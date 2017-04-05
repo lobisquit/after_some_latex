@@ -1,5 +1,5 @@
 # after_some_latex
-##Introduzione
+## Introduzione
 Appunti per le varie materie di telecomunicazioni, in particolare
 * [Antenne e propagazione wireless](antenne/) Per il corso tenuto da Santagiustina.
 * [Mathematical methods for information engeneering](mathematical_methods/) Il corso che sta tenendo Pavon solo per quest'anno sui metodi matematici per il nostro campo
@@ -10,7 +10,7 @@ Ogni cartella principale (elencata al punto precedente) avrà la struttura segue
 * cartella img/ per le immagini o i grafi.
 * altre sottocartelle se devono essere inclusi file diversi dai .tex
 
-##Esempio: Network modeling
+## Esempio: Network modeling
  * file principale è [network_modeling.tex](network_modeling/network_modeling.tex)
  * cartella delle immagini è [qui](network_modeling/img/)
 
@@ -20,16 +20,16 @@ Per scaricare il repo:
 2. date `` git clone https://github.com/lobisquit/after_some_latex.git``
 3. entrate nella sottocartella. Quello sarà lo spazio dove si sincronizzeranno i dati tra il vostro pc e GitHub®.
 
-##Se non avete git:
+## Se non avete git:
 ### Windows
 [Qui](https://github-windows.s3.amazonaws.com/GitHubSetup.exe) troverete i link per scaricare git.
-###MacOs
+### MacOs
 [Qui](https://central.github.com/mac/latest) troverete i link per scaricare git.
-###Linux
+### Linux
 Ubuntu: apt-get install git
 Altre distro: google è vostro amico :smile:
 
-##Salvare su Github
+## Salvare su Github
 Per salvare su GitHub i files che avete nel vostro pc
 
 1. ``git add <nome file modificato>``
@@ -38,5 +38,5 @@ Per salvare su GitHub i files che avete nel vostro pc
 4. ripetete 1-3 finché modificate
 4. ``git push `` portate le modifiche che avete salvato (committato) nel buon github
 
-##Domande?
+## Domande?
 Chiedete nel gruppo #AfterSomeAlgebra :smile:
