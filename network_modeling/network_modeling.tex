@@ -9,8 +9,10 @@
 \usepackage{graphics}
 \usepackage{wrapfig}
 \usepackage{changepage}
+
 %\usepackage{rotating}
-\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb,dsfont,bm}
 \usepackage[usenames,dvipsnames,table,tikz]{xcolor} % use colors on table and more
 %\definecolor{DefinedColor}{RGB}{51, 51, 51} % define custom color
 \usepackage{tikz}
@@ -33,21 +35,30 @@
 %   tabsize=2
 % }
 %%Parte figa per creare i teoremi
-\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+%temporary environment definitions
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
 
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
+
+\renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
 
 
 %------------------------------ define Abstract environment, missing in the 'book' class
@@ -66,6 +77,16 @@
 \renewcommand*\arraystretch{1.4} % tables padding
 \DeclareInputText{176}{°}
 
+% Useful Aliases
+\def\beq{\begin{equation}}
+\def\eeq{\end{equation}}
+\def\bal{\begin{align}}
+\def\eal{\end{align}}
+
+\usepackage[acronym]{glossaries}
+
+\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+
 \begin{document}
 \frontmatter
 
@@ -75,11 +96,12 @@
 
 \hspace{0.5cm}
 
-
+\emph{\Large{NETWORK MODELING}} \\
 \vspace{1cm}
-\emph{\Large{NETWORK MODELING - MODELLI PER LE RETI}} \\
-\vspace{1.5cm}
-\scshape{\Large{\bfseries{Michele Zorzi}}} \\
+\includegraphics[width=9cm]{Zorzilla}\\
+\vspace{0.5cm}
+{written with love by\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli\par}
 %\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
 \end{center}
 
@@ -115,6 +137,6 @@
 \endgroup
 \mainmatter
 \input{introduzione.tex}
-% \input{Capitolo_2.tex}
+\input{chapter_2.tex}
 
 \end{document}

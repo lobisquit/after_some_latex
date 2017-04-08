@@ -1,60 +1,19 @@
-\documentclass[a4paper,12pt]{report}
-%\documentclass[a4paper,12pt]{article}
-\usepackage{amsthm}
-\usepackage{amsmath,amssymb,mathtools,bm,etoolbox,dsfont}
-
-
-\usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
- 
-\usepackage{graphicx}
-\graphicspath{ {images/} }
- 
-\renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
-
- 
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{definition}{Definition}
- 
-
-%\title{Zorzilla's Theorems\thanks{Newtork Modeling}}
-%\author{Ettore Mariotti}
-%%%%%%%%%%%%
-
-
-\begin{document}
-%\includegraphics[width=\textwidth]{Zorzilla}
-%\maketitle
-
-\begin{titlepage}
-\centering
-\vspace*{\stretch{1}}
-\vspace*{\stretch{1}}
-{written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli\par}
-\vspace{1cm}
-{\LARGE{ \bfseries Zorzilla's Theorems \par}}
-\vspace{2cm}
-\includegraphics[width=9cm]{Zorzilla}
-\vspace*{\stretch{2}}
-\end{titlepage}
-
 %%%
 \chapter{Markov Chains}
 
-
-\section{Asymptotic considerations}
+\section{Long Run Behaviour}
 
 \subsection{Steady-state probabilities}
 
-For a regular Markov Chain, we have:
+\begin{definition}[Regular \gls{mc}]
+	A regular \gls{mc} is a \gls{mc} with the following property:
 
-$$ \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ x_n=j | x_0 =i] = \pi_j > 0 \quad \forall i, j $$
+	\beq \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ x_n=j | x_0 =i] = \pi_j > 0 \quad \forall i, j \eeq
+\end{definition}
 
+This tell us that:
 \begin{enumerate}
-\item Limit exsists (not obvious)
+\item Limit exists (not obvious)
 \item Limit is indipendent of the initial state
 \item Limit is strictly positive
 \end{enumerate}
@@ -62,29 +21,37 @@ $$ \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ x_n=j | x_0 =i]
 
 %%%%%
 \begin{theorem}
-For a regular MC (Markov Chain) with states 0,1,...,N the limit distribution $\pi$ is the unique solution of the following system of equations:
+For a regular \gls{mc} with states 0,1,...,N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:
 
-\begin{itemize} %itemize
-\item $\pi_j = \sum_{k=0}^N \pi_k P_{k j} $, \qquad for $j = 0,1, ..., N$
+\begin{align}
+	&\pi_j = \sum_{k=0}^N \pi_k P_{k j} , \qquad ~for ~j = 0,1, \cdots, N \\
+	&\sum_{k=0}^N \pi_k = 1, \qquad \qquad \pi_k \ge 0 \quad \forall k
+\end{align}
 
-\item $\sum_{k=0}^N \pi_k = 1$, \qquad \qquad $\pi_k \ge 0 \quad \forall k$
-
-\end{itemize}
 \end{theorem}
 
 ---
-\begin{proof} Let's start easy by proving the {\bfseries existence}:
+\begin{proof} Let's start easy by proving the \textbf{existence}:
 
-\begin{itemize}
-\item$ P_{i j}^{(n)} = \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j}$ \qquad / it's the developing of $P^n = P^{n-1} P$
-\item$ \sum_{k=0}^N P_{ik}^{(n)} = 1 \quad \forall n$ \qquad / normalisation condition
+\begin{equation}
+  P_{i j}^{(n)} = \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j}
+	\qquad with ~\sum_{k=0}^N P_{ik}^{(n)} = 1 ~\forall n
+\end{equation}
+it's the developing of $\bm P^n = \bm P^{n-1} \bm P$
 
-Now let's study what happens as $ n \to \infty $
-\item $\pi_j = lim_{n \to \infty} P_{ij}^{(n)} = \sum_{k=0}^N \pi_k P_{kj}$ / This shows that the system have a solution
+Now let's study what happens as $ n \to \infty $:
+\begin{equation}
+\begin{split}
+	&\pi_j = \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{n \to \infty} \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j
+	} =\\
+	&= \sum_{k=0}^N \lim_{n \to \infty} P_{ik}^{(n-1)} P_{k j
+	} = \sum_{k=0}^N \pi_k P_{kj}
+\end{split}
+\end{equation}
+Here the limit and the sum can be switched since the sum is finite.
+This shows that the system have a solution.
 
-\end{itemize}
-
-So the solution exsist. Now let's prove {\bfseries uniqueness}:
+Now let's prove \textbf{uniqueness}:
 
 
 \begin{itemize}
@@ -97,7 +64,7 @@ If we apply this trick again n times we can prove by induction  that:
 
 \item $x_j$ also satisfy $ x_j = \sum_{k=0}^N x_k P_{kj}^n $ \quad  $\forall n $
 
-Now, as $n \to \infty$ : 
+Now, as $n \to \infty$ :
 
 \item  $x_j = \sum_{k=0}^N x_k \pi_j = \pi_j (\sum_{k=0}^N x_k) = \pi_j  \Rightarrow $ Solution is unique
 
@@ -107,14 +74,14 @@ Now, as $n \to \infty$ :
 %%
 
 \subsection{Classes of states}
-\begin{definition}[Accessible State] 
+\begin{definition}[Accessible State]
 
 State $j$ is {\bfseries accessible} from state $i$ ($i \rightarrow j$) if $\exists n \geq 0$ such that $P_{ij}^n > 0$
 \end{definition}
 
-\begin{definition}[Communicant States] 
+\begin{definition}[Communicant States]
 
-States $i$ and $j$ are said to {\bfseries communicate} ( $ i \leftrightarrow j$ ) if 
+States $i$ and $j$ are said to {\bfseries communicate} ( $ i \leftrightarrow j$ ) if
 
  $i \rightarrow j$ and $j \rightarrow i$
 \end{definition}
@@ -132,9 +99,9 @@ Communication among states is an equivalence relation.
 The period of state i, $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$
 \end{definition}
 
-\begin{theorem} Periodicity is a class of propriety: 
-\begin{itemize} 
-\item if $i \leftrightarrow j$, then $d(i) = d(j)$ 
+\begin{theorem} Periodicity is a class of propriety:
+\begin{itemize}
+\item if $i \leftrightarrow j$, then $d(i) = d(j)$
 \end{itemize}
 \end{theorem}
 --
@@ -151,7 +118,7 @@ $$P_{jj}^{(n+s+m)} >0 \Rightarrow n+s+m \in S_j$$
 
 $$P_{jj}^{(n+2s+m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ii}^{(s)} P_{ij}^{(m)} >0 \Rightarrow n+2s+m \in S_j$$
 
-Now let's call $d(j) =$ g.c.d. of $S_j$ 
+Now let's call $d(j) =$ g.c.d. of $S_j$
 
 $ \Rightarrow n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$
 
@@ -168,7 +135,7 @@ Therefore, $d(i) = d(j)$
 \end{proof}
 --
 
-\begin{definition}[Return Time] 
+\begin{definition}[Return Time]
 the return time to state $i := R_i$
 \end{definition}
 
@@ -181,14 +148,14 @@ a state is recurrent if $f_{ii} = 1$
 
 \begin{definition}[Transient state]
 a state is transient if  $f_{ii} < 1$
-\end{definition}  
+\end{definition}
 
 \begin{definition}
 $M$ is the number of returns to state $i$
 \end{definition}
 
-$$\mathbb{E}[M | x_0 = i] = \sum_{k=1}^\infty \mathbb{P}[M\geq k | x_0 = i] = \sum_{k=1}^\infty f_{ii}^k = \begin{cases} 
-\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\ 
+$$\mathbb{E}[M | x_0 = i] = \sum_{k=1}^\infty \mathbb{P}[M\geq k | x_0 = i] = \sum_{k=1}^\infty f_{ii}^k = \begin{cases}
+\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\
 \infty, & \mbox{if recurrent}
 \end{cases}$$
 
@@ -209,8 +176,8 @@ $$i  \mbox{ is recurrent} \iff \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$$
 Number of time state i has been visited: $$M = \sum_{n=1}^\infty \mathds{1}\{x_n =i\} $$
 The following swap from expected value and infinite sum is allowed by Fubini's Theorem$$ \mathbb{E}[M | x_0 = i] = \mathbb{E}[\sum_{n=1}^\infty \mathds{1}\{x_n = i\} | x_0 = i] = \sum_{n=1}^\infty \mathbb{E}[\mathds{1}\{ x_n = i\} | x_0 = i] = \sum_{n=1}^\infty P_{ii}^{(n)} $$
 So we have shown that $\mathbb{E}[M | x_0=i] = \sum_{n=1}^\infty P_{ii}^{(n)}$.\\
-Now, remembering that$$ \mathbb{E}[M | x_0 = i] = \begin{cases} 
-\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\ 
+Now, remembering that$$ \mathbb{E}[M | x_0 = i] = \begin{cases}
+\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\
 \infty, & \mbox{if recurrent}
 \end{cases}$$
 the proof is concluded.
@@ -227,7 +194,7 @@ $$\mbox{Since } i\leftrightarrow j : \exists m,n \mbox{ such that } P_{ij}^{(n)}
 $$\mbox{let } r>0 : P_{jj}^{(m+r+n)} = \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
 $$\sum_{l=1}^\infty P_{jj}^{(l)} \geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}$$
 but since \begin{itemize}
-\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$  
+\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$
 \item $P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$
 \end{itemize}
 $$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
@@ -236,37 +203,34 @@ $$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
 
 
 
- 
+
 %\begin{theorem}
-%Let $f$ be a function whose derivative exists in every point, then $f$ is 
+%Let $f$ be a function whose derivative exists in every point, then $f$ is
 %a continuous function.
 %\end{theorem}
- 
+
 %\begin{theorem}[Pythagorean theorem]
 %\label{pythagorean}
-%This is a theorema about right triangles and can be summarised in the next 
-%equation 
+%This is a theorema about right triangles and can be summarised in the next
+%equation
 %\[ x^2 + y^2 = z^2 \]
 %\end{theorem}
- 
-%And a consequence of theorem \ref{pythagorean} is the statement in the next 
+
+%And a consequence of theorem \ref{pythagorean} is the statement in the next
 %corollary.
- 
+
 %\begin{corollary}
 %There's no right rectangle whose sides measure 3cm, 4cm, and 6cm.
 %\end{corollary}
- 
+
 %You can reference theorems such as \ref{pythagorean} when a label is assigned.
- 
+
 %\begin{lemma}
-%Given two line segments whose lengths are $a$ and $b$ respectively there is a 
+%Given two line segments whose lengths are $a$ and $b$ respectively there is a
 %real number $r$ such that $b=ra$.
 %\end{lemma}
- 
+
 %\begin{proof}
 %To prove it by contradiction try and assume that the statemenet is false,
 %proceed from there and at some point you will arrive to a contradiction.
 %\end{proof}
-
-
-\end{document}
