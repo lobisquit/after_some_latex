@@ -213,7 +213,7 @@ $$\mbox{Since } i\leftrightarrow j : \exists m,n \mbox{ such that } P_{ij}^{(n)}
 $$\mbox{let } r>0 : P_{jj}^{(m+r+n)} = \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
 $$\sum_{l=1}^\infty P_{jj}^{(l)} \geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}$$
 but since \begin{itemize}
-\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$  
+\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$
 \item $P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$
 \end{itemize}
 $$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
@@ -232,7 +232,7 @@ $$ \lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{m_i} = \pi_i = \lim_{n\to\infty} P
     \begin{tabular}{|l*{6}{|c}r}
         \hline
     state $i$ & $f_{ii} = \sum_{n=1}^\infty f_{ii}^{(n)}$  & $\lim_{k \to \infty } \mathbb{P}[M \geq k | x_0=i]$ & $\mathbb{E}[n|x_0=i]$ & $m_i = \sum_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
-    
+
     transient & $<1$ & 0 & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & 0 \\ \hline
     Null recurrent & 1 & 1 & $\infty$ & $\infty$ & 0 \\ \hline
     Positive recurrent & 1 & 1 & $\infty$ & $<\infty$ & $>1$ \\ \hline
@@ -241,7 +241,7 @@ $$ \lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{m_i} = \pi_i = \lim_{n\to\infty} P
 
 %%
 \begin{theorem}
-For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of 
+For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of
 
 $$\begin{cases}
 \pi_j = \sum_{i=0}^\infty \pi_i P_{ij} \\
@@ -267,12 +267,12 @@ $$ \mbox{as } m \to \infty :\quad \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)} $$
 \end{equation}
 
 \item
-$$  \sum_{k=0}^\infty \sum_{j=0}^\infty \pi_k P_{kj}^{(n)} \geq 
-      \sum_{k=0}^m \sum_{j=0}^\infty \pi_k P_{kj}^{(n)}  = 
+$$  \sum_{k=0}^\infty \sum_{j=0}^\infty \pi_k P_{kj}^{(n)} \geq
+      \sum_{k=0}^m \sum_{j=0}^\infty \pi_k P_{kj}^{(n)}  =
       (\mbox{since } \sum_{j=0}^\infty P_{kj}^{(n)} = 1 ) =
       \sum_{k=0}^m \pi_k \quad \forall m $$
 $$ \mbox{suppose } \exists j > 1 : \pi_j > \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} $$
-$$ \mbox{then we have that } \sum_{j=0}^\infty \pi_k > \sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum_{k=0}^\infty \pi_k \quad \mbox{ABSURD.} $$ 
+$$ \mbox{then we have that } \sum_{j=0}^\infty \pi_k > \sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum_{k=0}^\infty \pi_k \quad \mbox{ABSURD.} $$
 \begin{equation}
 \Rightarrow \pi_j = \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
 \end{equation}
@@ -294,13 +294,13 @@ Suppose $x_j$ is a solution
 $$x_j =
  \sum_{i=0}^\infty x_i P_{ij} =
  \sum_{i=0}^\infty ( \sum_{k=0}^\infty x_k P_{ki} ) P_{ij} \geq
- \sum_{k=0}^m x_k \sum_{i=0}^\infty P_{ki} P_{ij} = 
+ \sum_{k=0}^m x_k \sum_{i=0}^\infty P_{ki} P_{ij} =
  \sum_{k=0}^m x_k P_{kj}^{(2)}
- \quad \forall m            
+ \quad \forall m
 $$
 $$ \Rightarrow x_j \geq \sum_{k=0}^\infty x_k P_{kj}^{(n)}\qquad \forall n $$
 
-This is the same as 3, so as 3 we can prove by contradiction that this inequality is in fact an equality "="
+This is the same result of $3^{rd}$ step, so as in $3^{rd}$ step, we can prove by contradiction that this inequality is in fact an equality.
 
 $$\Rightarrow x_j = \sum_{k=0}^\infty x_k P_{kj}^{(n)} \quad \forall n$$
 as $n \to \infty$ we have:
@@ -312,11 +312,47 @@ So it's unique.
 \end{enumerate}
 \end{proof}
 
-
+\begin{lemma}
+  If $0 < p_i < 1 ~,~ i=0,1,2.\cdots $, then:
+	\begin{equation}\label{limprodpi}
+	  \lim_{m \to \infty} \prod_{i=0}^{m}(1-p_i) = 0
+	\end{equation}
+	if and only if
+	\begin{equation}\label{pitoinfty}
+	  \sum_{i=0}^\infty p_i = \infty
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	\begin{enumerate}
+	  \item 	Assume \eq{pitoinfty} is true. \\
+			Since the series expansion for $exp(-p_i)$ is an alternating series with terms decreasing in absolute value, we can write:
+			\begin{equation}
+			  1-p_i < 1-p_i + \frac{p_i^2}{2!} - \frac{p_i^3}{3!} + \cdots = ~exp(-p_i) \quad with ~i\ge 0
+			\end{equation}
+			applying the product to both members we obtain
+			\begin{equation}
+			  \prod_{i=0}^{k-1} (1-p_i) < e^{-\sum_{i=0}^{k-1}p_i}
+			\end{equation}
+			But by assumption $\sum_{i=0}^\infty p_i = \infty$ hence,
+			$$ \lim_{m \to \infty} \prod_{i=0}^{m}(1-p_i) = 0 $$
+		\item Let's prove the following inequality:
+		$$ \prod_{i=j}^m(1-p_i) > 1-\sum_{i=j}^m p_i \quad \forall m \ge j+1$$
+		We can prove it recursively:
+		$$(1-p_j)(1-p_{j+1}) = 1-p_j - p_{j+1} + p_jp_{j+1} > 1-p_j - p_{j+1}$$
+		Iterating we obtain:
+		\begin{eqnarray*}
+		\prod_{i=j}^{m+1}(1-p_i) = (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum_{i=j}^m p_i) = \\
+		1- \sum_{i=j}^{m+1} p_i + p_{m+1}\sum_{i=j}^m p_i
+		\end{eqnarray*}
+		Assume now that $\sum_{i=1}^\infty p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum_{i=j}^\infty p_i < 1$. \\
+		Then we have:
+		$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum_{i=j}^m p_i) > 0 $$
+	\end{enumerate}
+\end{proof}
 
 \begin{definition}[lezione 22/03/17]
 $$\Pi_{ik}^n(c) = \mathbb{P}[x_n = k \in c, x_l \notin c, l=1, ... , n-1 | x_0 =i]$$
-$c$ is an aperiodic recurrent class, $i$ is a transient state. 
+$c$ is an aperiodic recurrent class, $i$ is a transient state.
 $$\Pi_i^n(c) = \sum_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum_{n=1}^\infty \Pi_i^n(c)$$
 \end{definition}
 
@@ -324,7 +360,7 @@ $$\Pi_i^n(c) = \sum_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum_{n=1}^\infty
 Let $i$ be a transient state and$j \in c$, where $c$ is an aperiodic recurrent class:
 $$\lim_{n\to\infty} P_{ij}^{(n)} = \Pi_i(c) \lim_{n\to\infty} P_{jj}^{(n)} = \Pi_i(c) \Pi_j$$
 \end{theorem}
- 
+
 
 
 
