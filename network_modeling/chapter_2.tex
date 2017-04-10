@@ -203,6 +203,131 @@ $$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
 
 
 
+\begin{theorem}
+(not to confuse with theorem on periodicity)
+$$\mbox{if } i\leftrightarrow j \mbox{and i is recurrent} \Rightarrow \mbox{ j is also recurrent}$$
+\end{theorem}
+--
+\begin{proof}
+$$\mbox{Since } i\leftrightarrow j : \exists m,n \mbox{ such that } P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$$
+$$\mbox{let } r>0 : P_{jj}^{(m+r+n)} = \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
+$$\sum_{l=1}^\infty P_{jj}^{(l)} \geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}$$
+but since \begin{itemize}
+\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$  
+\item $P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$
+\end{itemize}
+$$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
+
+\end{proof}
+
+\begin{theorem}[Basic limit theorem on MC]
+Consider an irreducible aperiodic recurrent MC (an aperiodic recurrent class), we have
+$$ \lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{m_i} = \pi_i = \lim_{n\to\infty} P_{ji}^{(n)} \qquad \forall j$$
+\end{theorem}
+--
+%%
+%DA SISTEMARE LA TABELLA
+
+\begin{center}
+    \begin{tabular}{|l*{6}{|c}r}
+        \hline
+    state $i$ & $f_{ii} = \sum_{n=1}^\infty f_{ii}^{(n)}$  & $\lim_{k \to \infty } \mathbb{P}[M \geq k | x_0=i]$ & $\mathbb{E}[n|x_0=i]$ & $m_i = \sum_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
+    
+    transient & $<1$ & 0 & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & 0 \\ \hline
+    Null recurrent & 1 & 1 & $\infty$ & $\infty$ & 0 \\ \hline
+    Positive recurrent & 1 & 1 & $\infty$ & $<\infty$ & $>1$ \\ \hline
+        \end{tabular}
+\end{center}
+
+%%
+\begin{theorem}
+For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of 
+
+$$\begin{cases}
+\pi_j = \sum_{i=0}^\infty \pi_i P_{ij} \\
+\sum_{i=0}^\infty \pi_i = 1 \\
+\pi_i \geq 0 \quad \forall i
+\end{cases}$$
+\end{theorem}
+--
+\begin{proof} The funny thing is that this proof is easier than the book:
+\begin{enumerate}
+\item we first want to show that the $\pi_j$ satisfy the system (\textbf{\textit{Existence of the solution}})
+$$ \forall m,n \qquad 1=\sum_{j=0}^\infty P_{ij}^{(n)} > \sum_{j=0}^m P_{ij}^{(n)}$$
+$$ \lim_{n\to\infty} \sum_{j=0}^m P_{ij}^{(n)} = \sum_{j=0}^m \pi_j \leq 1 \quad \forall n $$
+\begin{equation}
+\Rightarrow \sum_{j=0}^\infty \pi_j \leq 1
+\end{equation}
+
+\item
+$$P_{ij}^{(n+m)} \geq \sum_{k=0}^m P_{ik}^{(m)} P_{kj}^{(n)} \quad \forall n, m, M$$
+$$ \mbox{as } m \to \infty :\quad \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)} $$
+\begin{equation}
+\Rightarrow  \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)}
+\end{equation}
+
+\item
+$$  \sum_{k=0}^\infty \sum_{j=0}^\infty \pi_k P_{kj}^{(n)} \geq 
+      \sum_{k=0}^m \sum_{j=0}^\infty \pi_k P_{kj}^{(n)}  = 
+      (\mbox{since } \sum_{j=0}^\infty P_{kj}^{(n)} = 1 ) =
+      \sum_{k=0}^m \pi_k \quad \forall m $$
+$$ \mbox{suppose } \exists j > 1 : \pi_j > \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} $$
+$$ \mbox{then we have that } \sum_{j=0}^\infty \pi_k > \sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum_{k=0}^\infty \pi_k \quad \mbox{ABSURD.} $$ 
+\begin{equation}
+\Rightarrow \pi_j = \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
+\end{equation}
+
+\item
+$$ \pi_j = \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}, \qquad |P_{kj}^{(n)}| \leq 1 \quad \forall n,i,k $$
+using an appropriate theorem for sliding the limit inside the infinite sum we have:
+$$\pi_j = \sum_{k=0}^\infty  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} = (\sum_{k=0}^\infty \pi_k) \pi_j$$
+and now since $\pi_j>0$
+\begin{equation}
+\Rightarrow \sum_{k=0}^\infty \pi_k = 1
+\end{equation}
+\textbf{\textit{This concludes the existence proof.}}
+
+\item
+Let's now prove the \textbf{\textit{Uniqueness}} \\
+Suppose $x_j$ is a solution
+
+$$x_j =
+ \sum_{i=0}^\infty x_i P_{ij} =
+ \sum_{i=0}^\infty ( \sum_{k=0}^\infty x_k P_{ki} ) P_{ij} \geq
+ \sum_{k=0}^m x_k \sum_{i=0}^\infty P_{ki} P_{ij} = 
+ \sum_{k=0}^m x_k P_{kj}^{(2)}
+ \quad \forall m            
+$$
+$$ \Rightarrow x_j \geq \sum_{k=0}^\infty x_k P_{kj}^{(n)}\qquad \forall n $$
+
+This is the same as 3, so as 3 we can prove by contradiction that this inequality is in fact an equality "="
+
+$$\Rightarrow x_j = \sum_{k=0}^\infty x_k P_{kj}^{(n)} \quad \forall n$$
+as $n \to \infty$ we have:
+\begin{equation}
+x_j = (\sum_{k=0}^\infty x_k ) \pi_j \Rightarrow x_j = \pi_j
+\end{equation}
+So it's unique.
+
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{definition}[lezione 22/03/17]
+$$\Pi_{ik}^n(c) = \mathbb{P}[x_n = k \in c, x_l \notin c, l=1, ... , n-1 | x_0 =i]$$
+$c$ is an aperiodic recurrent class, $i$ is a transient state. 
+$$\Pi_i^n(c) = \sum_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum_{n=1}^\infty \Pi_i^n(c)$$
+\end{definition}
+
+\begin{theorem}
+Let $i$ be a transient state and$j \in c$, where $c$ is an aperiodic recurrent class:
+$$\lim_{n\to\infty} P_{ij}^{(n)} = \Pi_i(c) \lim_{n\to\infty} P_{jj}^{(n)} = \Pi_i(c) \Pi_j$$
+\end{theorem}
+ 
+
+
+
 
 %\begin{theorem}
 %Let $f$ be a function whose derivative exists in every point, then $f$ is
