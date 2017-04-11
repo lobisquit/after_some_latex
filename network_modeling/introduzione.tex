@@ -1,2 +1,66 @@
 \chapter{Introduction}
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\section{Topics of the course}
+\begin{itemize}
+  \item Review of probability theory
+  \item Markov chains
+  \item Poisson processes
+  \item Example of applications protocols
+  \item Random access protocols
+\end{itemize}
+\section{Review of probability theory}
+Let $X_n, X_t$ be two different instances of a random variable (r.v.). We will use
+\textit{t} as a subscript if the r.v. is continuous ($t \in \mathbb{R}$), \textit{n} if the r.v. is discrete ($ n \in \mathbb{Z}$)
+
+Let \textit{A},\textit{B} be two events, then:
+\begin{itemize}
+  \item if $A \cap B = \emptyset$, then A and B are disjoint
+  \item $P[A \cup B] = P[A]+P[B] - P[A \cap B]$
+  \item $0\le P[A] \le 1$
+  \item $P[A \cup B] \le P[A]+P[B]$
+  \item $ P[\Omega]=1 $ and $P[\emptyset]=0$ with $\Omega$ the Universe set
+\end{itemize}
+\subsection{Total probability law}
+Given $A_i \cap A_j = \emptyset \;\; \forall i \neq j $, then $\bigcup\limits_{i=1}^{+\infty} A_i \, = \Omega$.
+Moreover $P[B]=\sum\limits_{i=1}^{+\ifty} P[B \cap A_i]$.
+
+If $P[A \cap B] = P[A]\cdot P[B] \implies A,B$ \textit{are} \textbf{independent}.
+
+\subsection{Distribution function (PMD)}\label{sec:pmd}
+$F(x) = P[X \le x]$ is called the distribution function and has the following properties:
+\begin{enumerate}
+  \item $\lim\limits_{x \to -\infty} F(x) = 0$ \quad and \quad $\lim\limits_{x \to +\infty} F(x) = 1$
+  \item F is monothonic non-decreasing $\implies$ if $x_1 > x_2 \implies F(x_1)\ge F(x_2)$
+  \item F(x) is continuous from the right
+\end{enumerate}
+We define $f(x)=F'(x)$ the probability density function \textit{PDF}.
+
+\subsection{Moment}
+We define  the moment as:
+$E[X^m]=
+\begin{cases}
+    \sum\limits_{i} {x{_i}^{m} \cdot P[X=x_i]} & \text{if X is discrete } \\
+    \int_{-\infty}^{+\infty} {x^{m} \cdot f(x) dx }  & \text{if X is continuous}
+\end{cases}$
+In particular if m=1, we obtain the mean, if m=2 we get the power (and in particular if $E[X]=0$ we obtain the variance).\\
+Defining $\mu = E[X]$, we say that $E[(X-\mu)^m]$ is the center moment.\\
+We will denote $E[g(x)]=\int_{-\infty}^{+\infty} g(x)\, d F_X(x)$
+
+\subsection{Joint probability}
+We define the joint probability of two variables as
+\begin{equation*}
+  $$F_{XY}(x,y)=P[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
+\end{equation*}
+
+From what we obtain in \ref{sec:pmd}, we can write \\
+\begin{equation*}
+  $$F_X(x)=F_{XY}(x,+\infty)=\lim\limits_{y \to +\infty} F_{XY}(x,y)$$
+  $$F_Y(y)=F_{XY}(+\infty,y)=\lim\limits_{x \to +\infty} F_{XY}(x,y)$$
+\end{equation*}
+If X and Y are independent ($X \indep Y$), we have
+\begin{itemize}
+  \item $F_{XY}(x,y)=F_X(x)\cdot F_Y(y) \; \forall x,y$
+  \item $cov(X,Y) = E[(X - \mu_X)\cdot (Y - \mu_Y)] = E[X \cdot Y]-\mu_X \cdot \mu_Y$
+\end{itemize}
+If X and Y are uncorrelated ($X \bot Y$) $\implies cov(X,Y)=0$.
+
+\subsection{Conditional probability}
