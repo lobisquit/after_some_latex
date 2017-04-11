@@ -1,148 +1,96 @@
-\documentclass[a4paper, 12pt, twoside, openright,fleqn]{book}
+\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
+
+% language settings
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{fancyhdr}
+\usepackage{textgreek}
+
+\usepackage{fancyhdr} % headers and footers
+
+% figures and positioning
 \usepackage{caption}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{graphics}
 \usepackage{wrapfig}
-\usepackage{changepage}
-
-%\usepackage{rotating}
-\usepackage{amsthm}
-\usepackage{amsmath,amssymb,dsfont,bm}
-\usepackage[usenames,dvipsnames,table,tikz]{xcolor} % use colors on table and more
-%\definecolor{DefinedColor}{RGB}{51, 51, 51} % define custom color
-\usepackage{tikz}
 \usepackage{listing}
-\usepackage{textgreek}
-%\usepackage{subfigure}
-\graphicspath{{./img/} {./.tmp/} }
-%------------------------------ colors
+%\usepackage{rotating}
 
-%\usetikzlibrary{positioning}
-\usetikzlibrary{shapes,arrows}
-%------------------------------ source code
-% \lstset{
-%   basicstyle=\footnotesize\sffamily,
-%   commentstyle=\itshape\color{gray},
-%   captionpos=b,
-%   frame=shadowbox,
-%   language=HTML,
-%   rulesepcolor=\color{DefinedColor},
-%   tabsize=2
-% }
-%%Parte figa per creare i teoremi
-% \newenvironment{theorem}[2][Theorem]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{lemma}[2][Lemma]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{exercise}[2][Exercise]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{reflection}[2][Reflection]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{proposition}[2][Proposition]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{corollary}[2][Corollary]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% math package
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb, dsfont, bm}
 
-%temporary environment definitions
+% tikz figures
+\usepackage[usenames, dvipsnames, table, tikz]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows}
+
+% image path
+\graphicspath{ {./img/} }
+
+% add support for url and cross-references in PDF output
+\usepackage{url}
+\renewcommand{\UrlFont}{\color{black}\small\ttfamily}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+
+% support for glossary and acronyms
+\usepackage[acronym]{glossaries}
+\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+
+% support for counting 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 
+% specific modification to basic book template of our book document
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
-
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
 
 
-%------------------------------ define Abstract environment, missing in the 'book' class
-\newenvironment{abstract}{\cleardoublepage \null \vfill \begin{center}\bfseries\abstractname \end{center}}{\vfill\null}
-\addto\captionsenglish{\renewcommand*\abstractname{Sommario}} % change Abstract title
-%------------------------------ active url
-\usepackage{url}
-\usepackage{svg}
-\usepackage{ifluatex}
-\renewcommand{\UrlFont}{\color{black}\small\ttfamily}
-
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
-%------------------------------ macros
-\newcommand{\sectionname}{Section} % define Section ref
-\newcommand{\subsectionname}{Sub-section} % define Sub-section ref
-\renewcommand*\arraystretch{1.4} % tables padding
-\DeclareInputText{176}{°}
-
-% Useful Aliases
-\def\beq{\begin{equation}}
+% useful aliases for common employed declarations
+\def \beq {\begin{equation}}
 \def\eeq{\end{equation}}
 \def\bal{\begin{align}}
 \def\eal{\end{align}}
 
-% REFERENCES
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
 \newcommand{\Sec}[1]{Sec.~\ref{#1}}
 
-\usepackage[acronym]{glossaries}
-
-\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+%---------------------------------
 
 \begin{document}
-\frontmatter
 
-\begin{titlepage} %------------------------------ TITLE PAGE
-\begin{center}
+\begin{titlepage}
+	\begin{center}
+		\hspace{0.5cm}
+		\Large{NETWORK MODELING} \\
+		\vspace{1cm}
+		\includegraphics[width=9cm]{Zorzilla}\\
+		\vspace{0.5cm}
+		\emph{written with love by} \\
+		\vspace{0.5cm}
+		{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli}
+	\end{center}
 
+	\vfill
 
-\hspace{0.5cm}
+	\begin{center}
+		\line(1, 0){360}
 
-\emph{\Large{NETWORK MODELING}} \\
-\vspace{1cm}
-\includegraphics[width=9cm]{Zorzilla}\\
-\vspace{0.5cm}
-{written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli\par}
-%\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
-\end{center}
-
-% **** SE VOGLIAMO FARE I FIGHI
-% \vfill
-% \begin{normalsize}
-% \begin{flushleft}
-%   \hspace{145pt} \textit{Editors} \\
-%   \vspace{5pt}
-%   \hspace{15pt} \large{\textbf{Andrea PITTARO}} \hspace{50pt} \large{\textbf{Enrico LOVISOTTO}}\\
-%   \hspace{15pt}\large{\textbf{Ettore MARIOTTI}}\\
-% \end{flushleft}
-% \end{normalsize}
-
-\vfill
-\begin{center}
-\hspace{-0.2cm}
-\textsc{Academic Year 2016/2017}
-\line(1, 0){360}
-
-\textsc{Anno Accademico 2016/2017}
-\end{center}
+		\textsc{Academic Year 2016/2017}
+	\end{center}
 \end{titlepage}
 
-%\input{dedica-citazione.tex}
+\tableofcontents
+\clearpage
 
-\begingroup %------------------------------ CONTENTS
-  \makeatletter
-  \let\ps@plain\ps@empty
-  \makeatother
-  \tableofcontents
-  \clearpage
-\endgroup
-\mainmatter
-\input{introduzione.tex}
+\input{introduction.tex}
 \input{chapter_2.tex}
 
 \end{document}
