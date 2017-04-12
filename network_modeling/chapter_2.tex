@@ -18,7 +18,7 @@
 	\end{enumerate}
 
 	\begin{theorem}
-		For a regular \gls{mc} with states 0,1,...,N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:
+		For a regular \gls{mc} with states 0, 1, ..., N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:
 
 		\begin{align}
 			&\pi_j = \sum_{k=0}^N \pi_k P_{k j} , \qquad ~for ~j = 0,1, \cdots, N \\
@@ -28,8 +28,7 @@
 	\end{theorem}
 
 	---
-	\begin{proof} Let's start easy by proving the \textbf{existence}:
-
+	\begin{proof} of \textbf{existence}:
 		\begin{equation}
   			P_{i j}^{(n)} = \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j}
 			\qquad with ~\sum_{k=0}^N P_{ik}^{(n)} = 1 ~\forall n
@@ -47,32 +46,34 @@
 		\end{equation}
 		Here the limit and the sum can be switched since the sum is finite.
 		This shows that the system have a solution.
+	\end{proof}
+	
+	\begin{proof} of \textbf{uniqueness}:
+		Let $x_j$ be a solution, so, by construction, $x_j = \sum_{k=0}^N x_k P_{kj} ~$.
 		
-		Now let's prove \textbf{uniqueness}:
+		For a given state $l$, it holds that
+		
+		$x_l = \sum_{j=0}^N x_j P_{jl} =  \sum_{j=0}^N ( \sum_{k=0}^N x_k P_{kj} ) P_{jl} =  \sum_{k=0}^N x_k \sum_{j=0}^N P_{kj} P_{jl} = \sum_{k=0}^N x_k P_{kl}^{(2)}$
 
-		\begin{itemize}
-			\item Let $x_j$ be a solution
-			\item $x_j = \sum_{k=0}^N x_k P_{kj} $ / by construction
-			\item $x_l = \sum_{j=0}^N x_j P_{jl} =  \sum_{j=0}^N ( \sum_{k=0}^N x_k P_{kj} ) P_{jl} =  \sum_{k=0}^N x_k \sum_{j=0}^N P_{kj} 			P_{jl} = \sum_{k=0}^N x_k P_{kl}^{(2)}$
+		If we apply this trick again $n$ times we can prove by induction that:
+		$x_j$ also satisfy $ x_j = \sum_{k=0}^N x_k P_{kj}^(n) $ \quad  $\forall n $
 
-			If we apply this trick again n times we can prove by induction  that:
+		Now, as $n \to \infty$, we have that
 
-			\item $x_j$ also satisfy $ x_j = \sum_{k=0}^N x_k P_{kj}^n $ \quad  $\forall n $
-
-			Now, as $n \to \infty$ :
-
-			\item  $x_j = \sum_{k=0}^N x_k \pi_j = \pi_j (\sum_{k=0}^N x_k) = \pi_j  \Rightarrow $ Solution is unique
-		\end{itemize}
+		$x_j = \sum_{k=0}^N x_k \pi_j = \pi_j (\sum_{k=0}^N x_k) = \pi_j  \Rightarrow $ Solution is unique.
 	\end{proof}
 
 \subsection{Classes of states}
 	\begin{definition}[Accessible State]
-		State $j$ is {\bfseries accessible} from state $i$ ($i \rightarrow j$) if $\exists n \geq 0$ such that $P_{ij}^n > 0$
+		State $j$ is {\bfseries accessible} from state $i$ if $\exists n \geq 0$ such that $P_{ij}^n > 0$. It can be written ($i \rightarrow j$).
 	\end{definition}
 
 	\begin{definition}[Communicant States]
-		States $i$ and $j$ are said to {\bfseries communicate} ( $ i \leftrightarrow j$ ) if
-		$i \rightarrow j$ and $j \rightarrow i$
+		States $i$ and $j$ are said to {\bfseries communicate}, written ( $ i \leftrightarrow j$ ), if
+		$$	\left\{\begin{matrix}
+			i \rightarrow j \\
+			j \rightarrow i
+			\end{matrix}\right $$
 	\end{definition}
 
 	{\bfseries Proprieties}
@@ -81,54 +82,42 @@
 		\item Symmetry: \quad if $i \leftrightarrow j$ then $j \leftrightarrow i$
 		\item Transitivity: \quad if $i \leftrightarrow j$ and $j \leftrightarrow k \Rightarrow i \leftrightarrow k$
 	\end{enumerate}
-	Communication among states is an equivalence relation.
+	This implies that communication between states is an equivalence relation.
 
 	\begin{definition}[Periodicity]
-		The period of state i, $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$
+		The period of state i, written $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$.
 	\end{definition}
 
-	\begin{theorem} Periodicity is a class of propriety:
-		\begin{itemize}
-			\item if $i \leftrightarrow j$, then $d(i) = d(j)$
-		\end{itemize}
+	\begin{theorem} Periodicity is a characteristic of groups (called \emph{classes}) of communicating states.
+		$$\text{if } i \leftrightarrow j \text{, then } d(i) = d(j)$$
 	\end{theorem}
 	---
 
 	\begin{proof}
-		given $$S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$$
+		Given $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$, and let $n, m >0 : P_{ji}^{(m)} >0, P_{ij}^{(m)} > 0$, we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$.
 		
-		let $$n, m >0 : P_{ij}^{(m)} >0, P_{ij}^{(m)} > 0$$
-		
-		we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$
-		
-		now, for total probability theorem$$P_{jj}^{(n+s+m)} = \sum_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{		ii}^{(s)} P_{ij}^{(m)} >0 $$		
-		
+		Now, for total probability theorem, it holds that 
+		$$P_{jj}^{(n+s+m)} = \sum_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ij}^{(m)} >0 $$
 		$$P_{jj}^{(n+s+m)} >0 \Rightarrow n+s+m \in S_j$$
-		
 		$$P_{jj}^{(n+2s+m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ii}^{(s)} P_{ij}^{(m)} >0 \Rightarrow n+2s+m \in S_j$$
 		
-		Now let's call $d(j) =$ g.c.d. of $S_j$
+		Now let's call $d(j) =$ g.c.d. of $S_j$.
 		
-		$ \Rightarrow n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$
+		Since both $n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$, so it is their difference $s$.
 		
-		Therefore s is an integer multple of $d(j)$ ?? bo raga non capisco dai miei appunti
+		We have proved that $\forall s \in S_i$ is integer multiple of $d(j)$: this implies that $d(j)$ is a common divisor of $S_i$, and moreover it divides the g.c.d. of $S$, $d(i)$. In conclusion, $d(i)$ is an integer multiple of $d(j)$.
 		
-		$\forall s \in S_i$ is integer multiple of $d(j)$ $\Rightarrow d(j)$ is a common divisor of $S_i$ and so it divides the g.c.d. 		of $S$, $d(i)$		
-		
-		$\Rightarrow d(i)$ is an integer multiple of $d(j)$.
-		
-		Doing this proof again switching role of i and j we prove that $d(j)$ is an integer multiple of $d(i)$
-		
-		Therefore, $d(i) = d(j)$
-		
+		Doing this proof again switching role of $i$ and $j$ we prove that $d(j)$ is an integer multiple of $d(i)$, and so $d(i) = d(j)$.
 	\end{proof}
 	---
 
 	\begin{definition}[Return Time]
-		the return time to state $i := R_i$
+		The random variable $R_i$ is defined as the time it takes to return to $i$ starting from $i$ itself.
 	\end{definition}
 
-	So the probability of ever going back to state i can be written as $$f_{ii} = \sum_{n=1}^\infty f_{ii}(n) $$
+	So the probability of ever going back to state $i$ can be written as
+	$$ f_{ii} = \sum_{n=1}^\infty f_{ii}(n)  = \sum_{n=1}^\infty P[R_i=n | X_0=i] $$
+	where $f_{ii}(n)$ is the probability of returning to state $i$ in $n$ steps.
 
 	\begin{definition}[Recurrent state]
 		a state is recurrent if $f_{ii} = 1$
