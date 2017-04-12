@@ -133,9 +133,99 @@ The mean and the variance of the moment generating functions can be calculated a
 \begin{equation}
 $$
 \begin{split}
-  g'_R(s) = g'_N(g(s)) \cdot g'_(s) \\
+  g'_R(s) &= g'_N(g(s)) \cdot g'_(s) \\
   g'_R(1) &= g_N'(1)\cdot g'(1) = E[N]\cdot E[X]=E[R]\\
-  &=E[N^2-N]\cdot (E[X])^2 + E[N]\cdot E[X^2-X] = 
+  &=E[N^2-N]\cdot (E[X])^2 + E[N]\cdot E[X^2-X] \\
+  &=E[N^2]\cdot E[X]^2 - E[N] \cdot E[X]^2 +E[N]\cdot E[X^2] - E[N]\cdot E[X]\\
+  & \implies var(R) = E[R^2]-E[R]^2 = g''_R(1)+g'_R(1)-[g'_R(1)]^2\\
+  &=E[N^2] \cdot E[X]^2 + E[N] \cdot var(X) - E[N]\cdot E[X] + E[N] \cdot E[X] - (E[N] \cdot E[X])^2 \\
+  &= E[X]^2 \cdot (E[N^2]-E[N]^2) + E[N] \cdot var(X)
 \end{split}
 $$
+\end{equation}
+
+\textbf{SO}
+\begin{itemize}
+  \item $E[R] = E[N] \cdot E[X]$
+  \item $var(R) = E[N] \cdot var(X) + var(N) \cdot E[X]^2$
+\end{itemize}
+
+What we saw just above is used in queueing systems when transmitting: queue length is N, random,
+and the queue has packets of length X\textsubscript{i}.
+
+\section{Distributions}
+\subsection{Bernoulli}
+Let $X \in \{0,1\}, \, p = P[X=1]$, then $E[X]=p, \, var(X)=p \cdot (1-p)$
+We define $\chi(A)$ as the indicator function.
+
+\subsection{Binomial}
+Let n be the number of i.i.d experiments with $P[success]=p$. Let Y be the counter of the successes:
+$Y=\sum\limits_{i=1}^{n} x_i$. We get $P[Y=k]= \frac{n! \cdot p^k \cdot (1-p)^{n-k}}{k! \cdot (n-k)!}$
+
+\subsection{Geometric}
+Let Z be the counter of failure prior to the first success. We have $P[Z=k] = p \cdot (1-p)^{k-1}$ with $k=0,1,\dots$, \\
+We get $E[Z]=\frac{1-p}{p} \; var(Z)=\frac{1-p}{p^2}$.
+Sometimes books refer to $Z'=Z+1$ as the number of failure with the first success. In that case we have:\\
+$E[Z']=\frac{1}{p} \; var(Z')=\frac{1-p}{p^2}=var(Z)$
+
+\subsection{Poisson}
+Let $X$ be a Poisson r.v. with parameter $\lambda$. Then $P[X=k] = \lambda^k \cdot \frac{e^{-\lambda}}{k!}$ with $k=0,1,\dots$
+\\
+$E[X]=\sum\limits_{k=0}^{+\infty}k \cdot \frac{\lambda^k \cdot e^{-\lambda}}{k!}= \lambda \sum\limits_{k=1}^{+\infty}\frac{\lambda^{k-1}\cdot e^{-\lambda}}{(k-1)!}=\lambda$
+and $var(X)=\lambda$
+
+We also can say that if $n \to +\infty$, the binomial can be approximated as a Poisson r.v.
+
+\subsection{Exponential}
+Let $T$ be an exponential r.v. in the form of
+$$f_T(t)=
+\begin{cases}
+  \lambda \cdot e^{-\lambda \cdot t} & t \ge 0 \\
+  0 & t <0
+\end{cases}
+$$
+\\
+Then $E[X]= \frac{1}{\lambda} \; var(X)=\frac{1}{\lambda^2}$
+
+What is the value of $P[T-t > x | T>t]$?
+
+\begin{equation}
+  $$P[T-t > x | T>t]=\frac{P[T-t > x , T>t]}{P[T>t]}=\frac{P[T > t+x ]}{P[T>t]}=\frac{1-P[T \le t+x]}{1-P[T\le t]}=\frac{e^{-\lambda \cdot (t+x)}}{e^{-\lambda \cdot t}} = e^{-\lambda \cdot x}$$
+\end{equation}
+We proved that the exponential r.v. is memoryless
+
+\subsection{Uniform}
+$E[\mathbb{U}]=\frac{a+b}/2 \, var(\mathbb{U})=\frac{(b-a)^2}{12}$
+
+\#TODO\# grafico uniforme
+
+\subsection{Gamma}
+Let $\alpha >0 , \lambda >0$. Then the PDF of a gamma-distributed r.v. is
+\begin{equation}
+  $$f(x) = \frac{\lambda}{\Gamma(\alpha)}\cdot (\lambda \cdot x)^{\alpha -1} \cdot e^{-\lambda \cdot x} \text{ with } x\ge 0$$
+\end{equation}
+
+For the expectation and the variance, we have: $E[G]=\frac{\alpha}{\lambda} \, var(G)=\frac{\alpha}{\lambda^2}$
+\\ If $\alpha \in \mathbb{N} \implies \Gamma(\alpha) = (\alpha-1)!$ and the gamma
+distribution is the sum of $\alpha$ i.i.d exponential r.v. of parameter $\lambda$.
+
+\begin{equation} $$
+  \begin{split}
+  E[X]&\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot P[X=k]
+  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} P[X>k]\\
+  &=0 \cdot p(0) + 1 \cdot p(1) + 2 \cdot p(2) + \dots \\
+  &= p(1) + p(2) + p(3)+ \dots \qquad P[X>0]\\
+  & \qquad \qquad + p(2) + p(3) +\dots \quad P[X>1]\\
+  & \qquad \qquad \qquad \qquad + p(3)+ \dots \quad P[X>2] \\
+  & \dots
+  \end{split}$$
+\end{equation}
+where $P[X=k]=p(k)$ and $P[X>k]$ is the complementary distribution
+
+In the continuous case
+\begin{equation}$$
+  \begin{split}
+    E[X] &= \int_{0}^{+\infty} 1-F(x) dx = \int_{0}^{+\infty} x \cdot f(x) dx
+    &=\int_{0}^{+\infty} e^{-\lambda \cdot x} dx = \frac{1}{\lambda}
+  \end{split}$$
 \end{equation}
