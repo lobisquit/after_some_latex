@@ -118,3 +118,24 @@ Doing the derivative of g(s) we obtain:
   \end{split}
   $$
 \end{equation}
+
+Now, let $X_1, X_2, \dotsc \; \text{ and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
+is a random, because the sum is made of random $x_i$ random terms and $N$ is a random number.
+
+\begin{equation}$$
+  \begin{split}
+    g_R(s)&=E[s^R]=E[s^{X_1+X_2+\dotsc+X_N}]=\sum\limits_{n=0}^{+\infty} P[N=n]\cdot E[s^{\sum\limits_{i=0}^{n}X_i}|N=n]\\
+    &=\sum\limits_{n=0}^{+\infty} P[N=n]\cdot E[g(s)]^n=g_N(g(s))
+    \\ & \implies g_R(s) = g_N(g(s))
+  \end{split}$$
+\end{equation}
+The mean and the variance of the moment generating functions can be calculated as follows:
+\begin{equation}
+$$
+\begin{split}
+  g'_R(s) = g'_N(g(s)) \cdot g'_(s) \\
+  g'_R(1) &= g_N'(1)\cdot g'(1) = E[N]\cdot E[X]=E[R]\\
+  &=E[N^2-N]\cdot (E[X])^2 + E[N]\cdot E[X^2-X] = 
+\end{split}
+$$
+\end{equation}
