@@ -21,7 +21,7 @@ Let \textit{A},\textit{B} be two events, then:
 \end{itemize}
 \subsection{Total probability law}
 Given $A_i \cap A_j = \emptyset \;\; \forall i \neq j $, then $\bigcup\limits_{i=1}^{+\infty} A_i \, = \Omega$.
-Moreover $P[B]=\sum\limits_{i=1}^{+\ifty} P[B \cap A_i]$.
+Moreover $P[B]=\sum\limits_{i=1}^{+\infty} P[B \cap A_i]$.
 
 If $P[A \cap B] = P[A]\cdot P[B] \implies A,B$ \textit{are} \textbf{independent}.
 
@@ -64,3 +64,57 @@ If X and Y are independent ($X \indep Y$), we have
 If X and Y are uncorrelated ($X \bot Y$) $\implies cov(X,Y)=0$.
 
 \subsection{Conditional probability}
+\begin{equation}
+  $$P[A | B]= \frac{P[A \cap B]}{P[B]} \; \text{with $P[B]\ne 0$}$$ \\
+  $$\implies P[A \cap B ] = P[A | B ]\cdot P[B]$$
+\end{equation}\\
+From the total probability law we can write\\
+$$P[A]= \sum\limits_{i=0}^{+\infty}P[A|B]\cdot P[B_i]$$
+
+Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = P[Z\le z] = P[X+Y \le z]$
+Calculating F(z) can be more difficult with two variables. We will proceed this way:
+\\
+\begin{equation}
+  $$
+  \begin{split}
+    E_{Y}[P[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} E_Y [P[X \le Z - Y | Y]] = E_Y[F_X(z-Y)]\\
+    &=\int_{-\infty}^{+\infty}F_x(z-y) \cdot dF_Y(y) \\
+    &\implies f_Z(z) = F'_z(z) = \int_{-\infty}^{+\infty}{f_X(z-y)\cdot f_Y(y) dy} \\
+    &=\int_{0}^{z}{f_X(z-y) \cdot f_Y(y) dy}
+  \end{split}
+  $$
+\end{equation}
+
+Test
+\subsection{K.T. pp. 10-13}
+\begin{equation}
+  $$\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = E[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
+  \int_{-\infty}^{+\infty}e^{\imath \lambda t} \cdot p(\lambda) d\lambda
+  \\ \implies$$
+\end{equation}
+\begin{enumerate}
+  \item $\phi(t)$ fully describes the statistics of X (the Fourier transform is a  one-to-one map )
+  \item The characteristic function of the sum of independent variables is the product
+  \item $\phi'(t)=\frac{d}{dt} E[e^{\imath \cdot t \cdot x}]=E[\imath \cdot x \cdot e^{\imath \cdot t \cdot x}]$ \\
+  if t=0 $\implies E[\imath \cdot x]=\imath \cdot E[ X] = \phi'(0)$
+  \item $\phi^{(k)}(0) = (\imath)^k \cdot E[X^k] \implies \phi(t)$ is the \textbf{moment-generating function}
+\end{enumerate}
+
+
+For integer and non negative r.v. :
+$$g(s)=\sum\limits_{k=0}^{+\infty}p_k \cdot s^k = E[S^X]$$
+
+$$\phi(t) = g(e^{\imath \cdot t})$$
+
+Doing the derivative of g(s) we obtain:
+\begin{equation}
+   $$
+  \begin{split}
+    & g'(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
+    \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = E[X] \\
+    & g''(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot (k-1) \cdot s^{k-2}
+    \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = E[X^2]-E[X] \\
+    &\implies E[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
+  \end{split}
+  $$
+\end{equation}
