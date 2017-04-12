@@ -229,3 +229,58 @@ In the continuous case
     &=\int_{0}^{+\infty} e^{-\lambda \cdot x} dx = \frac{1}{\lambda}
   \end{split}$$
 \end{equation}
+
+\section{Chapter 2 K. T. }
+We saw the Total Probability theorem and how to use it to find a probability with subsetting.\\
+Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $P[Y=y]\neq 0$.
+Then, $\forall x,y$
+\begin{equation}$$
+  \begin{split}
+    P[X\le x, Y \le y] &= \sum \limits_{\eta \le y} P[X \le x , Y \le \eta] \\
+    &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot P[Y=\eta]\\
+    &\stackrel{continuous}{=} \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)
+  \end{split}$$
+\end{equation}
+We can try to find the expectation of $g(x)$ which is a function of Y using the conditioning. So we obtain:
+\begin{equation}
+  $$E[g(x)]=E[E[g(x)|Y]] = \int_{-\infty}^{+\infty}E[g(x)|Y=\eta] dF_Y(\eta)$$
+\end{equation}
+
+\textbf{SO}
+\begin{equation}
+  \begin{split}
+   &\forall x,y \\
+  &P[X\le x , Y \le y] = \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)\\
+  &\forall x \quad P[X \le x] = \int_{-\infty}^{+\infty}F_{X|Y}(x|\eta) dF_Y(\eta) \\
+  &E[g(x)]=\int_{-\infty}^{+\infty}
+  E[g(x)|Y=\eta] dF_Y(\eta)
+  \end{split}
+\end{equation}
+
+\subsection{Example binomial}
+EMPTY
+
+\subsubsection{Transform approach}
+\begin{equation}
+  \begin{split}
+  g_N(s)=\sum \limits_{n=1}^{+\infty} \beta \cdot (1-\beta)^{n-1}\cdot s^n = \frac{\beta \cdot s}{1-(1-\beta)\cdot s}\\
+  \phi_T=E[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
+  \phi_Z = g_N(\phi_T(t))=\frac{\beta \cdot \frac{\lambda}{\lambda - \jmath \cdot t}}{1-(1-\beta)\cdot \frac{\lambda}{\lambda - \jmath \cdot t}} =
+   \frac{\beta \cdot \lambda}{\lambda - \jmath \cdot t -\lambda - \beta \cdot \lambda} = \frac{\beta \cdot \lambda}{\beta \cdot \lambda - \jmath \cdot t}
+  \end{split}
+\end{equation}
+In the last row we can see how the the composition changed only the parameter: $\lambda$ becomes $\beta \cdot \lambda$.
+
+We recall that $f_{X|Y} = \frac{f_{XY}(x,y)}{f_Y(y)}$ with $f_Y(y)\neq 0$ in the considered interval.
+We can then derive
+\begin{equation}
+  \begin{split}
+  F_{X|Y}(x|y) = \int_{-\infty}^{x}f_{X|Y}(\xi,y)d\xi\\
+  \forall x,y \quad P[X \le x , Y \le y] &= \int_{-\infty}^{x}d\xi \int_{-\infty}^{y}f_{XY}(\xi,\eta) d\eta\\
+  &=\int_{-\infty}^{y}f_Y(\eta) \int_{-\infty}^{x}f_{X|Y}(\xi,\eta) d\xi d\eta \\
+  =&\int_{-\infty}^{y}F_{X|Y}(x,\eta) dF_Y(\eta)
+  E[g(x)] &= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}g(\eta) f_{XY}(\xi,\eta) d\eta  d\xi \\
+  &= \int_{-\infty}^{+\infty} f_Y(\eta) \int_{-\infty}^{+\infty}g(\eta) f_{X|Y}(\xi,\eta)   d\xi d\eta \\
+  &= \int_{-\infty}^{+\infty}e[g(x)|Y=\eta] dF_Y(\eta)
+  \end{split}
+\end{equation}
