@@ -21,12 +21,12 @@ Let \textit{A},\textit{B} be two events, then:
 \end{itemize}
 \subsection{Total probability law}
 Given $A_i \cap A_j = \emptyset \;\; \forall i \neq j $, then $\bigcup\limits_{i=1}^{+\infty} A_i \, = \Omega$.
-Moreover $P[B]=\sum\limits_{i=1}^{+\infty} P[B \cap A_i]$.
+Moreover $\mathbb{P}[B]=\sum\limits_{i=1}^{+\infty} \mathbb{P}[B \cap A_i]$.
 
-If $P[A \cap B] = P[A]\cdot P[B] \implies A,B$ \textit{are} \textbf{independent}.
+If $\mathbb{P}[A \cap B] = \mathbb{P}[A]\cdot \mathbb{P}[B] \implies A,B$ \textit{are} \textbf{independent}.
 
 \subsection{Distribution function (PMD)}\label{sec:pmd}
-$F(x) = P[X \le x]$ is called the distribution function and has the following properties:
+$F(x) = \mathbb{P}[X \le x]$ is called the distribution function and has the following properties:
 \begin{enumerate}
   \item $\lim\limits_{x \to -\infty} F(x) = 0$ \quad and \quad $\lim\limits_{x \to +\infty} F(x) = 1$
   \item F is monothonic non-decreasing $\implies$ if $x_1 > x_2 \implies F(x_1)\ge F(x_2)$
@@ -36,19 +36,19 @@ We define $f(x)=F'(x)$ the probability density function \textit{PDF}.
 
 \subsection{Moment}
 We define  the moment as:
-$E[X^m]=
+$\mathbb{E}[X^m]=
 \begin{cases}
-    \sum\limits_{i} {x{_i}^{m} \cdot P[X=x_i]} & \text{if X is discrete } \\
+    \sum\limits_{i} {x{_i}^{m} \cdot \mathbb{P}[X=x_i]} & \text{if X is discrete } \\
     \int_{-\infty}^{+\infty} {x^{m} \cdot f(x) dx }  & \text{if X is continuous}
 \end{cases}$
-In particular if m=1, we obtain the mean, if m=2 we get the power (and in particular if $E[X]=0$ we obtain the variance).\\
-Defining $\mu = E[X]$, we say that $E[(X-\mu)^m]$ is the center moment.\\
-We will denote $E[g(x)]=\int_{-\infty}^{+\infty} g(x)\, d F_X(x)$
+In particular if m=1, we obtain the mean, if m=2 we get the power (and in particular if $\mathbb{E}[X]=0$ we obtain the variance).\\
+Defining $\mu = \mathbb{E}[X]$, we say that $\mathbb{E}[(X-\mu)^m]$ is the center moment.\\
+We will denote $\mathbb{E}[g(x)]=\int_{-\infty}^{+\infty} g(x)\, d F_X(x)$
 
 \subsection{Joint probability}
 We define the joint probability of two variables as
 \begin{equation*}
-  $$F_{XY}(x,y)=P[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
+  $$F_{XY}(x,y)=\mathbb{P}[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
 \end{equation*}
 
 From what we obtain in \ref{sec:pmd}, we can write \\
@@ -59,25 +59,25 @@ From what we obtain in \ref{sec:pmd}, we can write \\
 If X and Y are independent ($X \indep Y$), we have
 \begin{itemize}
   \item $F_{XY}(x,y)=F_X(x)\cdot F_Y(y) \; \forall x,y$
-  \item $cov(X,Y) = E[(X - \mu_X)\cdot (Y - \mu_Y)] = E[X \cdot Y]-\mu_X \cdot \mu_Y$
+  \item $cov(X,Y) = \mathbb{E}[(X - \mu_X)\cdot (Y - \mu_Y)] = \mathbb{E}[X \cdot Y]-\mu_X \cdot \mu_Y$
 \end{itemize}
 If X and Y are uncorrelated ($X \bot Y$) $\implies cov(X,Y)=0$.
 
 \subsection{Conditional probability}
 \begin{equation}
-  $$P[A | B]= \frac{P[A \cap B]}{P[B]} \; \text{with $P[B]\ne 0$}$$ \\
-  $$\implies P[A \cap B ] = P[A | B ]\cdot P[B]$$
+  $$\mathbb{P}[A | B]= \frac{\mathbb{P}[A \cap B]}{\mathbb{P}[B]} \; \text{with $\mathbb{P}[B]\ne 0$}$$ \\
+  $$\implies \mathbb{P}[A \cap B ] = \mathbb{P}[A | B ]\cdot \mathbb{P}[B]$$
 \end{equation}\\
 From the total probability law we can write\\
-$$P[A]= \sum\limits_{i=0}^{+\infty}P[A|B]\cdot P[B_i]$$
+$$\mathbb{P}[A]= \sum\limits_{i=0}^{+\infty}\mathbb{P}[A|B]\cdot \mathbb{P}[B_i]$$
 
-Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = P[Z\le z] = P[X+Y \le z]$
+Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = \mathbb{P}[Z\le z] = \mathbb{P}[X+Y \le z]$
 Calculating F(z) can be more difficult with two variables. We will proceed this way:
 \\
 \begin{equation}
   $$
   \begin{split}
-    E_{Y}[P[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} E_Y [P[X \le Z - Y | Y]] = E_Y[F_X(z-Y)]\\
+    E_{Y}[\mathbb{P}[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} E_Y [\mathbb{P}[X \le Z - Y | Y]] = E_Y[F_X(z-Y)]\\
     &=\int_{-\infty}^{+\infty}F_x(z-y) \cdot dF_Y(y) \\
     &\implies f_Z(z) = F'_z(z) = \int_{-\infty}^{+\infty}{f_X(z-y)\cdot f_Y(y) dy} \\
     &=\int_{0}^{z}{f_X(z-y) \cdot f_Y(y) dy}
@@ -85,24 +85,25 @@ Calculating F(z) can be more difficult with two variables. We will proceed this 
   $$
 \end{equation}
 
-Test
-\subsection{K.T. pp. 10-13}
+
+\subsection{Charateristic Function (C.F)}
+(This can be found at KT pp 10-13)
 \begin{equation}
-  $$\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = E[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
+  $$\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = \mathbb{E}[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
   \int_{-\infty}^{+\infty}e^{\imath \lambda t} \cdot p(\lambda) d\lambda
   \\ \implies$$
 \end{equation}
 \begin{enumerate}
   \item $\phi(t)$ fully describes the statistics of X (the Fourier transform is a  one-to-one map )
   \item The characteristic function of the sum of independent variables is the product
-  \item $\phi'(t)=\frac{d}{dt} E[e^{\imath \cdot t \cdot x}]=E[\imath \cdot x \cdot e^{\imath \cdot t \cdot x}]$ \\
-  if t=0 $\implies E[\imath \cdot x]=\imath \cdot E[ X] = \phi'(0)$
-  \item $\phi^{(k)}(0) = (\imath)^k \cdot E[X^k] \implies \phi(t)$ is the \textbf{moment-generating function}
+  \item $\phi'(t)=\frac{d}{dt} \mathbb{E}[e^{\imath \cdot t \cdot x}]=\mathbb{E}[\imath \cdot x \cdot e^{\imath \cdot t \cdot x}]$ \\
+  if t=0 $\implies \mathbb{E}[\imath \cdot x]=\imath \cdot \mathbb{E}[ X] = \phi'(0)$
+  \item $\phi^{(k)}(0) = (\imath)^k \cdot \mathbb{E}[X^k] \implies \phi(t)$ is the \textbf{moment-generating function}
 \end{enumerate}
 
 
 For integer and non negative r.v. :
-$$g(s)=\sum\limits_{k=0}^{+\infty}p_k \cdot s^k = E[S^X]$$
+$$g(s)=\sum\limits_{k=0}^{+\infty}p_k \cdot s^k = \mathbb{E}[S^X]$$
 
 $$\phi(t) = g(e^{\imath \cdot t})$$
 
@@ -111,21 +112,22 @@ Doing the derivative of g(s) we obtain:
    $$
   \begin{split}
     & g'(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
-    \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = E[X] \\
+    \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = \mathbb{E}[X] \\
     & g''(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot (k-1) \cdot s^{k-2}
-    \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = E[X^2]-E[X] \\
-    &\implies E[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
+    \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = \mathbb{E}[X^2]-\mathbb{E}[X] \\
+    &\implies \mathbb{E}[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
   \end{split}
   $$
 \end{equation}
 
+\subsection{Random Sum}
 Now, let $X_1, X_2, \dotsc \; \text{ and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
-is a random, because the sum is made of random $x_i$ random terms and $N$ is a random number.
+is a random sum, because the sum is made of random $x_i$ random terms and $N$ is a random number.
 
 \begin{equation}$$
   \begin{split}
-    g_R(s)&=E[s^R]=E[s^{X_1+X_2+\dotsc+X_N}]=\sum\limits_{n=0}^{+\infty} P[N=n]\cdot E[s^{\sum\limits_{i=0}^{n}X_i}|N=n]\\
-    &=\sum\limits_{n=0}^{+\infty} P[N=n]\cdot E[g(s)]^n=g_N(g(s))
+    g_R(s)&=\mathbb{E}[s^R]=\mathbb{E}[s^{X_1+X_2+\dotsc+X_N}]=\sum\limits_{n=0}^{+\infty} \mathbb{P}[N=n]\cdot \mathbb{E}[s^{\sum_{i=0}^{n}X_i}|N=n]\\
+    &=\sum\limits_{n=0}^{+\infty} \mathbb{P}[N=n]\cdot [g(s)]^n=g_N(g(s))
     \\ & \implies g_R(s) = g_N(g(s))
   \end{split}$$
 \end{equation}
@@ -134,20 +136,20 @@ The mean and the variance of the moment generating functions can be calculated a
 $$
 \begin{split}
   g'_R(s) &= g'_N(g(s)) \cdot g'_(s) \\
-  g'_R(1) &= g_N'(1)\cdot g'(1) = E[N]\cdot E[X]=E[R]\\
-  &=E[N^2-N]\cdot (E[X])^2 + E[N]\cdot E[X^2-X] \\
-  &=E[N^2]\cdot E[X]^2 - E[N] \cdot E[X]^2 +E[N]\cdot E[X^2] - E[N]\cdot E[X]\\
-  & \implies var(R) = E[R^2]-E[R]^2 = g''_R(1)+g'_R(1)-[g'_R(1)]^2\\
-  &=E[N^2] \cdot E[X]^2 + E[N] \cdot var(X) - E[N]\cdot E[X] + E[N] \cdot E[X] - (E[N] \cdot E[X])^2 \\
-  &= E[X]^2 \cdot (E[N^2]-E[N]^2) + E[N] \cdot var(X)
+  g'_R(1) &= g_N'(1)\cdot g'(1) = \mathbb{E}[N]\cdot \mathbb{E}[X]=\mathbb{E}[R]\\
+  &=\mathbb{E}[N^2-N]\cdot (\mathbb{E}[X])^2 + \mathbb{E}[N]\cdot \mathbb{E}[X^2-X] \\
+  &=\mathbb{E}[N^2]\cdot \mathbb{E}[X]^2 - \mathbb{E}[N] \cdot \mathbb{E}[X]^2 +\mathbb{E}[N]\cdot \mathbb{E}[X^2] - \mathbb{E}[N]\cdot \mathbb{E}[X]\\
+  & \implies var(R) = \mathbb{E}[R^2]-\mathbb{E}[R]^2 = g''_R(1)+g'_R(1)-[g'_R(1)]^2\\
+  &=\mathbb{E}[N^2] \cdot \mathbb{E}[X]^2 + \mathbb{E}[N] \cdot var(X) - \mathbb{E}[N]\cdot \mathbb{E}[X] + \mathbb{E}[N] \cdot \mathbb{E}[X] - (\mathbb{E}[N] \cdot \mathbb{E}[X])^2 \\
+  &= \mathbb{E}[X]^2 \cdot (\mathbb{E}[N^2]-\mathbb{E}[N]^2) + \mathbb{E}[N] \cdot var(X)
 \end{split}
 $$
 \end{equation}
 
-\textbf{SO}
+\textbf{So}
 \begin{itemize}
-  \item $E[R] = E[N] \cdot E[X]$
-  \item $var(R) = E[N] \cdot var(X) + var(N) \cdot E[X]^2$
+  \item $\mathbb{E}[R] = \mathbb{E}[N] \cdot \mathbb{E}[X]$
+  \item $var(R) = \mathbb{E}[N] \cdot var(X) + var(N) \cdot \mathbb{E}[X]^2$
 \end{itemize}
 
 What we saw just above is used in queueing systems when transmitting: queue length is N, random,
@@ -155,26 +157,26 @@ and the queue has packets of length X\textsubscript{i}.
 
 \section{Distributions}
 \subsection{Bernoulli}
-Let $X \in \{0,1\}, \, p = P[X=1]$, then $E[X]=p, \, var(X)=p \cdot (1-p)$
+Let $X \in \{0,1\}, \, p = \mathbb{P}[X=1]$, then $\mathbb{E}[X]=p, \, var(X)=p \cdot (1-p)$
 We define $\chi(A)$ as the indicator function.
 
 \subsection{Binomial}
-Let n be the number of i.i.d experiments with $P[success]=p$. Let Y be the counter of the successes:
-$Y=\sum\limits_{i=1}^{n} x_i$. We get $P[Y=k]= \frac{n! \cdot p^k \cdot (1-p)^{n-k}}{k! \cdot (n-k)!}$
+Let $n$ be the number of i.i.d experiments with $\mathbb{P}[success]=p$. Let Y be the counter of the successes:
+$Y=\sum\limits_{i=1}^{n} x_i$. We get $\mathbb{P}[Y=k]= \frac{n!}{k! \cdot (n-k)!}\cdot p^k \cdot (1-p)^{n-k}$
 
 \subsection{Geometric}
-Let Z be the counter of failure prior to the first success. We have $P[Z=k] = p \cdot (1-p)^{k-1}$ with $k=0,1,\dots$, \\
-We get $E[Z]=\frac{1-p}{p} \; var(Z)=\frac{1-p}{p^2}$.
+Let Z be the counter of failure prior to the first success. We have $\mathbb{P}[Z=k] = p \cdot (1-p)^{k-1}$ with $k=0,1,\dots$, \\
+We get $\mathbb{E}[Z]=\frac{1-p}{p} \; var(Z)=\frac{1-p}{p^2}$.
 Sometimes books refer to $Z'=Z+1$ as the number of failure with the first success. In that case we have:\\
-$E[Z']=\frac{1}{p} \; var(Z')=\frac{1-p}{p^2}=var(Z)$
+$\mathbb{E}[Z']=\frac{1}{p}; \quad var(Z')=\frac{1-p}{p^2}=var(Z)$
 
 \subsection{Poisson}
-Let $X$ be a Poisson r.v. with parameter $\lambda$. Then $P[X=k] = \lambda^k \cdot \frac{e^{-\lambda}}{k!}$ with $k=0,1,\dots$
+Let $X$ be a Poisson r.v. with parameter $\lambda$. Then $\mathbb{P}[X=k] =  \frac{\lambda^k \cdot e^{-\lambda}}{k!}$ with $k=0,1,\dots$
 \\
-$E[X]=\sum\limits_{k=0}^{+\infty}k \cdot \frac{\lambda^k \cdot e^{-\lambda}}{k!}= \lambda \sum\limits_{k=1}^{+\infty}\frac{\lambda^{k-1}\cdot e^{-\lambda}}{(k-1)!}=\lambda$
+$\mathbb{E}[X]=\sum\limits_{k=0}^{+\infty}k \cdot \frac{\lambda^k \cdot e^{-\lambda}}{k!}= \lambda \sum\limits_{k=1}^{+\infty}\frac{\lambda^{k-1}\cdot e^{-\lambda}}{(k-1)!}=\lambda$
 and $var(X)=\lambda$
 
-We also can say that if $n \to +\infty$, the binomial can be approximated as a Poisson r.v.
+Poisson r.v. play the role in the discrete as the gaussian in the continuos. There exists a theorem similar to CLT that states that under mild assumptions discrete r.v. converges to Poisson (will be better clarified with the Law of rare events).
 
 \subsection{Exponential}
 Let $T$ be an exponential r.v. in the form of
@@ -185,75 +187,78 @@ $$f_T(t)=
 \end{cases}
 $$
 \\
-Then $E[X]= \frac{1}{\lambda} \; var(X)=\frac{1}{\lambda^2}$
+Then $\mathbb{E}[X]= \frac{1}{\lambda}; \quad var(X)=\frac{1}{\lambda^2}$
 
-What is the value of $P[T-t > x | T>t]$?
+The exponential is a r.v. good to model inter-arrival time and reliability (time in-between disasters)
+What is the value of $\mathbb{P}[T-t > x | T>t]$?
 
 \begin{equation}
-  $$P[T-t > x | T>t]=\frac{P[T-t > x , T>t]}{P[T>t]}=\frac{P[T > t+x ]}{P[T>t]}=\frac{1-P[T \le t+x]}{1-P[T\le t]}=\frac{e^{-\lambda \cdot (t+x)}}{e^{-\lambda \cdot t}} = e^{-\lambda \cdot x}$$
+  $$\mathbb{P}[T-t > x | T>t]=\frac{\mathbb{P}[T-t > x , T>t]}{\mathbb{P}[T>t]}=\frac{\mathbb{P}[T > t+x ]}{\mathbb{P}[T>t]}=\frac{1-\mathbb{P}[T \le t+x]}{1-\mathbb{P}[T\le t]}=\frac{e^{-\lambda \cdot (t+x)}}{e^{-\lambda \cdot t}} = e^{-\lambda \cdot x}$$
 \end{equation}
-We proved that the exponential r.v. is memoryless
+We proved that the exponential r.v. is memoryless\footnote{If I observe that a the machine is working, it's like it's new. Not very realistic, but mathematically convenient.}
 
 \subsection{Uniform}
-$E[\mathbb{U}]=\frac{a+b}/2 \, var(\mathbb{U})=\frac{(b-a)^2}{12}$
+$\mathbb{E}[\mathbb{U}]=\frac{a+b}{2},\quad var(\mathbb{U})=\frac{(b-a)^2}{12}$
 
-\#TODO\# grafico uniforme
 
-\subsection{Gamma}
+\subsection{Gamma (also called Erlang distribution)}
 Let $\alpha >0 , \lambda >0$. Then the PDF of a gamma-distributed r.v. is
 \begin{equation}
   $$f(x) = \frac{\lambda}{\Gamma(\alpha)}\cdot (\lambda \cdot x)^{\alpha -1} \cdot e^{-\lambda \cdot x} \text{ with } x\ge 0$$
 \end{equation}
 
-For the expectation and the variance, we have: $E[G]=\frac{\alpha}{\lambda} \, var(G)=\frac{\alpha}{\lambda^2}$
+For the expectation and the variance, we have: $$\mathbb{E}[G]=\frac{\alpha}{\lambda}, \qquad var(G)=\frac{\alpha}{\lambda^2}$$
+
+Which is the same as $\alpha$ times $\mathbb{E}[exp]$ and $\alpha$ times $var(exp)$.
 \\ If $\alpha \in \mathbb{N} \implies \Gamma(\alpha) = (\alpha-1)!$ and the gamma
 distribution is the sum of $\alpha$ i.i.d exponential r.v. of parameter $\lambda$.
 
 \begin{equation} $$
   \begin{split}
-  E[X]&\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot P[X=k]
-  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} P[X>k]\\
+  \mathbb{E}[X]&\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot \mathbb{P}[X=k] 
+  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} \mathbb{P}[X>k] \quad\mbox{  (beautiful)}\\
   &=0 \cdot p(0) + 1 \cdot p(1) + 2 \cdot p(2) + \dots \\
-  &= p(1) + p(2) + p(3)+ \dots \qquad P[X>0]\\
-  & \qquad \qquad + p(2) + p(3) +\dots \quad P[X>1]\\
-  & \qquad \qquad \qquad \qquad + p(3)+ \dots \quad P[X>2] \\
+  &= p(1) + p(2) + p(3)+ \dots \qquad \mathbb{P}[X>0]\\
+  & \qquad \qquad + p(2) + p(3) +\dots \quad \mathbb{P}[X>1]\\
+  & \qquad \qquad \qquad \qquad + p(3)+ \dots \quad \mathbb{P}[X>2] \\
   & \dots
   \end{split}$$
 \end{equation}
-where $P[X=k]=p(k)$ and $P[X>k]$ is the complementary distribution
+where $\mathbb{P}[X=k]=p(k)$ and $\mathbb{P}[X>k]$ is the complementary distribution
 
 In the continuous case
 \begin{equation}$$
   \begin{split}
-    E[X] &= \int_{0}^{+\infty} 1-F(x) dx = \int_{0}^{+\infty} x \cdot f(x) dx
+    \mathbb{E}[X] &= \int_{0}^{+\infty} 1-F(x) dx = \int_{0}^{+\infty} x \cdot f(x) dx
     &=\int_{0}^{+\infty} e^{-\lambda \cdot x} dx = \frac{1}{\lambda}
   \end{split}$$
 \end{equation}
 
-\section{Chapter 2 K. T. }
+\section{Conditional Distribution}
+(Note: this material can be found in Chapter 2 K. T.).\\
 We saw the Total Probability theorem and how to use it to find a probability with subsetting.\\
-Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $P[Y=y]\neq 0$.
+Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $\mathbb{P}[Y=y]\neq 0$.
 Then, $\forall x,y$
 \begin{equation}$$
   \begin{split}
-    P[X\le x, Y \le y] &= \sum \limits_{\eta \le y} P[X \le x , Y \le \eta] \\
-    &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot P[Y=\eta]\\
+    \mathbb{P}[X\le x, Y \le y] &= \sum \limits_{\eta \le y} \mathbb{P}[X \le x , Y \le \eta] \\
+    &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot \mathbb{P}[Y=\eta]\\
     &\stackrel{continuous}{=} \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)
   \end{split}$$
 \end{equation}
 We can try to find the expectation of $g(x)$ which is a function of Y using the conditioning. So we obtain:
 \begin{equation}
-  $$E[g(x)]=E[E[g(x)|Y]] = \int_{-\infty}^{+\infty}E[g(x)|Y=\eta] dF_Y(\eta)$$
+  $$\mathbb{E}[g(x)]=\mathbb{E}[\mathbb{E}[g(x)|Y]] = \int_{-\infty}^{+\infty}\mathbb{E}[g(x)|Y=\eta] dF_Y(\eta)$$
 \end{equation}
 
 \textbf{SO}
 \begin{equation}
   \begin{split}
    &\forall x,y \\
-  &P[X\le x , Y \le y] = \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)\\
-  &\forall x \quad P[X \le x] = \int_{-\infty}^{+\infty}F_{X|Y}(x|\eta) dF_Y(\eta) \\
-  &E[g(x)]=\int_{-\infty}^{+\infty}
-  E[g(x)|Y=\eta] dF_Y(\eta)
+  &\mathbb{P}[X\le x , Y \le y] = \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)\\
+  &\forall x \quad \mathbb{P}[X \le x] = \int_{-\infty}^{+\infty}F_{X|Y}(x|\eta) dF_Y(\eta) \\
+  &\mathbb{E}[g(x)]=\int_{-\infty}^{+\infty}
+  \mathbb{E}[g(x)|Y=\eta] dF_Y(\eta)
   \end{split}
 \end{equation}
 
@@ -264,7 +269,7 @@ EMPTY
 \begin{equation}
   \begin{split}
   g_N(s)=\sum \limits_{n=1}^{+\infty} \beta \cdot (1-\beta)^{n-1}\cdot s^n = \frac{\beta \cdot s}{1-(1-\beta)\cdot s}\\
-  \phi_T=E[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
+  \phi_T=\mathbb{E}[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
   \phi_Z = g_N(\phi_T(t))=\frac{\beta \cdot \frac{\lambda}{\lambda - \jmath \cdot t}}{1-(1-\beta)\cdot \frac{\lambda}{\lambda - \jmath \cdot t}} =
    \frac{\beta \cdot \lambda}{\lambda - \jmath \cdot t -\lambda - \beta \cdot \lambda} = \frac{\beta \cdot \lambda}{\beta \cdot \lambda - \jmath \cdot t}
   \end{split}
@@ -276,11 +281,11 @@ We can then derive
 \begin{equation}
   \begin{split}
   F_{X|Y}(x|y) = \int_{-\infty}^{x}f_{X|Y}(\xi,y)d\xi\\
-  \forall x,y \quad P[X \le x , Y \le y] &= \int_{-\infty}^{x}d\xi \int_{-\infty}^{y}f_{XY}(\xi,\eta) d\eta\\
+  \forall x,y \quad \mathbb{P}[X \le x , Y \le y] &= \int_{-\infty}^{x}d\xi \int_{-\infty}^{y}f_{XY}(\xi,\eta) d\eta\\
   &=\int_{-\infty}^{y}f_Y(\eta) \int_{-\infty}^{x}f_{X|Y}(\xi,\eta) d\xi d\eta \\
   =&\int_{-\infty}^{y}F_{X|Y}(x,\eta) dF_Y(\eta)
-  E[g(x)] &= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}g(\eta) f_{XY}(\xi,\eta) d\eta  d\xi \\
+  \mathbb{E}[g(x)] &= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}g(\eta) f_{XY}(\xi,\eta) d\eta  d\xi \\
   &= \int_{-\infty}^{+\infty} f_Y(\eta) \int_{-\infty}^{+\infty}g(\eta) f_{X|Y}(\xi,\eta)   d\xi d\eta \\
-  &= \int_{-\infty}^{+\infty}e[g(x)|Y=\eta] dF_Y(\eta)
+  &= \int_{-\infty}^{+\infty}\mathbb{E}[g(x)|Y=\eta] dF_Y(\eta)
   \end{split}
 \end{equation}
