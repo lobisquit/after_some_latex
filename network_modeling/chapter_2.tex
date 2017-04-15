@@ -37,7 +37,7 @@ Suppose the service time occupies only one slot and all the slots for service ti
 If the queue is empty, that time slot is wasted.
 Now let the number of users arriving in the n-th slot be $\xi_n$ and the number of users in
 the system in the n-th slot  be $X_n$. Then we have:
- \begin{equation} 
+ \begin{equation}
  	\begin{split}
  	&\prob[\xi_n=k] = a_k \text{, probability of k arriving users at time n}\\
   	&X_{n+1}=
@@ -85,7 +85,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 	\begin{theorem}
 		For a regular \gls{mc} with states 0, 1, ..., N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:\\
-		
+
 		$\begin{cases}
 			\pi_j = \sum\limits_{k=0}^N \pi_k P_{k j} & \text{for } j = 0,1, \cdots, N \\
 			\sum\limits_{k=0}^N \pi_k = 1\\
@@ -186,7 +186,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{definition}
 
 	So the probability of ever going back to state $i$ can be written as
-	$$ f_{ii} = \sum\limits_{n=1}^\infty f_{ii}(n)  = \sum\limits_{n=1}^\infty \mathbb{P}[R_i=n | X_0=i] $$
+	$$ f_{ii} = \sum\limits_{n=1}^\infty f_{ii}(n)  = \sum\limits_{n=1}^\infty \prob[R_i=n | X_0=i] $$
 	where $f_{ii}(n)$ is the probability of returning to state $i$ in $n$ steps.
 
 	\begin{definition}[Recurrent state]
@@ -202,18 +202,18 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 	\begin{definition}
 		$M$ is the number of returns to state $i$, starting from $i$
-		$$\mathbb{E}[M | X_0 = i] = \sum\limits_{k=1}^\infty \mathbb{P}[M\geq k | X_0 = i] = \sum\limits_{k=1}^\infty f_{ii}^k = \begin{cases}
+		$$\exp[M | X_0 = i] = \sum\limits_{k=1}^\infty \prob[M\geq k | X_0 = i] = \sum\limits_{k=1}^\infty f_{ii}^k = \begin{cases}
 		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
 		\infty, & \text{if recurrent}
 		\end{cases}$$
 	\end{definition}
 
 	\begin{definition}[Proper r.v]
-		given X a finite value r.v. it is called proper if $$\lim_{x\to \infty} \mathbb{P}[x\geq a] = 0$$
+		given X a finite value r.v. it is called proper if $$\lim_{x\to \infty} \prob[x\geq a] = 0$$
 	\end{definition}
 
 	\begin{definition}[Improper r.v]
-		given X a r.v. it is called improper if  $$\lim_{x\to \infty} \mathbb{P}[x\geq a] = p_\infty \ne 0$$
+		given X a r.v. it is called improper if  $$\lim_{x\to \infty} \prob[x\geq a] = p_\infty \ne 0$$
 	\end{definition}
 
 	\begin{theorem}
@@ -224,10 +224,10 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{proof}
 		Let the number of time state i has been visited be $$M = \sum\limits_{n=1}^\infty \mathds{1}\{X_n =i\} $$
 		The following swap from expected value and infinite sum is allowed by Fubini's Theorem
-    $$ \mathbb{E}[M | X_0 = i] = \mathbb{E}\left[\sum\limits_{n=1}^\infty \mathds{1}\{X_n = i\} | X_0 = i\right]
-    = \sum\limits_{n=1}^\infty \mathbb{E}\left[\mathds{1}\{ X_n = i\} | X_0 = i\right] = \sum\limits_{n=1}^\infty P_{ii}^{(n)} $$
-		So we have shown that $\mathbb{E}[M | X_0=i] = \sum\limits_{n=1}^\infty P_{ii}^{(n)}$.\\
-		Now, remembering that$$ \mathbb{E}[M | X_0 = i] = \begin{cases}
+    $$ \exp[M | X_0 = i] = \exp\left[\sum\limits_{n=1}^\infty \mathds{1}\{X_n = i\} | X_0 = i\right]
+    = \sum\limits_{n=1}^\infty \exp\left[\mathds{1}\{ X_n = i\} | X_0 = i\right] = \sum\limits_{n=1}^\infty P_{ii}^{(n)} $$
+		So we have shown that $\exp[M | X_0=i] = \sum\limits_{n=1}^\infty P_{ii}^{(n)}$.\\
+		Now, remembering that$$ \exp[M | X_0 = i] = \begin{cases}
 		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
 		\infty, & \text{if recurrent}
 		\end{cases}$$
@@ -260,7 +260,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{center}
 		\begin{tabular}{|l*{6}{|c}r}
 			\hline
-			State $i$ & $f_{ii} = \sum\limits_{n=1}^\infty f_{ii}^{(n)}$  & $\lim\limits_{k \to \infty } \mathbb{P}[M \geq k | X_0=i]$ & $\mathbb{E}[n|X_0=i]$ & $m_i = \sum\limits_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
+			State $i$ & $f_{ii} = \sum\limits_{n=1}^\infty f_{ii}^{(n)}$  & $\lim\limits_{k \to \infty } \prob[M \geq k | X_0=i]$ & $\exp[n|X_0=i]$ & $m_i = \sum\limits_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
 
 			Transient & $<1$ & 0 & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & 0 \\ \hline
 			Null recurrent & 1 & 1 & $\infty$ & $\infty$ & 0 \\ \hline
@@ -392,7 +392,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{proof}
 
 	\begin{definition}[lesson 22/03/17]
-		$$\Pi_{ik}^n(c) = \mathbb{P}[X_n = k \in c, X_l \notin c, l=1, ... , n-1 | X_0 =i]$$
+		$$\Pi_{ik}^n(c) = \prob[X_n = k \in c, X_l \notin c, l=1, ... , n-1 | X_0 =i]$$
 		$c$ is an aperiodic recurrent class, $i$ is a transient state.
 		$$\Pi_i^n(c) = \sum\limits_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum\limits_{n=1}^\infty \Pi_i^n(c)$$
 	\end{definition}
