@@ -65,8 +65,10 @@ If X and Y are uncorrelated ($X \bot Y$) $\implies cov(X,Y)=0$.
 
 \subsection{Conditional probability}
 \begin{equation}
-  $$\prob[A | B]= \frac{\prob[A \cap B]}{\prob[B]} \; \text{with $\prob[B]\ne 0$}$$ \\
-  $$\implies \prob[A \cap B ] = \prob[A | B ]\cdot \prob[B]$$
+  \begin{split}
+    \prob[A | B]&= \frac{\prob[A \cap B]}{\prob[B]} \; \text{with $\prob[B]\ne 0$} \\
+    \implies \prob[A \cap B ] &= \prob[A | B ]\cdot \prob[B]
+  \end{split}
 \end{equation}\\
 From the total probability law we can write\\
 $$\prob[A]= \sum\limits_{i=0}^{+\infty}\prob[A|B]\cdot \prob[B_i]$$
@@ -74,24 +76,20 @@ $$\prob[A]= \sum\limits_{i=0}^{+\infty}\prob[A|B]\cdot \prob[B_i]$$
 Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = \prob[Z\le z] = \prob[X+Y \le z]$
 Calculating F(z) can be more difficult with two variables. We will proceed this way:
 \\
-\begin{equation}
-  $$
-  \begin{split}
+\begin{equation}\begin{split}
     \exp_{Y}[\prob[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} \exp_Y [\prob[X \le Z - Y | Y]] = \exp_Y[F_X(z-Y)]\\
     &=\int_{-\infty}^{+\infty}F_x(z-y) \cdot dF_Y(y) \\
     &\implies f_Z(z) = F'_z(z) = \int_{-\infty}^{+\infty}{f_X(z-y)\cdot f_Y(y) dy} \\
     &=\int_{0}^{z}{f_X(z-y) \cdot f_Y(y) dy}
   \end{split}
-  $$
 \end{equation}
 
 
 \subsection{Charateristic Function (C.F)}
 (This can be found at KT pp 10-13)
-\begin{equation}
-  $$\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = \exp[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
+\begin{equation}\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = \exp[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
   \int_{-\infty}^{+\infty}e^{\imath \lambda t} \cdot p(\lambda) d\lambda
-  \\ \implies$$
+  \\ \implies
 \end{equation}
 \begin{enumerate}
   \item $\phi(t)$ fully describes the statistics of X (the Fourier transform is a  one-to-one map )
@@ -104,12 +102,10 @@ Calculating F(z) can be more difficult with two variables. We will proceed this 
 
 For integer and non negative r.v. :
 $$g(s)=\sum\limits_{k=0}^{+\infty}p_k \cdot s^k = \exp[S^X]$$
-
 $$\phi(t) = g(e^{\imath \cdot t})$$
 
 Doing the derivative of g(s) we obtain:
 \begin{equation}
-   $$
   \begin{split}
     & g'(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
     \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = \exp[X] \\
@@ -117,24 +113,21 @@ Doing the derivative of g(s) we obtain:
     \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = \exp[X^2]-\exp[X] \\
     &\implies \exp[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
   \end{split}
-  $$
 \end{equation}
 
 \subsection{Random Sum}
 Now, let $X_1, X_2, \dotsc \; \text{ and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
 is a random sum, because the sum is made of random $x_i$ random terms and $N$ is a random number.
 
-\begin{equation}$$
+\begin{equation}
   \begin{split}
     g_R(s)&=\exp[s^R]=\exp[s^{X_1+X_2+\dotsc+X_N}]=\sum\limits_{n=0}^{+\infty} \prob[N=n]\cdot \exp[s^{\sum_{i=0}^{n}X_i}|N=n]\\
     &=\sum\limits_{n=0}^{+\infty} \prob[N=n]\cdot [g(s)]^n=g_N(g(s))
     \\ & \implies g_R(s) = g_N(g(s))
-  \end{split}$$
+  \end{split}
 \end{equation}
 The mean and the variance of the moment generating functions can be calculated as follows:
-\begin{equation}
-$$
-\begin{split}
+\begin{equation}\begin{split}
   g'_R(s) &= g'_N(g(s)) \cdot g'_(s) \\
   g'_R(1) &= g_N'(1)\cdot g'(1) = \exp[N]\cdot \exp[X]=\exp[R]\\
   &=\exp[N^2-N]\cdot (\exp[X])^2 + \exp[N]\cdot \exp[X^2-X] \\
@@ -143,7 +136,6 @@ $$
   &=\exp[N^2] \cdot \exp[X]^2 + \exp[N] \cdot var(X) - \exp[N]\cdot \exp[X] + \exp[N] \cdot \exp[X] - (\exp[N] \cdot \exp[X])^2 \\
   &= \exp[X]^2 \cdot (\exp[N^2]-\exp[N]^2) + \exp[N] \cdot var(X)
 \end{split}
-$$
 \end{equation}
 
 \textbf{So}
@@ -200,7 +192,6 @@ We proved that the exponential r.v. is memoryless\footnote{If I observe that a t
 \subsection{Uniform}
 $\exp[\mathbb{U}]=\frac{a+b}{2},\quad var(\mathbb{U})=\frac{(b-a)^2}{12}$
 
-
 \subsection{Gamma (also called Erlang distribution)}
 Let $\alpha >0 , \lambda >0$. Then the PDF of a gamma-distributed r.v. is
 \begin{equation}
@@ -213,25 +204,25 @@ Which is the same as $\alpha$ times $\exp[exp]$ and $\alpha$ times $var(exp)$.
 \\ If $\alpha \in \mathbb{N} \implies \Gamma(\alpha) = (\alpha-1)!$ and the gamma
 distribution is the sum of $\alpha$ i.i.d exponential r.v. of parameter $\lambda$.
 
-\begin{equation} $$
+\begin{equation}
   \begin{split}
-  \exp[X]&\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot \prob[X=k]
-  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} \prob[X>k] \quad\mbox{  (beautiful)}\\
+  \exp[X] &\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot \prob[X=k]
+  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} \prob[X>k] \quad\text{  (beautiful)}\\
   &=0 \cdot p(0) + 1 \cdot p(1) + 2 \cdot p(2) + \dots \\
   &= p(1) + p(2) + p(3)+ \dots \qquad \prob[X>0]\\
   & \qquad \qquad + p(2) + p(3) +\dots \quad \prob[X>1]\\
   & \qquad \qquad \qquad \qquad + p(3)+ \dots \quad \prob[X>2] \\
   & \dots
-  \end{split}$$
+  \end{split}
 \end{equation}
 where $\prob[X=k]=p(k)$ and $\prob[X>k]$ is the complementary distribution
 
 In the continuous case
-\begin{equation}$$
+\begin{equation}
   \begin{split}
     \exp[X] &= \int_{0}^{+\infty} 1-F(x) dx = \int_{0}^{+\infty} x \cdot f(x) dx
     &=\int_{0}^{+\infty} e^{-\lambda \cdot x} dx = \frac{1}{\lambda}
-  \end{split}$$
+  \end{split}
 \end{equation}
 
 \section{Conditional Distribution}
@@ -239,12 +230,12 @@ In the continuous case
 We saw the Total Probability theorem and how to use it to find a probability with subsetting.\\
 Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $\prob[Y=y]\neq 0$.
 Then, $\forall x,y$
-\begin{equation}$$
+\begin{equation}
   \begin{split}
     \prob[X\le x, Y \le y] &= \sum \limits_{\eta \le y} \prob[X \le x , Y \le \eta] \\
     &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot \prob[Y=\eta]\\
     &\stackrel{continuous}{=} \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)
-  \end{split}$$
+  \end{split}
 \end{equation}
 We can try to find the expectation of $g(x)$ which is a function of Y using the conditioning. So we obtain:
 \begin{equation}
@@ -262,8 +253,6 @@ We can try to find the expectation of $g(x)$ which is a function of Y using the 
   \end{split}
 \end{equation}
 
-\subsection{Example binomial}
-EMPTY
 
 \subsubsection{Transform approach}
 \begin{equation}
