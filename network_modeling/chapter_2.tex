@@ -1,5 +1,72 @@
 \chapter{Markov Chains}
 
+\section{Introduction}
+A markov process is a process $X_n \text{ or } X_t$ s.t.
+\begin{equation}
+\prob[X_{n+1} = j | X_0 = i_0, X_1 = i_1, \dots, X_n = i_n] = \prob[X_{n+1} = j | X_n=i_n] = P
+\end{equation}
+with P as the \textit{one-step probability}. From now on, the notation for that probability
+will be $P_{i,j}^{n,n+1}=P_{i,j} \quad \forall n$ if the MC is homogeneous, i.e.
+the transition probabilities are stationary.\\
+We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix}, which will characterize the
+process as
+\begin{equation} P=\begin{pmatrix}
+P_{00} & P_{01} & \cdots  \\
+P_{10} & P_{11} & \cdots \\
+\vdots & \vdots & \ddots  \\
+ \end{pmatrix}
+\text{with } P_{i,j}\ge 0 \forall i,j \quad \text{ and } \sum\limits_{j=0}^{+\infty}P_{i,j} = 1 \quad \forall i
+\end{equation}
+For example
+\begin{equation}
+\prob[X_3 = i_3 , X_2 = i_2, X_1 = i_1, X_0 = i_0]=P_{i_0}\cdot P_{i_0,i_1}\cdot P_{i_1,i_2}\cdot P_{i_2,i_3}
+\end{equation}
+
+The description of a markov process is given from the initial state probability and the transition probability matrix.
+% \begin{equation} \begin{split}
+% P_{i,j}^{(n)} &= \prob[X_{m+n}=j | X_m=i] \forall m\\
+% &=\prob[X_n=j|X_0=i]\stackrel{Tot.Prob.Th}{=}\sum\limits_{k=0}^{+\infty}\prob[X_n=j,X_1=k|X_0=i]\\
+% &=\sum\limits_{k=0}^{+\infty}\prob[X_n=j|X_1=k]\cdot \prob[X_1=k|X_0=i]=\sum\limits_{k=0}^{+\infty}P_{i,k}\cdot P_{k,j}^{(n-1)} \\
+% &\implies P_{i,j}^{(n)}=\sum\limits_{k=0}^{+\infty}P_{i,k}\cdot P_{k,j}^{(n-1)}\\
+% &\text{and doing it for all $i_s$ and $j_s$ we obtain}\\
+% &\implies P^{(n)} = P \cdot P^{(n-1)} = P \cdot P\cdot P^{(n-1)} = \dots = P^n \\
+% \end{split} \end{equation}
+
+\section{Stability of a process}
+Suppose a system where customers arrive independently and are queued in the system before getting served.
+Suppose the service time occupies only one slot and all the slots for service time have same duration.
+If the queue is empty, that time slot is wasted.
+Now let the number of users arriving in the n-th slot be $\xi_n$ and the number of users in
+the system in the n-th slot  be $X_n$. Then we have:
+ \begin{equation}
+ 	\begin{split}
+ 	&\prob[\xi_n=k] = a_k \text{, probability of k arriving users at time n}\\
+  	&X_{n+1}=
+		\begin{cases}
+ 			X_n -1 +\xi_n &  \text{if } X_n >0 \\
+ 			\xi_n 			 	&  \text{if } X_n = 0
+ 		\end{cases}
+ 	\end{split}
+ \end{equation}
+
+The transition probability matrix:
+\begin{equation} P=\begin{pmatrix}
+	a_{0} & a_{1} & a_2 & \cdots  \\
+	a_{0} & a_{1} & a_2 & \cdots  \\
+	0			& a_{0} & a_{1} & \cdots  \\
+	0 		& 0			& a_{0} & \cdots  \\
+	\vdots & \vdots & \ddots &  \\
+\end{pmatrix}
+\end{equation}
+\begin{definition}[Behavior of a MC]
+Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
+\begin{equation} \rho : \begin{cases}
+	>1 & \text{\textbf{unstable }: the system will never be able to serve everybody}\\
+	=1 & \text{\textbf{unstable \textit{unless deterministic}}: sooner or later the system will fail}\\
+	<1 & \text{\textbf{stable}: the queue tends to be empty}
+\end{cases}\end{equation}
+\end{definition}
+% \section{Poisson processes}
 \section{Long Run Behaviour}
 
 \subsection{Steady-state probabilities}
@@ -7,294 +74,280 @@
 	\begin{definition}[Regular \gls{mc}]
 		A regular \gls{mc} is a \gls{mc} with the following property:
 
-		\beq \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ x_n=j | x_0 =i] = \pi_j > 0 \quad \forall i, j \eeq
+		\begin{equation} \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ X_n=j | X_0 =i] = \pi_j > 0 \quad \forall i, j \end{equation}
+
 	\end{definition}
 
 	This tell us that:
 	\begin{enumerate}
-		\item Limit exists (not obvious)
+		\item Limit \textbf{exists} (not obvious)
 		\item Limit is indipendent of the initial state
-		\item Limit is strictly positive
+		\item Limit is \textbf{strictly} positive
 	\end{enumerate}
 
 	\begin{theorem}
-		For a regular \gls{mc} with states 0,1,...,N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:
+		For a regular \gls{mc} with states 0, 1, ..., N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:\\
 
-		\begin{align}
-			&\pi_j = \sum_{k=0}^N \pi_k P_{k j} , \qquad ~for ~j = 0,1, \cdots, N \\
-			&\sum_{k=0}^N \pi_k = 1, \qquad \qquad \pi_k \ge 0 \quad \forall k
-		\end{align}
-
+		$\begin{cases}
+			\pi_j = \sum\limits_{k=0}^N \pi_k P_{k j} & \text{for } j = 0,1, \cdots, N \\
+			\sum\limits_{k=0}^N \pi_k = 1\\
+			\\ \pi_k \ge 0 & \forall k
+		\end{cases}$
 	\end{theorem}
 
-	---
-	\begin{proof} Let's start easy by proving the \textbf{existence}:
-
+	\begin{proof} of \textbf{existence}:
 		\begin{equation}
-  			P_{i j}^{(n)} = \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j}
-			\qquad with ~\sum_{k=0}^N P_{ik}^{(n)} = 1 ~\forall n
+  			P_{i j}^{(n)} = \sum\limits_{k=0}^N P_{ik}^{(n-1)} P_{k j}
+			\qquad with ~\sum\limits_{k=0}^N P_{ik}^{(n)} = 1 ~\forall n
 		\end{equation}
 		it's the developing of $\bm P^n = \bm P^{n-1} \bm P$
 
 		Now let's study what happens as $ n \to \infty $:
 		\begin{equation}
 			\begin{split}
-				&\pi_j = \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{n \to \infty} \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j
+				&\pi_j = \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{n \to \infty} \sum\limits_{k=0}^N P_{ik}^{(n-1)} P_{k j
 				} =\\
-				&= \sum_{k=0}^N \lim_{n \to \infty} P_{ik}^{(n-1)} P_{k j
-				} = \sum_{k=0}^N \pi_k P_{kj}
+				&= \sum\limits_{k=0}^N \lim_{n \to \infty} P_{ik}^{(n-1)} P_{k j
+				} = \sum\limits_{k=0}^N \pi_k P_{kj}
 			\end{split}
 		\end{equation}
 		Here the limit and the sum can be switched since the sum is finite.
 		This shows that the system have a solution.
-		
-		Now let's prove \textbf{uniqueness}:
+	\end{proof}
 
-		\begin{itemize}
-			\item Let $x_j$ be a solution
-			\item $x_j = \sum_{k=0}^N x_k P_{kj} $ / by construction
-			\item $x_l = \sum_{j=0}^N x_j P_{jl} =  \sum_{j=0}^N ( \sum_{k=0}^N x_k P_{kj} ) P_{jl} =  \sum_{k=0}^N x_k \sum_{j=0}^N P_{kj} 			P_{jl} = \sum_{k=0}^N x_k P_{kl}^{(2)}$
+	\begin{proof} of \textbf{uniqueness}:
+		Let $X_j$ be a solution, so, by construction, $X_j = \sum\limits_{k=0}^N X_k P_{kj} ~$.
 
-			If we apply this trick again n times we can prove by induction  that:
+		For a given state $l$, it holds that
+		\begin{equation}
+				X_l = \sum\limits_{j=0}^N X_j P_{jl} =  \sum\limits_{j=0}^N \left( \sum\limits_{k=0}^N X_k P_{kj} \right) P_{jl} =  \sum\limits_{k=0}^N X_k \sum\limits_{j=0}^N P_{kj} P_{jl} = \sum\limits_{k=0}^N X_k P_{kl}^{(2)}
+		\end{equation}
 
-			\item $x_j$ also satisfy $ x_j = \sum_{k=0}^N x_k P_{kj}^n $ \quad  $\forall n $
+		If we apply this trick again $n$ times we can prove by induction that:
+		$X_j$ also satisfy $ X_j = \sum\limits_{k=0}^N X_k P_{kj}^{(n)} $ \quad  $\forall n $
 
-			Now, as $n \to \infty$ :
-
-			\item  $x_j = \sum_{k=0}^N x_k \pi_j = \pi_j (\sum_{k=0}^N x_k) = \pi_j  \Rightarrow $ Solution is unique
-		\end{itemize}
+		Now, as $n \to \infty$, we have that
+		\begin{equation}
+			X_j = \sum\limits_{k=0}^N X_k \pi_j = \pi_j (\sum\limits_{k=0}^N X_k) = \pi_j  \implies
+			\text{The solution is unique}
+		\end{equation}
 	\end{proof}
 
 \subsection{Classes of states}
 	\begin{definition}[Accessible State]
-		State $j$ is {\bfseries accessible} from state $i$ ($i \rightarrow j$) if $\exists n \geq 0$ such that $P_{ij}^n > 0$
+		State $j$ is {\bfseries accessible} from state $i$ if $\exists n \geq 0$ such that $P_{ij}^{(n)} > 0$. It can be written ($i \rightarrow j$).
+		State it's \textbf{not} accessible if $\forall n \ge 0 \quad P_{ij}^{(n)}=0$
 	\end{definition}
 
 	\begin{definition}[Communicant States]
-		States $i$ and $j$ are said to {\bfseries communicate} ( $ i \leftrightarrow j$ ) if
-		$i \rightarrow j$ and $j \rightarrow i$
+		States $i$ and $j$ are said to {\bfseries communicate}, written ( $ i \leftrightarrow j$ ), if
+		% \begin{equation}
+			$\begin{cases}
+				i \rightarrow j \\
+				j \rightarrow i
+			\end{cases}$
+		% \end{equation}
 	\end{definition}
 
 	{\bfseries Proprieties}
 	\begin{enumerate}
-		\item Reflexivity: \quad $i \leftrightarrow i$
-		\item Symmetry: \quad if $i \leftrightarrow j$ then $j \leftrightarrow i$
-		\item Transitivity: \quad if $i \leftrightarrow j$ and $j \leftrightarrow k \Rightarrow i \leftrightarrow k$
+		\item \textbf{Reflexivity}: \quad $i \leftrightarrow i \quad\text{ and } P_{ii}^{(0)}=1$
+		\item \textbf{Symmetry}: \quad if $i \leftrightarrow j$ then $j \leftrightarrow i$
+		\item \textbf{Transitivity}: \quad if $i \leftrightarrow j$ and $j \leftrightarrow k \Rightarrow i \leftrightarrow k$
 	\end{enumerate}
-	Communication among states is an equivalence relation.
+	This implies that communication between states is an equivalence relation.
 
 	\begin{definition}[Periodicity]
-		The period of state i, $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$
+		The period of state i, written $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$.\\
+		If $d(i)=1$, the state is said to be \textbf{aperiodic}
 	\end{definition}
 
-	\begin{theorem} Periodicity is a class of propriety:
-		\begin{itemize}
-			\item if $i \leftrightarrow j$, then $d(i) = d(j)$
-		\end{itemize}
+	\begin{theorem}[Periodicity] Periodicity is a characteristic of groups (called \emph{classes}) of communicating states.
+		$$\text{if } i \leftrightarrow j \text{, then } d(i) = d(j)$$
 	\end{theorem}
-	---
 
 	\begin{proof}
-		given $$S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$$
-		
-		let $$n, m >0 : P_{ij}^{(m)} >0, P_{ij}^{(m)} > 0$$
-		
-		we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$
-		
-		now, for total probability theorem$$P_{jj}^{(n+s+m)} = \sum_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{		ii}^{(s)} P_{ij}^{(m)} >0 $$		
-		
-		$$P_{jj}^{(n+s+m)} >0 \Rightarrow n+s+m \in S_j$$
-		
+		Given $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$, and let $n, m >0 : P_{ij}^{(m)} >0, P_{ji}^{(n)} > 0$, we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$.
+		Now, for total probability theorem, it holds that
+		$$P_{jj}^{(n+s+m)} = \sum\limits_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ij}^{(m)} >0 $$
+		$$P_{jj}^{(n+s+m)} >0 \implies n+s+m \in S_j$$
 		$$P_{jj}^{(n+2s+m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ii}^{(s)} P_{ij}^{(m)} >0 \Rightarrow n+2s+m \in S_j$$
-		
-		Now let's call $d(j) =$ g.c.d. of $S_j$
-		
-		$ \Rightarrow n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$
-		
-		Therefore s is an integer multple of $d(j)$ ?? bo raga non capisco dai miei appunti
-		
-		$\forall s \in S_i$ is integer multiple of $d(j)$ $\Rightarrow d(j)$ is a common divisor of $S_i$ and so it divides the g.c.d. 		of $S$, $d(i)$		
-		
-		$\Rightarrow d(i)$ is an integer multiple of $d(j)$.
-		
-		Doing this proof again switching role of i and j we prove that $d(j)$ is an integer multiple of $d(i)$
-		
-		Therefore, $d(i) = d(j)$
-		
+
+		Now let's call $d(j) =$ g.c.d. of $S_j$.
+
+		Since both $n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$, so it is their difference $s$.
+
+		We have proved that $\forall s \in S_i$ is integer multiple of $d(j)$: this implies that $d(j)$ is a common divisor of $S_i$, and moreover it divides the g.c.d. of $S$, $d(i)$. In conclusion, $d(i)$ is an integer multiple of $d(j)$.
+
+		Doing this proof again switching role of $i$ and $j$ we prove that $d(j)$ is an integer multiple of $d(i)$, and so $d(i) = d(j)$.
 	\end{proof}
 	---
 
 	\begin{definition}[Return Time]
-		the return time to state $i := R_i$
+		The random variable $R_i$ is defined as the time it takes to return to $i$ starting from $i$ itself.
 	\end{definition}
 
-	So the probability of ever going back to state i can be written as $$f_{ii} = \sum_{n=1}^\infty f_{ii}(n) $$
+	So the probability of ever going back to state $i$ can be written as
+	$$ f_{ii} = \sum\limits_{n=1}^\infty f_{ii}(n)  = \sum\limits_{n=1}^\infty \prob[R_i=n | X_0=i] $$
+	where $f_{ii}(n)$ is the probability of returning to state $i$ in $n$ steps.
 
 	\begin{definition}[Recurrent state]
 		a state is recurrent if $f_{ii} = 1$
 	\end{definition}
+	In other words we say that a state $i$ is recurrent if and only if, after the process starts from state $i$, the probability of its returning to state i after some finite length of time is one.
 
 	\begin{definition}[Transient state]
 		a state is transient if  $f_{ii} < 1$
 	\end{definition}
 
+	In other words a state $i$ is said to be transient if there exists a non-zero probability of never coming back to it.\footnote{like Angela. Please come back Angela, I love you.}
+
 	\begin{definition}
 		$M$ is the number of returns to state $i$, starting from $i$
-		$$\mathbb{E}[M | x_0 = i] = \sum_{k=1}^\infty \mathbb{P}[M\geq k | x_0 = i] = \sum_{k=1}^\infty f_{ii}^k = \begin{cases}
-		\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\
-		\infty, & \mbox{if recurrent}
+		$$\exp[M | X_0 = i] = \sum\limits_{k=1}^\infty \prob[M\geq k | X_0 = i] = \sum\limits_{k=1}^\infty f_{ii}^k = \begin{cases}
+		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
+		\infty, & \text{if recurrent}
 		\end{cases}$$
 	\end{definition}
 
 	\begin{definition}[Proper r.v]
-		given X a finite value r.v. it is called proper if $$\lim_{x\to \infty} \mathbb{P}[x\geq a] = 0$$
+		given X a finite value r.v. it is called proper if $$\lim_{x\to \infty} \prob[x\geq a] = 0$$
 	\end{definition}
 
 	\begin{definition}[Improper r.v]
-		given X a r.v. it is called improper if  $$\lim_{x\to \infty} \mathbb{P}[x\geq a] = p_\infty \ne 0$$
+		given X a r.v. it is called improper if  $$\lim_{x\to \infty} \prob[x\geq a] = p_\infty \ne 0$$
 	\end{definition}
 
 	\begin{theorem}
-		$$i  \mbox{ is recurrent} \iff \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$$
+		$$i  \text{ is recurrent} \iff \sum\limits_{n=1}^\infty P_{ii}^{(n)} = \infty$$
 	\end{theorem}
 	---
 
 	\begin{proof}
-		Number of time state i has been visited: $$M = \sum_{n=1}^\infty \mathds{1}\{x_n =i\} $$
-		The following swap from expected value and infinite sum is allowed by Fubini's Theorem$$ \mathbb{E}[M | x_0 = i] = \mathbb{E}[\sum_{n=1}^\infty \mathds{1}\{x_n = i\} | x_0 = i] = \sum_{n=1}^\infty \mathbb{E}[\mathds{1}\{ x_n = i\} | x_0 = i] = \sum_{n=1}^\infty P_{ii}^{(n)} $$
-		So we have shown that $\mathbb{E}[M | x_0=i] = \sum_{n=1}^\infty P_{ii}^{(n)}$.\\
-		Now, remembering that$$ \mathbb{E}[M | x_0 = i] = \begin{cases}
-		\frac{f_{ii}}{1-f_ii}, & \mbox{if transient} \\
-		\infty, & \mbox{if recurrent}
+		Let the number of time state i has been visited be $$M = \sum\limits_{n=1}^\infty \mathds{1}\{X_n =i\} $$
+		The following swap from expected value and infinite sum is allowed by Fubini's Theorem
+    $$ \exp[M | X_0 = i] = \exp\left[\sum\limits_{n=1}^\infty \mathds{1}\{X_n = i\} | X_0 = i\right]
+    = \sum\limits_{n=1}^\infty \exp\left[\mathds{1}\{ X_n = i\} | X_0 = i\right] = \sum\limits_{n=1}^\infty P_{ii}^{(n)} $$
+		So we have shown that $\exp[M | X_0=i] = \sum\limits_{n=1}^\infty P_{ii}^{(n)}$.\\
+		Now, remembering that$$ \exp[M | X_0 = i] = \begin{cases}
+		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
+		\infty, & \text{if recurrent}
 		\end{cases}$$
 		the proof is concluded.
 	\end{proof}
 
 	\begin{theorem}
 		(not to confuse with theorem on periodicity)
-		$$\mbox{if } i\leftrightarrow j \mbox{and i is recurrent} \Rightarrow \mbox{ j is also recurrent}$$
+		$$\text{if } i\leftrightarrow j \text{and i is recurrent} \Rightarrow \text{ j is also recurrent}$$
 	\end{theorem}
 	---
 	\begin{proof}
-		$$\mbox{Since } i\leftrightarrow j : \exists m,n \mbox{ such that } P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$$
-		$$\mbox{let } r>0 : P_{jj}^{(m+r+n)} = \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
-		$$\sum_{l=1}^\infty P_{jj}^{(l)} \geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}$$
+		$$\text{Since } i\leftrightarrow j : \exists m,n \text{ such that } P_{ij}^{(n)} \text{ and } P_{ji}^{(m)} > 0$$
+		$$\text{let } r>0 : P_{jj}^{(m+r+n)} = \sum\limits_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
+		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} \geq \sum\limits_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum\limits_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum\limits_{r=1}^\infty P_{ii}^{(r)}$$
 		but since \begin{itemize}
-		\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$
-		\item $P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$
+		\item$i$ is recurrent $\Rightarrow \sum\limits_{n=1}^\infty P_{ii}^{(n)} = \infty$
+		\item $P_{ij}^{(n)} \text{ and } P_{ji}^{(m)} > 0$
 		\end{itemize}
-		$$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
-	\end{proof}
-
-	\begin{theorem}
-		(not to confuse with theorem on periodicity)
-		$$\mbox{if } i\leftrightarrow j \mbox{and i is recurrent} \Rightarrow \mbox{ j is also recurrent}$$
-	\end{theorem}
-	---
-	\begin{proof}
-		$$\mbox{Since } i\leftrightarrow j : \exists m,n \mbox{ such that } P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$$
-		$$\mbox{let } r>0 : P_{jj}^{(m+r+n)} = \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
-		$$\sum_{l=1}^\infty P_{jj}^{(l)} \geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}$$
-		but since \begin{itemize}
-		\item$i$ is recurrent $\Rightarrow \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$
-		\item $P_{ij}^{(n)} \mbox{ and } P_{ji}^{(m)} > 0$
-		\end{itemize}
-		$$\sum_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \mbox{ is recurrent}$$
-
-	\end{proof}
+		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \text{ is recurrent}$$
+  \end{proof}
 
 	\begin{theorem}[Basic limit theorem on MC]
 		Consider an irreducible aperiodic recurrent MC (an aperiodic recurrent class), we have
 		$$ \lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{m_i} = \pi_i = \lim_{n\to\infty} P_{ji}^{(n)} \qquad \forall j$$
 	\end{theorem}
-	---
-%%
-%DA SISTEMARE LA TABELLA
 
+	%DA SISTEMARE LA TABELLA
 	\begin{center}
 		\begin{tabular}{|l*{6}{|c}r}
 			\hline
-			state $i$ & $f_{ii} = \sum_{n=1}^\infty f_{ii}^{(n)}$  & $\lim_{k \to \infty } \mathbb{P}[M \geq k | x_0=i]$ & $\mathbb{E}[n|x_0=i]$ & $m_i = \sum_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
+			State $i$ & $f_{ii} = \sum\limits_{n=1}^\infty f_{ii}^{(n)}$  & $\lim\limits_{k \to \infty } \prob[M \geq k | X_0=i]$ & $\exp[n|X_0=i]$ & $m_i = \sum\limits_n f_{ii}^{(n)}$ & $\pi_i = \frac{1}{m_i}$  \\ \hline
 
-			transient & $<1$ & 0 & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & 0 \\ \hline
+			Transient & $<1$ & 0 & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & 0 \\ \hline
 			Null recurrent & 1 & 1 & $\infty$ & $\infty$ & 0 \\ \hline
-			Positive recurrent & 1 & 1 & $\infty$ & $<\infty$ & $>1$ \\ \hline
+			\begin{tabular}{@{}c@{}}Positive\\recurrent\end{tabular} & 1 & 1 & $\infty$ & $<\infty$ & $>1$ \\ \hline
 		\end{tabular}
 	\end{center}
 
 	\begin{theorem}
 		For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of
-		
-		$$\begin{cases}
-			\pi_j = \sum_{i=0}^\infty \pi_i P_{ij} \\
-			\sum_{i=0}^\infty \pi_i = 1 \\
+		$\begin{cases}
+			\pi_j = \sum\limits_{i=0}^\infty \pi_i P_{ij} \\
+			\sum\limits_{i=0}^\infty \pi_i = 1 \\
 			\pi_i \geq 0 \quad \forall i
-		\end{cases}$$
+		\end{cases}$
 	\end{theorem}
-	---
 
 	\begin{proof} The funny thing is that this proof is easier than the book:
 		\begin{enumerate}
 			\item
 			we first want to show that the $\pi_j$ satisfy the system (\textbf{\textit{Existence of the solution}})
-			$$ \forall m,n \qquad 1=\sum_{j=0}^\infty P_{ij}^{(n)} > \sum_{j=0}^m P_{ij}^{(n)}$$
-			$$ \lim_{n\to\infty} \sum_{j=0}^m P_{ij}^{(n)} = \sum_{j=0}^m \pi_j \leq 1 \quad \forall n $$
-			\begin{equation}
-				\Rightarrow \sum_{j=0}^\infty \pi_j \leq 1
-			\end{equation}
+			\begin{equation*}
+				\begin{split}
+					\forall m,n \qquad 1&=\sum\limits_{j=0}^\infty P_{ij}^{(n)} > \sum\limits_{j=0}^m P_{ij}^{(n)}\\
+	 			 \lim_{n\to\infty} \sum\limits_{j=0}^m P_{ij}^{(n)} &= \sum\limits_{j=0}^m \pi_j \leq 1 \quad \forall n \\
+				 &\implies \sum\limits_{j=0}^\infty \pi_j \leq 1\\
+				\end{split}
+			\end{equation*}
 
 			\item
-			$$P_{ij}^{(n+m)} \geq \sum_{k=0}^m P_{ik}^{(m)} P_{kj}^{(n)} \quad \forall n, m, M$$
-			$$ \mbox{as } m \to \infty :\quad \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)} $$
-			\begin{equation}
-				\Rightarrow  \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)}
-			\end{equation}
+			\begin{equation*}
+				\begin{split}
+					P_{ij}^{(n+m)} &\geq \sum\limits_{k=0}^m P_{ik}^{(m)} P_{kj}^{(n)} \quad \forall n, m, M\\
+					\text{as } m \to \infty :\quad \pi_j &\geq \sum\limits_{k=0}^m \pi_k P_{kj}^{(n)}\\
+					&\implies  \pi_j \geq \sum\limits_{k=0}^m \pi_k P_{kj}^{(n)}
+				\end{split}
+			\end{equation*}
 
 			\item
-			$$\sum_{k=0}^\infty \sum_{j=0}^\infty \pi_k P_{kj}^{(n)} \geq
-			\sum_{k=0}^m \sum_{j=0}^\infty \pi_k P_{kj}^{(n)}  =
-			(\mbox{since } \sum_{j=0}^\infty P_{kj}^{(n)} = 1 ) =
-			\sum_{k=0}^m \pi_k \quad \forall m $$
-
-			$$ \mbox{suppose } \exists j > 1 : \pi_j > \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} $$
-			$$ \mbox{then we have that } \sum_{j=0}^\infty \pi_k > \sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum_{k=0}^\infty \pi_k \quad \mbox{ABSURD.} $$
-
-			\begin{equation}
-				\Rightarrow \pi_j = \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
-			\end{equation}
+			\begin{equation*}
+				\begin{split}
+					\sum\limits_{k=0}^\infty \sum\limits_{j=0}^\infty \pi_k P_{kj}^{(n)} &\geq
+					\sum\limits_{k=0}^m \sum\limits_{j=0}^\infty \pi_k P_{kj}^{(n)}  \\
+					&=(\text{since } \sum\limits_{j=0}^\infty P_{kj}^{(n)} = 1 )\\
+					&=\sum\limits_{k=0}^m \pi_k \quad \forall m\\
+					\text{suppose } \exists j > 1 : \pi_j &> \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)} \\
+					\text{then we have that } \sum\limits_{j=0}^\infty \pi_k &> \sum\limits_{j=0}^\infty \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum\limits_{k=0}^\infty \pi_k \quad \text{ABSURD.} \\
+					&\implies \pi_j = \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)}
+				\end{split}
+			\end{equation*}
 
 			\item
-			$$ \pi_j = \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}, \qquad |P_{kj}^{(n)}| \leq 1 \quad \forall n,i,k $$
-			using an appropriate theorem for sliding the limit inside the infinite sum we have:
-			$$\pi_j = \sum_{k=0}^\infty  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} = (\sum_{k=0}^\infty \pi_k) \pi_j$$
-			and now since $\pi_j>0$
-
-			\begin{equation}
-				\Rightarrow \sum_{k=0}^\infty \pi_k = 1
-			\end{equation}
+			\begin{equation*}
+				\begin{split}
+			 		\pi_j = \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)}, \qquad |P_{kj}^{(n)}| &\leq 1 \quad \forall n,i,k \\
+					\text{using an appropriate theorem for sliding the}&\text{ limit inside the infinite sum we have:}\\
+					\pi_j = \sum\limits_{k=0}^\infty  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} &= (\sum\limits_{k=0}^\infty \pi_k) \pi_j\\
+					\text{and now since $\pi_j>0$}
+					&\implies \sum\limits_{k=0}^\infty \pi_k = 1
+				\end{split}
+			\end{equation*}
 			\textbf{\textit{This concludes the existence proof.}}
 
 			\item
 			Let's now prove the \textbf{\textit{Uniqueness}} \\
-			Suppose $x_j$ is a solution
-
-			$$x_j =
-			 \sum_{i=0}^\infty x_i P_{ij} =
-			 \sum_{i=0}^\infty ( \sum_{k=0}^\infty x_k P_{ki} ) P_{ij} \geq
-			 \sum_{k=0}^m x_k \sum_{i=0}^\infty P_{ki} P_{ij} =
-			 \sum_{k=0}^m x_k P_{kj}^{(2)}
-			 \quad \forall m$$
-			$$ \Rightarrow x_j \geq \sum_{k=0}^\infty x_k P_{kj}^{(n)}\qquad \forall n $$
+			Suppose $X_j$ is a solution
+			\begin{equation}
+				\begin{split}
+					X_j =
+					 \sum\limits_{i=0}^\infty X_i P_{ij} &=
+					 \sum\limits_{i=0}^\infty ( \sum\limits_{k=0}^\infty X_k P_{ki} ) P_{ij} \geq
+					 \sum\limits_{k=0}^m X_k \\
+					 \sum\limits_{i=0}^\infty P_{ki} P_{ij} &= \sum\limits_{k=0}^m X_k P_{kj}^{(2)}
+					 \quad \forall m
+					 \Rightarrow X_j \geq \sum\limits_{k=0}^\infty X_k P_{kj}^{(n)}\qquad \forall n
+				\end{split}
+			\end{equation}
 
 			This is the same result of $3^{rd}$ step, so as in $3^{rd}$ step, we can prove by contradiction that this inequality is in fact an equality.
 
-			$$\Rightarrow x_j = \sum_{k=0}^\infty x_k P_{kj}^{(n)} \quad \forall n$$
+			$$\implies X_j = \sum\limits_{k=0}^\infty X_k P_{kj}^{(n)} \quad \forall n$$
 			as $n \to \infty$ we have:
-			
+
 			\begin{equation}
-				x_j = (\sum_{k=0}^\infty x_k ) \pi_j \Rightarrow x_j = \pi_j
+				X_j = (\sum\limits_{k=0}^\infty X_k ) \pi_j \Rightarrow X_j = \pi_j
 			\end{equation}
-			
+
 			So it's unique.
 		\end{enumerate}
 	\end{proof}
@@ -306,50 +359,49 @@
 		\end{equation}
 		if and only if
 		\begin{equation}\label{pitoinfty}
-			\sum_{i=0}^\infty p_i = \infty
+			\sum\limits_{i=0}^\infty p_i = \infty
 		\end{equation}
 	\end{lemma}
 
 	\begin{proof}
 		\begin{enumerate}
 			\item Assume \eq{pitoinfty} is true. \\
-				Since the series expansion for $exp(-p_i)$ is an alternating series with terms decreasing in absolute value, we can write:
+				Since the series expansion for $e^{-p_i}$ is an alternating series with terms decreasing in absolute value, we can write:
 				\begin{equation}
-					1-p_i < 1-p_i + \frac{p_i^2}{2!} - \frac{p_i^3}{3!} + \cdots = ~exp(-p_i) \quad with ~i\ge 0
+					1-p_i < 1-p_i + \frac{p_i^2}{2!} - \frac{p_i^3}{3!} + \cdots = ~e^{-p_i} \quad with ~i\ge 0
 				\end{equation}
 				applying the product to both members we obtain
 				\begin{equation}
-					\prod_{i=0}^{k-1} (1-p_i) < e^{-\sum_{i=0}^{k-1}p_i}
+					\prod_{i=0}^{k-1} (1-p_i) < e^{-\sum\limits_{i=0}^{k-1}p_i}
 				\end{equation}
-				But by assumption $\sum_{i=0}^\infty p_i = \infty$ hence,
+				But by assumption $\sum\limits_{i=0}^\infty p_i = \infty$ hence,
 				$$ \lim_{m \to \infty} \prod_{i=0}^{m}(1-p_i) = 0 $$
-			
+
 			\item Let's prove the following inequality:
-			$$ \prod_{i=j}^m(1-p_i) > 1-\sum_{i=j}^m p_i \quad \forall m \ge j+1$$
+			$$ \prod_{i=j}^m(1-p_i) > 1-\sum\limits_{i=j}^m p_i \quad \forall m \ge j+1$$
 			We can prove it recursively:
 			$$(1-p_j)(1-p_{j+1}) = 1-p_j - p_{j+1} + p_jp_{j+1} > 1-p_j - p_{j+1}$$
 			Iterating we obtain:
 			\begin{eqnarray*}
-				\prod_{i=j}^{m+1}(1-p_i) = (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum_{i=j}^m p_i) = \\
-				1- \sum_{i=j}^{m+1} p_i + p_{m+1}\sum_{i=j}^m p_i
+				\prod_{i=j}^{m+1}(1-p_i) = (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum\limits_{i=j}^m p_i) = \\
+				1- \sum\limits_{i=j}^{m+1} p_i + p_{m+1}\sum\limits_{i=j}^m p_i
 			\end{eqnarray*}
-			Assume now that $\sum_{i=1}^\infty p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum_{i=j}^\infty p_i < 1$. \\
+			Assume now that $\sum\limits_{i=1}^\infty p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum\limits_{i=j}^\infty p_i < 1$. \\
 			Then we have:
-			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum_{i=j}^m p_i) > 0 $$
+			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
 		\end{enumerate}
 	\end{proof}
 
 	\begin{definition}[lesson 22/03/17]
-		$$\Pi_{ik}^n(c) = \mathbb{P}[x_n = k \in c, x_l \notin c, l=1, ... , n-1 | x_0 =i]$$
+		$$\Pi_{ik}^n(c) = \prob[X_n = k \in c, X_l \notin c, l=1, ... , n-1 | X_0 =i]$$
 		$c$ is an aperiodic recurrent class, $i$ is a transient state.
-		$$\Pi_i^n(c) = \sum_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum_{n=1}^\infty \Pi_i^n(c)$$
+		$$\Pi_i^n(c) = \sum\limits_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum\limits_{n=1}^\infty \Pi_i^n(c)$$
 	\end{definition}
 
 	\begin{theorem}
 		Let $i$ be a transient state and$j \in c$, where $c$ is an aperiodic recurrent class:
 		$$\lim_{n\to\infty} P_{ij}^{(n)} = \Pi_i(c) \lim_{n\to\infty} P_{jj}^{(n)} = \Pi_i(c) \Pi_j$$
 	\end{theorem}
-
 
 
 
