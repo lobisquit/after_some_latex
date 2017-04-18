@@ -1,0 +1,22 @@
+\chapter{Renewal Processes}
+A renewal process is a sequence of i.i.d. $r.v._s$ with the same statistical properties
+
+\#TODO Graph
+
+where $N(t) = $ number of events in $(0;t] = max\{n : W_n \le t \}$ and $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal.
+
+\subsection{Assumptions}
+$X_i$ is i.i.d. sequence of $r.v._s \sim F(x) = \prob[X_i \le x] \forall i \text{ with } F(\infty)=0
+\text{ and } F(0)=0$. Those two conditions implies that the renewal happen in a finite time and not at the same time.
+\\ We want to determine
+\begin{cases}$$
+  \exp[N(t)]=M(t) & the renewal function \\
+  \prob[W_n \le x] = F_n(x) & where F_n(x) is the n-th convolution of f by itself
+$$\end{cases}
+\begin{equation}
+  N(t)\ge k \quad \iff W_k \le t\\
+  \prob[W_k \le t] = P[N(t) \ge k] = F_k(t) \\
+  \text{In particular} \\
+  \prob[N(t)=k] = F_k(t)-F_{k+1}(t) \\
+  M(t) = \exp[N(t)]=\sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] \implies M(t)=\sum\limits_{k=1}^{+\infty}F_k(t)
+\end{equation}
