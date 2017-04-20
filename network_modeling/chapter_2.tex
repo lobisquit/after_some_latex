@@ -1,4 +1,5 @@
 \chapter{Markov Chains}
+
 \section{Introduction}
 A markov process is a process $X_n \text{ or } X_t$ s.t.
 \begin{equation}
@@ -74,6 +75,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		A regular \gls{mc} is a \gls{mc} with the following property:
 
 		\begin{equation} \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{ n \to \infty} Prob[ X_n=j | X_0 =i] = \pi_j > 0 \quad \forall i, j \end{equation}
+
 	\end{definition}
 
 	This tell us that:
@@ -197,8 +199,8 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{definition}[Transient state]
 		a state is transient if  $f_{ii} < 1$
 	\end{definition}
-	In other words a state $i$ is said to be transient if there exists a non-zero probability of never coming back to it.\footnote{like Angela. Please come back Angela, I love you.}
 
+	In other words a state $i$ is said to be transient if there exists a non-zero probability of never coming back to it.\footnote{like Angela. Please come back Angela, I love you.}
 
 	\begin{definition}
 		$M$ is the number of returns to state $i$, starting from $i$
@@ -248,7 +250,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\item $P_{ij}^{(n)} \text{ and } P_{ji}^{(m)} > 0$
 		\end{itemize}
 		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \text{ is recurrent}$$
-	\end{proof}
+  \end{proof}
 
 	\begin{theorem}[Basic limit theorem on MC]
 		Consider an irreducible aperiodic recurrent MC (an aperiodic recurrent class), we have
@@ -256,7 +258,6 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{theorem}
 
 	%DA SISTEMARE LA TABELLA
-
 	\begin{center}
 		\begin{tabular}{|l*{6}{|c}r}
 			\hline
