@@ -9,14 +9,142 @@ where $N(t) = $ number of events in $(0;t] = max\{n : W_n \le t \}$ and $ S_n = 
 $X_i$ is i.i.d. sequence of $r.v._s \sim F(x) = \prob[X_i \le x] \forall i \text{ with } F(\infty)=0
 \text{ and } F(0)=0$. Those two conditions implies that the renewal happen in a finite time and not at the same time.
 \\ We want to determine
-\begin{cases}$$
-  \exp[N(t)]=M(t) & the renewal function \\
-  \prob[W_n \le x] = F_n(x) & where F_n(x) is the n-th convolution of f by itself
-$$\end{cases}
-\begin{equation}
-  N(t)\ge k \quad \iff W_k \le t\\
-  \prob[W_k \le t] = P[N(t) \ge k] = F_k(t) \\
+$$\begin{cases}
+  \exp[N(t)]=M(t) & \text{the renewal function} \\
+  \prob[W_n \le x] = F_n(x) & \text{where} F_n(x) \text{is the n-th convolution of f by itself}
+\end{cases}$$
+\begin{equation}\begin{split} \noindent
+  N(t)\ge k \quad &\iff W_k \le t\\
+  \prob[W_k \le t] &= P[N(t) \ge k] = F_k(t) \\
   \text{In particular} \\
-  \prob[N(t)=k] = F_k(t)-F_{k+1}(t) \\
-  M(t) = \exp[N(t)]=\sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] \implies M(t)=\sum\limits_{k=1}^{+\infty}F_k(t)
+  \prob[N(t)=k] = F_k(t)-F_{k+1}(t)& \\
+  M(t) = \exp[N(t)]=\sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] &\implies M(t)=\sum\limits_{k=1}^{+\infty}F_k(t)
+\end{split}\end{equation}
+
+We then define $\delta(t) = t - W_{N(t)}$ the current life (or age) and $\gamma_t = W_{N(t)+1}-t$ the residual lifetime.
+The total lifetime is defined as $\beta_t = \delta_t + \gamma_t$.
+
+An application of the renewal process is a markov chain wher starts of a busy period are renewal instances if and only if
+the conditions are the same for each start instance, which happens as when the start period begin, the previous instant got the mc empty.
+A departure, instead, happens after a full service time and after an arrival. This means that if the arrival is a generic process, the instance
+can depend on previous arrivals, so the conditions at the beginning are not independent of the previous status and the conditions
+for the statistical properties are not the same for each start.
+
+\subsection{CASE: Poisson processes}
+\begin{equation}
+  \begin{split}
+    F(x)=1-e^{-\lambda \cdot x} &\quad M(t)=\exp[N(t)]=\lambda \cdot t \quad \prob[N(t)=k]=\frac{(\lambda \cdot k)^k}{k!}\cdot e^{-\lambda \cdot t}\\
+    \prob[\gamma_t > x]&=\prob\left[\text{no events in } (t,t+x] \right]=e^{-\lambda \cdot x} \implies \text{\textbf{memoryless}}\\
+    \prob[\delta_t > x] &= \prob \left[\text{no events in }(t-x,t] \right]=
+    \begin{cases}
+      e^{-\lambda x} & \text{if } x < t \\
+      0 & \text{if } x \ge t\\
+    \end{cases}
+  \end{split}
 \end{equation}
+
+\subsubsection{Joint distribution}
+\begin{equation}
+  \prob[\delta > y , \gamma_t > x] =
+  \begin{cases}
+    e^{-\lambda \cdot (x+y)} & \text{if } y < t \\
+    0     & \text{if } y \ge t \\
+  \end{cases}
+\end{equation}
+
+For poisson processes residual life and are independent. We defined $\beta_t=\gamma_t + \delta_t$, so
+\begin{equation}\begin{split}
+\exp[\beta_t]&=\exp[\gamma_t] + \exp[\delta_t]  = \frac{1}{\lambda} + \exp[\delta_t]\\
+\exp[\delta_t]&= \int_0^t e^{-\lambda \cdot x} dx = \frac{1-e^{-\lambda \cdot t}}{\lambda} \\
+&\implies \exp[\beta_t]= \frac{2-e^{-\lambda \cdot t}}{\lambda}
+\end{split}\end{equation}
+\textbf{\textsc{Paradox:}}
+\begin{equation}
+  \begin{split}
+    \prob[\gamma_t > x] &\approx \prob[\delta_t>x] = e^{-\lambda \cdot t} \quad \text{for }x<t \\
+    \text{but } &\prob[\delta_t >x , \gamma _ t > y ] = e^{-\lambda \cdot (x+y)} \neq e^{-\lambda x} \cdot e^{-\lambda y}
+  \end{split}
+\end{equation}
+\textbf{why?}
+\begin{enumerate}
+  \item Pick uniformly an index $i \to x_i $
+  \item Pick uniformly a time $t \to X$ which contains t
+\end{enumerate}
+
+Then in 2 I get a bias because I prefear a longer interval, wherease in 1 I get F(x).
+\\
+\textit{\textbf{Ross p. 101}}
+Let $S_n = \sum \limits_{k=1}^{n}X_k$ a finite sum if $n<+\infty$ as there can't be infinite arrivals in a finite time.
+Then
+\begin{equation}
+  \begin{split}
+    \frac{S_n}{n}\xrightarrow{n\rightarrow\infty}\mu &= \exp[X] \quad \text{with probability 1} \\
+    &\text{\textsc{\textbf{Also:}}}\\
+    N(\infty) = \lim_{t \to +\infty}N(t) &= \infty \quad \text{with probability 1}
+  \end{split}
+\end{equation}
+
+\begin{proof}
+  \begin{equation}
+    \begin{split}
+      \prob[N(\infty)<\infty] &= \prob[X_n = \infty \text{for some n}] = \prob[\bigcup\limits_{n=1}^{+\infty}\{X_n = \infty \}] \\
+      &\le \sum\limits_{n=1}^{+\infty}\prob[X_n = \infty] = 0 \\
+      &\implies F(\infty)=1
+    \end{split}
+  \end{equation}
+\end{proof}
+
+\textbf{Prop. 3.3.1 (Ross p. 102)}
+\begin{equation}
+  \lim_{t \to +\infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{with probability 1}
+\end{equation}
+
+ \begin{proof}
+   \begin{equation}
+     \begin{split}
+       S_{N(t)} \le t < S_{N(t)+1} \quad \frac{S_{N(t)}}{N(t)} \le t &< \frac{S_{N(t)+1}}{N(t)}\\
+       &=\frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}
+     \end{split}
+   \end{equation}
+   We know that $N(t)\xrightarrow{t\to +\infty} \infty$ with probability 1
+   $$\implies \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} =\lim_{N \to +\infty} \frac{S_{N}}{N} = \mu \quad \text{w.p. 1}$$
+
+\textbf{SO}
+\begin{equation}
+  \mu \le \lim_{t \to +\infty} \frac{t}{N(t)} \stackrel{(1)}{\le}\mu \quad \implies \lim_{t \to +\infty} \frac{t}{N(t)} = \mu
+\end{equation}
+Where in $(1)$ the strict $<$ became $\le$ as we were dealing with limits.
+ \end{proof}
+
+ \textbf{(K.T. p. 102)}
+\begin{equation}
+  \begin{split}
+    M(t) &= \exp[N(t)] = \sum\limits_{j=1}^{+\infty}F_j(t) \\
+    F_n(t) &= \int\limits_0^t F_{n-m}(t-\xi) dF_m(\xi) \quad 1 \le m \le n-1\\
+    & \le \int\limits_0^t F_{n-m}(t) dF_m(\xi) \le F_{n-m} \cdot F_m(t) \quad \text{upper bound is valid if }\xi \to 0 \\
+    &\implies  \sum\limits_{j=1}^{+\infty}F_j(t)= \sum\limits_{n=0}^{+\infty} \sum\limits_{k=1}^{r}F_{n \cdot r + k}(t) \\
+    F_{n \cdot r + k} (t) &\le F_r(t) \cdot F_{(n-1)\cdot r + k}(t) \le F_r^2(t) \cdot F_{(n-2)\cdot r +k}(t) \le \dots
+    \le \left[F_r(t)\right]^n \cdot F_k(t)\\
+    \sum\limits_{j=1}^{+\infty}F_j(t) &\le \sum\limits_{n=0}^{+\infty} \sum\limits_{k=1}^{r}\left[F_r(t)\right]^n \cdot F_k(t)
+    = \sum\limits_{n=0}^{+\infty} \left[F_r(t)\right]^n \cdot \sum\limits_{k=1}^{r}F_k(t)
+  \end{split}
+\end{equation}
+The sum converges unless $F_r(t)=1$ with geometric distribution.
+\begin{equation}
+  F_r(t)=\prob[S_r\le t]=\prob[\sum\limits_{i=1}^r X_i \le t]
+\end{equation}
+I can choose r sufficiently large such that I can set $F_r(t)<1$ strictly. \\
+\textbf{So}, formally
+\begin{equation*}
+  \exists t_0 >0 s.t. F(t_0)<1 \quad \forall t \exists r s.t. F_r(t)<1
+\end{equation*}
+\begin{equation*}
+  \prob[S_r >t] = \prob\left[\sum\limits_{i=1}^r X_i > t \right] \ge
+  \left(\prob\left[X_i > \frac{t}{r}\right]\right)^r = \left[1-F\left(\frac{t}{r}\right)\right]^r>0
+  \quad \text{if }\frac{t}{r}<t_0
+\end{equation*}
+We can conclude
+\begin{enumerate}
+  \item $F_n(t)\xrightarrow{n\to +\infty}0$ at least geometrically
+  \item $M(t)<\infty \quad \forall t < \infty \quad M(t)\xrightarrow{t \to +\infty}+\infty$
+\end{enumerate}
