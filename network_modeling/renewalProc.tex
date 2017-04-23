@@ -1,30 +1,32 @@
-\chapter{Renewal Processes}
-A renewal process is a sequence of i.i.d. $r.v._s$ with the same statistical properties
+\chapter{Renewal Processes (Cap 7)}
+The main idea of a renewal process is a cyclic recurrence of a random fenomena presenting always the same statistics. The classical example is the lifetime of a light bulb: everytime a light blub dies the lifetime of the new one have the same statistics as the first one.
 
+A renewal process is a sequence of i.i.d. $r.v._s$ with the same statistical properties. 
 \#TODO Graph
 
 where $N(t) = $ number of events in $(0;t] = max\{n : W_n \le t \}$ and $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal.
+By knowing $N(t)$ or  $W_n$ or $X_i$ allows to fully characterize the process.
 
 \subsection{Assumptions}
-$X_i$ is i.i.d. sequence of $r.v._s \sim F(x) = \prob[X_i \le x] \forall i \text{ with } F(\infty)=0
-\text{ and } F(0)=0$. Those two conditions implies that the renewal happen in a finite time and not at the same time.
+$X_i$ is i.i.d. sequence of $r.v._s \sim F(x) = \prob[X_i \le x]  \forall i \text{ with } F(\infty)=0$
+(so the process always end and restart) and  $F(0)=0$. Those two conditions implies that the renewal happen in a finite time and not at the same time.
 \\ We want to determine
 $$\begin{cases}
-  \exp[N(t)]=M(t) & \text{the renewal function} \\
-  \prob[W_n \le x] = F_n(x) & \text{where} F_n(x) \text{is the n-th convolution of f by itself}
+  \exp[N(t)]=M(t) & \text{the renewal function} \\   \prob[W_n \le x] = F_n(x) & \text{where } F_n(x) \text{ is the n-th convolution of $f$ by itself}
 \end{cases}$$
+
 \begin{equation}\begin{split} \noindent
   N(t)\ge k \quad &\iff W_k \le t\\
-  \prob[W_k \le t] &= P[N(t) \ge k] = F_k(t) \\
+  \prob[W_k \le t] &= \prob[N(t) \ge k] = F_k(t) \\
   \text{In particular} \\
   \prob[N(t)=k] = F_k(t)-F_{k+1}(t)& \\
   M(t) = \exp[N(t)]=\sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] &\implies M(t)=\sum\limits_{k=1}^{+\infty}F_k(t)
 \end{split}\end{equation}
 
-We then define $\delta(t) = t - W_{N(t)}$ the current life (or age) and $\gamma_t = W_{N(t)+1}-t$ the residual lifetime.
+We then define $\delta_t = t - W_{N(t)}$ the \textit{current life} (or age) and $\gamma_t = W_{N(t)+1}-t$ the \textit{residual lifetime}.
 The total lifetime is defined as $\beta_t = \delta_t + \gamma_t$.
 
-An application of the renewal process is a markov chain wher starts of a busy period are renewal instances if and only if
+An application of the renewal process is a markov chain where starts of a busy period are renewal instances if and only if
 the conditions are the same for each start instance, which happens as when the start period begin, the previous instant got the mc empty.
 A departure, instead, happens after a full service time and after an arrival. This means that if the arrival is a generic process, the instance
 can depend on previous arrivals, so the conditions at the beginning are not independent of the previous status and the conditions
@@ -45,20 +47,20 @@ for the statistical properties are not the same for each start.
 
 \subsubsection{Joint distribution}
 \begin{equation}
-  \prob[\delta > y , \gamma_t > x] =
+  \prob[\gamma_t > x, \delta_t > y ] =
   \begin{cases}
     e^{-\lambda \cdot (x+y)} & \text{if } y < t \\
     0     & \text{if } y \ge t \\
   \end{cases}
 \end{equation}
 
-For poisson processes residual life and are independent. We defined $\beta_t=\gamma_t + \delta_t$, so
+For poisson processes residual and current life are independent, which is a consequence of the memoryless propriety. We defined $\beta_t=\gamma_t + \delta_t$, so
 \begin{equation}\begin{split}
 \exp[\beta_t]&=\exp[\gamma_t] + \exp[\delta_t]  = \frac{1}{\lambda} + \exp[\delta_t]\\
 \exp[\delta_t]&= \int_0^t e^{-\lambda \cdot x} dx = \frac{1-e^{-\lambda \cdot t}}{\lambda} \\
 &\implies \exp[\beta_t]= \frac{2-e^{-\lambda \cdot t}}{\lambda}
 \end{split}\end{equation}
-\textbf{\textsc{Paradox:}}
+\textbf{\textsc{Paradox:   (I don't think this is the real paradox)}}
 \begin{equation}
   \begin{split}
     \prob[\gamma_t > x] &\approx \prob[\delta_t>x] = e^{-\lambda \cdot t} \quad \text{for }x<t \\
@@ -71,10 +73,12 @@ For poisson processes residual life and are independent. We defined $\beta_t=\ga
   \item Pick uniformly a time $t \to X$ which contains t
 \end{enumerate}
 
-Then in 2 I get a bias because I prefear a longer interval, wherease in 1 I get F(x).
-\\
-\textit{\textbf{Ross p. 101}}
-Let $S_n = \sum \limits_{k=1}^{n}X_k$ a finite sum if $n<+\infty$ as there can't be infinite arrivals in a finite time.
+Then in 2 I get a bias because I tend to favor a longer interval over shorter ones, whereas in 1 I get F(x).
+
+\subsection{Asymptotic results}
+\begin{theorem}[Ross p. 101]
+%{\textbf{Ross p. 101}}
+Let $S_n = \sum \limits_{k=1}^{n}X_k$ a finite sum with $n<+\infty$ as there can't be infinite renewals in a finite time.
 Then
 \begin{equation}
   \begin{split}
@@ -83,22 +87,27 @@ Then
     N(\infty) = \lim_{t \to +\infty}N(t) &= \infty \quad \text{with probability 1}
   \end{split}
 \end{equation}
-
+\end{theorem}
+In essence this results states that in finite time we have a finite number of renewals. Viceversa in infinite time we have infinite renewals.
 \begin{proof}
+If we have infinite time, what is the case where we have a finite number of renewals? 
+$\rightarrow$ when we have a last renewal $\rightarrow$ we have for some $n$ an infinite interarrival time 
   \begin{equation}
     \begin{split}
-      \prob[N(\infty)<\infty] &= \prob[X_n = \infty \text{for some n}] = \prob[\bigcup\limits_{n=1}^{+\infty}\{X_n = \infty \}] \\
+      \prob[N(\infty)<\infty] &= \prob[X_n = \infty \text{ for some n}] = \prob[\bigcup\limits_{n=1}^{+\infty}\{X_n = \infty \}] \\
       &\le \sum\limits_{n=1}^{+\infty}\prob[X_n = \infty] = 0 \\
-      &\implies F(\infty)=1
+      &\text{because } F(\infty)=1
     \end{split}
   \end{equation}
 \end{proof}
 
-\textbf{Prop. 3.3.1 (Ross p. 102)}
-\begin{equation}
-  \lim_{t \to +\infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{with probability 1}
-\end{equation}
+\begin{theorem}[Elementary renewal theorem]%Prop. 3.3.1 (Ross p. 102), KT pp 437
+	\begin{equation}
+ 		 \lim_{t \to +\infty} \frac{N(t)}{t} = \frac{1}{\mu} \quad \text{with probability 1}
+	\end{equation}
+\end{theorem}
 
+So as $t \to\infty$, $N(t)\to\infty$ \textbf{linearly} in $t$.
  \begin{proof}
    \begin{equation}
      \begin{split}
@@ -107,7 +116,7 @@ Then
      \end{split}
    \end{equation}
    We know that $N(t)\xrightarrow{t\to +\infty} \infty$ with probability 1
-   $$\implies \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} =\lim_{N \to +\infty} \frac{S_{N}}{N} = \mu \quad \text{w.p. 1}$$
+   $$\implies \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} =\lim_{N \to +\infty} \frac{S_{N}}{N} = \mu \quad \text{w.p. 1 for LLN}$$ 
 
 \textbf{SO}
 \begin{equation}
@@ -116,7 +125,9 @@ Then
 Where in $(1)$ the strict $<$ became $\le$ as we were dealing with limits.
  \end{proof}
 
- \textbf{(K.T. p. 102)}
+
+\textbf{(K.T. p. 102)}
+%\begin{theorem}[K.T. page 102]
 \begin{equation}
   \begin{split}
     M(t) &= \exp[N(t)] = \sum\limits_{j=1}^{+\infty}F_j(t) \\
@@ -133,11 +144,11 @@ The sum converges unless $F_r(t)=1$ with geometric distribution.
 \begin{equation}
   F_r(t)=\prob[S_r\le t]=\prob[\sum\limits_{i=1}^r X_i \le t]
 \end{equation}
-I can choose r sufficiently large such that I can set $F_r(t)<1$ strictly. \\
+I can choose $r$ sufficiently large such that I can set $F_r(t)<1$ strictly. \\
 \textbf{So}, formally
-\begin{equation*}
-  \exists t_0 >0 s.t. F(t_0)<1 \quad \forall t \exists r s.t. F_r(t)<1
-\end{equation*}
+%\begin{equation*}
+  $$\exists t_0 >0 \text{ s.t. } F(t_0)<1 \quad \forall t  \exists r \text{ s.t. } F_r(t)<1$$
+%\end{equation*}
 \begin{equation*}
   \prob[S_r >t] = \prob\left[\sum\limits_{i=1}^r X_i > t \right] \ge
   \left(\prob\left[X_i > \frac{t}{r}\right]\right)^r = \left[1-F\left(\frac{t}{r}\right)\right]^r>0
@@ -146,7 +157,7 @@ I can choose r sufficiently large such that I can set $F_r(t)<1$ strictly. \\
 We can conclude
 \begin{enumerate}
   \item $F_n(t)\xrightarrow{n\to +\infty}0$ at least geometrically
-  \item $M(t)<\infty \quad \forall t < \infty \quad M(t)\xrightarrow{t \to +\infty}+\infty$
+  \item $M(t)<\infty \quad \forall t < \infty, \text{ on the other hand }  M(t)\xrightarrow{t \to +\infty}+\infty$
 \end{enumerate}
 
 \textbf{We saw that:}
