@@ -47,6 +47,11 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 
+% added support for proof parts
+\theoremstyle{remark}
+\newtheorem{proofpart}{Part}
+\renewcommand\theproofpart{\Roman{proofpart}}
+
 % specific modification to basic book template of our book document
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
