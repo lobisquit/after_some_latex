@@ -133,10 +133,10 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 	\begin{definition}[Communicant States]
 		States $i$ and $j$ are said to {\bfseries communicate}, written $ i \leftrightarrow j$, if
-		$$\left\{\begin{matrix}
+		$$\begin{cases}
 			i \rightarrow j \\
 			j \rightarrow i
-			\end{matrix}\right.$$
+		\end{cases}$$
 	\end{definition}
 
 	{\bfseries Proprieties}
@@ -392,7 +392,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
 		\end{enumerate}
 	\end{proof}
-	
+
 	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
 		Given a recurrent class $C$ and atransient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
 		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
