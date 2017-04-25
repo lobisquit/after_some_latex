@@ -133,10 +133,10 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 	\begin{definition}[Communicant States]
 		States $i$ and $j$ are said to {\bfseries communicate}, written $ i \leftrightarrow j$, if
-		$$\left\{\begin{matrix}
+		$$\begin{cases}
 			i \rightarrow j \\
 			j \rightarrow i
-			\end{matrix}\right.$$
+		\end{cases}$$
 	\end{definition}
 
 	{\bfseries Proprieties}
@@ -379,7 +379,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			\item Let's prove the following inequality:
 			$$ \prod_{i=j}^m(1-p_i) > 1-\sum\limits_{i=j}^m p_i \quad \forall m \ge j+1$$
 			We can prove it recursively:
-			$$(1-p_j)(1-P_{j+1}) = 1-p_j - P_{j+1} + p_jP_{j+1} > 1-p_j - P_{j+1}$$
+			$$(1-p_j)(1-p_{j+1}) = 1-p_j - p_{j+1} + p_j p_{j+1} > 1-p_j - p_{j+1}$$
 			Iterating we obtain:
 			\begin{eqnarray*}
 				\prod_{i=j}^{m+1}(1-p_i) = (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum\limits_{i=j}^m p_i) = \\
@@ -393,13 +393,8 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\end{enumerate}
 	\end{proof}
 
-	\begin{definition}[lesson 22/03/17]
-		$$\Pi_{ik}^n(C) = \prob[X_n = k \in C, X_l \notin C, l=1, ... , n-1 | X_0 =i]$$
-		$C$ is an aperiodic recurrent class, $i$ is a transient state.
-		$$\Pi_i^n(C) = \sum\limits_{k \in C} \Pi_{ik}^n(C); \qquad \Pi_i(C) = \sum\limits_{n=1}^\infty \Pi_i^n(C)$$
-	\end{definition}
+	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
 
-	\begin{definition} \label{def:falling_probability}
 		Given a recurrent class $C$ and atransient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
 		$$ \Pi_{ik}^{n}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
 
