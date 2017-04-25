@@ -392,14 +392,8 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
 		\end{enumerate}
 	\end{proof}
-
-	\begin{definition}[lesson 22/03/17]
-		$$\Pi_{ik}^n(c) = \prob[X_n = k \in c, X_l \notin c, l=1, ... , n-1 | X_0 =i]$$
-		$c$ is an aperiodic recurrent class, $i$ is a transient state.
-		$$\Pi_i^n(c) = \sum\limits_{k \in c} \Pi_{ik}^n(c); \qquad \Pi_i(c) = \sum\limits_{n=1}^\infty \Pi_i^n(c)$$
-	\end{definition}
-
-	\begin{definition} \label{def:falling_probability}
+	
+	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
 		Given a recurrent class $C$ and atransient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
 		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
 
