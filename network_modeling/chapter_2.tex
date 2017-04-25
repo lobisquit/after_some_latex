@@ -9,7 +9,7 @@ A markov process is a process $X_n \text{ or } X_t$ s.t.
 with P as the \textit{one-step probability}. From now on, the notation for that probability will be $P_{i,j}^{n,n+1}=P_{i,j} \quad \forall n$ if the MC is homogeneous, i.e. the transition probabilities are stationary.
 
 We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix}, which will characterize the process as
-\begin{equation} P=\begin{pmatrix}
+\begin{equation} \bm P=\begin{pmatrix}
 	P_{00} & P_{01} & \cdots  \\
 	P_{10} & P_{11} & \cdots \\
 	\vdots & \vdots & \ddots  \\
@@ -42,7 +42,7 @@ the system in the n-th slot  be $X_n$. Then we have:
  \end{equation}
 
 The transition probability matrix:
-\begin{equation} P=\begin{pmatrix}
+\begin{equation} \bm P=\begin{pmatrix}
 	a_{0} & a_{1} & a_2 & \cdots  \\
 	a_{0} & a_{1} & a_2 & \cdots  \\
 	0			& a_{0} & a_{1} & \cdots  \\
@@ -157,7 +157,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{theorem}
 
 	\begin{proof}
-		Given $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$, and let $n, m > 0 : P_{ij}^{(m)} > 0, P_{ji}^{(n)} > 0$, we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$.
+		Given $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$, and let $n, m > 0 : P_{ij}^{(m)} > 0, P_{ji}^{(n)} > 0$, we have that $$\forall s \in S_i : P_{ii}^{(s)} > 0$$
 
 		Now, for total probability theorem, it holds that
 		$$ P_{jj}^{(n+s+m)} = \sum\limits_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ij}^{(m)} >0 $$
@@ -394,7 +394,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{proof}
 
 	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
-		Given a recurrent class $C$ and atransient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
+		Given a recurrent class $C$ and a transient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
 		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
 
 		Thus, the probability that the chain, starting from $i$, reaches class $C$ at step $n$ is
@@ -502,7 +502,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{tabular}\end{center}
 
 	\begin{theorem}[Property of finite \gls{mc}] \label{th:finite_MC_1}
-		A finite \gls{mc} must have a positive recurrent state.
+		A finite \gls{mc} must have at least a positive recurrent state.
 
 		$$ \forall \text{ finite \gls{mc}, } \exists i: \pi_i \neq 0 $$
 	\end{theorem}
@@ -536,37 +536,37 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		So a null recurrent class cannot exist in a finite \gls{mc}.
 	\end{proof}
 
-	\begin{lemma}[Ross 2, pg. 78-82] \label{lemma:MC_irreducible_fi0}
-		Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
+	%\begin{lemma}[Ross 2, pg. 78-82] \label{lemma:MC_irreducible_fi0}
+	%	Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
+%
+%		$$ \forall i \neq 0, f_{i 0} = 1 $$
+%		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
+%	\end{lemma}
+%	---
+%	\begin{proof} \emph{if implication} $"\Leftarrow"$
+%		\begin{equation}\begin{split}
+%			f_{00} = P_{00} + \sum_{i \neq 0} P_{0i} f_{i 0} \stackrel{(*)}{=} \sum_{i} P_{0i} = 1
+%		\end{split}\end{equation}
+%		where (*) is due to hypothesis.
+%
+%		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1.
+%	\end{proof}
+%
+%	\begin{proof} \emph{only if implication} $"\Rightarrow"$
+%		Suppose chain is irreducible, but thesis is false, i.e.
+%		$$ \exists i \neq 0 : f_{i0} < 1 $$
+%
+%		If \gls{mc} is irreducible (i.e. it is made only of a single class) it must be that
+%		$$ \forall i \neq 0, \exists m : P_{0i}^{(m)} > 0 $$
+%
+%		Let $n$ be the minimum value among all possible $m$  that satisfies this condition for given state $i \neq 0$: such number is the shortest path from 0 to $i$ and, by its definition, does not cross state 0 in the middle.
 
-		$$ \forall i \neq 0, f_{i 0} = 1 $$
-		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
-	\end{lemma}
-	---
-	\begin{proof} \emph{if implication} $"\Leftarrow"$
-		\begin{equation}\begin{split}
-			f_{00} = P_{00} + \sum_{i \neq 0} P_{0i} f_{i 0} \stackrel{(*)}{=} \sum_{i} P_{0i} = 1
-		\end{split}\end{equation}
-		where (*) is due to hypothesis.
+%		$$ \prob[\forall n, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
 
-		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1.
-	\end{proof}
+%		where (*) inequality holds because leaving 0 forever (first term) is a more general case of going to state $i$ via the shortest path and then not crossing 0 ever again.
 
-	\begin{proof} \emph{only if implication} $"\Rightarrow"$
-		Suppose chain is irreducible, but thesis is false, i.e.
-		$$ \exists i \neq 0 : f_{i0} < 1 $$.
-
-		If \gls{mc} is irreducible (i.e. it is made only of a single class) it must be that
-		$$ \forall i \neq 0, \exists m : P_{0i}^{(m)} > 0 $$
-
-		Let $n$ be the minimum value among all possible $m$  that satisfies this condition for given state $i \neq 0$: such number is the shortest path from 0 to $i$ and, by its definition, does not cross state 0 in the middle.
-
-		$$ \prob[\forall n, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
-
-		where (*) inequality holds because leaving 0 forever (first term) is a more general case of going to state $i$ via the shortest path and then not crossing 0 ever again.
-
-		This is absurd, because chain is supposed irreducible.
-	\end{proof}
+%		This is absurd, because chain is supposed irreducible.
+%	\end{proof}
 
 	\begin{definition}
 		Given an \gls{mc} with a state set $S = \{1, 2, ...\}$, quantity $Y_i(n)$ is defined as the probability of staying in $S$ along an $n$-steps path that starts from $i \in S$.
@@ -621,6 +621,38 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{proof} Inductive step
 		$$ |Z_i| = \sum_{j \in S} P_{ij} |Z_j| \stackrel{(*)}{\le} \sum_{j \in S} P_{ij} Y_j(n) = Y_i(n+1) $$
 		where (*) is due to the inductive hypothesis.
+	\end{proof}
+	
+	\begin{lemma}[Ross 2, pg. 78-82] \label{lemma:MC_irreducible_fi0}
+		Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
+
+		$$ \forall i \neq 0, f_{i 0} = 1 $$
+		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
+	\end{lemma}
+	---
+	\begin{proof} \emph{if implication} $"\Leftarrow"$
+		\begin{equation}\begin{split}
+			f_{00} = P_{00} + \sum_{i \neq 0} P_{0i} f_{i 0} \stackrel{(*)}{=} \sum_{i} P_{0i} = 1
+		\end{split}\end{equation}
+		where (*) is due to hypothesis.
+
+		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1.
+	\end{proof}
+
+	\begin{proof} \emph{only if implication} $"\Rightarrow"$
+		Suppose chain is irreducible, but thesis is false, i.e.
+		$$ \exists i \neq 0 : f_{i0} < 1 $$
+
+		If \gls{mc} is irreducible (i.e. it is made only of a single class) it must be that
+		$$ \forall i \neq 0, \exists m : P_{0i}^{(m)} > 0 $$
+
+		Let $n$ be the minimum value among all possible $m$  that satisfies this condition for given state $i \neq 0$: such number is the shortest path from 0 to $i$ and, by its definition, does not cross state 0 in the middle.
+
+		$$ \prob[\forall n, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
+
+		where (*) inequality holds because leaving 0 forever (first term) is a more general case of going to state $i$ via the shortest path and then not crossing 0 ever again.
+
+		This is absurd, because chain is supposed irreducible.
 	\end{proof}
 
 	\begin{theorem}
@@ -682,17 +714,17 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		From now on, we consider only positive sequences $Y_i$.
 
 		\item \begin{equation}\begin{split}
-			\forall i, ~ Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
-			\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{ik} Y_k \right) \stackrel{(2)}{=} \\
-			& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{ik} =
-			\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ij}^{(2)} = \\
-			& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ij}^{(m)} \forall m
+			\forall i, ~ Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(\RN{1})}{\ge}
+			\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(\RN{2})}{=} \\
+			& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
+			\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
+			& \stackrel{(\RN{3})}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall m
 		\end{split}\end{equation}
 		where
 		\begin{itemize}
-			\item [(1)] hypothesis has been applied to $Y_j$ itself. Note that for $\tilde{P}$ this property is valid for $i=0$ too.
-			\item [(2)] sums can be swapped since sum in $k$ surely converges, both simply and absolutely since $Y_i$ are strictly positive. Note that convergence is guaranteed by the fact that at the left side of the current chain of decreasing inequalities we find the real number $Y_i$, that exists for hypothesis.
-			\item [(3)] the same reasoning of (2) is repeated in a recursive way.
+			\item[(\RN{1} )] hypothesis has been applied to $Y_j$ itself. Note that for $\tilde{P}$ this property is valid for $i=0$ too (in general it's not true for $P$).
+			\item[(\RN{2} )] sums can be swapped since sum in $k$ surely converges, both simply and absolutely since $Y_i$ are strictly positive. Note that convergence is guaranteed by the fact that at the left side of the current chain of decreasing inequalities we find the real number $Y_i$, that exists for hypothesis.
+			\item[(\RN{3} )] the same reasoning of (\RN{2} ) is repeated in a recursive way.
 		\end{itemize}
 
 		\item
@@ -700,18 +732,18 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		$$ \forall \epsilon > 0, \exists M \in \mathbb{N} : Y_i \ge 1 / \epsilon ~ \forall i \ge M$$
 
 		\begin{equation}\begin{split}
-			\forall i, \forall m, ~ Y_i & \ge \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ij}^{(m)}
-				= \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)}
-				+ \sum_{k=M}^{+\infty} Y_k \tilde{P}_{ij}^{(m)} \ge \\
-			& \ge \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)}
-				+ \frac{1}{\epsilon} \sum_{k=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
-			& = \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)}
-				+ \frac{1}{\epsilon} \left( 1 - \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)} \right) \\
+			\forall i, \forall m, ~ Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
+				= \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \sum_{j=M}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \ge \\
+			& \ge \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \frac{1}{\epsilon} \sum_{j=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
+			& = \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \\
 		\end{split}\end{equation}
 
 		\item
 		Our aim is now to prove following statement
-		$$ \forall j \neq 0, \lim_{m \to \infty} \tilde{P}_{ij}^{(m)} = 0 $$
+		$$ \forall i,j \neq 0, \lim_{m \to \infty} \tilde{P}_{ij}^{(m)} = 0 $$
 
 		We can distinguish two cases,
 		\begin{itemize}
@@ -736,19 +768,20 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 		By definition,
 		$$ f_{i0} = \lim_{m \to +\infty} \tilde{P}_{i0}^{(m)} = \prob[\exists k : X_k = 0 | X_0 = i] = \tilde{\pi}_i(C_0)$$
-		where $C_0$ is the class that contains only state 0.
+		where $C_0$ is the recurrent class that contains only the absorbing state 0.
 
-		For what has been proved previously,
+		Using (4):
 		\begin{equation}\begin{split}
-			Y_i & = \lim_{m \to +\infty} Y_i = \\
-				& = \lim_{m \to +\infty} \left[ \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)}
-					+ \frac{1}{\epsilon} \left( 1 - \sum_{k=0}^{M-1} Y_k \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
+			Y_i & \ge \lim_{m \to +\infty} Y_i = \\
+				& = \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+					+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
 			& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
 		\end{split}\end{equation}
 		where (*) holds because 0 is a trap state for $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
 
-		Terms can be rearranged this way
-
+		Terms can be rearranged this way:
+%%%%
+I THINK THERE'S SOMETHING WRONG HERE:
 		\begin{equation*}\begin{split}
 			\forall \epsilon > 0, ~ & Y_i - \tilde{\pi}_i(C_0) Y_0 = \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
 			& \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] = 1 - \tilde{\pi}_i(C_0)
