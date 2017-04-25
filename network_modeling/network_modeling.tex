@@ -51,6 +51,9 @@
 \theoremstyle{remark}
 \newtheorem{proofpart}{Part}
 \renewcommand\theproofpart{\Roman{proofpart}}
+\makeatletter
+\@addtoreset{proofpart}{theorem}
+\makeatother
 
 % specific modification to basic book template of our book document
 \renewcommand{\chaptername}{Section}
