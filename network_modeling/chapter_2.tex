@@ -389,25 +389,26 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			Assume now that $\sum\limits_{i=1}^\infty p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum\limits_{i=j}^\infty p_i < 1$.
 
 			Then we have:
-			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) > \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
+			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) \ge \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
 		\end{enumerate}
 	\end{proof}
 
 	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
+
 		Given a recurrent class $C$ and atransient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
-		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
+		$$ \Pi_{ik}^{n}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
 
 		Thus, the probability that the chain, starting from $i$, reaches class $C$ at step $n$ is
-		$$ \pi_{i}^{(n)}(C) = \sum_{k \in C} \pi_{ik}^{(n)}(C) $$
+		$$ \pi_{i}^{n}(C) = \sum_{k \in C} \Pi_{ik}^{n}(C) $$
 
 		and the general probability of reaching $C$ starting from $i$ is
-		$$ \pi_i(C) = \sum_{n \in \mathbb{N}} \pi_i^{(n)}(C) $$
+		$$ \pi_i(C) = \sum_{n \in \mathbb{N}} \pi_i^{n}(C) $$
 	\end{definition}
 
 	\begin{theorem}[3.1, KT p. 91] \label{th:3.1}
 		Given state $j \in C$, an aperiodic and recurrent class, and a transient state $i \notin C$, it holds that
 
-		$$ \lim_{n \to \infty } P_{ij}^{(n)} = \pi_i(C) ~ \lim_{n \to \infty } P_{jj}^{(n)} = \pi_i(C) ~ \pi_j $$
+		$$ \lim_{n \to \infty } P_{ij}^{(n)} = \pi_i(C) \cdot \lim_{n \to \infty } P_{jj}^{(n)} = \pi_i(C) \cdot \pi_j $$
 	\end{theorem}
 	---
 	\begin{proof}
@@ -496,9 +497,9 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{center}\begin{tabular}{c|c|c}
 		Starting state $i$ & Arrival state $j$ & $\lim_{n \to +\infty} P_{ij}^{(n)}$ \\ \hline
 		any & transient & 0 \\
-		recurrent $\notin C$ & recurrent $\in C$ & 0 \\
+		recurrent $\notin C_1 ,\: \in C$ & recurrent $\in C$ & 0 \\
 		recurrent $\in C$ & recurrent $\in C$ & $\pi_j = 1 / m_j$ \\
-		transient & recurrent $\in C$ & $\pi_i(C)~\pi_j = \pi_i(C) / m_j$ \\
+		transient & recurrent $\in C$ & $\pi_i(C)\cdot\pi_j = \pi_i(C) / m_j$ \\
 	\end{tabular}\end{center}
 
 	\begin{theorem}[Property of finite \gls{mc}] \label{th:finite_MC_1}
@@ -513,6 +514,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		$$ \forall i, n ~ \sum_{j=0}^N P_{ij}^{(n)} = 1$$
 
 		This holds for each value of $n$, so it must be true also in the limit.
+		Suppose also that there are no positive reccurent states:
 		$$ 1 = \lim_{n \to +\infty} \sum_{j=0}^N P_{ij}^{(n)} \stackrel{(*)}{=} \sum_{j=0}^N \lim_{n \to +\infty} P_{ij}^{(n)}
 		= \sum_{j=0}^N \pi_j $$
 		where passage marked with the (*) is possible only because sum is finite.
@@ -651,13 +653,14 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{theorem}[4.2, KT p. 95]
 		A \gls{mc} with probability matrix $P$ is irreducible and aperiodic if
 
-		\begin{equation}\begin{split}
-			& \exists \text{ a sequence } Y_i \text{, for } i = 1,\,... :\\
-			& \begin{dcases}
- 				& \sum_{j=0}^{+\infty} P_{ij} Y_j \le Y_i 	~~ \forall i \neq 0 \\
- 				& \lim_{i \to +\infty} Y_i = +\infty		~~ \forall i
-			\end{dcases}
-		\end{split}\end{equation}
+		\begin{equation}\noindent%\begin{split}
+			\exists \text{ a sequence } Y_i \text{, for } i = 1,\,... :\\
+			\begin{cases}
+ 				\sum\limits_{j=0}^{+\infty} P_{ij} Y_j \le Y_i 	& \forall i \neq 0 \\
+ 				\lim\limits_{i \to +\infty} Y_i = +\infty		& \forall i
+			\end{cases}
+	% \end{split}
+	\end{equation}
 	\end{theorem}
 	---
 	\begin{proof}
