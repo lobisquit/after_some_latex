@@ -148,3 +148,80 @@ We can conclude
   \item $F_n(t)\xrightarrow{n\to +\infty}0$ at least geometrically
   \item $M(t)<\infty \quad \forall t < \infty \quad M(t)\xrightarrow{t \to +\infty}+\infty$
 \end{enumerate}
+
+\textbf{We saw that:}
+$$\exp[a(t-X)]=\inta(t-x)\cdot dF(x)$$
+
+We now want to extend it to another monothonic function which is not a probability distribution function.
+
+\begin{definition}[Convolution]
+  For any monothonic function $A$ and for any well behaved function $B$ we define the convolution as
+  \begin{equation}\begin{split}
+    A \ast B &= \int\limits_0^t B(t-\eta)\cdot dA(\eta) = B \ast A \\
+    \implies &\int a(t-x)\cdot dM(x) = M \ast a ~(t)
+  \end{split}\end{equation}
+\end{definition}
+
+\subsection{Renewal argument}
+We will firstly define it as conditioned to a particular value of $X_1$ and then we will extend it. \\
+$X_1 = x \quad \implies M(t)=\exp[N(t)]$ \\
+The starting point is
+\begin{equation}\begin{split}
+  \exp[N(t)| X_1=x] =&
+  \begin{cases}
+  0 & x>t \quad \text{the renewal has yet to happen}     \\
+  1+M(t-x) & x \le t
+  \end{cases}
+  \implies M(t)=&\exp[N(t)]=\int\limits_0^{+\infty}\exp[N(t)|X_1=x] \cdot dF(x) \\
+  =&\int\limits_0^{t}[1+M(t-x)] \cdot dF(x) = F(t) + \int\limits_0^{t}M(t-x) \cdot dF(x) = F(t) + F \ast M ~ (t)
+\end{split}\end{equation}
+
+\subsection{Renewal Equation}
+
+\begin{equation}
+    A(t) = a(t) + =&\int\limits_0^{t}A(t-x) \cdot dF(x) \quad \text{ in general}
+\end{equation}
+with $a(t)$ given and $F(x)$ the common distribution. If $a(t)=F(t) \implies$ we have the equation for $M(t)$.
+
+\begin{theorem}[4.1 K.T. p.184]
+  Let a(t) be a bounded function. The renewal equation has an unique solution with
+  the property of being bounded on finite intervals and such solution is
+  \begin{equation}
+    A(t) = a(t) + =\int\limits_0^{t}[a(t-x)] \cdot dM(x)
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  The proof is in three steps: boundary, existence and uniqueness.
+  \proofpart
+  \textsc{Boundary}
+  \begin{equation}\begin{split}
+    |A(t)| & \le |a(t)| + \int\limits_0^{t}|a(t-x)| \cdot dM(x) \\
+    \sup_{0\le t \le T} |A(t)| & le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le t \le T}|a(\eta)| \cdot dM(x)  \\
+    & = \sup_{0\le t \le T} |a(t)| \cdot (1+M(T)) < \infty \text{as}
+    \begin{cases}
+      |a(t)| & \text{bounded for hypothesis} \\
+      M(t) < \infty & \text{for } t<\infty
+    \end{cases}
+  \end{split}\end{equation}
+
+  \proofpart
+  \textsc{Existence}
+    \begin{equation}\begin{split}
+      A(t) &= a(t) + M \ast a~(t) = a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a~(t) \\
+      &= a(t) + F \ast a~(t) \left(\sum\limits_{k=2}^{+\infty} F_k \right) \ast a~(t)
+      \text{\textbf{Reminder:}& but each $F_k \, k>1$ is the convolution with itself k times $F_k = F \ast \F_{k-1}$} \\
+      \implies A(t)&= a(t) + F \ast \left[ a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a~(t) \right] \\
+      &=a(t) + F \ast A ~ (t) \quad \text{which is one solution}
+    \end{split}\end{equation}
+  \proofpart
+  \textsc{Uniqueness}
+  \begin{equation}\begin{split}
+    A(t) &= a(t) + F \ast A(t) \quad \text{which is a recursive expression.}
+    &= a(t) + F \ast \left[a~(t) + F \ast A~(t) \right] = a(t) + F \ast a ~ (t) + F_2 \ast A~(t) \\
+    &= a(t) + F \ast a ~ (t) + F_2 \ast  \left[a~(t) + F \ast A~(t) \right] = a(t) + F \ast a~(t) + F_2 \ast a~(t) + F_3 \ast A~(t) = \dots \\
+    &\text{after n steps we obtain} \\
+    A(t) &= a(t) + \left( \sum\limits_{k=1}^{n-1}F_k\right) \ast a~(t) + F_n \ast A~(t) \\
+    & \sum\limits_{k=1}^{n-1}F_k \xrightarrow{n \to +\infty} M \quad \implies A(t) = a(t) + M \ast a~(t) + \lim_{n \to +\infty} F_n \ast A~(t) \\
+
+  \end{split}\end{equation}
+\end{proof}
