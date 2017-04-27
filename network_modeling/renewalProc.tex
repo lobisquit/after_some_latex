@@ -274,10 +274,17 @@ Let $X_1, X_2, \dots, X_N $ be i.i.d,  $\exp[X] < \infty$ and N a \gls{st} s.t. 
   \exp\left[\sum\limits_{n=1}^{N}X_n\right] &= \exp\left[\sum\limits_{n=1}^{N}X_n \cdot I_n \right] \stackrel{(1)}{=} \sum\limits_{n=1}^{+\infty}\exp[X_n \cdot I_n] \\
   &=\sum\limits_{n=1}^{+\infty}\exp[X_n] \cdot \exp[I_n] \stackrel{\text{X i.i.d.}}{=} \exp[X]\cdot\sum\limits_{n=1}^{+\infty}\exp[I_n] \\
   &= \exp[X] \cdot \sum\limits_{n=1}^{+\infty}\prob[N \ge n] = \exp[X] \cdot \exp[N]
-\end{split}\end{equation}
+\end{split}\label{wald:proof}\end{equation}
 \end{proof}
+\subsubsection{Discussion on Wald's equation proof}
+In the equation \ref{wald:proof} we should see if the passage marked with \textit{\textbf{(1)}} is allowed.
+If we use $|X_n|>0$, the infinite sum is allowed and it's surely positive and finite, as the expectation of each X is finite.
+With $X_n$ the sum is bounded by $|X_n|$, which allows the switching for the Lebesque theorem.
+\subsubsection{Examples}
 
-Example:
 \begin{enumerate}
-  \item $\prob[X_i=0]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =10\}$
+  \item $\prob[X_i=0]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =10\}$ is a \gls{st}, and in particular
+  $10 = \exp[N] \cdot \exp[X] = 0.5 \cdot \exp[N] \implies \exp[N]=20$
+  \item $\prob[X_i=-1]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =1\}$ is a \gls{st}, but the expected stop time
+  is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies \exp[N]=\infty \implies$ ABSURD. One hypothesis was violated: the \gls{st} is not finite.
 \end{enumerate}
