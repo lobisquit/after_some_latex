@@ -1,5 +1,5 @@
 \chapter{Poisson Processes}
-A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stochastic process ${X_t; t \ge 0}$ for which:
+A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stochastic process ${X_t,  t \ge 0}$ for which:
 \begin{enumerate}
   \item $X_0 = 0$
 	\item For any time points $t_0 = 0 < t_1 < t_2 < \cdots < t_n$, the process increments
@@ -13,7 +13,7 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 	\begin{equation}\label{p_dist_conseq}
 	  \begin{split}
 	    \prob[X_n \ge 1] &= \lambda n + o(n) \\
-			\prob[X_n \ge 1] &= o(n)
+			\prob[X_n \ge 2] &= o(n)
 	  \end{split}
 	\end{equation}
 	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
@@ -62,7 +62,7 @@ In general,
              \node at (1.6 , 0.3) {$\lambda$};
           \end{tikzpicture}
         \end{figure}
-          Given X $\sim Poi(\mu)$, Y $\sim Poi(\nu)$
+          Given X $\sim \pois(\mu)$, Y $\sim \pois(\nu)$
           \begin{equation}
             \begin{split}
   	           \prob[X + Y = n] &=  \sum\limits_{k=0}^n \prob[X = k, Y = n - k] \\
