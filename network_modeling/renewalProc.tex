@@ -175,17 +175,23 @@ We now want to extend it to another monothonic function which is not a probabili
 
 \subsection{Renewal argument}
 We will firstly define it as conditioned to a particular value of $X_1$ and then we will extend it. \\
-$X_1 = x \quad \implies M(t)=\exp[N(t)]$ \\
+$X_1 = x \quad \implies M(t)= \exp[N(t)]$ \\
 The starting point is
-\begin{equation}\begin{split}
-  \exp[N(t)| X_1=x] =&
+\begin{equation}
+  \exp[N(t)| X_1=x] =
   \begin{cases}
   0 & x>t \quad \text{the renewal has yet to happen}     \\
   1+M(t-x) & x \le t
   \end{cases}
-  \implies M(t)=&\exp[N(t)]=\int\limits_0^{+\infty}\exp[N(t)|X_1=x] \cdot dF(x) \\
-  =&\int\limits_0^{t}[1+M(t-x)] \cdot dF(x) = F(t) + \int\limits_0^{t}M(t-x) \cdot dF(x) = F(t) + F \ast M ~ (t)
-\end{split}\end{equation}
+\end{equation}
+ \begin{equation}
+ 	\begin{split}
+  M(t)= \exp[N(t)]&=\int\limits_0^{+\infty}\exp[N(t)|X_1=x] \cdot dF(x)\\
+   &=\int\limits_0^{t}[1+M(t-x)] \cdot dF(x)\\
+   &= F(t) + \int\limits_0^{t}M(t-x) \cdot dF(x)\\
+   &= F(t) + F \ast M ~ (t)
+	\end{split}
+\end{equation}
 
 \subsection{Renewal Equation}
 
@@ -198,16 +204,17 @@ with $a(t)$ given and $F(x)$ the common distribution. If $a(t)=F(t) \implies$ we
   Let a(t) be a bounded function. The renewal equation has an unique solution with
   the property of being bounded on finite intervals and such solution is
   \begin{equation}
-    A(t) = a(t) + =\int\limits_0^{t}[a(t-x)] \cdot dM(x)
+    A(t) = a(t) + \int\limits_0^{t}[a(t-x)] \cdot dM(x)
   \end{equation}
 \end{theorem}
+In other words it exists an unique solution that doesn't diverge in finite time.
 \begin{proof}
-  The proof is in three steps: boundary, existence and uniqueness.
+  The proof is in three steps: boundness, existence and uniqueness.
   \proofpart
-  \textsc{Boundary}\label{req:boundary}
+  \textsc{Boundness}\label{req:boundness}
   \begin{equation}\begin{split}
     |A(t)| & \le |a(t)| + \int\limits_0^{t}|a(t-x)| \cdot dM(x) \\
-    \sup_{0\le t \le T} |A(t)| & \le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le t \le T}|a(\eta)| \cdot dM(x)  \\
+    \sup_{0\le t \le T} |A(t)| & \le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le \eta \le T}|a(\eta)| \cdot dM(x)  \\
     & = \sup_{0\le t \le T} |a(t)| \cdot (1+M(T)) < \infty \text{ as }
     \begin{cases}
       |a(t)| & \text{bounded for hypothesis} \\
@@ -219,10 +226,10 @@ with $a(t)$ given and $F(x)$ the common distribution. If $a(t)=F(t) \implies$ we
   \textsc{Existence}
     \begin{equation}\begin{split}
       A(t) &= a(t) + M \ast a~(t) = a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a~(t) \\
-      &= a(t) + F \ast a~(t) \left(\sum\limits_{k=2}^{+\infty} F_k \right) \ast a~(t)\\
-      \text{\textbf{Reminder:}}&\text{ but each $F_k \, k>1$ is the convolution with itself k times $F_k = F \ast F_{k-1}$} \\
+      &= a(t) + F \ast a~(t) +\left(\sum\limits_{k=2}^{+\infty} F_k \right) \ast a~(t)\\
+      \text{\textbf{Reminder:}}&\text{ each $F_k , k>1$ is the convolution with itself k times $F_k = F \ast F_{k-1}$} \\
       \implies A(t) &= a(t) + F \ast \left[ a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a~(t) \right] \\
-      &=a(t) + F \ast A ~ (t) \quad \text{ which is one solution.}
+      &=a(t) + F \ast A ~ (t) \quad \text{ which is the renewal equation.}
     \end{split}\end{equation}
   \proofpart
   \textsc{Uniqueness}
@@ -234,15 +241,15 @@ with $a(t)$ given and $F(x)$ the common distribution. If $a(t)=F(t) \implies$ we
     &\text{after n steps we obtain} \\
     A(t) &= a(t) + \left( \sum\limits_{k=1}^{n-1}F_k\right) \ast a~(t) + F_n \ast A~(t) \\
     & \sum\limits_{k=1}^{n-1}F_k \xrightarrow{n \to +\infty} M \quad \implies A(t) = a(t) + M \ast a~(t) + \lim_{n \to +\infty} F_n \ast A~(t) \\
-    &\text{\textbf{Now}  we need to \textbf{proove} that the limits goes to zero:} \\
+    &\text{For our proof we want to show that the limit goes to zero:} \\
     |F_n \ast A~(t)| &= |\int\limits_0^{t}A(t-\eta) \cdot dF_n(\eta)| \le \int\limits_0^{t}|A(t-\eta)| \cdot dF_n(\eta)  \\
-    & \le \sup\limits_{0 \le \eta \le t} |A(\eta)| \cdot F_n (t) < +\infty \quad \text{ for what we found in \ref{req:boundary}} \\
+    & \le \sup\limits_{0 \le \eta \le t} |A(\eta)| \cdot F_n (t) < +\infty \quad \text{ for what we found in \ref{req:boundness}} \\
     &\implies |F_n \ast A~(t)| \xrightarrow{n \to +\infty} 0 \quad\text{ at least geometrically.}
   \end{split}\end{equation}
 \end{proof}
 
 \textbf{\textsc{Remark:}}
-Let's now focus on the expectation for a \gls{st} and let's proove that for a \gls{pp} it's not true the following:
+Let's now focus on the expectation for a \gls{st} and let's proove that for a \gls{pp}:
 \begin{equation}
   \exp[S_{N(t)+1}] = \exp\left[\sum\limits_{i=1}^{N(t)+1}X_i\right] = \exp[N(t)+1]\cdot \exp[X] \text{  \textbf{but}  } \exp[S_{N(t)}] \neq \exp[N(t)]\cdot \exp[X]
 \end{equation}
@@ -259,36 +266,41 @@ Let's now focus on the expectation for a \gls{st} and let's proove that for a \g
     &= \int\limits_0^{t} [x+ A(t-x)] \cdot dF(x) + \int\limits_t^{+\infty} x \cdot dF(x) \\
     &= \underbrace{\int\limits_0^{+\infty} x \cdot dF(x)}_{\exp[X_1]} + \int\limits_0^{t} A(t-x) \cdot dF(x) \\
     &= \exp[X_1] + \int\limits_0^{t} A(t-x) \cdot dF(x)\\
-    & \text{ \textbf{If}}\exp[X_1] < \infty \implies A(t) \text{ is bounded} \\
+    & \text{\textbf{If} }\exp[X_1] < \infty \implies A(t) \text{ is bounded} \\
     \implies A(t) &= \exp[X_1] + \int\limits_0^{t} \exp[X_1] \cdot dM(x) = \exp[X_1]\cdot [1+M(t)]\\
-  \end{split}\end{equation}1
+  \end{split}\end{equation}
 \end{proof}
 
-\subsection{Ross p. 104}
-A \gls{rv} N, integer, is called a \gls{st} for the i.i.d. sequence $X_i$ if:
-\begin{equation}
-  \{N=n\} \text{ is independent of }X_i , i > n
-\end{equation}
-
 \subsection{Wald's equation}
-Let $X_1, X_2, \dots, X_N $ be i.i.d,  $\exp[X] < \infty$ and N a \gls{st} s.t. $\exp[N] < \infty$. Then:
+\begin{definition}[Stopping Time]
+A random variable N (integer valued), is called "stopping time" (ST) for the i.i.d. sequence $X_i$ if:
+\begin{equation}
+  \{N=n\} \text{ is independent of }X_i ,\quad i > n
+\end{equation}
+\end{definition}
+\begin{theorem}[Wald's equation]
+Let $X_1, X_2, \dots, X_N $ be i.i.d,  $\exp[X] < \infty$ and N a stopping time such that: $\exp[N] < \infty$. Then:
 
 \begin{equation}
   \exp\left[\sum\limits_{n=1}^N X_n \right] = \exp[N] \cdot \exp[X]
 \end{equation}
+\end{theorem}
+---
 \begin{proof}
-  Let $I_n = \begin{cases} 1 & N \ge n \\ 0 & N<n \end{cases}$. Then $\sum\limits_{n=1}^N X_n = \sum\limits_{n=1}^{+\infty} X_n \cdot I_n$
+  We are gonna use a trick that will allow us to write the random sum as an infinite sum:\\ \\
+  Let $I_n = \begin{cases} 1 & N \ge n \\ 0 & N<n \end{cases}$ \quad be our indicator function,\\
+  This allows us to write: $\sum\limits_{n=1}^N X_n = \sum\limits_{n=1}^{+\infty} X_n \cdot I_n$
 \begin{equation}\begin{split}
   \{I_n=1\} &= \{N \ge n \} \text{ event}\\
   &= \bigcup\limits_{i=1}^{n-1}\{\underbrace{N \neq i}_{\text{depend on } X_1, \dots, X_i} \} \\
-  &\implies \{I_n\} \text{ is independent of }X_n, X_{n+1}, \dots\\
+  &\implies \{I_n=1\} \text{ is independent of }X_n, X_{n+1}, \dots\\
   \exp\left[\sum\limits_{n=1}^{N}X_n\right] &= \exp\left[\sum\limits_{n=1}^{N}X_n \cdot I_n \right] \stackrel{(1)}{=} \sum\limits_{n=1}^{+\infty}\exp[X_n \cdot I_n] \\
   &=\sum\limits_{n=1}^{+\infty}\exp[X_n] \cdot \exp[I_n] \stackrel{\text{X i.i.d.}}{=} \exp[X]\cdot\sum\limits_{n=1}^{+\infty}\exp[I_n] \\
   &= \exp[X] \cdot \sum\limits_{n=1}^{+\infty}\prob[N \ge n] = \exp[X] \cdot \exp[N]
 \end{split}\label{wald:proof}\end{equation}
 \end{proof}
 \subsubsection{Discussion on Wald's equation proof}
-In the equation \ref{wald:proof} we should see if the passage marked with \textit{\textbf{(1)}} is allowed.
+In the equation \ref{wald:proof} we should see if the passage marked with (1) is allowed.
 If we use $|X_n|>0$, the infinite sum is allowed and it's surely positive and finite, as the expectation of each X is finite.
 With $X_n$ the sum is bounded by $|X_n|$, which allows the switching for the Lebesque theorem.
 \subsubsection{Examples}
@@ -297,5 +309,5 @@ With $X_n$ the sum is bounded by $|X_n|$, which allows the switching for the Leb
   \item $\prob[X_i=0]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =10\}$ is a \gls{st}, and in particular
   $10 = \exp[N] \cdot \exp[X] = 0.5 \cdot \exp[N] \implies \exp[N]=20$
   \item $\prob[X_i=-1]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =1\}$ is a \gls{st}, but the expected stop time
-  is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies \exp[N]=\infty \implies$ ABSURD. One hypothesis was violated: the \gls{st} is not finite.
+  is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies $ ABSURD. We conclude that Wald's equation doesn't apply. So it must be that N has not finite mean $\implies \exp[N]=\infty$
 \end{enumerate}
