@@ -1,0 +1,115 @@
+\chapter{Ad Hoc and Sensor Networks}
+In this section our aim is to study efficient algorithms to setting up a multihop communication in an ad hoc or sensor network.
+In these type of networks multiple nodes, geographically random distributed and with very limited resources, need to communicate each others, for this reason is important to take in account the energy/latency performance of the network.
+
+In general, in a sensor network is a good practice to save as much power as possible, so we assume that a node $A$ can be in \textit{active} or in \textit{sleep} mode.
+\textit{Active mode} includes three state:
+\begin{itemize}
+	\item \textit{trasmitting state}: node $A$ is transmitting data to another node $B$ with a consequent power consumption;
+	\item \textit{receiving state}: node $A$ is receiving data from another node $B$, here $A$ have to perform at least some decoding operations on the incoming packets;
+	\item \textit{idle state}: node $A$ is listening to the channel to sense for new incoming request of communication, that is implemented with a busy waiting (and power consumption).
+\end{itemize}
+
+\textit{Sleep mode} is a way to avoid useless power consumption. When a node is in this state, it switch off most of its hardware, keeping active some core feature like clock. It can't receive or listen for anything.
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+	\begin{axis}[
+	xmin = 0, xmax = 100,
+	ymin = 0, ymax = 100,
+	grid = major,
+	xlabel = $distance$, ylabel = $Power$,
+	legend pos=north east
+	]
+	\fill[green!30]
+		(axis cs:0,0) --
+		(axis cs:0,50) --
+		(axis cs:10,50) --
+		(axis cs:10,0) --
+		cycle;
+	% \addplot [thick,color=blue,fill=blue, fill opacity=0.5]coordinates {
+	% 	(0, 0)
+	% 	(10, 0)
+	% 	(0, 100)
+	% 	(10, 100)};
+	\addplot[domain=0:100,red] {x+20};
+	\addplot[domain=0:100,blue] {20};
+	\legend{Transmit, Receive \& Idle}
+	\end{axis}
+\end{tikzpicture}
+\caption{M1} \label{fig:powervar}
+\end{figure}
+
+\Fig{fig:powervar} show as for long range communication (like satellite communication), a node in trasmitting state consume much power then a node in receiving or in idle state, since decoding and listen operation are independent from the distance between transmitter and receiver, while transmission power grows almost linearly with that distance.
+Our aim is to focus on short range communication, in which the amount of power consumed in each of the three state is almost the same (as \Fig{fig:powervar} shows in the green rectangle), for this reason the only way to save power is introducing the \textit{sleep mode}.
+
+How can the network be efficiently used under these assumption?
+
+\section{SPAN Method}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{SPAN.png}
+	\caption{Sensor network subdivided into class as required by SPAN method}
+	\label{fig:SPAN}
+\end{figure}
+
+The set of nodes of a sensor network can be divided in $N$ subsets in a way to assign to each node a class.
+Each class ensure a good communication across the network.
+In this way each class of node can sleep $\frac{N-1}{N}$ of the time.
+This behaviour is shown in \Fig{fig:SPAN}.
+
+\begin{example}
+	A network is divided in 3 classes of nodes $\Rightarrow$ each class can sleep $2/3$ of the time.
+\end{example}
+
+The drawback for this method is that each node must know which class it belongs to, so a global coordination is required. This is an unfeasible requirement in networks with thousands of nodes.
+
+\section{GAF Method}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.4\textwidth]{GAF.png}
+	\caption{GAF behaviour in a sensor networks}
+	\label{fig:GAF}
+\end{figure}
+GAF is similar to SPAN in a sense since it envisions the use of only a fraction of the nodes at any given time. The
+specific approach of GAF is to divide the area in square
+regions, called grids, in such a way that any two nodes in
+neighboring grids are within range of each other, and in each grid at least a node is awaken. With this approach each grid can work independently from the others, so a global coordination is not required. The GAF scheme is presented in \Fig{fig:GAF}.
+
+The price to pay is that for every configuration we take two adiacent nodes (when two nodes in neighboring grids are at the maximum distance each other), the hop length is significantly smaller than the radio range. This may result in inefficiency in terms of latency and energy consumption (more hops than possibly needed).
+
+\section{STEM Method}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{STEM.png}
+	\caption{STEM mechanism in a sensor networks}
+	\label{fig:STEM}
+\end{figure}
+STEM method solves the problem of sleeping nodes by providing a rendezvous mechanism, using beacons and periodic wakeup.
+Each sleeping node wakes up periodically to listen. If a node wants to establish communications, it starts sending out beacons polling a specific user. Within a bounded time, the polled node will wake up and receive the poll, after which the two nodes are able to communicate. This mechanism is shown in \Fig{fig:STEM}.
+
+\section{Geographic Random Forwarding}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{GeRaF.png}
+	\caption{Geographic Random Forwarding mechanism in a sensor networks}
+	\label{fig:GeRaF}
+\end{figure}
+\gls{geraf} is based on knowledge of a node’s own position and of the position of the destination.
+With this technique there's no need to explicitly address the next hop, since it choose the best hop between sensors awaken within the radio range of the source.
+
+Given a node (source) that needs to communicate to another node (destination), the \textit{best hop} is the sensor within the radio range of the source, that is closest to the destination in terms of meters or kilometers.
+
+This \textit{best hop} is chosen after the transmission has started, in the following method:
+\begin{itemize}
+	\item source send a broadcast message contains the source and the destination position, all active nodes within range receive it;
+	\item each node determines its own priority as a relay based on geometric considerations;
+	\item contention phase takes place so that nodes closer to the destination are likely to win;
+	\item the winner becomes itself the source.
+\end{itemize}
+
+This algorithm is iterate until the destination is reached, a schem of this is shown in \Fig{fig:GeRaF}.
+
+Since \gls{geraf} is based on geographically position of the nodes, it allow to reach the destination in less hop than GAF.
+
+\subsection{Analytical approach}
