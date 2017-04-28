@@ -1,6 +1,6 @@
 \chapter{Ad Hoc and Sensor Networks}
 In this section our aim is to study efficient algorithms to setting up a multihop communication in an ad hoc or sensor network.
-In these type of networks multiple nodes, geographically random distributed and with very limited resources, need to communicate each others, for this reason is important to take in account the energy/latency performance of the network.
+In these type of networks multiple nodes, geographically random distributed and with very limited resources, need to communicate each others. For this reason it's important to take in account the energy/latency performance of the network.
 
 In general, in a sensor network is a good practice to save as much power as possible, so we assume that a node $A$ can be in \textit{active} or in \textit{sleep} mode.
 \textit{Active mode} includes three state:
@@ -10,7 +10,7 @@ In general, in a sensor network is a good practice to save as much power as poss
 	\item \textit{idle state}: node $A$ is listening to the channel to sense for new incoming request of communication, that is implemented with a busy waiting (and power consumption).
 \end{itemize}
 
-\textit{Sleep mode} is a way to avoid useless power consumption. When a node is in this state, it switch off most of its hardware, keeping active some core feature like clock. It can't receive or listen for anything.
+\textit{Sleep mode} is a way to avoid useless power consumption. When a node is in this state, it switch off most of its hardware, keeping active just some core feature like clock. It can't receive or listen for anything.
 \begin{figure}[h]
 \centering
 \begin{tikzpicture}
@@ -40,7 +40,7 @@ In general, in a sensor network is a good practice to save as much power as poss
 \caption{M1} \label{fig:powervar}
 \end{figure}
 
-\Fig{fig:powervar} show as for long range communication (like satellite communication), a node in trasmitting state consume much power then a node in receiving or in idle state, since decoding and listen operation are independent from the distance between transmitter and receiver, while transmission power grows almost linearly with that distance.
+\Fig{fig:powervar} show as for long range communication (like satellite communication), a node in trasmitting state consume more power than a node in receiving or in idle state, since decoding and listening operations are independent from the distance between transmitter and receiver, while transmission power grows with that distance\footnote{the growing rate is super linear, but here is shown as linear for sake of simplicity}.
 Our aim is to focus on short range communication, in which the amount of power consumed in each of the three state is almost the same (as \Fig{fig:powervar} shows in the green rectangle), for this reason the only way to save power is introducing the \textit{sleep mode}.
 
 How can the network be efficiently used under these assumption?
@@ -49,7 +49,7 @@ How can the network be efficiently used under these assumption?
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.4\textwidth]{SPAN.png}
-	\caption{Sensor network subdivided into class as required by SPAN method}
+	\caption{Sensor network subdivided into classes as required by SPAN method}
 	\label{fig:SPAN}
 \end{figure}
 
@@ -108,7 +108,7 @@ This \textit{best hop} is chosen after the transmission has started, in the foll
 	\item the winner becomes itself the source.
 \end{itemize}
 
-This algorithm is iterate until the destination is reached, a schem of this is shown in \Fig{fig:GeRaF}.
+This algorithm is iterated until the destination is reached, a scheme of this is shown in \Fig{fig:GeRaF}.
 
 Since \gls{geraf} is based on geographically position of the nodes, it allow to reach the destination in less hop than GAF.
 
