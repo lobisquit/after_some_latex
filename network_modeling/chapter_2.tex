@@ -657,13 +657,13 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
 
-	\begin{theorem}[4.2, KT p. 95]
-		A \gls{mc} with probability matrix $P$ is irreducible and aperiodic if
+	\begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
+		An irreducible aperiodic \gls{mc}  is recurrent if:
 
 		\begin{equation}\noindent
-			\exists \text{ a sequence } Y_i \text{, for } i = 1,\,... \\
+			\exists \text{ a sequence } Y_i :  \text{, for } i = 1, \dots \\
 			\begin{cases}
- 				\sum\limits_{j=0}^{+\infty} P_{ij} Y_j \le Y_i 	& \forall i \neq 0 \\
+ 				\sum\limits_{i=0}^{+\infty} P_{ij} Y_j \le Y_i 	& \forall i \neq 0 \\
  				\lim\limits_{i \to +\infty} Y_i = +\infty		& \forall i
 			\end{cases}
 		\end{equation}
