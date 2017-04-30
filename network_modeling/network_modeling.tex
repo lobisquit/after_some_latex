@@ -40,6 +40,18 @@
 \usepackage[acronym]{glossaries}
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 
+% Costumization of theorem style
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font %\color{Mahogany}
+  { -- }% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{theoremdd}
 % support for counting
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -59,6 +71,7 @@
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
+%\renewcommand\qedsymbol{$\square$\itshape QED}
 
 
 % useful aliases for common employed declarations
