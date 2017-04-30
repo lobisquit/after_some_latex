@@ -16,6 +16,7 @@
 \usepackage[usenames,dvipsnames,table,tikz]{xcolor} % use colors on table and more
 %\definecolor{DefinedColor}{RGB}{51, 51, 51} % define custom color
 \usepackage{tikz}
+\usepackage{pgfplots}
 \usepackage{listing}
 \usepackage{textgreek}
 %\usepackage{subfigure}
@@ -54,6 +55,7 @@
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
+\newtheorem{example}{Example}
 
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
@@ -66,7 +68,7 @@
 \addto\captionsenglish{\renewcommand*\abstractname{Sommario}} % change Abstract title
 %------------------------------ active url
 \usepackage{url}
-\usepackage{svg}
+%\usepackage{svg}
 \usepackage{ifluatex}
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
 
@@ -82,16 +84,22 @@
 \def\eeq{\end{equation}}
 \def\bal{\begin{align}}
 \def\eal{\end{align}}
+\def\prob{\ensuremath\mathbb{P}}
+\def\exp{\ensuremath\mathbb{E}}
+
 
 % REFERENCES
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
 \newcommand{\Sec}[1]{Sec.~\ref{#1}}
+\newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
 
 \usepackage[acronym]{glossaries}
 
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+\newacronym{kt}{KT}{Karlin-Taylor}
+\newacronym{pp}{PP}{Poisson Process}
 
 \begin{document}
 \frontmatter
@@ -107,7 +115,7 @@
 \includegraphics[width=9cm]{Zorzilla}\\
 \vspace{0.5cm}
 {written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero, Ciprian Matteo\par}
 %\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
 \end{center}
 
@@ -142,8 +150,14 @@
   \clearpage
 \endgroup
 \mainmatter
+<<<<<<< HEAD
 \input{introduzione.tex}
 %\input{chapter_2.tex}
 \input{chapter_poisson_processes.tex}
+=======
+\input{introduction.tex}
+\input{chapter_2.tex}
+\input{chapter_PP.tex}
+>>>>>>> origin/Poisson-Process
 
 \end{document}
