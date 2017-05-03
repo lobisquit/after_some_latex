@@ -401,7 +401,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		$$ \pi_{i}^{(n)}(C) = \sum_{k \in C} \pi_{ik}^{(n)}(C) $$
 
 		and the general probability of reaching $C$ starting from $i$ is
-		$$ \pi_i(C) = \sum_{n \in \mathbb{N}} \pi_i^{(n)}(C) $$
+		$$ \pi_i(C) = \sum_{n \in \N} \pi_i^{(n)}(C) $$
 	\end{definition}
 
 	\begin{theorem}[3.1, KT p. 91] \label{th:3.1}
@@ -413,7 +413,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{proof}
 		The limit of theorem thesis can be expanded this way
 		\begin{equation}\begin{split} \label{eq:theorem_3.1_thesis}
-			& \forall \epsilon > 0, \exists \text{ class } C' \in C, N \in \mathbb{N} \text{ such that } \\
+			& \forall \epsilon > 0, \exists \text{ class } C' \in C, N \in \N \text{ such that } \\
 			& \forall n \ge N,~ \left| P_{ij}^{(n)} - \pi_i(C) \pi_j \right| \stackrel{(1)}{=} \\
 			= & \left| P_{ij}^{(n)} - \left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right) \pi_j +
 				\left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C)\right)\pi_j - \pi_i(C)\pi_j \right| \stackrel{(2)}{\le} \\
@@ -437,7 +437,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 		This formula can be written as a limit in $n$ and $C$, expliciting the inner infinite sum over class elements.
 		\begin{equation}\begin{split} \label{eq:theorem_3.1_first term}
-			& \forall \epsilon > 0, \exists N \in \mathbb{N} \text{ and a finite class } C' \subseteq C \text{ such that } \\
+			& \forall \epsilon > 0, \exists N \in \N \text{ and a finite class } C' \subseteq C \text{ such that } \\
 			& \forall n \ge N, \left| P_{ij}^{(n)} - \pi_j \left( \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)} \right) \right| \stackrel{(1)}{=}
 			\\
 			= & \left|
@@ -467,7 +467,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\begin{itemize}
 			\item [(1)] using equation \ref{eq:n_step_in_class}, sum is splitted in $k \in C$ into two sums in $k \in C'$ and $k \in C ~ \wedge ~ k \notin C' $
 			\item [(2)] terms have been rearranged: first and last one have been merged
-			\item [(3)] the first sum over all $n \in \mathbb{N}$ is splitted using $N$
+			\item [(3)] the first sum over all $n \in \N$ is splitted using $N$
 			\item [(4)] the module of a sum is less or equal than the sum of the modules
 			\item [(5)] given it always holds that $P_{kj}^{(n-v)} \le 1$ and $|P_{kj}^{(n-v)} - \pi_j| \le 2$
 			\item [(6)] choosing $C'$ and $N$ large enough, we can make the two terms between parenthesis small as we want: they are infinitesimal
@@ -483,7 +483,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\smallbreak
 		Since the right term converges to a finite value, namely $\pi_i$, the limit implicit in the infinite sum can be expanded this way.
 		\begin{equation}\begin{split} \label{eq:pi_limit_definition}
-			& \forall \epsilon > 0, \exists N \in \mathbb{N} \text{ and a finite class } C' \subseteq C \text{ such that } \\
+			& \forall \epsilon > 0, \exists N \in \N \text{ and a finite class } C' \subseteq C \text{ such that } \\
 			& \forall n \ge N,~ \left| \pi_i(C) - \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right| < \epsilon
 		\end{split}\end{equation}
 
@@ -653,11 +653,9 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		An irreducible aperiodic \gls{mc}  is recurrent if:
 
 		\begin{equation}\noindent
-			\exists \text{ a sequence } Y_i :  \text{, for } i = 1, \dots \\
-			\begin{cases}
- 				\sum\limits_{i=0}^{+\infty} P_{ij} Y_j \le Y_i 	& \forall i \neq 0 \\
- 				\lim\limits_{i \to +\infty} Y_i = +\infty		& \forall i
-			\end{cases}
+			\exists \text{ a sequence } Y_i : \quad
+ 			\sum\limits_{i=0}^{+\infty} P_{ij} Y_j \le Y_i \quad \forall i \neq 0 \quad and \quad
+ 			\lim\limits_{i \to +\infty} Y_i = +\infty
 		\end{equation}
 	\end{theorem}
 	---
@@ -666,7 +664,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 		\proofpart
 			Let's consider a \gls{mc} with probability matrix $\tilde{P}$, that concides with P except for the first line, which is $(1, 0, 0, ...)$.
-			This way we make the state 0 absorbing.
+			In this way we make the state 0 absorbing.
 
 			We employ this trick to write theorem condition also for $i=0$.
 			$$ \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \le Y_i ~~ \forall i$$
@@ -674,7 +672,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\proofpart
 			If a given sequence $Y_i$ is a solution, its shifted version $y_i + b$ is a solution too, for all $b$.
 
-			Since $Y_i$ sequence diverges, we can choose a suitable $b$ that makes each member strictly positive.
+			Since $Y_i$ sequence diverges, we can choose the minimum $b$ that makes each member strictly positive.
 			\begin{equation}
 				\exists b: \forall i, Y_i + b \doteq Y_i' > 0 \text{ is a valid solution.}
 			\end{equation}
@@ -683,11 +681,11 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 		\proofpart
 			\begin{equation}\begin{split}
-				\forall i, ~ Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
+				Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
 				\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(2)}{=} \\
 				& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
 				\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
-				& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall m
+				& \stackrel{(3)}{=} \ldots = \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \quad\forall i,\forall m
 			\end{split}\end{equation}
 			where
 			\begin{itemize}
@@ -698,16 +696,16 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 		\proofpart \label{part:Yi_lower_bound}
 			Since $Y_i$ serie diverges, we can write, by limit definition
-			$$ \forall \epsilon > 0, \exists M \in \mathbb{N} : Y_i \ge 1 / \epsilon ~ \forall i \ge M$$
+			$$ \forall \epsilon > 0, ~\exists M \in \N : ~Y_i \ge \frac{1}{\epsilon} \quad \forall i \ge M$$
 
 			\begin{equation}\begin{split}
-				\forall i, \forall m, ~ Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
+				Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
 					= \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
 					+ \sum_{j=M}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \ge \\
 				& \ge \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
 					+ \frac{1}{\epsilon} \sum_{j=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
 				& = \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-					+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \\
+					+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \quad \forall i, \forall m
 			\end{split}\end{equation}
 
 		\proofpart
@@ -716,9 +714,9 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 			We can distinguish two cases,
 			\begin{itemize}
-				\item if $P$ is recurrent, we certantly reach state 0 at some time ($f_{i0} = 1$), but given $\tilde{P}$ strucure we will be stuck there forever.
-				\item if $P$ is transient, it must be that $\lim_{m \to \infty} P_{ij}^{(m)} = 0 $, so our lemma would be proven if
-				$$ \forall i, j \neq 0, ~ \tilde{P}_{ij}^{(m)} \le P_{ij}^{(m)} $$
+				\item if $P$ is recurrent, we certantly reach state 0 at some time ($f_{i0} = 1$), but given $\tilde{P}$ strucure, we will be stuck there forever.
+				\item if $P$ is transient, it must be $P_{ij}^{(m)}\stackrel{m \to \infty}{\longrightarrow} 0 $, so our lemma would be proven if
+				$$ \tilde{P}_{ij}^{(m)} \le P_{ij}^{(m)} \quad\forall i, j \neq 0$$
 			\end{itemize}
 
 			This possibility can be more widely explained this way, splitting $\tilde{P}_{ij}^{(m)}$ and $P_{ij}^{(m)}$ across random walks	 that contain state 0 or not.
@@ -733,7 +731,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			Note that, in $\tilde{P}$, state $0$ is a trap state, so the first term of the sum disappear because $j \neq 0$ can no more be reached.
 
 		\proofpart
-			Now we assume that chain is transient? and we proceed to an absurd statement, which proves our theorem.
+			Now we assume that chain is transient and we proceed to an absurd statement, which proves our theorem.
 
 			By definition,
 			$$ f_{i0} = \lim_{m \to +\infty} \tilde{P}_{i0}^{(m)} = \prob[\exists k : X_k = 0 | X_0 = i] = \tilde{\pi}_i(C_0)$$
@@ -741,8 +739,8 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 			Using what we have proved in part \ref{part:Yi_lower_bound}:
 			\begin{equation}\begin{split}
-				Y_i & \ge \lim_{m \to +\infty} Y_i = \\
-					& = \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				Y_i & \ge \lim_{m \to +\infty} Y_i \ge \\
+					& \ge \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
 						+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
 				& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
 			\end{split}\end{equation}
@@ -750,11 +748,14 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 			Terms can be rearranged this way:
 			\begin{equation*}\begin{split}
-				\forall \epsilon > 0, ~ & Y_i - \tilde{\pi}_i(C_0) Y_0 = \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
-				& \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] = 1 - \tilde{\pi}_i(C_0)
+				&Y_i - \tilde{\pi}_i(C_0) Y_0 \ge \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
+				&1 - \tilde{\pi}_i(C_0) \le \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] \le \epsilon Y_i \quad\forall \epsilon > 0
 			\end{split}\end{equation*}
 
-			Since previous relation holds $\forall \epsilon > 0$ and all terms are numbers (no functions), we can freely take the limit for $\epsilon \to 0$.
-			$$ 1 - \tilde{\pi}_i(C_0) = \lim_{\epsilon \to 0^{+}} \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] = 0 \Rightarrow \tilde{\pi}_i(C_0) = f_{i0} = 1$$
+			Since we have assumed that chain is transient we can state that $\tilde{\pi}_i(C_0) < 1$, then we can choose $\epsilon < \frac{1-\tilde{\pi}_i(C_0)}{Y_i}$ and then:
+			\begin{equation*}
+				1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i \Rightarrow 1 - \tilde{\pi}_i(C_0) \le 1 - \tilde{\pi}_i(C_0)
+			\end{equation*}
+			Since this absurd, $\tilde{\pi}_i(C_0) = f_{i0} = 1$
 			which implies that \gls{mc} is recurrent for lemma \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
