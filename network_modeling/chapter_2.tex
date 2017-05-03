@@ -47,7 +47,7 @@ The transition probability matrix:
 	a_{0} & a_{1} & a_2 & \cdots  \\
 	0			& a_{0} & a_{1} & \cdots  \\
 	0 		& 0			& a_{0} & \cdots  \\
-	\vdots & \vdots & \ddots &  \\
+	\vdots & \vdots & \vdots & \ddots &  \\
 \end{pmatrix}
 \end{equation}
 \begin{definition}[Behavior of a MC]
@@ -253,7 +253,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 	---
 
-	Following table summarize some properties for the types of state that can be found in a \gls{mc}.
+	The following table summarize some properties for the types of state that can be found in a \gls{mc}:
 
 	{\renewcommand{\arraystretch}{1.2}
 	\begin{center}
@@ -436,6 +436,10 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		where path from $i$ to $j$ is splitted in two parts, before and after entering $C$.
 
 		This formula can be written as a limit in $n$ and $C$, expliciting the inner infinite sum over class elements.
+
+		% FORMAT setting
+		\setlength{\mathindent}{-1.5cm} % sporco trucco ingegneristico
+
 		\begin{equation}\begin{split} \label{eq:theorem_3.1_first term}
 			& \forall \epsilon > 0, \exists N \in \N \text{ and a finite class } C' \subseteq C \text{ such that } \\
 			& \forall n \ge N, \left| P_{ij}^{(n)} - \pi_j \left( \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)} \right) \right| \stackrel{(1)}{=}
@@ -462,7 +466,11 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 				\left( \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) \right) \stackrel{(6)}{\le}
 			\\
 			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)} (P_{kj}^{(n-v)} - \pi_j) \right| + 3 \epsilon \stackrel{(7)}{<} 4 \epsilon
-		\end{split}\end{equation}since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
+		\end{split}\end{equation}
+
+		\setlength{\mathindent}{0cm} % reset of "sporco trucco ingegneristico"
+
+		since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
 		where
 		\begin{itemize}
 			\item [(1)] using equation \ref{eq:n_step_in_class}, sum is splitted in $k \in C$ into two sums in $k \in C'$ and $k \in C ~ \wedge ~ k \notin C' $
@@ -650,7 +658,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\end{proof}
 
 	\begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
-		An irreducible aperiodic \gls{mc}  is recurrent if:
+		An irreducible \gls{mc} is recurrent if:
 
 		\begin{equation}\noindent
 			\exists \text{ a sequence } Y_i : \quad
@@ -744,7 +752,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 						+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
 				& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
 			\end{split}\end{equation}
-			where (*) holds because 0 is a trap state for $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
+			where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
 
 			Terms can be rearranged this way:
 			\begin{equation*}\begin{split}
