@@ -693,7 +693,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 				\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(2)}{=} \\
 				& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
 				\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
-				& \stackrel{(3)}{=} \ldots = \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \quad\forall i,\forall m
+				& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall i,\forall m
 			\end{split}\end{equation}
 			where
 			\begin{itemize}
@@ -754,16 +754,16 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 			\end{split}\end{equation}
 			where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
 
-			Terms can be rearranged this way:
+			Terms can be rearranged this way
 			\begin{equation*}\begin{split}
 				&Y_i - \tilde{\pi}_i(C_0) Y_0 \ge \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
 				&1 - \tilde{\pi}_i(C_0) \le \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] \le \epsilon Y_i \quad\forall \epsilon > 0
 			\end{split}\end{equation*}
 
-			Since we have assumed that chain is transient we can state that $\tilde{\pi}_i(C_0) < 1$, then we can choose $\epsilon < \frac{1-\tilde{\pi}_i(C_0)}{Y_i}$ and then:
+			Since we assumed that the chain is transient, we can state that $\tilde{\pi}_i(C_0) < 1$, so choosing $\epsilon < \frac{1-\tilde{\pi}_i(C_0)}{Y_i}$ we have that
+
 			\begin{equation*}
-				1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i \Rightarrow 1 - \tilde{\pi}_i(C_0) \le 1 - \tilde{\pi}_i(C_0)
+				1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i = 1 - \tilde{\pi}_i(C_0)
 			\end{equation*}
-			Since this absurd, $\tilde{\pi}_i(C_0) = f_{i0} = 1$
-			which implies that \gls{mc} is recurrent for lemma \ref{lemma:MC_irreducible_fi0}.
+			We derive that $\tilde{\pi}_i(C_0) = f_{i0} = 1$, which implies that chain is recurrent for lemma \ref{lemma:MC_irreducible_fi0}. This is an absurd given chain is supposed transient.
 	\end{proof}
