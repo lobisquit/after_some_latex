@@ -3,6 +3,7 @@
 % language settings
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
+
 \usepackage[utf8]{inputenc}
 \usepackage{textgreek}
 
@@ -18,6 +19,7 @@
 %\usepackage{rotating}
 
 % math package
+\usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{amsmath, amssymb, dsfont, bm}
 
@@ -38,6 +40,18 @@
 \usepackage[acronym]{glossaries}
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 
+% Costumization of theorem style
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font %\color{Mahogany}
+  { -- }% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{theoremdd}
 % support for counting
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
@@ -45,10 +59,19 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 
+% added support for proof parts
+\theoremstyle{remark}
+\newtheorem{proofpart}{Part}
+\renewcommand\theproofpart{\Roman{proofpart}}
+\makeatletter
+\@addtoreset{proofpart}{theorem}
+\makeatother
+
 % specific modification to basic book template of our book document
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
+%\renewcommand\qedsymbol{$\square$\itshape QED}
 
 
 % useful aliases for common employed declarations
@@ -58,12 +81,34 @@
 \def\eal{\end{align}}
 \def\prob{\ensuremath\mathbb{P}}
 \def\exp{\ensuremath\mathbb{E}}
+\newcommand{\Hb}{\mathbb{H}}
+\newcommand{\Sb}{\mathbb{\Sigma}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Rm}{\mathbb{R^{-1}}}
+\newcommand{\J}{\mathbb{J}}
 
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
 \newcommand{\Sec}[1]{Sec.~\ref{#1}}
 \newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
+\newcommand{\RN}[1]{ \textup{\uppercase\expandafter{\romannumeral#1}}} %This is for inserting Roman Numbers (useful for \stackrel in equations so that you don't confuse indicating numbers from equation numbers
 
 %---------------------------------
 
