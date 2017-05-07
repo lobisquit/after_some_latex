@@ -113,3 +113,113 @@ This algorithm is iterated until the destination is reached, a scheme of this is
 Since \gls{geraf} is based on geographically position of the nodes, it allow to reach the destination in less hop than GAF.
 
 \subsection{Analytical approach}
+	Given two areas A and B with different shape but the same area measure, the number of sensors in A depends on the measure of its area and not on its shape.
+
+	Therefore the number of sensors in A and in B have the same distribution. We assume that this distribution is Poissonian, so for area A we can state:
+	\begin{equation}
+		\begin{split}
+			number ~of ~sensors ~in ~A &= \lambda A \\
+			\prob[0 ~nodes ~in ~A] = e^{-\lambda A}
+		\end{split}
+	\end{equation}
+
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\textwidth]{analytical_scheme.png}
+		\caption{Scheme of a sensors network}
+		\label{fig:anapproach}
+	\end{figure}
+
+	% \begin{figure}[h]
+	% 	\begin{tikzpicture}
+	% 		\node (v2) at (-4,0) {\textbullet};
+	% 		\node (v1) at (-13,0) {\textbullet};
+	% 		\def\radius{2.5cm}
+	% 		\draw  (v1) circle[radius=\radius];
+	% 		\fill[red] (v1) +(160:\radius) {circle[radius=2pt]};
+	% 		\node (v3) at (1.5,2) {\textbullet};
+	% 		\draw  plot[smooth, tension=.7] coordinates {(v1) (v2)};
+	% 	\end{tikzpicture}
+	% 	\caption{title}
+	% \end{figure}
+
+	Given $\zeta$ the advancement between two nodes, with reference to \Fig{fig:anapproach}, $\zeta < D - r$ if there are no relays in circle intersection of area
+	\begin{equation}
+			A(r,D) = 2 \int_{D-1}^r a \cdot arccos( \frac{a^2 + D^2 - 1}{2aD}) da
+	\end{equation}
+
+	so we can define the statistic of the advancement $\zeta$ as
+	\begin{equation}
+		\prob[\zeta > a] = \begin{cases}
+			0 & a \ge 1\\
+			1-e^{-MA(D-a,D)/\pi} & otherwise
+		\end{cases}
+	\end{equation}
+
+	where $M$ stands for $\lambda$. Given these quantities, we can define the average advancement towards the destination as
+
+	\begin{equation}
+		E[\zeta] = \int_0^{+\infty} \prob[\zeta > a]da = 1-\int_0^1 e^{-MA(D-a,D)/\pi}da
+	\end{equation}
+
+	and an approximation for the average number of hops as
+
+	\begin{equation}
+		E(n) \approx \frac{D}{E[\zeta]}
+	\end{equation}
+
+A rigorous way to compute $E[n]$ is the following.
+
+\begin{equation}\label{hopsdefinition}
+	\begin{split}
+		&n' = \text{number of hops to reach node within coverage of the destination}\\
+		&n = n' + 1 = \text{number of hops}
+	\end{split}
+\end{equation}
+
+We can state
+
+\begin{equation}\label{firstBound}
+	\sum_{i=1}^{n'-1} X_i < D-1 \le \sum_{i=1}^{n'} X_i
+\end{equation}
+
+where $x_i$ are r.v. representing the advancement in a given hop.
+This may seem like a \textit{stopping rule}, since I can advance until I enter in the range of the destination and $n'$ can be used as the \textit{stopping time}, but $X_i$ are neither independent nor identically distributed, since these depends on the distance from the source.
+
+For the moment, we can ignore this problem and replace $X_i$ with an iid sequence $Y_i$, and replace it in \eq{firstBound}.
+
+\begin{equation}\label{stoppingRule}
+	\sum_{i=1}^{n'-1} Y_i < D-1 \le \sum_{i=1}^{n'} Y_i
+\end{equation}
+
+where $Y_i$ are iid.
+In this way we can apply to \eq{stoppingRule} the stopping theory and divide the problem in two parts.
+
+\begin{enumerate}
+		\item
+			$$ D-1 \le E\left[\sum_{i=1}^{n'} Y_i\right] \stackrel{(1)}{=} E[n']E[Y] $$
+			Where (1) holds for the Wald's equation. Rearranging the previous equation and using \eq{hopsdefinition}, we can found that
+			\begin{equation}\label{lowerBound}
+				E[n] = E[n'+1] \ge \frac{D-1}{E[Y]} +1
+			\end{equation}
+		\item
+			advancement $\zeta$ is at most 1, then
+			$$\sum_{i=1}^{n'} Y_i \le \sum_{i=1}^{n'-1} Y_i +1 \stackrel{(1)}{<} D$$
+			Where (1) is derived from \eq{stoppingRule}. Then we can apply the expectation and the Wald's equation, obtaining
+			$$E\left[\sum_{i=1}^{n'} Y_i\right] = E[n']E[Y] < D$$
+			Then, applying the definition of number of hops in \eq{hopsdefinition} we obtain the second bound.
+			\begin{equation}\label{upperBound}
+				E[n] < \frac{D}{E[Y]} + 1
+			\end{equation}
+
+			The final result is the union of the bounds \eq{lowerBound} and \eq{upperBound}:
+			\begin{equation}\label{iidBounds}
+				\frac{D-1}{E[Y]} +1 \le E[n] < \frac{D}{E[Y]} + 1
+			\end{equation}
+\end{enumerate}
+Then we must replace $Y$ with $X$ appropriately in the result.
+If we assume that all the $X_s$ have the statistic of $X_1$(worst case), we have the maximum number of hops, while if we assume that all the $X_s$ have the statistic of $X_D$(best case) we have the minimum number of hops. So we can replace in \eq{iidBounds} the best and the worst case, obtaining the final result:
+
+\begin{equation}\label{finalBounds}
+	\underbrace{\frac{D-1}{E[X_d]} +1}_\text{Best Case} \le E[n] < \underbrace{\frac{D}{E[X_1]} + 1}_\text{Worst Case}
+\end{equation}
