@@ -102,8 +102,8 @@ Given a node (source) that needs to communicate to another node (destination), t
 
 This \textit{best hop} is chosen after the transmission has started, in the following method:
 \begin{itemize}
-	\item source send a broadcast message contains the source and the destination position, all active nodes within range receive it;
-	\item each node determines its own priority as a relay based on geometric considerations;
+	\item source send a broadcast message that contains the source and the destination position, all active nodes within its range receive it;
+	\item each node determines its own priority as a relay, based on geometric considerations;
 	\item contention phase takes place so that nodes closer to the destination are likely to win;
 	\item the winner becomes itself the source.
 \end{itemize}
@@ -159,16 +159,16 @@ Since \gls{geraf} is based on geographically position of the nodes, it allow to 
 	where $M$ stands for $\lambda$. Given these quantities, we can define the average advancement towards the destination as
 
 	\begin{equation}
-		E[\zeta] = \int_0^{+\infty} \prob[\zeta > a]da = 1-\int_0^1 e^{-MA(D-a,D)/\pi}da
+		\exp[\zeta] = \int_0^{+\infty} \prob[\zeta > a]da = 1-\int_0^1 e^{-MA(D-a,D)/\pi}da
 	\end{equation}
 
 	and an approximation for the average number of hops as
 
 	\begin{equation}
-		E(n) \approx \frac{D}{E[\zeta]}
+		\exp(n) \approx \frac{D}{\exp[\zeta]}
 	\end{equation}
 
-A rigorous way to compute $E[n]$ is the following.
+A rigorous way to compute $\exp[n]$ is the following.
 
 \begin{equation}\label{hopsdefinition}
 	\begin{split}
@@ -183,7 +183,7 @@ We can state
 	\sum_{i=1}^{n'-1} X_i < D-1 \le \sum_{i=1}^{n'} X_i
 \end{equation}
 
-where $x_i$ are r.v. representing the advancement in a given hop.
+where $X_i$ are r.v. representing the advancement in a given hop.
 This may seem like a \textit{stopping rule}, since I can advance until I enter in the range of the destination and $n'$ can be used as the \textit{stopping time}, but $X_i$ are neither independent nor identically distributed, since these depends on the distance from the source.
 
 For the moment, we can ignore this problem and replace $X_i$ with an iid sequence $Y_i$, and replace it in \eq{firstBound}.
@@ -197,29 +197,29 @@ In this way we can apply to \eq{stoppingRule} the stopping theory and divide the
 
 \begin{enumerate}
 		\item
-			$$ D-1 \le E\left[\sum_{i=1}^{n'} Y_i\right] \stackrel{(1)}{=} E[n']E[Y] $$
-			Where (1) holds for the Wald's equation. Rearranging the previous equation and using \eq{hopsdefinition}, we can found that
+			$$ D-1 \le \exp\left[\sum_{i=1}^{n'} Y_i\right] \stackrel{(1)}{=} \exp[n']\exp[Y] $$
+			Where (1) holds for the Wald's equation. Rearranging the previous equation and using \eq{hopsdefinition}, we can find that
 			\begin{equation}\label{lowerBound}
-				E[n] = E[n'+1] \ge \frac{D-1}{E[Y]} +1
+				\exp[n] = \exp[n'+1] \ge \frac{D-1}{\exp[Y]} +1
 			\end{equation}
 		\item
-			advancement $\zeta$ is at most 1, then
+			Advancement $\zeta$ is at most 1, then
 			$$\sum_{i=1}^{n'} Y_i \le \sum_{i=1}^{n'-1} Y_i +1 \stackrel{(1)}{<} D$$
 			Where (1) is derived from \eq{stoppingRule}. Then we can apply the expectation and the Wald's equation, obtaining
-			$$E\left[\sum_{i=1}^{n'} Y_i\right] = E[n']E[Y] < D$$
+			$$\exp\left[\sum_{i=1}^{n'} Y_i\right] = \exp[n']\exp[Y] < D$$
 			Then, applying the definition of number of hops in \eq{hopsdefinition} we obtain the second bound.
 			\begin{equation}\label{upperBound}
-				E[n] < \frac{D}{E[Y]} + 1
+				\exp[n] < \frac{D}{\exp[Y]} + 1
 			\end{equation}
 
 			The final result is the union of the bounds \eq{lowerBound} and \eq{upperBound}:
 			\begin{equation}\label{iidBounds}
-				\frac{D-1}{E[Y]} +1 \le E[n] < \frac{D}{E[Y]} + 1
+				\frac{D-1}{\exp[Y]} +1 \le \exp[n] < \frac{D}{\exp[Y]} + 1
 			\end{equation}
 \end{enumerate}
 Then we must replace $Y$ with $X$ appropriately in the result.
 If we assume that all the $X_s$ have the statistic of $X_1$(worst case), we have the maximum number of hops, while if we assume that all the $X_s$ have the statistic of $X_D$(best case) we have the minimum number of hops. So we can replace in \eq{iidBounds} the best and the worst case, obtaining the final result:
 
 \begin{equation}\label{finalBounds}
-	\underbrace{\frac{D-1}{E[X_d]} +1}_\text{Best Case} \le E[n] < \underbrace{\frac{D}{E[X_1]} + 1}_\text{Worst Case}
+	\underbrace{\frac{D-1}{\exp[X_d]} +1}_\text{Best Case} \le \exp[n] < \underbrace{\frac{D}{\exp[X_1]} + 1}_\text{Worst Case}
 \end{equation}
