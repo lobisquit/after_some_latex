@@ -315,6 +315,145 @@ A random variable N (integer valued), is called "stopping time" (ST) for the i.i
 		is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies $ ABSURD. We conclude that Wald's equation doesn't apply. So it must be that N has not finite mean $\implies \exp[N]=\infty$
 	\end{enumerate}
 
+\section{The key renewal theorem}
+\begin{definition}
+	(Point of increase) Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that:
+	\begin{equation}
+		F(\alpha+\epsilon)-F(\alpha-\epsilon)>0 \quad  \forall \quad
+		\epsilon > 0
+	\end{equation}
+\end{definition}
+\begin{definition}
+	(Arithmetic function) We say that a dristibution function F is \textit{arithmetic} if $\exists$ $\lambda > 0$ such that F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, ... . \\
+	We call \textit{SPAN} the largest $\lambda$ for which F is still arithmetic.
+\end{definition}
+
+The distribution function of a discrete random variable with possible values 0,1,2,... is an arithmetic function with SPAN=1.
+
+\begin{definition}
+	(Directly Riemann Integrable Function) Given a function g defined on [0, $\infty$) we define the following quantities for every $\delta > 0$:
+	\begin{align*}
+		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
+		\\
+		\bar \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty}max\{g(t):(n-1)\delta \leq t \leq n \delta \}
+	\end{align*}
+	We say that g is directly Riemann integrable if both $\underline \sigma (\delta)$ and $\bar \sigma (\delta)$ converge absolutely $\forall \quad \delta > 0$ and if:
+	\begin{equation}
+		\underline \sigma (\delta) - \bar \sigma (\delta) \rightarrow 0 \quad \delta \rightarrow 0
+		\end{equation}
+\end{definition}
+
+We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
+
+\begin{theorem}
+	(Key Renewal Theorem) Is given a distribution function F of a positive random variable $a$ with mean $\mu$. We suppone that $a$ is directly Riemann integrable and that $A$ is the solution of the \textit{renewal equation}
+	\begin{equation}
+		A(t)=a(t)+\int_{0}^{t}A(t-x)dF(x)
+	\end{equation}
+	If F is not arithmetic, then:
+	\begin{equation*}
+		\lim_{t \rightarrow \infty} A(t) =
+		\begin{cases}
+			\frac{1}{\mu} \int_{0}^{\infty}a(x)dx \quad & if \quad \mu < \infty
+			\\
+			0 \quad & if \quad \mu = \infty
+		\end{cases}
+	\end{equation*}
+	If F is arithmetic with SPAN = $\lambda$ then $\forall c > 0$:
+	\begin{equation*}
+		\lim_{t \rightarrow \infty} A(c+n\cdot \lambda) =
+		\begin{cases}
+			\frac{\lambda}{\mu} \sum_{n=0}^{\infty}a(c+n \cdot \lambda) \quad & if 	\quad \mu<\infty
+			\\
+			0 \quad & if \quad \mu = \infty
+		\end{cases}
+	\end{equation*}
+\label{KRT1}
+\end{theorem}
+
+The theorem \ref{KRT1} can be also expressed in the following form:
+
+\begin{theorem}
+	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppone $h>0$ and that $M(t)=\sum_{k=1}^\infty F_{k}(t)$ is the \textit{renewal function} associated with F.
+	If F is not arithmetic then:
+	\begin{equation}
+		\lim_{t \rightarrow \infty} [M(t+h)-M(t)]=\frac{h}{\mu}
+	\end{equation}
+	If F is arithmetic with SPAN = $\lambda$ then:
+	\begin{equation}
+		\lim_{t \rightarrow \infty} [M(t+h)-M(t)]=\frac{h}{\mu} \quad \forall h = n \cdot \lambda
+	\end{equation}
+	\label{KRT2}
+\end{theorem}
+
+We note that the \textit{elementary renewal theorem} $\lim_{t \to \infty} \frac{1}{t} M(t) = \frac{1}{\mu}$ is a corollary of the \textit{key renewal theorem} \ref{KRT2}.
+
+\subsection{Limiting distribution of the excess life}
+We say that $\gamma_{t}=S_{N(t)+1}-t$ is the excess life at time t and that $A_z=Prob[\gamma_t>z]$ for a fixed $z>0$. We obtain that:
+\begin{equation*}
+	Prob[\gamma_t>z|X_1=x] = \begin{cases}
+		1 \quad & if \quad x > t+z \\
+		0 \quad & if \quad t+x \geq x > t \\
+		A_z(t-x) \quad & if \quad t \geq x > 0
+	\end{cases}
+\end{equation*}
+For the law of the total probability we obtain that:
+\begin{align*}
+	A_z(t)= & \int_{0}^{\infty} Prob[\gamma_t>z|X_1=x] dF(x) = \int_{0}^{t}A_z(t-x)dF(x)+\int_{t+z}^{\infty}dF(x)= \\ & \int_{0}^{t}A_z(t-x)dF(x)+1-F(t+z)
+\end{align*}
+For the \textit{renewal equation} $ A(t)=a(t)+\int_{0}^{t}A(t-x)dF(x)=a(t)+\int_{0}^{t}a(t-x)dM(x) $ we conclude that:
+\begin{align*}
+	& a(t) = 1 - F(t+z) \\
+	& A_z(t)=\int_{0}^{t}(1-F(t+z-x))dM(x)+1-F(t+z) \\
+	& \int_{0}^{\infty} a(x) d(x) = \int_{0}^{\infty}(1-F(x)) d(x) = \int_{z}^{\infty}(1-F(y))dy \leq \int_{0}^{\infty}(1-F(y))dy = \mu
+\end{align*}
+We suppone $\mu < \infty$. For the \textit{renewal theorem} we obtain that:
+\begin{equation}
+	\lim_{t \rightarrow \infty} Prob[\gamma_t>z] = \lim_{t \rightarrow \infty} A_z(t) = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(x))dx \quad \forall z > 0
+	\label{limitingdistribution}
+\end{equation}
+
+From \ref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that:
+\begin{equation}
+	\{\gamma_t \geq x, \delta_t \geq y \} \Leftrightarrow \{\gamma_{t-y} \geq x+y \}
+	\label{currtotallife}
+\end{equation}
+From \ref{currtotallife} we have that:
+\begin{align*}
+	\lim_{t \rightarrow \infty} Prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} Prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(z))dz
+\end{align*}
+In particular we have that:
+\begin{align*}
+	\lim_{t \rightarrow \infty} Prob[\delta_t \geq y] & = \lim_{t \rightarrow \infty} Prob[\delta_t \geq y, \gamma_{t} \geq 0] \\ & = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(z))dz
+\end{align*}
+$\frac{1-F(z)}{\mu}$ is the probability density function of $\delta_t$. We are able to compute $\delta_t$ and $\gamma_t$ averages.
+\begin{align*}
+	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{\infty} \frac{z}{\mu} \cdot (1-F(z))dz \\ & = \frac{z^2}{2\mu}(1-F(z))|_0^{\infty}+\int_0^{\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
+\end{align*}
+Finally we conclude that:
+\begin{align}
+	& \exp[\delta_t] = \frac{\exp[X^2]}{2 \exp[X]}
+	\\ & \exp[\gamma_t] = \frac{\exp[X^2]}{2 \exp[X]}
+	\\ & \exp[\beta_t] = \frac{\exp[X^2]}{\exp[X]}
+\end{align}
+
+\subsection{Asymptotic expansion of the renewal function}
+
+Given a distribution function of mean $\mu$ and variance $\sigma$ we want to prove that $\lim_{t \rightarrow \infty} (M(t) - \frac{t}{\mu}) = \frac{\sigma^2-\mu^2}{2\mu^2}$. For $t \rightarrow \infty$ we have what follows:
+\begin{align*}
+	M(t)-\frac{t}{\mu} & =\exp[N(t)+1]-\frac{t}{\mu}-1 \\
+	& = \frac{1}{\mu} \cdot (\exp[S_{N(t)+1}]-t)-1 \\
+	& = \frac{1}{\mu} \cdot \exp[\delta_t]-1 \\
+	& = \frac{1}{\mu}\frac{\exp[X^2]}{2\mu}-1 \\
+	& = \frac{\sigma^2+\mu^2}{2\mu^2}-1 \\
+	& = \frac{\sigma^2-\mu^2}{2\mu^2}
+\end{align*}
+Then we conclude that:
+\begin{equation}
+	\lim_{t \rightarrow \infty} (M(t) - \frac{t}{\mu}) = \frac{\sigma^2-\mu^2}{2\mu^2}
+\end{equation}
+
+
 \section{Regenerative Processes}
 
 Consider a stochastic process $\{X(t), t \geq 0\}$ with state space$\{0, 1, 2, ... \}$ having
@@ -350,7 +489,7 @@ state, we see
 	\begin{equation}
 		H_i(t) = \sum_j P_{ij} F_{ij}(t)
 	\end{equation}
-	
+
 and let $\mu_i$ denote its mean. That is:
 	\begin{equation}
 		 \mu_i = \exp[H_i(t)] = \int_{0}^{+\infty}x \,dH_i(x)
@@ -411,13 +550,13 @@ process.
 
 \begin{theorem}
 	If the semi-Markov process is irreducible and if $T_{ii}$ has a non-lattice\footnote{boh} distribution with finite mean, then
-	
+
 	$$P_j = \lim_{t \to \infty} \prob[Z(t)=j | Z(0)=k]$$
-	
+
 	Exists and independent of the initial state. Furthermore,
-	
+
 	$$P_j = \frac{\exp[\mbox{time in state i in a cycle}]}{\exp[\mbox{duration of the cycle}]} = \frac{\mu_i}{\mu_{ii}}$$
-	
+
 \end{theorem}
 Note that while $\mu_i$ is easy to compute, $\mu_{ii}$ is much more difficult.
 
@@ -433,7 +572,7 @@ R_i = \sum_k P_{ik} R_{ik} = \mbox{ average reward of a visit to state } i
 \end{equation}
 $\theta_{ij} = $ total reward of going from i to j for the first time following any path
 \begin{equation}
-\theta_{ij} = \begin{cases} 
+\theta_{ij} = \begin{cases}
 &r_{ij} \quad\mbox{with probability } P_{ij}\\
 &r_{ik}+\theta_{kj}  \quad\mbox{with probability } P_{ik}, k\neq j
 \end{cases}
@@ -470,6 +609,3 @@ This is a powerful way to evaluate systems performances, in order for this model
 	\item The system must be able to be modeled with a concept of \emph{state}.\footnote{That's good for us, every protocol is essentially a state machine}
 	\item The process have to be Markovian or at least semi-Markovian
 \end{enumerate}
-
-	
-
