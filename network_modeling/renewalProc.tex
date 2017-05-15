@@ -388,7 +388,10 @@ The theorem \ref{KRT1} can be also expressed in the following form:
 
 We note that the \textit{elementary renewal theorem} $\lim_{t \to \infty} \frac{1}{t} M(t) = \frac{1}{\mu}$ is a corollary of the \textit{key renewal theorem} \ref{KRT2}.
 
-\subsection{Limiting distribution of the excess life}
+\subsection{Application of the key renewal theorem}
+
+\paragraph{Limiting distribution of the excess life}
+
 We say that $\gamma_{t}=S_{N(t)+1}-t$ is the excess life at time t and that $A_z=Prob[\gamma_t>z]$ for a fixed $z>0$. We obtain that:
 \begin{equation*}
 	Prob[\gamma_t>z|X_1=x] = \begin{cases}
@@ -437,7 +440,7 @@ Finally we conclude that:
 	\\ & \exp[\beta_t] = \frac{\exp[X^2]}{\exp[X]}
 \end{align}
 
-\subsection{Asymptotic expansion of the renewal function}
+\paragraph{Asymptotic expansion of the renewal function}
 
 Given a distribution function of mean $\mu$ and variance $\sigma$ we want to prove that $\lim_{t \rightarrow \infty} (M(t) - \frac{t}{\mu}) = \frac{\sigma^2-\mu^2}{2\mu^2}$. For $t \rightarrow \infty$ we have what follows:
 \begin{align*}
@@ -452,6 +455,91 @@ Then we conclude that:
 \begin{equation}
 	\lim_{t \rightarrow \infty} (M(t) - \frac{t}{\mu}) = \frac{\sigma^2-\mu^2}{2\mu^2}
 \end{equation}
+
+\subsection{Delayed renewal processes}
+
+We assume that $\{X_k\}$ are independent positive random variables but only $X_2,X_3,...$ are identically distribuited. $X_1$ has a distribution function G that differs from the distribution function F of the other variables. We call such process \textit{delayed renewal process}. Given an ordinary renewal process we can obtain a \textit{delayed renewal process} if we fix the time origin $t=0$ a certain time after the start of the ordinary process. We put $S_0=0$ and $S_n=X_1+X_2+...+X_n$ and $N(t)$ equal to the number of renewal at time t. We must distinguish between the mean number of renewals in the delayed process $M_D(t)$ and the renewal function associated with F $M(t)$.
+\begin{align}
+	& M_D(t) = \exp[N(t)]
+	\\ & M(t) = \sum_{k=1}^{\infty}F_k(t)
+\end{align}
+Now we want to prove what follows:
+\begin{align*}
+	& \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
+	\\ & \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
+\end{align*}
+
+We have already seen that for a recurrent irreducible aperiodic Markov Chain the following statament is true.
+\begin{equation}
+	\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
+\end{equation}
+Given a reccurent state $j$ we call $N_j(t)$ the number of visits in j by the time t. The following statament is always true for any initial state $Y_0$.
+\begin{equation}
+	N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
+\end{equation}
+If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
+\begin{align*}
+	& \exp[N_j(n)-N_j(n-1)|Y_0=j]=M(n)-M(n-1)=P_{jj}^{(n)}
+	\\ & \Rightarrow \pi_j=\frac{1}{m_j}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M(n)-M(n-1)]=\frac{1}{\mu}
+\end{align*}
+So we have proved that:
+\begin{equation}
+	\lim_{n \to \infty} P_{jj}^{n}=\frac{1}{\mu}
+\end{equation}
+If $Y_0=i \neq j$, then $N_j(n)$ is a delayed renewal process. We keep $Y_0=i \neq j$ and we obtain what follows.
+\begin{align*}
+	& \exp[N_j(n)-N_j(n-1)|Y_0=i \neq j]=M_D(n)-M_D(n-1)=P_{jj}^{(n)}
+	\\ & \Rightarrow \frac{1}{\mu}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M_D(n)-M_D(n-1)]
+\end{align*}
+So we have proved that:
+\begin{equation}
+	\lim_{n \to \infty} [M_D(n)-M_D(n-1)]=\frac{1}{\mu} \Rightarrow \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
+\end{equation}
+Now we consider a periodic Markov Chain with period $d$. We define $N_j$ as before. The following statament is always true for any initial state $Y_0$.
+\begin{equation}
+	N_j(n \cdot d)-N_j((n-1)\cdot d)=1 \quad \Leftrightarrow \quad Y_{n \cdot d}=j
+\end{equation}
+For $Y_0=j$ we obtain what follows.
+\begin{align*}
+	& \exp[N_j(n \cdot d)-N_j((n-1)\cdot d)|Y_0=j]=M(n \cdot d)-M((n-1)\cdot d)=P_{jj}^{(n \cdot d)}
+	\\ & \Rightarrow d \cdot \pi_j=\frac{d}{m_j}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [ M(n \cdot d)- M( (n-1) \cdot d)]=\frac{d}{\mu}
+\end{align*}
+So we have proved that:
+\begin{equation}
+	\lim_{n \to \infty} P_{jj}^{n \cdot d}=\frac{d}{\mu}
+\end{equation}
+For $Y_0 \neq j$ we obtain what follows.
+\begin{align*}
+	& \exp[N_j(n \cdot d)-N_j((n-1) \cdot d)|Y_0=i \neq j]=M_D(n \cdot d)-M_D((n-1) \cdot d)=P_{jj}^{(n \cdot d)}
+	\\ & \Rightarrow \frac{d}{\mu}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]
+\end{align*}
+So we have proved that:
+\begin{equation}
+	\lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]=\frac{d}{\mu} \Rightarrow \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
+\end{equation}
+
+\subsection{Cumulative and related renewal process}
+We associate to every random varriable $X_i$ a second random variable $Y_i$. So $Y_i$ and $X_i$ are dependent but $(X_i,Y_i)$ and $(X_j,Y_j)$ are independent. We call F the distribution function of $X_i$, G the distribution function of $Y_i$, $\mu$ the mean of $X_i$ and $\nu$ the mean of $Y_i$.
+\paragraph{Queieng model}
+Suppose to ahve queieng system in which the arrivals follow a Poisson process. $X_i$ represents the the period between two consequent arrivals. $Y_i$ is a portion $X_i$ and represents the period in which the queieng system is busy. We call $p(t)$ the probability that t falls into some portion $Y_i$. We suppone that the first interval has length $X_1=x$ and we obtain what follows.
+\begin{align*}
+	p(t) & =Prob[t \in Y |X_1 = x]=\begin{cases}
+		Prob[Y_1>t|X_1=x] \quad & if \quad x \geq t
+		\\ p(t-x) \quad & if \quad x<t
+	\end{cases}
+	\\ & = \int_0^t p(t-x)dF(x)+\int_t^{\infty}Prob[Y_1>t|X_1=x]dF(x)
+\end{align*}
+Knowing that $\int_0^{t}Prob[Y_1>t|X_1=x]dF(x)=0$ we have that:
+\begin{align*}
+	p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{\infty}Prob[Y_1>t|X_1=x]dF(x)
+	\\ & = Prob[Y_1>t]+\int_0^t p(t-x)dF(x)
+\end{align*}
+We know that $p(t)= Prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. We can establish that $\int_0^{\infty}Prob[Y_1>t]dt=\exp[Y_1]=\nu$. Applying the renewal theorem we obtain what follows.
+\begin{align*}
+	\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
+\end{align*}
+
+
 
 
 \section{Regenerative Processes}
