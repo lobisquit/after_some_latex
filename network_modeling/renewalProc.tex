@@ -539,8 +539,104 @@ We know that $p(t)= Prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. We 
 	\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
 \end{align*}
 
+\section{Reward Processes}
 
-
+Consider a \textit{renewal process} $N(t)$ with interarrival time $X_n$ with distribution function $F$. We suppone that each time a renewal occurs we receive a \textit{reward}; we call $R_n$ the reward associated with the nth renewal event. We suppone that each reward $R_n$ depend on the length of the interval $X_n$. In this scenario the pairs $(X_n, R_n)$ are independent and identically distribuited. We define the total number of reward at time $t$ $R(t)$ as follows.
+\begin{equation}
+	R(t)=\sum_{n=1}^{N(t)}R_n
+\end{equation}
+Now we adopt the following definitions.
+\begin{align*}
+	\exp[X] & =\exp[X_n]
+	\\ \exp[R] & =\exp[R_n]
+\end{align*}
+\begin{theorem}
+  If $\exp[X]<\infty$ and $\exp[R]<\infty$ then with probability equal to 1 we have:
+	\begin{equation}
+		\lim_{t \to \infty}\frac{R(t)}{t}=\frac{\exp[R]}{\exp[X]}
+		\label{rewardtheorem1}
+	\end{equation}
+	\begin{equation}
+		\lim_{t \to \infty}\frac{\exp[R(t)]}{t}=\frac{\exp[R]}{\exp[X]}
+		\label{rewardtheorem2}
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	We want to prove \ref{rewardtheorem1}.
+	\begin{align*}
+		\frac{R(t)}{t}=\frac{\sum_{n=1}^{N(t)}R_n}{t}= \bigg( \frac{\sum_{n=1}^{N(t)}R_n}{N(t)}\bigg)\cdot\bigg(\frac{N(t)}{t}\bigg)
+	\end{align*}
+	By the strong law of large numbers we obtain that:
+	\begin{align*}
+		\lim_{t \to \infty}\frac{\sum_{n=1}^{N(t)}R_n}{N(t)}=\exp[R]
+	\end{align*}
+	By the renewal theorem we obtain that:
+	\begin{align*}
+		\lim_{t \to \infty}=\frac{1}{\exp[X]}
+	\end{align*}
+	Then \ref{rewardtheorem1} is proven.
+\end{proof}
+\begin{proof}
+	We want prove \ref{rewardtheorem2}. We note immediately that $N(t)+1$ is a stopping time both for $X_1,X_2,X_3,...$ and for $R_1,R_2,R_3,..$.
+	\begin{align*}
+		\sum_{n=1}^{N(t)}R_n \leq R(t) \leq \sum_{n=1}^{N(t)+1}R_n
+	\end{align*}
+	Then we have that:
+	\begin{align*}
+		& \exp\bigg[\sum_{n=1}^{N(t)}R_n\bigg] \leq \exp[R(t)] \leq \exp\bigg[\sum_{n=1}^{N(t)+1}R_n\bigg]
+		\\ & (M(t)+1)\exp[R]-\exp[R_{N(t)+1}] \leq \exp[R(t)] \leq (M(t)+1)\exp[R]
+	\end{align*}
+	Then, knowing that $\lim_{t \to \infty} \frac{(M(t)+1)\exp[R]}{t} = \frac {\exp[R]}{\exp[X]} $ we have that:
+	\begin{align*}
+		\frac {\exp[R]}{\exp[X]} - \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
+	\end{align*}
+	We put $A(t)=\exp[R_{N(t)+1}]$ and we have that:
+	\begin{align*}
+		& \exp[R_{N(t)+1}|X_1=x]=
+			\begin{cases}
+				\exp[R_1|X_1=x] \quad & if \quad x>t
+				\\ A(t-x) \quad & if \quad x \leq t
+			\end{cases}
+		\\ & \Rightarrow
+		\\ & A(t)=\int_{0}^{t}A(t-x)dF(x)+\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)
+	\end{align*}
+	We put $a(t)=\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)$ and we have that:
+	\begin{align*}
+		A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)=(M \ast a) (t)+a(t)
+	\end{align*}
+	Assuming that $R_n \geq 0$ we have that:
+	\begin{align*}
+		& \lim_{t \to \infty}a(t) = \lim_{t \to \infty}\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)=0
+		\\ & a(0)=\int_{0}^{+\infty}\exp[R_1|X_1=x]dF(x)=\exp[R_1]<+\infty
+	\end{align*}
+	\begin{align*}
+		|a(t)| & \leq \int_{t}^{+\infty}\exp[|R_1||X_1=x]dF(x)
+		\\ & \leq \int_{0}^{+\infty}\exp[|R_1||X_1=x]dF(x) = \exp[|R_1|]=\exp[R_1]<+\infty
+	\end{align*}
+	So we have come to the following results:
+	\begin{align*}
+		1) \quad & \forall \epsilon>0 \quad \exists T>0:\quad |a(t)|<\epsilon \quad \forall t>T
+		\\ 2) \quad & |a(t)| \leq \exp[|R_1|]<+\infty \quad \forall t
+	\end{align*}
+	Knowing that $A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)$ we have that:
+	\begin{align*}
+		|A(t)| & = |\int_{0}^{t}a(t-x)dM(x)+a(t)| \leq \int_{0}^{t}|a(t-x)|dM(x)+|a(t)|
+		\\ & \leq \int_{0}^{t-T}|a(t-x)|dM(x)+ \int_{t-T}^{t}|a(t-x)|dM(x) + a(t)
+		\\ & \leq \int_{0}^{t-T}\epsilon dM(x)+ \int_{t-T}^{t}\exp[|R_1|] dM(x) + a(t)
+	\end{align*}
+	\begin{align*}
+		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
+	\end{align*}
+	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that:
+	\begin{align*}
+		\lim_{t \to \infty} \frac{A(t)}{t} \leq \frac{\epsilon}{\exp[X]} \Rightarrow \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t}=0 \Rightarrow \frac {\exp[R]}{\exp[X]} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
+	\end{align*}
+	The we have that:
+	\begin{align*}
+		\lim_{t \to \infty} \frac{\exp[R(t)]}{t} = \frac{\exp[R]}{\exp[X]}
+	\end{align*}
+	Then \ref{rewardtheorem2} is proven.
+\end{proof}
 
 \section{Regenerative Processes}
 
