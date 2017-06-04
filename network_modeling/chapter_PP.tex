@@ -356,5 +356,61 @@ of ALOHA as the \textbf{STABILIZED ALOHA}.
   \end{proof}
 \end{lemma}
 \begin{lemma}[Kaplan's lemma]
+Suppose it $\exists i_0 \text{ s.t. } D_{i}>0 \forall i > i_0 , \; P_{i,j} = 0 \forall i,j \; 0 \le j \le i-k$
+Then the \gls{mc} is unstable (i.e. non-positive recurrent)
 
+-- INSERIRE GRAFICO
+
+We may want the \gls{mc} to be stable at least for an amount of time (i.e. network can fail once or twice a year).
+----NO PROOF
 \end{lemma}
+
+Slotted Aloha exploits at max $S \approx 37 \%$ of its maximum throughput, so we'd like to reduce the wasted time,
+so that we can increase $S \to 100\%$. To do so, we need
+\begin{enumerate}
+  \item Coordination
+  \item See if the channel is empty and determine what's happening (\textbf{CSMA})
+\end{enumerate}
+
+Let $\beta = \frac{\tau}{\frac{L}{C}} = \frac{\tau \cdot C}{L}$. If $\beta \ll 1 \; \implies \text{CSMA is effective}$. \\
+L.A.N are defined by $\beta \ll 1$.
+
+If user generates a packet in an empty time slot, he will try to send it in the next slot. If the packet is generated while the channel is in usa, the packet will be backlogged.
+state transitions take $\begin{cases}
+  \beta & \text{if empty slot} \\
+  \beta + 1 & \text{if there's a transmission}
+\end{cases}$
+
+\begin{equation}\begin{split}
+  \prob[\text{empty slot }|n] &= e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \\
+  \exp[\text{slot duration}] &= \beta + 1 - e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \\
+  D_n &= \exp[\text{arrivals - departures }|n ]= \lambda \cdot [\beta + 1 - e^{-\lambda \cdot \beta} \cdot (1-q_r)^n ]\\
+  P_{succ} &= \lambda \cdot \beta \cdot e^{-\lambda \cdot \beta} \cdot (1-q_r)^n + e^{-\lambda \cdot \beta} \cdot (1-q_r)^{n-1} \cdot n \cdot q_r \\
+  &\approx (\lambda \cdot \beta + n \cdot q_r) \cdot e^{-(\lambda \cdot \beta + n \cdot q_r)} \quad \text{ if } n \cdot q_r \ll 1 \\
+  &= g(n) \cdot e^{g(n)}
+\end{split}\end{equation}
+
+---- Grafico comparazione aloha con il nuovo sistema
+
+If two transmissions occours at the same tume, but the nodes transmitting are far
+ enough, they won't hear each other and packets will collide.
+ \begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c|}
+\textbf{Type} & \textbf{Duration} & \textbf{Probability}                                         \\ \hline
+IDLE          & $\beta$           & $e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \approx e^{-g(n)}$ \\
+SUCCESS       & $1+\beta$         & $\approx g(n) \cdot e^{-g(n)}$                               \\
+COLLISION     & $2 \beta$         & $1-(1+g(n))\cdot e^{-g(n)}$
+\end{tabular}
+\caption{Events occouring in the CSMA channel}
+\label{TAB:tx_prob}
+\end{table}
+$D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{g(n) \cdot e^{-g(n)}}{\beta + 1 - e^{-g(n)}}$\\
+We know that instability will occour eventually, but the time for it to happen is really long.
+
+\subsection{Recurrent \gls{mc} behaviour}
+\begin{figure}
+  \input{img/recurr.tex}
+  \caption{}
+  \label{}
+\end{figure}
