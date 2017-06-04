@@ -26,7 +26,7 @@
 % tikz figures
 \usepackage[usenames, dvipsnames, table, tikz]{xcolor}
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows}
+\usetikzlibrary{automata,arrows,positioning,calc, shapes}
 
 % image path
 \graphicspath{ {./img/} }
@@ -39,6 +39,7 @@
 % support for glossary and acronyms
 \usepackage[acronym]{glossaries}
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+\newacronym{rtt}{RTT}{Round Trip Time}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -123,7 +124,7 @@
 		\vspace{0.5cm}
 		\emph{written with love by} \\
 		\vspace{0.5cm}
-		{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli}
+		{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Cristina Gava}
 	\end{center}
 
 	\vfill
@@ -140,5 +141,6 @@
 
 \input{introduction.tex}
 \input{chapter_2.tex}
+\input{gbn_analysis.tex}
 
 \end{document}

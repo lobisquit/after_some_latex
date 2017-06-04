@@ -1,0 +1,193 @@
+\chapter{Go Back N protocol with limited retransmissions}
+
+Suppose a system governed by the Go Back N protocol.
+In this system the \gls{rtt} take m slot and when a received packet is wrong, it's retransmitted, until the $N^{th}$ failure, after which the packet is discarded.
+
+$x(t)$ is the random variable indicating the state of the system. The possible values of $x(t)$ can be:
+
+$$ x(t) = G \text{ \qquad if success at t} $$
+$$ x(t) = B_j \text{ \qquad if $j_{th}$ failure at t} $$
+
+Where we count a success whenether we enter in state $G$.
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B_1)[right of=G]				{$B_1$};
+			\node[state]		(B_2)[right of=B_1]			{$B_2$};
+			\node[state]		(dots)[right of=B_2]		{...};
+			\node[state]		(B_N)[right of=dots]		{$B_N$};
+			\path
+			(G) 		edge[loop left]		 			node{$p_{00}s_1s_2$}			(G)
+							edge[bend left]		 			node{$p_{01}s_2$}		 			(B_1)
+			(B_1)		edge[bend left]					node{$p_{10}(m)s_1s_2^m$}	(G)
+							edge[bend left, below]	node{$p_{11}(m)s_2^m$}		(B_2)
+			(B_2)		edge[bend left]																		(G)
+							edge[bend left, below]	node{$p_{11}(m)s_2^m$} 		(dots)
+			(dots)	edge[bend left, below]	node{$p_{11}(m)s_2^m$} 		(B_N)
+							edge[bend left]																		(G)
+			(B_N)		edge[bend left]																		(G)
+			(B_N)		edge[bend right, above]	node{$p_{11}(m)s_2^m$}		(B_1);
+		\end{tikzpicture}
+	\end{center}
+	\caption{Markov Chain of the Go Back N protocol with limited retransmission}
+	\label{fig:gbn_mc_complete}
+\end{figure}
+
+We spend 1 slot in $G$ and m slots in $B_j$ since we need an \gls{rtt} to recognize an error.
+
+For the sake of simplicity we rename the transition probability in a simpler way:
+$$ \beta_{00} = p_{00}s_1s_2 \qquad \beta_{01} = p_{01}s_2$$
+$$ \beta_{10} = p_{10}(m)s_1s_2^m \qquad \beta_{11} = p_{11}(m)s_2^m$$
+
+All these $\beta s$ seems similar, we can simplify a bit the system assuming the following statement:
+
+\begin{enumerate}
+	\item metrics on different transitions are independent;
+	\item metrics are additive;
+	\item the transform of the distribution of sum is the product of the transforms.
+\end{enumerate}
+
+In the following part there are some example to show how the semplification work.
+
+Given a three-state system $x(t) = i,j,k$, we want to reduce it to a two-state system.
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(i)								{$i$};
+		\node[state]		(j)[right of=i]		{$j$};
+		\node[state]		(k)[right of=j]		{$k$};
+		\path
+		(i) 		edge[bend left]		node{$p_{ij}\frac{\Psi_{ij}(s)}{p_{ij}}$}			(j)
+		(j) 		edge[bend left]		node{$p_{jk}\frac{\Psi_{jk}(s)}{p_{jk}}$}			(k);
+
+	\end{tikzpicture}
+\end{center}
+
+$$ \Psi_{ij}(s) = \sum_{A \in \epsilon(i,j)} P[A] \cdot \underline{S}[A] \qquad \Psi_{jk}(s) = \sum_{B \in \epsilon(j,k)} P[B] \cdot \underline{S}[B]$$
+
+Using the assumption made before, we can reduce the above system to a two-state system with the product of the transition probabilities $\Psi_{ij}(s)$ and $\Psi_{jk}(s)$ as transition probability.
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(i)								{$i$};
+		\node[state]		(k)[right of=i]		{$k$};
+		\path
+		(i) 		edge[bend left]		node{$\Psi_{ik}(s)$}			(k);
+
+	\end{tikzpicture}
+\end{center}
+
+$$ \Psi_{ik}(s) = \Psi_{ij}(s) \cdot \Psi_{jk}(s) = \sum_{A \in \epsilon(i,j), B \in \epsilon(j.k)} P[A] \cdot P[B] \cdot \underline{S}[A] \cdot \underline{S}[A]$$
+
+What if we are in the following situation?
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(i)								{$i$};
+		\node[state]		(j)[right of=i]		{$j$};
+		\node[state]		(k)[above right of=j]		{$k$};
+		\node[state]		(l)[below right of=j]		{$l$};
+		\path
+		(i) 		edge		node{$\Psi_{ij}$}			(j)
+		(j) 		edge[left]		node{$\Psi_{jk}$}			(k)
+						edge[left]		node{$\Psi_{jl}$}			(l);
+
+	\end{tikzpicture}
+\end{center}
+
+In this case we can substitute state $j$ with 2 different paths starting from $i$ and ending in $k$ and $l$, considering as transition probability the product of the initial transition probabilities, as is shown in the following figure.
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(i)								{$i$};
+		\node[state]		(k)[above right of=i]		{$k$};
+		\node[state]		(l)[below right of=i]		{$l$};
+		\path
+		(i) 		edge[left]		node{$\Psi_{ij}\Psi_{jk}$}			(k)
+						edge[left]		node{$\Psi_{ij}\Psi_{jl}$}			(l);
+
+	\end{tikzpicture}
+\end{center}
+
+With this rule we can remove states $B_2, B_3, \cdots, B_{N-1}$ from the system represented in \autoref{fig:gbn_mc_complete}, and reduce it to the system represented in \autoref{fig:gbn_mc_3state}.
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B_1)[right of=G]				{$B_1$};
+			\node[state]		(B_N)[right of=B_1]		{$B_N$};
+			\path
+			(G) 		edge[loop left]		 			node{$\beta_{00}$}				(G)
+							edge[bend left]		 			node{$\beta_{01}$}		 		(B_1)
+			(B_1)		edge[bend left, above]	node{$\beta_{BG}$}				(G)
+							edge[bend left]					node{$\beta_{11}^{N-1}$}	(B_N)
+			(B_N)		edge[bend left]					node{$\beta_{10}$}				(G)
+							edge[bend left, above]	node{$\beta_{11}$}				(B_1);
+
+		\end{tikzpicture}
+	\end{center}
+	\caption{\autoref{fig:gbn_mc_complete} reduced to 3-state system}
+	\label{fig:gbn_mc_3state}
+\end{figure}
+
+Where $\beta_{BG}$ takes in account all the possible paths from $B_1$ to $G$ and is define as:
+
+\begin{equation}
+	\beta_{BG} = \beta_{10} + \beta_{11}\beta_{10} + \beta_{11}^2\beta_{10} + \cdots + \beta_{11}^{N-2}\beta_{10} = \beta_{10}\sum_{k=0}^{N-2} \beta_{11}^K = \beta_{10}\frac{1-\beta_{11}^{N-1}}{1-\beta_{11}}
+\end{equation}
+
+What about removing $B_N$?
+To reduce \autoref{fig:gbn_mc_3state} to a 2-state system we need one more property.
+
+In the case that we have 2 transitions towards the same state, we can sum the transition probabilities as in the following example.
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(i)								{$i$};
+		\node[state]		(j)[right of=i]		{$j$};
+		\node		(ar)[right of=j]		{$\Rightarrow$};
+		\node[state]		(i1)[right of=ar]		{$i$};
+		\node[state]		(j1)[right of=i1]		{$j$};
+		\path
+		(i) 		edge[bend left]		node{$\Psi_{ij}^{(1)}$}			(j)
+						edge[bend right, below]		node{$\Psi_{ij}^{(2)}$}			(j)
+		(i1)		edge							node{$\Psi_{ij}^{(1)} + \Psi_{ij}^{(2)}$} (j1);
+
+	\end{tikzpicture}
+\end{center}
+
+Knowing the previous property, we can remove $B_N$ from \autoref{fig:gbn_mc_3state}.
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B_1)[right of=G]				{$B_1$};
+			\path
+			(G) 		edge[loop left]		 			node{$\beta_{00}$}				(G)
+							edge[bend left]		 			node{$\beta_{01}$}		 		(B_1)
+			(B_1)		edge[bend left]	node{$\beta_{BG} + \beta_{10}\beta_{11}^{N-1}$}				(G)
+							edge[loop right]					node{$\beta_{11}^{N}$}	(B_1);
+
+		\end{tikzpicture}
+	\end{center}
+	\caption{\autoref{fig:gbn_mc_complete} reduced to 2-state system removing the state $B_N$.}
+	\label{fig:gbn_mc_2state}
+\end{figure}
+
+In \autoref{fig:gbn_mc_2state} we can rearrange the probability of going from $B_1$ to $G$ in the following way:
+
+\begin{equation}
+	\beta_{BG} + \beta_{10}\beta_{11}^{N-1} = \beta_{10}\sum_{K=0}^{N-1} \beta_{11}^K = \beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}}
+\end{equation}
