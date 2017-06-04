@@ -248,10 +248,113 @@ Assumptions:
   \item[4.] Immediate $ \{ 0,1, e\}$ feedback
   \item[5.] Retransmission until success (backlogged)
   \item[6a.] No buffering $\rightarrow$ upper bound to the performance of a realistic system
-  \item[6b] Infinite set of nodes $\rightarrow$ lower bound
+  \item[6b.] Infinite set of nodes $\rightarrow$ lower bound
 \end{itemize}
 \subsection{ALOHA}
 Slot time = 1\\
 G = average $\#$ of attempts per slot\\
 S = average $\#$ of successes per slot \\
 $\lambda$ = average rate of arrivals (new packet per slot)
+
+The success probability is $P_{succ} = e^{-T \cdot G} = e^{-2 \cdot G}$, as the vulnerability interval is T=2.
+Now suppose to consider the interval $d\tau$, we have
+\begin{equation}\begin{split}
+  \text{Are stationary processes:} \begin{cases}
+    \prob[\text{one TX starts in $d\tau$}] &\approx G  \cdot d\tau\\
+    \exp{\text{\# of successes in $d\tau$}} &= G \cdot e^{-2 \cdot G} d\tau \\
+  \end{cases}
+  \exp{\text{\# of successes in $[0;t]$}} &= \int\limits_0^t G \cdot e^{-2 \cdot G} = t \cdot G \cdot e^{-2 \cdot G}\\
+  \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G} =  G \cdot e^{-2 \cdot G}\\
+  \implies S_{max} = \frac{1}{2e}& \approx 18.7\% \quad G_{max} = \frac{1}{2}
+\end{split}\end{equation}
+
+If the user transmits only at the end of the (universal) time: \textbf{Slotted ALOHA}.
+With S.A. the vulnerability interval becomes T=1. $\implies S_{max})=\frac{1}{e} \approx 37\% \quad G_{max} = 1$.
+
+\subsubsection{Suppose m users}
+Let the state of the system be n, which considers the number of backlogged users.
+The traffic per user is $\frac{\lambda}{m}$ and let the probability that a backlogged
+user transmits in a slot be $q_r$. Suppose the retransmission probability density function be a geometric,
+
+then a non-backlogged user transmits with probability $q_a = 1-e^{-\frac{\lambda}{m}}$.
+
+As the arrival are poissonian and the retransmission are memoryless, we can study this case with \gls{mc}.
+
+\begin{equation}\begin{split}
+  Q_a(i,n) &= \prob[\text{i new arrivals per TX | state n}] = \binom{m-n}{i} \cdot q_a^i \cdot (1-q_a)^{m-n-i} \\
+  Q_r(i,n) &= \prob[\text{i ReTX | state n}] = \binom{n}{i} \cdot q_r^i \cdot (1-q_r)^{n-i} \\
+\end{split}\end{equation}
+Now we want to define the transition probability $P_{n,n+1}$, and the calculations provide the following cases:
+
+\begin{equation}
+  P_{n,n+1} = \begin{cases}
+    Q_a(i,n) & 2 \le i \le m-n \\
+    Q_a(1,n) \cdot [1-Q_r(0,n)] & i=1 \quad \text{1 arrival, no departures}\\
+    Q_a(0,n) \cdot [1-Q_r(1,n)] + Q_a(1,n)\cdot Q_r(0,n) & i=0 \quad \text{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
+    Q_a(0,n)\cdot Q_r(1,n) & i = -1 \quad \text{1 departure, no arrivals}\\
+    0 & i < -1 \quad \text{no more than one departure}
+  \end{cases}
+\end{equation}
+We can conclude that the resulting matrix is an almost-upper-triangular.
+
+\subsubsection{Drift Analysis}
+\begin{equation}\begin{split}
+  D_n &= \exp[\text{change in state} | n] = \exp[X_{t+1} - X_t | X_t = n] \\
+  &= \exp[\text{arrivals - departures} | n ] = (m-n) \cdot q_a - P_{succ} \\
+  P_{succ}&= \prob[\text{exactly 1 TX}|n] = Q_a(1,n) \cdot Q_r(0,n) + Q_a(0,n) \cdot Q_r(1,n) \\
+  &= (m-n)\cdot(1-q_a)^{n-m-1} \cdot q_a \cdot(1-q_r)^n + (1-q_a)^{m-n}\cdot n \cdot q_r \cdot (1-q_r)^(n-1) \\
+  &= (1-q_1)^{m-n} \cdot (1-q_r)^n \cdot [\frac{m-n}{1-qa}\cdot q_a + \frac{n \cdot q_r}{1-q_r}]
+\end{split}\end{equation}
+we can then approximate $(1+x)^n \approx e^{-n \cdot x}$ if $x \ll 1$
+\begin{equation}
+  \implies P_{succ} \approx e^{-(m-n)\cdot q_a} \cdot e^{-n\cdot q_r} \cdot \overbrace{[(m-n) \cdot q_a + n \cdot q_r]}^{G(n)}
+  \implies P_{succ} \approx e^{-G(n)}
+\end{equation}
+
+We found out that the success probability depends on the state, so we would like to know how the states evolve in time.
+The process can be approximated as a Poisson Process and the description is given by $D_n = (m-n)\cdot q_a - G(n) \cdot e^{-G(n)}$
+with G(n) as given before.
+
+------ INSERIRE GRAFICO Dn
+
+When $D_n>0$ the system tends to reduce the backlogging, wherease if $D_n<0$ the backlogging
+increases and the system becomes unstable.
+
+We would like to improve the system, such that the probability of the system to become
+unstable, is small and the delay to be as low as possible; to do so we can
+\begin{enumerate}
+  \item[increase $q_r$] The delay gets smaller, but the stability get worse
+  \item[decrease $q_r$] the delay increases, but the system is more stable
+\end{enumerate}
+
+Considering the limit, when $m \to +\infty$, $q_a \to 0 \implies q_a \approx \frac{\lambda}{m}$
+As $G=\lambda + n \cdot q_r$ we'd like to maximize the throughput and the success probability.
+$G_{max}=1 = \lambda + n  \cdot q_r \implies q_r = \frac{1-\lambda}{n} \implies q_r = q_r(n)$
+
+We don't know n, so we need to extimate $q_r(n)$ to best fit. We will call the maximized G version
+of ALOHA as the \textbf{STABILIZED ALOHA}.
+
+\begin{lemma}[Pakes' lemma (B.G. p.264)]
+  Suppose $D_i < +\infty \forall i$ and that $\exists \delta > 0 , i_0$ index s.t.
+  $D_i \le - \delta \forall i > i_0$ ($D_i$ is bounded away from zero)\\
+  Then the  \gls{mc} is \textbf{stable} (or positive recurrent).
+  \begin{proof}
+    Let $\beta = \max_{i \le i_0} D_i$ . Then $\forall i$:
+    \begin{equation}\begin{split}
+      \exp[X_n | X_0 = i] -i &= \sum\limits_{k=1}^n \exp[X_k - X_{k-1}|X_0 = i] \\
+      &= \sum\limits_{k=1}^n \sum\limits_{j=0}^{+\infty} \exp[X_k - X_{k-1}|X_{k-1} = j , X_0 = i ] \cdot P_{i,j}^{(k-1)}\\
+      & \le \sum\limits_{k=1}^{n} \left[\beta \cdot \sum\limits_{j=0}^{+\infty} P_{i,j}^{(k-1)} - \delta \cdot (1- \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)}\right]\\
+       &= (\beta + \delta) \cdot \sum\limits_{k=1}^n \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)} - n \cdot \delta \\
+       \implies & 0 \le \exp[X_n | X_0 = i] \le (\beta + \delta) \cdot \sum\limits_{k=1}^n \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)} - n \cdot \delta +i\\
+       & \quad \text{as it's valid $\forall n , i$ we can say that} \\
+       \exp[X_n | X_0 = i] &= n \cdot \left[(\beta + \delta) \cdot \sum\limits_{j=0}^{i_0} \frac{1}{n} \cdot \sum\limits_{k=1}^{n} P_{i,j}^{(k-1)} - \delta \right] +i\\
+    \text{As $n \to +\infty$ } & \text{ we can write}\\
+    0 \le \lim_{n \to +\infty} &(\beta + \delta) \cdot\sum\limits_{j=0}^{i_0} \underbrace {\frac{1}{n} \cdot \sum\limits_{k=1}^{n} P_{i,j}^{(k-1)}}_{\pi_j} - \delta + \underbrace{\frac{i}{n}}_{\to 0}\\
+    0 \le &\underbrace{(\beta + \delta)}_{>0} \cdot \sum\limits_{j=0}^{i_0} \pi_j - \delta \quad \text{\textbf{CONTRADDICTION }if } \pi_j = 0 \forall j \\
+    \implies & \text{it must be positive recurrent}
+    \end{split}\end{equation}
+  \end{proof}
+\end{lemma}
+\begin{lemma}[Kaplan's lemma]
+
+\end{lemma}
