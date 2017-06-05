@@ -521,7 +521,7 @@ So we have proved that:
 \subsection{Cumulative and related renewal process}
 We associate to every random varriable $X_i$ a second random variable $Y_i$. So $Y_i$ and $X_i$ are dependent but $(X_i,Y_i)$ and $(X_j,Y_j)$ are independent. We call F the distribution function of $X_i$, G the distribution function of $Y_i$, $\mu$ the mean of $X_i$ and $\nu$ the mean of $Y_i$.
 \paragraph{Queueieng model}
-Suppose to ahve queieng system in which the arrivals follow a Poisson process. $X_i$ represents the the period between two consequent arrivals. $Y_i$ is a portion $X_i$ and represents the period in which the queieng system is busy. We call $p(t)$ the probability that t falls into some portion $Y_i$. We suppone that the first interval has length $X_1=x$ and we obtain what follows.
+Suppose to have queueing system in which the arrivals follow a Poisson process. $X_i$ represents the the period between two consequent arrivals. $Y_i$ is a portion $X_i$ and represents the period in which the queieng system is busy. We call $p(t)$ the probability that t falls into some portion $Y_i$. We suppone that the first interval has length $X_1=x$ and we obtain what follows.
 \begin{align*}
 	p(t) & =Prob[t \in Y |X_1 = x]=\begin{cases}
 		Prob[Y_1>t|X_1=x] \quad & if \quad x \geq t
@@ -550,7 +550,7 @@ Now we adopt the following definitions.
 	\exp[X] & =\exp[X_n]
 	\\ \exp[R] & =\exp[R_n]
 \end{align*}
-\begin{theorem}
+\begin{theorem}[Th. 3.6 (Ross)]
   If $\exp[X]<\infty$ and $\exp[R]<\infty$ then with probability equal to 1 we have:
 	\begin{equation}
 		\lim_{t \to \infty}\frac{R(t)}{t}=\frac{\exp[R]}{\exp[X]}
