@@ -18,9 +18,9 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 	\end{equation}
 	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
 \end{enumerate}
-\begin{theorem}[Exponential times in Poisson arrivals]
+
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
-\end{theorem}
+
 \begin{tikzpicture}
 	\begin{axis}[
 		y = 1.5cm,
@@ -32,7 +32,7 @@ Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
 	\end{axis}
 \end{tikzpicture}
 
-\begin{proof}
+
 \begin{equation}
 	\prob[S_0 > t] = \prob[0 ~arrivals ~in ~[0,t]] = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t}
 \end{equation}
@@ -45,7 +45,7 @@ In general,
 \begin{equation}
 	\prob[S_n > t | S_i = s_i, ~i=0,\cdots,n-1] = e^{-\lambda t}
 \end{equation}
-\end{proof}
+
 %LAW OF RARE EVENTS: rare events can be aproximated with a poisson process? (non ho ben capito)
 \section{Properties}
 \begin{itemize}
@@ -263,10 +263,6 @@ Now suppose to consider the interval $d\tau$, we have
     \prob[\text{one TX starts in $d\tau$}] &\approx G  \cdot d\tau\\
     \exp{\text{\# of successes in $d\tau$}} &= G \cdot e^{-2 \cdot G} d\tau \\
   \end{cases}
-  \end{split}
- \end{equation}
- \begin{equation}
-	\begin{split}
   \exp{\text{\# of successes in $[0;t]$}} &= \int\limits_0^t G \cdot e^{-2 \cdot G} = t \cdot G \cdot e^{-2 \cdot G}\\
   \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G} =  G \cdot e^{-2 \cdot G}\\
   \implies S_{max} = \frac{1}{2e}& \approx 18.7\% \quad G_{max} = \frac{1}{2}
@@ -294,7 +290,9 @@ Now we want to define the transition probability $P_{n,n+1}$, and the calculatio
   P_{n,n+1} = \begin{cases}
     Q_a(i,n) & 2 \le i \le m-n \\
     Q_a(1,n) \cdot [1-Q_r(0,n)] & i=1 \quad \text{1 arrival, no departures}\\
-    Q_a(0,n) \cdot [1-Q_r(1,n)] + Q_a(1,n)\cdot Q_r(0,n) & i=0 \quad \text{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
+    \begin{aligned}
+    & Q_a(0,n) \cdot [1-Q_r(1,n)] + \\ & Q_a(1,n)\cdot Q_r(0,n)
+    \end{aligned}& i=0 \quad \parbox[t]{0.6\textwidth}{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
     Q_a(0,n)\cdot Q_r(1,n) & i = -1 \quad \text{1 departure, no arrivals}\\
     0 & i < -1 \quad \text{no more than one departure}
   \end{cases}
@@ -462,10 +460,10 @@ We can now evaluate separately the case where n is even and the one where it's o
   n &= 2 \cdot k \\
   &\sum\limits_{i=0}^{2k}Q^i \cdot R_1 \cdot A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1} \cdot R_1 \cdot A \\
   &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right) \cdot R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right) \cdot (Q \cdot R_1 \cdot A)\\
-  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
+  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
   n &= 2 \cdot k + 1 \\
   &\sum\limits_{i=0}^{2k+1}Q^i \cdot R_1 \cdot A^{2k+1-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1\cdot A + \sum\limits_{j=0}^{k}Q^{2j+1} \cdot R_1 \\
-  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
+  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
   \\
   &\text{the two limits are the same if: }\\
   & [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A) = [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 )\\
