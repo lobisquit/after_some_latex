@@ -414,3 +414,51 @@ We know that instability will occour eventually, but the time for it to happen i
   \caption{}
   \label{}
 \end{figure}
+
+\begin{equation}\begin{split}
+  P&=\begin{pmatrix}
+      Q & R_1 & R_2 \\
+      0 & A   & 0 \\
+      0 & 0   & 1 \\
+  \end{pmatrix}\\
+  \text{where, }&\forall n\ge 0
+  A^{2n+1}&=\begin{pmatrix}
+      0 & 1 \\
+      1 & 0 \\
+  \end{pmatrix}\\
+  A^{2n}&=\begin{pmatrix}
+      1 & 0 \\
+      0 & 1 \\
+  \end{pmatrix}\\
+\end{split}\end{equation}
+
+We than have that
+
+\begin{equation}\begin{split}
+  P^2&=\begin{pmatrix}
+      Q^2 & Q \cdot R_1 + R_1 \cdot A & Q \cdot R_2  + R_2\\
+      0 & A^2   & 0 \\
+      0 & 0   & 1 \\
+  \end{pmatrix}
+  \quad
+  P^{3} = P \cdot P^2 &=\begin{pmatrix}
+      Q^3 & Q^2 \cdot Q \cdot R_1\cdot A + R_1 \cdot A^2 & Q^2 \cdot R_2  + Q \cdot R_2 +R_2\\
+      0 & A^3=A   & 0 \\
+      0 & 0   & 1 \\
+  \end{pmatrix}\\
+  P^{n+1}&=\begin{pmatrix}
+      Q^{n+1} & \sum\limits_{i=0}^n Q^i \cdot R_1 \cdot A^{n-i} & \sum\limits_{i=0}^n Q^i \cdot R_2\\
+      0 & A^{n+1}   & 0 \\
+      0 & 0   & 1 \\
+  \end{pmatrix}\\
+\end{split}\end{equation}
+We can now evaluate separately the case where n is even and the one where it's odd
+
+\begin{equation}\begin{split}
+  n &= 2 \cdot k \\
+  &\sum\limits_{i=0}^{2k}Q^i \cdot R_1 \cdot A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1} \cdot R_1 \cdot A \\
+  &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right) \cdot R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right) \cdot (Q \cdot R_1 \cdot A)\\
+  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)
+  \\
+  n &= 2 \cdot k + 1 \\
+\end{split}\end{equation}
