@@ -458,7 +458,31 @@ We can now evaluate separately the case where n is even and the one where it's o
   n &= 2 \cdot k \\
   &\sum\limits_{i=0}^{2k}Q^i \cdot R_1 \cdot A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1} \cdot R_1 \cdot A \\
   &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right) \cdot R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right) \cdot (Q \cdot R_1 \cdot A)\\
-  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)
+  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
   \\
   n &= 2 \cdot k + 1 \\
+  &\sum\limits_{i=0}^{2k+1}Q^i \cdot R_1 \cdot A^{2k+1-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1\cdot A + \sum\limits_{j=0}^{k}Q^{2j+1} \cdot R_1 \\
+  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
+  &\text{the two limits are the same if: }\\
+  & [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A) = [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 )\\
+  \implies & det(1-Q^2)\neq 0\\
+  & [I-Q ]\cdot R_1 = [I-Q]\cdot R_1 \cdot \A \quad \implies R_1 = R_1 \cdot A
+
+\end{split}\end{equation}
+
+
+\subsection{PASTA property (Poisson Arrivals See Time Averages)}
+\begin{equation}
+  \prob[N(t)=n|A(t,t+\delta)] = \prob[N(t)=n]
+\end{equation}
+At time t I have n users, so N(t)=n depends on past, wherease $A(t,t+\delta)$ depends on the future
+
+\subsubsection{Under mild conditions}
+\begin{enumerate}
+  \item the system is stable
+  \item the system state changes in unit increments
+\end{enumerate}
+If the chain is staboe, the state n will be visited an infinite numer of times. In particular, the arrivals and the departures can be written as:
+\begin{equation}\begin{split}
+
 \end{split}\end{equation}
