@@ -285,14 +285,13 @@ As the arrival are poissonian and the retransmission are memoryless, we can stud
   Q_r(i,n) &= \prob[\text{i ReTX | state n}] = \binom{n}{i} \cdot q_r^i \cdot (1-q_r)^{n-i} \\
 \end{split}\end{equation}
 Now we want to define the transition probability $P_{n,n+1}$, and the calculations provide the following cases:
-
 \begin{equation}
   P_{n,n+1} = \begin{cases}
     Q_a(i,n) & 2 \le i \le m-n \\
     Q_a(1,n) \cdot [1-Q_r(0,n)] & i=1 \quad \text{1 arrival, no departures}\\
     \begin{aligned}
     & Q_a(0,n) \cdot [1-Q_r(1,n)] + \\ & Q_a(1,n)\cdot Q_r(0,n)
-    \end{aligned}& i=0 \quad \parbox[t]{0.6\textwidth}{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
+    \end{aligned}& i=0 \quad \parbox[t]{0.5\textwidth}{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
     Q_a(0,n)\cdot Q_r(1,n) & i = -1 \quad \text{1 departure, no arrivals}\\
     0 & i < -1 \quad \text{no more than one departure}
   \end{cases}
@@ -324,10 +323,10 @@ increases and the system becomes unstable.
 
 We would like to improve the system, such that the probability of the system to become
 unstable, is small and the delay to be as low as possible; to do so we can
-\begin{enumerate}
+\begin{description}
   \item[increase $q_r$] The delay gets smaller, but the stability get worse
   \item[decrease $q_r$] the delay increases, but the system is more stable
-\end{enumerate}
+\end{description}
 
 Considering the limit, when $m \to +\infty$, $q_a \to 0 \implies q_a \approx \frac{\lambda}{m}$
 As $G=\lambda + n \cdot q_r$ we'd like to maximize the throughput and the success probability.
