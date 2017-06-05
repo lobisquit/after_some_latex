@@ -316,7 +316,11 @@ We found out that the success probability depends on the state, so we would like
 The process can be approximated as a Poisson Process and the description is given by $D_n = (m-n)\cdot q_a - G(n) \cdot e^{-G(n)}$
 with G(n) as given before.
 
------- INSERIRE GRAFICO Dn
+\begin{figure}
+  \input{img/driftAnalisis.tex}
+  \caption{Between \textbf{A} and \textbf{B} and for any G(n) bigger than \textbf{G(m)} $D_n <0$. $D_n>0$ in the other regions of the plane}
+  \label{fig:drift}
+\end{figure}
 
 When $D_n>0$ the system tends to reduce the backlogging, wherease if $D_n<0$ the backlogging
 increases and the system becomes unstable.
