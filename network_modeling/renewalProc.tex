@@ -1,51 +1,69 @@
 \chapter{Renewal Processes (Cap 7)}
-The main idea of a renewal process is a cyclic recurrence of a random fenomena presenting always the same statistics. The classical example is the lifetime of a light bulb: everytime a light blub dies the lifetime of the new one have the same statistics as the first one.
+The main idea of a renewal process is a cyclic recurrence of a random fenomena presenting always the same statistics.
+The classical example is the lifetime of a light bulb: everytime a blub dies the new one experience the same conditions as the previous one.
 
-A renewal process is a sequence of i.i.d. $r.v._s$ with the same statistical properties.
+\begin{definition}[Renewal Process]
+	More formally, a renewal process is a sequence of i.i.d. r.v. $X_i$ that satisfy these constraints:
+
+	\begin{itemize}
+		\item $ \forall i, F_i(x) = P[X_i < x] = F(x) \rightarrow $ lifetimes are statistically equivalent
+		\item $ F(0) = 0 \rightarrow $ renewals are not simultanous
+		\item $ F(+\infty) = 0 \rightarrow $ renewals repeat forever
+	\end{itemize}
+
+\end{definition}
+
+Each $X_i$ can be reported as a progress on a plot... (description of the graph here)
+
 \#TODO Graph
 
-where $N(t) = $ number of events in $(0;t] = max\{n : W_n \le t \}$ and $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal.
-By knowing $N(t)$ or $W_n$ or $X_i$ allows to fully characterize the process.
+where
+\begin{itemize}
+	\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
+	\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
+\end{itemize}
 
-\section{Assumptions}
-$X_i$ is i.i.d. sequence of $r.v._s \sim F(x) = \prob[X_i \le x] \forall i \text{ with } F(\infty)=0$
-(so the process always end and restart) and $F(0)=0$. Those two conditions implies that the renewal happen in a finite time and not at the same time.
+Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
 
-We want to determine
-$$\begin{cases}
-	\exp[N(t)]=M(t) & \text{the renewal function} \\
-	\prob[W_n \le x] = F_n(x) & \text{where } F_n(x) \text{ is the n-th convolution of $f$ by itself}
-\end{cases}$$
+\begin{remark}[Markov chain as renewal processes]
+	Given this definition, it can be noted that in a \gls{mc} each arrival at a given states can be considered as a renewal instant.
 
-\begin{equation}\begin{split} \noindent
-	N(t)\ge k \quad &\iff W_k \le t\\
-	\prob[W_k \le t] &= \prob[N(t) \ge k] = F_k(t) \\
-	\text{In particular} \\
-	\prob[N(t)=k] = F_k(t)-F_{k+1}(t)& \\
-	M(t) = \exp[N(t)]=\sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] &\implies M(t)=\sum\limits_{k=1}^{+\infty}F_k(t)
-\end{split}\end{equation}
+	For the Markov property the future evolution depends only on the current state, so behaviour of the process through a given node is the same after every passage.
+\end{remark}
 
-We then define $\delta_t = t - W_{N(t)}$ the \textit{current life} (or age) and $\gamma_t = W_{N(t)+1}-t$ the \textit{residual lifetime}.
-The total lifetime is defined as $\beta_t = \delta_t + \gamma_t$.
+\begin{remark}[Poisson process as renewal processes]
+	A similar reasoning is straightforward to apply to Poisson processes: each new arrival is statistically equivalent to the first one, since they are all \emph{memoryless} and identically distributed.
+\end{remark}
 
-An application of the renewal process is a markov chain where starts of a busy period are renewal instances if and only if
-the conditions are the same for each start instance, which happens as when the start period begin, the previous instant got the mc empty.
-A departure, instead, happens after a full service time and after an arrival. This means that if the arrival is a generic process, the instance
-can depend on previous arrivals, so the conditions at the beginning are not independent of the previous status and the conditions
-for the statistical properties are not the same for each start.
+\section{Relevant quantities}
 
-\section{CASE: Poisson processes}
-\begin{equation}
-	\begin{split}
-		F(x)=1-e^{-\lambda \cdot x} &\quad M(t)=\exp[N(t)]=\lambda \cdot t \quad \prob[N(t)=k]=\frac{(\lambda \cdot k)^k}{k!}\cdot e^{-\lambda \cdot t}\\
-		\prob[\gamma_t > x]&=\prob\left[\text{no events in } (t,t+x] \right]=e^{-\lambda \cdot x} \implies \text{\textbf{memoryless}}\\
-		\prob[\delta_t > x] &= \prob \left[\text{no events in }(t-x,t] \right]=
-		\begin{cases}
-			e^{-\lambda x} & \text{if } x < t \\
-			0 & \text{if } x \ge t\\
-		\end{cases}
-	\end{split}
-\end{equation}
+\subsection{Renewal function}
+	Given a series of renewals, it can be interesting to obtain the probaability distribution on the \emph{n}-th event: since it describes a sum of r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
+
+	\begin{equation}
+		F_n(t) = \prob[W_n \le t] \stackrel{(*)}{=} \prob[N(t) \ge n]
+	\end{equation}
+	where (*) holds for $W_n$ definition.
+
+		\begin{definition}[Renewal function]
+			The sum over $n$ of these probabilities gives the expected number of renewals at time $t$, defined as $M(t)$ and called \emph{renewal function}.
+
+			\begin{equation}
+				M(t) = \exp[N(t)] = \sum\limits_{k=1}^{+\infty}\prob[N(t)\ge k] = \sum\limits_{k=1}^{+\infty} F_k(t)
+			\end{equation}
+		\end{definition}
+
+\subsection{Relevant quantities}
+	Other parameters of interest are the times of the renewals that are close to a time instant $t$.
+
+	\begin{equation} \begin{cases}
+		\delta_t = t - W_{N(t)} & \rightarrow
+			\text{~~current life (or age)} \\
+		\gamma_t = W_{N(t)+1}-t & \rightarrow
+			\text{~~residual lifetime} \\
+		\beta_t = \delta_t + \gamma_t & \rightarrow
+			\text{~~total lifetime}
+	\end{cases} \end{equation}
 
 \subsection{Joint distribution}
 \begin{equation}
