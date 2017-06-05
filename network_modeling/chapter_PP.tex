@@ -18,9 +18,9 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 	\end{equation}
 	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
 \end{enumerate}
-
+\begin{theorem}[Exponential times in Poisson arrivals]
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
-
+\end{theorem}
 \begin{tikzpicture}
 	\begin{axis}[
 		y = 1.5cm,
@@ -32,7 +32,7 @@ Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
 	\end{axis}
 \end{tikzpicture}
 
-
+\begin{proof}
 \begin{equation}
 	\prob[S_0 > t] = \prob[0 ~arrivals ~in ~[0,t]] = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t}
 \end{equation}
@@ -45,7 +45,7 @@ In general,
 \begin{equation}
 	\prob[S_n > t | S_i = s_i, ~i=0,\cdots,n-1] = e^{-\lambda t}
 \end{equation}
-
+\end{proof}
 %LAW OF RARE EVENTS: rare events can be aproximated with a poisson process? (non ho ben capito)
 \section{Properties}
 \begin{itemize}
@@ -263,6 +263,10 @@ Now suppose to consider the interval $d\tau$, we have
     \prob[\text{one TX starts in $d\tau$}] &\approx G  \cdot d\tau\\
     \exp{\text{\# of successes in $d\tau$}} &= G \cdot e^{-2 \cdot G} d\tau \\
   \end{cases}
+  \end{split}
+ \end{equation}
+ \begin{equation}
+	\begin{split}
   \exp{\text{\# of successes in $[0;t]$}} &= \int\limits_0^t G \cdot e^{-2 \cdot G} = t \cdot G \cdot e^{-2 \cdot G}\\
   \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G} =  G \cdot e^{-2 \cdot G}\\
   \implies S_{max} = \frac{1}{2e}& \approx 18.7\% \quad G_{max} = \frac{1}{2}
