@@ -18,9 +18,9 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 	\end{equation}
 	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
 \end{enumerate}
-
+\begin{theorem}[Exponential times in Poisson arrivals]
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
-
+\end{theorem}
 \begin{tikzpicture}
 	\begin{axis}[
 		y = 1.5cm,
@@ -32,7 +32,7 @@ Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
 	\end{axis}
 \end{tikzpicture}
 
-
+\begin{proof}
 \begin{equation}
 	\prob[S_0 > t] = \prob[0 ~arrivals ~in ~[0,t]] = \frac{(\lambda t)^0 e^{-\lambda t}}{0!} = e^{-\lambda t}
 \end{equation}
@@ -45,6 +45,7 @@ In general,
 \begin{equation}
 	\prob[S_n > t | S_i = s_i, ~i=0,\cdots,n-1] = e^{-\lambda t}
 \end{equation}
+\end{proof}
 
 %LAW OF RARE EVENTS: rare events can be aproximated with a poisson process? (non ho ben capito)
 \section{Properties}
@@ -263,6 +264,9 @@ Now suppose to consider the interval $d\tau$, we have
     \prob[\text{one TX starts in $d\tau$}] &\approx G  \cdot d\tau\\
     \exp{\text{\# of successes in $d\tau$}} &= G \cdot e^{-2 \cdot G} d\tau \\
   \end{cases}
+  \end{split}
+  \end{equation}
+  \begin{equation}\begin{split}
   \exp{\text{\# of successes in $[0;t]$}} &= \int\limits_0^t G \cdot e^{-2 \cdot G} = t \cdot G \cdot e^{-2 \cdot G}\\
   \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G} =  G \cdot e^{-2 \cdot G}\\
   \implies S_{max} = \frac{1}{2e}& \approx 18.7\% \quad G_{max} = \frac{1}{2}
@@ -288,10 +292,14 @@ Now we want to define the transition probability $P_{n,n+1}$, and the calculatio
 \begin{equation}
   P_{n,n+1} = \begin{cases}
     Q_a(i,n) & 2 \le i \le m-n \\
-    Q_a(1,n) \cdot [1-Q_r(0,n)] & i=1 \quad \text{1 arrival, no departures}\\
+    Q_a(1,n) \cdot [1-Q_r(0,n)] & i=1 \quad \text{1 arrival, no departures}\\\\
     \begin{aligned}
     & Q_a(0,n) \cdot [1-Q_r(1,n)] + \\ & Q_a(1,n)\cdot Q_r(0,n)
+<<<<<<< HEAD
     \end{aligned}& i=0 \quad \parbox[t]{0.5\textwidth}{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\
+=======
+    \end{aligned}& i=0 \quad \parbox[t]{0.6\textwidth}{no arrivals, 1 departure (successful reTX) or 1 arrival successfully transmitted }\\\\
+>>>>>>> 846364170ce92b52889217e250188c4ced55bfdb
     Q_a(0,n)\cdot Q_r(1,n) & i = -1 \quad \text{1 departure, no arrivals}\\
     0 & i < -1 \quad \text{no more than one departure}
   \end{cases}
@@ -316,21 +324,32 @@ We found out that the success probability depends on the state, so we would like
 The process can be approximated as a Poisson Process and the description is given by $D_n = (m-n)\cdot q_a - G(n) \cdot e^{-G(n)}$
 with G(n) as given before.
 
+<<<<<<< HEAD
 \begin{figure}
   \input{img/driftAnalisis.tex}
   \caption{Between \textbf{A} and \textbf{B} and for any G(n) bigger than \textbf{G(m)} $D_n <0$. $D_n>0$ in the other regions of the plane}
   \label{fig:drift}
 \end{figure}
+=======
+%------ INSERIRE GRAFICO Dn
+>>>>>>> Poisson-Process
 
 When $D_n>0$ the system tends to reduce the backlogging, wherease if $D_n<0$ the backlogging
 increases and the system becomes unstable.
 
 We would like to improve the system, such that the probability of the system to become
 unstable, is small and the delay to be as low as possible; to do so we can
+<<<<<<< HEAD
 \begin{description}
   \item[increase $q_r$] The delay gets smaller, but the stability get worse
   \item[decrease $q_r$] the delay increases, but the system is more stable
 \end{description}
+=======
+\begin{enumerate}
+  \item [increase $q_r$] The delay gets smaller, but the stability get worse
+  \item [decrease $q_r$] the delay increases, but the system is more stable
+\end{enumerate}
+>>>>>>> 846364170ce92b52889217e250188c4ced55bfdb
 
 Considering the limit, when $m \to +\infty$, $q_a \to 0 \implies q_a \approx \frac{\lambda}{m}$
 As $G=\lambda + n \cdot q_r$ we'd like to maximize the throughput and the success probability.
@@ -463,10 +482,10 @@ We can now evaluate separately the case where n is even and the one where it's o
   n &= 2 \cdot k \\
   &\sum\limits_{i=0}^{2k}Q^i \cdot R_1 \cdot A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1} \cdot R_1 \cdot A \\
   &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right) \cdot R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right) \cdot (Q \cdot R_1 \cdot A)\\
-  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
+  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
   n &= 2 \cdot k + 1 \\
   &\sum\limits_{i=0}^{2k+1}Q^i \cdot R_1 \cdot A^{2k+1-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1\cdot A + \sum\limits_{j=0}^{k}Q^{2j+1} \cdot R_1 \\
-  \implies & k  to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
+  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
   \\
   &\text{the two limits are the same if: }\\
   & [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A) = [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 )\\
@@ -479,7 +498,7 @@ We can now evaluate separately the case where n is even and the one where it's o
 \begin{equation}
   \prob[N(t)=n|A(t,t+\delta)] = \prob[N(t)=n]
 \end{equation}
-At time t I have n users, so N(t)=n depends on past, wherease $A(t,t+\delta)$ depends on the future
+At time $t$ I have $n$ users, so $N(t)=n$ depends on past, wherease $A(t,t+\delta)$ depends on the future
 
 \subsubsection{Under mild conditions}
 \begin{enumerate}
