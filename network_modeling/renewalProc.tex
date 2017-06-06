@@ -10,25 +10,12 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 		\item $ F(0) = 0 \rightarrow $ renewals are not simultanous
 		\item $ F(+\infty) = 0 \rightarrow $ renewals repeat forever
 	\end{itemize}
-
 \end{definition}
 
-Each $X_i$ can be reported as a progress on a plot... (description of the graph here)
-
-\#TODO Graph
-
-where
-\begin{itemize}
-	\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
-	\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
-\end{itemize}
-
-Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
-
 \begin{remark}[Markov chain as renewal processes]
-	Given this definition, it can be noted that in a \gls{mc} each arrival at a given states can be considered as a renewal instant.
+	Given this definition, in a \gls{mc} each arrival at a given state can be considered as a renewal instant.
 
-	For the Markov property the future evolution depends only on the current state, so behaviour of the process through a given node is the same after every passage.
+	In fact, for the Markov property the future evolution depends only on the current state, so behaviour of the process through a given node is the same after every passage.
 \end{remark}
 
 \begin{remark}[Poisson process as renewal processes]
@@ -37,8 +24,21 @@ Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W
 
 \section{Relevant quantities}
 
+\subsection{Count of renewals}
+	Each $X_i$ can be reported as a progress on a plot, marking each renewal event and the time intervals between them.
+
+	\#TODO Graph
+
+	where
+	\begin{itemize}
+		\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
+		\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
+	\end{itemize}
+
+	Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
+
 \subsection{Renewal function}
-	Given a series of renewals, it can be interesting to obtain the probaability distribution on the \emph{n}-th event: since it describes a sum of r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
+	Given a serie of renewals, it can be interesting to obtain the probability distribution on the \emph{n}-th event: since it describes a sum of i.i.d. r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
 
 	\begin{equation}
 		F_n(t) = \prob[W_n \le t] \stackrel{(*)}{=} \prob[N(t) \ge n]
@@ -53,8 +53,8 @@ Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W
 			\end{equation}
 		\end{definition}
 
-\subsection{Relevant quantities}
-	Other parameters of interest are the times of the renewals that are close to a time instant $t$.
+\subsection{Time intervals}
+	Other parameters of interest are the times of the renewals that are close to a time instant $t$, that is used to split the inter-renewal time.
 
 	\begin{equation} \begin{cases}
 		\delta_t = t - W_{N(t)} & \rightarrow
@@ -65,35 +65,30 @@ Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W
 			\text{~~total lifetime}
 	\end{cases} \end{equation}
 
-\subsection{Joint distribution}
-\begin{equation}
-	\prob[\gamma_t > x, \delta_t > y ] =
-	\begin{cases}
-		e^{-\lambda \cdot (x+y)} & \text{if } y < t \\
-		0 & \text{if } y \ge t \\
-	\end{cases}
-\end{equation}
+	\bigbreak
+	An interesting result can be proven for Poisson processes with intensity $\lambda$.
+	In this case, given $\beta_t = \delta_t + \gamma_t$, the join distribution of $\delta_t$ and $\gamma_t$ can be written as follows.
 
-For poisson processes residual and current life are independent, which is a consequence of the memoryless propriety. We defined $\beta_t=\gamma_t + \delta_t$, so
-\begin{equation}\begin{split}
-\exp[\beta_t]&=\exp[\gamma_t] + \exp[\delta_t] = \frac{1}{\lambda} + \exp[\delta_t]\\
-\exp[\delta_t]&= \int_0^t e^{-\lambda \cdot x} dx = \frac{1-e^{-\lambda \cdot t}}{\lambda} \\
-&\implies \exp[\beta_t]= \frac{2-e^{-\lambda \cdot t}}{\lambda}
-\end{split}\end{equation}
-\textbf{\textsc{Paradox: (I don't think this is the real paradox)}}
-\begin{equation}
-	\begin{split}
-		\prob[\gamma_t > x] &\approx \prob[\delta_t>x] = e^{-\lambda \cdot t} \quad \text{for }x<t \\
-		\text{but } &\prob[\delta_t >x , \gamma _ t > y ] = e^{-\lambda \cdot (x+y)} \neq e^{-\lambda x} \cdot e^{-\lambda y}
-	\end{split}
-\end{equation}
-\textbf{why?}
-\begin{enumerate}
-	\item Pick uniformly an index $i \to x_i $
-	\item Pick uniformly a time $t \to X$ which contains t
-\end{enumerate}
+	\begin{equation}
+		\prob[\gamma_t > x, \delta_t > y ] =
+		\begin{cases}
+			e^{-\lambda \cdot (x+y)} & \text{if } y < t \\
+			0 & \text{if } y \ge t \\
+		\end{cases}
+	\end{equation}
+	where the second case takes into account that the previous event can not happen before time 0.
 
-Then in 2 I get a bias because I tend to favor a longer interval over shorter ones, whereas in 1 I get F(x).
+	The expectation of $\beta_t$ can be computed naturally as
+	\begin{equation*}
+		\exp[\beta_t] = \exp[\gamma_t] + \exp[\delta_t] =
+		\frac{1}{\lambda} + \exp[\delta_t] =
+		\frac{1}{\lambda} + \int_0^t e^{-\lambda \cdot x} dx =
+		\frac{2-e^{-\lambda \cdot t}}{\lambda} \neq \frac{1}{\lambda}
+	\end{equation*}
+	where again it is taken into account that $\delta_t$ must be smaller than $t$, i.e. the last renewal cannot happen before 0.
+
+	This result is indeed correct, but it clashes with our previous knowledge of the mean interarrivals time for Poisson process.
+	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation time $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
 
 \section{Asymptotic results}
 \begin{theorem}[Ross p. 101]
