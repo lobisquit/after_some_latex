@@ -83,12 +83,16 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 		\exp[\beta_t] = \exp[\gamma_t] + \exp[\delta_t] =
 		\frac{1}{\lambda} + \exp[\delta_t] =
 		\frac{1}{\lambda} + \int_0^t e^{-\lambda \cdot x} dx =
-		\frac{2-e^{-\lambda \cdot t}}{\lambda} \neq \frac{1}{\lambda}
+		\frac{2-e^{-\lambda \cdot t}}{\lambda}
 	\end{equation*}
 	where again it is taken into account that $\delta_t$ must be smaller than $t$, i.e. the last renewal cannot happen before 0.
 
+	The asymptotic value of this expectation removes the transient behaviour of the process and gives this surprising result.
+	\begin{equation*}
+		\lim_{t \to +\infty} \exp[\beta_t] = \lim_{t \to +\infty} \frac{2-e^{-\lambda \cdot t}}{\lambda} = \frac{2}{\lambda} > \frac{1}{\lambda} = \exp[X] \text{ where } X \sim exp(\lambda)
+	\end{equation*}
 	This result is indeed correct, but it clashes with our previous knowledge of the mean interarrivals time for Poisson process.
-	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation time $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
+	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
 
 \section{Asymptotic results}
 \begin{theorem}[Ross p. 101]
@@ -96,24 +100,23 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 Let $S_n = \sum \limits_{k=1}^{n}X_k$ a finite sum with $n<+\infty$ as there can't be infinite renewals in a finite time.
 Then
 \begin{equation}
-	\begin{split}
-		\frac{S_n}{n}\xrightarrow{n\rightarrow\infty}\mu &= \exp[X] \quad \text{with probability 1} \\
-		&\text{\textsc{\textbf{Also:}}}\\
-		N(\infty) = \lim_{t \to +\infty}N(t) &= \infty \quad \text{with probability 1}
-	\end{split}
+	\begin{cases}
+		S_n / n\xrightarrow{n\rightarrow\infty}\mu = \exp[X] \quad &\text{with probability 1} \\
+		N(\infty) = \lim_{t \to +\infty}N(t) = \infty \quad &\text{with probability 1}
+	\end{cases}
 \end{equation}
 \end{theorem}
 In essence this results states that in finite time we have a finite number of renewals. Viceversa in infinite time we have infinite renewals.
+
 \begin{proof}
-If we have infinite time, what is the case where we have a finite number of renewals?
-$\rightarrow$ when we have a last renewal $\rightarrow$ we have for some $n$ an infinite interarrival time
-	\begin{equation}
-		\begin{split}
-			\prob[N(\infty)<\infty] &= \prob[X_n = \infty \text{ for some n}] = \prob[\bigcup\limits_{n=1}^{+\infty}\{X_n = \infty \}] \\
-			&\le \sum\limits_{n=1}^{+\infty}\prob[X_n = \infty] = 0 \\
-			&\text{because } F(\infty)=1
-		\end{split}
-	\end{equation}
+	In have infinite time, we have a finite number of renewals if and ony if there exists an event that is the last one, of as
+		\begin{equation}
+			\begin{split}
+				\prob[N(\infty)<\infty] &= \prob[X_n = \infty \text{ for some n}] = \prob[\bigcup\limits_{n=1}^{+\infty}\{X_n = \infty \}] \\
+				&\le \sum\limits_{n=1}^{+\infty}\prob[X_n = \infty] = 0 \\
+				&\text{because } F(\infty)=1
+			\end{split}
+		\end{equation}
 \end{proof}
 
 \begin{theorem}[Elementary renewal theorem]%Prop. 3.3.1 (Ross p. 102), KT pp 437
