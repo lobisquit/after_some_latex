@@ -1,5 +1,125 @@
-\chapter{Go Back N protocol with limited retransmissions}
+\chapter{Markov Error Process}
+Two state Markov process $X_n$: 0 = correct transmission, 1 = erroneous transmission. Statistic of successful slots up to time n:
+\begin{equation}
+	\begin{split}
+			\Phi_{ij}(k,n) = & \prob[\textrm{k good slots in 0,1,...,n-1 and j at n | i at 0}] \\
+										 = & \prob[\sum\limits_{m=0}^{n-1} \mathbb{1}\{X_m = 0\} = k, X_n = j | X_0 = i]
+	\end{split}
+\end{equation}
+\textbf{Conditioning on last transition:}
+If the last state is successfull, we require k-1 successes in the previous n-1 transitions, else we require k successes in the previous n-1 successes:
+$$\Phi_{ij}(k,n) = \Phi_{i0}(k-1,n-1)p_{0j} + \Phi_{i1}(k,n-1)p_{1j} \textrm{ with } n>0 \textrm{ and } 0<k\leq n$$
+Initial condition:
+\begin{equation}
+ \begin{split}
+	 &\Phi_{ij}(k,0)=
+	 \begin{cases}
+		 1 &  \text{if } i = j \text{and } k = 0 \\
+		 0 &  \text{otherwise}
+	 \end{cases}
+ \end{split}
+\end{equation}
+Using the $\delta$ functions:
+\begin{equation*}
+ \begin{split}
+	 &\delta_{ij}=
+	 \begin{cases}
+		 1 &  \text{if } i = j \\
+		 0 &  \text{otherwise}
+	 \end{cases}
+ \end{split}
+\end{equation*}
+and
+\begin{equation*}
+ \begin{split}
+	 &\delta(k)=
+	 \begin{cases}
+		 1 &  \text{if } k = 0 \\
+		 0 &  \text{otherwise}
+	 \end{cases}
+ \end{split}
+\end{equation*}
+The initial condition can be rewritten as: $\Phi_{ij}(k,0)=\delta_{ij}\delta(k)\delta(n)$.\\
+Therefore $\Phi_{ij}(k,n) = 0$ if $k<0$ or $k>n$ or $n<0$.\\
+Finally:
+$$\Phi_{ij}(k,n) =  \Phi_{i0}(k-1,n-1)p_{0j} + \Phi_{i1}(k,n-1)p_{1j} + \delta_{ij}\delta(n)\delta(k)$$
+In matrix form: $\Phi(k,n) = \begin{pmatrix} \Phi_{00}(k,n)&\Phi_{01}(k,n)\\ \Phi_{10}(k,n)&\Phi_{11}(k,n)\end{pmatrix}$
+\begin{equation}
+	\begin{split}
+			\Phi(k,n) =	 & \Phi(k-1,n-1)\underbrace{\begin{pmatrix} p_{00}&p_{01}\\0&0 \end{pmatrix}}_{\mathclap{= P(1)\text{ (``good transitions")}}} + \Phi(k,n-1)\underbrace{\begin{pmatrix} 0&0\\ p_{10}&p_{11}\end{pmatrix}}_{\mathclap{=P(0)\text{ (``bad transitions")}}} + I\delta(n)\delta(k)\\
+								= & \Phi(k-1,n-1)P(1) + \Phi(k,n-1)P(0) + I\delta(n)\delta(k)
+	\end{split}
+\end{equation}
+If, instead, we condition on the first transition:
+\begin{align*}
+\Phi_{0j}(k,n) =& p_{00}\Phi_{0j}(k-1, n-1) + p_{01}\Phi{1j}(k-1,n-1) + \delta_{0j}\delta(n)\delta(k)  \\
+\Phi_{1j}(k,n) =& p_{10}\Phi_{0j}(k, n-1) + p_{11}\Phi{1j}(k,n-1) + \delta_{1j}\delta(n)\delta(k)
+\end{align*}
+In matrix form: $\Phi(k,n) = P(1)\Phi(k-1,n-1) + P(0)\Phi_{i1}(k,n-1) + I\delta(n)\delta(k)$.\\
+To solve these equations:
+\begin{itemize}
+	\item compute recursively (brute force)
+	\item use transforms
+\end{itemize}
+2D transform of $\Phi(k,n)$: $\varphi(s,z) = \sum\limits_{k=0}^{+\infty}s^k\sum\limits_{n=0}^{+\infty}z^n\Phi(k,n)$ \\
+Using transforms properties: $\varphi(s,z) = \varphi(s,z)P(1)sz + \varphi(s,z)P(0)z + I $ \\
+Therefore:
+\begin{equation}
+\begin{split}
+	\varphi(s,z) = & [I - P(1)sz -P(0)z ]^{-1} \\
+							 = & [I - z(P(1)s + P(0))]^{-1} \\
+							 = & \sum\limits_{n=0}^{+\infty}[P(1)s + P(0)]^n z^n
+\end{split}
+\end{equation}
+$$\rightarrow \varphi(s,n)= \underbrace{\sum\limits_{k=0}^{+\infty} s^k \Phi(k,n)}_{\mathclap{\text{transform over k for a given n}}}=(P(1)s+P(0))^n$$
+Now suppose we associate an integer metric to each transition. Let $P(l)$ be the matrix that contains all elements of P that correspond to a ``reward" of l. We have:
+$$\Phi(k,n) = \sum\limits_{l=0}^{+\infty} \Phi(k-l,n-1)P(l) + I\delta(n)\delta(k)$$
+With transform: $\varphi(s,z) = \varphi(s,z)\psi(s)z + I$.\\
+Where
+\begin{equation}
+\begin{split}
+		\psi(s) =& \sum\limits_{l=0}^{+\infty} P(l)s^l \\
+						=& P(1)s + P(0) \text{  (in the previous case)}
+\end{split}
+\end{equation}
+As before: $\varphi(s) = [I - z\psi(s)]^{-1} \rightarrow \varphi(s,n)=[\psi(s)]^n$ for a given n.\\
+\textbf{Notes:}
+\begin{enumerate}
+	\item We can find average number of rewards in 0,1,...,n-1 as before
+	\item In $\varphi(s,z)$, s labels successes and z labels the number of transitions
+	\item Each transition has a ``label" $\psi_{ij}(s)$
+	\item The label $\psi_{ij}(s)$ does not need to be a single term, but in general can be polynomial: $$\psi_{ij}(s) = \sum\limits_{l=0}^{+\infty} P_{ij}(l)s^l$$
+				Where $P_{ij} = \prob[X_{n+1}=j\text{ and l is earned}| X_n = i]$.\\
+				Properties of $\psi_{ij}(s)$:
+				\begin{itemize}
+					\item[a)] $\psi_{ij}(1)=P_{ij} \rightarrow \text{in matrix form: } \psi(1) = P$
+					\item[b)] $\frac{\psi_{ij}(s)}{P_{ij}}=\text{generating function of the distribution of the metric given the transition}$
+					\item[c)] $\psi_{ij}^{'}(1)=P_{ij}\E[\text{reward earned in the transition from i to j}] $
+					\item[d)] If the metric is the reward:
+								\begin{equation}
+									\begin{split}
+										R_i =& \sum_j P_{ij}R_{ij} \\
+										    =& \sum_j \psi_{ij}^{'}(1)
+									\end{split}
+								\end{equation}
+				\end{itemize}
+	\item We can define multiple metrics, i.e., $\textbf{s} = (s_1,...)$. In this case,
+				$$P_{ij}\E[\text{k-th metric on transition } i \rightarrow j] = \frac{\partial \psi_{ij}(s_1,...)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}} $$
+				$$R_{ij}^{(k)}P_{ij}=  \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}$$
+				$$R_i^{(k)} = \sum_j P_{ij}R_{ij}^{(k)} = \sum_j \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}$$
+				$$ \lim_{t \to \infty}\frac{R^{(1)}(t)}{R^{(2)}(t)}=\frac{\sum_i \pi_i R_i^{(1)}}{\sum_i \pi_i R_i^{(2)}}= \frac{\mathbf{\pi} \frac{\partial \psi(\mathbf{s})}{\partial s_1}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}{\mathbf{\pi}\frac{\partial \psi(\mathbf{s})}{\partial s_2}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}$$
+	\item To compute $\psi_{ij}(s)$:
+		\begin{itemize}
+			\item[a)] Let $\epsilon(i,j)$ be the set of all events that lead from state i to state j
+			\item[b)] Let $\prob[A]$ be the probability of each event A
+			\item[c)] Let $\textbf{s}(A) = s_1^{l_1(a)}s_2^{l_2(A)}...$ where $l_k(A)$ is the value of the k-th metric that corresponds to the event A
+			\item[d)] We have: $$\psi_{i,j}(\textbf{s}) = \sum_{A \in \epsilon(i,j)} \prob[A]\textbf{s}(A)$$
+			$$\psi_{i,j}(\mathbf{1}) =\sum_{A \in \epsilon(i,j)} \prob[A] = P_{ij}$$
+		\end{itemize}
+\end{enumerate}
 
+
+\chapter{Go Back N protocol with limited retransmissions}
 Suppose a system governed by the Go Back N protocol.
 In this system the \gls{rtt} take m slot and when a received packet is wrong, it's retransmitted, until the $N^{th}$ failure, after which the packet is discarded.
 
