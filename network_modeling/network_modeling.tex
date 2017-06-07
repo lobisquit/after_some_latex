@@ -1,6 +1,7 @@
 \documentclass[a4paper, 12pt, twoside, openright,fleqn]{book}
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
+
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{caption}
@@ -9,46 +10,43 @@
 \usepackage{graphics}
 \usepackage{wrapfig}
 \usepackage{changepage}
-
-%\usepackage{rotating}
-\usepackage{amsthm}
-\usepackage{amsmath,amssymb,dsfont,bm}
-\usepackage[usenames,dvipsnames,table,tikz]{xcolor} % use colors on table and more
-%\definecolor{DefinedColor}{RGB}{51, 51, 51} % define custom color
+\usepackage[usenames, dvipsnames, table, tikz]{xcolor}
 \usepackage{pgfplots}
 \usepackage{listing}
 \usepackage{textgreek}
-%\usepackage{subfigure}
-\graphicspath{{./img/} {./.tmp/} }
-%------------------------------ colors
+% math package
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb, dsfont, bm}
+% support for glossary and acronyms
+\usepackage[acronym]{glossaries}
+% tikz figures
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows}
 
-%\usetikzlibrary{positioning}
-\usetikzlibrary{shapes,arrows}
-%------------------------------ source code
-% \lstset{
-%   basicstyle=\footnotesize\sffamily,
-%   commentstyle=\itshape\color{gray},
-%   captionpos=b,
-%   frame=shadowbox,
-%   language=HTML,
-%   rulesepcolor=\color{DefinedColor},
-%   tabsize=2
-% }
-%%Parte figa per creare i teoremi
-% \newenvironment{theorem}[2][Theorem]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{lemma}[2][Lemma]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{exercise}[2][Exercise]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{reflection}[2][Reflection]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{proposition}[2][Proposition]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{corollary}[2][Corollary]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% image path
+\graphicspath{ {./img/} }
 
-%temporary environment definitions
+% add support for url and cross-references in PDF output
+\usepackage{url}
+\renewcommand{\UrlFont}{\color{black}\small\ttfamily}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+
+
+
+% Costumization of theorem style
+\newtheoremstyle{theoremdd}% name of the style to be used
+  {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
+  {\topsep}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font %\color{Mahogany}
+  { -- }% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+
+\theoremstyle{theoremdd}
+% support for counting
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
@@ -56,10 +54,20 @@
 \newtheorem{remark}{Remark}
 \newtheorem{example}{Example}
 
+% added support for proof parts
+\theoremstyle{remark}
+\newtheorem{proofpart}{Part}
+\renewcommand\theproofpart{\Roman{proofpart}}
+\makeatletter
+\@addtoreset{proofpart}{theorem}
+\makeatother
+
+% specific modification to basic book template of our book document
 \renewcommand{\chaptername}{Section}
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
 
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
+%\renewcommand\qedsymbol{$\square$\itshape QED}
 
 
 %------------------------------ define Abstract environment, missing in the 'book' class
@@ -86,6 +94,27 @@
 \def\prob{\ensuremath\mathbb{P}}
 \def\exp{\ensuremath\mathbb{E}}
 \def\pois{\mathcal P}
+\newcommand{\Hb}{\mathbb{H}}
+\newcommand{\Sb}{\mathbb{\Sigma}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Pb}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\Rm}{\mathbb{R^{-1}}}
+\newcommand{\J}{\mathbb{J}}
 
 
 % REFERENCES
@@ -94,6 +123,7 @@
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
 \newcommand{\Sec}[1]{Sec.~\ref{#1}}
 \newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
+\newcommand{\RN}[1]{ \textup{\uppercase\expandafter{\romannumeral#1}}} %This is for inserting Roman Numbers (useful for \stackrel in equations so that you don't confuse indicating numbers from equation numbers
 
 \usepackage[acronym]{glossaries}
 
