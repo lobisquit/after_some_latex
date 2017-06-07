@@ -145,7 +145,7 @@ Since \gls{geraf} is based on geographically position of the nodes, it allow to 
 
 	Given $\zeta$ the advancement between two nodes, with reference to \Fig{fig:anapproach}, $\zeta < D - r$ if there are no relays in circle intersection of area
 	\begin{equation}
-			A(r,D) = 2 \int_{D-1}^r a \cdot arccos( \frac{a^2 + D^2 - 1}{2aD}) da
+			A(r,D) = 2 \int_{D-1}^r a \cdot arccos\left( \frac{a^2 + D^2 - 1}{2aD}\right) da
 	\end{equation}
 
 	so we can define the statistic of the advancement $\zeta$ as
@@ -159,7 +159,7 @@ Since \gls{geraf} is based on geographically position of the nodes, it allow to 
 	where $M$ stands for $\lambda$. Given these quantities, we can define the average advancement towards the destination as
 
 	\begin{equation}
-		\exp[\zeta] = \int_0^{+\infty} \prob[\zeta > a]da = 1-\int_0^1 e^{-MA(D-a,D)/\pi}da
+		\exp[\zeta] = \int_0^{+\infty} \prob[\zeta > a]da = 1-\int_0^1 e^{\frac{-MA(D-a,D)}{\pi}}da
 	\end{equation}
 
 	and an approximation for the average number of hops as
