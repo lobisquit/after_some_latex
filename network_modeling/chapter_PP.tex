@@ -401,8 +401,11 @@ state transitions take $\begin{cases}
   &= g(n) \cdot e^{g(n)}
 \end{split}\end{equation}
 
----- Grafico comparazione aloha con il nuovo sistema
-
+\begin{figure} \centering
+  \input{img/comparison_newSystem.tex}
+  \caption{The new system, in red, perform always better than Aloha, in blue}
+  \label{}
+\end{figure}
 If two transmissions occours at the same tume, but the nodes transmitting are far
  enough, they won't hear each other and packets will collide.
  \begin{table}[h!]
@@ -420,10 +423,13 @@ $D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{g(n) \cdot e^{-g(n)}}{\beta + 1 - e
 We know that instability will occour eventually, but the time for it to happen is really long.
 
 \subsection{Recurrent \gls{mc} behaviour}
-\begin{figure}[h!]
+Suppose a recurrent markov chain like the one in figure \ref{fig:recurrMC}, we can study a system which has a transient state and two states, 0 and 1,
+that may be recurrent.
+\begin{figure}[h!]\centering
   \input{img/recurr.tex}
-  \caption{Suppose a recurrent markov chain like this to study whether there's a recurrency or not}
-  \label{}
+  \caption{ State 0 and 1 form a periodic class, state 2 and 3 are the transient
+  and the state on the right represent the other possible states in that markov chain}
+  \label{fig:recurrMC}
 \end{figure}
 
 \begin{equation}\begin{split}
