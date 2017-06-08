@@ -311,3 +311,102 @@ In \autoref{fig:gbn_mc_2state} we can rearrange the probability of going from $B
 \begin{equation}
 	\beta_{BG} + \beta_{10}\beta_{11}^{N-1} = \beta_{10}\sum_{K=0}^{N-1} \beta_{11}^K = \beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}}
 \end{equation}
+
+%%%BEGINNING LECTURE 26/05
+%%%GRAPH FROM PREVIOUS LECTURE MISSING
+For the three state Markov chain:
+$$\Psi(s_1,s_2)=
+\begin{pmatrix}
+		p_{00} & p_{01} & 0 \\
+		1-p_{11}(m)^{N-1} & 0 & p_{11}(m)^{N-1} \\
+		p_{11}(m) & p_{11} & 0
+\end{pmatrix} $$
+By solving the system $\mathbf{\pi} = \mathbf{\pi}P$ it is possible to find
+$$\mathbf{\pi} \hspace{0.25 cm} \alpha \hspace{0.25cm} (\frac{1-p_{11}(m)^{N}}{p_{01}},1,1-p_{11}(m)^{N-1})$$
+It is  possible to find the exact values by dividing those numbers by their sum. From the previous analysis we know that
+$$\mathbf{R} =
+\begin{pmatrix}
+		p_{00}\\
+	  1-p_{11}(m)^{N-1} \\
+		1-p_{11}(m)
+\end{pmatrix} \hspace{1 cm}
+\mathbf{T} =
+\begin{pmatrix}
+		1 \\
+		m \frac{1-p_{11}(m)^{N-1}}{1-p_{11}(m)} \\
+		m
+\end{pmatrix} $$
+$\mathbf{\pi}$ will still be proportional to the previous result we find even if we multiply all the  terms by the same number. If we multiply all the terms by $p_{01}$ it is easier to perform the calculation:
+\begin{equation}
+	\begin{split}
+		\mathbf{\pi}R \hspace{0.25 cm} \alpha &  \hspace{0.25cm}  (1-p_{11}(m)^{N})p_{00} + p_{01}1-p_{11}(m)^{N-1} + p_{01}p_{11}(m)^{N-1}(1-p_{11}(m))\\
+		= & \hspace{0.25cm} 1 + p_{11}(m)^N
+	\end{split}
+\end{equation}
+And
+\begin{equation}
+	\begin{split}
+		\mathbf{\pi}T \hspace{0.25 cm} \alpha &  \hspace{0.25cm}  (1-p_{11}(m)^{N}) + p_{01}m\frac{1-p_{11}(m)^{N-1}}{1-p_{11}(m)} + p_{01}p_{11}(m)^{N-1}m\\
+		= & \hspace{0.25cm} \frac{(1 + p_{11}(m)^N)(1-p_{11}(m))+mp_{01}(1-p_{11}(m)^N)}{1-p_{11}(m)}
+	\end{split}
+\end{equation}
+Therefore:
+\begin{equation}
+		\frac{\mathbf{\pi}R}{\mathbf{\pi}T} = \frac{1-p_{11}(m)}{1-p_{11}(m)+ mp_{01}}
+\end{equation}
+
+To remove $B_1$ I have to account for all the transitions coming from and going to it: \\
+%%%GRAPH MISSING
+$$P =
+\begin{pmatrix}
+		1-p_{01}p_{11}(m)^{N-1} & p_{01}p_{11}(m)^{N-1} \\
+		1-p_{11}(m)^N & p_{11}(m)^N
+\end{pmatrix}$$
+We can find $\Psi$, T, R and to the calculations we did before. \\
+How to find the probability that a packet is dropped?
+Assign a label to the transmission, such that every time a packet is generated counts how many packets have been transmitted and how many packets have been dropped.
+$$\Psi=
+\begin{pmatrix}
+	 (1- p_{00}p_{11}(m)^{N-1})s_3 & p_{01}p_{11}(m)^{N-1}s_3s_4 \\
+	 (1- p_{11}(m)^{N-1})s_3 & p_{11}(m)^{N-1}s_3s_4 \\
+\end{pmatrix} $$
+Where $s_3 =$ new packets, $s_4 =$ packet drops. Then $\mathbf{\pi} \hspace{0.25cm} \alpha \hspace{0.25cm} (1-p_{11}(m)^N,p_{01}p_{11}(m)^{N-1})$.
+Therefore Drop $= \begin{pmatrix} p_{01}p_{11}(m)^{N-1} \\ p_{11}(m)^N \end{pmatrix}$ and pkts $= \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.\\
+The probability can then be computed as:
+\begin{equation}
+	P_{\text{drop}} = \frac{p_{01}p_{11}(m)^{N-1}}{1-p_{11}(m)^N + p_{01}p_{11}(m)^{N-1}}
+\end{equation}
+%Probabilistic way to find the same result?
+First passage function:
+$$\Psi=
+\begin{pmatrix}
+	 \beta_{00} & \beta_{01} & 0 \\
+	 \beta_{BG} & 0 & \beta_{11}^{N-1} \\
+	 \beta_{10} & \beta_{11} & 0
+\end{pmatrix} $$
+Using the equation $\theta_{ij}(\textbf{s}) = \sum_{k \neq j} \Psi_{ik}(\textbf{s})\theta_{kj}(\textbf{s}) + \Psi_{ij}(\textbf{s})$ for $i\neq j$ it is possible to find the following results:
+\begin{equation*}
+	\begin{split}
+		\theta_{02} = & \frac{\Psi_{01}\Psi_{12}}{1 - \Psi_{01}\Psi_{10} - \Psi_{00}}\\
+		= & \frac{\beta_{01}\beta_{11}^{N-1}}{1- \beta_{01}\beta_{BG}-\beta_{00}}
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\theta_{12} = & \Psi_{10}\theta_{02}+\Psi_{12}\\
+		= & \frac{\beta_{11}^{N-1}(1-\beta_{00})}{1- \beta_{01}\beta_{BG}-\beta_{00}}
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\theta_{20} = & \frac{\Psi_{20}+\Psi_{21}\Psi_{10}}{1 - \Psi_{21}\Psi_{12}}\\
+		= & \frac{\beta_{10}+ \beta_{11}\beta_{BG}}{1- \beta_{11}^N}
+	\end{split}
+\end{equation*}
+\begin{equation*}
+	\begin{split}
+		\theta_{10} = & \frac{\beta_{BG} + \beta_{11}^{N-1}\beta_{10}}{1- \beta_{11}^N}
+	\end{split}
+\end{equation*}
+%%%DRAWINGS MISSING
+The chains are different from the ones of the previous cases considered, the reason for that is the fact that they have different meanings. In fact, in this case, we required to pass through the state BN before going to G.
