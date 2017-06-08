@@ -320,39 +320,53 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 	But, since $A(\eta)$ is bounded (see part \ref{req:boundness}) and $F_n(t)$ is infinitesimal in $n$, the proof is completed.
 \end{proof}
 
-\remark
-Let's now focus on the expectation for a \gls{st} and let's proove that for a \gls{pp}:
-\begin{equation}
-	\exp[S_{N(t)+1}] = \exp\left[\sum\limits_{i=1}^{N(t)+1}X_i\right] = \exp[N(t)+1]\cdot \exp[X] \text{\textbf{but}} \exp[S_{N(t)}] \neq \exp[N(t)]\cdot \exp[X]
-\end{equation}
-
-\begin{proof}
-	\begin{equation}\begin{split}
-		A(t) &= \exp[S_{N(t)+1}]\\
-		\exp[S_{N(t)+1}|X_1=x] &=
-		\begin{cases}
-			x & x>t \quad \text{no renewal has been seen} \\
-			x + A(t-x) & x \le t \quad \text{\gls{pp} restarts at every renewal}
-		\end{cases} \\
-		A(t) &= \int\limits_0^{+\infty} \exp[S_{N(t)+1}|X_1 = x] \cdot dF(x) \\
-		&= \int\limits_0^{t} [x+ A(t-x)] \cdot dF(x) + \int\limits_t^{+\infty} x \cdot dF(x) \\
-		&= \underbrace{\int\limits_0^{+\infty} x \cdot dF(x)}_{\exp[X_1]} + \int\limits_0^{t} A(t-x) \cdot dF(x) \\
-		&= \exp[X_1] + \int\limits_0^{t} A(t-x) \cdot dF(x)\\
-		& \text{\textbf{If} }\exp[X_1] < \infty \implies A(t) \text{ is bounded} \\
-		\implies A(t) &= \exp[X_1] + \int\limits_0^{t} \exp[X_1] \cdot dM(x) = \exp[X_1]\cdot [1+M(t)]\\
-	\end{split}\end{equation}
-\end{proof}
-
 \section{Wald's equation}
+
+Let's now apply the renewal equation to another relevant quantity of a renewal process: we focus on the expectation of the next arrival time after a given time $t$.
+	$$ S_{N(t) + 1} = \sum\limits_{i=1}^{N(t)+1}X_i $$
+
+% \begin{equation}
+% 	\exp[S_{N(t)+1}] = \exp\left[\sum\limits_{i=1}^{N(t)+1}X_i\right] = \exp[N(t)+1]\cdot \exp[X]\exp[S_{N(t)}] \neq \exp[N(t)]\cdot \exp[X]
+% \end{equation}
+
+This resembles a random sum, but it is not the case, since $N(t) + 1$ is not independent on the various $X_i$.
+
+With the knowledge acquired on renewal processes, we try to answer this question applying the renewal argument on $ A(t) = S_{N(t)+1} $, differentiating again between times $t$ before and after first event.
+
+\begin{equation}\begin{split}
+	\exp[A(t)|X_1=x] &=
+	\begin{cases}
+		x & x>t \\
+		x + A(t-x) & x \le t
+	\end{cases}
+\end{split} \end{equation}
+
+Thus we can build a renewal equation.
+
+\begin{equation} \begin{split}
+	A(t) &= \int\limits_0^{+\infty} \exp[S_{N(t)+1}|X_1 = x] \cdot dF(x) \\
+	&= \int\limits_0^{t} [x+ A(t-x)] \cdot dF(x) + \int\limits_t^{+\infty} x \cdot dF(x) \\
+	&= \int\limits_0^{+\infty} x \cdot dF(x) + \int\limits_0^{t} A(t-x) \cdot dF(x) \\
+	&= \exp[X_1] + \int\limits_0^{t} A(t-x) \cdot dF(x)\\
+\end{split}\end{equation}
+
+As proved earlier, the final solution for $A(t)$ is
+$$ \exp[S_{N(t)+1}] = A(t) = \exp[X_1] + \int\limits_0^{t} \exp[X_1] \cdot dM(x) = \exp[X_1]\cdot [1+M(t)] $$
+where the expectation is bounded if $\exp[X_1]$ is finite.
+
+This is the same result we would have obtained with the formula of the random sum: this gives us the idea of extending random sums theory with the concept of \emph{stopping time}.
+
 \begin{definition}[Stopping Time]
-A random variable N (integer valued), is called "stopping time" (ST) for the i.i.d. sequence $X_i$ if:
+An integer random variable N is called \gls{st} for the i.i.d. sequence $X_i$ if
 \begin{equation}
-	\{N=n\} \text{ is independent of }X_i ,\quad i > n
+	\forall i > n, \{N=n\} \text{ is independent of }X_i
 \end{equation}
+
+Less formally, N is independent on what happens after $X_n$.
 \end{definition}
 
 \begin{theorem}[Wald's equation]
-	Let $X_1, X_2, \dots, X_N $ be i.i.d, $\exp[X] < \infty$ and N a stopping time such that: $\exp[N] < \infty$. Then:
+	Let $X_1, X_2, \dots, X_N $ be an i.i.d. sequence with finite mean and N a stopping time such that $\exp[N] < \infty$. Then
 
 	\begin{equation}
 		\exp\left[\sum\limits_{n=1}^N X_n \right] = \exp[N] \cdot \exp[X]
@@ -360,30 +374,33 @@ A random variable N (integer valued), is called "stopping time" (ST) for the i.i
 \end{theorem}
 ---
 \begin{proof}
-	We are gonna use a trick that will allow us to write the random sum as an infinite sum:\\ \\
-	Let $I_n = \begin{cases} 1 & N \ge n \\ 0 & N<n \end{cases}$ \quad be our indicator function,\\
-	This allows us to write: $\sum\limits_{n=1}^N X_n = \sum\limits_{n=1}^{+\infty} X_n \cdot I_n$
-	\begin{equation}\begin{split} \label{wald:proof}
-		\{I_n=1\} &= \{N \ge n \} \text{ event}\\
-		&= \bigcup\limits_{i=1}^{n-1}\{\underbrace{N \neq i}_{\text{depend on } X_1, \dots, X_i} \} \\
-		&\implies \{I_n=1\} \text{ is independent of }X_n, X_{n+1}, \dots\\
-		\exp\left[\sum\limits_{n=1}^{N}X_n\right] &= \exp\left[\sum\limits_{n=1}^{N}X_n \cdot I_n \right] \stackrel{(1)}{=} \sum\limits_{n=1}^{+\infty}\exp[X_n \cdot I_n] \\
-		&=\sum\limits_{n=1}^{+\infty}\exp[X_n] \cdot \exp[I_n] \stackrel{\text{X i.i.d.}}{=} \exp[X]\cdot\sum\limits_{n=1}^{+\infty}\exp[I_n] \\
+	We are gonna use a trick that will allow us to write the random sum as an infinite sum. \\
+
+	Let $I_n = \begin{cases} 1 & N \ge n \\ 0 & N<n \end{cases}$~, we can observe immediatly that
+	$$ \{I_n=1\} = \{N \ge n \} = \bigcap\limits_{i=1}^{n-1}\{ N \neq i \} \implies \{I_n=1\} \perp X_n, X_{n+1}, \ldots $$
+
+	% it is independent on the future of $X$ after $n$.
+	Now the proof of the thesis is straightforward.
+	\begin{equation}\begin{split}
+		\exp\left[\sum\limits_{n=1}^{N}X_n\right] &= \exp\left[\sum\limits_{n=1}^{N}X_n \cdot I_n \right] \stackrel{(1)}{=} \sum\limits_{n=1}^{+\infty}\exp[X_n \cdot I_n] \stackrel{(2)}{=} \\
+		&=\sum\limits_{n=1}^{+\infty}\exp[X_n] \cdot \exp[I_n] \stackrel{(3)}{=} \exp[X]\cdot\sum\limits_{n=1}^{+\infty}\exp[I_n] \stackrel{(4)}{=} \\
 		&= \exp[X] \cdot \sum\limits_{n=1}^{+\infty}\prob[N \ge n] = \exp[X] \cdot \exp[N]
 	\end{split}\end{equation}
+	where
+	\begin{itemize}
+		\item[(1)] holds since the sum converges always, since it is actually a finite one
+		\item[(2)] holds for the indipendence between $I_n$ and $X_n$
+		\item[(3)] is due to the identically distributed $X_k$
+		\item[(4)] holds for $I_n$ definition
+	\end{itemize}
 \end{proof}
-
-\subsection{Discussion on Wald's equation proof}
-	In the equation \ref{wald:proof} we should see if the passage marked with (1) is allowed.
-	If we use $|X_n|>0$, the infinite sum is allowed and it's surely positive and finite, as the expectation of each X is finite.
-	With $X_n$ the sum is bounded by $|X_n|$, which allows the switching for the Lebesgue theorem.
 
 \subsection{Examples}
 	\begin{enumerate}
-		\item $\prob[X_i=0]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =10\}$ is a \gls{st}, and in particular
+		\item Given $\prob[X_i=0]=\prob[X_i = 1] = \frac{1}{2}$, $N = \min\{n : X_1 + \dots + X_N =10\}$ is a \gls{st}, and in particular
 		$10 = \exp[N] \cdot \exp[X] = 0.5 \cdot \exp[N] \implies \exp[N]=20$
-		\item $\prob[X_i=-1]=\prob[X_i = 1] = \frac{1}{2}$ and $N = \min\{n : X_1 + X_2 + \dots + X_N =1\}$ is a \gls{st}, but the expected stop time
-		is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies $ ABSURD. We conclude that Wald's equation doesn't apply. So it must be that N has not finite mean $\implies \exp[N]=\infty$
+		\item Given $\prob[X_i=-1]=\prob[X_i = 1] = \frac{1}{2}$, $N = \min\{n : X_1 + X_2 + \dots + X_N =1\}$ is a \gls{st}, but the expected stop time
+		is $1 = \exp[N] \cdot \exp[X] = 0 \cdot \exp[N] \implies $ ABSURD. We conclude that Wald's equation doesn't apply. So it must be that N has not finite mean $\implies \exp[N]=+\infty$
 	\end{enumerate}
 
 \section{The key renewal theorem}
