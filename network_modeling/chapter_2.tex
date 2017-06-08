@@ -61,6 +61,81 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 
 
 \input{first_step_analysis.tex}
+\section{Random walk}
+\begin{figure}[h]
+	\input{img/infinite_mc.tex}
+	\caption{An infinite random walk MC. With relation to gambling, the MC rapresents the case
+	where (1) the adversary has an infinite wealth (e.g.: casino), (2) the gambler can loose nothing in one game
+	(3) all games have different probability to win or loose (4) the player can always recover }
+	\label{}
+\end{figure}
+The theory around the random walks was developed to understand better the probability around the
+gambling world using the MC theory. We now make some assumptions before starting the analysis on this topic.
+\subsection{Assumptions:}
+\begin{enumerate}
+	\item The MC has \textbf{N+1} states, representing the status of the gambler' health.
+	 Let 0 be the \textit{ruined gambler} state and N be the gambler' success;
+	\item The gambler must always play;
+	\item All the games are equal with
+	\begin{description}
+		\item[p] probability to go to an upper state by winning a game
+		\item[q] probability to lose the game and go to a lower state
+	\end{description}
+\end{enumerate}
+\begin{figure}[h]
+	\input{img/finite_mc.tex}
+	\caption{Under the assumption given before, the MC can be represented as this picture}
+	\label{}
+\end{figure}
+
+Let now define the probability that the gambler goes to ruin if he starts in state k
+\begin{equation}\begin{split}
+	u_k &= \prob[\text{gambler's ruin}|\text{initial wealth}=k] \\
+	&=p \cdot u_{k+1} + q \cdot u_{k-1} \quad \text{with }k=1, \dots, N-1 \\
+	u_0 &= 1 \quad u_N = 0
+\end{split}\label{eq:defUk}
+\end{equation}
+We can now define the transition probability as follows
+
+\begin{equation}\begin{split}
+q \cdot \underbrace{(u_k - u_k-1)}{X_k} &= p \cdot \underbrace{\left(u_{k+1} -u_k\right)}{X_{k+1}} \\
+X_{k+1} = \frac{q}{p}\cdot X_k \quad & X_{2} = \frac{q}{p}\cdot X_1 \quad X_{3} = \left(\frac{q}{p}\right)^2 \cdot X_1\\
+\implies & X_{k} = \left(\frac{q}{p}\right)^{k-1}\cdot X_1
+\end{split}\end{equation}
+Let's now see what's the expression for $u_k$.
+\begin{equation}\begin{split}
+	\sum\limits_{i=1}^{k}X_i &= X_1 \cdot \sum\limits_{i=1}^{k}\left(\frac{q}{p}\right)^{i-1} \\
+	\sum\limits_{i=1}^{k}X_i &= \sum\limits_{i=1}^{k}(u_i-u_{i-1}) = u_k - u_0 = u_k -1
+	\implies & u_k = 1+ \sum\limits_{i=1}^k X_i
+\end{split}\end{equation}
+Now recalling eq. \eqref{eq:defUk}, we have that
+\begin{equation}\begin{split}
+	X_1 &= -\frac{1}{\sum\limits_{i=1}^N \left(\frac{q}{p}\right)^{i-1}}\\
+	u_k &= 1- \frac{\sum\limits_{i=1}^k\left(\frac{q}{p}\right)^{i-1}}{\sum\limits_{i=1}^N\left(\frac{q}{p}\right)^{i-1}}
+\end{split}\end{equation}
+The $u_k$ result we obtained, includes also the extremal cases where k=0 and k=N.\\
+If now we calculate the sum, we obtain
+\begin{equation}
+	u_k = 1- \frac{\frac{1-\left(\frac{q}{p}\right)^k}{1-\frac{q}{p}}}{\frac{1-\left(\frac{q}{p}\right)^N}{1-\frac{q}{p}}}=
+	1-\frac{1-\left(\frac{q}{p}\right)^k}{1-\left(\frac{q}{p}\right)^N}
+\end{equation}
+We can now make two distinction cases using the Taylor approximation
+\begin{equation}u_k=\begin{cases}
+	1-\frac{1-\left(\frac{q}{p}\right)^k}{1-\left(\frac{q}{p}\right)^N} & p \neq q \\
+	1-\frac{k}{N} & p=q
+\end{cases}\end{equation}
+Suppose now that the adversary has an infinity wealth, like a casino. The probability
+that the gambler goes in ruin is
+\begin{equation}
+	\lim_{N \to +\infty} u_k =
+	\begin{cases}
+		1 & p<k \\
+		\left(\frac{q}{p}\right)^k & p>q\\
+		1 & p=q
+\end{cases}\end{equation}
+The last case may seem strange, but even if the game is fair ($p=q=\frac{1}{2}$), in an infinite time
+a series of unfortunate events may occour and the gambler will reach $X_0$, his ruin.
+
 \section{First passage time}
 \begin{definition}[$\theta_{i,j}$]
 We define $\theta_{i,j}$ to be the number of transitions to reach j from i for the first time.
@@ -98,8 +173,8 @@ Let's start with the probability:
 For a two state \gls{mc} like the one in \ref{fig:2sMC}, we can write:
 \begin{equation}\begin{split}
 	f_{01}(n)&= P_{01} \cdot \delta(n-1) + P_{00} \cdot f_{01}(n-1) = a \cdot \delta(n-1) + (1-a)\cdot f_{01}(n-1)\\
-	f_{01}(1)&=a \quad f_{01}(2)=a \cdot(1-a) \quad \dots \quad f_{01}(n) = a\cdot(1-a)^{n-1} n \ge 1
-	f_{11}(n) = P_{11}\cdot \delta(n-1) + P_{10} \cdot f_{01}(n-1) =
+	f_{01}(1)&=a \quad f_{01}(2)=a \cdot(1-a) \quad \dots \quad f_{01}(n) = a\cdot(1-a)^{n-1} n \ge 1 \\
+	f_{11}(n) &= P_{11}\cdot \delta(n-1) + P_{10} \cdot f_{01}(n-1) =
 	\begin{cases}
 		1-b & n=1 \\ (1-a)^{n-2}\cdot a \cdot b & n>1
 	\end{cases}
@@ -125,16 +200,19 @@ For a general \gls{mc}, we have
 Let's now focus on the expectation of $\theta_{i,j}$. We can write:
 \begin{equation}\begin{split}
 	\exp[\theta_{i,j}] &= P_{i,j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k,j}])\cdot P_{i,k}\\
-	&\stackrel{1}{=}+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} \forall i \neq j\\
-	& \text{We then get $N$ equations in $N$ unknowns, so the system can be solved.}
+	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} \forall i \neq j\\
 \end{split}\end{equation}
-The average return time is the inverse of the in-state remaining probability, as we can see in the example of
-the two state MC
+with \textit{(1)} $P_{i,j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
+\\
+We then get $N$ equations in $N$ unknowns, so the system can be solved.
+\\
+Now, with the example of the two state MC, we will show that the average return
+time is the inverse of the in-state remaining probability.
 \begin{equation}\begin{split}
-	\exp[\theta_{0,1}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{0,1}] = \frac{1}{1-P_{00}} = \frac{1}{a}\\
-	\exp[\theta_{1,0}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{1,0}] = \frac{1}{1-P_{11}} = \frac{1}{b}\\
-	\exp[\theta_{0,0}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] =1+\frac{a}{b} = \frac{1}{1-P_{00}} = \left(\frac{b}{a+b}\right)^{-1}\\
-	\exp[\theta_{1,1}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] =1+\frac{b}{a} = \frac{1}{1-P_{00}} = \left(\frac{a}{a+b}\right)^{-1}\\
+	\exp[\theta_{0,1}] &= 1 + P_{00} \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{0,1}] = \frac{1}{1-P_{00}} = \frac{1}{a}\\
+	\exp[\theta_{1,0}] &= 1 + P_{11} \cdot \exp[\theta_{1,0}] \quad \exp[\theta_{1,0}] = \frac{1}{1-P_{11}} = \frac{1}{b}\\
+	\exp[\theta_{0,0}] &= 1 + P_{01} \cdot \exp[\theta_{1,0}] =1+\frac{a}{b} = \frac{1}{1-P_{00}} = \left(\frac{b}{a+b}\right)^{-1}\\
+	\exp[\theta_{1,1}] &= 1 + P_{10} \cdot \exp[\theta_{0,1}] =1+\frac{b}{a} = \frac{1}{1-P_{00}} = \left(\frac{a}{a+b}\right)^{-1}\\
 	\lim_{n \to +\infty} P^n &=
 	\begin{pmatrix}
 		\frac{b}{a+b} & \frac{a}{a+b} \\
