@@ -59,8 +59,107 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 \end{cases}\end{equation}
 \end{definition}
 
-\section{Long Run Behaviour}
 
+\input{first_step_analysis.tex}
+\section{First passage time}
+\begin{definition}[$\theta_{i,j}$]
+We define $\theta_{i,j}$ to be the number of transitions to reach j from i for the first time.
+\end{definition}
+We now would like to know $\prob[\theta_{i,j}=n]$ and $\exp[\theta_{i,j}]$.
+
+Let's start with the probability:
+\begin{definition}
+	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{i,j}=n]$, as follows:
+	\begin{equation}\begin{split}
+		\prob[\theta_{i,j}=n] &= f_{i,j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1 \dots n-1}\\
+		f_{i,j}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
+		f_{i,j}(0)&=P_{i,j} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{k,j}(n-1)\\
+	\end{split}\end{equation}
+\end{definition}
+\subsubsection{Example for a 2-state MC}
+\begin{figure}
+	\centering
+  \begin{tikzpicture}
+    [
+      my circle/.style={minimum width=10mm, circle, draw},
+      my label/.style={above=10pt, anchor=mid}
+    ]
+    \node[my circle] (1) at (-1,0) {$0$};
+    \node[my circle] (2) at ( 1,0) {$1$};
+    %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
+		\path[->,draw] (1.south east)  edge[bend right=90] node [below] {$b$} (2.south west);
+		\path[->,draw] (1.north east)  edge[bend left=90] node [above]  {$a$} (2.north west);
+		\path [-stealth, draw] (2.south east) arc (-135:135:5mm) node [near end, my label] {$1-b$};
+    \path [-stealth, draw] (1.south west) arc (-45:-315:5mm) node [near end, my label] {$1-a$};
+  \end{tikzpicture}
+	\caption{A two-state Markov chain}
+	\label{fig:2sMC}
+\end{figure}
+For a two state \gls{mc} like the one in \ref{fig:2sMC}, we can write:
+\begin{equation}\begin{split}
+	f_{01}(n)&= P_{01} \cdot \delta(n-1) + P_{00} \cdot f_{01}(n-1) = a \cdot \delta(n-1) + (1-a)\cdot f_{01}(n-1)\\
+	f_{01}(1)&=a \quad f_{01}(2)=a \cdot(1-a) \quad \dots \quad f_{01}(n) = a\cdot(1-a)^{n-1} n \ge 1
+	f_{11}(n) = P_{11}\cdot \delta(n-1) + P_{10} \cdot f_{01}(n-1) =
+	\begin{cases}
+		1-b & n=1 \\ (1-a)^{n-2}\cdot a \cdot b & n>1
+	\end{cases}
+\end{split}\end{equation}
+
+For a general \gls{mc}, we have
+\begin{equation}\begin{split}
+	P^{(n)} &= P^n \\
+	P_{i,j}^{(n)} &= \sum\limits_{m=1}^n f_{i,j}(m) \cdot P_{j,j}^{(n-m)} \quad n \ge 1 \\
+	f_{i,j}(n)&=
+	\begin{cases}
+		P_{i,j}^{(n)} -\sum\limits_{m=1}^{n-1} f_{i,j}(m) \cdot P_{j,j}^{(n-m)} & n \ge 2 \\
+		P_{i,j}^{(n)} = P_{i,j} & n =1 \\
+		0 & n=0
+	\end{cases} \\
+	\theta_{i,j}(n)&=
+	\begin{cases}
+		1 & \text{w.p. } P_{i,j} \\
+		1+\theta_{k,j} &  \text{w.p. } P_{i,j} \text{ with } k \neq j
+	\end{cases} \\
+\end{split}\end{equation}
+
+Let's now focus on the expectation of $\theta_{i,j}$. We can write:
+\begin{equation}\begin{split}
+	\exp[\theta_{i,j}] &= P_{i,j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k,j}])\cdot P_{i,k}\\
+	&\stackrel{1}{=}+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} \forall i \neq j\\
+	& \text{We then get $N$ equations in $N$ unknowns, so the system can be solved.}
+\end{split}\end{equation}
+The average return time is the inverse of the in-state remaining probability, as we can see in the example of
+the two state MC
+\begin{equation}\begin{split}
+	\exp[\theta_{0,1}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{0,1}] = \frac{1}{1-P_{00}} = \frac{1}{a}\\
+	\exp[\theta_{1,0}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{1,0}] = \frac{1}{1-P_{11}} = \frac{1}{b}\\
+	\exp[\theta_{0,0}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] =1+\frac{a}{b} = \frac{1}{1-P_{00}} = \left(\frac{b}{a+b}\right)^{-1}\\
+	\exp[\theta_{1,1}] &= 1 + P_00 \cdot \exp[\theta_{0,1}] =1+\frac{b}{a} = \frac{1}{1-P_{00}} = \left(\frac{a}{a+b}\right)^{-1}\\
+	\lim_{n \to +\infty} P^n &=
+	\begin{pmatrix}
+		\frac{b}{a+b} & \frac{a}{a+b} \\
+		\frac{b}{a+b} & \frac{a}{a+b}
+	\end{pmatrix}
+\end{split}\end{equation}
+
+Analyzing the second order momentum, we have
+\begin{equation}\begin{split}
+	\exp[\theta_{i,j}^2] &= P_{i,j} + \sum\limits_{k \neq j} \exp[(1+\theta_{k,j})]\cdot P_{i,k}\\
+	&= 1 + 2 \underbrace{\cdot \sum\limits_{k \neq j} \exp[\theta_{k,j}]\cdot P_{i,k}}_{\exp[\theta_{i,j}-1]} + \sum\limits_{k \neq j} \exp[\theta_{k,j}^2] \cdot P_{i,k}\\
+	&= 2 \cdot \exp[\theta_{i,j}]-1 +  \sum\limits_{k \neq j} \exp[\theta_{k,j}^2] \cdot P_{i,k} \forall i \neq j \\
+\end{split}\end{equation}
+
+Which means that for the two-state MC, we have
+\begin{equation} \begin{split}
+	\exp[\theta_{01}^2] &= \frac{2 \cdot \exp[\theta_{01}]}{1-P_{00}} = \frac{\frac{2}{a}-1}{a} = \frac{2}{a^2} - \frac{1}{a}\\
+	var[\theta_{01}] &= \frac{1-a}{a^2} \quad \text{same variance as a geometric r.v.} \\
+	var[\theta_{10}] &= \frac{1-b}{b^2}\\
+	\exp[\theta_{00}^2] &= 2 \cdot \exp[\theta_{00}]  -1 - P_{01}\cdot \exp[\theta_{10}^2] = 1 + \frac{a}{b} + \frac{2a}{b^2} \\
+	var[\theta_{00}] &= \frac{a \cdot(2-a-b)}{b^2}\\
+	var[\theta_{11}] &= \frac{b\cdot(2-a-b)}{a^2}\\
+\end{split}\end{equation}
+
+\section{Long Run Behaviour}
 \subsection{Steady-state probabilities}
 
 	\begin{definition}[Regular \gls{mc}]
