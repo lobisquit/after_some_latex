@@ -159,6 +159,57 @@ Which means that for the two-state MC, we have
 	var[\theta_{11}] &= \frac{b\cdot(2-a-b)}{a^2}\\
 \end{split}\end{equation}
 
+\subsection{Techniques to set up P matrix}
+In this part, we will show some tips to set the P matrix, so that the solving and the product
+will be easier when analyzing absorption time. First of all, you should discriminate
+transient state and the one that creates the absorbing states, like the following:
+\begin{equation} \begin{split}
+	P&=\raisebox{-1\baselineskip}{\begin{blockarray}{cc}
+      \begin{block}{(cc)}
+          Q  & R \\
+          0  & I \\
+      \end{block}
+			\parbox[c]{1.7cm}{\small 0,1,\dots,r-1 \text{transient}} & \parbox[c]{1.7cm}{\small r,\dots,n \text{absorbing}}
+    \end{blockarray}}
+	P^2 &= P \cdot P = \begin{pmatrix}
+	Q^2 & Q \cdot R + R \\
+	0 & I
+	\end{pmatrix}	\\
+\end{split}\end{equation}
+which means that for the general case we have:
+\begin{equation} \begin{split}
+	P^n &= \begin{pmatrix}
+	Q^n & \sum\limits_{i=0}^{n-1}Q^i \cdot R \\
+	0 & I
+	\end{pmatrix}
+\end{split}\end{equation}
+Let's now define $W_{i,j}^{(n)}$ as follows
+\begin{definition}
+	\begin{equation}
+		W_{i,j}^{(n)} = \exp[\sum\limits_{l=0}^n \Chi \{ X_l=j\}|X_0=i] = \sum\limits_{l=0}^n\exp[\Chi \{ X_l=j\}|X_0=i]\sum\limits_{l=0}^n P_{i,j}^{(l)}
+	\end{equation}
+\end{definition}
+Now suppose that $i,j$ are transient and put $W_{i,j}^{(n)}$ as element of a matrix. The resulting matrix will be:
+\begin{equation}\begin{split}
+	W^{(n)} &= I + Q + \dots + Q^n = I + Q \cdot W^{(n-1)} \\
+	W &= \lim_{n \to +\infty} W^{(n)} = \sum\limits_{l=0}^{+\infty} [I-Q]^{-1} \cdot \vec{1}
+\end{split}\end{equation}
+If we sum, for all j transient states $W_{i,j}$  we obtain:
+\begin{equation}
+	\sum\limits_{j=0}^{r-1}W_{i,j} = \exp[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i] = \exp[T|X_0=i]=v_i
+\end{equation}
+Let's now find the probability to go from a transient state ($i$) to an absorbing one($k$)
+\begin{equation}
+	U_{i,k}^{(n)} = \prob[T \le n , X_T = k | X_0=i] = \prob[X_n=k|X_0=i]=P_{i,k}^{(n)}
+\end{equation}
+This means that:
+\begin{enumerate}
+	\item $U^{(n)} = W^{(n-1)}\cdot R$
+	\item $U=\lim_{n\to +\infty} U^{(n)} = W \cdot R = [I-Q]^{-1}\cdot R$
+	\item $\tilde{P}=\begin{matrix} Q & r \\ \vec{0}&1 \end{matrix}$
+\end{enumerate}
+In conclusion, we found that the average first passage time is equal to the average
+ absorption time, which is $[I-Q]^{-1}\cdot \vec{1}$
 \section{Long Run Behaviour}
 \subsection{Steady-state probabilities}
 
@@ -345,7 +396,7 @@ Which means that for the two-state MC, we have
 		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \text{ is recurrent}$$
 	\end{proof}
 
-	\begin{theorem}[Basic limit theorem on MC]
+	\begin{theorem}[Basic limit theorem on MC] \label{th:basic_limit_MC}
 		Consider an irreducible aperiodic recurrent MC (an aperiodic recurrent class), we have
 		$$ \lim_{n\to \infty} P_{ii}^{(n)} = \frac{1}{m_i} = \pi_i = \lim_{n\to\infty} P_{ji}^{(n)} \qquad \forall j$$
 	\end{theorem}
