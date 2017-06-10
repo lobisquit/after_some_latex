@@ -82,7 +82,7 @@ I vettori $\e$, $\h$, $\d$, $\b$ sono tutti rappresentabili nella forma
 $$\vec{v}(\r,t) = \left(v_x(\r,t);v_y(\r,t);v_z(\r,t)\right)$$
 Definiamo ora cosa rappresentano i vettori sopra elencati:
 \begin{description}
-  \item[$\ert$ ] è il vettore campo elettrico $\left[\frac{V}{m}\right]$
+  \item[$\ert$] è il vettore campo elettrico $\left[\frac{V}{m}\right]$
   \item[$\brt$] è il vettore induzione magnetica $[T]$
   \item[$\hrt$] è il vettore campo magnetico $[A \cdot m]$
   \item[$\drt$] è il vettore spostamento elettrico $\left[\frac{C}{m^2}\right]$
@@ -101,15 +101,15 @@ dalle equazioni ai rotori, le equazioni alle divergenze. In particolare si trova
 Poiché non esiste il monopolo magnetico, si ottiene che $\diverg\b =0$.\\
 Per valutare il risultato della divergenza del rotore del campo magnetico, abbiamo bisogno della
 \textbf{legge di conservazione della carica elettrica}, che porta come risultato
-\begin{equation}
-  \int_{S_v}\Jt \cdot \hat{n} d S_v = -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho(\r,t) \cdot dV = \int \deriv{\rho(\r,t)}{t} dV\\
-  \int_V \diverg \Jt dV = - \int \deriv{\rho}{t} dV \Leftrightarrow \diverg \Jt = -\deriv{\rho}{t} \\
-  \deriv{}{t} \left(\diverg \d - \rho \right) =0 \implies
+\begin{equation}\begin{split}
+  \int_{S_v}\Jt \cdot \hat{n} d S_v &= -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho(\r,t) \cdot dV = \int \deriv{\rho(\r,t)}{t} dV\\
+  \int_V \diverg \Jt dV &= - \int \deriv{\rho}{t} dV \Leftrightarrow \diverg \Jt = -\deriv{\rho}{t} \\
+  \deriv{}{t} \left(\diverg \d - \rho \right) &=0 \implies
   \begin{cases}
     \diverg \d - \rho & \text{costante nel tempo} \\
     \diverg \d = \rho & \text{legge di Gauss}
   \end{cases}
-\end{equation}
+\end{split}\end{equation}
 La risoluzione delle equazioni di Maxwell porta ad aver 6 equazioni, derivanti
 dalle prime due equazioni (vettoriali) di Maxwell in 15 incognite ($\b , \e , \h , \d , \Jt $ tutte $\in \R^3$)
 
@@ -128,9 +128,9 @@ Nel vuoto si ha inoltre che:
 \end{equation}
 dove
 \begin{itemize}
-  \item $\mu_0 = 4 \pi 10^{-7} \left[\frac{H}{m}\right]$ è la costante di \textbf{permeabilità
+  \item $\mu_0 = 4\cdot \pi \cdot 10^{-7} \left[\frac{H}{m}\right]$ è la costante di \textbf{permeabilità
   magnetica del vuoto}
-  \item $\epsilon_0 = 8.85 10^{-12} \left[\frac{F}{m}\right]$ è la costante di \textbf{permermittività
+  \item $\epsilon_0 = 8.85 \cdot 10^{-12} \left[\frac{F}{m}\right]$ è la costante di \textbf{permermittività
   dielettrica del vuoto}
 \end{itemize}
 
@@ -158,5 +158,90 @@ Inoltre si ha che se uno dei due campi è statico, l'altro risulta indipendente.
 \textsc{Nota:} d'ora in poi si scriverà $\e$ invece che $\ert$ per semplicità.
 Applicando ora il rotore alle prime due equazioni di Maxwell nel vuoto, si ha:
 \begin{equation}\begin{split}
-  \rot\left(\rot\e\right) = -\mu_0 \partial{}{t}
+  \rot\left(\rot\e\right) &= -\mu_0 \deriv{}{t} \left(\rot\h\right) = -\mu_0\epsilon_0 \deriv[2]{\e}{t} \\
+  \rot\left(\rot\h\right) &= -\epsilon_0 \deriv{}{t} \left(\rot\e\right) = -\mu_0\epsilon_0 \deriv[2]{\h}{t} \\
 \end{split}\end{equation}
+
+Sfruttando l'identità vettoriale $\rot\rot\vec{A} = -\nabla^2 + \nabla(\diverg\vec{A})$ si ottiene
+\begin{equation}\begin{split}
+  -\nabla^2\e + \nabla(\diverg\e) &= - \mu_0\epsilon_0 \deriv[2]{\e}{t} \Leftrightarrow \nabla^2\e = \mu_0\epsilon_0\deriv[2]{\e}{t}\\
+  -\nabla^2\h + \nabla(\diverg\b) &= - \mu_0\epsilon_0 \deriv[2]{\h}{t} \Leftrightarrow \nabla^2\h = \mu_0\epsilon_0\deriv[2]{\h}{t}\\
+\end{split}\end{equation}
+Dove la prima equazione suppone che non ci siano cariche superficiali ($\rho=0$)
+Abbiamo quindi ottenuto sei equazioni in sei incognite, che conducono a un sistema risolvibile.
+
+\textbf{\textsc{Analisi dimensionale}}\\
+Consideriamo solo la componente lungo l'asse x del campo elettrico
+\begin{equation}
+  \left[\nabla^2 e_x\right] = \left[\mu_0\epsilon_0\right]  \cdot \left[\deriv[2]{e_x}{t}\right] \\
+  \frac{[e]}{m^2} = [\mu_0\epsilon_0] \cdot \frac{[e]}{s^2} \implies \frac{1}{\sqrt{[\mu_0\epsilon_0]}} = \frac{m}{s}
+\end{equation}
+Abbiamo quindi scoperto la velocità del moto ondoso nel vuoto. D'ora in avanti definiremo
+$c_0 = \frac{1}{\sqrt{\mu_0\epsilon_0}}\stackrel{\approx}{conti} 3 \cdot 10^8 m/s$.
+Possiamo inoltre definire il campo elettromagnetico come \textbf{campo di}
+\begin{description}
+  \item[propagazione] se $\vec{J_s}=\vec{0}$
+  \item[radiazione] se $\vec{J_s}\neq\vec{0}$
+\end{description}
+
+\section{Campo in spazio non vuoto}
+Nel mezzo, supponiamo che la legge che lega $\b$ ad $\h$ e $\d$ ad $\e$ sia analoga a quella nel vuoto.
+In particolare $\b=\mu\cdot\h$ e $\d=\epsilon\cdot\e$ dove
+\begin{itemize}
+  \item $\mu ]$ è la costante di \textbf{permeabilità  magnetica del mezzo}
+  \item $\epsilon$ è la costante di \textbf{permermittività  dielettrica del mezzo}
+\end{itemize}
+Supponiamo inoltre che le correnti impresse siano $\vec{j_i}$ e che le correnti di conduzione siano
+$\vec{J_{COND}} = \sigma \cdot \e$, definendo $\sigma$ la \textbf{costante di conducibilità elettrica
+del mezzo}, affinché le correnti di conduzione rispettino la legge di Ohm.
+
+Elenchiamo ora le \textbf{proprietà del mezzo} che andremo a studiare, considerandole vere almeno per volumi
+di spazio sufficientemente piccoli.
+\begin{description}
+  \item[linearità]
+  \item[isotropia]
+  \item[omogeneità] ossia $\epsilon, \mu, \sigma$ rimangono costanti nello spazio considerato
+  \item[tempo-invarianza] ossia le costanti non variano al variare del tempo (temperatura costante)
+  \item[non dispersività] le costanti di propagazione non variano in frequenza
+\end{description}
+
+D'ora in poi considereremo \textbf{solo mezzi dielettrici}, mezzi per cui $\mu \approx \mu_0$, per cui
+le equazioni di Maxwell rimarranno invariate nel mezzo e le costanti saranno $\epsilon, \mu_0$ e $\sigma$
+
+\section{Studio delle equazioni di Maxwell in regime sinusoidale}
+Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale:
+introdurremo i vettori di \textbf{\textit{Steinmetz}} e vedremo come un mezzo possa variare la sua
+attitudine al campo alle diverse frequenze.
+
+Supponiamo quindi, nel caso generale di lavorare a pulsazione $\omega = 2\pi f$ con $[f] = Hz = s^{-1}$ frequenza.
+Nonostante le trasmissioni avvengano su una banda di frequenze($\Delta f$), se consideriamo
+di lavorare in banda stretta ($\Delta f \ll f$), l'analisi alla frequenza portante è una buona
+approsimazione per tutta l'analisi. Nel momento in cui andremo a studiare segnali a
+banda larga, li vedremo come sovrapposizione di molti segnali a banda stretta.
+
+Il campo elettrico ora può essere scritto come:
+\begin{equation}\begin{split}
+  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot E_n(\r)\cdot cos\left[\omega t + \Phi_{E_n}(\r)\right]\\
+  \text{con}& \\
+  E_n (\r) &\in \R \text{ pari al massimo del campo nella componente n} \\
+  \Phi_{E_{n}} &\in [0;2\pi]\subset \R \text{ pari alla fase del campo nella componente n} \\
+\end{split}\end{equation}
+
+Introduciamo ora la rappresentazione con i \textbf{vettori complessi} o rappresentazione di \textbf{Steinmetz}
+come estensione del concetto di fasore complesso: utilizzeremo i valori massimi (invece che valori efficaci,
+usati durante il corso di elettrotecnica) e il fasore sarà un vettore.\
+\textsc{Fasore sulla linea di trasmissione}\\
+Vediamo ora come estendere il concetto di fasore al nostro campo elettromagnetico analizzando
+la tensione lungo la linea di trasmissione che lavora a pulsazione $\omega$
+\begin{equation}
+  v(t,x) = cos(\omega t + \Phi_0) = \Re\left[V \cdot e^{\jmath \omega t}\right]
+\end{equation}
+Con il campo elettrico $\E(\r) = \left[E_x(\r);E_y(\r);E_z(\r)\right] \in \C^3$ possiamo
+scrivere $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$. Avremo quindi
+\begin{equation}\begin{split}
+  \E(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)} \\
+  \ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot \Re\left[e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot cos[\omega t + \Phi_{E_n}(\r)]
+\end{split}\end{equation}
+Analogamente si ottengono ke
