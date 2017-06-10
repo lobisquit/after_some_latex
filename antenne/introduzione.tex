@@ -54,8 +54,7 @@ Mostreremo ora due teoremi che verranno utilizzati per risolvere le equazioni di
 il teorema di \textbf{Stokes} (o \textit{del rotore}) e il teorema di \textbf{Gauss} (del flusso).
 Si mostrerà solo il risultato, senza enunciarlo nè dimostrarlo.
 \subsection{Teorema di Stokes}
-Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat{n}$
- il versore normale alla superficie  e $\vec{A}$ il vettore del campo attraverso la superficie $S_l$, si ha:
+Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat{n}$ il versore normale alla superficie  e $\vec{A}$ il vettore del campo attraverso la superficie $S_l$, si ha:
 \begin{equation}
   \oint_{\vec{l}} \vec{A} \cdot d\vec{l} = \int_{S_l}\rot \vec{A} \cdot \hat{n} d S_l
 \end{equation}
@@ -64,7 +63,7 @@ Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat
 Dato $V$ un volume, $\vec{A}$ un campo e $S$ la superficie del volume e $\hat{n}$
 il versore normale alla superficie, si ha:
 \begin{equation}
-  \int_V \diverg \vec{A} dV = \int_S \vec{A}\cdot \hat{n} dS
+  \int_V \diverg \vec{A} dV = \int_S \vec{A}\cdot \hat{n} ~ dS
 \end{equation}
 
 \section{Equazioni di Maxwell}
@@ -74,15 +73,15 @@ vettoriale della divergenza del rotore, si ricaveranno le ultime due equazioni d
 \begin{equation}\begin{cases}
   \rot \ert = -\deriv{\brt}{t} \\
   \rot \hrt = \jt(\r,t) + \deriv{\drt}{t} \\
-  \diverg \d = \rho \\
-  \diverg \b = 0
+  \diverg \d(\r,t) = \rho \\
+  \diverg \b(\r,t) = 0
 \end{cases}\label{eq:maxwell}\end{equation}
 
 I vettori $\e$, $\h$, $\d$, $\b$ sono tutti rappresentabili nella forma
 $$\vec{v}(\r,t) = \left(v_x(\r,t);v_y(\r,t);v_z(\r,t)\right)$$
 Definiamo ora cosa rappresentano i vettori sopra elencati:
 \begin{itemize}
-  \item \textbf{$\ert$]}è il vettore campo elettrico $\left[\frac{V}{m}\right]$
+  \item \textbf{$\ert$}è il vettore campo elettrico $\left[\frac{V}{m}\right]$
   \item \textbf{$\brt$} è il vettore induzione magnetica $[T]$
   \item \textbf{$\hrt$} è il vettore campo magnetico $[A \cdot m]$
   \item \textbf{$\drt$} è il vettore spostamento elettrico $\left[\frac{C}{m^2}\right]$
@@ -99,10 +98,9 @@ dalle equazioni ai rotori, le equazioni alle divergenze. In particolare si trova
 \end{split}\end{equation}
 
 Poiché non esiste il monopolo magnetico, si ottiene che $\diverg\b =0$.\\
-Per valutare il risultato della divergenza del rotore del campo magnetico, abbiamo bisogno della
-\textbf{legge di conservazione della carica elettrica}, che porta come risultato
+Per valutare il risultato della divergenza del rotore del campo magnetico, abbiamo bisogno della \textbf{legge di conservazione della carica elettrica}, che porta come risultato
 \begin{equation}\begin{split}
-  \int_{S_v}\jt \cdot \hat{n} d S_v &= -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho(\r,t) \cdot dV = \int \deriv{\rho(\r,t)}{t} dV\\
+  \int_{S_v}\jt \cdot \hat{n} ~ dS_v &= -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho(\r,t) \cdot dV = \int \deriv{\rho(\r,t)}{t} dV\\
   \int_V \diverg \jt dV &= - \int \deriv{\rho}{t} dV \Leftrightarrow \diverg \jt = -\deriv{\rho}{t} \\
   \deriv{}{t} \left(\diverg \d - \rho \right) &=0 \implies
   \begin{cases}
