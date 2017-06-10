@@ -267,3 +267,26 @@ Con $\epsilon_c = \epsilon + \frac{-\jmath\sigma}{\omega}$ \textbf{costante di p
 dielettrica complessa}
 
 Andiamo ad analizzare ora i diversi tipi di mezzi al variare di $\epsilon_c$
+Sapendo che $\Re(\epsilon_c) = \epsilon$ e  $\Im(\epsilon_c) = -\frac{\sigma}{\omega}$,
+che $\J_{COND} = \sigma \E$ la densità di corrente di conduzione e $\J_{SPOST}$ la densità
+di corrente di spostamento, definiamo
+\begin{definition}[Angolo di perdita]
+  Definiamo l'angolo di perdita come
+  \begin{equation}
+    \delta = arctg\left(-\frac{\Im(\epsilon_c)}{\Re(\epsilon_c)}\right) = arctg\left(\frac{\sigma}{\omega \epsilon}\right)
+    \end{equation}
+\end{definition}
+
+Nella seguente tabella definiamo i diversi materiali a seconda di $\sigma$ e $\delta$.
+\begin{table}[h]
+\centering
+\label{tab:conductors}
+\begin{tabular}{llll}
+$\sigma$                      & materiale & $\delta$                & tipo di materiale                  \\
+0                             & vuoto     & 0                       & isolante perfetto                  \\
+$\approx 0$                   & aria      & $\approx 0$             & buon isolante                      \\
+$\gtreqless \omega \epsilon $ &           &                         & conduttore                         \\
+$\gg \omega \epsilon$         & metalli   & $\approx \frac{\pi}{2}$ & buon conduttore                    \\
+$\approx +\infty$             &           & $\frac{\pi}{2}$         & conduttore perfetto o ideale (PEC)
+\end{tabular}
+\end{table}
