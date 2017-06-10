@@ -317,7 +317,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 		& \le \int\limits_0^{t}|A(t-\eta)| \cdot dF_n(\eta) \le \sup\limits_{0 \le \eta \le t} |A(\eta)| \cdot F_n (t)
 	\end{split}\end{equation}
 
-	But, since $A(\eta)$ is bounded (see part \ref{req:boundness}) and $F_n(t)$ is infinitesimal in $n$, the proof is completed.
+	Since $A(\eta)$ is bounded (see part \ref{req:boundness}) and $F_n(t)$ is infinitesimal in $n$, the proof is completed.
 \end{proof}
 
 \section{Wald's equation}
@@ -325,13 +325,9 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 Let's now apply the renewal equation to another relevant quantity of a renewal process: we focus on the expectation of the next arrival time after a given time $t$.
 	$$ S_{N(t) + 1} = \sum\limits_{i=1}^{N(t)+1}X_i $$
 
-% \begin{equation}
-% 	\exp[S_{N(t)+1}] = \exp\left[\sum\limits_{i=1}^{N(t)+1}X_i\right] = \exp[N(t)+1]\cdot \exp[X]\exp[S_{N(t)}] \neq \exp[N(t)]\cdot \exp[X]
-% \end{equation}
-
 This resembles a random sum, but it is not the case, since $N(t) + 1$ is not independent on the various $X_i$.
 
-With the knowledge acquired on renewal processes, we try to answer this question applying the renewal argument on $ A(t) = S_{N(t)+1} $, differentiating again between times $t$ before and after first event.
+With the knowledge acquired on renewal processes, we try to answer this question applying the renewal argument on $ A(t) = S_{N(t)+1} $, discerning again between times $t$ before and after first event.
 
 \begin{equation}\begin{split}
 	\exp[A(t)|X_1=x] &=
@@ -389,7 +385,7 @@ Less formally, N is independent on what happens after $X_n$.
 	where
 	\begin{itemize}
 		\item[(1)] holds since the sum converges always, since it is actually a finite one
-		\item[(2)] holds for the indipendence between $I_n$ and $X_n$
+		\item[(2)] holds because of the indipendence between $I_n$ and $X_n$
 		\item[(3)] is due to the identically distributed $X_k$
 		\item[(4)] holds for $I_n$ definition
 	\end{itemize}
@@ -407,7 +403,7 @@ Less formally, N is independent on what happens after $X_n$.
 
 \section{The key renewal theorem}
 \begin{definition}
-	(Point of increase) Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that:
+	(Point of increase) Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that
 	\begin{equation}
 		F(\alpha+\epsilon)-F(\alpha-\epsilon)>0 \quad  \forall \quad
 		\epsilon > 0
@@ -515,7 +511,7 @@ Supposing $\mu < \infty$, for the \textit{renewal theorem} we obtain that
 	\label{limitingdistribution}
 \end{equation}
 
-From \ref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that:
+From \ref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that
 \begin{equation} \label{currtotallife}
 	\{\gamma_t \geq x, \delta_t \geq y \}
 	\Leftrightarrow
@@ -535,7 +531,7 @@ So $\frac{1-F(z)}{\mu}$ is the probability density function of $\delta_t$. We ar
 	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{\infty} \frac{z}{\mu} (1-F(z))dz \\ & = \frac{z^2}{2\mu} \left( 1-F(z) \right|_0^{\infty} + \int_0^{\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
 \end{align*}
 
-Finally we conclude that:
+Finally we conclude that
 \begin{equation*}
 	\begin{dcases}
 		~ \exp[\delta_t] = \frac{\exp[X^2]}{2 \exp[X]} \\
@@ -564,91 +560,109 @@ Then we finally prove that
 \end{equation}
 
 \subsection{Delayed renewal processes}
+	We assume that $\{X_k\}$ are independent positive random variables but only $X_2,X_3,...$ are identically distribuited.
+	In fact $X_1$ has a distribution function $G$ that differs from the distribution function $F$ of the other variables.
 
-We assume that $\{X_k\}$ are independent positive random variables but only $X_2,X_3,...$ are identically distribuited. $X_1$ has a distribution function G that differs from the distribution function F of the other variables. We call such process \textit{delayed renewal process}. Given an ordinary renewal process we can obtain a \textit{delayed renewal process} if we fix the time origin $t=0$ a certain time after the start of the ordinary process. We put $S_0=0$ and $S_n=X_1+X_2+...+X_n$ and $N(t)$ equal to the number of renewal at time t. We must distinguish between the mean number of renewals in the delayed process $M_D(t)$ and the renewal function associated with F $M(t)$.
-\begin{align}
-	& M_D(t) = \exp[N(t)]
-	\\ & M(t) = \sum_{k=1}^{\infty}F_k(t)
-\end{align}
-Now we want to prove what follows:
-\begin{align*}
-	& \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
-	\\ & \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
-\end{align*}
+	We call such process \textit{delayed renewal process}. Given an ordinary renewal process we can obtain a \textit{delayed renewal process} if we fix the time origin $t=0$ a certain time after the start of the ordinary process.
 
-We have already seen that for a recurrent irreducible aperiodic Markov Chain the following statament is true.
-\begin{equation}
-	\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
-\end{equation}
-Given a reccurent state $j$ we call $N_j(t)$ the number of visits in j by the time t. The following statament is always true for any initial state $Y_0$.
-\begin{equation}
-	N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
-\end{equation}
-If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
-\begin{align*}
-	& \exp[N_j(n)-N_j(n-1)|Y_0=j]=M(n)-M(n-1)=P_{jj}^{(n)}
-	\\ & \Rightarrow \pi_j=\frac{1}{m_j}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M(n)-M(n-1)]=\frac{1}{\mu}
-\end{align*}
-So we have proved that:
-\begin{equation}
-	\lim_{n \to \infty} P_{jj}^{n}=\frac{1}{\mu}
-\end{equation}
-If $Y_0=i \neq j$, then $N_j(n)$ is a delayed renewal process. We keep $Y_0=i \neq j$ and we obtain what follows.
-\begin{align*}
-	& \exp[N_j(n)-N_j(n-1)|Y_0=i \neq j]=M_D(n)-M_D(n-1)=P_{jj}^{(n)}
-	\\ & \Rightarrow \frac{1}{\mu}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M_D(n)-M_D(n-1)]
-\end{align*}
-So we have proved that:
-\begin{equation}
-	\lim_{n \to \infty} [M_D(n)-M_D(n-1)]=\frac{1}{\mu} \Rightarrow \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
-\end{equation}
-Now we consider a periodic Markov Chain with period $d$. We define $N_j$ as before. The following statament is always true for any initial state $Y_0$.
-\begin{equation}
-	N_j(n \cdot d)-N_j((n-1)\cdot d)=1 \quad \Leftrightarrow \quad Y_{n \cdot d}=j
-\end{equation}
-For $Y_0=j$ we obtain what follows.
-\begin{align*}
-	& \exp[N_j(n \cdot d)-N_j((n-1)\cdot d)|Y_0=j]=M(n \cdot d)-M((n-1)\cdot d)=P_{jj}^{(n \cdot d)}
-	\\ & \Rightarrow d \cdot \pi_j=\frac{d}{m_j}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [ M(n \cdot d)- M( (n-1) \cdot d)]=\frac{d}{\mu}
-\end{align*}
-So we have proved that:
-\begin{equation}
-	\lim_{n \to \infty} P_{jj}^{n \cdot d}=\frac{d}{\mu}
-\end{equation}
-For $Y_0 \neq j$ we obtain what follows.
-\begin{align*}
-	& \exp[N_j(n \cdot d)-N_j((n-1) \cdot d)|Y_0=i \neq j]=M_D(n \cdot d)-M_D((n-1) \cdot d)=P_{jj}^{(n \cdot d)}
-	\\ & \Rightarrow \frac{d}{\mu}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]
-\end{align*}
-So we have proved that:
-\begin{equation}
-	\lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]=\frac{d}{\mu} \Rightarrow \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
-\end{equation}
+	Let us put $S_0=0$ and $S_n=X_1+X_2+...+X_n$ and $N(t)$ equal to the number of renewal at time $t$. We must distinguish between the mean number of renewals in the delayed process $M_D(t)$ and the renewal function  $M(t)$ associated to $F$.
+
+	\begin{align}
+		& M_D(t) = \exp[N(t)]
+		\\ & M(t) = \sum_{k=1}^{\infty}F_k(t)
+	\end{align}
+	Now we want to prove what follows:
+	\begin{align*}
+		& \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
+		\\ & \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
+	\end{align*}
+
+	We have already seen that for a recurrent irreducible aperiodic \gls{mc} the following statament is true.
+	\begin{equation}
+		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
+	\end{equation}
+	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
+
+	\begin{equation}
+		N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
+	\end{equation}
+
+	If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
+	\begin{align*}
+		& \exp[N_j(n)-N_j(n-1)|Y_0=j]=M(n)-M(n-1)=P_{jj}^{(n)}
+		\\ & \Rightarrow \pi_j=\frac{1}{m_j}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M(n)-M(n-1)]=\frac{1}{\mu}
+	\end{align*}
+
+	So we have proved that
+	\begin{equation}
+		\lim_{n \to \infty} P_{jj}^{n}=\frac{1}{\mu}
+	\end{equation}
+
+	If $Y_0=i \neq j$, then $N_j(n)$ is a delayed renewal process. We keep $Y_0=i \neq j$ and we obtain what follows.
+	\begin{align*}
+		& \exp[N_j(n)-N_j(n-1)|Y_0=i \neq j]=M_D(n)-M_D(n-1)=P_{jj}^{(n)}
+		\\ & \Rightarrow \frac{1}{\mu}=\lim_{n \to \infty} P_{jj}^{n} = \lim_{n \to \infty} [M_D(n)-M_D(n-1)]
+	\end{align*}
+
+	So we have proved that
+	\begin{equation}
+		\lim_{n \to \infty} [M_D(n)-M_D(n-1)]=\frac{1}{\mu} \Rightarrow \lim_{t \to \infty }\frac{M_D(t)}{t}=\frac{1}{\mu}
+	\end{equation}
+
+	Now we consider a periodic \gls{mc} with period $d$. We define $N_j$ as before. The following statament is always true for any initial state $Y_0$.
+	\begin{equation}
+		N_j(n \cdot d)-N_j((n-1)\cdot d)=1 \quad \Leftrightarrow \quad Y_{n \cdot d}=j
+	\end{equation}
+
+	For $Y_0=j$ we obtain what follows.
+	\begin{align*}
+		& \exp[N_j(n \cdot d)-N_j((n-1)\cdot d)|Y_0=j]=M(n \cdot d)-M((n-1)\cdot d)=P_{jj}^{(n \cdot d)}
+		\\ & \Rightarrow d \cdot \pi_j=\frac{d}{m_j}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [ M(n \cdot d)- M( (n-1) \cdot d)]=\frac{d}{\mu}
+	\end{align*}
+
+	So we have proved that
+	\begin{equation}
+		\lim_{n \to \infty} P_{jj}^{n \cdot d}=\frac{d}{\mu}
+	\end{equation}
+	For $Y_0 \neq j$ we obtain what follows.
+	\begin{align*}
+		& \exp[N_j(n \cdot d)-N_j((n-1) \cdot d)|Y_0=i \neq j]=M_D(n \cdot d)-M_D((n-1) \cdot d)=P_{jj}^{(n \cdot d)}
+		\\ & \Rightarrow \frac{d}{\mu}=\lim_{n \to \infty} P_{jj}^{n \cdot d} = \lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]
+	\end{align*}
+	So we have proved that
+	\begin{equation}
+		\lim_{n \to \infty} [M_D(n \cdot d)-M_D((n-1) \cdot d)]=\frac{d}{\mu} \Rightarrow \lim_{t \to \infty }[M_D(t)-M_D(t-d)]=\frac{d}{\mu}
+	\end{equation}
 
 \subsection{Cumulative and related renewal process}
-We associate to every random varriable $X_i$ a second random variable $Y_i$. So $Y_i$ and $X_i$ are dependent but $(X_i,Y_i)$ and $(X_j,Y_j)$ are independent. We call F the distribution function of $X_i$, G the distribution function of $Y_i$, $\mu$ the mean of $X_i$ and $\nu$ the mean of $Y_i$.
-\paragraph{Queueieng model}
-Suppose to have queueing system in which the arrivals follow a Poisson process. $X_i$ represents the the period between two consequent arrivals. $Y_i$ is a portion $X_i$ and represents the period in which the queieng system is busy. We call $p(t)$ the probability that t falls into some portion $Y_i$. We suppose that the first interval has length $X_1=x$ and we obtain what follows.
-\begin{align*}
-	p(t) & =\prob[t \in Y |X_1 = x]=\begin{cases}
-		\prob[Y_1>t|X_1=x] \quad & if \quad x \geq t
-		\\ p(t-x) \quad & if \quad x<t
-	\end{cases}
-	\\ & = \int_0^t p(t-x)dF(x)+\int_t^{\infty}\prob[Y_1>t|X_1=x]dF(x)
-\end{align*}
-Knowing that $\int_0^{t}\prob[Y_1>t|X_1=x]dF(x)=0$ we have that:
-\begin{align*}
-	p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{\infty}\prob[Y_1>t|X_1=x]dF(x)
-	\\ & = \prob[Y_1>t]+\int_0^t p(t-x)dF(x)
-\end{align*}
-We know that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. We can establish that $\int_0^{\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$. Applying the renewal theorem we obtain what follows.
-\begin{align*}
-	\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
-\end{align*}
+	We associate to every random varriable $X_i$ a second random variable $Y_i$. So $Y_i$ and $X_i$ are dependent but the two couples $(X_i,Y_i)$ and $(X_j,Y_j)$ are still independent.
+
+	We call $F$ the distribution function of $X_i$, $G$ the distribution function of $Y_i$, $\mu$ the mean of $X_i$ and $\nu$ the mean of $Y_i$.
+
+	\paragraph{Queueing model}
+	Suppose to have queueing system in which the arrivals follow a Poisson process. $X_i$ represents the the period between two consequent arrivals. $Y_i$ is a portion $X_i$ and represents the period in which the queieng system is busy. We call $p(t)$ the probability that $t$ falls into some portion $Y_i$. We suppose that the first interval has length $X_1=x$ and we obtain what follows.
+	\begin{align*}
+		p(t) & =\prob[t \in Y |X_1 = x]=\begin{dcases}
+			\prob[Y_1>t|X_1=x] & \text{if} \quad x \geq t
+			\\ p(t-x) & \text{if} \quad x<t
+		\end{dcases}
+		\\ & = \int_0^t p(t-x)dF(x)+\int_t^{\infty}\prob[Y_1>t|X_1=x]dF(x)
+	\end{align*}
+	Knowing that $\int_0^{t}\prob[Y_1>t|X_1=x]dF(x)=0$ we have that
+	\begin{align*}
+		p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{\infty}\prob[Y_1>t|X_1=x]dF(x)
+		\\ & = \prob[Y_1>t]+\int_0^t p(t-x)dF(x)
+	\end{align*}
+
+	We observe that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. Let $\int_0^{\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$, we can apply the renewal theorem
+	\begin{align*}
+		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
+	\end{align*}
 
 \section{Reward Processes}
+Consider a \textit{renewal process} $N(t)$ with interarrival time $X_n$ with distribution function $F$. We suppose that each time a renewal occurs we receive a \textit{reward}; we call $R_n$ the reward associated with the \emph{n}-th renewal event.
 
-Consider a \textit{renewal process} $N(t)$ with interarrival time $X_n$ with distribution function $F$. We suppose that each time a renewal occurs we receive a \textit{reward}; we call $R_n$ the reward associated with the nth renewal event. We suppose that each reward $R_n$ depend on the length of the interval $X_n$. In this scenario the pairs $(X_n, R_n)$ are independent and identically distribuited. We define the total number of reward at time $t$ $R(t)$ as follows.
+We suppose that each reward $R_n$ depends on the length of the interval $X_n$. In this scenario the pairs $(X_n, R_n)$ are independent and identically distribuited. We define the total number of reward $R(t)$ at time $t$ as follows.
 \begin{equation}
 	R(t)=\sum_{n=1}^{N(t)}R_n
 \end{equation}
@@ -668,36 +682,36 @@ Now we adopt the following definitions.
 		\label{rewardtheorem2}
 	\end{equation}
 \end{theorem}
-\begin{proof}
-	We want to prove \ref{rewardtheorem1}.
+\begin{proof} of equation \ref{rewardtheorem1}.
 	\begin{align*}
 		\frac{R(t)}{t}=\frac{\sum_{n=1}^{N(t)}R_n}{t}= \bigg( \frac{\sum_{n=1}^{N(t)}R_n}{N(t)}\bigg)\cdot\bigg(\frac{N(t)}{t}\bigg)
 	\end{align*}
-	By the strong law of large numbers we obtain that:
+	By the strong law of large numbers we obtain that
 	\begin{align*}
 		\lim_{t \to \infty}\frac{\sum_{n=1}^{N(t)}R_n}{N(t)}=\exp[R]
 	\end{align*}
-	By the renewal theorem we obtain that:
+	By the renewal theorem we obtain that
 	\begin{align*}
-		\lim_{t \to \infty}=\frac{1}{\exp[X]}
+		\lim_{t \to \infty} \frac{N(t)}{t}=\frac{1}{\exp[X]}
 	\end{align*}
 	Then \ref{rewardtheorem1} is proven.
 \end{proof}
-\begin{proof}
-	We want prove \ref{rewardtheorem2}. We note immediately that $N(t)+1$ is a stopping time both for $X_1,X_2,X_3,...$ and for $R_1,R_2,R_3,..$.
+\begin{proof} of equation \ref{rewardtheorem2}.
+
+	We see immediately that $N(t)+1$ is a stopping time both for $X_1,X_2,X_3,...$ and for $R_1,R_2,R_3,..$.
 	\begin{align*}
 		\sum_{n=1}^{N(t)}R_n \leq R(t) \leq \sum_{n=1}^{N(t)+1}R_n
 	\end{align*}
-	Then we have that:
+	Then we have that
 	\begin{align*}
 		& \exp\bigg[\sum_{n=1}^{N(t)}R_n\bigg] \leq \exp[R(t)] \leq \exp\bigg[\sum_{n=1}^{N(t)+1}R_n\bigg]
-		\\ & (M(t)+1)\exp[R]-\exp[R_{N(t)+1}] \leq \exp[R(t)] \leq (M(t)+1)\exp[R]
+		\\ & [M(t)+1] \, \exp[R]-\exp[R_{N(t)+1}] \leq \exp[R(t)] \leq [M(t)+1] \, \exp[R]
 	\end{align*}
-	Then, knowing that $\lim_{t \to \infty} \frac{(M(t)+1)\exp[R]}{t} = \frac {\exp[R]}{\exp[X]} $ we have that:
+	Then, knowing that $\lim_{t \to \infty} \frac{[M(t)+1] \, \exp[R]}{t} = \frac {\exp[R]}{\exp[X]} $ we have that
 	\begin{align*}
 		\frac {\exp[R]}{\exp[X]} - \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
 	\end{align*}
-	We put $A(t)=\exp[R_{N(t)+1}]$ and we have that:
+	We put $A(t)=\exp[R_{N(t)+1}]$ and we have that
 	\begin{align*}
 		& \exp[R_{N(t)+1}|X_1=x]=
 			\begin{cases}
@@ -707,11 +721,11 @@ Now we adopt the following definitions.
 		\\ & \Rightarrow
 		\\ & A(t)=\int_{0}^{t}A(t-x)dF(x)+\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)
 	\end{align*}
-	We put $a(t)=\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)$ and we have that:
+	We put $a(t)=\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)$ and we have that
 	\begin{align*}
 		A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)=(M \ast a) (t)+a(t)
 	\end{align*}
-	Assuming that $R_n \geq 0$ we have that:
+	Assuming that $R_n \geq 0$ we have that
 	\begin{align*}
 		& \lim_{t \to \infty}a(t) = \lim_{t \to \infty}\int_{t}^{+\infty}\exp[R_1|X_1=x]dF(x)=0
 		\\ & a(0)=\int_{0}^{+\infty}\exp[R_1|X_1=x]dF(x)=\exp[R_1]<+\infty
@@ -725,7 +739,7 @@ Now we adopt the following definitions.
 		1) \quad & \forall \epsilon>0 \quad \exists T>0:\quad |a(t)|<\epsilon \quad \forall t>T
 		\\ 2) \quad & |a(t)| \leq \exp[|R_1|]<+\infty \quad \forall t
 	\end{align*}
-	Knowing that $A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)$ we have that:
+	Knowing that $A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)$ we have that
 	\begin{align*}
 		|A(t)| & = |\int_{0}^{t}a(t-x)dM(x)+a(t)| \leq \int_{0}^{t}|a(t-x)|dM(x)+|a(t)|
 		\\ & \leq \int_{0}^{t-T}|a(t-x)|dM(x)+ \int_{t-T}^{t}|a(t-x)|dM(x) + a(t)
@@ -734,11 +748,11 @@ Now we adopt the following definitions.
 	\begin{align*}
 		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
 	\end{align*}
-	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that:
+	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that
 	\begin{align*}
 		\lim_{t \to \infty} \frac{A(t)}{t} \leq \frac{\epsilon}{\exp[X]} \Rightarrow \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t}=0 \Rightarrow \frac {\exp[R]}{\exp[X]} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
 	\end{align*}
-	The we have that:
+	The we have that
 	\begin{align*}
 		\lim_{t \to \infty} \frac{\exp[R(t)]}{t} = \frac{\exp[R]}{\exp[X]}
 	\end{align*}
@@ -747,21 +761,17 @@ Now we adopt the following definitions.
 
 \section{Regenerative Processes}
 
-Consider a stochastic process $\{X(t), t \geq 0\}$ with state space$\{0, 1, 2, ... \}$ having
-the property that there exist time points at which the process (probabilistically) restarts itself. That is, suppose that with probability 1, there exists a time $S_1$
-such that the continuation of the process beyond $S_1$ is a probabilistic replica
-of the whole process starting at 0. Note that this property implies the existence
-of further times $S_2 , S_3 , \dots$ having the same property as $S_1$. Such a stochastic
-process is known as a \emph{regenerative process}.
-From the above, it follows that $\{S_1 , S_2 , ...\}$ constitute the event times of
-a renewal process. We say that a cycle is completed every time a renewal
-occurs. Let $N(t) = \max\{n: S_n \leq t\}$ denote the number of cycles by time t.
+Consider a stochastic process $\{X(t), t \geq 0\}$ with state space $\{0, 1, 2, ... \}$ with the property that there exist time points at which the process (probabilistically) restarts itself.
+
+That is, suppose that with probability 1, there exists a time $S_1$
+such that the continuation of the process beyond $S_1$ is a probabilistic replica of the whole process starting at 0. Note that this property implies the existence of further times $S_2 , S_3 , \dots$ having the same property as $S_1$. Such a stochastic process is known as a \emph{regenerative process}.
+
+From the above, it follows that $\{S_1 , S_2 , ...\}$ constitute the event times of a renewal process. We say that a cycle is completed every time a renewal occurs. Let $N(t) = \max\{n: S_n \leq t\}$ denote the number of cycles by time t.
 
 \section{Semi-Markov Processes}
-A semi-Markov process is one that changes states in accordance with a Markov
-chain but takes a random amount of time between changes. More specifically
-consider a stochastic process with states $0, 1, ...  $, which is such that, whenever
-it enters state $i, i\geq 0$:
+A semi-Markov process is one that changes states following a \gls{mc} but takes a random amount of time between changes.
+
+More formally, consider a stochastic process with states $0, 1, ...  $, such that, whenever it enters state $i\geq 0$,
 \begin{enumerate}
 	\item The next state is $j$ with probability $P_{ij}$
 	\item Given that the next state is $j$, the time the transition takes is random with distribution $F_{ij}$ and independent of past and future
@@ -769,134 +779,84 @@ it enters state $i, i\geq 0$:
 If we let $Z(t)$ denote the state at time $t$, then $\{Z(t), t\leq 0\}$ is called a \emph{semi-Markov
 process}.
 Thus a semi-Markov process does not possess the Markovian property that
-given the present state the future is independent of the past. For in predicting
-the future not only would we want to know the present state, but also the
-length of time that has been spent in that state\footnote{note that ``$Z(t) = \mbox{ state of the process at time } t$" is Markov only in the case where the distribution pdf od the transition time is memoryless (for example exponential), more in general $Z(t)$ is not Markovian.}. Of course, at the moment of transition, all we would need to know is the new state ( and nothing about
-the past). %A Markov chain is a semi-Markov process in which
+the future is independent of the past, given the present state.
 
-Let $H_i(t)$ denote the \emph{distribution of time} that the semi-Markov process spends
-in state i before making a transition. That is, by conditioning on the next
-state, we see
-	\begin{equation}
-		H_i(t) = \sum_j P_{ij} F_{ij}(t)
-	\end{equation}
+To predict the future not only would we want to know the present state, but also the length of time that has been spent in that state
+\footnote{note that $Z(t) = \{\text{state of the process at time } t\}$ is a \gls{mc} only when the transition time is memoryless (for example exponential).}. Of course, at the moment of transition, all we would need to know is the new state (and nothing about the past).
 
-and let $\mu_i$ denote its mean. That is:
-	\begin{equation}
-		 \mu_i = \exp[H_i(t)] = \int_{0}^{+\infty}x \,dH_i(x)
-	\end{equation}
-
-\begin{definition}[Average return time]
-	$\mu_{ii} = $ average time between two consecutive transition in state $i$
-\end{definition}
-
-\subsection{Regenerative Processes}
-
-Consider a stochastic process $\{X(t), t \geq 0\}$ with state space$\{0, 1, 2, ... \}$ having
-the property that there exist time points at which the process (probabilistically) restarts itself. That is, suppose that with probability 1, there exists a time $S_1$
-such that the continuation of the process beyond $S_1$ is a probabilistic replica
-of the whole process starting at 0. Note that this property implies the existence
-of further times $S_2 , S_3 , \dots$ having the same property as $S_1$. Such a stochastic
-process is known as a \emph{regenerative process}.
-From the above, it follows that $\{S_1 , S_2 , ...\}$ constitute the event times of
-a renewal process. We say that a cycle is completed every time a renewal
-occurs. Let $N(t) = \max\{n: S_n \leq t\}$ denote the number of cycles by time t.
-
-\subsection{Semi-Markov Processes}
-A semi-Markov process is one that changes states in accordance with a Markov
-chain but takes a random amount of time between changes. More specifically
-consider a stochastic process with states $0, 1, ...  $, which is such that, whenever
-it enters state $i, i\geq 0$:
-\begin{enumerate}
-	\item The next state is $j$ with probability $P_{ij}$
-	\item Given that the next state is $j$, the time the transition takes is random with distribution $F_{ij}$ and independent of past and future
-\end{enumerate}
-If we let $Z(t)$ denote the state at time $t$, then $\{Z(t), t\leq 0\}$ is called a \emph{semi-Markov
-	process}.
-Thus a semi-Markov process does not possess the Markovian property that
-given the present state the future is independent of the past. For in predicting
-the future not only would we want to know the present state, but also the
-length of time that has been spent in that state\footnote{note that ``$Z(t) = \mbox{ state of the process at time } t$" is Markov only in the case where the distribution pdf od the transition time is memoryless (for example exponential), more in general $Z(t)$ is not Markovian.}. Of course, at the moment of transition, all we would need to know is the new state ( and nothing about
-the past). %A Markov chain is a semi-Markov process in which
-
-Let $H_i(t)$ denote the \emph{distribution of time} that the semi-Markov process spends
-in state i before making a transition. That is, by conditioning on the next
-state, we see
+Let $H_i(t)$ denote the \emph{distribution of time} that the semi-Markov process spends in state i before making a transition. For the law of total probability, we have that
 \begin{equation}
-H_i(t) = \sum_j P_{ij} F_{ij}(t)
+	H_i(t) = \sum_j P_{ij} F_{ij}(t)
 \end{equation}
 
-and let $\mu_i$ denote its mean. That is:
+and the average time between two consecutive transition in state $i$ is
 \begin{equation}
-\mu_i = \exp[H_i(t)] = \int_{0}^{+\infty}x \,dH_i(x)
+	 \mu_i = \exp[H_i(t)] = \int_{0}^{+\infty}x \,dH_i(x)
 \end{equation}
 
-Let $T_{ii}$ denote the time between successive transitions into state i and let
+Let $T_{ii}$ denote the time between successive transitions into state $i$ and
 \begin{equation}
 \mu_{ii}=\exp [T_{ii}]
 \end{equation}
-By using the theory of alternating renewal processes, it is a
-simple matter to derive an expression for the limiting probabilities of a semi-Markov
-process.
+With the theory of alternating renewal processes, it is a simple matter to derive an expression for the limiting probabilities of a semi-Markov process.
 
 \begin{theorem}
-	If the semi-Markov process is irreducible and if $T_{ii}$ has a non-lattice\footnote{boh} distribution with finite mean, then
+	If the semi-Markov process is irreducible and if $T_{ii}$ has a non-lattice\footnote{previously defined as arithmetic} distribution with finite mean, then the limiting distribution
 
 	$$P_j = \lim_{t \to \infty} \prob[Z(t)=j | Z(0)=k]$$
 
-	Exists and independent of the initial state. Furthermore,
+	exists and independent of the initial state. Furthermore,
 
 	$$P_j = \frac{\exp[\mbox{time in state i in a cycle}]}{\exp[\mbox{duration of the cycle}]} = \frac{\mu_i}{\mu_{ii}}$$
 
 \end{theorem}
-Note that while $\mu_i$ is easy to compute, $\mu_{ii}$ is much more difficult.
+Note that while $\mu_i$ is easy to compute, $\mu_{ii}$ is tipically much more difficult, since it requires the knowledge of the whole chain.
 
 \subsection{Renewal-Reward processes}
 
-Let:
+Let us define the following quantities of interest.
 
-\begin{equation}
-r_{ij} = \mbox{reward of transition } i\rightarrow j. \qquad R_{ij} = \exp[r_i]
-\end{equation}
-\begin{equation}
-R_i = \sum_k P_{ik} R_{ik} = \mbox{ average reward of a visit to state } i
-\end{equation}
-$\theta_{ij} = $ total reward of going from i to j for the first time following any path
-\begin{equation}
-\theta_{ij} = \begin{cases}
-&r_{ij} \quad\mbox{with probability } P_{ij}\\
-&r_{ik}+\theta_{kj}  \quad\mbox{with probability } P_{ik}, k\neq j
-\end{cases}
-\end{equation}
 \begin{equation*}
-\rho_{ij} = \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} = R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] = R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
+	\begin{dcases}
+		r_{ij} & \text{reward of transition } i\rightarrow j \\
+		R_{ij} = \exp[r_{ij}] & \text{mean reward of transition } i\rightarrow j\\
+		R_i = \sum_k P_{ik} R_{ik} & \text{average reward of a visit to state } i\\
+		\theta_{ij} =
+			\begin{dcases}
+				r_{ij} &\text{with probability } P_{ij}\\
+				r_{ik}+\theta_{kj} &\text{with probability } P_{ik}, k\neq j
+			\end{dcases}
+			& \parbox[c]{.5\textwidth}{total reward going from $i$ to $j$ for the first time following any path} \\
+			\begin{aligned}[b]
+				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
+				&= R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] \\
+				&= R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
+			\end{aligned} & \parbox[b]{.5\textwidth}{average reward going from $i$ to $j$ for the first time following any path}
+	\end{dcases}
 \end{equation*}
 
-\begin{equation}
-\Rightarrow\rho_{ij} = \exp[\theta_{ij}] =  R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
-\end{equation}
-
-
-We have that:
+We have that the average reward for transitions exiting each possible state $i$ is
 \begin{equation*}
 \sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_j \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
 \end{equation*}
-So we have that for \emph{any} metric $r(\cdot)$
+
+For \emph{any} metric $r(\cdot)$ it holds that
 \begin{equation}
 \Rightarrow\sum_i \pi_i \rho_{ij} = \sum_j \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
 \end{equation}
-if the metric is \emph{time}
+
+and if the metric is specifically \emph{time}
 \begin{equation}
 \pi_j \mu_{jj} = \sum_i \pi_i \mu_i
 \end{equation}
 
-Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result applies:
+Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
 \begin{equation}
 \lim_{t \to \infty}\frac{R(t)}{t} = \frac{\exp[R]}{\exp[X]} = \frac{\rho_{jj}}{\mu_{jj}} = \frac{\sum_i \pi_i \frac{R_i}{\pi_j}}{\sum_i \pi_i \frac{\mu_i}{\pi_j}} = \frac{\sum_i \pi_i \sum_j P_{ik} R_{ik}}{\sum_i \pi_i \sum_k P_{ik}T_{ik}}
 \end{equation}
 
-This is a powerful way to evaluate systems performances, in order for this model to apply 2 conditions need to be met:
+This is a powerful way to evaluate systems performances, in order for this model to be applied two conditions need to be met:
 \begin{enumerate}
-	\item The system must be able to be modeled with a concept of \emph{state}.\footnote{That's good for us, every protocol is essentially a state machine}
-	\item The process have to be Markovian or at least semi-Markovian
+	\item The system must be able to be modeled with a concept of \emph{state}\footnote{That's good for us, every protocol is essentially a state machine}
+	\item The process must be Markovian or at least semi-Markovian
 \end{enumerate}
