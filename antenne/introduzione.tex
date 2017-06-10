@@ -102,5 +102,61 @@ Poiché non esiste il monopolo magnetico, si ottiene che $\diverg\b =0$.\\
 Per valutare il risultato della divergenza del rotore del campo magnetico, abbiamo bisogno della
 \textbf{legge di conservazione della carica elettrica}, che porta come risultato
 \begin{equation}
-  
+  \int_{S_v}\Jt \cdot \hat{n} d S_v = -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho(\r,t) \cdot dV = \int \deriv{\rho(\r,t)}{t} dV\\
+  \int_V \diverg \Jt dV = - \int \deriv{\rho}{t} dV \Leftrightarrow \diverg \Jt = -\deriv{\rho}{t} \\
+  \deriv{}{t} \left(\diverg \d - \rho \right) =0 \implies
+  \begin{cases}
+    \diverg \d - \rho & \text{costante nel tempo} \\
+    \diverg \d = \rho & \text{legge di Gauss}
+  \end{cases}
 \end{equation}
+La risoluzione delle equazioni di Maxwell porta ad aver 6 equazioni, derivanti
+dalle prime due equazioni (vettoriali) di Maxwell in 15 incognite ($\b , \e , \h , \d , \Jt $ tutte $\in \R^3$)
+
+Si possono ridurre le incognite attraverso le \textbf{relazioni costitutive} o
+\textbf{leggi del legame materiale}. In particolare si riesce ad ottenere
+\begin{equation}
+  \Jt = \vec{J}_{COND} + \vec{j}
+\end{equation}
+dove la prima è la corrente autoindotta (incognita) e la seconda è la corrente impressa, nota.
+
+Nel vuoto si ha inoltre che:
+\begin{equation}
+  \b = \mu_0 \cdot \h \quad \d = \epsilon_0 \e \\
+  \vec{J}_{COND} = 0 \implies \Jt \text{ è nota} \\
+  \label{eq:bh-de-j}
+\end{equation}
+dove
+\begin{itemize}
+  \item $\mu_0 = 4 \pi 10^{-7} \left[\frac{H}{m}\right]$ è la costante di \textbf{permeabilità
+  magnetica del vuoto}
+  \item $\epsilon_0 = 8.85 10^{-12} \left[\frac{F}{m}\right]$ è la costante di \textbf{permermittività
+  dielettrica del vuoto}
+\end{itemize}
+
+\textsc{Densità di corrente impressa}
+Dato $V_s$ il volume delle sorgenti, si ha che la densità di corrente elettrica impressa è:
+\begin{equation} \vec{j}(\r,t)=
+  \begin{cases}
+    \neq 0 & \forall \r \in V_s \\
+    =0 & \text{altrimenti}
+  \end{cases}
+  \label{eq:correnti}
+\end{equation}
+
+Grazie alle condizioni descritte in \eqref{eq:bh-de-j} e \eqref{eq:correnti}, nel vuoto
+le equazioni di Maxwell si possono riscrivere come
+\begin{equation}\begin{cases}
+  \rot \ert = -\mu_0 \deriv{\hrt}{t} \\
+  \rot \hrt = \epsilon_0 \deriv{\ert}{t}\\
+  \diverg \hrt = 0 \\ \diverg\ert = \frac{\rho}{\epsilon_0}
+\end{cases}\label{eq:maxwell-vuoto}\end{equation}
+
+Le incognite $\{\ert, \hrt\}$ sono le incognite del \textbf{campo elettromagnetico}.
+Inoltre si ha che se uno dei due campi è statico, l'altro risulta indipendente.
+
+\textsc{Nota:} d'ora in poi si scriverà $\e$ invece che $\ert$ per semplicità.
+Applicando ora il rotore alle prime due equazioni di Maxwell nel vuoto, si ha:
+\begin{equation}\begin{split}
+  \rot\left(\rot\e\right) = -\mu_0 \partial{}{t}
+\end{split}\end{equation}
