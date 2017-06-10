@@ -1,0 +1,23 @@
+\chapter{Polarizzazione del campo elettromagnetico}
+Andremo ora ad analizzare come si comporta il campo elettromagnetico nello spazio, in particolare la sua evoluzione e i casi degeneri.
+
+Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione alla differenza con il corso di Fisica 2: mentre nell'altro corso si è osservata la polarizzazione del mezzo, ora analizzeremo la polarizzazione dell'onda elettromagnetica.
+\begin{esp}
+  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos\left[\omega t + \phi_{E_n}(\r)\right] \\
+  &=\ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos(\omega t)\cdot cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\\
+  &=cos(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos \left[ \phi_{E_n}(\r) \right] \\
+  &+sin(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right] \\
+  \implies \ert &= \E^R(\r)\cdot cos(\omega t) - \E^I(\r)\cdot sin(\omega t)
+&\text{with } \\
+\E^R(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos \left[ \phi_{E_n}(\r) \right] \\
+\E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right]
+\end{esp}
+
+We can say that $\e(\r,0) = \E^R(\r)$ if $t=0$ and $\e(\r,\frac{pi}{2\omega}) = -\E^I(\r)$
+
+\textsc{Possiamo quindi affermare che}
+\begin{enumerate}
+  \item Il campo elettromagnetico giace in un dato punto $\r$ su un piano di polarizzazione, qualunque t si scelga
+  \item Il campo elettromagnetico traccia una curva chiusa
+  \item La curva chiusa, in genere, è un ellisse.
+\end{enumerate}
