@@ -20,7 +20,7 @@
 
 % math package
 \usepackage{mathtools}
-\usepackage{amsthm}
+\usepackage{amsthm, environ}
 \usepackage{amsmath, amssymb, dsfont, bm,blkarray}
 
 % tikz figures
@@ -129,6 +129,11 @@
 \newcommand{\deriv}[3][]{% \deriv[<order>]{<func>}{<var>}
   \ensuremath{\frac{\partial^{#1} {#2}}{\partial {#3}^{#1}}}}
 %---------------------------------
+\NewEnviron{esp}{%
+\begin{equation}\begin{split}
+  \BODY
+\end{split}\end{equation}
+}
 
 \begin{document}
 
@@ -141,7 +146,7 @@
 		\vspace{0.5cm}
 		\emph{written with love by} \\
 		\vspace{0.5cm}
-		{\Large Andrea Pittaro, Umberto Martinelli}
+		{\Large Andrea Pittaro, Enrico Lovisotto, Umberto Martinelli}
 	\end{center}
 
 	\vfill
