@@ -1,0 +1,106 @@
+\chapter{Introduzione}
+\section{Sistemi di riferimento}
+Nel corso verranno utilizzate principalmente due sistemi di riferimento: quello
+con coordinate \textbf{cartesiane} e quello con coordinate \textbf{sferiche}.
+Le rappresentazioni di un punto \textit{\textbf{P}} nelle due coordinate saranno le seguenti:
+\begin{equation}
+  P=(x,y,z) = \r = x \cdot \hat{x} + y \cdot \hat{y} +z \cdot \hat{z}  \quad \r\text{ è il vettore posizione} \\
+  x \bot y \bot z \bot x \\
+  P=(r,\theta,\phi) = r \cdot \hat{r} = r \cdot \hat{r}(\theta,\phi)\\
+  r \bot \theta \bot \phi \bot r
+  \label{eq:riferimento}
+\end{equation}
+
+\section{Operatori differenziali (spaziali)}
+Elenchiamo ora gli operatori che utilizzeremo, per poi definirli meglio in delle loro sottosezioni.
+\begin{description}
+  \item[Operatore Nabla] $ \nabla = \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right)$
+  \item[Rotore] $\rot$
+  \item[Divergenza] $\diverg$
+  \item[Gradiente] $\nabla$
+  \item[Laplaciano] $\nabla^2$
+\end{description}
+Iniziamo a descrivere cosa succede a un generico vettore $\vec{A\left(\r\right)}=\left(A_x(\r),A_y(\r),A_z(\r)\right)$.
+\subsection{Rotore}
+\begin{equation} \begin{split}
+  \rot \vec{A(\r)} &=
+  \begin{vmatrix}
+    \hat{x} &\hat{y} &\hat{z} \\
+    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+    A_x & A_y & A_z
+  \end{vmatrix} \\
+  &= \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right)\cdot \hat{x} -
+  \left(\frac{\partial A_z}{\partial x} - \frac{\partial A_x}{\partial z}\right)\cdot \hat{y} +
+  \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right)\cdot \hat{z}
+\end{split}\end{equation}
+
+\subsection{Divergenza}
+\begin{equation}
+  \diverg \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}
+\end{equation}
+\subsection{Gradiente}
+Dato $\Phi(\r)$ uno scalare, il suo gradiente risulta
+\begin{equation}
+  \nabla \Phi = \left(\frac{\partial \Phi}{\partial x} ; \frac{\partial \Phi}{\partial y}; \frac{\partial \Phi}{\partial z}\right)
+\end{equation}
+\subsection{Laplaciano}
+Dato $\Phi(\r)$ uno scalare, il suo laplaciano risulta
+\begin{equation}
+  \nabla^2 \Phi = \left(\frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} + \frac{\partial^2 \Phi}{\partial z^2}\right)
+\end{equation}
+
+\section{Teoremi importanti}
+Mostreremo ora due teoremi che verranno utilizzati per risolvere le equazioni di Maxwell:
+il teorema di \textbf{Stokes} (o \textit{del rotore}) e il teorema di \textbf{Gauss} (del flusso).
+Si mostrerà solo il risultato, senza enunciarlo nè dimostrarlo.
+\subsection{Teorema di Stokes}
+Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat{n}$
+ il versore normale alla superficie  e $\vec{A}$ il vettore del campo attraverso la superficie $S_l$, si ha:
+\begin{equation}
+  \oint_{\vec{l}} \vec{A} \cdot d\vec{l} = \int_{S_l}\rot \vec{A} \cdot \hat{n} d S_l
+\end{equation}
+
+\subsection{Teorema di Gauss (del flusso)}
+Dato $V$ un volume, $\vec{A}$ un campo e $S$ la superficie del volume e $\hat{n}$
+il versore normale alla superficie, si ha:
+\begin{equation}
+  \int_V \diverg \vec{A} dV = \int_S \vec{A}\cdot \hat{n} dS
+\end{equation}
+
+\section{Equazioni di Maxwell}
+Si elencano ora le quattro equazioni di Maxwell nel dominio del tempo e, dall'identità
+vettoriale della divergenza del rotore, si ricaveranno le ultime due equazioni dalle prime due.
+
+\begin{equation}\begin{cases}
+  \rot \ert = -\deriv{\brt}{t} \\
+  \rot \hrt = \Jt(\r,t) + \deriv{\drt}{t} \\
+  \diverg \d = \rho \\
+  \diverg \b = 0
+\end{cases}\label{eq:maxwell}\end{equation}
+
+I vettori $\e$, $\h$, $\d$, $\b$ sono tutti rappresentabili nella forma
+$$\vec{v}(\r,t) = \left(v_x(\r,t);v_y(\r,t);v_z(\r,t)\right)$$
+Definiamo ora cosa rappresentano i vettori sopra elencati:
+\begin{description}
+  \item[$\ert$ ] è il vettore campo elettrico $\left[\frac{V}{m}\right]$
+  \item[$\brt$] è il vettore induzione magnetica $[T]$
+  \item[$\hrt$] è il vettore campo magnetico $[A \cdot m]$
+  \item[$\drt$] è il vettore spostamento elettrico $\left[\frac{C}{m^2}\right]$
+  \item[$\Jt$] è il vettore densità totale di corrente elettrica $\left[\frac{A}{m^2}\right]$
+\end{description}
+
+\subsubsection{Identità vettoriale e ultime due equazioni di Maxwell}
+L'identità vettoriale $\diverg (\rot \vec{A}) = 0$ permette di ricavare
+dalle equazioni ai rotori, le equazioni alle divergenze. In particolare si trova che:
+\begin{equation}\begin{split}
+  \diverg (\rot \ert) &= \diverg \left(-\deriv{\brt}{t}\right)=0 \quad \Leftrightarrow \deriv{\diverg \b}{t}=0\\
+  \implies & \diverg \b \text{ è costante nel tempo.}\\
+  \diverg(\rot \h) &= \diverg \Jt + \deriv{\diverg \d}{t}=0
+\end{split}\end{equation}
+
+Poiché non esiste il monopolo magnetico, si ottiene che $\diverg\b =0$.\\
+Per valutare il risultato della divergenza del rotore del campo magnetico, abbiamo bisogno della
+\textbf{legge di conservazione della carica elettrica}, che porta come risultato
+\begin{equation}
+  
+\end{equation}
