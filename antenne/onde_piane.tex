@@ -1,0 +1,212 @@
+\chapter{Onde piane}
+Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno proprietà e simmetrie notevoli che ne semplificano notevolmente lo studio rispetto al caso generale.
+
+\section{Equazioni di Helmotz}
+	Le equazioni di Maxwell possono essere riscritte come le cosiddette equazioni di Helmotz, nel caso in cui il mezzo sia il vuoto.
+
+	\begin{equation*}
+		\begin{cases}
+			\rot\E = - \jmath \, \omega \, \mu \, \H \\
+			\rot\H = \jmath \, \omega \, \epsilon_c \, \E \\
+		\end{cases}
+	\end{equation*}
+
+	Applicando, per esempio alla prima, l'operazione di rotore ad ambo i membri, e sostituendo la seconda si ottiene
+	\begin{equation*}
+		\begin{split}
+			\rot\rot\E &= - \jmath \, \omega \, \mu \, \rot \rot\H \\
+			- \nabla^2\E &= - \jmath \, \omega \, \mu \, (\jmath \, \omega \, \epsilon_c \, \E)\\
+		\end{split}
+	\end{equation*}
+
+	\begin{equation} \label{eq:helmotz}
+		\begin{cases}
+			\nabla^2 \E + \omega^2 \, \mu \, \epsilon_c \, \E = 0 \\
+			\nabla^2 \H + \omega^2 \, \mu \, \epsilon_c \, \H = 0
+		\end{cases}
+	\end{equation}
+
+	Esse sono affini alle ben note equazioni delle onde: la loro soluzione sarà perciò nella forma
+
+	\begin{equation*} \label{eq:helmotz_sol}
+		\begin{cases}
+			E_x(\r) = E_{ox} ~ e^{-\s \cdot \r} \\
+			E_y(\r) = E_{oy} ~ e^{-\s \cdot \r} \\
+			E_z(\r) = E_{oz} ~ e^{-\s \cdot \r}
+		\end{cases}
+	\end{equation*}
+	dove $\r$ è il vettore reale che definisce la posizione del punto considerato, mentre $\s = (s_x, s_y, s_z)$ è detto vettore \emph{di spostamento} e definisce come il campo vari nello spazio in modulo e fase.
+
+	Sostituendo questa generica soluzione in \ref{eq:helmotz}, si ottiene la condizione che il parametro $\s$ deve soddisfare per essere un'effettiva soluzione.
+
+	\begin{equation} \label{eq:condizione_s}
+		\begin{split}
+			& \nabla^2 E_x+ \omega^2 \, \mu \, \epsilon_c \, E_x = 0 \\
+			& E_{ox} ~ ({s_x}^2 e^{-\s \cdot \r} +
+				{s_y}^2 e^{-\s \cdot \r} +
+				{s_z}^2 e^{-\s \cdot \r}) +
+				\omega^2 \, \mu \, \epsilon_c \, E_{ox} ~ e^{-\s \cdot \r} = 0 \\
+			& \s \cdot \s = {s_x}^2 + {s_y}^2 + {s_z}^2 = - \omega^2 \, \mu \, \epsilon_c
+		\end{split}
+	\end{equation}
+	dove nell'ultimo passaggio la somma dei quadrati delle componenti di $\s$ è indicata, con un abuso di notazione, come il prodotto scalare ``reale'' nonstante $\s$ sia un vettore complesso.
+
+	Una volta individuate le condizioni per la validità della soluzione \ref{eq:helmotz_sol}, si può stabilire il legame tra campo elettrico e magnetico.
+
+	\begin{equation*}
+		\begin{split}
+			\H & = \frac {\rot\E}{- \jmath \omega \mu} =
+				\frac {\rot(\vec{E_o} ~ e^{-\s \cdot \r})}{- \jmath \omega \mu} \stackrel{(1)}{=} \\
+			& = \frac {(\rot\vec{E_o}) ~ e^{-\s \cdot \r} - \vec{E_o} \times \nabla e^{-\s \cdot \r})} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
+			& = \frac { \vec{E_o} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_o}} {\jmath \omega \mu} ~ e^{-\s \cdot \r} = \frac { \s \times \vec{E}} {\jmath \omega \mu} \\
+		\end{split}
+	\end{equation*}
+	dove (1) è dato dalla derivata del prodotto, mentre (2) è dovuto al fatto che, essendo $\vec{E_o}$ costante, il suo gradiente è nullo.
+
+\section{Piani di simmetria}
+	La soluzione di onda piana presenta particolari comportamenti lungo e trasversalmente le direzioni date dalla parte reale e immaginaria del vettore $\s$.
+
+	\begin{equation*}
+		\s = \a + \jmath \k
+	\end{equation*}
+
+	\begin{itemize}
+		\item[|$\Delta\r \perp \a$ )] Lungo questa direzione, l'ampiezza dei campi $\E$ e $\H$ non cambia.
+
+		\begin{equation*}
+			\begin{split}
+				|\E(\r + \Delta\r)| &= |\vec{E_o}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
+				& = |\vec{E_o}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
+				& = |\vec{E_o}| ~ e^{-\a \cdot \r} = |\E(\r)|
+			\end{split}
+		\end{equation*}
+		dove (*) è dato dal fatto che $\a \cdot \Delta\r = 0$ per costruzione.
+
+		\item[|$\Delta\r \perp \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ non cambia.
+
+		\begin{equation*}
+				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r = \measuredangle \E(\r)
+		\end{equation*}
+		dove (*) è dato dal fatto che $\k \cdot \Delta\r = 0$ per costruzione.
+
+		\item[|$\Delta\r \parallel \a$ )] Lungo questa direzione, l'ampiezza dei campi cala in modo esponenziale in $|\a|$ e in $\Delta r$.
+
+		\begin{equation*}
+			\begin{split}
+				|\E(\r + \Delta\r)| &= |\vec{E_o}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
+				& = |\vec{E_o}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
+				& = \left( |\vec{E_o}| ~ e^{-|\a| \Delta\r} \right) e^{-\a \cdot \r} = |\E(\r)| ~ e^{-|\a| \Delta\r}
+			\end{split}
+		\end{equation*}
+		dove (*) è dovuto al parallelismo tra $\a$ e $\Delta\r$.
+
+		\item[|$\Delta\r \parallel \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ oscilla periodicamente.
+
+		\begin{equation*}
+				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r - |\k| \Delta r = \measuredangle \E(\r) - |\k| \Delta r
+		\end{equation*}
+		dove (*) è dovuto al parallelismo tra $\k$ e $\Delta\r$.
+
+		Come si può osservare da questa periodicità della fase, i piano cosiddetti equifase sono separati da una distanza $\lambda$ funzione di $|\k| \stackrel{.}{=} \beta$.
+
+		\begin{equation*}
+			\lambda = \frac{2 \pi}{|\k|} = \frac{2 \pi}{\beta} \text{ è definita come \emph{lunghezza d'onda}}
+		\end{equation*}
+	\end{itemize}
+
+\section{Onda piana nel vuoto}
+	Studieremo qui la propagazione dell'onda piana in un mezzo che, come il vuoto, è un perfetto isolante, ovvero $\sigma = 0$.
+
+	Scomponendo l'equazione \ref{eq:condizione_s}, si può ottenere il seguente sistema
+
+	\begin{equation} \label{eq:s_components}
+		\begin{dcases}
+			& |\a|^2 - |\k|^2 = - \omega^2 \, \mu \, \epsilon \\
+			& 2 \a \cdot \k = \omega^2 \, \mu \, \sigma = 0
+		\end{dcases}
+	\end{equation}
+
+	La seconda equazione è risolta per ciascuno dei seguenti casi
+
+	\begin{equation}\begin{cases}
+		|\a| = 0 \\
+		|\k| = 0 \\
+		\a \perp \k
+	\end{cases}\end{equation}
+
+	Il caso $|\k| = 0$ è da escludere a priori, perché la prima equazione del sistema \ref{eq:s_components} diventa impossibile.
+
+	\subsection{Onda piana uniforme}
+		Concentriamoci sul caso $|\a| = 0$: esso porta alla soluzione cosiddetta di onda piana uniforme, che si propaga nel vuoto senza perdite di potenza.
+
+		\begin{equation*}
+				\a = 0 \implies |\k| = \sqrt{\omega^2 \mu \epsilon} = \omega \sqrt{\mu \epsilon} = \frac{\omega}{c} = \frac{2 \pi}{\lambda} = \beta
+		\end{equation*}
+		dove $c$ è la velocità della luce nel mezzo.
+
+		Nei mezzi dielettrici $c$ è calcolabile come
+		\begin{equation*}
+				c = \frac{1}{\sqrt{\epsilon \mu_0}} = \frac{1}{\sqrt{\epsilon_0 \mu_0 \epsilon_r}} = \frac{c_0}{\epsilon_r} = \frac{c_0}{n}
+		\end{equation*}
+		dove $n$ è definito come il coefficiente di rifrazione nel mezzo e $c_0$ è la velocità della luce nel vuoto.
+
+	\subsection{Onda piana uniforme in polarizzazione rettilinea}
+		Considerando il caso specifico di polarizzazione rettilinea, con $\vec{E_o} = E_o \, \hat{x}$, otteniamo che
+
+		\begin{equation*} \begin{split}
+			\vec{H_o} &= \frac{\s \times \vec{E}} {\jmath \omega \mu}
+				= \frac{(\jmath \k) \times (E_o \, \hat{x})}{\jmath \omega \mu}
+				= \frac{|\k| \, E_o}{\omega \mu} ~ \hat{k} \times \hat{x} = \\
+			& = \frac{|\k| \, E_o}{\omega \mu} ~ \hat{y}
+				= \frac{E_o}{\mu c} ~ \hat{y}
+				= \frac{E_o}{\sqrt{\mu / \epsilon}} ~ \hat{y}
+				= \frac{E_o}{\eta} ~ \hat{y}
+				= H_o ~ \hat{y}
+		\end{split} \end{equation*}
+		dove $\eta$ è definita come impedenza d'onda del mezzo.
+
+\section{Onda piana nel mezzo conduttore}
+	Per i mezzi conduttori vale $\sigma \neq 0$, che rende il prodotto scalare $\a \cdot \k \neq 0$: questo rende impossibile il caso considerato in precedenza di onda piana uniforme, perché la componente reale di attenuazione (come pure il vettore $\k$) è sempre presente.
+
+	\subsection{Onda piana nel buon conduttore}
+		Dividendo tra loro membro a membro le due equazioni del sistema \ref{eq:s_components} si ottiene che
+
+		\begin{equation*} \begin{split}
+			& \frac{|\k|^2 - |\a|^2}{2 |\a| |\k| \cos(\theta)}
+				= \frac{\omega^2 \mu \epsilon}{\omega \mu \sigma}
+				= \frac{\omega \epsilon}{\sigma} \stackrel{(*)}{\ll} 1
+		\end{split} \end{equation*}
+		dove $\theta$ è l'angolo tra $\a$ e $\k$ e la disuguaglianza (*) è data dalla proprietà caratteristica dei buoni conduttori.
+
+		Riformulando l'equazione sopra si ottiene che
+		\begin{equation*}
+			\frac{|\k|^2 - |\a|^2}{|\a| |\k|}
+				= \frac{|\k|}{|\a|} - \frac{|\a|}{|\k|}
+				\ll 2 \cos(\theta) < 2 \implies
+				\begin{dcases}
+					~ |\k| \simeq |\a| \\
+					~ \k \parallel \a
+				\end{dcases}
+		\end{equation*}
+		dove il passaggio al sistema di destra non è rigoroso, ma vuole presentare l'intuizione sottostante.
+
+		Questa uguaglianza tra i due vettori $\a$ e $\k$ si può sfruttare per risolvere il sistema \ref{eq:s_components}.
+		\begin{equation*}
+			\begin{dcases}
+				~ |\k| \simeq |\a|
+					= \sqrt{\frac{\omega \mu \sigma}{2}}
+					= \sqrt{\pi f \mu \sigma} \\
+				~ \s = (1 + \jmath) ~ \sqrt{\pi f \mu \sigma} ~ \hat{z} \\
+			\end{dcases}
+		\end{equation*}
+
+		Un'onda polarizzato linearmente con questo valore di $\s$ avrà perciò campi
+		\begin{equation*}
+			\begin{dcases}
+				~ \E = \vec{E_o} ~ e^{-\s \cdot \r} = E_o \hat{x} ~ e^{-|\a| (1 + \jmath) z} \\
+				~ \H = \frac{\s \times \vec{E_o}}{\jmath \omega \mu} ~ e^{-\s \cdot \r}
+					= \ldots = \frac{E_o |\a| (1 + \jmath)}{\jmath \omega \mu} ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
+					= \frac{E_o}{ R_s (1 + \jmath) } ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
+			\end{dcases}
+		\end{equation*}
+		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}} (1 + \jmath)$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
