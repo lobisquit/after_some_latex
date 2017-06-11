@@ -109,9 +109,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Come si può osservare da questa periodicità della fase, i piano cosiddetti equifase sono separati da una distanza $\lambda$ funzione di $|\k| \stackrel{.}{=} \beta$.
 
-		\begin{equation*}
+		\begin{equation} \label{eq:lunghezza_donda}
 			\lambda = \frac{2 \pi}{|\k|} = \frac{2 \pi}{\beta} \text{ è definita come \emph{lunghezza d'onda}}
-		\end{equation*}
+		\end{equation}
 	\end{itemize}
 
 \section{Onda piana nel vuoto}
@@ -200,7 +200,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			\end{dcases}
 		\end{equation*}
 
-		Un'onda polarizzato linearmente con questo valore di $\s$ avrà perciò campi
+		Un'onda polarizzata linearmente con questo valore di $\s$ avrà perciò campi
 		\begin{equation*}
 			\begin{dcases}
 				~ \E = \vec{E_o} ~ e^{-\s \cdot \r} = E_o \hat{x} ~ e^{-|\a| (1 + \jmath) z} \\
@@ -210,3 +210,40 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			\end{dcases}
 		\end{equation*}
 		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}} (1 + \jmath)$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
+
+		\paragraph{Spessore di penetrazione}
+		Nello studio della propagazione di onde in un mezzo, si può definire il cosiddetto \emph{spessore di penetrazione} come la distanza $\delta$ lungo l'asse di propagazione per cui il modulo del campo cala di un fattore $e^{-1}$.
+
+		\begin{equation*}
+			|\E(z + \delta)| = |\E(z)| ~ e^{-1}
+		\end{equation*}
+
+		Nel buon conduttore essa è facilmente calcolabile con le equazioni trovate in precedenza.
+		\begin{equation*} \begin{split}
+			|\E(z + \delta)| = E_o ~ e^{-|\a| z} ~ e^{-|\a| \delta} = |\E(z)| ~ e^{-|\a| \delta} = e^{-1} \text{ per } \delta = \frac{1}{|\a|}
+		\end{split} \end{equation*}
+
+		Nel caso, per esempio del rame, $\delta$ risulta dell'ordine di $1.6 \mu m$: questo ci porta a concludere che l'onda incidente il buon conduttore viene in gran parte dispersa vicino alla superficie del mezzo.
+		Questo comportamento, dovuto in gran parte all'effetto Joule, viene chiamato \emph{effetto pelle}.
+
+		\paragraph{Lunghezza d'onda nel buon conduttore}
+		Il buon conduttore induce un ulteriore modifica delle proprietà dell'onda: riduce infatti notevolmente la sua lunghezza d'onda rispetto alla propagazione libera nel vuoto.
+
+		\begin{equation*} \begin{split}
+			& |\k|
+				= \sqrt{\pi f \mu \sigma}
+				\gg \omega \sqrt{\mu \epsilon}
+				= |\vec{k_o}| \\
+		\end{split} \end{equation*}
+
+		perché, per le proprietà del buon conduttore,
+		\begin{equation*} \begin{split}
+				\sqrt{\pi f \mu \sigma} &\gg \omega \sqrt{\mu \epsilon} \\
+				2 \pi f \sigma &\gg 2 \omega^2 \epsilon \\
+				\sigma &\gg 2 \omega \epsilon
+		\end{split} \end{equation*}
+
+		Da questo risultato e dalla definizione di $\lambda$ (equazione \ref{eq:lunghezza_donda}) si ottiene quanto anticipato in precedenza, ovvero che
+		\begin{equation*} \begin{split}
+			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_o}|} = \lambda_o \\
+		\end{split} \end{equation*}
