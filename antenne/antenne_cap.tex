@@ -1,0 +1,47 @@
+\section{Propagazione guidata}
+Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicare anche per la propagazione di onde elettromagnetiche in conduttori, per esempio
+\begin{itemize}
+  \item \textbf{linee bifilari} come il doppino telefonico
+  \item \textbf{linee coassiali}, per esempio  cavo che collega l'antenna al televisore
+  \item \textbf{le guide rettangolari}, usate principalmente per applicazioni in cui è necessario trasportare molta potenza (radar o trasmissioni satellitari)
+  \item \textbf{le linee a microstriscia} utilizzate per trasportare segnali in circuiti stampati
+\end{itemize}
+Accenniamo ora come si propaga l'onda in alcune di queste guide, poiché il segnale prima di essere emesso dall'antenna dovrà essere trasportato in una qualche maniera.
+\paragraph{Campi nella guida}
+
+I campi elettromagnetici che si propagano in guide d'onda il vettore di propagazione  e l'impedenza d'onda sono:
+\begin{esp}
+  |\k| &=\beta= \omega \sqrt{\mu \epsilon} \\
+  \eta &= \frac{E_o}{H_o} = \sqrt{\frac{\mu}{\epsilon}}
+\end{esp}
+
+\paragraph{Linea bifilare}
+Le linee di forza del campo elettrico nella linea bifilare sono simili a quelle di un condensatre, ossia $\forall$ punto $\E\perp\H\perp\k$. In figura \#TODO\# sono rappresentate le linee di campo.
+
+\paragraph{Linea coassiale}
+In questo caso le linee di campo elettrico sono ortogonali alla circonferenza, mentre quelle di campo magnetico sono concentriche all'asse della linea, come visibile in fig \#TODO\#
+
+\paragraph{Impedenza caratteristica}
+Cerchiamo ora di valutare l'impedenza caratteristica della linea e, in particolare, come sfruttarla per ridurre al minimo le perdite.
+
+La tensione e la corrente nella linea coassiale si possono scrivere come
+\begin{esp}
+  V&= \int_{r_{int}}^{r_{ext}} \E \cdot d\vec{l} \\
+  I&= \oint \H \cdot d\vec{l} \\
+  &\implies Z_c = \frac{V_o}{I_o} \text{ impedenza caratteristica della linea}
+\end{esp}
+Definendo inoltre
+\begin{itemize}
+  \item $l$ l'induttanza per unità di lunghezza $\frac{H}{m}$
+  \item $c$ la capacità per unità di lunghezza $\frac{F}{m}$
+\end{itemize}
+si ottiene che l'impedenza caratteristica risulta
+\begin{equation}
+  Z_c = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\parbox{fattore \\di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
+\end{equation}
+
+Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
+\begin{esp}
+  V(z) &= V_o \cdot e^{-\jmath \beta \cdot z}\\
+  I(z) &= I_o \cdot e^{-\jmath \beta \cdot z}
+\end{esp}
