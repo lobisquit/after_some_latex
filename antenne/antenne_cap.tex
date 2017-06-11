@@ -66,7 +66,7 @@ Un campo vettoriale $\A$ è univocamente definito se sono fissati $\rot \A$ e $\
 ----------------
 
 Dobbiamo dunque definire in maniera intelligente $\diverg \A$:
-\begin{esp}
+\begin{esp} \label{eq:AE}
   \rot\E &= - \jmath \omega \cdot \mu \frac{1}{\mu} \rot \A \quad \Leftrightarrow \quad \rot\left(\rot \E + \jmath \omega \A\right)=0 \\
   \forall \Phi& \text {, scalare, } \rot(\diverg\Phi)=0\\
   \E +& \jmath \omega \A = -\nabla\Phi \quad \implies \E = -\jmath \omega \A - \nabla \Phi  \\
@@ -94,8 +94,8 @@ Dobbiamo quindi determinare il valore di $\Phi$, cosa che faremo sfruttando la t
   \diverg\E &= \frac{\rho}{\epsilon} \quad \implies\quad \diverg\left(-\jmath \omega \A - \nabla \Phi  \right)= \frac{\rho}{\epsilon}\\
   \implies & \jmath \omega \A + \nabla \Phi= -\frac{\rho}{\epsilon}  \\
   &\jmath\omega\left(-\jmath \omega\mu\epsilon_c\Phi\right) + \nabla^2\Phi = - \frac{\rho}{\epsilon}\\
-  &\text{Otteniamo quindi l'equazione scalare di Helmoltz non omogenea}
-  \omega^2\mu\epsilon_c\Phi + \nabla^2 \Phi = -\frac{\rho}{\epsilon}
+  &\text{Otteniamo quindi l'equazione scalare di Helmoltz non omogenea}\\
+  &\omega^2\mu\epsilon_c\Phi + \nabla^2 \Phi = -\frac{\rho}{\epsilon}
 \end{esp*}
 \begin{esp}\label{eq:helmolts-lorentz}
   \nabla^2\A + \omega^2\mu\epsilon_c\A &= -\mu\J \\
@@ -105,3 +105,114 @@ Poiché le equazioni di Helmoltz trovate sono lineari, utilizzeremo spesso il pr
 
 \section{Dipolo elementare}
 Partiamo analizzando il dipolo elementare, indicando la rappresentazione di un punto P attraverso il vettore posizione $\r$
+\begin{esp}
+  \r &= (x,y,z) = (|\r|,\theta,\phi) = (r,\theta,\phi) \\
+  \J &= I \cdot \delta(x)\delta(y)\cdot f(z)\cdot \hat{z}
+\end{esp}
+Dobbiamo quindi risolvere l'equazione di Helmoltz non omogenea:
+\begin{esp*}
+  \nabla^2 \A + \omega^2 \mu\epsilon_c \A &= -\mu \J \quad \text{con } \A = (A_x,A_y,A_z)\\
+  \begin{cases}
+    \nabla^2 \A_{x,y} + \omega^2 \mu\epsilon_c\A_{x,y} =0 \\
+    \nabla^2 \A_{z} + \omega^2 \mu\epsilon_c\A_{z} =-\mu\J_z
+  \end{cases} \\
+  \implies & A_x=A_y=0 \parbox[c]{5cm}{\text{ è una soluzione possibile e più semplice}}\\
+  \forall \r &= 0 \implies \nabla^2 \A_{z} + \omega^2 \mu\epsilon_c\A_{z} =0
+\end{esp*}
+Supponiamo ora che $\sigma=0 \implies \epsilon_c = \epsilon \in \R$
+\begin{equation*}
+  \nabla^2 \A_{z} + \omega^2 \mu\epsilon\A_{z} =0
+\end{equation*}
+
+Le soluzioni dovranno avere simmetria sferica
+\begin{esp*}
+  &A_z(r,\theta,\phi) =A_z(r) = \frac{f(r)}{r} \\
+  &\implies \nabla^2 A_z = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) \\
+  &\implies  \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
+  & \frac{1}{r} \deriv{}{r}\left(r^2 \deriv{\frac{f'(r)\cdot r - f}{r^2}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
+  &\frac{1}{r} \cdot \left(f\prime\prime(r)\cdot r + f\prime(r)\cdot 1 - f\prime(r) \right) + \omega^2\mu\epsilon f(r) = 0\\
+\end{esp*}
+dove $f\prime(r) = \deriv{f(r)}{r}$ e $f\prime\prime =\deriv[2]{f(r)}{r}$
+Concludiamo quindi che
+\begin{equation*}
+  f\prime\prime(r) + \omega^2\mu\epsilon f(r) = 0
+\end{equation*}
+Integrando otteniamo
+\begin{equation}
+  f(r) = c \cdot e^{-\jmath \beta r} + d \cdot e^{\jmath \beta r}
+\end{equation}
+con $c,d \in \C$ costanti di integrazione, $\beta = \omega\sqrt{\mu\epsilon}$.
+
+$A_z(r)$ risulta quindi essere
+\begin{equation}
+  A_z(r) = \frac{c}{r}\cdot e^{-\jmath \beta r} +\frac{d}{r}\cdot e^{\jmath \beta r}
+\end{equation}
+che non è più un'onda piana.
+
+Nel dominio temporale, ora troviamo che:
+\begin{equation}
+  a_z(r,t) = \Re \left[A_z(r)\cdot e^{\jmath \omega t}\right] \propto cos(\omega t \pm \beta r)
+\end{equation}
+che rende evidente come non ci sia dipendenza rispetto $\theta$ e $\phi$. Questo implica che l'onda si propaga radialmente. Il $\pm$ indica la presenza di un'onda progressiva e, eventualmente, una regressiva, la quale si annulla se non vi sono ostacoli.
+
+Definiamo ora la velocità di fase: $v_f = \frac{\omega}{\beta}$
+Analizzando $A_z$ otteniamo che
+\begin{itemize}
+  \item $|A_z| = \left|\frac{c}{r}\right|$ la superficie equiampiezza è una sfera di raggio r
+  \item $\measuredangle A_z = \beta r$ la superficie equifase è una sfera di raggio r
+\end{itemize}
+ossia l'onda è di tipo sferico.
+
+integrando nel volume della sfera otteniamo
+\begin{esp*}
+  \int_V \nabla^2 A_z \cdot dV + \omega^2 \mu \epsilon \int_V A_z \cdot dV &= -\mu \int_V J_z \cdot dV \\
+  \int_V \diverg(\nabla A_z) \cdot dV + \omega^2 \mu \epsilon \int_V A_z \cdot dV &= -\mu \int_V I \cdot \delta(x)\delta(y)\cdot F(z) \cdot dV \\
+  \text{ con } F(z) &=
+  \begin{cases}
+    1 & |z| \le \frac{\Delta z}{2} \\ 0 &\text{altrove}
+  \end{cases}
+\end{esp*}
+Attraverso il teorema della divergenza possiamo continuare
+\begin{esp*}
+  \int_{S_V} \nabla A_z \cdot \r \cdot dS + \omega^2 \mu \epsilon \int_V A_z \cdot dV &= -\mu \int_V I \cdot \delta(x)\delta(y)\cdot F(z) \cdot dV \\
+  \nabla A_z = \hr \cdot \deriv{A_z}{r} &= \hr \cdot c \left(\frac{-\jmath \beta \ejbr -\ejbr }{r^2}\right) \\
+  c \cdot \int_{S_V} \left(-\jmath\beta\frac{\ejbr}{r} -\frac{\ejbr}{r} \right) \hr \cdot \hr dS + \int_V \oqme A_z dV &= -\mu \int_V I \cdot \delta(x)\delta(y)\cdot F(z) \cdot dV \\
+  \A_z(r) = \frac{\mu\cdot I \cdot \Delta z}{4\pi}\cdot \frac{\ejbr}{r} \cdot \hz
+\end{esp*}
+Dove $c=\frac{\mu\cdot I \cdot \Delta z}{4\pi}$, calcolato attraverso il teorema dei residui.
+
+Otteniamo quindi le equazioni per il csmpo elettrico e magnetico
+\begin{esp}\label{eq:campoDE}
+  \H &= \frac{1}{\mu}  \cdot \rot \A \stackrel{=}{conti} \frac{I \cdot \Delta z}{4\pi} \cdot \left(\frac{\jmath \beta}{r} + \frac{1}{r^2}\right)\cdot\ejbr \cdot sin(\theta)\hphi\\
+  \E &= -\jmath\omega\A - \nabla \left(\frac{\diverg\A}{-\jmath\omega\mu\epsilon}\right) \stackrel{=}{conti}\\
+  &= \eta \frac{I \cdot \Delta z}{4\pi} \cdot\left(\frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right)\cdot\ejbrp \cdot sin(\theta)\hth +
+  \eta \frac{I \cdot \Delta z}{2\pi} \cdot\left( \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right)\cdot\ejbr \cdot cos(\theta)\hr
+\end{esp}
+
+L'andamento della soluzione del campo elettrico permette di individuare la regione di campo lontano, in particolare con le approssimazioni per r sufficientemente grande, si ottiene:
+\begin{esp*}
+  \frac{\jmath\beta}{r} &= \frac{\jmath 2\pi}{\lambda \cdot r} \quad \lambda r \gg  \lambda \implies \text{regione campo lontano}\\
+  \frac{1}{\jmath\beta r^3} = \frac{\lambda}{\jmath 2 \pi r^3} \to 0 \\
+  \H &\approx \frac{I \cdot \Delta z}{4\pi} \cdot \frac{\jmath\beta}{r} \cdot \ejbr sin(\theta)\hphi\\
+  \E &\approx \eta \cdot \frac{I \cdot \Delta z}{4\pi} \cdot \jmath\beta\cdot \frac{\ejbr{r}}{r} sin(\theta) \cdot \hth
+\end{esp*}
+
+Possiamo quindi scrivere le condizioni di campo lontato:
+\begin{equation}\begin{cases}
+  E_\theta \approx \jmath\beta\eta\cdot\frac{I \cdot \Delta z}{4\pi} \cdot \frac{\ejbr}{r} \cdot sin(\theta) = \jmath \eta\cdot\frac{I \cdot \Delta z}{2\lambda} \cdot \frac{\ejbr}{r} \cdot sin(\theta) \\
+  E_\theta \approx \jmath\beta\cdot\frac{I \cdot \Delta z}{4\pi} \cdot \frac{\ejbr}{r} \cdot sin(\theta) = \jmath \cdot\frac{I \cdot \Delta z}{2\lambda} \cdot \frac{\ejbr}{r} \cdot sin(\theta) \\
+\end{cases}\end{equation}
+
+Possiamo quindi trovare una relazione tra l'impedenza d'onda e il campo EM, attraverso
+\begin{equation}
+  \frac{E_\theta}{H_\Phi} = \eta \in \R
+\end{equation}
+L'onda è quindi localmente piana.
+
+Il vettore di Poynting risulta quindi
+\begin{esp*}
+  \S = \frac{\E \times\H^*}{2} &= \frac{E_\theta \cdot \hth \times H_\Phi \cdot \hphi}{2} = \frac{E_\theta\cdot H_\Phi}{2}\cdot \hth \times \hphi \\
+  &= \frac{E_\theta\cdot H_\Phi}{2} \cdot \hr = \frac{\eta|I|^2 \Delta z^2}{8\lambda^2\r^2} \sin^2(\theta)\cdot \hr \\
+  \frac{\eta |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right) \cdot \frac{sin^2(\theta)}{r^2} \cdot \hr = \Re[\P]
+\end{esp*}
+dove $\Re[\P]$ è il flusso di potenza attiva
