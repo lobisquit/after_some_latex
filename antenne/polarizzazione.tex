@@ -4,7 +4,7 @@ Andremo ora ad analizzare come si comporta il campo elettromagnetico nello spazi
 Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione alla differenza con il corso di Fisica 2: mentre nell'altro corso si è osservata la polarizzazione del mezzo, ora analizzeremo la polarizzazione dell'onda elettromagnetica.
 \begin{esp}
   \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos\left[\omega t + \phi_{E_n}(\r)\right] \\
-  &=\ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos(\omega t)\cdot cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\\
+  &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos(\omega t)\cdot cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\\
   &=cos(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot cos \left[ \phi_{E_n}(\r) \right] \\
   &+sin(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right] \\
   \implies \ert &= \E^R(\r)\cdot cos(\omega t) - \E^I(\r)\cdot sin(\omega t)
@@ -13,7 +13,7 @@ Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione al
 \E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right]
 \end{esp}
 
-We can say that $\e(\r,0) = \E^R(\r)$ if $t=0$ and $\e(\r,\frac{pi}{2\omega}) = -\E^I(\r)$
+Possiamo quindi dire che $\e(\r,0) = \E^R(\r)$ se $t=0$ e $\e(\r,\frac{pi}{2\omega}) = -\E^I(\r)$
 
 \textsc{Possiamo quindi affermare che}
 \begin{enumerate}
@@ -21,3 +21,82 @@ We can say that $\e(\r,0) = \E^R(\r)$ if $t=0$ and $\e(\r,\frac{pi}{2\omega}) = 
   \item Il campo elettromagnetico traccia una curva chiusa
   \item La curva chiusa, in genere, è un ellisse.
 \end{enumerate}
+In generale possiamo scrivere
+\begin{esp}
+  \E^R &= E^R_{x\prime} \cdot \hat{x}\prime+E^R_{y\prime} \cdot \hat{y}\prime \\
+  \E^I &= E^I_{x\prime} \cdot \hat{x}\prime+E^I_{y\prime} \cdot \hat{y}\prime \\
+  \e &= (E^R_{x\prime}\cdot \hat{x}\prime+ E^R_{y\prime})\cdot cos(\omega t) - (E^I_{x\prime}\cdot \hat{x}\prime+ E^I_{y\prime})\cdot sin(\omega t)\\
+  &= \left[E^R_{x\prime} \cdot cos(\omega t)-E^I_{x\prime}\cdot sin(\omega t)\right]\cdot \hat{x}\prime + \left[E^R_{y\prime} \cdot cos(\omega t) -E^I_{y\prime}\cdot sin(\omega t)\right]\cdot \hat{y}\prime \\
+\end{esp}
+  o in forma matriciale
+\begin{esp}
+  \begin{pmatrix}
+    e_{x\prime} \\ e_{y\prime}
+  \end{pmatrix}
+  &=
+  \underbrace{\begin{pmatrix}
+    E_{x\prime}^R & -E_{x\prime}^I\\
+    E_{y\prime}^R & -E_{y\prime}^I
+  \end{pmatrix}}_{\text{Deformazione lineare}}
+  \cdot
+  \underbrace{\begin{pmatrix}
+    cos(\omega t) \\ sin(\omega t)
+  \end{pmatrix}}_{\text{circonferenza}}
+\end{esp}
+
+Passando quindi alle coordinate cartesiane principali, si ottiene
+\begin{esp}
+\begin{pmatrix} e_{x} \\ e_{y} \end{pmatrix}
+&= \begin{pmatrix}
+  a \cdot cos(\omega t + \Phi) \\
+  \pm b \cdot sin(\omega t + \Phi)
+\end{pmatrix}
+\end{esp}
+dove $a,b \in \R^+$ indicano il valore dei semiassi dell'ellisse, mentre il $\pm$ indica il verso \textbf{destrorso} o \textbf{sinistrorso} della polarizzazione ellittica del campo elettrico. Ci sono ora due casi degeneri principali:
+\begin{enumerate}
+  \item $a = b$ l'ellisse degenera in una circonferenza, per cui la polarizzazione sarà circolare destrorsa o sinistrorsa
+  \item $\begin{cases}a=0 \\ b \neq 0 \end{cases} \vee  \begin{cases}a\neq 0 \\ b = 0 \end{cases}$ l'ellisse degenera in un segmento e la polarizzazione sarà rettilinea verticale o orizzontale.
+\end{enumerate}
+Passando ora ai vettori di Steinmetz
+\begin{esp}
+  \e(t) &= \Re[\E\cdot e^{\jmath \omega t}] \quad \E \in \C^3 \\
+  &=\Re\left[\left(\E^R + \jmath \E^I\right)\cdot\left(cos(\omega t) + \jmath sin(\omega t)\right)\right] = \E^R \cdot cos(\omega t) - \E^I\cdot sin(\omega t) \\
+  &= a \cdot cos(\omega t + \Phi)\cdot \hat{x} \pm b \cdot sin(\omega t + \Phi)\cdot \hat{y}
+\end{esp}
+In un sistema di riferimento ruotato di un angolo $\delta$ l'uguaglianza si può scrivere nella seguente forma matriciale
+\begin{equation}
+  \begin{pmatrix} E_{x\prime} \\ E_{y\prime} \end{pmatrix} =
+  \begin{pmatrix}
+     cos(\delta) & sin(\delta) \\ -sin(\delta) & cos(\delta)
+  \end{pmatrix} \cdot
+    \begin{pmatrix} E_{x} \\ E_{y} \end{pmatrix}
+\end{equation}
+
+\section{Rapporto di polarizzazione rettilinea}
+Definiamo il rapporto di polarizzazione $p$ nel sistema di assi principali come
+\begin{equation}
+  p = \jmath \frac{E_y}{E_x} \in \C
+\end{equation}
+mentre in un sistema di assi generico, si ottiene
+\begin{equation}
+  p\prime = \jmath \frac{E_y}{E_x} = \frac{p - \jmath tg(\delta)}{1-\jmath p \cdot tg(\delta)} \quad \text{simile a linee di trasmissione}
+\end{equation}
+Interessante notare come, per qualsiasi angolo $\delta$ il segno di $p\prime$ non cambi.
+Osservando ora i possibili valori di $p\prime \in \C$, distinguiamo i diversi tipi di polarizzazione
+\begin{equation}\begin{cases}
+  \Re[p\prime] >0 & \text{\textbf{ellittica destrorsa}}\\
+  \Re[p\prime] <0 & \text{\textbf{ellittica sinistrorsa}}\\
+  \Re[p\prime] =0 & \text{\textbf{rettilinea "orizzontale"}}\\
+  \Re[p\prime] =\infty & \text{\textbf{rettilinea "verticale"}}\\
+  p = p\prime = 1 & \text{\textbf{circolare destrorsa}} \\
+  p = p\prime = 1 & \text{\textbf{circolare sinistrorsa}}
+\end{cases}\end{equation}
+\textbf{\textsc{Nota Bene:}} la polarizzazione circolare prevede che $p=p\prime$ sia \textbf{puramente reale} e pari a $\pm1$
+
+Cerchiamo ora di valutare $\Re [p\prime]$:
+\begin{esp}
+  p\prime &= \jmath \frac{E_{y\prime}}{E_{x\prime}} = e^{\jmath \frac{\pi}{2}} \cdot \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \|
+  \cdot e^{j(\Phi_{y\prime}-\Phi_{x\prime})} \\
+  &= \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \| \cdot e^{j(\frac{\pi}{2}+\Phi_{y\prime}-\Phi_{x\prime})}
+  \Re[p\prime]&= \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \| \cdot \underbrace{cos(\frac{\pi}{2} + +\Phi_{y\prime}-\Phi_{x\prime})}_{\text{verso di polarizzazione}}
+\end{esp}
