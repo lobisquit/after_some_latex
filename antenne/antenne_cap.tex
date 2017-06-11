@@ -37,7 +37,7 @@ Definendo inoltre
 \end{itemize}
 si ottiene che l'impedenza caratteristica risulta
 \begin{equation}
-  Z_c = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\parbox{fattore \\di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
+  Z_c = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
 \end{equation}
 
 Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
@@ -45,3 +45,62 @@ Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo c
   V(z) &= V_o \cdot e^{-\jmath \beta \cdot z}\\
   I(z) &= I_o \cdot e^{-\jmath \beta \cdot z}
 \end{esp}
+
+
+\chapter{Antenne}
+In questo capitolo analizzeremo le antenne, partendo inizialmente con i potenziali elettromagnetici e cercando di modificare le equazioni di Maxwell affinché siano più comode da studiare nei nostri casi. Vedremo quindi l'equazione di Helmoltz e la scelta di Lorentz. Inizieremo quindi a studiare le antenne partendo dal caso del dipolo elementare, ideale e non realizzabile nella realtà, ma utile per fare le prime approssimazioni. Estenderemo quindi il dipolo elementare al dipolo corto per studiare poi le antenne lineari, le schiere e le patch.
+
+Riprendiamo le equazioni di Maxwell scritte con i vettori di Steinmets:
+\begin{equation}\begin{cases}
+  \rot\E = -\jmath \omega \mu\H(\r) \textcolor[rgb]{0.8,0,0}{+ \M} \\
+  \rot\H = \jmath  \omega \epsilon \E + \J\\
+  \diverg\H=0\\
+  \diverg \E = \frac{\rho}{\epsilon}
+\end{cases}\end{equation}
+Ora aggiungiamo un termine $\M$ fittizio, affinché le equazioni risultino simmetriche e si possano scrivere, in seguito, le equazioni per le sorgenti equivalenti. ($\M$ non può esistere, in quanto non esiste il monopolo magnetico)
+
+\subsubsection{Potenziali elettromagnetici}
+$\forall \A , \diverg(\rot \A) = 0$ per quanto trovato nel paragrafo dell'identità notevole (\ref{sec:id-not}). Definiamo quindi $\A$  \textbf{potenziale vettore magnetico} il campo per cui $\H = \frac{1}{\mu} \cdot \rot \A$.
+\paragraph{Teorema di Helmoltz}
+Un campo vettoriale $\A$ è univocamente definito se sono fissati $\rot \A$ e $\diverg \A$
+----------------
+
+Dobbiamo dunque definire in maniera intelligente $\diverg \A$:
+\begin{esp}
+  \rot\E &= - \jmath \omega \cdot \mu \frac{1}{\mu} \rot \A \quad \Leftrightarrow \quad \rot\left(\rot \E + \jmath \omega \A\right)=0 \\
+  \forall \Phi& \text {, scalare, } \rot(\diverg\Phi)=0\\
+  \E +& \jmath \omega \A = -\nabla\Phi \quad \implies \E = -\jmath \omega \A - \nabla \Phi  \\
+  \implies &[\Phi] = V
+\end{esp}
+Definiamo quindi $\Phi$ potenziale scalare elettrico associato ad $\A$. Analizziamo ora la seconda equazione di Maxwell
+\begin{esp}
+  \rot \H &= \jmath \omega \epsilon_c \cdot \E + \J \\
+  \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right) &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \Phi \right) + \J \mu  \\
+  -\nabla^2\A + \diverg(\nabla \A) = \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \Phi + \mu \J \\
+  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\parbox[c]{2cm}{\text{Struttura dell'eq. di Helmoltz}}} &= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \Phi \\
+  &=\underbrace{-\mu\J}_{\parbox[c]{2cm}{\text{termine noto: presenza sorgenti}}} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \Phi}_{\parbox[c]{2cm}{\text{complicazione? scelgo il valore di $\A$}}}\right)\\
+\end{esp}
+\paragraph{Scelta di Lorentz}
+Poiché abbiamo ancora un grado di libertà per definire $\A$, possiamo scegliere
+\begin{equation}
+  \diverg \A = -\jmath \omega \mu \epsilon_c \Phi
+\end{equation}
+Otteniamo quindi l'\textbf{equazione di Helmoltz non omogenea}:
+\begin{equation}
+  \nabla^2\A + \omega^2 \mu\epsilon_c\A =-\mu \J
+\end{equation}
+Dobbiamo quindi determinare il valore di $\Phi$, cosa che faremo sfruttando la terza legge di Maxwell
+\begin{esp*}
+  \diverg\E &= \frac{\rho}{\epsilon} \quad \implies\quad \diverg\left(-\jmath \omega \A - \nabla \Phi  \right)= \frac{\rho}{\epsilon}\\
+  \implies & \jmath \omega \A + \nabla \Phi= -\frac{\rho}{\epsilon}  \\
+  &\jmath\omega\left(-\jmath \omega\mu\epsilon_c\Phi\right) + \nabla^2\Phi = - \frac{\rho}{\epsilon}\\
+  &\text{Otteniamo quindi l'equazione scalare di Helmoltz non omogenea}
+  \omega^2\mu\epsilon_c\Phi + \nabla^2 \Phi = -\frac{\rho}{\epsilon}
+\end{esp*}
+\begin{esp}\label{eq:helmolts-lorentz}
+  \nabla^2\A + \omega^2\mu\epsilon_c\A &= -\mu\J \\
+  \nabla^2\Phi + \omega^2\mu\epsilon_c\Phi &= -\frac{\rho}{\epsilon}
+\end{esp}
+Poiché le equazioni di Helmoltz trovate sono lineari, utilizzeremo spesso il principio di sovrapposizione degli effetti
+
+\section{Dipolo elementare}
