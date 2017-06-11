@@ -1,7 +1,8 @@
-\documentclass[a4paper, 12pt, twoside, openright,fleqn]{book}
+\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book} 
+
+% language settings
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
-
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{caption}
@@ -18,8 +19,8 @@
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{amsmath, amssymb, dsfont, bm}
-% support for glossary and acronyms
-\usepackage[acronym]{glossaries}
+\usepackage{cases}
+
 % tikz figures
 \usepackage{tikz}
 \usetikzlibrary{shapes, arrows}
@@ -32,7 +33,13 @@
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
 
-
+% support for glossary and acronyms
+\usepackage[acronym]{glossaries}
+\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+\newacronym[plural=STs,firstplural=Stopping times (STs)]{st}{ST}{Stopping Time}
+\newacronym{kt}{KT}{Karlin-Taylor}
+\newacronym{rv}{r.v.}{random variable (r.v.)}
+\newacronym[plural=PPs,firstplural=Poisson Processes]{pp}{PP}{Poisson Process}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -184,6 +191,6 @@
 \input{introduction.tex}
 \input{chapter_2.tex}
 \input{chapter_PP.tex}
+\input{renewalProc.tex}
 \input{chapter_SN.tex}
-
 \end{document}
