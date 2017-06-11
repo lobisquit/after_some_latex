@@ -247,3 +247,23 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\begin{equation*} \begin{split}
 			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_o}|} = \lambda_o \\
 		\end{split} \end{equation*}
+
+\section{Appendice sui vettori di \emph{Steimetz}}
+Dati due vettori complessi tridimensionali $\vec{A}, \vec{B} \in \mathbb{C}^3$, il prodotto scalare è definito come $<\vec{A} | \vec{B}> = \vec{A} \cdot \vec{B}^* = \sum_{n=1}^3 A_n {B_n}^*$.
+
+Cerchiamo ora di stabilire cosa significhi, partendo dalla sua definizione,  l'ortogonalità tra due vettori complessi. Considereremo in particolare vettori che esprimano componenti lungo due soli assi, ovvero giacenti sul piano di polarizzazione.
+
+\begin{esp}
+	& \vec{A} \perp \vec{B} \Leftrightarrow \vec{A} \cdot \vec{B}^* = 0 \quad \text{con}\quad \begin{dcases}
+		\vec{A} = A_{x\prime} \hat{y}\prime + A_x \hat{y}\prime \\
+		\vec{B} = B_{x\prime} \hat{y}\prime + B_x \hat{y}\prime
+	\end{dcases}
+\end{esp}
+
+Risolvendo l'equazione, si dimostra che l'ortogonalità di vettori di questo tipo consiste in una particolare simmetria dei rapporti di polarizzazione.
+\begin{esp}
+	&A_{x\prime} ~ B_{x\prime}^x + A_{y\prime} ~ B_{y\prime}^x = 0 \\
+	&p_A\prime = \jmath \frac{ A_{x\prime} } { A_{y\prime} }
+		= - \jmath \frac{ B_{y\prime} } { B_{x\prime} }
+		= \frac{1} {\jmath \frac{ B_{y\prime} } { B_{x\prime} }} = \frac{1}{-p_B^*\prime}
+\end{esp}
