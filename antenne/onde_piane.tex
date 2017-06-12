@@ -247,3 +247,72 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\begin{equation*} \begin{split}
 			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_o}|} = \lambda_o \\
 		\end{split} \end{equation*}
+
+\section{Appendice sui vettori di \emph{Steimetz}}
+	Dati due vettori complessi tridimensionali $\vec{A}, \vec{B} \in \mathbb{C}^3$, il prodotto scalare è definito come $<\vec{A} | \vec{B}> = \vec{A} \cdot \vec{B}^* = \sum_{n=1}^3 A_n {B_n}^*$.
+
+	Cerchiamo ora di stabilire cosa significhi, partendo dalla sua definizione,  l'ortogonalità tra due vettori complessi. Considereremo in particolare vettori che esprimano componenti lungo due soli assi, ovvero giacenti sul piano di polarizzazione.
+
+	\begin{esp}
+		& \vec{A} \perp \vec{B} \Leftrightarrow \vec{A} \cdot \vec{B}^* = 0 \quad \text{con}\quad \begin{dcases}
+			\vec{A} = A_{x\prime} \hat{y}\prime + A_x \hat{y}\prime \\
+			\vec{B} = B_{x\prime} \hat{y}\prime + B_x \hat{y}\prime
+		\end{dcases}
+	\end{esp}
+
+	Risolvendo l'equazione, si dimostra che l'ortogonalità di vettori di questo tipo consiste in una particolare simmetria dei rapporti di polarizzazione.
+	\begin{esp}
+		&A_{x\prime} ~ B_{x\prime}^x + A_{y\prime} ~ B_{y\prime}^x = 0 \\
+		&p_A\prime = \jmath \frac{ A_{x\prime} } { A_{y\prime} }
+			= - \jmath \frac{ B_{y\prime} } { B_{x\prime} }
+			= \frac{1} {\jmath \frac{ B_{y\prime} } { B_{x\prime} }} = \frac{1}{-p_B^*\prime}
+	\end{esp}
+
+\section{Potenza dell'onda elettromagnetica}
+	Partendo dalle ben note equazioni di Maxwell è possibile ottenere un bilancio energetico a cui le onde elettromagnetica devono sottostare.
+
+	\begin{esp}
+		\begin{dcases}
+			\rot \e = - \mu \deriv{\h}{t} \\
+			\rot \h = \jt + \sigma \e + \epsilon \deriv{\e}{t} \\
+		\end{dcases}
+	\end{esp}
+
+	Combinando tra loro le equazioni, si ottiene che
+	\begin{esp}
+		& \rot \h \cdot \e - \h \cdot \rot \e
+			= \e \jt + \sigma |\e|^2 + \epsilon \e \deriv{\e}{t} - \h \mu \deriv{\h}{t} \\
+		& -\diverg(\e \times \h) - \e \j = \sigma |\e|^2 + \epsilon \deriv{|\e|^2}{t} + \mu \deriv{|\h|^2}{t}
+	\end{esp}
+	
+	\subsection{Potenza con i vettori di Steinmetz}
+
+
+	Cercheremo ora la relazione tra $|\ert|$ e il suo vettore associato $|\E|$, per stabilire come calcolare la potenza del campo oscillante $\e$ con il vettore di Steinmetz.
+
+	\begin{esp}
+		|\ert|^2
+			& = \Re\left[ \E ~ e^{j \omega t}\right] \left( \Re\left[ \E ~ e^{j \omega t}\right] \right)^* \\
+			& = \left( \frac{\E ~ e^{j \omega t} + \E ~ e^{-j \omega t}}{2} \right) ^2 \\
+			& = \frac{1}{4} \left( \E \cdot \E^* +  \E^* \cdot \E + \E \cdot \E ~ e^{j 2 \omega t} + \E^* \cdot \E^* ~ e^{-j 2 \omega t} \right) \\
+			& = \frac{|\E|^2}{2} +
+				\frac{
+					\E \cdot \E ~ e^{j 2 \omega t} +
+					\E^* \cdot \E^* ~ e^{-j 2 \omega t}
+				}{4}
+	\end{esp}
+
+	Mediando nel periodo $T$ il modulo del quadrato del campo otteniamo la potenza del campo elettrico.
+
+	\begin{esp}
+		\frac{1}{T} \int_0^T |\ert|^2 dt
+			& = \frac{1}{T} \int_0^T \frac{|\E|^2}{2} dt +
+				\frac{1}{T} \int_0^T \left(
+					\frac{
+						\E \cdot \E ~ e^{j 2 \omega t} +
+						\E^* \cdot \E^* ~ e^{-j 2 \omega t}
+				}{4}\right) dt \\
+			& \stackrel{(1)}{=}  \frac{1}{T} \int_0^T \frac{|\E|^2}{2} dt
+				\stackrel{(2)}{=} \frac{|\E|^2}{2}
+	\end{esp}
+	dove (1) vale perché il secondo membro è periodico, perciò l'integrale sul periodo $T$ è nullo, mentre (2) perché il vettore $\E$ non dipende dal tempo $t$.
