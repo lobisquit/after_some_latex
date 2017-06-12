@@ -213,6 +213,60 @@ Il vettore di Poynting risulta quindi
 \begin{esp*}
   \S = \frac{\E \times\H^*}{2} &= \frac{E_\theta \cdot \hth \times H_\Phi \cdot \hphi}{2} = \frac{E_\theta\cdot H_\Phi}{2}\cdot \hth \times \hphi \\
   &= \frac{E_\theta\cdot H_\Phi}{2} \cdot \hr = \frac{\eta|I|^2 \Delta z^2}{8\lambda^2\r^2} \sin^2(\theta)\cdot \hr \\
-  \frac{\eta |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right) \cdot \frac{sin^2(\theta)}{r^2} \cdot \hr = \Re[\P]
+  &=\frac{\eta |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot \frac{sin^2(\theta)}{r^2} \cdot \hr = \Re[\P]
 \end{esp*}
-dove $\Re[\P]$ è il flusso di potenza attiva
+dove $\Re[\P]$ è il flusso di potenza attiva.
+
+\paragraph{Efficienza di radiazione del dipolo elementare}
+
+Dimostriamo ora che il dipolo elementare non è un'antenna efficiente e per farlo analizzeremo la potenza irradiata($P$) utilizzando il vettore di Poynting($\P$). Definiamo $S(r)$ la superficie della sfera di raggio r e $I(r,\theta,\Phi)$ l'intensità di radiazione del campo in un punto della sfera di raggio $r$ e coordinate sferiche $\theta , \Phi$).
+\begin{esp*}
+  P &= \int_{S(r)} \Re[\P] \cdot \hr \cdot dS = \int_{S(r)} I(r,\theta,\Phi)\cdot \underbrace{\hr \cdot \hr}_{=1} dS \\
+  &= \int_0^{2\pi}\int_0^\pi I(r,\theta,\Phi)\cdot r^2 \cdot sin(\theta) \cdot d\theta \cdot d\Phi \\
+  &= \int_0^{2\pi}\int_0^\pi \frac{\eta |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot \frac{sin^2(\theta)}{r^2} \cdot r^2 sin(\theta) d\theta \cdot d\Phi \\
+  &=\frac{\eta |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot 2\pi \cdot  \underbrace{\int_0^\pi sin^3(\theta)}_{=\frac{4}{3}} = \frac{\pi}{3} \eta |I|^2 \left(\frac{\Delta z}{\lambda}\right)^2
+\end{esp*}
+
+Analizziamo ora il vettore di Poyting per vedere come si comporta il campo EM in un caso generico, ossia in assenza di approssimazioni di campo lontano.
+\begin{esp}
+  \P &= \frac{\E \times \H^*}{2} = \frac{1}{2} \cdot (E_\theta \hth + E_r \hr) \times H_\Phi^* \hphi \\
+  &=\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{(4\pi)^2} \cdot\left(\frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot sin^2(\theta) \left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\hr \\
+  &+\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{2\pi\cdot 4\pi} \cdot\left( \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot cos(\theta)\cdot sin(\theta)\left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\cdot(-\hth)\\
+  &= \eta \frac{|I|^2 \cdot (\Delta z)^2}{32\pi^2} sin^2(\theta) \cdot \left(\frac{\beta^2}{r^2}+\frac{\jmath\beta}{r^3}-\frac{\jmath\beta}{r^3} +\frac{1}{r^4}-\frac{1}{r^4} + \frac{1}{\jmath\beta r^5}\right) \hr \\
+  &-\eta \frac{|I|^2 \cdot (\Delta z)^2}{16\pi^2} sin(\theta)\cos(\theta) \cdot \left(-\frac{\jmath\beta}{r^3} +\frac{1}{r^4}-\frac{1}{r^4} + \frac{1}{\jmath\beta r^5}\right) \hth \\
+\end{esp}
+Facendo le dovute semplificazioni e scrivendo, dove necessario $\beta = \frac{2\pi}{\lambda}$ otteniamo:
+\begin{esp}
+  P=\eta \frac{|I|^2 \cdot (\Delta z)^2}{32\pi^2} sin^2(\theta) \cdot \frac{4\pi^2}{\lambda^2} \cdot \left(1+ \underbrace{\frac{1}{\jmath\beta^3 r^3}}_{\frac{1}{\jmath}\left(\frac{\lambda}{2\pi r}\right)^3}\right) \hr
+  +\eta \frac{\jmath\beta |I|^2 \cdot (\Delta z)^2}{16\pi^2\cdot r^3} sin(\theta)\cos(\theta) \cdot \left(1 - \frac{1}{(\jmath\beta)^2 r^2}\right) \hth \\
+\end{esp}
+Osservando ora la parte immaginaria otteniamo:
+\begin{equation}
+  \Im[\P] = -\jmath\frac{\eta}{\beta} |I|^2 \cdot \left(\frac{\Delta z}{4\pi}\right)^2 \cdot \frac{1}{r^5}\left(sin^2(\theta)\hr - sin(2\theta)\hth\right)
+\end{equation}
+Il comportamento della parte immaginaria è mostrato in figura \ref{fig:capIndutt}
+\begin{figure}
+  \input{img/capacitivoInduttivoDE.tex}
+  \caption{Dall'origine al punto A il comportamento di $\Im[\P]$ è induttivo, tra a e $\pi$ è capacitivo}
+  \label{fig:capIndutt}
+\end{figure}
+
+\section{Parametri di un'antenna}
+Mostreremo ora i parametri attraverso cui un'antenna è caratterizzata, prima elencandoli e poi ricavandoli per il dipolo elementare.
+I parametri, dunque, sono
+\begin{itemize}
+  \item Pattern di radiazione in campo e in potenza
+  \item Direttività
+  \item Guadagno in potenza
+\end{itemize}
+
+\subsection{Pattern di radiazione}
+\paragraph{Pattern di radiazione in campo}
+Si definisce Pattern di radiazione in campo il rapporto
+\begin{equation} \label{eq:patternCampo}
+  F(\theta,\Phi) = \frac{E_\theta(r,\theta,\Phi)}{E_\theta(r,\theta_{max},\Phi_{max})}
+\end{equation}
+dove
+\begin{equation}
+  \{\theta_{max} , \Phi_{max}\} = \max_{\theta,\Phi} |E_\theta(r,\theta,\Phi)|
+\end{equation}
