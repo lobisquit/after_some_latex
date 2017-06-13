@@ -1,6 +1,6 @@
-\section{Propagazione guidata}
+\section{Propagazione guidata}%
 Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicare anche per la propagazione di onde elettromagnetiche in conduttori, per esempio
-\begin{itemize}
+\begin{itemize}%
   \item \textbf{linee bifilari} come il doppino telefonico
   \item \textbf{linee coassiali}, per esempio  cavo che collega l'antenna al televisore
   \item \textbf{le guide rettangolari}, usate principalmente per applicazioni in cui è necessario trasportare molta potenza (radar o trasmissioni satellitari)
@@ -192,7 +192,7 @@ Otteniamo quindi le equazioni per il csmpo elettrico e magnetico
 L'andamento della soluzione del campo elettrico permette di individuare la regione di campo lontano, in particolare con le approssimazioni per r sufficientemente grande, si ottiene:
 \begin{esp*}
   \frac{\jmath\beta}{r} &= \frac{\jmath 2\pi}{\lambda \cdot r} \quad \lambda r \gg  \lambda \implies \text{regione campo lontano}\\
-  \frac{1}{\jmath\beta r^3} = \frac{\lambda}{\jmath 2 \pi r^3} \to 0 \\
+  \frac{1}{\jmath\beta r^3} &= \frac{\lambda}{\jmath 2 \pi r^3} \to 0 \\
   \H &\approx \frac{I \cdot \Delta z}{4\pi} \cdot \frac{\jmath\beta}{r} \cdot \ejbr sin(\theta)\hphi\\
   \E &\approx \eta \cdot \frac{I \cdot \Delta z}{4\pi} \cdot \jmath\beta\cdot \frac{\ejbr{r}}{r} sin(\theta) \cdot \hth
 \end{esp*}
@@ -245,9 +245,9 @@ Osservando ora la parte immaginaria otteniamo:
   \Im[\P] = -\jmath\frac{\eta}{\beta} |I|^2 \cdot \left(\frac{\Delta z}{4\pi}\right)^2 \cdot \frac{1}{r^5}\left(sin^2(\theta)\hr - sin(2\theta)\hth\right)
 \end{equation}
 Il comportamento della parte immaginaria è mostrato in figura \ref{fig:capIndutt}
-\begin{figure}
+\begin{figure}\centering
   \input{img/capacitivoInduttivoDE.tex}
-  \caption{Dall'origine al punto A il comportamento di $\Im[\P]$ è induttivo, tra a e $\pi$ è capacitivo}
+  \caption{Dall'origine al punto A il comportamento di $\Im[\P]$ è induttivo, tra A e $\pi$ è capacitivo}
   \label{fig:capIndutt}
 \end{figure}
 
@@ -256,6 +256,7 @@ Mostreremo ora i parametri attraverso cui un'antenna è caratterizzata, prima el
 I parametri, dunque, sono
 \begin{itemize}
   \item Pattern di radiazione in campo e in potenza
+  \item SLL - Side Lobe Level
   \item Direttività
   \item Guadagno in potenza
 \end{itemize}
@@ -270,3 +271,109 @@ dove
 \begin{equation}
   \{\theta_{max} , \Phi_{max}\} = \max_{\theta,\Phi} |E_\theta(r,\theta,\Phi)|
 \end{equation}
+
+Nel caso del dipolo elementare, si ha:
+
+\begin{equation}
+  F_{DE}(\theta,\Phi) = \frac{\jmath\eta I \frac{\Delta z}{\lambda} \frac{\ejbr}{r} sin(\theta)}{\jmath\eta I \frac{\Delta z}{\lambda} \frac{\ejbr}{r}} = sin(\theta) \, \theta_{max}=\frac{\pi}{2} \implies sin(\theta_{max}) =1
+\end{equation}
+
+
+\paragraph{Pattern di radiazione in potenza}
+Definiamo il pattern di radiazione in potenza come
+\begin{equation}\label{eq:patternPotenza}
+  P(\theta,\Phi) = |F(r,\theta,\Phi)|^2 = \frac{|E_\theta(r,\theta,\Phi)|^2}{|E_\theta(r,\theta_{max},\Phi_{max})|^2} = \frac{|I|}{|I_{max}|} \, 0\le P(\theta,\Phi) \le 1
+\end{equation}
+
+Nel caso del dipolo elementare si ha che il pattern di radiazione in potenza è
+$|  F_{DE}(\theta,\Phi)|^2 = sin^2(\theta)$
+
+\subsection{Side Lobe Level SLL}
+Definiamo il rapporto dei lobi secondari come
+\begin{equation}\label{eq:SLL}
+  SSL=10 \cdot log_{10}\left|\frac{F(SSL)}{F_{max}}\right|^2 = 20 \cdot log_{10} |F(SSL)|
+\end{equation}
+tenendo a mente che $F_{max}=1$
+
+\paragraph{Solidi di direttività}
+Dal pattern di radiazione in campo e in potenza, possiamo trovare i solidi di direttività in campo lontano. Il solido di direttività è un grafico tridimensionale che in coordinate sferiche permette di valutare la propagazione. Nel caso del dipolo elementare i suoi solidi di direttività in campo e in potenza sono visibili in figura \ref{fig:pattern}.
+Poiché la maggior parte delle volte risulta difficoltoso rappresentare un grafico tridimensionale che sia facile e veloce da leggere, si decide di rappresentare un grafico bidimensionale, che verrà chiamato \textbf{diagramma di radiazione}.
+Il diagramma di radiazione si costruisce omettendo uno dei due angoli $\theta$ o $\Phi$ e utilizzando
+\begin{itemize}
+  \item coordinate polari, la rappresentazione più utilizzata perché permette di cogliere immediatamente dove il campo si propaga;
+  \item coordinate cartesiane, la rappresentazione che dà più risalto all'intensità del campo in determinati angoli.
+\end{itemize}
+
+\subsection{Direttività}
+Il concetto di direttività di un'antenna è legato al voler quantificare la porzione di potenza che viene emessa nel lobo (o nei lobi) principali rispetto alla potenza media irradiata dall'antenna.
+Iniziamo quindi a determinare come la potenza irradiata:
+\begin{equation}
+  P= \int_{S(r)} I(r,\theta,\Phi) dS =\int_0^\pi\int_0^{2\pi} I(r,\theta,\Phi)\cdot r^2 \cdot sin(\theta)d\theta\,d\Phi
+\end{equation}
+
+Definiamo quindi la potenza per unità di angolo solido la quantità
+\begin{equation}
+  U(\theta,\Phi)=I(r,\theta,\Phi)\cdot r^2 \quad [U] = W = \frac{W}{sterad}
+\end{equation}
+definiamo inolte il massimo della potenza per unità di angolo solido come:
+\begin{equation}
+  U_m = \max_{\theta,\Phi} U(\theta,\Phi) = U(\theta_{max},\Phi_{max})
+\end{equation}
+Possiamo quindi riscrivere la potenza come
+\begin{equation}
+  \int_0^\pi \int_0^{2\pi} U(\theta,\Phi) \cdot \underbrace{ sin(\theta) d\theta \, d\Phi}_{\text{ \parbox{2cm}{$d\Omega$ unità infinitesima di angolo solido}}}
+\end{equation}
+Da quest'ultima equazione possiamo definire la potenza media per unità di angolo solido come
+\begin{equation}
+  U_{AVG} = \frac{1}{4\pi}\cdot \int U(\theta,\Phi) \cdot d\Omega
+\end{equation}
+Definiamo quindi la direttivià come il rapporto
+\begin{equation}
+  D=\frac{U_m}{U_{AVG}}
+\end{equation}
+
+Possiamo riscrivere la direttività in due altri modi differenti:
+\begin{esp}\label{eq:dirett}
+  D&\stackrel{=}{1}\frac{I(r,\theta_{max},\Phi_{max})}{\frac{1}{4\pi}\int I(r,\theta,\Phi) sin(\theta) \cdot d\theta \, d\Phi} \\
+  &\stackrel{=}{2}\frac{U_m}{\frac{P}{4\pi}} =\frac{U_m\cdot 4\pi}{P} = \frac{4\pi r^2 I(r,\theta_{max},\Phi_{max})}{P}
+\end{esp}
+La quantità $4\pi r^2 I(r,\theta_{max},\Phi_{max})$ viene normalmente chiamata \textbf{EIRP}: Effective Isotropic Radiated Power e indica un'antenna che trasmetta isotropicamente con un campo pari a quello nella direzione del massimo.
+
+\paragraph{Direttività del dipolo elementare}
+
+Nel dipolo elementare abbiamo che:
+\begin{esp*}
+  U(\theta,\Phi) &= \frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 sin(\theta) \\
+  U_m &= \frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2\\
+  P&= \frac{\pi}{3}\eta |I|^2 \left(\frac{\Delta z}{\lambda}\right)^2 \\
+  \implies & D_{DE} = \frac{U_m \cdot 4\pi}{P}= \frac{\frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot 4\pi}{\frac{\pi}{3}\eta |I|^2 \left(\frac{\Delta z}{\lambda}\right)^2} = \frac{3}{2} = 1,5
+\end{esp*}
+Il risultato ottenuto mostra come il dipolo elementare sia poco direttivo. Spesso però si è soliti riportare la direttività in decibel rispetto a un'antenna isotropa (che quindi ha direttività pari a 1): $D_{DE_{dB}} \approx 1.76 dB$
+
+Ipotizziamo ora un'antenna ideale che emette in un settore della sfera, per esempio supponiamo il pattern di radiazione in campo pari a:
+\begin{equation}F=\begin{cases}
+  1 & \frac{\pi}{3}\le \theta \le\frac{2}{3}\pi \\ 0 & \text{altrove}
+\end{cases}\end{equation}
+Possiamo scrivere la potenza media per unità di angolo solido come
+\begin{equation}
+  U_{AVG} =\frac{1}{4\pi}\int U(\theta,\Phi) d\Omega = \frac{U_m}{4\pi}\int |F|^2 d\Omega
+\end{equation}
+
+La direttività quindi risulta
+\begin{esp*}
+  D=\frac{U_m}{U_{AVG}} = 4\pi\frac{U_m}{U_m}\cdot \frac{1}{\int_0^{2\pi}\int_{\frac{\pi}{3}}^{\frac{2}{3}\pi} sin(\theta)d\theta \, d\Phi} = \frac{4\pi}{2\pi} = 2
+\end{esp*}
+Abbiamo quindi trovato un altro modo per scrivere $U(\theta,\Phi)$:
+\begin{equation}
+  U(\theta,\Phi) = |F(\theta,\Phi)|\cdot U_m
+\end{equation}
+
+Possiamo definire inoltre l'angolo solido del fascio, o \textit{beam solid angle} la quantità
+\begin{equation}
+  \Omega_A = \int |F(\theta,\Phi)|^2 d\Omega
+\end{equation}
+Otteniamo quindi che la direttività si può scrivere come
+$$D= \frac{4\pi}{\Omega_A}$$.
+
+\textsc{Remark:} a volte si scrive $D(\theta,\Phi) = D \cdot |F(\theta,\Phi)|^2$ rinormalizzando come visto in \eqref{eq:dirett} (2)
+\subsection{Guadagno in potenza}
