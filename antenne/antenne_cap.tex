@@ -51,7 +51,7 @@ Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo c
 In questo capitolo analizzeremo le antenne, partendo inizialmente con i potenziali elettromagnetici e cercando di modificare le equazioni di Maxwell affinché siano più comode da studiare nei nostri casi. Vedremo quindi l'equazione di Helmoltz e la scelta di Lorentz. Inizieremo quindi a studiare le antenne partendo dal caso del dipolo elementare, ideale e non realizzabile nella realtà, ma utile per fare le prime approssimazioni. Estenderemo quindi il dipolo elementare al dipolo corto per studiare poi le antenne lineari, le schiere e le patch.
 
 Riprendiamo le equazioni di Maxwell scritte con i vettori di Steinmets:
-\begin{equation}\begin{cases}
+\begin{equation}\label{eq:maxw-ant}\begin{cases}
   \rot\E = -\jmath \omega \mu\H(\r) \textcolor[rgb]{0.8,0,0}{+ \M} \\
   \rot\H = \jmath  \omega \epsilon \E + \J\\
   \diverg\H=0\\
@@ -380,7 +380,7 @@ $$D= \frac{4\pi}{\Omega_A}$$.
 Non sempre si riesce a conoscere in ogni punto il valore di $I(r,\theta,\Phi)$, per cui si procede analizzando la potenza elettrica emessa rispetto alla direttività dell'antenna. In particolare, osservando anche la figura \ref{fig:antDipolo}, si procede come segue:
 \begin{esp}
   P_{IN} &= \Re\left[\frac{V_A \cdot I_A^*}{2}\right] \\
-  G= \frac{U_m}{\frac{P_{IN}{4\pi}}}
+  G= \frac{U_m}{\frac{P_{IN}}{4\pi}}
 \end{esp}
 Poiché si riesce sempre a calcolare
 \begin{esp}
@@ -426,9 +426,9 @@ Possiamo quindi ricavare
 Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, otteniamo:
 \begin{esp*}
   P&=\frac{\pi}{3} \eta |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \quad P_{IN} = P \\
-  R_r = \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta  left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2left(\frac{\Delta z}{\lambda}\right)^2 \Omega
+  R_r &= \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta \left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2\left(\frac{\Delta z}{\lambda}\right)^2 \Omega
 \end{esp*}
-poiché il rapporto $left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
+Poiché il rapporto $\left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
 Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$. Iniziamo riprendendo l'equazione \eqref{eq:bilancio_potenza_EM_steinmetz}:
 \begin{esp*}
   \Im\left[- \int_V \E \cdot \J^* ~ dV\right] &= \omega \underbrace{\int_V \omega \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
@@ -454,7 +454,7 @@ Definiamo quindi impedenza caratteristica, la quantità
 \begin{equation}
   Z_C = \frac{V+}{I_+} = \sqrt{\frac{l}{c}}
 \end{equation}
-Se la linea è priva di perdite, $Z_C \in \R$ e, in generale $Z_C = \{ \underbrace{50,75}_{\text{coassiale}},\underbrace{100\~300}_{\text{\parbox{3cm}{linee bifilari}}} \Omega$
+Se la linea è priva di perdite, $Z_C \in \R$ e, in generale $Z_C = \{ \underbrace{50,75}_{\text{coassiale}} , \underbrace{100\div\300}_{\text{\parbox{3cm}{linee bifilari}}}\} \Omega$
 
 Definiamo ora il coefficiente di riflessione della linea:
 \begin{equation}
@@ -489,4 +489,61 @@ In particolare, vogliamo che $S_{ii}\to0$, in modo che non ci sia riflessione.
     P_{IN} = \frac{1}{2}\sum\limits_{i=1}^N |a_i|^2 - |b_i|^2 \stackrel{=}{conti}=\frac{1}{2} A^{*^T}\cdot D \cdot A
 \end{esp*}
 
-\section{Momento di dipolo equivalente}
+\section{Momento di dipolo equivalente }
+Vogliamo ora cercare di estendere quanto calcolato per il dipolo elementare a qualsiasi antenna, valutando i casi in cui è possibile adottare le approssimazioni di campo lontano e in generale, quali sono le differenze con il caso studiato in precedenza.
+
+Ipotizziamo ora un volume dove scorre una corrente impressa e che al di fuori del volume stesso ci sia un campo di radiazione. Calcoleremo quindi  il vettore $\M$ introdotto in eq. \eqref{eq:maxw-ant}.
+
+Supponiamo che il vettore densità totale di corrente elettrica sia
+\begin{equation}\J(\r\prime)=\begin{cases}
+  \neq 0 & \forall r\prime \in V\prime \\ 0 & \text{altrove}
+\end{cases}\end{equation}
+Per ogni punto P si ha che il vettore posizione sia $\vec{R} = \vec{R}(\vec{r}\prime)$ dove $\vec{r}\prime$ è la distanza dal centro alla superficie del volume, in quanto siamo interessati a ogni contributo infinitesimo dalla superficie della sfera al punto P.
+
+Il differenziale del potenziale vettore magnetco è
+\begin{equation}
+  d\A(\r) = \frac{\mu}{4\pi} \J(\r) \frac{e^{-\jmath \beta R}}{R}d\r\prime
+\end{equation}
+
+Possiamo quindi calcolare quanto vale $\A(\r)$
+\begin{equation}
+  \A(\r)=\int_{V\prime} d\A(\r) =\int_{V\prime} \frac{\mu}{4\pi} \J(\r) \frac{\ejbr}{R}d\r\prime
+\end{equation}
+Cerchiamo ora di trovare una maniera più semplice per trovare $R=|\vec{R}(\r\prime)|$
+\begin{esp}
+  R&=|\vec{R}(\r\prime)| = \sqrt{r^2+r\prime^2-2r\cdot r\prime cos(\psi)} \\
+  &= r\cdot \sqrt{1+\left(\frac{r\prime}{r}\right)^2-2\frac{r\prime}{r} cos(\psi)} = r \cdot\sqrt{1+\Delta} \\
+  &\approx r \cdot \left(1+\frac{\Delta}{2} + o\left( \left( \frac{r\prime}{r} \right)^2 \right) \right)\\
+  \Delta &= -2\frac{r\prime}{r} cos(\psi)+\left(\frac{r\prime}{r}\right)^2 \approx -2\frac{r\prime}{r} cos(\psi)+o\left[\left(\frac{r\prime}{r}\right)^2\right]
+\end{esp}
+
+Possiamo quindi scrivere $\A(\r)$ come:
+\begin{esp*}
+  \A(\r)&\approx \int_{V\prime} \frac{\mu}{4\pi} \J(\r) \frac{e^{-\jmath\beta \cdot[r-r\prime cos(\psi)]}}{r}d\r\prime
+\end{esp*}
+dove il denominatore è potuto essere approssimato a $r$ perché non ha un cambiamento significativo al risultato dell'integrale, mentre nell'esponenziale il termine di fase avrebbe comportato un cambiamento molto maggiore, per cui non si può applicare alcuna semplificaizione.\\
+Continuando con i conti, otteniamo
+\begin{esp*}
+  \A(\r) &= \underbrace{\frac{\mu\ejbr}{4\pi r}}_{\text{onda sferica}} \cdot \int_{V\prime}\J(\r\prime)\cdot e^{-\jmath\beta r\prime cos(\psi)} dr\prime \\
+  &=\frac{\mu \ejbr}{4\pi r} \cdot \M(\theta,\Phi)\\
+\end{esp*}
+Abbiamo quindi trovato che il momento di dipolo equivalente vale
+\begin{equation}
+  \M(\theta, \Phi) = \int_{V\prime}\J(\r\prime)\cdot e^{-\jmath\beta r\prime cos(\psi)} dr\prime
+\end{equation}
+
+L'approssimazione vale
+\begin{esp}
+  &r \cdot \left(1+\frac{\Delta}{2} + o\left[ \left( \frac{r\prime}{r} \right)^2 \right]\right) \approx r-r\prime cos(\psi) + \underbrace{\frac{r\prime^2}{r}}_{\ll 1} \\
+  &\beta \frac{r\prime^2}{r} \ll 1 \Leftrightarrow \frac{2\pi }{\lambda}\frac{r\prime^2}{r} \ll 1\Leftrightarrow \frac{2\pi D^2}{\lambda r} \ll 1 \\
+  & 2 \pi \underbrace{\frac{D}{\lambda}}_{(1)}\underbrace{\frac{D}{r}}_{(2)}
+\end{esp}
+dove $(1)$ considera il rapporto tra la dimensione dell'antenna e lunghezza d'ona, mentre $(2) \ll 1$  perché considero il campo lontano.
+
+Le condizioni di campo lontano sono valide:
+\begin{itemize}
+  \item $r\gg \lambda$ per il dipolo elementare e le antenne filiformi
+  \item $r\gg \frac{D^2}{\lambda}$
+\end{itemize}
+
+\subsection{Altezza efficace}
