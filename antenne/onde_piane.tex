@@ -454,15 +454,128 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\end{dcases}
 \end{equation}
 
-\subsubsection{Incidenza normale tra perfetti isolanti}
-Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie, e $\sigma_1 = \sigma_2 = 0$, si ha che
+\subsection{Incidenza tra perfetti isolanti}
+	Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie e $\sigma_1 = \sigma_2 = 0$ si ha che, come rappresentato in figura \ref{fig:incidenza_normale}, la lunghezza d'onda si riduce: in particolare vale che
 
-\begin{figure}[h] \label{fig:incidenza_normale_isolanti}
-	\centering
-	\input{img/incidenza_normale.pgf}
-	\caption{I piani equifase, evidenziati in verde, riducono la distanza tra loro, ovvero la lunghezza d'onda $\lambda_2 < \lambda_1$ nel caso $n_2 > n_1$.}
-\end{figure}
+	\begin{esp}
+		\begin{dcases}
+			c_1 = \frac{c_o}{n_1} \\
+			c_2 = \frac{c_o}{n_2} 
+		\end{dcases}
+		\implies 
+		\begin{dcases}
+			\lambda_1 = \frac{\lambda_o}{n_1} \\
+			\lambda_2 = \frac{\lambda_o}{n_2} 
+		\end{dcases}
+		\implies 
+		\lambda_2 = \lambda_1 \frac{n_1}{n_2}
+	\end{esp}
 
+	\begin{figure}[ht] \label{fig:incidenza_normale_isolanti}
+		\centering
+		\includegraphics{img/incidenza_normale.pdf}
+		\caption{I piani equifase, evidenziati in verde, riducono la distanza tra loro, ovvero la lunghezza d'onda $\lambda_2 < \lambda_1$ nel caso $n_2 > n_1$.}
+	\end{figure}
+
+	Nel caso invece di incidenza con un angolo $\theta_i$ rispetto alla normale della superficie, il comportamento è più complesso, come si può osservare in figura \ref{fig:incidenza_non_normale_isolanti}.
+
+	La continuità dei piani equifase ci permette ancora di valutare il comportamento dell'onda anche senza risolvere le equazioni di Maxwell. 
+
+	Considerando il segmento $l$ evidenziato in figura, la sua lunghezza può essere calcolata in due modi diversi, grazie alle proprietà dei triangoli rettangoli.
+
+	\begin{esp}
+		l = \frac{\lambda_1}{\sin(\theta_i)} = \frac{\lambda_1}{\sin(\theta_i)}
+	\end{esp}
+
+	\begin{figure}[ht] \label{fig:incidenza_non_normale_isolanti}
+		\centering
+		\includegraphics{img/incidenza_non_normale.pdf}
+		\caption{La continuità dei campi tangenti impone che i piano equifase conservino la stessa distanza $l$ tra loro \emph{sulla superficie di separazione}.}
+	\end{figure}
+
+	Nel caso i due elementi abbiamo lo stesso indice di rifrazione $n_i$, l'onda procede senza variazioni: per $\lambda_1 = \lambda_2$ vale infatti che $\theta_1 = \theta_2$.
+	Possiamo osservare che questo è ciò che accade per l'onda riflessa, per la quale $\theta_i = \theta_r$, appunto perché l'onda non cambia materiale di propagazione.
+
+\subsection{Coefficienti di riflessione e trasmissione}
+	Nella sezione precedente abbiamo osservato come individuare le direzioni dell'onda riflessa e di quella trasmessa: ci focalizzaremo quindi su come la discontinuità influenzi il modulo del campo elettromagnetico.
+	
+	Per semplicità di calcolo e notazione ci metteremo nel caso di incidenza normale, ma analogamente segue per il caso generale.
+
+	\begin{figure}[ht] \label{fig:campi_incidenza_normale_isolanti}
+		\centering
+		\includegraphics{img/campi_incidenza_normale.pdf}
+		\caption{Nella riflessione il campo $\E$ mantiene la sua direzione, mentre $\H$ la inverte. Questo è dovuto ad un asimmetria delle equazioni di Maxwell legata al teorema delle immagini.}
+	\end{figure}
+	
+	Nella superficie di discontinuità i campi sono tutti paralleli, quindi le somme vettoriali si riducono a somme scalari.
+	\begin{esp}
+		\begin{cases}
+			E_{oi} + E_{or} = E_{ot} \\
+			H_{oi} - H_{or} = H_{ot}
+		\end{cases} \implies
+		\frac{E_{oi}}{\eta_1} - \frac{E_{or}}{\eta_1} = \frac{E_{ot}}{\eta_2} = \frac{E_{oi} + E_{or}}{\eta_2}
+	\end{esp}
+	dove sono state impiegate le formule che legano $|\E|$ e $|\H|$ nel caso dell'onda piana.
+	
+	Riorganizzando i termini dell'equazione, si ottiene il \emph{coefficiente di riflessione} $\rho$.
+	\begin{esp}
+		& \rho \stackrel{.}{=} \frac{E_{or}}{E_{oi}} 
+			= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1} 
+			\stackrel{(*)}{=} \frac{ \frac{\eta_o}{n_2} - \frac{\eta_o}{n_1}}{\frac{\eta_o}{n_2} + \frac{\eta_o}{n_1}}  
+			= \frac{n_2 - n_1}{n_2 + n_1} 
+	\end{esp}
+	dove (*) vale solamente per i dielettrici, materiali per cui $\eta_i = \frac{\eta_o}{n_i}$.
+
+	Il \emph{coefficiente di trasmissione} $\tau$ si può ricavare in modo analogo.
+	\begin{esp}
+		& \tau \stackrel{.}{=} \frac{E_{ot}}{E_{oi}} 
+				= \frac{E_{or} + E_{oi}}{E_{oi}} 
+				= \frac{E_{or}}{E_{oi}} + 1
+				= \rho + 1 \\
+	\end{esp}
+
+\subsection{Potenza trasmessa e riflessa}
+	A partire dai valori del campo elettrico trasmessi e riflessi è possibile calcolare come si distribuisca la potenza dell'onda nei due materiali.
+	
+	\begin{esp}
+		I_t 
+		& = |\Re[\vec{P}]| 
+			= \frac{|E_{ot}|^2}{2 \eta_2}
+			= \frac{|E_{oi} (1 + \rho)|^2}{2 \eta_2} \\
+		& = \frac{|E_{oi}|^2}{2 \eta_1} \frac{\eta_1}{\eta_2} |1 + \rho|^2
+			= I_i \frac{\eta_1}{\eta_2} |1 + \rho|^2 \\
+		& = I_i \frac{4 \eta_1 \eta_2}{|\eta_1 + \eta_2|^2}
+			= I_i (1 - |\rho|^2) = I_i - I_i |\rho|^2 = I_i - I_r
+	\end{esp}
+	
+	È possibile osservare come tutto il comportamento in potenza sia dovuto al solo parametro $\rho$, che definisce sia l'intensità dell'onda trasmessa che quella riflessa.
+	
+\subsection{Interferenza in riflessione}
+	Come è possibile notare in figura \ref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due. 
+	Questo dà vita a fenomeni di interferenza tra l'onda progressiva incidente e l'onda regressiva riflessa, generata dalla discontinuità di mezzo.
+	
+	\begin{figure}[ht] \label{fig:campi_incidenza_non_normale_isolanti}
+		\centering
+		\includegraphics{img/campi_incidenza_non_normale.pdf}
+		 \caption{Per l'onda considerata, i campi elettrici sono evidenziati per renderli più visibili e risultano paralleli all'asse $\hat{x}_3$ entrante nel foglio.}
+	\end{figure}
+	
+	Nel caso generico di incidenza, abbiamo che
+	\begin{esp}
+		\begin{cases}
+			\k_i = (+ \beta_1 \cos(\theta_1), + \beta_1 \sin(\theta_1), 0) \\
+			\k_r = (- \beta_1 \cos(\theta_1), + \beta_1 \sin(\theta_1), 0)
+		\end{cases}
+	\end{esp}
+	dove i vettori sono scomposti nelle loro componenti secondo il sistema di coordinate in figura \ref{fig:campi_incidenza_non_normale_isolanti}.
+	
+	Il campo nel mezzo 1 si può perciò scrivere come 
+	%\begin{esp}
+	%	\E_1(\r) 
+	%	& = \E_{oi} ~ e^{-j \k_i \cdot \r} + \E_{or} ~ e^{-j \k_r \cdot \r}
+	%		E_{oi} \hat{x}_3 ~ e^{-\beta_1 ( \cos(\theta_i) x_1 + \sin(\theta_i) x_2} (1 + \rho ~ ^{- 2 \beta_1 ( \cos(\theta_i) x_1}
+	%	
+	%\end{esp}
 
 
 
