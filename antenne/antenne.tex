@@ -1,6 +1,5 @@
 \documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
-
-% language settings
+%language settings
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 
@@ -20,8 +19,8 @@
 
 % math package
 \usepackage{mathtools}
-\usepackage{amsthm, environ}
-\usepackage{amsmath, amssymb, dsfont, bm,blkarray}
+\usepackage{amsthm, environ}%
+\usepackage{amsmath, amssymb, dsfont, bm,blkarray}%
 \usepackage{cases}
 
 % tikz figures
@@ -66,8 +65,8 @@
 \theoremstyle{remark}
 \newtheorem{proofpart}{Part}
 \renewcommand\theproofpart{\Roman{proofpart}}
-\makeatletter
-\@addtoreset{proofpart}{theorem}
+\makeatletter%
+\@addtoreset{proofpart}{theorem}%
 \makeatother
 
 % specific modification to basic book template of our book document
@@ -82,7 +81,7 @@
 \def\eeq{\end{equation}}
 \def\bal{\begin{align}}
 \def\eal{\end{align}}
-\def\prob{\ensuremath\mathbb{P}}
+\def\prob{\ensuremath\mathbb{P}}%
 \def\exp{\ensuremath\mathbb{E}}
 \newcommand{\Hb}{\mathbb{H}}
 \newcommand{\Sb}{\mathbb{\Sigma}}

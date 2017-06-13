@@ -1,6 +1,6 @@
-\section{Propagazione guidata}
+\section{Propagazione guidata}%
 Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicare anche per la propagazione di onde elettromagnetiche in conduttori, per esempio
-\begin{itemize}
+\begin{itemize}%
   \item \textbf{linee bifilari} come il doppino telefonico
   \item \textbf{linee coassiali}, per esempio  cavo che collega l'antenna al televisore
   \item \textbf{le guide rettangolari}, usate principalmente per applicazioni in cui è necessario trasportare molta potenza (radar o trasmissioni satellitari)
@@ -28,7 +28,7 @@ La tensione e la corrente nella linea coassiale si possono scrivere come
 \begin{esp}
   V&= \int_{r_{int}}^{r_{ext}} \E \cdot d\vec{l} \\
   I&= \oint \H \cdot d\vec{l} \\
-  &\implies Z_c = \frac{V_o}{I_o} \text{ impedenza caratteristica della linea}
+  &\implies Z_C = \frac{V_o}{I_o} \text{ impedenza caratteristica della linea}
 \end{esp}
 Definendo inoltre
 \begin{itemize}
@@ -37,7 +37,7 @@ Definendo inoltre
 \end{itemize}
 si ottiene che l'impedenza caratteristica risulta
 \begin{equation}
-  Z_c = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
+  Z_C = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
 \end{equation}
 
 Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
@@ -51,7 +51,7 @@ Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo c
 In questo capitolo analizzeremo le antenne, partendo inizialmente con i potenziali elettromagnetici e cercando di modificare le equazioni di Maxwell affinché siano più comode da studiare nei nostri casi. Vedremo quindi l'equazione di Helmoltz e la scelta di Lorentz. Inizieremo quindi a studiare le antenne partendo dal caso del dipolo elementare, ideale e non realizzabile nella realtà, ma utile per fare le prime approssimazioni. Estenderemo quindi il dipolo elementare al dipolo corto per studiare poi le antenne lineari, le schiere e le patch.
 
 Riprendiamo le equazioni di Maxwell scritte con i vettori di Steinmets:
-\begin{equation}\begin{cases}
+\begin{equation}\label{eq:maxw-ant}\begin{cases}
   \rot\E = -\jmath \omega \mu\H(\r) \textcolor[rgb]{0.8,0,0}{+ \M} \\
   \rot\H = \jmath  \omega \epsilon \E + \J\\
   \diverg\H=0\\
@@ -192,7 +192,7 @@ Otteniamo quindi le equazioni per il csmpo elettrico e magnetico
 L'andamento della soluzione del campo elettrico permette di individuare la regione di campo lontano, in particolare con le approssimazioni per r sufficientemente grande, si ottiene:
 \begin{esp*}
   \frac{\jmath\beta}{r} &= \frac{\jmath 2\pi}{\lambda \cdot r} \quad \lambda r \gg  \lambda \implies \text{regione campo lontano}\\
-  \frac{1}{\jmath\beta r^3} = \frac{\lambda}{\jmath 2 \pi r^3} \to 0 \\
+  \frac{1}{\jmath\beta r^3} &= \frac{\lambda}{\jmath 2 \pi r^3} \to 0 \\
   \H &\approx \frac{I \cdot \Delta z}{4\pi} \cdot \frac{\jmath\beta}{r} \cdot \ejbr sin(\theta)\hphi\\
   \E &\approx \eta \cdot \frac{I \cdot \Delta z}{4\pi} \cdot \jmath\beta\cdot \frac{\ejbr{r}}{r} sin(\theta) \cdot \hth
 \end{esp*}
@@ -228,7 +228,7 @@ Dimostriamo ora che il dipolo elementare non è un'antenna efficiente e per farl
 \end{esp*}
 
 Analizziamo ora il vettore di Poyting per vedere come si comporta il campo EM in un caso generico, ossia in assenza di approssimazioni di campo lontano.
-\begin{esp}
+\begin{esp} \label{eq:campoEM}
   \P &= \frac{\E \times \H^*}{2} = \frac{1}{2} \cdot (E_\theta \hth + E_r \hr) \times H_\Phi^* \hphi \\
   &=\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{(4\pi)^2} \cdot\left(\frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot sin^2(\theta) \left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\hr \\
   &+\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{2\pi\cdot 4\pi} \cdot\left( \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot cos(\theta)\cdot sin(\theta)\left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\cdot(-\hth)\\
@@ -245,9 +245,9 @@ Osservando ora la parte immaginaria otteniamo:
   \Im[\P] = -\jmath\frac{\eta}{\beta} |I|^2 \cdot \left(\frac{\Delta z}{4\pi}\right)^2 \cdot \frac{1}{r^5}\left(sin^2(\theta)\hr - sin(2\theta)\hth\right)
 \end{equation}
 Il comportamento della parte immaginaria è mostrato in figura \ref{fig:capIndutt}
-\begin{figure}
+\begin{figure}\centering
   \input{img/capacitivoInduttivoDE.tex}
-  \caption{Dall'origine al punto A il comportamento di $\Im[\P]$ è induttivo, tra a e $\pi$ è capacitivo}
+  \caption{Dall'origine al punto A il comportamento di $\Im[\P]$ è induttivo, tra A e $\pi$ è capacitivo}
   \label{fig:capIndutt}
 \end{figure}
 
@@ -256,6 +256,7 @@ Mostreremo ora i parametri attraverso cui un'antenna è caratterizzata, prima el
 I parametri, dunque, sono
 \begin{itemize}
   \item Pattern di radiazione in campo e in potenza
+  \item SLL - Side Lobe Level
   \item Direttività
   \item Guadagno in potenza
 \end{itemize}
@@ -270,3 +271,279 @@ dove
 \begin{equation}
   \{\theta_{max} , \Phi_{max}\} = \max_{\theta,\Phi} |E_\theta(r,\theta,\Phi)|
 \end{equation}
+
+Nel caso del dipolo elementare, si ha:
+
+\begin{equation}
+  F_{DE}(\theta,\Phi) = \frac{\jmath\eta I \frac{\Delta z}{\lambda} \frac{\ejbr}{r} sin(\theta)}{\jmath\eta I \frac{\Delta z}{\lambda} \frac{\ejbr}{r}} = sin(\theta) \, \theta_{max}=\frac{\pi}{2} \implies sin(\theta_{max}) =1
+\end{equation}
+
+
+\paragraph{Pattern di radiazione in potenza}
+Definiamo il pattern di radiazione in potenza come
+\begin{equation}\label{eq:patternPotenza}
+  P(\theta,\Phi) = |F(r,\theta,\Phi)|^2 = \frac{|E_\theta(r,\theta,\Phi)|^2}{|E_\theta(r,\theta_{max},\Phi_{max})|^2} = \frac{|I|}{|I_{max}|} \, 0\le P(\theta,\Phi) \le 1
+\end{equation}
+
+Nel caso del dipolo elementare si ha che il pattern di radiazione in potenza è
+$|  F_{DE}(\theta,\Phi)|^2 = sin^2(\theta)$
+
+\subsection{Side Lobe Level SLL}
+Definiamo il rapporto dei lobi secondari come
+\begin{equation}\label{eq:SLL}
+  SSL=10 \cdot log_{10}\left|\frac{F(SSL)}{F_{max}}\right|^2 = 20 \cdot log_{10} |F(SSL)|
+\end{equation}
+tenendo a mente che $F_{max}=1$
+
+\paragraph{Solidi di direttività}
+Dal pattern di radiazione in campo e in potenza, possiamo trovare i solidi di direttività in campo lontano. Il solido di direttività è un grafico tridimensionale che in coordinate sferiche permette di valutare la propagazione. Nel caso del dipolo elementare i suoi solidi di direttività in campo e in potenza sono visibili in figura \ref{fig:pattern}.
+Poiché la maggior parte delle volte risulta difficoltoso rappresentare un grafico tridimensionale che sia facile e veloce da leggere, si decide di rappresentare un grafico bidimensionale, che verrà chiamato \textbf{diagramma di radiazione}.
+Il diagramma di radiazione si costruisce omettendo uno dei due angoli $\theta$ o $\Phi$ e utilizzando
+\begin{itemize}
+  \item coordinate polari, la rappresentazione più utilizzata perché permette di cogliere immediatamente dove il campo si propaga;
+  \item coordinate cartesiane, la rappresentazione che dà più risalto all'intensità del campo in determinati angoli.
+\end{itemize}
+
+\subsection{Direttività}
+Il concetto di direttività di un'antenna è legato al voler quantificare la porzione di potenza che viene emessa nel lobo (o nei lobi) principali rispetto alla potenza media irradiata dall'antenna.
+Iniziamo quindi a determinare come la potenza irradiata:
+\begin{equation}
+  P= \int_{S(r)} I(r,\theta,\Phi) dS =\int_0^\pi\int_0^{2\pi} I(r,\theta,\Phi)\cdot r^2 \cdot sin(\theta)d\theta\,d\Phi
+\end{equation}
+
+Definiamo quindi la potenza per unità di angolo solido la quantità
+\begin{equation}
+  U(\theta,\Phi)=I(r,\theta,\Phi)\cdot r^2 \quad [U] = W = \frac{W}{sterad}
+\end{equation}
+definiamo inolte il massimo della potenza per unità di angolo solido come:
+\begin{equation}
+  U_m = \max_{\theta,\Phi} U(\theta,\Phi) = U(\theta_{max},\Phi_{max})
+\end{equation}
+Possiamo quindi riscrivere la potenza come
+\begin{equation}
+  \int_0^\pi \int_0^{2\pi} U(\theta,\Phi) \cdot \underbrace{ sin(\theta) d\theta \, d\Phi}_{\text{ \parbox{2cm}{$d\Omega$ unità infinitesima di angolo solido}}}
+\end{equation}
+Da quest'ultima equazione possiamo definire la potenza media per unità di angolo solido come
+\begin{equation}
+  U_{AVG} = \frac{1}{4\pi}\cdot \int U(\theta,\Phi) \cdot d\Omega
+\end{equation}
+Definiamo quindi la direttivià come il rapporto
+\begin{equation}
+  D=\frac{U_m}{U_{AVG}}
+\end{equation}
+
+Possiamo riscrivere la direttività in due altri modi differenti:
+\begin{esp}\label{eq:dirett}
+  D&\stackrel{=}{1}\frac{I(r,\theta_{max},\Phi_{max})}{\frac{1}{4\pi}\int I(r,\theta,\Phi) sin(\theta) \cdot d\theta \, d\Phi} \\
+  &\stackrel{=}{2}\frac{U_m}{\frac{P}{4\pi}} =\frac{U_m\cdot 4\pi}{P} = \frac{4\pi r^2 I(r,\theta_{max},\Phi_{max})}{P}
+\end{esp}
+La quantità $4\pi r^2 I(r,\theta_{max},\Phi_{max})$ viene normalmente chiamata \textbf{EIRP}: Effective Isotropic Radiated Power e indica un'antenna che trasmetta isotropicamente con un campo pari a quello nella direzione del massimo.
+
+\paragraph{Direttività del dipolo elementare}
+
+Nel dipolo elementare abbiamo che:
+\begin{esp*}
+  U(\theta,\Phi) &= \frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 sin(\theta) \\
+  U_m &= \frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2\\
+  P&= \frac{\pi}{3}\eta |I|^2 \left(\frac{\Delta z}{\lambda}\right)^2 \\
+  \implies & D_{DE} = \frac{U_m \cdot 4\pi}{P}= \frac{\frac{\eta \cdot |I|^2}{8} \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot 4\pi}{\frac{\pi}{3}\eta |I|^2 \left(\frac{\Delta z}{\lambda}\right)^2} = \frac{3}{2} = 1,5
+\end{esp*}
+Il risultato ottenuto mostra come il dipolo elementare sia poco direttivo. Spesso però si è soliti riportare la direttività in decibel rispetto a un'antenna isotropa (che quindi ha direttività pari a 1): $D_{DE_{dB}} \approx 1.76 dB$
+
+Ipotizziamo ora un'antenna ideale che emette in un settore della sfera, per esempio supponiamo il pattern di radiazione in campo pari a:
+\begin{equation}F=\begin{cases}
+  1 & \frac{\pi}{3}\le \theta \le\frac{2}{3}\pi \\ 0 & \text{altrove}
+\end{cases}\end{equation}
+Possiamo scrivere la potenza media per unità di angolo solido come
+\begin{equation}
+  U_{AVG} =\frac{1}{4\pi}\int U(\theta,\Phi) d\Omega = \frac{U_m}{4\pi}\int |F|^2 d\Omega
+\end{equation}
+
+La direttività quindi risulta
+\begin{esp*}
+  D=\frac{U_m}{U_{AVG}} = 4\pi\frac{U_m}{U_m}\cdot \frac{1}{\int_0^{2\pi}\int_{\frac{\pi}{3}}^{\frac{2}{3}\pi} sin(\theta)d\theta \, d\Phi} = \frac{4\pi}{2\pi} = 2
+\end{esp*}
+Abbiamo quindi trovato un altro modo per scrivere $U(\theta,\Phi)$:
+\begin{equation}
+  U(\theta,\Phi) = |F(\theta,\Phi)|\cdot U_m
+\end{equation}
+
+Possiamo definire inoltre l'angolo solido del fascio, o \textit{beam solid angle} la quantità
+\begin{equation}
+  \Omega_A = \int |F(\theta,\Phi)|^2 d\Omega
+\end{equation}
+Otteniamo quindi che la direttività si può scrivere come
+$$D= \frac{4\pi}{\Omega_A}$$.
+
+\textsc{Remark:} a volte si scrive $D(\theta,\Phi) = D \cdot |F(\theta,\Phi)|^2$ rinormalizzando come visto in \eqref{eq:dirett} (2)
+\subsection{Guadagno in potenza}
+Non sempre si riesce a conoscere in ogni punto il valore di $I(r,\theta,\Phi)$, per cui si procede analizzando la potenza elettrica emessa rispetto alla direttività dell'antenna. In particolare, osservando anche la figura \ref{fig:antDipolo}, si procede come segue:
+\begin{esp}
+  P_{IN} &= \Re\left[\frac{V_A \cdot I_A^*}{2}\right] \\
+  G= \frac{U_m}{\frac{P_{IN}}{4\pi}}
+\end{esp}
+Poiché si riesce sempre a calcolare
+\begin{esp}
+  4\pi U_m  &= G \cdot P_{IN} \leftrightarrow 4\pi U_m = D \cdot P\\
+  \implies & G=D \frac{P}{P_IN} \quad D =G \frac{P_{IN}}{P}
+\end{esp}
+Sapendo che non esiste alcun materiale con resistenza nulla, si ha $P \le P_{IN}$. \\
+Definiamo quindi efficienza dell'antenna o efficienza di radiazione la quantità
+\begin{equation}\label{eq:efficienzaAnt}
+  e_r = \frac{P}{P_IN}
+\end{equation}
+
+Possiamo ora riscrivere G come
+\begin{esp*}
+  G&=\frac{4\pi\U_m}{P_{IN}} \cdot \frac{r^2}{r^2} = \frac{4\pi r^2 I(r,\theta,\Phi)}{P_{IN}} = \frac{EIRP}{P_{IN}} \\
+  EIRP &= G \cdot P_{IN} = D \dot P \\
+  I(r,\theta,\Phi) &= G \frac{P_in}{4\pi r^2}\\
+  \implies &G(\theta,\Phi) = G \cdot |F(\theta,\Phi)|^2
+\end{esp*}
+
+\section{Impedenza d'antenna}
+Vogliamo ora valutare come adattare l'antenna affinché la maggior parte della potenza venga trasmessa e irradiata, invece che venir riflessa nel cavo.
+Definiamo quindi l'impedenza di antenna:
+\begin{equation}
+  Z_A = \frac{V_A}{I_A} = R_A + \jmath \Chi_A
+\end{equation}
+dove $R_A$ è la resistenza d'antenna e $\Chi_A$ è la reattanza d'antenna.
+
+Possiamo inoltre scrivere la potenza in ingresso all'antenna come:
+\begin{esp*}
+  P_{IN} &\stackrel{=}{1} \frac{R_A \cdot |I_A|^2}{2} = \Re\left[\frac{V_a \cdot I_A^*}{2}\right] \\
+  &\stackrel{=}{2} \underbrace{P}_{pot. irradiata} + \underbrace{P_o}_{pot. dissipata}\\
+  &= P + R_o \cdot \frac{|I_A|^2}{2}
+\end{esp*}
+definendo $R_o$ resistenza ohmica dell'antenna e $R_r$ la  resistenza di radiazione, tale per cui $P=R_r \cdot \frac{|I_A|^2}{2}$
+
+Possiamo quindi ricavare
+\begin{esp*}
+  P_{IN} &= (R_o + R_r)\cdot \frac{|I_A|^2}{2}\\
+  e_r &= \frac{R_r}{R_r + R_o} = \frac{R_r}{R_A} \le 1
+\end{esp*}
+
+Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, otteniamo:
+\begin{esp*}
+  P&=\frac{\pi}{3} \eta |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \quad P_{IN} = P \\
+  R_r &= \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta \left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2\left(\frac{\Delta z}{\lambda}\right)^2 \Omega
+\end{esp*}
+Poiché il rapporto $\left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
+Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$. Iniziamo riprendendo l'equazione \eqref{eq:bilancio_potenza_EM_steinmetz}:
+\begin{esp*}
+  \Im\left[- \int_V \E \cdot \J^* ~ dV\right] &= \omega \underbrace{\int_V \omega \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
+    _{<0} + \Im\left[\int_{S(r)} \P \cdot \hr dS\right] \\
+  \Im\left[\frac{V_a \cdot I_A^*}{2}\right] &= -\omega\epsilon
+\end{esp*}
+Da quanto trovato in eq. \eqref{eq:campoEM}, sappiamo che $H_\Phi \propto \frac{1}{r^2}$ e $E_\theta \propto \frac{1}{r^3}$, dunque
+\begin{esp*}
+  \frac{\mu|\H|^2}{2} &\approx \frac{\mu}{r^2}\\
+  \frac{\epsilon|\E|^2}{2} &\approx \frac{\mu}{r^6}\\
+  &\stackrel{\implies}{r<1} \frac{\epsilon|\E|^2}{2} \gg \frac{\mu|\H|^2}{2}
+\end{esp*}
+Inoltre $\Im[\P]\approx 1$, per cui
+\begin{esp*}
+  \Im[\P] &= \frac{\eta}{3} |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot \Im[-\jmath] \left(\frac{\lambda}{2\pi r} \right)^3\\
+  &= \frac{\eta}{3} |I_A|^2 \cdot \frac{\Delta z^2 \lambda}{8\pi^3 r^3} \ll -1
+  & \implies \Chi_A \ll -1 ~  \text{negativo e molto grande}
+\end{esp*}
+
+\subsection{Adattamento dell'antenna}
+Il segnale trasmesso da un'antenna proviene da un generatore collegato attraverso una linea (coassiale, bifilare o guida d'onda) che possiede una sua impedenza caratteristica. È quindi necessario adattare l'antenna, che considereremo come un dipolo elettrico, alla linea di trasmissione per ridurre le riflessioni e permettere che, al limite, tutta la potenza venga trasmessa.
+Definiamo quindi impedenza caratteristica, la quantità
+\begin{equation}
+  Z_C = \frac{V+}{I_+} = \sqrt{\frac{l}{c}}
+\end{equation}
+Se la linea è priva di perdite, $Z_C \in \R$ e, in generale $Z_C = \{ \underbrace{50,75}_{\text{coassiale}} , \underbrace{100\div300}_{\text{\parbox{3cm}{linee bifilari}}}\} \Omega$
+
+Definiamo ora il coefficiente di riflessione della linea:
+\begin{equation}
+  \rho = \frac{Z_A -Z_C}{Z_A + Z_C}
+\end{equation}
+Nel caso del dipolo elementare, dato che la reattanza è molto maggiore della resistenza e quest'ultima è molto piccola, possiamo scrivere:
+\begin{esp*}
+  |\rho| &\approx \frac{|\jmath \Chi_A -Z_C|}{|\jmath \Chi_A +Z_C|}\approx 1 \\
+  P_{IN} = P(1-|\rho|^2) = \frac{|V_+|^2}{Z_C}(1-|\rho|^2) \approx 0
+\end{esp*}
+Se ho riflessione alta, l'antenna non irradia e tutto il segnale viene riflesso al generatore.
+
+Bisogna quindi adattare l'antenna adottando una delle seguenti strategie:
+\begin{itemize}
+  \item modifico $Z_A$ in modo tale che sia simile a $Z_C$, ma spesso non è una cosa fattibile perché è legata al pattern di radiazione desiderato.
+  \item utilizzo gli adattatori d'impedenza, che però hanno due principali limiti
+  \begin{itemize}
+    \item introducono perdite
+    \item adattano l'antenna alla linea una banda limitata. Costruire adattatori a banda larga è più costodo e difficile da realizzare.
+  \end{itemize}
+\end{itemize}
+Definiamo ora la matrice di scattering, una matrice quadrata di ordine N che rappresenta come avviene la diffusione di un segnale che entra in un N-polo.
+Dato $a_i$ l'ingresso i-esimo e $b_i$ l'uscita i-esima, abbiamo
+\begin{equation}
+  \begin{cases}
+    S_{ii} = \left. \frac{b_i}{a_i}\right |_{a_k = 0 \forall k \neq i} & \text{\parbox{3cm}{coefficiente di riflessione}} \\
+    S_{ij} = \left. \frac{b_i}{a_j}\right |_{a_k = 0 \forall k \neq j} & \text{\parbox{3cm}{coefficiente di trasmissione}} \\
+  \end{cases}
+\end{equation}
+In particolare, vogliamo che $S_{ii}\to0$, in modo che non ci sia riflessione.
+\begin{esp*}
+    P_{IN} = \frac{1}{2}\sum\limits_{i=1}^N |a_i|^2 - |b_i|^2 \stackrel{=}{conti}=\frac{1}{2} A^{*^T}\cdot D \cdot A
+\end{esp*}
+
+\section{Momento di dipolo equivalente }
+Vogliamo ora cercare di estendere quanto calcolato per il dipolo elementare a qualsiasi antenna, valutando i casi in cui è possibile adottare le approssimazioni di campo lontano e in generale, quali sono le differenze con il caso studiato in precedenza.
+
+Ipotizziamo ora un volume dove scorre una corrente impressa e che al di fuori del volume stesso ci sia un campo di radiazione. Calcoleremo quindi  il vettore $\M$ introdotto in eq. \eqref{eq:maxw-ant}.
+
+Supponiamo che il vettore densità totale di corrente elettrica sia
+\begin{equation}\J(\r\prime)=\begin{cases}
+  \neq 0 & \forall r\prime \in V\prime \\ 0 & \text{altrove}
+\end{cases}\end{equation}
+Per ogni punto P si ha che il vettore posizione sia $\vec{R} = \vec{R}(\vec{r}\prime)$ dove $\vec{r}\prime$ è la distanza dal centro alla superficie del volume, in quanto siamo interessati a ogni contributo infinitesimo dalla superficie della sfera al punto P.
+
+Il differenziale del potenziale vettore magnetco è
+\begin{equation}
+  d\A(\r) = \frac{\mu}{4\pi} \J(\r) \frac{e^{-\jmath \beta R}}{R}d\r\prime
+\end{equation}
+
+Possiamo quindi calcolare quanto vale $\A(\r)$
+\begin{equation}
+  \A(\r)=\int_{V\prime} d\A(\r) =\int_{V\prime} \frac{\mu}{4\pi} \J(\r) \frac{\ejbr}{R}d\r\prime
+\end{equation}
+Cerchiamo ora di trovare una maniera più semplice per trovare $R=|\vec{R}(\r\prime)|$
+\begin{esp}
+  R&=|\vec{R}(\r\prime)| = \sqrt{r^2+r\prime^2-2r\cdot r\prime cos(\psi)} \\
+  &= r\cdot \sqrt{1+\left(\frac{r\prime}{r}\right)^2-2\frac{r\prime}{r} cos(\psi)} = r \cdot\sqrt{1+\Delta} \\
+  &\approx r \cdot \left(1+\frac{\Delta}{2} + o\left( \left( \frac{r\prime}{r} \right)^2 \right) \right)\\
+  \Delta &= -2\frac{r\prime}{r} cos(\psi)+\left(\frac{r\prime}{r}\right)^2 \approx -2\frac{r\prime}{r} cos(\psi)+o\left[\left(\frac{r\prime}{r}\right)^2\right]
+\end{esp}
+
+Possiamo quindi scrivere $\A(\r)$ come:
+\begin{esp*}
+  \A(\r)&\approx \int_{V\prime} \frac{\mu}{4\pi} \J(\r) \frac{e^{-\jmath\beta \cdot[r-r\prime cos(\psi)]}}{r}d\r\prime
+\end{esp*}
+dove il denominatore è potuto essere approssimato a $r$ perché non ha un cambiamento significativo al risultato dell'integrale, mentre nell'esponenziale il termine di fase avrebbe comportato un cambiamento molto maggiore, per cui non si può applicare alcuna semplificaizione.\\
+Continuando con i conti, otteniamo
+\begin{esp*}
+  \A(\r) &= \underbrace{\frac{\mu\ejbr}{4\pi r}}_{\text{onda sferica}} \cdot \int_{V\prime}\J(\r\prime)\cdot e^{-\jmath\beta r\prime cos(\psi)} dr\prime \\
+  &=\frac{\mu \ejbr}{4\pi r} \cdot \M(\theta,\Phi)\\
+\end{esp*}
+Abbiamo quindi trovato che il momento di dipolo equivalente vale
+\begin{equation}
+  \M(\theta, \Phi) = \int_{V\prime}\J(\r\prime)\cdot e^{-\jmath\beta r\prime cos(\psi)} dr\prime
+\end{equation}
+
+L'approssimazione vale
+\begin{esp}
+  &r \cdot \left(1+\frac{\Delta}{2} + o\left[ \left( \frac{r\prime}{r} \right)^2 \right]\right) \approx r-r\prime cos(\psi) + \underbrace{\frac{r\prime^2}{r}}_{\ll 1} \\
+  &\beta \frac{r\prime^2}{r} \ll 1 \Leftrightarrow \frac{2\pi }{\lambda}\frac{r\prime^2}{r} \ll 1\Leftrightarrow \frac{2\pi D^2}{\lambda r} \ll 1 \\
+  & 2 \pi \underbrace{\frac{D}{\lambda}}_{(1)}\underbrace{\frac{D}{r}}_{(2)}
+\end{esp}
+dove $(1)$ considera il rapporto tra la dimensione dell'antenna e lunghezza d'ona, mentre $(2) \ll 1$  perché considero il campo lontano.
+
+Le condizioni di campo lontano sono valide:
+\begin{itemize}
+  \item $r\gg \lambda$ per il dipolo elementare e le antenne filiformi
+  \item $r\gg \frac{D^2}{\lambda}$
+\end{itemize}
+
+\subsection{Altezza efficace}

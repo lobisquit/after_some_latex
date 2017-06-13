@@ -299,9 +299,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		%	+ \deriv{}{t} \int_V \left[ \frac{\epsilon}{2} |\e|^2 - \frac{\mu}{2} |\h|^2 \right] dV
 		%	+ \int_{S_V} (\e \times \h) \cdot \hat{n} ~ dV \\
 	\end{esp}
-
 	\subsection{Potenza espresssa con vettori di Steinmetz}
-
 	Cercheremo ora la relazione tra $|\ert|$ e il suo vettore associato $|\E|$, per stabilire come calcolare la potenza del campo oscillante $\e$ con il vettore di Steinmetz.
 
 	\begin{esp}
@@ -334,7 +332,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	Grazie alla relazione appena ricavata, è possibile applicare la trasformata di Steinmetz all'equazione \ref{eq:bilancio_potenza_EM}, ottenendone il duale.
 
 	\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
-		& \underbrace{ - \int_V \E \cdot \J ~ dV}_{\text{potenza dai generatori}}
+		& \underbrace{ - \int_V \E \cdot \J^* ~ dV}_{\text{potenza dai generatori}}
 			= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{\text{effetto Joule}}
 			+ \underbrace{\int_V \jmath \omega \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
 				_{\text{variazione di energia \textsc{EM} in } V}
@@ -362,7 +360,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \ref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
 
-		\begin{esp}
+		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
 			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= 0 \text{ perché } \jt = 0}
 				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= 0 \text{ perché } \sigma = 0}
 				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS
