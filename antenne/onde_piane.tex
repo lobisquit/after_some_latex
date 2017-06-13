@@ -602,12 +602,31 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			& = |E_{oi}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
 	\end{esp}
 
-	Due piani equiampiezza distano tra loro secondo il periodo della funzione coseno.
+	Questi piani individuano lungo $\hat{x}_3$ settori in cui l'impedenza vista dall'onda elettromagnetica varia. Essa, nel caso dell'onda piana, può essere semplicemente calcolata come
+
 	\begin{esp}
-		\lambda \prime
-			= \frac{2\pi}{2 \beta_1}
-			= \frac{2\pi}{2 \left( \frac{2\pi}{\lambda_1} \right) }
-			= \frac{\lambda_1}{2}
+		Z(x_3)
+		& = \frac{E(x_3)}{H(x_3)}
+			= \frac
+				{E_{oi} (1 - e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3}}
+				{-\frac{E_{oi}}{\eta_1} (1 + e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3} } \\
+		& = \eta_1 ~ \frac
+			{e^{\jmath \beta_1 x_3} - e^{\jmath \beta_1 x_3}}
+			{e^{\jmath \beta_1 x_3} + e^{\jmath \beta_1 x_3}} \\
+		& = \frac{\eta_1}{\jmath} ~ \frac{\sin(\beta_1 x_3)}{\cos(\beta_1 x_3)}
+			= -\jmath \eta_1 \tan(\beta x_3)
+	\end{esp}
+
+	Periodicamente ogni $\lambda_1 / 2$ l'impedenza d'onda oscilla da 0 a $+\infty$:
+
+	\begin{esp}
+		\forall m \in \mathbb{N}, ~
+		\begin{dcases}
+			Z \left( x_3 = -\frac{\lambda_1}{4} - m \frac{\lambda_1}{2} \right) = +\infty
+				& \text{circuito aperto} \\
+			Z \left( x_3 = - m \frac{\lambda_1}{2} \right) = 0
+				& \text{perfetto conduttore} \\
+		\end{dcases}
 	\end{esp}
 
 \subsection{Riflessione su un buon conduttore}
@@ -650,6 +669,3 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\end{esp}
 
 	Con valore di $\rho$ come questo, si ha che $I_t = I_i (1 - |\rho|^2) \simeq 0$: il nostro materiale è un buono specchio e diventa uno specchio perfetto per $\sigma \to +\infty$.
-
-\subsection{Piano di massa}
-	Anca massa
