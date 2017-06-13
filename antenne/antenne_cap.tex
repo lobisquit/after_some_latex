@@ -402,3 +402,31 @@ Possiamo ora riscrivere G come
 \end{esp*}
 
 \section{Impedenza d'antenna}
+Vogliamo ora valutare come adattare l'antenna affinché la maggior parte della potenza venga trasmessa e irradiata, invece che venir riflessa nel cavo.
+Definiamo quindi l'impedenza di antenna:
+\begin{equation}
+  Z_A = \frac{V_A}{I_A} = R_A + \jmath \Chi_A
+\end{equation}
+dove $R_A$ è la resistenza d'antenna e $\Chi_A$ è la reattanza d'antenna.
+
+Possiamo inoltre scrivere la potenza in ingresso all'antenna come:
+\begin{esp*}
+  P_{IN} &\stackrel{=}{1} \frac{R_A \cdot |I_A|^2}{2} = \Re\left[\frac{V_a \cdot I_A^*}{2}\right] \\
+  &\stackrel{=}{2} \underbrace{P}_{pot. irradiata} + \underbrace{P_o}_{pot. dissipata}\\
+  &= P + R_o \cdot \frac{|I_A|^2}{2}
+\end{esp*}
+definendo $R_o$ resistenza ohmica dell'antenna e $R_r$ la  resistenza di radiazione, tale per cui $P=R_r \cdot \frac{|I_A|^2}{2}$
+
+Possiamo quindi ricavare
+\begin{esp*}
+  P_{IN} &= (R_o + R_r)\cdot \frac{|I_A|^2}{2}\\
+  e_r &= \frac{R_r}{R_r + R_o} = \frac{R_r}{R_A} \le 1
+\end{esp*}
+
+Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, otteniamo:
+\begin{esp*}
+  P&=\frac{\pi}{3} \eta |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \quad P_{IN} = P \\
+  R_r = \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta  left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2left(\frac{\Delta z}{\lambda}\right)^2 \Omega
+\end{esp*}
+poiché il rapporto $left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
+Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$.
