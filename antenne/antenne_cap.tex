@@ -547,3 +547,165 @@ Le condizioni di campo lontano sono valide:
 \end{itemize}
 
 \subsection{Altezza efficace}
+Definiamo altezza efficace in trasmissione
+\begin{equation}
+  \h_T(\theta,\Phi) t.c. \E= \jmath \frac{\eta}{2\lambda} \frac{\ejbr}{r}\h_T(\theta,\Phi I_A)
+\end{equation}
+Nel caso del dipolo elementare $\h_T(\theta,\Phi) = \Delta z \hz$
+
+Cerchiamo ora di definire l'altezza efficace in ricezione. Presupponiamo di adattare il carico $Z_A=Z_C=Z_G$. Supponiamo inoltre che $\E_i$ sia il campo elettrico incidente sull'antenna determinato in assenza dell'antenna stessa. L'antenna si può quindi schematizzare come in figura \#TODO.
+
+Possiamo inoltre scrivere, definita $\h_R$ l'altezza efficace in ricezione
+\begin{equation}
+  V_G=\E_i \cdot \h_R^*(\theta,\Phi)
+\end{equation}
+
+La potenza al ricevitore sarà quindi:
+\begin{equation}
+  P_R=\Re\left[\frac{V_L \cdot I_L^*}{2}\right] = \frac{|V_G|^2}{2} \cdot \frac{R_L}{|Z_L+Z_A|^2} =\frac{R_L \cdot |\E_i \cdot \h_R^*|^2}{2\cdot|Z_L+Z_A|^2}
+\end{equation}
+Per il teorema di reciprocità possiamo scrivere che
+\begin{equation}
+  \h_T(\theta,\Phi) = \h_R(\theta,\Phi)
+\end{equation}
+Inoltre otteniamo che se
+\begin{equation}
+  \E_i \cdot \h_R^* =0 \implies \E_i \perp \h_R
+\end{equation}
+ossia sono a polarizzazione ortogonale.
+Definiamo quindi l'adattamento di polarizzazione
+\begin{equation}
+  p=\frac{|\E_i \cdot \h_R^*|^2}{|\E_i|^2 \cdot |\h_R|^2} ~ p \in [0;1]
+\end{equation}
+
+Nel caso in cui $\E_i \cdot \h_R^* = \gamma |\h_R|$ allora $\E_i \parallel \h_R$ e $p=1$. Possiamo riscrivere
+\begin{equation}
+  p= \left|\frac{\E_i}{|\E_i|}\cdot\frac{\h_R}{|\h_R|}\right| = |\hat{e}_i \cdot \hat{h}_R^*|^2
+\end{equation}
+in cui $\hat{e}_i$ e $\hat{h}_R^*$ sono i fasori di direzione.
+
+Le antenne trasmittente e ricevente possono essere rappresentate come due dipoli di lunghezza $\h_x,\h_y$ e tensioni $V_x,V_y$. In particolare possiamo scrivere:
+\begin{equation}\begin{cases}
+  \h_x = \Delta l \cdot \hat{x} & V_x = E_x \cdot \Delta l \\
+  \h_y = \Delta l \cdot \hat{y} & V_y = E_y \cdot \Delta l
+\end{cases}\end{equation}
+Nella linea, in posizione $-\frac{\lambda}{4}$ otteniamo
+\begin{esp}
+  V_y(-\frac{\lambda}{4}) &= V_y \cdot e^{\jmath \beta \frac{\lambda}{4}} = E_y \cdot \Delta l \cdot e^{\jmath \frac{2\pi}{\lambda}\frac{\lambda}{4}} = \jmath E_y \Delta l \\
+  V&= V_x + V_y(-\frac{\lambda}{4}) = E_x \Delta l+\jmath E_y \Delta l = \left(\underbrace{E_x \cdot \hat{x} E_y \cdot \hat{y}}_{\E}\right) \cdot \Delta l \cdot \left(\underbrace{\hat{x} + j\hat{y}}_{\h_R}\right)
+\end{esp}
+Possiamo quindi esprimere $\h_R = \left(\hat{x} + j\hat{y}\right)$. In generale possiamo ricevere un'onda con polarizzazione circolare destrorsa, mentre si annulla la polarizzazione circolare sinistrorsa.
+Un'onda polarizzata linearmente, inoltre, se entra in un'antenna a polarizzazione circolare porta metà potenza dell'antenna stessa. Questa cosa viene sfruttata nelle comunicazioni tra le stazioni radio base (BTS) e i cellulari.
+La potenza al ricevitore risulta:
+\begin{esp*}
+  P_R &= \frac{R_L}{2|Z_A+Z_L|^2}\frac{|\E_i \cdot \h_R^*|^2}{|\E_i|^2 \cdot |\h_R|^2} \cdot |\E_i|^2 \cdot |\h_R|^2\\
+  &=\frac{R_L}{2|Z_A+Z_L|^2} \cdot p \cdot \cdot |\E_i|^2 \cdot |\h_R|^2
+\end{esp*}
+
+\paragraph{Esempio GNSS}
+Nel caso di navigazione satellitare, sistemi come il GPS, il GLONASS, Beidou e IRNSS utilizzano una polarizzazione circolare destrorsa, in quanto l'onda, dopo una riflessione, inverte il verso di polarizzazione e si attenua leggermente. L'antenna del cellulare, quindi, filtra naturalmente una riflessione.In caso di doppia riflessione su materiale non conduttore il segnale è molto più attenuato, per cui verrà considerato come rumore di fondo. Il problema si verifica in caso di doppia riflessione su buon conduttore.
+Le equazioni che lo legano sono riportate qui:
+\begin{esp*}
+  \E_i &= (E_x \cdot \hat{x}+E_y \cdot \hat{y}) \cdot e^{\textcolor[rgb]{0.8,0,0}{-}\jmath \beta z} \\
+  \E_r &= (E_x \cdot \hat{x}+E_y \cdot \hat{y}) \cdot \rho \cdot e^{\textcolor[rgb]{0.8,0,0}{+}\jmath \beta z} \\
+\end{esp*}
+\subsection{Area efficace}
+Definiamo area efficace di un'antenna il rapporto:
+\begin{equation}\label{eq:Aeff}
+  A_{e_m}=\frac{P_{R_{max}}}{I_i(r,\theta,\Phi)} \quad [A_{e_m}] = m^2
+\end{equation}
+
+dove $I_i$ è l'intensità di radiazione nel punto dove si inserisce l'antenna, in assenza dell'antenna stessa.
+\subsection{Ottimizzazione della potenza ricevuta}
+La potenza ricevuta dipende
+\begin{equation}\begin{cases}
+  \text{Dal carico $(R_L,Z_L)$} \\
+  \text{Dalla polarizzazione (relativa fra $\E_i,\h_R$)}
+  \text{Dall'orientamento dell'antenna ricevente ($\h_R$)}
+\end{cases}\end{equation}
+Nel caso del dipolo elementare
+\begin{equation}
+  \E = \jmath \frac{\eta}{2\lambda} \cdot \frac{\ejbr}{r} \cdot \underbrace{\Delta z \cdot sin(\theta) \hth}_{\h_r(\theta,\Phi)}
+\end{equation}
+Per il teorema di reciprocità se l'antenna trasmette bene in una direzione, riceverà bene nella stessa direzione. Per massimizzare la potenza al ricevitore, devo supporre:
+\begin{enumerate}
+  \item Adattamento in potenza: in figura \ref{fig:antRic} $Z_A=Z_L^*$
+    \begin{figure}
+%      \includegraphics{}
+      \caption{L'antenna è schematizzata come generatore, la sua resistenza è $Z_A$ e l'impedenza del carico collegato è $Z_L$}
+      \label{fig:antRic}
+    \end{figure}
+    \begin{equation}
+      Z_A=Z_L^* \implies \frac{R_L}{2|Z_A+Z_L|} =\frac{R_A}{2 \cdot 4\Re[Z_A]^2 } = \frac{1}{(R_A)}
+    \end{equation}
+  \item adattamento in polarizzazione: $p=1$
+  \item orientamento ottimale dell'antenna in ricezione $|\h_R|=|\h_{R_{max}}|$
+\end{enumerate}
+Sotto queste tre condizioni
+\begin{equation}\label{eq:PRmax}
+  P_{R_{max}} = \frac{|\E_i|^2 \cdot |\h_R|^2}{8 R_A} = I(r,\theta,\Phi)\cdot A_{e_{max}}
+\end{equation}
+
+\subsection{Regime di campo lontano}
+In regime di campo lontano possiamo assumere l'onda sferica, come onda piana uniforme. L'intensità di radiazione, l'area efficace massima e l'altezza efficace risultano
+\begin{esp}
+  I_i(r,\theta,\Phi) &= \frac{|\E_i|^2}{2\eta} \\
+  A_{e_{max}} &= \frac{\eta}{4 R_A} \cdot |\h_{R_{max}}|^2 \\
+  |h_{R_{max}} &= 2 \sqrt{\frac{R_A \cdot A_{e_{max}}}{\eta}}
+\end{esp}
+\paragraph{Caso dipolo elementare}
+\begin{esp}
+  |h_{R_{max}} &= \Delta z^2\\
+  R_A=R_r=2 \frac{2}{3}\pi\eta\left(\frac{\Delta z}{\lambda}\right)^2\\
+  A_{e_{max}} &= \frac{\eta\cdot\Delta z^2}{4 \frac{2}{3}\pi\eta\left(\frac{\Delta z}{\lambda}\right)^2}= \frac{3}{8\pi} \lambda^2 \\
+\end{esp}
+Poiché l'area efficace non dipende dalle dimensioni dell'antenna, è molto difficile adattare il sistema per ottenere $A_{e_{max}}$.
+
+\subsection{Relazione tra i parametri di antenna in TX e RX}
+Definiamo ora i parametri d'antenna come l'EIRP e la relazione tra area efficace, direttività, guadagno e efficienza di radiazione, prima in generale e poi nel caso del dipolo elementare
+\begin{esp}
+  EIRP &= 4\pi U_m = D \cdot P \quad \text{in trasmissione}\\
+  &= 4\pi \cdot r^2 \cdot I(r,\theta_{max},\Phi_{max}) = D \cdot P \\
+  &= \frac{|\E_{i_{max}}|^2}{2\eta}\cdot 4\pi \cdot r^2 =D \cdot P = D \cdot R_r \frac{|I_A|^2}{2} \\
+  &= \frac{\eta \pi |I_A|^2}{\lambda^2} \cdot |\h_{max}|^2 = D\cdot R_r \cdot |I_A|^2 \\
+  \Leftrightarrow &\frac{\eta \pi}{\lambda^2} \cdot |\h_{max}|^2 = D\cdot R_r
+  \implies & \frac{\eta \pi |I_A|^2}{\lambda^2}\frac{4 R_A}{\eta} \cdot A_{e_{max}} = D\cdot R_r
+\end{esp}
+Supponendo di non avere perdite ($R_o = 0$), si ottiene che per qualsiasi antenna
+\begin{equation}\label{eq:rapportoParam}
+  \frac{A_{e_{max}}}{D} = \frac{\lambda^2}{4\pi}
+\end{equation}
+
+Verifichiamo ora il rapporto appena ricavato nel caso del dipolo elementare:
+\begin{esp*}
+  D&=\frac{3}{2} \quad A_{e_{max}}=\frac{3}{8\pi}\cdot \lambda^2 \implies \frac{A_{e_{max}}}{D} =\frac{\frac{3}{8\pi}\cdot \lambda^2}{\frac{3}{2}}  = \frac{\lambda^2}{4\pi}
+\end{esp*}
+Le antenne reali presentano delle perdite, per cui utilizzo il guadagno. Ottengo quindi:
+\begin{esp*}
+  G&=e_r \cdot D \quad A_e = e_r \cdot A_{e_{max}} \text{ area efficace}\\
+  \frac{A_{e_{max}}}{D} &= \frac{e_r \cdot A_{e_{max}}}{e_r \cdot D }=\frac{A_e}{G}=\frac{\lambda^2}{4\pi} \\
+  \implies &\frac{A_e}{G}=\frac{\lambda^2}{4\pi} \\
+\end{esp*}
+\section{Dimensionamento di TX di potenza (formula di Friis)}
+Affinché si possa applicare la formula di Friis, che risulta comoda per calcolare la potenza al ricevitore, sono necessarie le seguenti condizioni:
+\begin{enumerate}
+  \item Antenne sono in campo lontano, ossia
+  \begin{equation*}\begin{cases}
+    d\gg \lambda & \text{se } D \ll \lambda \\
+    d \gg \frac{2D^2}{\lambda} & \text{se } D\ge 2,5\lambda
+  \end{cases}\end{equation*}
+  \item Adattamento in potenza di $Z_L$ e adattamento alla linea $Z_C$
+  \item Adattamento in polarizzazione dell'antenna riceventa
+  \item Orientamento ottimale di entrambe le antenne
+\end{enumerate}
+Sotto queste condizioni possiamo scrivere
+\begin{esp*}
+  EIRP&= G_{TX}\cdot P_{IN}\\
+  \frac{|\E_{i_{max}}|^2}{2\eta}\cdot 4\pi \cdot d^2 &= G_{TX}\cdot P_{IN} \\
+  \frac{|\E_{i_{max}}|^2}{2\eta} &= \frac{G_{TX}\cdot P_{IN}}{4\pi d^2}\\
+  P_{R_{max}} &= \frac{|\E_{i_{max}}|^2}{2\eta} \cdot A_{e_{max}}^{RC} = \frac{G_{TX}\cdot P_{IN}}{4\pi d^2}\cdot \frac{\lambda^2}{4\pi}\cdot G_{RC}
+\end{esp*}
+Si ottiene quindi la \textbf{formula di Friis}:
+\begin{equation}\label{eq:friis}
+  P_{R_{max}} = G_{TX}\cdot G_{RC}\cdot P_{IN}\cdot \left(\frac{\lambda}{4\pi d}\right)^2
+\end{equation}
