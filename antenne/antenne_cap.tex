@@ -28,7 +28,7 @@ La tensione e la corrente nella linea coassiale si possono scrivere come
 \begin{esp}
   V&= \int_{r_{int}}^{r_{ext}} \E \cdot d\vec{l} \\
   I&= \oint \H \cdot d\vec{l} \\
-  &\implies Z_c = \frac{V_o}{I_o} \text{ impedenza caratteristica della linea}
+  &\implies Z_C = \frac{V_o}{I_o} \text{ impedenza caratteristica della linea}
 \end{esp}
 Definendo inoltre
 \begin{itemize}
@@ -37,7 +37,7 @@ Definendo inoltre
 \end{itemize}
 si ottiene che l'impedenza caratteristica risulta
 \begin{equation}
-  Z_c = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
+  Z_C = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
 \end{equation}
 
 Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
@@ -228,7 +228,7 @@ Dimostriamo ora che il dipolo elementare non è un'antenna efficiente e per farl
 \end{esp*}
 
 Analizziamo ora il vettore di Poyting per vedere come si comporta il campo EM in un caso generico, ossia in assenza di approssimazioni di campo lontano.
-\begin{esp}
+\begin{esp} \label{eq:campoEM}
   \P &= \frac{\E \times \H^*}{2} = \frac{1}{2} \cdot (E_\theta \hth + E_r \hr) \times H_\Phi^* \hphi \\
   &=\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{(4\pi)^2} \cdot\left(\frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot sin^2(\theta) \left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\hr \\
   &+\frac{1}{2} \cdot \eta \frac{|I|^2 \cdot (\Delta z)^2}{2\pi\cdot 4\pi} \cdot\left( \frac{1}{r^2} + \frac{1}{\jmath\beta r^3}\right) \cdot cos(\theta)\cdot sin(\theta)\left(\frac{-\jmath \beta}{r} + \frac{1}{r^2}\right)\cdot(-\hth)\\
@@ -435,3 +435,58 @@ Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\C
     _{<0} + \Im\left[\int_{S(r)} \P \cdot \hr dS\right] \\
   \Im\left[\frac{V_a \cdot I_A^*}{2}\right] &= -\omega\epsilon
 \end{esp*}
+Da quanto trovato in eq. \eqref{eq:campoEM}, sappiamo che $H_\Phi \propto \frac{1}{r^2}$ e $E_\theta \propto \frac{1}{r^3}$, dunque
+\begin{esp*}
+  \frac{\mu|\H|^2}{2} &\approx \frac{\mu}{r^2}\\
+  \frac{\epsilon|\E|^2}{2} &\approx \frac{\mu}{r^6}\\
+  &\stackrel{\implies}{r<1} \frac{\epsilon|\E|^2}{2} \gg \frac{\mu|\H|^2}{2}
+\end{esp*}
+Inoltre $\Im[\P]\approx 1$, per cui
+\begin{esp*}
+  \Im[\P] &= \frac{\eta}{3} |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \cdot \Im[-\jmath] \left(\frac{\lambda}{2\pi r} \right)^3\\
+  &= \frac{\eta}{3} |I_A|^2 \cdot \frac{\Delta z^2 \lambda}{8\pi^3 r^3} \ll -1
+  & \implies \Chi_A \ll -1 ~  \text{negativo e molto grande}
+\end{esp*}
+
+\subsection{Adattamento dell'antenna}
+Il segnale trasmesso da un'antenna proviene da un generatore collegato attraverso una linea (coassiale, bifilare o guida d'onda) che possiede una sua impedenza caratteristica. È quindi necessario adattare l'antenna, che considereremo come un dipolo elettrico, alla linea di trasmissione per ridurre le riflessioni e permettere che, al limite, tutta la potenza venga trasmessa.
+Definiamo quindi impedenza caratteristica, la quantità
+\begin{equation}
+  Z_C = \frac{V+}{I_+} = \sqrt{\frac{l}{c}}
+\end{equation}
+Se la linea è priva di perdite, $Z_C \in \R$ e, in generale $Z_C = \{ \underbrace{50,75}_{\text{coassiale}},\underbrace{100\~300}_{\text{\parbox{3cm}{linee bifilari}}} \Omega$
+
+Definiamo ora il coefficiente di riflessione della linea:
+\begin{equation}
+  \rho = \frac{Z_A -Z_C}{Z_A + Z_C}
+\end{equation}
+Nel caso del dipolo elementare, dato che la reattanza è molto maggiore della resistenza e quest'ultima è molto piccola, possiamo scrivere:
+\begin{esp*}
+  |\rho| &\approx \frac{|\jmath \Chi_A -Z_C|}{|\jmath \Chi_A +Z_C|}\approx 1 \\
+  P_{IN} = P(1-|\rho|^2) = \frac{|V_+|^2}{Z_C}(1-|\rho|^2) \approx 0
+\end{esp*}
+Se ho riflessione alta, l'antenna non irradia e tutto il segnale viene riflesso al generatore.
+
+Bisogna quindi adattare l'antenna adottando una delle seguenti strategie:
+\begin{itemize}
+  \item modifico $Z_A$ in modo tale che sia simile a $Z_C$, ma spesso non è una cosa fattibile perché è legata al pattern di radiazione desiderato.
+  \item utilizzo gli adattatori d'impedenza, che però hanno due principali limiti
+  \begin{itemize}
+    \item introducono perdite
+    \item adattano l'antenna alla linea una banda limitata. Costruire adattatori a banda larga è più costodo e difficile da realizzare.
+  \end{itemize}
+\end{itemize}
+Definiamo ora la matrice di scattering, una matrice quadrata di ordine N che rappresenta come avviene la diffusione di un segnale che entra in un N-polo.
+Dato $a_i$ l'ingresso i-esimo e $b_i$ l'uscita i-esima, abbiamo
+\begin{equation}
+  \begin{cases}
+    S_{ii} = \left. \frac{b_i}{a_i}\right |_{a_k = 0 \forall k \neq i} & \text{\parbox{3cm}{coefficiente di riflessione}} \\
+    S_{ij} = \left. \frac{b_i}{a_j}\right |_{a_k = 0 \forall k \neq j} & \text{\parbox{3cm}{coefficiente di trasmissione}} \\
+  \end{cases}
+\end{equation}
+In particolare, vogliamo che $S_{ii}\to0$, in modo che non ci sia riflessione.
+\begin{esp*}
+    P_{IN} = \frac{1}{2}\sum\limits_{i=1}^N |a_i|^2 - |b_i|^2 \stackrel{=}{conti}=\frac{1}{2} A^{*^T}\cdot D \cdot A
+\end{esp*}
+
+\section{Momento di dipolo equivalente}
