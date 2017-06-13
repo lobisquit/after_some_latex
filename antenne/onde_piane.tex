@@ -168,7 +168,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 \section{Onda piana nel mezzo conduttore}
 	Per i mezzi conduttori vale $\sigma \neq 0$, che rende il prodotto scalare $\a \cdot \k \neq 0$: questo rende impossibile il caso considerato in precedenza di onda piana uniforme, perché la componente reale di attenuazione (come pure il vettore $\k$) è sempre presente.
 
-	\subsection{Onda piana nel buon conduttore}
+	\subsection{Onda piana nel buon conduttore} \label{sec:onda_piana_conduttore}
 		Dividendo tra loro membro a membro le due equazioni del sistema \ref{eq:s_components} si ottiene che
 
 		\begin{equation*} \begin{split}
@@ -285,9 +285,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		& -\diverg(\e \times \h) - \e \cdot \jt = \sigma |\e|^2 + \epsilon \deriv{|\e|^2}{t} - \mu \deriv{|\h|^2}{t}
 	\end{esp}
 	dove il primo membro è riscritto come divergenza grazie ad un'identità vettoriale.
-	
+
 	Lì analisi dimensionale mette in luce come le quantità dell'equazione ricavata siano potenze per unità di volume: integrando sul volume $V$ considerato si ottengono perciò potenze, qui scomposte a seconda dell'origine dei vari termini.
-	
+
 	\begin{esp} \label{eq:bilancio_potenza_EM}
 		& \underbrace{ - \int_V \e \cdot \jt dV}_{\text{potenza dai generatori}}
 			= \underbrace{\int_V \sigma |\e|^2 dV}_{\text{effetto Joule}}
@@ -299,7 +299,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		%	+ \deriv{}{t} \int_V \left[ \frac{\epsilon}{2} |\e|^2 - \frac{\mu}{2} |\h|^2 \right] dV
 		%	+ \int_{S_V} (\e \times \h) \cdot \hat{n} ~ dV \\
 	\end{esp}
-	
+
 	\subsection{Potenza espresssa con vettori di Steinmetz}
 
 	Cercheremo ora la relazione tra $|\ert|$ e il suo vettore associato $|\E|$, per stabilire come calcolare la potenza del campo oscillante $\e$ con il vettore di Steinmetz.
@@ -332,7 +332,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	dove (1) vale perché il secondo membro è periodico, perciò l'integrale sul periodo $T$ è nullo, mentre (2) perché il vettore $\E$ non dipende dal tempo $t$.
 
 	Grazie alla relazione appena ricavata, è possibile applicare la trasformata di Steinmetz all'equazione \ref{eq:bilancio_potenza_EM}, ottenendone il duale.
-	
+
 	\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
 		& \underbrace{ - \int_V \E \cdot \J ~ dV}_{\text{potenza dai generatori}}
 			= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{\text{effetto Joule}}
@@ -340,11 +340,11 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 				_{\text{variazione di energia \textsc{EM} in } V}
 			+ \underbrace{ \int_V \frac{\diverg(\E \times \H^*)}{2} dV}_{\text{flusso di potenza in uscita da }V}
 	\end{esp}
-	
+
 	\subsection{Vettore di Poynting}
-	
+
 	L'ultimo termine dell'equazione \ref{eq:bilancio_potenza_EM_steinmetz} rappresenta la potenza in uscita dal volume trasportata dall'onda: esso è perciò di particolare interesse per il nostro studio.
-	
+
 	\begin{esp} \label{eq:def_poynting}
 		\int_V \frac{\diverg(\E \times \H^*)}{2} dV
 			= \int_{S_V} \frac{\E \times \H^*}{2} \cdot \hat{n} ~ dS
@@ -357,25 +357,25 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		I = \Re[\vec{P}]
 	\end{equation}
 
-	
+
 	\subsubsection{Poynting per l'onda piana nel vuoto}
-	
+
 		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \ref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
-		
-		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
+
+		\begin{esp}
 			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= 0 \text{ perché } \jt = 0}
 				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= 0 \text{ perché } \sigma = 0}
-				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS 
+				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS
 				\implies \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS = 0
 		\end{esp}
-		
+
 		Da qui emerge che in questo caso privo di sorgenti e di dispersioni, $\Re[\vec{P}]$ è un campo solenoidale.
-		
+
 		Nel caso ancora più specifico di polarizzazione rettilinea, il vettore di Poynting si calcola semplicemente come
 		\begin{esp}
 			\vec{P}
 				= \frac{1}{2} \left( E_o \hat{x} \right) \times \left( \frac{H_o}{\eta} \hat{y} \right)
-					~ e^{\jmath \beta z} ~ e^{- \jmath \beta z} 
+					~ e^{\jmath \beta z} ~ e^{- \jmath \beta z}
 				= \frac{|E_o|^2}{2\eta} \hat{z}
 				= I \hat{z}
 		\end{esp}
@@ -391,7 +391,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\subsubsection{Poynting per l'onda piana nel buon conduttore}
 		Analogamente rispetto al caso di onda piana nel vuoto, $\vec{P}$ si calcola a partire dalle espressioni per i campi $\E$ e $\H$.
-		
+
 		\begin{equation}
 			\begin{dcases}
 				~ \E = \vec{E_o} \hat{x} ~ e^{-\beta(1+\jmath) z} \\
@@ -399,23 +399,23 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			\end{dcases}
 			\text{ con } \beta = |\k| = |\a| = \sqrt{\pi f \sigma \mu}
 		\end{equation}
-		
+
 		Applicando la definizione di vettore di Poynting si ha perciò
-	
+
 		\begin{esp}
 			\vec{P} &
 				= \frac{\E \times \H^*}{2} \\
-			& = \frac{1}{2} \left( E_o \hat{x} \right) 
+			& = \frac{1}{2} \left( E_o \hat{x} \right)
 					\times \left( \frac{H_o^*}{Z_w^*} \hat{y} \right)
 					~ e^{-\beta(1+\jmath) z} ~ e^{-\beta(1-\jmath) z} \\
-			& = \frac{|E_o|^2}{2 Z_w*} \hat{z} ~ e^{-2 \beta z} 
+			& = \frac{|E_o|^2}{2 Z_w*} \hat{z} ~ e^{-2 \beta z}
 				= \frac{|E_o|^2}{2 R_s (1 - \jmath)} \hat{z} ~ e^{-2 \beta z} \\
 			& = \left( \frac{|E_o|^2}{2 R_s} \hat{z} ~ e^{-2 \beta z} \right)  (1 + \jmath) \\
 			& = \Re[\vec{P}]  (1 + \jmath)
 		\end{esp}
-		
+
 		dove si può notare come l'intensità $I = \Re[\vec{P}] $ cali esponenzialmente in $z$, secondo $\beta = |\a|$.
-		
+
 		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \ref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai $3-5 ~ \delta$.
 
 \section{Riflessione e rifrazione}
@@ -426,22 +426,23 @@ La loro analisi consiste perciò nel risolvere le equazioni di Maxwell nei due m
 \def\height{3}
 \def\length{6}
 
-\begin{figure}[h] \label{fig:discontinuita}
+\begin{figure}[h]
 	\centering
 	\begin{tikzpicture}
-		\fill[black!20] 
-			(0, 0) rectangle 
+		\fill[black!20]
+			(0, 0) rectangle
 			(\length, \height)
 			node [pos=0.5,text=black] {metallo};
-			
-		\fill[black!5] 
-			(0, \height) rectangle 
+
+		\fill[black!5]
+			(0, \height) rectangle
 			(\length, 2*\height)
 			node [pos=0.5,text=black] {aria};
-			
+
 		\draw [dashed] (0, \height) -- (\length, \height);
-	\end{tikzpicture} 
+	\end{tikzpicture}
 	\caption{La discontinuità tra i materiali è evidenziata dalla linea tratteggiata.}
+	\label{fig:discontinuita}
 \end{figure}
 
 \subsection{Continuità dei campi tangenti}
@@ -455,42 +456,44 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 \end{equation}
 
 \subsection{Incidenza tra perfetti isolanti}
-	Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie e $\sigma_1 = \sigma_2 = 0$ si ha che, come rappresentato in figura \ref{fig:incidenza_normale}, la lunghezza d'onda si riduce: in particolare vale che
+	Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie e $\sigma_1 = \sigma_2 = 0$ si ha che, come rappresentato in figura \ref{fig:incidenza_normale_isolanti}, la lunghezza d'onda si riduce: in particolare vale che
 
 	\begin{esp}
 		\begin{dcases}
 			c_1 = \frac{c_o}{n_1} \\
-			c_2 = \frac{c_o}{n_2} 
+			c_2 = \frac{c_o}{n_2}
 		\end{dcases}
-		\implies 
+		\implies
 		\begin{dcases}
 			\lambda_1 = \frac{\lambda_o}{n_1} \\
-			\lambda_2 = \frac{\lambda_o}{n_2} 
+			\lambda_2 = \frac{\lambda_o}{n_2}
 		\end{dcases}
-		\implies 
+		\implies
 		\lambda_2 = \lambda_1 \frac{n_1}{n_2}
 	\end{esp}
 
-	\begin{figure}[ht] \label{fig:incidenza_normale_isolanti}
+	\begin{figure}[ht]
 		\centering
 		\includegraphics{img/incidenza_normale.pdf}
 		\caption{I piani equifase, evidenziati in verde, riducono la distanza tra loro, ovvero la lunghezza d'onda $\lambda_2 < \lambda_1$ nel caso $n_2 > n_1$.}
+		\label{fig:incidenza_normale_isolanti}
 	\end{figure}
 
 	Nel caso invece di incidenza con un angolo $\theta_i$ rispetto alla normale della superficie, il comportamento è più complesso, come si può osservare in figura \ref{fig:incidenza_non_normale_isolanti}.
 
-	La continuità dei piani equifase ci permette ancora di valutare il comportamento dell'onda anche senza risolvere le equazioni di Maxwell. 
+	La continuità dei piani equifase ci permette ancora di valutare il comportamento dell'onda anche senza risolvere le equazioni di Maxwell.
 
 	Considerando il segmento $l$ evidenziato in figura, la sua lunghezza può essere calcolata in due modi diversi, grazie alle proprietà dei triangoli rettangoli.
 
-	\begin{esp}
+	\begin{esp} \label{eq:legge_di_schnell}
 		l = \frac{\lambda_1}{\sin(\theta_i)} = \frac{\lambda_1}{\sin(\theta_i)}
 	\end{esp}
 
-	\begin{figure}[ht] \label{fig:incidenza_non_normale_isolanti}
+	\begin{figure}[ht]
 		\centering
 		\includegraphics{img/incidenza_non_normale.pdf}
 		\caption{La continuità dei campi tangenti impone che i piano equifase conservino la stessa distanza $l$ tra loro \emph{sulla superficie di separazione}.}
+		\label{fig:incidenza_non_normale_isolanti}
 	\end{figure}
 
 	Nel caso i due elementi abbiamo lo stesso indice di rifrazione $n_i$, l'onda procede senza variazioni: per $\lambda_1 = \lambda_2$ vale infatti che $\theta_1 = \theta_2$.
@@ -498,15 +501,16 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 \subsection{Coefficienti di riflessione e trasmissione}
 	Nella sezione precedente abbiamo osservato come individuare le direzioni dell'onda riflessa e di quella trasmessa: ci focalizzaremo quindi su come la discontinuità influenzi il modulo del campo elettromagnetico.
-	
+
 	Per semplicità di calcolo e notazione ci metteremo nel caso di incidenza normale, ma analogamente segue per il caso generale.
 
-	\begin{figure}[ht] \label{fig:campi_incidenza_normale_isolanti}
+	\begin{figure}[ht]
 		\centering
 		\includegraphics{img/campi_incidenza_normale.pdf}
 		\caption{Nella riflessione il campo $\E$ mantiene la sua direzione, mentre $\H$ la inverte. Questo è dovuto ad un asimmetria delle equazioni di Maxwell legata al teorema delle immagini.}
+		\label{fig:campi_incidenza_normale_isolanti}
 	\end{figure}
-	
+
 	Nella superficie di discontinuità i campi sono tutti paralleli, quindi le somme vettoriali si riducono a somme scalari.
 	\begin{esp}
 		\begin{cases}
@@ -516,30 +520,30 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		\frac{E_{oi}}{\eta_1} - \frac{E_{or}}{\eta_1} = \frac{E_{ot}}{\eta_2} = \frac{E_{oi} + E_{or}}{\eta_2}
 	\end{esp}
 	dove sono state impiegate le formule che legano $|\E|$ e $|\H|$ nel caso dell'onda piana.
-	
+
 	Riorganizzando i termini dell'equazione, si ottiene il \emph{coefficiente di riflessione} $\rho$.
-	\begin{esp}
-		& \rho \stackrel{.}{=} \frac{E_{or}}{E_{oi}} 
-			= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1} 
-			\stackrel{(*)}{=} \frac{ \frac{\eta_o}{n_2} - \frac{\eta_o}{n_1}}{\frac{\eta_o}{n_2} + \frac{\eta_o}{n_1}}  
-			= \frac{n_2 - n_1}{n_2 + n_1} 
+	\begin{esp} \label{eq:coefficiente_riflessione}
+		& \rho \stackrel{.}{=} \frac{E_{or}}{E_{oi}}
+			= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1}
+			\stackrel{(*)}{=} \frac{ \frac{\eta_o}{n_2} - \frac{\eta_o}{n_1}}{\frac{\eta_o}{n_2} + \frac{\eta_o}{n_1}}
+			= \frac{n_2 - n_1}{n_2 + n_1}
 	\end{esp}
 	dove (*) vale solamente per i dielettrici, materiali per cui $\eta_i = \frac{\eta_o}{n_i}$.
 
 	Il \emph{coefficiente di trasmissione} $\tau$ si può ricavare in modo analogo.
 	\begin{esp}
-		& \tau \stackrel{.}{=} \frac{E_{ot}}{E_{oi}} 
-				= \frac{E_{or} + E_{oi}}{E_{oi}} 
+		& \tau \stackrel{.}{=} \frac{E_{ot}}{E_{oi}}
+				= \frac{E_{or} + E_{oi}}{E_{oi}}
 				= \frac{E_{or}}{E_{oi}} + 1
 				= \rho + 1 \\
 	\end{esp}
 
 \subsection{Potenza trasmessa e riflessa}
 	A partire dai valori del campo elettrico trasmessi e riflessi è possibile calcolare come si distribuisca la potenza dell'onda nei due materiali.
-	
+
 	\begin{esp}
-		I_t 
-		& = |\Re[\vec{P}]| 
+		I_t
+		& = |\Re[\vec{P}]|
 			= \frac{|E_{ot}|^2}{2 \eta_2}
 			= \frac{|E_{oi} (1 + \rho)|^2}{2 \eta_2} \\
 		& = \frac{|E_{oi}|^2}{2 \eta_1} \frac{\eta_1}{\eta_2} |1 + \rho|^2
@@ -547,19 +551,20 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		& = I_i \frac{4 \eta_1 \eta_2}{|\eta_1 + \eta_2|^2}
 			= I_i (1 - |\rho|^2) = I_i - I_i |\rho|^2 = I_i - I_r
 	\end{esp}
-	
+
 	È possibile osservare come tutto il comportamento in potenza sia dovuto al solo parametro $\rho$, che definisce sia l'intensità dell'onda trasmessa che quella riflessa.
-	
+
 \subsection{Interferenza in riflessione}
-	Come è possibile notare in figura \ref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due. 
+	Come è possibile notare in figura \ref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due.
 	Questo dà vita a fenomeni di interferenza tra l'onda progressiva incidente e l'onda regressiva riflessa, generata dalla discontinuità di mezzo.
-	
-	\begin{figure}[ht] \label{fig:campi_incidenza_non_normale_isolanti}
+
+	\begin{figure}[ht]
 		\centering
 		\includegraphics{img/campi_incidenza_non_normale.pdf}
 		 \caption{Per l'onda considerata, i campi elettrici sono evidenziati per renderli più visibili e risultano paralleli all'asse $\hat{x}_3$ entrante nel foglio.}
+		\label{fig:campi_incidenza_non_normale_isolanti}
 	\end{figure}
-	
+
 	Nel caso generico di incidenza, abbiamo che
 	\begin{esp}
 		\begin{cases}
@@ -568,30 +573,83 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		\end{cases}
 	\end{esp}
 	dove i vettori sono scomposti nelle loro componenti secondo il sistema di coordinate in figura \ref{fig:campi_incidenza_non_normale_isolanti}.
-	
-	Il campo nel mezzo 1 si può perciò scrivere come 
-	%\begin{esp}
-	%	\E_1(\r) 
-	%	& = \E_{oi} ~ e^{-j \k_i \cdot \r} + \E_{or} ~ e^{-j \k_r \cdot \r}
-	%		E_{oi} \hat{x}_3 ~ e^{-\beta_1 ( \cos(\theta_i) x_1 + \sin(\theta_i) x_2} (1 + \rho ~ ^{- 2 \beta_1 ( \cos(\theta_i) x_1}
-	%	
-	%\end{esp}
 
+	Il campo nel mezzo 1 si può perciò scrivere come
+	\begin{esp}
+		\E_1(\r)
+		& = \E_{oi} ~ e^{-\jmath \k_i \cdot \r} + \E_{or} ~ e^{-j \k_r \cdot \r} \\
+		& = E_{oi} ~ \hat{x}_3
+			~ e^{-\jmath \beta_1 [ \cos(\theta_i) \, x_1 + \sin(\theta_i) \, x_2] }
+			+ E_{or} ~ \hat{x}_3
+			~ e^{-\jmath \beta_1 [-\cos(\theta_i) \, x_1 + \sin(\theta_i) \, x_2] } \\
+		& = E_{oi} ~ \hat{x}_3
+			~ e^{-\jmath \beta_1 [ \cos(\theta_i) x_1 + \sin(\theta_i) x_2] }
+			+ E_{oi} (1 + \rho)
+			~ \hat{x}_3 ~ e^{-\jmath \beta_1 [-\cos(\theta_i) x_1 + \sin(\theta_i) x_2]} \\
+		& = E_{oi} (1 + \rho ~ e^{\jmath 2 \beta_1 \cos(\theta_i) x_1} )
+			~ e^{-\jmath \beta_1 [\cos(\theta_i) x_1 + \sin(\theta_i) x_2]} \\
+	\end{esp}
 
+	Il modulo quadro del campo elettrico varia oscilla in funzione della posizione $x_1$, alternando piani di interferenza distruttiva (campo nullo) a piani di interferenza costruttiva (campo massimo).
 
+	In particolare, nel caso di incidenza normale si ha che
+	\begin{esp}
+		|\E_1(\r)|^2
+			& = |E_{oi}|^2 |1 + \rho ~ e^{\jmath 2 \beta_1 x_1}|^2 \\
+			& = |E_{oi}|^2
+				(1 + \rho ~ e^{-\jmath 2 \beta_1 x_1})
+				(1 + \rho^* ~ e^{-\jmath 2 \beta_1 x_1}) \\
+			& = |E_{oi}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
+	\end{esp}
 
+	Due piani equiampiezza distano tra loro secondo il periodo della funzione coseno.
+	\begin{esp}
+		\lambda \prime
+			= \frac{2\pi}{2 \beta_1}
+			= \frac{2\pi}{2 \left( \frac{2\pi}{\lambda_1} \right) }
+			= \frac{\lambda_1}{2}
+	\end{esp}
 
+\subsection{Riflessione su un buon conduttore}
+	Richiamando i risultati ottenuti nella sezione \ref{sec:onda_piana_conduttore}, se il mezzo di trasmissione (mezzo 2) è un buon coduttore, vale che
 
+	\begin{esp}
+		\begin{cases}
+			|\a| \simeq |\k| = \sqrt{\pi f \mu_o \sigma} \\
+			\lambda_2 \ll \lambda_1
+		\end{cases}
+	\end{esp}
 
+	La legge di Schnell, dimostrata in precedenza nell'equazione \ref{eq:legge_di_schnell}, vale anche in questo caso, ed emerge che la trasmissione è sostanzialmente normale anche per angoli di incidenza diversi da $0^\circ$.
 
+	\begin{esp}
+		\sin(\theta_t)
+			= \frac{\lambda_2}{\lambda_1} \sin(\theta_t)
+			= \begin{cases}
+				0 & \theta_i = 0 \\
+				\sim 0 & \theta_i \simeq 0
+			\end{cases}
+	\end{esp}
 
+	Inoltre si può dimostrare come un buon conduttore si comporti come uno specchio per l'onda elettromagnetica, infatti, richiamando l'equazione \ref{eq:coefficiente_riflessione}, si ha che
 
+	\begin{esp}
+		\rho
+			= \frac{Z_w - \eta_1}{Z_w + \eta_1}
+			= \frac{R_s (1 + \jmath) - \eta_1}{R_s (1 + \jmath) + \eta_1}
+			\simeq -1
+	\end{esp}
+	dove l'ultimo passaggio è giustificato dal fatto che, per i buoni conduttori, la resistenza di parete $R_s$ è molto più piccola dell'impedenza del mezzo isolante $\eta_1$.
 
+	Infatti, per il passaggio dell'onda dall'aria al rame, si può calcolare che
+	\begin{esp}
+		\begin{cases}
+			R_s = \sqrt{\frac{\pi f \mu_o}{\sigma}} \simeq 60m\Omega \\
+			\eta_1 = \frac{\eta_o}{n_1} \simeq 377\Omega \gg R_s
+		\end{cases}
+	\end{esp}
 
+	Con valore di $\rho$ come questo, si ha che $I_t = I_i (1 - |\rho|^2) \simeq 0$: il nostro materiale è un buono specchio e diventa uno specchio perfetto per $\sigma \to +\infty$.
 
-
-
-
-
-
-
+\subsection{Piano di massa}
+	Anca massa
