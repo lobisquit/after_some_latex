@@ -429,4 +429,9 @@ Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, o
   R_r = \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta  left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2left(\frac{\Delta z}{\lambda}\right)^2 \Omega
 \end{esp*}
 poiché il rapporto $left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
-Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$.
+Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$. Iniziamo riprendendo l'equazione \eqref{eq:bilancio_potenza_EM_steinmetz}:
+\begin{esp*}
+  \Im\left[- \int_V \E \cdot \J^* ~ dV\right] &= \omega \underbrace{\int_V \omega \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
+    _{<0} + \Im\left[\int_{S(r)} \P \cdot \hr dS\right] \\
+  \Im\left[\frac{V_a \cdot I_A^*}{2}\right] &= -\omega\epsilon
+\end{esp*}
