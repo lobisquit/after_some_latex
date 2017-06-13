@@ -377,3 +377,28 @@ $$D= \frac{4\pi}{\Omega_A}$$.
 
 \textsc{Remark:} a volte si scrive $D(\theta,\Phi) = D \cdot |F(\theta,\Phi)|^2$ rinormalizzando come visto in \eqref{eq:dirett} (2)
 \subsection{Guadagno in potenza}
+Non sempre si riesce a conoscere in ogni punto il valore di $I(r,\theta,\Phi)$, per cui si procede analizzando la potenza elettrica emessa rispetto alla direttività dell'antenna. In particolare, osservando anche la figura \ref{fig:antDipolo}, si procede come segue:
+\begin{esp}
+  P_{IN} &= \Re\left[\frac{V_A \cdot I_A^*}{2}\right] \\
+  G= \frac{U_m}{\frac{P_{IN}{4\pi}}}
+\end{esp}
+Poiché si riesce sempre a calcolare
+\begin{esp}
+  4\pi U_m  &= G \cdot P_{IN} \leftrightarrow 4\pi U_m = D \cdot P\\
+  \implies & G=D \frac{P}{P_IN} \quad D =G \frac{P_{IN}}{P}
+\end{esp}
+Sapendo che non esiste alcun materiale con resistenza nulla, si ha $P \le P_{IN}$. \\
+Definiamo quindi efficienza dell'antenna o efficienza di radiazione la quantità
+\begin{equation}\label{eq:efficienzaAnt}
+  e_r = \frac{P}{P_IN}
+\end{equation}
+
+Possiamo ora riscrivere G come
+\begin{esp*}
+  G&=\frac{4\pi\U_m}{P_{IN}} \cdot \frac{r^2}{r^2} = \frac{4\pi r^2 I(r,\theta,\Phi)}{P_{IN}} = \frac{EIRP}{P_{IN}} \\
+  EIRP &= G \cdot P_{IN} = D \dot P \\
+  I(r,\theta,\Phi) &= G \frac{P_in}{4\pi r^2}\\
+  \implies &G(\theta,\Phi) = G \cdot |F(\theta,\Phi)|^2
+\end{esp*}
+
+\section{Impedenza d'antenna}
