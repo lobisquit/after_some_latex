@@ -1,4 +1,4 @@
-\section{Antenne patch o a microstriscia}
+\chapter{Antenne patch o a microstriscia}
 Questo tipo di antenne sono spesso utilizzate nei circuiti integrati, poiché nella stessa basetta in cui si crea il circuito, si può costruire l'antenna stessa. Poiché inoltre le applicazioni principali sono i dispositivi mobili, è necessario rendere questo tipo di antenne, quanto più possibile isotrope .
 Dalla figura \ref{fig:patch} possiamo vedere come sia necessario calcolarsi la lunghezza, la larghezza e lo spessore dell'isolante. Spesso però, per adattare l'impedenza d'ingresso della patch all'impedenza del conduttore che trasporta il segnale, si modifica il rettangolo inserendo l'inset di un'unità $\Delta x$
 
@@ -6,11 +6,11 @@ Le formule per calcolare le dimensioni dell'antenna dipendono della lunghezza d'
 Riportiamo ora le equazioni e, nel caso, le approssimazioni migliori di un'antenna patch senza inset.
 
 \begin{esp}\label{eq:paramPatch}
-  \epsilon_{re} = \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h}{W}} \text{ \parbox{3cm}{ costante dielettrica efficace dell'isolante}}
+  \epsilon_{re} &= \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h}{W}} \text{ \parbox{7cm}{ costante dielettrica efficace dell'isolante}} \\
   L&=\frac{\lambda}{2\sqrt{\epsilon_r}} - \frac{\left(\epsilon_{re} +0.3 \right)\cdot\left(\frac{W}{h} + 0.264\right)}{\left(\epsilon_{re} +0.258 \right)\cdot\left(\frac{W}{h} + 0.8\right)} \\
   &= 0.49 \cdot \frac{\lambda}{\sqrt{\epsilon_r}} \quad \text{formula approssimata}\\
   W &=\frac{\lambda}{2 \sqrt{\frac{\epsilon_r+1}{2}}} \\
-  B_\%&= 3.77 \cdot \frac{\epsilon_r-1}{\epsilon_r^2} \cdot \frac{W}{L}\cdot \frac{h}{\lambda} \text{\parbox{4cm}{ percentuale di banda sfruttata dalla patch}}
+  B_\%&= 3.77 \cdot \frac{\epsilon_r-1}{\epsilon_r^2} \cdot \frac{W}{L}\cdot \frac{h}{\lambda} ~\text{\parbox{8cm}{ percentuale di banda sfruttata dalla patch}}
 \end{esp}
 L'impedenza d'antenna risulta quindi:
 \begin{equation}\label{eq:ZaPatch}

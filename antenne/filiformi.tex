@@ -1,0 +1,78 @@
+\chapter{Antenne filiformi}
+Dato $V^{\prime}$ il volume delle sorgenti, definiamo la
+distribuzione di corrente come
+\begin{equation}
+  \vec{J}(\vec{r^{\prime}})$ $\forall \vec{r^{\prime}}\in V^{\prime}
+\end{equation}
+Otteniamo quindi che il potenziale vettore magnetico risulta:
+\begin{esp*}
+  \vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{V^{\prime}} \vec{J}(\vec{r^{\prime}})e^{\jmath\beta r^{\prime}\cos (\Psi (\vec{r^{\prime}}))}d\vec{r^{\prime}}
+\end{esp*}
+
+\section{Antenne rettilinee}
+Data l'equazione di propagazione di un'onda di tensione lungo una linea di trasmissione
+\begin{esp}\begin{cases}
+  V(z^{\prime})=V_+ e^{-\jmath\beta z^{\prime}} + V_- e^{\jmath\beta z^{\prime}}\\
+  I(z^{\prime})=I_+ e^{-\jmath\beta z^{\prime}} - I_- e^{\jmath\beta z^{\prime}}
+\end{cases}\end{esp}
+Possiamo vedere il carico $Z_L$ come un'impedenza puramente reale e infinita. In tal caso l'estremità della linea è un circuito aperto, ma il campo non si propaga in quanto il campo elettomagnetico si annulla in quanto le linee di campo uscenti da un filo rientrano nell'altro. Se però apriamo i due fili, il campo elettromagnetico non rimane confinato, ma si propagherà.
+
+Possiamo notare l'analogia tra la tensione della linea: $V_+$ è l'onda trasmessa e $V_-$ quella riflessa con l'equazione per le onde piane.
+
+Nel caso di circuito aperto ($Z_L \to +\infty$) il coefficiente di riflessione risulta  $\rho = 1$.
+La corrente lungo la linea risulta:
+\begin{esp}\label{eq:I_fili}
+  I(z^{\prime}) &= I_+(e^{-\jmath\beta z^{\prime}} - e^{\jmath\beta z^{\prime}}) = -2j I_+ \sin (\beta z^{\prime}) \\
+  I(-L^{\prime})&=  I_A = +2j I_+ \sin (\beta L^{\prime}) \\
+  \implies & I_+ = \frac{I_A}{+2\jmath\sin (\beta L^{\prime})}\\
+  \implies & I(z^{\prime}) - \frac{I_A\cdot \sin (\beta z^{\prime})}{\sin (\beta L^{\prime})}  = - I_m \sin (\beta z^{\prime})
+\end{esp}
+
+con $I_m = \frac{I_A}{\sin (\beta L^{\prime})}$\\
+Calcolando le correnti nei diversi punti dei due fili aperti, otteniamo le relazioni tra $z$ e $z^{\prime}$
+\begin{esp}&(1) \quad z \ge 0  \begin{cases}
+  z^{\prime} = z-L^{\prime} \implies z = 0 \\
+  z^{\prime} = 0 \implies z = L^{\prime} \\
+\end{cases} \\
+&(2) \quad z \le 0 \begin{cases}
+z^{\prime} = -L^{\prime} \implies z = 0\\
+z^{\prime} = 0 \implies z = -L^{\prime}
+\end{cases}
+\end{esp}
+
+Possiamo quindi dividere i due casi $(1)$ e $(2)$ nel seguente modo:
+\begin{itemize}
+  \item in $(1)$  possiamo scrivere l'equivalenza $z^{\prime} = z-L^{\prime}$
+  \item in $(2)$  possiamo scrivere l'equivalenza $z^{\prime} = -z-L^{\prime}$
+\end{itemize}
+Ora possiamo scrivere una sola equazione, utilizzando questa sostituzione:
+\begin{equation}
+ \forall z \in [-L^{\prime};L^{\prime}] \implies z^{\prime} = \left | z \right | - L^{\prime}
+\end{equation}
+
+L'equazione \eqref{eq:I_fili} si può quindi riscrivere come:
+\begin{equation}
+  I(z)=-I_m sin \left[sin(\beta \cdot (|z| - L^{\prime}))\right] = I_m sin \left[sin\left(\beta \frac{L}{2}-\beta |z|\right)\right] ~ |z| \le \frac{L}{2}
+\end{equation}
+
+L'impedenza dell'antenna risulta quindi
+\begin{equation}
+  Z(z^{\prime}) = \frac{V(z^{\prime})}{I(z^{\prime})} \propto \jmath ctg( \beta z^{\prime})
+\end{equation}
+Che risulta essere sempre immaginaria. Poiché  non esiste alcuna impedenza puramente immaginaria nei casi reali, abbiamo commesso qualche errore di approssimazione. Normalmente si cerca di minimizzare il più possibile la resistenza nei fili che la compongono utilizzando materiali il più possibile conduttori
+
+\section{Dipolo corto (o antenna corta)}
+Ipotesi : $\beta L << 1$ , $\frac{2 \pi}{\lambda}L << 1$ , $L << \frac{\lambda}{2 \pi}$
+
+$I(z) = I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] \cong I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L}) $
+con la prima approssimazione grazie a Taylor.
+
+$\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime}) e^{\jmath\beta z^{\prime}\cos \Psi (z^{\prime})}dz^{\prime} \cong  \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} \cong \\ \cong \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} $
+
+$\int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} =  I_A [\int_{\frac{-L}{2}}^{\frac{L}{2}}dz^{\prime}- \int_{0}^{\frac{L}{2}}\frac{2 z^{\prime}}{L}) dz^{\prime}+ \int_{-\frac{L}{2}}^{0}\frac{2 z^{\prime}}{L}) dz^{\prime}] = I_A [L-\frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{0}^{L/2} + \frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{-L/2}^{0}] = I_A [L-\frac{2}{L}\frac{L^2}{8} + \frac{2}{L}(-\frac{L^2}{8})] = I_A (L-\frac{L}{4}-\frac{L}{4}) = \frac{I_A L}{2} $
+
+DIPOLO CORTO : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \frac{I_A L}{2} \hat{z} $
+
+DIPOLO ELEMENTARE : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} I_A \hat{z} \Delta{z}$
+
+Considero il caso $r >> \lambda$ ($r > 5 \lambda$ per esempio) e $\Delta{z} \to L/2$
