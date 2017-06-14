@@ -22,42 +22,44 @@
 	\end{esp}
 	dove in (*) si calcola la differenza di cammino tra i vari percorsi.
 
-	D'ora in avanti considereremo sempre alimentazioni $I_i$ sfasate tra loro di un angolo $\alpha$ costante: in questo caso il calcolo dell'\gls{af} si riduce a
-
-	\begin{esp}
-		AF = \sum_{i=0}^{n-1} A_i ~ e^{\jmath i (\beta d \cos \theta + \alpha)}
-			\stackrel{.}{=} \sum_{i=0}^{n-1} ~ e^{\jmath i \psi}
-	\end{esp}
-	dove $I_i$ viene scomposto in modulo e fase come $A_i ~ e^{\jmath (i-1) \alpha}$ e $\psi$ è un angolo definito per semplificare la notazione che racchiude le tutti gli sfasamenti.
-	
-	\subsection{Regione di visibilità}
-		I valori validi per l'inclinazione rispetto all'array sono $\theta \in [0, \pi]$, perché i valori opposti sono ottenuti semplicemente per simmetria.s
-		
-		Questo induce dei limiti nell'angolo $\psi$: il range di valori validi per questo angolo è detto \emph{regione di visibilità}.
-		\begin{equation} \begin{gathered}
-		 0 \le \theta \le \pi \\
-		 -\beta d \le \beta d \cos \theta \le \beta d \\ 
-		 \alpha - \beta d \le \psi \le \alpha + \beta d 
-		\end{gathered} \end{equation}
-
 	\subsection{Schiere fasate}
 		Un caso particolare, ma di notevole interesse, sono le \emph{schiere fasate}, array in cui le correnti hanno modulo uguale e sfasamento $\alpha$. 
 		Il calcolo dell'\gls{af} per questa scelta dei parametri si semplifica ulteriormente.
 			
 		\begin{esp}
-				& AF 
-					= A_o \sum_{i=0}^{n-1} e^{\jmath i \psi}
-					\stackrel{(*)}{=} A_o \frac{ 1 - e^{\jmath n \psi} }{ 1 - e^{\jmath \psi} } \\
+				AF 
+				& = \sum_{k=0}^{n-1} I_k ~ e^{\jmath k \beta d \cos \theta} \\
+				& \stackrel{(1)}{=}  \sum_{k=0}^{n-1} A_k ~ e^{\jmath k (\beta d \cos \theta + \alpha)}
+					\stackrel{(2)}{=} \sum_{k=0}^{n-1} ~ A_k e^{\jmath k \psi} \\
+				& = A_o \sum_{k=0}^{n-1} e^{\jmath k \psi}
+					\stackrel{(3)}{=} A_o 
+						\left( \frac{ 1 - e^{\jmath n \psi} }{ 1 - e^{\jmath \psi} } \right) \\
 				& = A_o 
 						~ \frac{ e^{\jmath \frac{n}{2} \psi} }{ e^{\jmath \psi} } 
-						~ \frac{ e^{\jmath \frac{n}{2} \psi} - e^{- \jmath \frac{n}{2} \psi} }{ e^{\jmath \psi} - e^{-\jmath \psi} }  \\
-				& = A_o 
-					~ \frac{ \sin(\frac{n}{2} \psi) }{ \sin(\frac{\psi}{2}) } ~ \frac{ e^{\jmath \frac{n-1}{2} \psi} }{ e^{\jmath \psi} }
+						\left( \frac{ e^{\jmath \frac{n}{2} \psi} - e^{- \jmath \frac{n}{2} \psi} }{ e^{\jmath \psi} - e^{-\jmath \psi} } \right) \\
+				& = A_o
+					\left( \frac{ \sin(\frac{n}{2} \psi) }{ \sin(\frac{\psi}{2}) } \right) 
+					~ e^{\jmath \frac{n-1}{2} \psi}
 			\end{esp}
-		dove in (*) è stata utilizzata la formula per il calcolo della serie geometrica troncata.
+		dove 
+		\begin{itemize}
+			\item[(1)] $I_k$ viene scomposto in modulo e fase come $A_k ~ e^{\jmath k \alpha}$
+			\item[(2)] l'angolo $\psi$ è definito, per semplificare la notazione, come la somma di tutti gli sfasamenti per l'antenna $k$-esima
+			\item[(3)] viene utilizzata la formula per il calcolo della serie geometrica troncata.
+		\end{itemize}
+		
+		\subsubsection{Regione di visibilità}
+			I valori validi di $\theta$, ovvero l'inclinazione dell'onda incidente rispetto all'array, sono nell'intervallo $[0, \pi]$: le proprietà dell'array per i valori opposti sono ottenute semplicemente per simmetria.
+			
+			Questo induce dei limiti nell'angolo $\psi$: il range di valori validi per questo angolo è detto \emph{regione di visibilità}.
+			\begin{equation} \begin{gathered}
+			0 \le \theta \le \pi \\
+			-\beta d \le \beta d \cos \theta \le \beta d \\ 
+			\alpha - \beta d \le \psi \le \alpha + \beta d 
+			\end{gathered} \end{equation}
 		
 		\subsubsection{Massimo di radiazione}
-			Il massimo delle capacità dell'antenna si ha per $\psi = 0$, che corrisponde all'angolo $\theta_o$ (o agli angoli) nella regione di visibilità per cui $\beta d \cos \theta_o = -\alpha$.
+			Il massimo delle capacità dell'antenna si ha per $\psi = 0$, che corrisponde all'angolo (o agli angoli) $\theta_o$ nella regione di visibilità per cui $\beta d \cos \theta_o = -\alpha$.
 			
 			\begin{esp}
 				|AF(\psi = 0)| 
@@ -67,7 +69,7 @@
 						= A_o \cdot n \cdot 1 = A_o \cdot n
 			\end{esp}
 
-			Questa osservazione ci permette di calcolare il pattern di radiazione dell'array, definito come il coefficiente di \gls{af} normalizzato al suo valor massimo.
+			Questa osservazione ci permette di calcolare il pattern di radiazione dell'array, definito come il modulo dell'\gls{af} normalizzato al suo valor massimo.
 			
 			\begin{equation} \label{eq:array_pattern}
 				F(\theta) 
@@ -111,12 +113,12 @@
 				 = 0
 			\end{esp} 
 			
-			Approssimando valori di $n$ grandi (indicativamente maggiori di 10), si può compiere questa semplificazione.
+			Per valori di $n$ grandi (indicativamente maggiori di 10), si può compiere questa semplificazione.
 			
 			\begin{esp}
 				\cos \left(\frac{n}{2} \psi \right) \sin\left( \frac{\psi}{2} \right)
 				= \frac{2}{n} \sin \left(\frac{n}{2} \psi \right) \cos\left( \frac{\psi}{2} \right)
-				\simeq 0 \quad \forall N \to +\infty
+				\simeq 0 \quad \forall n \to +\infty
 				 = 0
 			\end{esp} 
 			
