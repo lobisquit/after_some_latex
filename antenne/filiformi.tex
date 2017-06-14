@@ -1,0 +1,70 @@
+\chapter{ANTENNE FILIFORMI}
+
+Distribuzione di corrente : $\vec{J}(\vec{r^{\prime}})$ $\forall \vec{r^{\prime}}\in V^{\prime}$ (con V^{\prime} volume delle sorgenti)
+
+$\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{V^{\prime}} \vec{J}(\vec{r^{\prime}})e^{\jmath\beta r^{\prime}\cos \Psi (\vec{r^{\prime}})}d\vec{r^{\prime}}$
+
+con $M(\theta,\phi) = \vec{J}(\vec{r^{\prime}})e^{\jmath\beta r^{\prime}\cos \Psi (\vec{r^{\prime}})}$ definito come  \textit{momento di dipolo}.
+
+\section{ANTENNE RETTILINEE}
+
+"Apro" le due estremità di un cavo alimentato.
+
+$V(z^{\prime})=V_+ e^{-\jmath\beta z^{\prime}} + V_- e^{\jmath\beta z^{\prime}}$, simile a onde piane $(V_+ trasmessa e V_- riflessa)$.
+
+$I(z^{\prime})=I_+ e^{-\jmath\beta z^{\prime}} - I_- e^{\jmath\beta z^{\prime}}$, con il meno tra le due correnti poichè il campo magnetico si gira quando viene riflesso.
+
+$V_- = \rho V_+$ con $\rho$ definito \textit{coefficiente di riflessione} (z^{\prime}= 0)
+
+$\implies \rho = \frac{Z_L - z_C}{Z_L + Z_C}$
+
+$Z_L$ : impedenza al termine della linea $\implies Z_L = \frac{V_-}{I}$
+
+$Z_C$ : impedenza caratteristica della linea $\implies Z_C = \frac{V_+}{I_+}$
+
+Nel nostro caso $Z_L$ $\to +\infty$ (circuito aperto)  $\longrightarrow \rho = 1$
+
+quindi $I(z^{\prime}) = I_+(e^{-\jmath\beta z^{\prime}} - e^{\jmath\beta z^{\prime}}) = -2j I_+ \sin (\beta z^{\prime})$ con $\beta = \frac{2 \pi}{\lambda}$
+
+$I(z^{\prime} = -L^{\prime}) = I_A = +2j I_+ \sin (\beta L^{\prime}) \to I_+ = \frac{I_A}{+2j I_+ \sin (\beta L^{\prime})} $
+
+$I'(z^{\prime}) =  -2j \frac{I_A}{+2j \sin (\beta L^{\prime})} \sin (\beta z^{\prime}) = - \frac{I_A}{I_+ \sin (\beta L^{\prime})} \sin (\beta z^{\prime}) = - I_m \sin (\beta z^{\prime}) $ con $I_m = \frac{I_A}{\sin (\beta L^{\prime})}$
+
+$z \ge 0,  z^{\prime} = z-L^{\prime} \begin{cases} z = 0 \to z^{\prime} = L^{\prime}\\ z^{\prime} = L^{\prime} \to z = 0\\ \end{cases}$
+\hfill
+$z \le 0,  z^{\prime} = -z-L^{\prime} \begin{cases} z^{\prime} = -L^{\prime} \to z = 0\\ z^{\prime} = 0 \to z = -L^{\prime}\\ \end{cases}$
+
+$\forall \left | z \right | < L^{\prime} \to  z^{\prime} = \left | z \right | - L^{\prime}$
+
+$I(z) = - I_m \sin [\beta (\left | z \right | - L^{\prime})] = I_m \sin [\beta (L^{\prime} - \left | z \right |)]$
+
+...PDF con campi elettrici e magnetici...
+
+$Z(z^{\prime}) = \frac{V(z^{\prime})}{I(z^{\prime})} \propto j \cot \beta z^{\prime} \to$ immaginaria pura!
+
+se L = 2L^{\prime} $\implies I(z) = I_m \sin [\beta (\frac{L}{2} - \left | z \right |)]$ con $\left | z \right | \le \frac{L}{2}$ e $I_m = \frac{I_A}{\sin (\frac{\beta L}{2})}$
+
+\clearpage
+
+\section{DIPOLO CORTO (ANTENNA CORTA)}
+Ipotesi : $\beta L << 1$ , $\frac{2 \pi}{\lambda}L << 1$ , $L << \frac{\lambda}{2 \pi}$
+
+$I(z) = I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] \cong I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L}) $
+con la prima approssimazione grazie a Taylor.
+
+$\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime}) e^{\jmath\beta z^{\prime}\cos \Psi (z^{\prime})}dz^{\prime} \cong  \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} \cong \\ \cong \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} $
+
+$\int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} =  I_A [\int_{\frac{-L}{2}}^{\frac{L}{2}}dz^{\prime}- \int_{0}^{\frac{L}{2}}\frac{2 z^{\prime}}{L}) dz^{\prime}+ \int_{-\frac{L}{2}}^{0}\frac{2 z^{\prime}}{L}) dz^{\prime}] = I_A [L-\frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{0}^{L/2} + \frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{-L/2}^{0}] = I_A [L-\frac{2}{L}\frac{L^2}{8} + \frac{2}{L}(-\frac{L^2}{8})] = I_A (L-\frac{L}{4}-\frac{L}{4}) = \frac{I_A L}{2} $
+
+DIPOLO CORTO : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \frac{I_A L}{2} \hat{z} $
+
+DIPOLO ELEMENTARE : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} I_A \hat{z} \Delta{z}$
+
+Considero il caso $r >> \lambda$ ($r > 5 \lambda$ per esempio) e $\Delta{z} \to L/2$
+
+In campo lontano, localmente, posso considerare piana un'onda sferica.
+
+CAMPO LONTANO ($r >> \lambda$)
+
+$\begin{cases}\vec{E} \simeq\\
+\vec{H} \simeq\end{cases}$

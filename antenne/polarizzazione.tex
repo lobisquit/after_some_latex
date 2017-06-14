@@ -37,20 +37,20 @@ A partire dall'equazione \ref{eq:ert} possiamo osservare alcune simmetrie del ca
 
 Queste affermazioni possono essere provate come segue
 \begin{esp}
-  \E^R &= E^R_{x\prime} \cdot \hat{x}\prime+E^R_{y\prime} \cdot \hat{y}\prime \\
-  \E^I &= E^I_{x\prime} \cdot \hat{x}\prime+E^I_{y\prime} \cdot \hat{y}\prime \\
-  \e &= (E^R_{x\prime}\cdot \hat{x}\prime+ E^R_{y\prime})\cdot cos(\omega t) - (E^I_{x\prime}\cdot \hat{x}\prime+ E^I_{y\prime})\cdot sin(\omega t)\\
-  &= \left[E^R_{x\prime} \cdot cos(\omega t)-E^I_{x\prime}\cdot sin(\omega t)\right]\cdot \hat{x}\prime + \left[E^R_{y\prime} \cdot cos(\omega t) -E^I_{y\prime}\cdot sin(\omega t)\right]\cdot \hat{y}\prime \\
+  \E^R &= E^R_{x^{\prime}} \cdot \hat{x}^{\prime}+E^R_{y^{\prime}} \cdot \hat{y}\prime \\
+  \E^I &= E^I_{x^{\prime}} \cdot \hat{x}^{\prime}+E^I_{y^{\prime}} \cdot \hat{y}\prime \\
+  \e &= (E^R_{x^{\prime}}\cdot \hat{x}^{\prime}+ E^R_{y^{\prime}})\cdot cos(\omega t) - (E^I_{x^{\prime}}\cdot \hat{x}^{\prime}+ E^I_{y^{\prime}})\cdot sin(\omega t)\\
+  &= \left[E^R_{x^{\prime}} \cdot cos(\omega t)-E^I_{x^{\prime}}\cdot sin(\omega t)\right]\cdot \hat{x}^{\prime} + \left[E^R_{y^{\prime}} \cdot cos(\omega t) -E^I_{y^{\prime}}\cdot sin(\omega t)\right]\cdot \hat{y}\prime \\
 \end{esp}
   o in forma matriciale
 \begin{esp}
   \begin{pmatrix}
-    e_{x\prime} \\ e_{y\prime}
+    e_{x^{\prime}} \\ e_{y^{\prime}}
   \end{pmatrix}
   &=
   \underbrace{\begin{pmatrix}
-    E_{x\prime}^R & -E_{x\prime}^I\\
-    E_{y\prime}^R & -E_{y\prime}^I
+    E_{x^{\prime}}^R & -E_{x^{\prime}}^I\\
+    E_{y^{\prime}}^R & -E_{y^{\prime}}^I
   \end{pmatrix}}_{\text{Deformazione lineare}}
   \cdot
   \underbrace{\begin{pmatrix}
@@ -82,7 +82,7 @@ Queste proprietà si posso ricavare anche con i vettori di Steinmetz
 
 Ruotando il sistema di riferimento di un angolo $\delta$ la proprità resta valida: è sufficiente applicare la corrispodente trasformazione ai campi considerati.
 \begin{equation}
-  \begin{pmatrix} E_{x\prime} \\ E_{y\prime} \end{pmatrix} =
+  \begin{pmatrix} E_{x^{\prime}} \\ E_{y^{\prime}} \end{pmatrix} =
   \begin{pmatrix}
      cos(\delta) & sin(\delta) \\ -sin(\delta) & cos(\delta)
   \end{pmatrix} \cdot
@@ -113,14 +113,14 @@ Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno di $p\p
 Cerchiamo ora di valutare $\Re [p\prime]$
 \begin{esp*}
   p\prime
-	&= \jmath \frac{E_{y\prime}}{E_{x\prime}} \\
-	& = e^{\jmath \frac{\pi}{2}} \cdot \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \|
-  \cdot e^{j(\Phi_{y\prime}-\Phi_{x\prime})} \\
-  &= \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \| \cdot e^{j(\frac{\pi}{2}+\Phi_{y\prime}-\Phi_{x\prime})}
+	&= \jmath \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \\
+	& = e^{\jmath \frac{\pi}{2}} \cdot \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \|
+  \cdot e^{j(\Phi_{y^{\prime}}-\Phi_{x^{\prime}})} \\
+  &= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \cdot e^{j(\frac{\pi}{2}+\Phi_{y^{\prime}}-\Phi_{x^{\prime}})}
 \end{esp*}
 
 e dunque,
 \begin{esp*}
 	\Re[p\prime]
-	&= \left \| \frac{E_{y\prime}}{E_{x\prime}} \right \| \cdot \underbrace{\cos \left( \frac{\pi}{2} +\Phi_{y\prime}-\Phi_{x\prime} \right)}_{\text{verso di polarizzazione}}
+	&= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \cdot \underbrace{\cos \left( \frac{\pi}{2} +\Phi_{y^{\prime}}-\Phi_{x^{\prime}} \right)}_{\text{verso di polarizzazione}}
 \end{esp*}
