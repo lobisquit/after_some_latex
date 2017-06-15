@@ -132,7 +132,7 @@
 				\end{dcases}
 			\end{equation*}
 
-			Ottenute le posizioni di massimi e minimi in $\psi$ è possibile calcolare attraverso la funzione $AF(\psi)$ il \emph{Side Lobe Level}, che misura il rapporto tra lobi primari e secondari.
+			Ottenute le posizioni di massimi e minimi in $\psi$ è possibile calcolare attraverso la funzione $AF(\psi)$ il \emph{\gls{sll}}, che misura il rapporto tra lobi primari e secondari.
 
 	\subsection{Tipologie di schiere lineari fasate}
 		Come si può notare dalla definizione di $\psi$, il massimo che si ha per $\psi = 0$ corrisponde ad un valore di $\theta$ che è funzione dello sfasamento delle correnti $\alpha$.
@@ -150,6 +150,152 @@
 		\end{esp*}
 
 \section{Schiera di antenne non isotrope}
+	Osserveremo ora il caso generico in cui le antenne isotrope ideali sono rimpiazzate da antenne reali.
 	
-
+	\subsection{Schiera di dipoli corti}
+		\begin{figure}[ht]
+			\centering
+			\includegraphics{img/schiera_non_isotropa_dipoli_corti.pdf}
+			\caption{I dipoli corti di lunghezza $\Delta z$ sono equispaziati da una distanza $d$.}
+			\label{fig:schiera_non_isotropa_dipoli_corti}
+		\end{figure}
 		
+		In figura \ref{fig:schiera_non_isotropa_dipoli_corti} i dipoli corti sono disposti lungo l'asse $z$: il contributo nel potenziale vettore magnetico dell'antenna $k$-esima si può valutare, nel campo lontano, come segue.
+		
+		\begin{esp}
+			\vec{A}_k(\r) 
+				& = \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta (r - k d \cos \theta)}}{r - k d \cos \theta} \right)
+				I_k \Delta z ~ \hat{z} \\
+				& \simeq \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta (r - k d \cos \theta)}}{r} \right)
+				I_k \Delta z ~ \hat{z}
+		\end{esp}
+		dove il termine di sfasamento al denominatore dell'onda sferica è trascurabile perché nel campo lontano $d \ll r$. Il termine all'esponenziale invece non lo è, perché nel caso generale $d$ è paragonabile alla lunghezza d'onda $\lambda$.
+
+		L'effetto complessivo delle $n$ antenne si può quantificare come 
+		\begin{esp}
+			\vec{A}(\r) 
+			& = \sum_{k=0}^{n-1} \vec{A}_k(\r) \\
+			& = \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+				\Delta z
+				\left( \sum_{k=0}^{n-1} I_k ~ e^{\jmath k \beta d \cos \theta} \right) \hat{z} \\
+			& = \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+				\Delta z ~ AF ~ \hat{z} 
+		\end{esp}
+		dove l'\gls{af} è calcolato come il rapporto tra il contributo complessivo e della singola antenna.
+		
+		Il campo elettrico, per esempio lungo $\theta$, si può ricavare a partire da $\vec{A}$.
+		\begin{esp}
+			\vec{E}_\theta
+			& = \left[ 
+					\jmath \frac{\eta_o}{2\lambda} 
+					\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+					\Delta z ~ \sin \theta ~ \hat{z} 
+				\right] AF
+		\end{esp}
+		dove il termine tra tra quadre è il campo lontano della singola antenna.
+	
+	\subsection{Schiera di antenne filiformi generiche}
+		Abbiamo osservato nella precedente sezione come il campo della singola antenna si componga nella schiera con l'\gls{af}, definito in precedenza per le antenne isotrope.
+		
+		Questa calcolo si può generalizzare per distribuzioni lineari di corrente $i_k(z)$ generiche.
+		
+		\begin{figure}[ht]
+			\centering
+			\includegraphics{img/schiera_non_isotropa_dipoli.pdf}
+			\caption{I dipoli sono posti nei punti $z_o, \ldots, z_{n-1}$.}
+			\label{fig:schiera_non_isotropa_dipoli}
+		\end{figure}
+	
+		Il potenziale vettore magnetico nel campo lontano si calcola come 
+		\begin{esp}
+			\vec{A}_k(\r) 
+				& \stackrel{(1)}{=} \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta r}}{r} \right)
+				\int_{V_s} \vec{J}(\r^{\, \prime}) 
+					~ e^{\jmath \beta r^\prime \cos \theta} d\r^{\, \prime} \\
+				& \stackrel{(2)}{=} \frac{\mu}{4\pi} 
+				\left( \frac{e^{-\jmath \beta r}}{r} \right) \hat{z} 
+				\int_{-\infty}^{+\infty} 
+					\left( \sum_{k=0}^{n-1} i_k(z^\prime) ~ e^{\jmath \beta r^\prime \cos \theta} \right)
+					dz^\prime
+		\end{esp}
+		dove 
+		\begin{itemize}
+			\item[(1)] il termine esponenziale è scomposto in ciò che dipende da $\r$, posizione del punto in esame rispetto all'origine, e da $\r^{\,\prime}$, posizione del punto rispetto alla sorgente infinitesima di corrente $\vec{J}$
+			\item[(2)] la corrente è rivolta solamente lungo l'asse $z$, quindi il prodotto tra vettori si riduce ad un prodotto tra scalari.
+		\end{itemize}
+		
+		Da $\vec{A}$ si può ricavare $E_\theta$, come fatto in precedenza.
+		\begin{esp} \label{eq:e_theta_schiera_dipoli}
+			\vec{E}_\theta
+			& = \jmath \frac{\eta_o}{2\lambda} 
+					\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+					\sum_{k=0}^{n-1} 
+						\int_{-\infty}^{+\infty} dz^\prime ~ i_k(z^\prime) ~ e^{\jmath \beta z^\prime \cos \theta} ~ \hat{z} \\
+			& = \jmath \frac{\eta_o}{2\lambda} 
+					\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+					\sum_{k=0}^{n-1} E_n(\theta) \\
+		\end{esp}
+		dove il termine integrale $E_n(\theta)$ è identificabile come il contributo della $k$-esima antenna della schiera.
+		
+	\subsection{Schiera di antenne filiformi identiche}
+		Nel caso specifico in cui tutte le antenne abbiano la stessa lunghezza $L$ e la stessa distribuzione di corrente, è possibile mostrare come la scomposizione tra contributo individuale e \gls{af} sia effettivamente possibile.
+		
+		Prima di tutto, definiamo la distribuzione di correnti complessiva delle $n$ antenne.
+		\begin{esp}
+			i_n(z^\prime) = I_n ~ i(z^\prime - z_n)
+		\end{esp}
+		dove $i(\cdot)$ è una funzione reale (quindi un numero puro) ed associa alla distanza dal centro dell'antenna $n$-esima la frazione di corrente presente rispetto a $I_n$.
+		
+		Il contributo dell'antenna nel campo lontano si può valutare con la seguente espressione.
+		\begin{esp}
+			E_n(\theta) 
+			& = \sin \theta ~ I_n 
+				~ \int_{z_n - \frac{L}{2}}^{z_n + \frac{L}{2}} dz^\prime ~
+					i(z^\prime - z_n) e^{\jmath \beta z^\prime \cos \theta} \\
+			& \stackrel{(*)}{=} \sin \theta ~ I_n 
+				~ \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
+					i(\tau) ~ e^{\jmath \beta (\tau + z_n) \cos \theta} \\
+			& = \sin \theta ~ I_n ~ e^{\jmath \beta z_n \cos \theta} 
+				~ \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
+					i(\tau) ~ e^{\jmath \beta \tau \cos \theta} \\
+		\end{esp}
+		dove in (*) $z^\prime$ è stato sostituito da $\tau = z^\prime - z_n$.
+
+		È possibile infine inserire questo risultato all'interno della formula generale, in equazione \ref{eq:e_theta_schiera_dipoli}.
+		\begin{esp}
+			\vec{E}_\theta
+			= \jmath \frac{\eta_o}{2\lambda} 
+					\left( \frac{e^{-\jmath \beta r}}{r} \right) 
+					\underbrace{
+						\left( \sum_{k=0}^{n-1} I_n ~ e^{\jmath \beta z_n \cos \theta} \right)
+					}_{\text{AF}}
+					\underbrace{ 
+						\left( \sin \theta \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
+						i(\tau) ~ e^{\jmath \beta \tau \cos \theta} \right)
+					}_{\text{singola antenna}}
+		\end{esp}
+		dove sono messi in luce i contributi della singola antenna e della loro combinazione.
+
+		Avendo messo in luce questa proprietà per il campo elettrico, essa vale anche per il pattern di radiazione, che non è altro che il campo lontano normalizzato al suo valore massimo.
+		\begin{esp}
+			F(\theta, \phi) = F_{AF}(\theta, \phi) ~ F_{elemento}(\theta, \phi)
+		\end{esp}
+
+	\subsection{Schiera non uniformemente eccitate}
+		In questa sezione mostreremo come il valore massimo $I_n$ di corrente nell'antenna $n$-esima si può sfruttare per ottenere particolari effetti sul pattern di radiazione.
+		
+		Per esempio, sono interessanti le antenne che sopprimono completamente i lobi secondari, possedendo quindi un \gls{sll} pari a 0. 
+		Questo si può raggiungere ponendo $AF = 1 + e^{\jmath \psi}$, che corrisponde a $F_{AF} = \cos\left( \frac{\pi}{2} \cos \theta \right)$: questa condizione è in particolare verificata per $n$ antenne alimentate come descritto.
+		
+		\begin{esp}
+			& (1 + e^{\jmath \psi}) \text{ non ha lobi secondari } \\
+			& \implies (1 + e^{\jmath \psi})^n = 
+				\sum_{k=0}^{n-1} \binom{n}{k} e^{\jmath k \psi} \text{ non ha lobi secondari }
+		\end{esp}
+
+		Ponendo le correnti nel rapporto ``binomiale'' che sussiste tra i termini dell'\gls{af} è possibile quindi sopprimere completamente i lobi secondari.
