@@ -1,11 +1,10 @@
-\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
+\documentclass[a4paper, 12pt, twoside, openright, fleqn,usenames, dvipsnames, table, tikz]{book}
 %language settings
-\usepackage[english]{babel}
+\usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
 
 \usepackage[utf8]{inputenc}
 \usepackage{textgreek}
-
 \usepackage{fancyhdr} % headers and footers
 
 % figures and positioning
@@ -15,8 +14,7 @@
 \usepackage{graphics}
 \usepackage{wrapfig}
 \usepackage{listing}
-%\usepackage{rotating}
-
+\usepackage{pdfpages}
 % math package
 \usepackage{mathtools}
 \usepackage{amsthm, environ}%
@@ -24,9 +22,9 @@
 \usepackage{cases}
 
 % tikz figures
-\usepackage[usenames, dvipsnames, table, tikz]{xcolor}
 \usepackage{tikz,pgfplots}
 \usetikzlibrary{shapes, arrows,automata}
+\usepackage{xcolor}
 
 % image path
 \usepackage{epstopdf}
@@ -190,4 +188,6 @@
 \input{filiformi.tex}
 \input{array.tex}
 \input{patch.tex}
+\appendix
+\input{appendici.tex}
 \end{document}

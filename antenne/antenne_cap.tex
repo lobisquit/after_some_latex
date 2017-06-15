@@ -236,7 +236,7 @@ Analizziamo ora il vettore di Poyting per vedere come si comporta il campo EM in
   &-\eta \frac{|I|^2 \cdot (\Delta z)^2}{16\pi^2} sin(\theta)\cos(\theta) \cdot \left(-\frac{\jmath\beta}{r^3} +\frac{1}{r^4}-\frac{1}{r^4} + \frac{1}{\jmath\beta r^5}\right) \hth \\
 \end{esp}
 Facendo le dovute semplificazioni e scrivendo, dove necessario $\beta = \frac{2\pi}{\lambda}$ otteniamo:
-\begin{esp}
+\begin{esp}\label{eq:potDE}
   P=\eta \frac{|I|^2 \cdot (\Delta z)^2}{32\pi^2} sin^2(\theta) \cdot \frac{4\pi^2}{\lambda^2} \cdot \left(1+ \underbrace{\frac{1}{\jmath\beta^3 r^3}}_{\frac{1}{\jmath}\left(\frac{\lambda}{2\pi r}\right)^3}\right) \hr
   +\eta \frac{\jmath\beta |I|^2 \cdot (\Delta z)^2}{16\pi^2\cdot r^3} sin(\theta)\cos(\theta) \cdot \left(1 - \frac{1}{(\jmath\beta)^2 r^2}\right) \hth \\
 \end{esp}
@@ -251,7 +251,7 @@ Il comportamento della parte immaginaria è mostrato in figura \ref{fig:capIndut
   \label{fig:capIndutt}
 \end{figure}
 
-\section{Parametri di un'antenna}
+\section{Parametri di un'antenna}\label{sec:paramAnt}
 Mostreremo ora i parametri attraverso cui un'antenna è caratterizzata, prima elencandoli e poi ricavandoli per il dipolo elementare.
 I parametri, dunque, sono
 \begin{itemize}
@@ -424,10 +424,10 @@ Possiamo quindi ricavare
 \end{esp*}
 
 Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, otteniamo:
-\begin{esp*}
+\begin{esp}\label{eq:pot-resRadDE}
   P&=\frac{\pi}{3} \eta |I_A|^2 \cdot \left(\frac{\Delta z}{\lambda}\right)^2 \quad P_{IN} = P \\
   R_r &= \frac{2P}{|I_A|^2} = \frac{2}{3}\pi \eta \left(\frac{\Delta z}{\lambda}\right)^2 = 80\pi^2\left(\frac{\Delta z}{\lambda}\right)^2 \Omega
-\end{esp*}
+\end{esp}
 Poiché il rapporto $\left(\frac{\Delta z}{\lambda}\right)$ è molto piccolo, l'antenna risulta poco efficiente.
 Osserviamo ora la potenza reattiva emessa dall'antenna, in modo da calcolare $\Chi_A$. Iniziamo riprendendo l'equazione \eqref{eq:bilancio_potenza_EM_steinmetz}:
 \begin{esp*}

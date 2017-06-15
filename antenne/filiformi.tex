@@ -59,6 +59,10 @@ L'impedenza dell'antenna risulta quindi
 \begin{equation}
   Z(z^{\prime}) = \frac{V(z^{\prime})}{I(z^{\prime})} \propto \jmath ctg( \beta z^{\prime})
 \end{equation}
+e la corrente massima
+\begin{equation}\label{eq:corrDE}
+  I_m = \frac{I_A}{sin\left(\beta \cdot \frac{L}{2}\right)}
+\end{equation}
 Che risulta essere sempre immaginaria. Poiché  non esiste alcuna impedenza puramente immaginaria nei casi reali, abbiamo commesso qualche errore di approssimazione. Normalmente si cerca di minimizzare il più possibile la resistenza nei fili che la compongono utilizzando materiali il più possibile conduttori
 
 \section{Dipolo corto (o antenna corta)}
@@ -71,8 +75,153 @@ $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_
 
 $\int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} =  I_A [\int_{\frac{-L}{2}}^{\frac{L}{2}}dz^{\prime}- \int_{0}^{\frac{L}{2}}\frac{2 z^{\prime}}{L}) dz^{\prime}+ \int_{-\frac{L}{2}}^{0}\frac{2 z^{\prime}}{L}) dz^{\prime}] = I_A [L-\frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{0}^{L/2} + \frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{-L/2}^{0}] = I_A [L-\frac{2}{L}\frac{L^2}{8} + \frac{2}{L}(-\frac{L^2}{8})] = I_A (L-\frac{L}{4}-\frac{L}{4}) = \frac{I_A L}{2} $
 
-DIPOLO CORTO : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \frac{I_A L}{2} \hat{z} $
+Quindi risulta :
 
-DIPOLO ELEMENTARE : $\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} I_A \hat{z} \Delta{z}$
+DIPOLO CORTO : $\overline{A}(\overline{r'}) = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z')dz' = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \frac{I_A L}{2} \hat{z} $
+
+Confrontando con il dipolo elementare :
+
+DIPOLO ELEMENTARE : $\overline{A}(\overline{r'}) = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} I_A \hat{z} \Delta{z}$
 
 Considero il caso $r >> \lambda$ ($r > 5 \lambda$ per esempio) e $\Delta{z} \to L/2$
+
+In campo lontano, localmente, posso considerare piana un'onda sferica.
+
+CAMPO LONTANO ($r >> \lambda$)
+
+In campo lontano i campi elettrico e megnetico per un dipolo corto risultano quindi :
+\begin{equation}
+\begin{cases}\overline{E} \approx \jmath \eta \frac{I_A}{2 \lambda} (\frac{L}{2}) \sin \theta \frac{e^{-j\beta r}}{r} \hat{\theta}\\
+\overline{H} \approx \jmath \frac{I_A}{2 \lambda} (\frac{L}{2}) \sin \theta \frac{e^{j\beta r}}{r} \hat{\theta}\end{cases}
+\end{equation}
+
+Di seguito vengono riportati alcuni parametri fondamerntali per il dipolo corto, partendo da quanto definito in sezione \ref{sec:paramAnt}.
+
+\paragraph{Pattern di radiazione in potenza}
+Per il dipolo corto si trova che
+\begin{equation}
+\left | F(\theta, \phi) \right |^2 = \left | \frac{E(r, \theta, \phi)}{E(r, \theta_{MAX}, \phi_{MAX})} \right |^2 = \sin^2\theta
+\end{equation}
+che è lo stesso risultato ottenuto con il dipolo elementare.
+
+Possiamo quindi confrontare le equazioni della potenza emessa e della resistenza di radiazione del dipolo elementare ( entrambe in [eq. \eqref{eq:pot-resRadDE}]) con quelle del dipolo corto, ossia:
+
+\begin{equation}
+P = \frac{\pi}{3} \eta \left | I_A \right |^2 \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{12} \eta \left | I_A \right |^2 \left(\frac{L}{\lambda}\right)^2
+\end{equation}
+\begin{equation}
+R_r = \frac{2}{3} \frac{\pi}{4} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} 120 \pi  \left(\frac{L}{2 \lambda}\right)^2 = 20 (\pi)^2 \left(\frac{L}{2 \lambda}\right)^2
+\end{equation}
+
+Gli altri parametri d'antenna nel caso del dipolo corto sono:
+\begin{itemize}
+  \item Resistenza per unità di lunghezza:
+    \begin{equation}
+      r_f = \frac{R_s}{2 \pi a} = \frac{1}{2 \pi a} \sqrt{\frac{\pi f M }{\sigma}}
+    \end{equation}
+  \item Efficienza d'antenna:
+    \begin{equation}
+      e_r = \frac{P}{P_{IN}} = \frac{P}{P + P_0} = \frac{R_r}{R_r + R_0}
+    \end{equation}
+  \item Guadagno:
+    \begin{equation}
+      G = e_r D = e_r \frac{U_m}{\frac{P}{4 \pi}}
+    \end{equation}
+  \item Corrente nel dipolo:
+    \begin{equation}
+      I(z) = I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] con \left | z \right | \le \frac{L}{2} e I_m = \frac{I_A}{\sin (\frac{\beta L}{2})}
+    \end{equation}
+
+\end{itemize}
+
+\subsection{Momento di dipolo equivalente}
+Calcoleremo ora il momento di dipolo equivalente nel caso del dipolo corto.
+\begin{esp}
+\M (\theta, \Phi) &= \int_{\frac{-L}{2}}^{\frac{L}{2}} \hz I_m \sin \left[\beta \left(\frac{L}{2} -  \left | z' \right |\right)\right] e^{-\jmath \beta z' \cos \theta} dz' \\
+&= [\dots] = \frac{\frac{2 I_m}{\beta} \cos \left(\frac{\beta L}{2} \cos \theta) \right) - \cos \left(\frac{\beta L}{2}\right)}{\sin^2 \theta} \hz
+\end{esp}
+
+I passaggi intermedi, ritenuti troppo difficili e di poco interesse, sono stati omessi ma sono presenti nel libro.
+
+Il potenziale vettore magnetico si ricava dal momento di dipolo equivalente appena calcolato, in particolare si ha:
+\begin{equation}
+\A(\r) = \frac{\mu}{4\pi} \frac{\ejbr}{r} \M (\theta, \Phi)
+\end{equation}
+
+Si ottiene quindi che il campo elettromagnetico si può scrivere come:
+\begin{equation}
+\begin{cases}\E = -j \omega \A \frac{\nabla(\diverg \A)}{j \omega \mu \epsilon} \\
+\H = \frac{1}{\mu} \rot \A \end{cases}
+\end{equation}
+
+In \textit{campo lontano}, possiamo applicare le approssimazioni viste per il dipolo elementare: tutti i rapporti in cui la distanza si trova al denominatore vengono approssimati. alla potenza di ordine uno:    $\left\{ \frac{1}{r}, \frac{1}{r^2},\frac{1}{r^3},.. \approx \frac{1}{r}\right\}$
+
+Quindi in campo lontano i due campi elettrici e magnetici risultano:
+
+\begin{equation}\begin{cases}
+  \E \approx \jmath \frac{\eta}{2 \pi} \frac{\ejbr}{r} \frac{I_m \cos \left(\frac{\beta L}{2} \cos \theta \right) - \cos \left(\frac{\beta L}{2} \right)}{\sin \theta} \hth \\
+  \H \approx \frac{E_{\theta}}{\eta} \hphi
+\end{cases}\end{equation}
+
+Essendo antenne filiformi non c'è la dipendenza da ???
+
+
+
+\section{Dipolo a mezz'onda (L = $\frac{\lambda}{2}$)}
+
+Il campo elettrico del dipolo a mezz'onda può essere ricavato da quelllo del dipolo corto. Si trova quindi che
+
+\begin{equation}
+\E \approx \jmath \frac{\eta}{2 \pi} \frac{\ejbr}{r} \frac{I_m \cos \left(\frac{\beta L}{2} \cos \theta \right) - \cos \left(\frac{\beta L}{2} \right)}{\sin \theta} \hat{\theta}
+\end{equation}
+
+inoltre, poiché $\frac{\beta L}{2} = \frac{2 \pi}{\lambda} \frac{\lambda}{4} = \frac{\pi}{2}$
+
+il campo elettrico e magnetico possono essere riscritti come :
+
+\begin{equation}\begin{cases}
+  \E \approx \jmath \frac{\eta}{2 \pi} \frac{\ejbr}{r} \frac{I_m \cos \left(\frac{\pi}{2} \cos \theta \right)}{\sin \theta} \hth \\
+  \H \approx \frac{E_{\theta}}{\eta} \hphi
+\end{cases}\end{equation}
+
+\subsection{Parametri d'antenna per il dipolo a mezz'onda}
+Ricaviamo ora i parametri d'antenna trovati sia per il dipolo elementare che per il dipolo corto, nel caso del dipolo a mezz'onda:
+\begin{itemize}
+  \item Pattern di radiazione in campo
+    \begin{equation}
+      F(\theta, \Phi) = \frac{\cos \left(\frac{\pi}{2} \cos \theta \right)}{\sin \theta}
+    \end{equation}
+
+  \item Pattern di radiazione in potenza
+    \begin{equation}
+      \left | F(\theta, \Phi) \right |^2 = \left | \frac{E(r, \theta, \Phi)}{E(r, \theta_{MAX}, \Phi_{MAX})} \right |^2 = \frac{\cos^2 \left(\frac{\pi}{2} \cos \theta \right)}{\sin^2 \theta} \to \theta_{MAX} = \frac{\pi}{2}
+    \end{equation}
+  \item Vettore di Poynting
+    \begin{equation}
+      \P = \int_{S(r)} \frac{\E X \H^*}{2} \r dS = \int_{S(r)} \frac{\left | E_{\theta} \right |^2}{2 \eta} dS  \stackrel{=}{\text{conti}} \frac{C_{in} (2 \pi)}{8 \pi} \eta \left | I_m \right |^2
+    \end{equation}
+    con $C_in$ coseno integrale. Il valore di del coseno integrale approssimato è $C_{in}(2 \pi) \approx 2,44$.
+    \item Resistenza di radiazione: \\
+      Scrivendo la potenza emessa come funzione della resistenza di radiazione e richiamando l'equazione della corrente massima nel dipolo equivalente [\eqref{eq:corrDE}] possiamo scrivere:
+      \begin{equation}
+        \frac{C_{in} (2 \pi)}{8 \pi} \eta \left | I_A \right |^2 = \frac{R_r \left | I_A \right |^2}{2} \to R_r = \frac{C_{in} (2 \pi)}{4 \pi} \eta \cong 73 \Omega
+      \end{equation}
+    \item Direttività:
+      \begin{esp}
+        D &= \frac{U_m}{\frac{P}{4 \pi}} = \frac{r^2 I (r, \theta_{MAX}, \phi_{MAX})}{\frac{P}{4 \pi}} = \frac{4 \pi r^2 \frac{\left | E_{\theta} \right |^{2}_{MAX}}{2 \eta}}{P} = \frac{4 \pi r^2 \frac{\eta^2}{4 \pi^2 r^2}\frac{\left |I_m \right |^{2}}{2 \eta}}{\frac{C_{in} (2 \pi)}{8 \pi} \eta \left |I_m \right |^{2}} \\
+        &= \frac{4}{C_in (2 \pi)} = \frac{4}{2.44} \cong 1.63
+      \end{esp}
+    \item Resistenza superficiale del filo:
+        \begin{equation}
+          R_s = \sqrt{\frac{\pi f \mu_0}{\sigma}}
+        \end{equation}
+    \item Resistenza del filo
+      \begin{equation}
+        r_f = \frac{R_s}{2\pi a}
+      \end{equation}
+      con $a$ il raggio del conduttore
+    \item Resistenza ohmica totale
+      \begin{equation}
+        R_o = \frac{2 P_0}{\left |I_A \right |^{2}} = \frac{2}{\left |I_A \right |^{2}} \int_{\frac{-L}{2}}^{\frac{L}{2}} r_f \frac{\left |I(z) \right |^{2}}{2}dz'
+      \end{equation}
+\end{itemize}
