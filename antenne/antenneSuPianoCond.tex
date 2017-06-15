@@ -1,0 +1,61 @@
+\chapter{Antenne su piano conduttore}
+Cerchiamo ora di vedere cosa succede nel caso in cui non ci siano due fili, conduttori, ma che uno dei due venga sostituito da un piano conduttore. Prima di analizzare questo tipo di antenne, abbiamo bisogno di introdurre il terema delle immagini.
+\section{Teorema delle immagini}
+Dalla figura \#TODO possiamo ipotizzare che il piano conduttore non esista e, che al suo posto, simmetricamente alla prima antenna, ci sia un'altra antenna fittizia. Ci chiediamo quindi quanto debba valere il campo elettrico dell'antenna fittizia affinché lo schema \#TODO sia uguale alla \#TODO.
+\textsc{Nota Bene:} In questa analisi non utilizzeremo le approssimazioni di campo lontano.
+
+Supponiamo ora che i due campi elettromagnetici generati dalle due antenne, parallele al PEC in figura \#TODO siano
+\begin{equation}\begin{cases}
+  \E_{r_1} = c \cdot cos(\theta_1)\hr_1 \\
+  \E_{r_1} = c \cdot cos(\theta_2)\hr_2 \\
+\end{cases}\end{equation}
+e che la somma dei due angoli sia $\pi$, ossia che i due angoli siano complementari. Possiamo quindi riscrivere il sistema come:
+\begin{equation}\begin{cases}
+  \E_{r_1} = c \cdot cos(\pi-\theta_2)\hr_1 = -c \cdot cos(\theta_2)\hr_1 \\
+  \E_{r_2} = c \cdot cos(\theta_2)\hr_2 \\
+\end{cases}\end{equation}
+
+Analizziamo ora solo la componente ortogonale al PEC:
+\begin{equation}\begin{cases}
+  \E_{\theta_1} = D \cdot sin(\theta_1)\hth_1 = D \cdot sin(\theta_2) \hth_1 \\
+  \E_{\theta_2} = D \cdot sin(\theta_2)\hth_2 \\
+\end{cases}\end{equation}
+Otteniamo quindi, come visibile nelle figure \#TODO, che il campo elettrico parallelo ha direzione opposta nella parte dell'antenna fittizia rispetto all'antenna reale. Il campo elettrico ortogonale, invece, mantiene invariata la sua direzione.
+\section{Monopoli}
+Nel caso dei monopoli che andremo a studiare ora, uno dei morsetti è collegato al filo conduttore, mentre l'altro è collegato al piano conduttore.
+L'impedenza, la resistenza di radiazione e la potenza di trasmissione del monopolo si possono quindi scrivere come
+\begin{esp}
+  Z_{monopolo} &= \frac{\frac {V_A}{2}}{I_A} = \frac{1}{2} Z_{dipolo}\\
+  R_{r_{monopolo} }&=\frac{1}{2}R_{r_{dipolo} }
+  P_{monopolo} =R_{r_{monopolo} } \cdot \frac{|I_A|^2}{2} = \frac{P_{dipolo}}{2}
+\end{esp}
+Nel caso del monopolo corto:
+\begin{itemize}
+  \item Resistenza di radiazione
+  \begin{equation}
+    R_r = \frac{\pi}{12}\eta\left(\frac{L}{\lambda}\right)^2 \approx 40 \pi^2 \left(\frac{L}{\lambda}\right)^2
+  \end{equation}
+  \item Direttività
+  \begin{equation}
+    D_{monopolo} = \frac{U_m \cdot 4\pi}{P_{dipolo}} = \frac{U_m \cdot 4\pi}{\frac{P_{dipolo}}{2}} = 2 \cdot D_{dipolo}
+  \end{equation}
+\end{itemize}
+\section{ILA - Inverted L antenna}
+Questo tipo di antenna prende il nome dalla sua forma a L rovesciata. Come visto nel teorema delle immagini, l'unica parte che ci interesserà per l'emissione del campo elettromagnetico, sarà la parte ortogonale al piano conduttore in quanto le parti orizzontali si annullano.
+Cerchiamo ora di calcolare il momento del dipolo magnetico per questa antenna
+
+\begin{esp}
+  \M(\theta,\Phi) &\approx \int_{-\frac{L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} \\
+  &\stackrel{=}{(1)} I_m \cdot \int_{-\frac{L}{2}}^{\frac{L}{2}} 1-\frac{|z^{\prime}|}{\frac{L}{2}+b} dz^{\prime} \\
+  &= I_m\left(L- \int_0^{\frac{L}{2}}\frac{-z^{\prime}}{\frac{L}{2}+b} dz^{\prime} + \int_{-\frac{L}{2}}^0\frac{z^{\prime}}{\frac{L}{2}+b} dz^{\prime}\right)\\
+  &=I_m \cdot \left(\left. L - \frac{z^{\prime^2}}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_0^{\frac{L}{2}}+\left. \frac{z^{\prime^2}}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_{\frac{L}{2}}^0 \right)\\
+  &=I_m \cdot \frac{4L\left(\frac{L}{2}+b\right)-L^2}{4\left(\frac{L}{2}+b\right)} = I_m \cdot \frac{L}{2}\cdot \underbrace{\frac{L+4b}{L+2b}}_{>1}
+\end{esp}
+Quindi abbiamo ottenuto che
+\begin{equation}
+  M_{monopolo} = I_m \cdot \frac{L}{2}\cdot \frac{L+4b}{L+2b} > I_m \cdot \frac{L}{2} = M_{dipolo}
+\end{equation}
+Nel caso in cui si voglia avere un'antenna più capacitiva, al posto del ramo parallelo al PEC, si può mettere un disco fatto con un buon conduttore.
+
+\chapter{Yagi-uda}
+\#TODO fino a schiere

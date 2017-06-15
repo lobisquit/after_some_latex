@@ -74,11 +74,12 @@ Dobbiamo dunque definire in maniera intelligente $\diverg \A$:
 \end{esp}
 Definiamo quindi $\Phi$ potenziale scalare elettrico associato ad $\A$. Analizziamo ora la seconda equazione di Maxwell
 \begin{esp}
-  \rot \H &= \jmath \omega \epsilon_c \cdot \E + \J \\
-  \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right) &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \Phi \right) + \J \mu  \\
-  -\nabla^2\A + \diverg(\nabla \A) = \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \Phi + \mu \J \\
-  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\parbox[c]{2cm}{\text{Struttura dell'eq. di Helmoltz}}} &= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \Phi \\
-  &=\underbrace{-\mu\J}_{\parbox[c]{2cm}{\text{termine noto: presenza sorgenti}}} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \Phi}_{\parbox[c]{2cm}{\text{complicazione? scelgo il valore di $\A$}}}\right)\\
+  \rot \H &= \jmath \omega \epsilon_c \cdot \E + \J =  \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right)\\
+   &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \Phi \right) + \J \mu  \\
+  -\nabla^2\A + \diverg(\nabla \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \Phi + \mu \J \\
+  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\text{\parbox[c]{3cm}{Struttura dell'eq. di Helmoltz}}} 
+  &= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \Phi \\
+  &=\underbrace{-\mu\J}_{\text{\parbox[c]{3cm}{termine noto: presenza sorgenti}}} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \Phi}_{\text{\parbox[c]{3cm}{complicazione? scelgo il valore di $\A$}}}\right)\\
 \end{esp}
 \paragraph{Scelta di Lorentz}
 Poiché abbiamo ancora un grado di libertà per definire $\A$, possiamo scegliere

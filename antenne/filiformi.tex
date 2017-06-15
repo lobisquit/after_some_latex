@@ -66,28 +66,45 @@ e la corrente massima
 Che risulta essere sempre immaginaria. Poiché  non esiste alcuna impedenza puramente immaginaria nei casi reali, abbiamo commesso qualche errore di approssimazione. Normalmente si cerca di minimizzare il più possibile la resistenza nei fili che la compongono utilizzando materiali il più possibile conduttori
 
 \section{Dipolo corto (o antenna corta)}
-Ipotesi : $\beta L << 1$ , $\frac{2 \pi}{\lambda}L << 1$ , $L << \frac{\lambda}{2 \pi}$
+Il dipolo corto è la realizzazione fisica più vicina al dipolo elementare e si basa sull'ipotesi che la lunghezza del dipolo dell'antenna sia inferiore alla lunghezza d'onda. Possiamo quindi scrivere questa relazione come
+\begin{equation}
+  \beta L \ll 1 \Leftrightarrow \frac{2 \pi}{\lambda}L \ll 1 \implies L \ll \frac{\lambda}{2 \pi}
+\end{equation}
 
-$I(z) = I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] \cong I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L}) $
-con la prima approssimazione grazie a Taylor.
+La corrente che scorre lungo il filo può essere scritta nel seguente modo:
+\begin{esp}
+  I(z) &= I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] \\
+   &\approx I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L}) 
+\end{esp}
+dove tra il primo e il secondo passaggio è stata applicata l'approssimazione di Taylor.
+Possiamo inoltre scrivere che il vettore potenziale magnetico è:
+\begin{esp}
+  \vec{A}(\vec{r^{\prime}}) &= \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime}) e^{\jmath\beta z^{\prime}\cos \Psi (z^{\prime})}dz^{\prime}\\
+  &\approx  \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} \\
+  &\approx \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} \\
+  \int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} \\
+  &=  I_A [\int_{\frac{-L}{2}}^{\frac{L}{2}}dz^{\prime}- \int_{0}^{\frac{L}{2}}\frac{2 z^{\prime}}{L}) dz^{\prime}+ \int_{-\frac{L}{2}}^{0}\frac{2 z^{\prime}}{L}) dz^{\prime}] \\
+  &= I_A [L-\frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{0}^{L/2} + \frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{-L/2}^{0}] \\
+  &= I_A [L-\frac{2}{L}\frac{L^2}{8} + \frac{2}{L}(-\frac{L^2}{8})]\\
+  &= I_A (L-\frac{L}{4}-\frac{L}{4}) = \frac{I_A L}{2}
+\end{esp}
 
-$\vec{A}(\vec{r^{\prime}}) = \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime}) e^{\jmath\beta z^{\prime}\cos \Psi (z^{\prime})}dz^{\prime} \cong  \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I(z^{\prime})dz^{\prime} \cong \\ \cong \frac{\mu}{4\pi} \frac{e^{-\jmath\beta r}}{r} \int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} $
 
-$\int_{\frac{-L}{2}}^{\frac{L}{2}} I_A (1-\frac{2 \left | z \right |}{L}) dz^{\prime} =  I_A [\int_{\frac{-L}{2}}^{\frac{L}{2}}dz^{\prime}- \int_{0}^{\frac{L}{2}}\frac{2 z^{\prime}}{L}) dz^{\prime}+ \int_{-\frac{L}{2}}^{0}\frac{2 z^{\prime}}{L}) dz^{\prime}] = I_A [L-\frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{0}^{L/2} + \frac{2}{L}\frac{(z^{\prime})^{2}}{2}  \mid_{-L/2}^{0}] = I_A [L-\frac{2}{L}\frac{L^2}{8} + \frac{2}{L}(-\frac{L^2}{8})] = I_A (L-\frac{L}{4}-\frac{L}{4}) = \frac{I_A L}{2} $
+Quindi risulta che il potenziale vettore magnetico del dipolo corto sia
+\begin{esp}
+  \A(\r^{\prime}) &= \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z')dz^\prime \\
+  &= \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \frac{I_A L}{2} \hat{z}
+\end{esp}
 
-Quindi risulta :
-
-DIPOLO CORTO : $\overline{A}(\overline{r'}) = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \hat{z}\int_{\frac{-L}{2}}^{\frac{L}{2}} I(z')dz' = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} \frac{I_A L}{2} \hat{z} $
-
-Confrontando con il dipolo elementare :
-
-DIPOLO ELEMENTARE : $\overline{A}(\overline{r'}) = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} I_A \hat{z} \Delta{z}$
+% Confrontando con il dipolo elementare :
+%
+% DIPOLO ELEMENTARE : $\overline{A}(\overline{r'}) = \frac{\mu}{4\pi} \frac{e^{-j\beta r}}{r} I_A \hat{z} \Delta{z}$
 
 Considero il caso $r >> \lambda$ ($r > 5 \lambda$ per esempio) e $\Delta{z} \to L/2$
 
 In campo lontano, localmente, posso considerare piana un'onda sferica.
 
-CAMPO LONTANO ($r >> \lambda$)
+CAMPO LONTANO ($r \gg \lambda$)
 
 In campo lontano i campi elettrico e megnetico per un dipolo corto risultano quindi :
 \begin{equation}
