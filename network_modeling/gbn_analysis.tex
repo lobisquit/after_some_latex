@@ -129,6 +129,10 @@ $$ x(t) = G \text{ \qquad if success at t} $$
 $$ x(t) = B_j \text{ \qquad if $j_{th}$ failure at t} $$
 
 Where we count a success whenether we enter in state $G$.
+In the following system, we define 2 metrics:
+
+$$s_1 = \text{number of success per transition}$$
+$$s_2 = \text{time per transition}$$
 
 \begin{figure}[h]
 	\begin{center}
@@ -312,9 +316,110 @@ In \autoref{fig:gbn_mc_2state} we can rearrange the probability of going from $B
 	\beta_{BG} + \beta_{10}\beta_{11}^{N-1} = \beta_{10}\sum_{K=0}^{N-1} \beta_{11}^K = \beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}}
 \end{equation}
 
+At the end of this process we want to reduce \autoref{fig:gbn_mc_complete} to a one-state system.
+In the previous steps we have reduced \autoref{fig:gbn_mc_complete} to a two-state system, we still have to remove $B_1$ from \autoref{fig:gbn_mc_2state}.
+
+To perform this, we have to make a further example.
+
+Suppose you have three states in the following configuration:
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(x)								{$x$};
+		\node[state]		(z)[right of=x]		{$z$};
+		\node[state]		(y)[right of=z]		{$y$};
+		\path
+		(x)		edge		node{$a$}			(z)
+		(z)		edge[loop, above]	node{$b$} (z)
+					edge		node{$c$} (y);
+
+	\end{tikzpicture}
+\end{center}
+
+In this case, the probability to found the system in state $z$ (i.e. $p(z)$) will be
+
+\begin{equation}
+	p(z) = ap(x)+bp(z)
+\end{equation}
+
+And so, rearranging this formula, we obtain
+
+\begin{equation}
+	p(z) = \frac{ap(x)}{1-b} \qquad and \qquad p(y) = cp(z) = \frac{acp(x)}{1-b}
+\end{equation}
+
+With this method we have remove state $z$, remaining with only one transition from $x$ to $y$:
+
+\begin{center}
+	\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3cm]
+		\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+		\node[state]		(x)								{$x$};
+		\node[state]		(y)[right of=x]		{$y$};
+		\path
+		(x)		edge		node{$\frac{ac}{1-b}$}			(y);
+
+	\end{tikzpicture}
+\end{center}
+
+In this way we have simplified the system but we have lose the informatino about the self transition of $z$, indeed the sum of all the transition probabilities in the system isn't equal to 1.
+
+We can now apply this method to the system in \autoref{fig:gbn_mc_2state} taking state $G$ as $x$ and $y$, and $B_1$ as state $z$.
+We end up with a 1-state graph like the one in
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\path
+			(G) 		edge[loop left]		 			node{$\beta_{00}$}				(G)
+			(G) 		edge[loop right]		 			node{$\frac{\beta_{01} \beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}}}{1-\beta{11}^N} = \frac{\beta_{01}\beta_{10}}{1-\beta_{11}}$}				(G);
+		\end{tikzpicture}
+	\end{center}
+	\caption{\autoref{fig:gbn_mc_2state} reduced to 1-state system removing the state $B_1$.}
+	\label{fig:gbn_mc_1state}
+\end{figure}
+
+We have reduced \autoref{fig:gbn_mc_complete} to an extremely simple chain, but while in \autoref{fig:gbn_mc_complete} the transition labels are very simple, in \autoref{fig:gbn_mc_1state} they are more complex.
+
+Expanding the transition probabilities in \autoref{fig:gbn_mc_1state}, we have:
+
+\begin{equation}
+	\Psi_{GG} = \beta_{00} + \frac{\beta_{01}\beta_{10}}{1-\beta_{11}} = p_{00}s_1s_2 + \frac{p_{01}s_2p_{10}(m)s_1s_2^m}{1-p_{11}(m)s_2^m}
+\end{equation}
+
+In the follows, we compute the throughput of \autoref{fig:gbn_mc_complete} and of its semplifications.
+We start from the 1-state system, analyzing the derivative of the different metrics assuming $\underline{s} = 1$.
+
+\begin{equation}\label{eq:av_succ_gbn}
+	\frac{\partial B}{\partial s_1}\bigg|_{\underline{s} = 1} = p_{00} + \frac{p_{01}\bcancel{p_{10}(m)}}{\bcancel{1-p_{11}(m)}} = 1
+\end{equation}
+
+\begin{equation}\label{eq:av_time_gbn}
+	\begin{split}
+			\frac{\partial B}{\partial s_2}\bigg|_{\underline{s} = 1} &= p_{00} + p_{01}\bcancel{p_{10}(m)}\frac{(m+1)[1-p_{11}(m)]+mp_{11}(m)}{[1-p_{11}(m)]^{\bcancel{2}}}\\
+			&= p_{00} + \frac{p_{01}[m+1-p_{11}(m)]}{1-p_{11}(m)}\\
+			&= \frac{p_{00}p_{10}(m)+p_{01}m+p_{01}p_{10}(m)}{p_{10}(m)}\\
+			&= \frac{p_{10}(m)+mp_{01}}{p_{10}(m)}
+	\end{split}
+\end{equation}
+We have simplified some terms since $p_{10}(m) = 1-p_{11}(m)$ and $p_{00} + p_{01} = 1$.
+
+The throughput of the system in \autoref{fig:gbn_mc_1state} represents the average number of successes per unit time, and is given by:
+
+\begin{equation}
+	throughput = \frac{\text{average \# of success per transition}}{\text{average time per transition}} = \frac{p_{10}(m)}{p_{10}(m) + mp_{01}}
+\end{equation}
+
+Where the numerator is \autoref{eq:av_succ_gbn} and the denominator is \autoref{eq:av_time_gbn}.
+
+We can see that, in terms of throughput, this version of Go Back N protocol have no difference with the original one, even if in this version packets are not retransmitted.
+
 %%%BEGINNING LECTURE 26/05
 %%%GRAPH FROM PREVIOUS LECTURE MISSING
-For the three state Markov chain:
+
+We proceed now to the calculation of the throughput of the three state Markov chain:
 $$\Psi(s_1,s_2)=
 \begin{pmatrix}
 		p_{00} & p_{01} & 0 \\
