@@ -23,6 +23,7 @@
 \usepackage{amsthm}
 \usepackage{amsmath, amssymb, dsfont, bm}
 \usepackage{cancel}
+\usepackage{cases}
 
 % tikz figures
 \usepackage[usenames, dvipsnames, table, tikz]{xcolor}
@@ -41,6 +42,10 @@
 \usepackage[acronym]{glossaries}
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 \newacronym{rtt}{RTT}{Round Trip Time}
+\newacronym[plural=STs,firstplural=Stopping times (STs)]{st}{ST}{Stopping Time}
+\newacronym{kt}{KT}{Karlin-Taylor}
+\newacronym{rv}{r.v.}{random variable (r.v.)}
+\newacronym[plural=PPs,firstplural=Poisson Processes]{pp}{PP}{Poisson Process}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -115,26 +120,42 @@
 %---------------------------------
 
 \begin{document}
+\frontmatter
 
-\begin{titlepage}
-	\begin{center}
-		\hspace{0.5cm}
-		\Large{NETWORK MODELING} \\
-		\vspace{1cm}
-		\includegraphics[width=9cm]{Zorzilla}\\
-		\vspace{0.5cm}
-		\emph{written with love by} \\
-		\vspace{0.5cm}
-		{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Cristina Gava}
-	\end{center}
+\begin{titlepage} %------------------------------ TITLE PAGE
+\begin{center}
 
-	\vfill
 
-	\begin{center}
-		\line(1, 0){360}
+\hspace{0.5cm}
 
-		\textsc{Academic Year 2016/2017}
-	\end{center}
+\emph{\Large{NETWORK MODELING}} \\
+\vspace{1cm}
+\includegraphics[width=9cm]{Zorzilla}\\
+\vspace{0.5cm}
+{written with love by\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero\par}
+%\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
+\end{center}
+
+% **** SE VOGLIAMO FARE I FIGHI
+% \vfill
+% \begin{normalsize}
+% \begin{flushleft}
+%   \hspace{145pt} \textit{Editors} \\
+%   \vspace{5pt}
+%   \hspace{15pt} \large{\textbf{Andrea PITTARO}} \hspace{50pt} \large{\textbf{Enrico LOVISOTTO}}\\
+%   \hspace{15pt}\large{\textbf{Ettore MARIOTTI}}\\
+% \end{flushleft}
+% \end{normalsize}
+
+\vfill
+\begin{center}
+\hspace{-0.2cm}
+\textsc{Academic Year 2016/2017}
+\line(1, 0){360}
+
+\textsc{Anno Accademico 2016/2017}
+\end{center}
 \end{titlepage}
 
 \tableofcontents
