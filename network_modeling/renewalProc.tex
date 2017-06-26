@@ -401,6 +401,287 @@ Less formally, N is independent on what happens after $X_n$.
 		We conclude that Wald's equation doesn't apply and so it must be that $N$ has not finite mean: $\exp[N]=+\infty$
 	\end{enumerate}
 
+	\section{Elementary renewal theorem}
+	Let's take the limit
+	\beq
+	\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}
+	\eeq
+	where $\mu = E[X]$.\\
+	Then we can prove that $\frac{M(t)}{t} = E[\frac{N(t)}{t}]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
+	\subsubsection{Counter example}
+	Let $U$ be a uniform r.v. $U(0,1)$ and let $Y_n$ be a r.v. such that:
+	\beq
+	Y_n =
+	\begin{cases}
+	0 \quad for \quad U \ > \frac{1}{n}\\
+	n \quad for \quad U \leq \frac{1}{n}
+	\end{cases}
+	\eeq
+	Where the second equation brings to the espressions $\frac{M(t)}{t} > \frac{1}{\mu} - \frac{1}{t}$ and $\lim_{t \to \infty} \frac{M(t)}{t} \geq \frac{1}{\mu}$
+
+	\textbf{NOTE}: In the book the notation has also the expression \textit{"lim \textbf{inf}"} since, in this way, the demonstration is "easier" to do, in fact we can also see graphically that the $inf$ expression guarantees that we have a lower bound. Figure\ref{fig:graph1}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{Cri_graph1.jpg}
+	\caption{lower bound}
+	\label{fig:graph1}
+	\end{figure}
+	Now the other bound must be proved, so to reach the equality, but here there is a problem: $S_{N(t)}$ is not known, so it is difficult to demonstrate the inequality $t \geq S_{N(t)}$ since I cannot take the expectation. So we use a \textbf{trick}: we consider a new renewal process obtained by the previous one by truncation:
+	\begin{equation}
+	X_i^c =
+	\begin{cases}
+	X_i \qquad X_i \leq c\\
+	c \qquad X_i >c
+	\end{cases}
+	\end{equation}
+
+	What do we have for this truncated process?\\
+	First of all we have the relations:
+	\begin{equation}
+	\begin{split}
+	N^c(t) \geq N(t)\\
+	M^c(t) \geq M(t)
+	\end{split}
+	\end{equation}
+	because, since events are spaced by numbers that are no bigger, times are no smaller.\\
+
+	So for the truncated process we have $t \geq S_{N^c(t) +1}$ (in the truncated process, the $X$ I'm adding cannot be bigger than $c$), and the next inequality also goes:
+	\begin{equation}
+	c+t \geq S_{N^c(t)+1}
+	\end{equation}•
+	If now I take this inequality expectation I obtain:
+	\begin{equation}
+	t+c \geq \mu^c(1+M^c(t))
+	\end{equation}•
+	and since $M^c(t) \geq M(t)$ from the previous inequality, I can say that:
+	\begin{align}
+	\begin{split}
+	\mu^c(1+M^c(t)) \geq \mu^c(1+M(t))\\
+	\frac{M(t)}{t} \leq \frac{1}{\mu^c} \frac{1}{t}(\frac{c}{\mu^c}-1) \qquad \forall c > 0 \quad (valid\quad for\quad any\quad truncation)
+	\end{split}
+	\end{align}
+
+	NOTE: $c$ is an index, not an exponent.
+	So now I take the limit:
+	\beq
+	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \frac{1}{\mu^c} \qquad \forall c > 0
+	\eeq
+	Since it is true $\forall c$ , it is true also for $c \to \infty$ (which means that truncation becomes less an less important until I don't truncate at all), so I obtain:
+	\beq
+	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
+	\eeq
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^\infty(1-F(x))\,dx$. See figure\ref{fig:mu}
+	\begin{figure}
+	\centering
+	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
+	\caption{This graph is the complementary distribution of $X^c$}
+	\label{fig:mu}
+	\end{figure}
+	So at the end we conclude that
+	\beq
+	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c} = \frac{1}{\mu}
+	\eeq
+	\\
+	\textit{cvd}
+	\subsection*{Observation}
+	In the book, at the beginning, they assume that $E[X] < \infty$. Reasoning on it we can observe that:
+	\begin{itemize}
+	\item In the first part is not needed;
+	\item In the second one, even though $\mu = 0$, I can make it finite by truncation;
+	\end{itemize}
+	\subsection{Two important results proofs}
+	We now proceed with proving two important results:
+	\begin{itemize}
+	\item \textbf{1}: $E[S_{N(t)+1}] = (1+M(t))E[X]$;
+	\item \textbf{2}: $E[S_{N(t)}] \ne M(t)E[X]$;
+	\end{itemize}
+	In the first case there is no case in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
+	\subsubsection*{$1^{st}$ Statement}
+	In this case represents a Poisson process: $S_{N(t)+1} = t + \gamma_t$ and $S_{N(t)} = t - \delta_t$;\\
+	If i sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
+	Moreover we know that both $\gamma$ and $\delta$ are exponentially distributed (because of Poisson process theory and the memoryless condition of the process): $\gamma_t$ is exponential with parameter $\lambda$, while $\delta_t$ is exponential with parameter $\lambda$ truncated at $t$.\\
+	So we can find all the quantities involved:%min 25:00
+	\beq
+	E[S_{N(t)+1} = t + \frac{1}{\lambda}] \qquad E[S_{N(t)}] = t - \frac{1-e^{-\lambda t}}{\lambda}
+	\eeq
+	with $M(t) = \lambda t$ and $E[X] = \frac{1}{\lambda}$.\\
+	Thanks to it we can see that the equality in true.
+	\subsubsection*{$2^{nd}$ Statement}
+	In this case we take:
+	\beq
+	X_i =
+	\begin{cases}
+	1 \qquad w.p. p\\
+	a \geq 2 \qquad w.p. 1-p
+	\end{cases}
+	\eeq
+	How many arrivals do we count?
+	\beq
+	N(t) =
+	\begin{cases}
+	1 \qquad w.p. p\\
+	0 \qquad w.p. 1-p
+	\end{cases}
+	\eeq
+	And how much time do we count?
+	\beq
+	S_{N(t)}=
+	\begin{cases}
+	1 \qquad w.p. p\\
+	0 \qquad w.p. 1-p
+	\end{cases}
+	\eeq
+	NOTE: Even though the value is the same, they do not represent the same thing.\\
+	What about $S_{N(t)+1}$? $a>t$ so:
+	\beq
+	S_{N(t)+1} =
+	\begin{cases}
+	a \quad \text{w.p. $ (1-p)$}  \rightarrow \text{it means it the first renewal}\\
+	2  \quad \text{w.p.  $p^2$}  \rightarrow \text{if the first  X is 1 and also the second}\\
+	1+a \quad \text{w.p. $ p(1-p)$} \rightarrow \text{if the first X is 1 and the second is a}\\
+	\end{cases}
+	\eeq
+	So:
+	\beq
+	\begin{split}
+	E[S_{N(t)+1}] & = a(1-p)+2p^2+(1+a)p(1-p)\\
+	                        & = p^2 + p + (1-p^2)a\\
+	\end{split}
+	\eeq
+	\beq
+	\begin{split}
+	E[S_{N(t)}] & = p\cdot1 + 0\cdot(1-p)\\
+		         & = p E[N(t)] = M(t)\\
+		         & =  p\cdot1 + (1-p)\cdot0 = p
+	\end{split}
+	\eeq
+	So I can try those equalities by multiplying
+	\beq
+	E[N(t)+1]E[X] = (1+p)(p+a(1-p)) = p^2+p+(1-p^2)a = E[S_{N(t)+1}]
+	\eeq
+	On the other hand:
+	\beq
+	E[N(t)]E[X] = p(p+(1-p)a) \ne p
+	\eeq
+	$\leftarrow$ {I can always find a value of $a$ that makes the equality not true}
+	So the first equation was found to be true in both cases and it's contrary for the second.
+	\subsection{Exercises}
+	\subsubsection*{Ex 2.4}
+	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
+	So I represent the book as:
+	\begin{figure}[h]
+	\centering
+	\includegraphics[width = 0.6\textwidth]{Cri_book.jpg}
+	\label{fig:book}
+	\end{figure}
+	Easy to find the probability of what happens i different pages: each page is an independent interval, so:
+	\beq
+	P[\text{0 errors in 3 pages}\footnote{not necessarily consecutive}] = e^{-1.2}
+	\eeq
+	\subsubsection*{Ex 2.5}
+	We have $N$ points equally distributed in a circle of radius $r$. The distribution of points in the circle of radius $1$ as $N \to \infty$ and $r \to \infty$ is:
+	\beq
+	\frac{N}{\pi r^2} < \lambda
+	\eeq
+	While the probability \textit{Prob[points inside r = 1]} is:
+	\beq
+	\frac{Small_{Area}}{Big_{Area}}
+	\eeq
+	This bring us to say that \textit{P[a given point is inside r $\leq$ 1] = } $\frac{Area(1)}{Area(r)} = \frac{1}{r^2}$.\\
+	The number of points present in the smaller circle is a binary r.v. $\sim bin(N,\frac{1}{r^2})$, so its expected value is:
+	\beq
+	\text{E[number of points inside the smaller circle]} = \frac{N}{r^2} = \lambda\pi
+	\eeq
+	where $\lambda$ is the density of points and $\pi$ is the area of unitary circle.\\
+	So we have two parameters, the product of which is still constant.
+	\begin{align}
+	\begin{split}
+	N \to \infty \qquad r \to \infty\\
+	\frac{N}{\pi r^2} = \lambda' \rightarrow P_{0i}(\lambda\pi)
+	\end{split}
+	\end{align}
+	\subsubsection*{Ex 3.6}
+	For $i = 1 \dots n$ I have an indep. PP $\rightarrow X_i(t)$ is an i.i.d. PP($\lambda$).\\
+	The problem asks to find the first time such that there is at least one event  in every process, see figure\ref{fig:3.6}
+	\begin{figure}[h]
+	\centering
+	\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
+	\label{3.6}
+	\end{figure}
+	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{}-\lambda t)^n$.\\
+	We could actually see the problem from a different point of view: this view counts the events in the Poisson Poisson process and uses the independence to find the probability that none of them has seen $0$ events.\\
+	So we can see how we can look at $T$: we get that $T$ is the time at which the last process has its first event and it will be the biggest value among the exponentials; the first event will occur, obviously, with exponential time, so using this reasoning we can express the r.v. $T$ as:
+	\beq
+	T = \max_{i = 1,2,\dots,n}{exp_i(\lambda)}
+	\eeq
+	So I can turn the point into a question: what is the distribution of the maximum among the i.i.d variables?
+	\begin{align}
+	\begin{split}
+	P[max{X_1,X_2,\dots,X_n} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
+						  & = (P[X \leq t])^n = (1-e^{-\lambda t})^n
+	\end{split}
+	\end{align}
+	In general this shows that if we take $F_{max}(t)$, then $F_{max}(t) = (F(t))^n$; on the other side:
+	\begin{align}
+	\begin{split}
+	P[min{X_1,X_2,\dots,X_n} >t ] & = P[X_i > t \forall i = 1,2,\dots, n] \\
+					        & = (P[X > t])^n
+	\end{split}
+	\end{align}
+	So we found that $1-F_{min}(t) = (1-F(t))^n \rightarrow F_{min}(t) = 1- (1-F(t))^n$
+	\subsubsection*{Problem 3.6}
+	Service facility situation: service when $Q$ users arrived $\rightarrow$ a process that focuses on the $q^{th}$ arrival in sequence.\\
+	$T = $ service time.
+	\begin{figure}
+	\centering
+	\includegraphics[width = 0.6\textwidth]{Cri_scale.jpg}
+	\caption{Prob 3.6}
+	\end{figure}
+	We have to show that $E[\int_{0}^{T}N(t)dt] = \frac{q(Q-1)}{2\lambda}$; The first question is intuitive: we can see that if the time at which a user is served is the time at which the $q^{th}$ user arrives, then I have to wait for $q$ users to arrive to be served.\\
+	I then have to take the expectation of the blue area, to do it I can use two different approaches: I can look how much time each user has to wait and then I sum all of then (and that corresponds to summing the horizontal slices of the area), or I can look at it vertically and see how much time there is one, two, three users waiting and then multiplying this amount of time by the number of users who are waiting during that time.\\
+	So with the first approach:
+	\begin{itemize}
+	\item The first user will have to wait $\frac{1}{\lambda}(Q-1)$ inter-arrival times;
+	\item The second user arrives after $2$ inter-arrival times and so he has to wait $\frac{1}{\lambda }(Q-2)$ inter-arrival times;
+	\item After the second user more users will arrive until the $q^{th}$ user will arrive, and for it the waiting time will be $0$;
+	\end{itemize}
+	So the average sum of all the waiting time is the constant $1/\lambda$ times  the sum of the first $Q-1$ integers: $\frac{1}{\lambda}[(Q-1)+(Q-2)+\dots+1]$.\\
+	With the second approach we see that:
+	\begin{itemize}
+	\item At the beginning no one is waiting in line;
+	\item After the first arrival $1$ user is waiting;
+	\item After the second arrival $2$ users are waiting;
+	\item After the $(q)^{th}$ arrival, $Q-1$ users are waiting and so the structure is the same as previously.
+	\end{itemize}
+	\subsubsection*{Ex 4.1}
+	Given $n$ arrivals, we take the quantity $E[w_1] = \int_{0}^{1}(1-t)^n dt = \frac{1}{n+1}$ where $w_1$ is the smallest among $n$ i.i.d. uniform r.v. between $0$ and $1$ and so the distribution is the distribution of the minimum of $n$ i.i.d. uniform r.v., and its complementary distribution is the $n^{th}$ power of the complementary distribution.\\
+	\subsubsection*{Ex 4.3}
+	Suppose we have $5$ arrivals, the cumulative time is the area in figure4, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
+	\subsubsection*{Ex 4.5}
+	Here assume we have $\alpha$  and the service time is an exponential r.v. $\sim exp(\alpha)$, and the probability $P[\text{at time 1 h the queue is empty}]$ is estimated considering each user arriving uniformly. So at the end the number of users is binomial and, conditioning on the uniform variable, we get:
+	\begin{align}
+	\begin{split}
+	p = P & [\text{a uniformly arriving user has not left at time 1 h}] =\\
+	& P[U_i + Y_i > 1] = \int_{0}^{1}e^{-\alpha(1-u)}du = \frac{1-e^{-\alpha}}{\alpha}
+	\end{split}
+	\end{align}
+	So the probability becomes finding the probability that all users that had arrived here have left: it is the value $(1-P)^{n}$ with $n = $ \textit{number of users}:
+	\begin{align}
+	P&[\text{System empty at time 1|5 arrivals}] = (1-\frac{1-e^{-\alpha}}{\alpha})^5
+	\end{align}
+	\begin{figure}[h]
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width = 0.9\textwidth]{Cri_area.jpg}
+	\caption{Ex 4.3}
+	\end{minipage}
+	\hspace{10mm}
+	\label{fig:area}
+	\begin{minipage}[c]{0.5\textwidth}
+	\includegraphics[width = 0.9\textwidth]{Cri_arrivals.jpg}
+	\caption{Ex 4.5}
+	\end{minipage}
+	\end{figure}
+
 \section{The key renewal theorem}
 \begin{definition}
 	(Point of increase) Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that
@@ -659,7 +940,7 @@ Then we finally prove that
 		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
 	\end{align*}
 
-\section{Reward Processes}
+\section{Renewal-Reward processes}
 Consider a \textit{renewal process} $N(t)$ with interarrival time $X_n$ with distribution function $F$. We suppose that each time a renewal occurs we receive a \textit{reward}; we call $R_n$ the reward associated with the \emph{n}-th renewal event.
 
 We suppose that each reward $R_n$ depends on the length of the interval $X_n$. In this scenario the pairs $(X_n, R_n)$ are independent and identically distribuited. We define the total number of reward $R(t)$ at time $t$ as follows.
@@ -759,6 +1040,53 @@ Now we adopt the following definitions.
 	Then \ref{rewardtheorem2} is proven.
 \end{proof}
 
+Let us define the following quantities of interest.
+
+\begin{equation*}
+	\begin{dcases}
+		r_{ij} & \text{reward of transition } i\rightarrow j \\
+		R_{ij} = \exp[r_{ij}] & \text{mean reward of transition } i\rightarrow j\\
+		R_i = \sum_k P_{ik} R_{ik} & \text{average reward of a visit to state } i\\
+		\theta_{ij} =
+			\begin{dcases}
+				r_{ij} &\text{with probability } P_{ij}\\
+				r_{ik}+\theta_{kj} &\text{with probability } P_{ik}, k\neq j
+			\end{dcases}
+			& \parbox[c]{.5\textwidth}{total reward going from $i$ to $j$ for the first time following any path} \\
+			\begin{aligned}[b]
+				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
+				&= R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] \\
+				&= R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
+			\end{aligned} & \parbox[b]{.5\textwidth}{average reward going from $i$ to $j$ for the first time following any path}
+	\end{dcases}
+\end{equation*}
+
+We have that the average reward for transitions exiting each possible state $i$ is
+\begin{equation*}
+\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_j \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
+\end{equation*}
+
+For \emph{any} metric $r(\cdot)$ it holds that
+\begin{equation}
+\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_j \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
+\end{equation}
+
+and if the metric is specifically \emph{time}
+\begin{equation}
+\pi_j \mu_{jj} = \sum_i \pi_i \mu_i
+\end{equation}
+
+Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
+\begin{equation}
+\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\exp[R]}{\exp[X]} = \frac{\rho_{jj}}{\mu_{jj}} = \frac{\sum_i \pi_i \frac{R_i}{\pi_j}}{\sum_i \pi_i \frac{\mu_i}{\pi_j}} = \frac{\sum_i \pi_i \sum_j P_{ik} R_{ik}}{\sum_i \pi_i \sum_k P_{ik}T_{ik}}
+\end{equation}
+
+This is a powerful way to evaluate systems performances, in order for this model to be applied two conditions need to be met:
+\begin{enumerate}
+	\item The system must be able to be modeled with a concept of \emph{state}\footnote{That's good for us, every protocol is essentially a state machine}
+	\item The process must be Markovian or at least semi-Markovian
+\end{enumerate}
+
 \section{Regenerative Processes}
 
 Consider a stochastic process $\{X(t), t \geq 0\}$ with state space $\{0, 1, 2, ... \}$ with the property that there exist time points at which the process (probabilistically) restarts itself.
@@ -812,51 +1140,304 @@ With the theory of alternating renewal processes, it is a simple matter to deriv
 \end{theorem}
 Note that while $\mu_i$ is easy to compute, $\mu_{ii}$ is tipically much more difficult, since it requires the knowledge of the whole chain.
 
-\subsection{Renewal-Reward processes}
+\section{Go Back N modeling}
+%listen to the tape
+From a modeling perspective, the packets subsequent to the bad packet are not relevant since we have to re transmit them either (See fig\ref{fig:gbns}). The transmitter will re transmit after two dashed packets so that two slots don't represent throughput since they are going to be rejected. To better understand, we number the packets and suppose to have a two-state Markov Channel:
+\beq
+\begin{cases}
+0 \quad good\\
+1 \quad bad
+\end{cases}
+\eeq
+The channel matrix is:
+\beq
+C = \begin{bmatrix} p_{00} & p_{01}\\p_{10} & p_{11} \end{bmatrix}
+\eeq
+Every time the source try to retx, it does not do it right after the bad packet but only after a number of packets equivalent to the $R\pi(m)$. Doing so, this does not involve every single slot but some certain slots. The probability that, from the packet num $3$, the packet $4$ is good is a 1-step transmission probability; while the probability that the packet $3$ (coming after the packet $5$) is good is an m-step transmission probability. So we also write down the $m$ step matrix:
+\beq
+C^m =
+\begin{bmatrix}
+p_{00}(m) & p_{01}(m)\\
+p_{10}(m) & p_{11}(m)
+\end{bmatrix}\footnote{$p_{11}(m)$ is the probability of moving from a bad step to another bad step in $m$ moves}
+\eeq
+So we can model the protocol assuming error free feedback: (G = good, B = bad).
+\begin{figure}
+\centering
+\includegraphics[width = .8\textwidth]{Cri_packets.jpg}
+\caption{Go Back N scheme}
+\label{fig:gbns}
+\end{figure}
+\begin{figure}
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B)[right of=G]				{$B$};
+			\path
+			(G) 		edge[loop left]		 			node{$p_{00}$}				(G)
+							edge[bend left]		 			node{$p_{01}$}		 		(B)
+			(B)		edge[bend left]	node{$p_{01}(m)$}				(G)
+							edge[loop right]					node{$p_{11}(m)$}	(B);
 
-Let us define the following quantities of interest.
+		\end{tikzpicture}
+	\end{center}
+	\caption{Graph model}
+	\label{fig:GBN}
+\end{figure}
+In the model we can describe the behavior of the protocol like: \textit{If the slot is good, then go to the next one, otherwise skip $m-1$ slots and go to the $m^{th}$ one.}\\
+With this reasoning it goes that the throughput is expressed as:
+\beq
+Throughput = \frac{\text{number of good slots}}{\text{total number of slots}}
+\eeq
+Every visit to state $G$ is $1$ success and every visit to state $B$ is a failure. The respective rewards are: $R_G = 1$ and $R_B = 0$; moreover we associate to $G$ and $B$ different time metrics: $T_{G} = 1$ and $T_{B} = m$, such that we obtain:
+\beq
+\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\sum_i\pi_iR_i}{\sum_i\pi_iT_i}
+\eeq
+And the protocol chain is:
+\beq
+P =
+\begin{bmatrix}
+p_{00} & p_{01}\\
+p_{10}(m) & p_{11}(m)
+\end{bmatrix}
+\eeq
+To solve the limit we can find the $\pi$s like:
+\begin{align}
+\pi_{G} & = \frac{p_{10}(m)}{p_{10}(m)+p_{01}}\\
+\pi_{B} & = \frac{p_{01}}{p_{10}(m)+p_{01}}
+\end{align}
+and insert them in the fraction, not considering the denominators, since they are the same for both the $\pi$s and so they would erase with each other.
+\begin{align}
+\begin{split}
+\lim_{t \to \infty}\frac{R(t)}{t} & = \frac{\pi_GR_G+\pi_BR_B}{\pi_GT_G +\pi_BT_B}\\
+& = \frac{p_{10}(m)\cdot1+p_{01}\cdot0}{p_{10}(m)\cdot1+p_{01}(m)}\\
+& =\frac{p_{10}(m)}{p_{10}(m)+mp_{01}}
+\end{split}
+\end{align}
+If we suppose an i.i.d. error we obtain:
+\beq
+\frac{1-\epsilon}{(1-\epsilon)+m\epsilon}
+\eeq
+Where $1-\epsilon$ is the \textit{P[having a good result | m previous results were bad]}, or better, \textit{P[having a good result]} since we hypothesized the independence of the errors.\\
+Now let's try to answer another question: \textit{If we are in state G, how long does it take to us to come back?}\\
+The answer is:
+\beq
+m_0 = p_{00}\cdot1+p_{01}[1+\frac{m}{p_{10}(m)}]
+\label{Formula}
+\eeq
+Where $m_0$ is the average return time to $G$ and so the inverse of throughput; why? Because as in all semi-Markov processes, if we consider one state, visits to that one state are renewal instants. So the return time from $G$ to itself is a renewal interval and for this specific case, at every renewal cycle we have 1 success and the avg number of successes per unit time is the avg number of successes per cycle, $1$, divided by the average time per cycle. Moreover, once we have obtained the Markov structure we can identify the metrics we need to find.\\
+Returning to the expression \ref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra\footnote{Fede e Davide this is for you $\heartsuit$} is:
+\begin{align}
+\begin{split}
+m_0 & = 1+\frac{p_{01}\cdot m}{p_{10}(m)}\\
+& = \frac{p_{10}(m)+mp_{01}}{p_{10}(m)}
+\end{split}
+\end{align}
+\\
+In the case the feedback has errors, we also need a M.C. for the acknowledgment and to combine it with the previous one, obtaining four states. But the only way to have successful transmission is that both the transmissions works fine:
+\beq
+C_f =
+\begin{bmatrix}
+p_{00} & p_{01}\\
+p_{10} & p_{11}
+\end{bmatrix}
+\hspace{10mm}
+C_b =
+\begin{bmatrix}
+q_{00} & q_{01}\\
+q_{10} & q_{11}
+\end{bmatrix}
+\eeq
+So the total transmission probability matrix is:
+\beq
+P =
+\begin{bmatrix}
+p_{00}q_{00} & p_{00}q_{01} & p_{01}q_{00} & p_{01}q_{01}\\
+p_{00}(m)q_{10}(m) & p_{00}(m)q_{11}(m) & p_{01}(m)q_{10}(m) & p_{01}(m)q_{11}(m)\\
+\text{$3^{rd}$ and} & \text{$4^{th}$ rows} & \text{can be} & \text{derived}\\
+\text{in} & \text{a} & \text{similar} & \text{way}
+\end{bmatrix}
+\eeq
+The state $00$ means $1$ success and $1$ slot, any other state is a failure: $0$ successes and $m$ slots. So I can rewrite the model, defining the vectors $R$ and $T$:
+\beq
+R =
+\begin{bmatrix}
+1\\
+0\\
+0\\
+0
+\end{bmatrix}
+\hspace{20mm}
+T =
+\begin{bmatrix}
+1\\
+m\\
+m\\
+m
+\end{bmatrix}
+\eeq
+and so obtaining the result:
+\beq
+\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{\pi_{00}\cdot 1}{\pi_{00}\cdot1+(1-\pi_{00})m}
+\eeq
+If now we suppose i.i.d. feedback errors w.p. $\delta$, we obtain the matrix
+\beq
+C_b =
+\begin{bmatrix}
+1-\delta & \delta\\
+1-\delta & \delta
+\end{bmatrix}
+\eeq
+Moreover, if the feedback channel is i.i.d., we have nothing to remember: regardless of whether the ack is good or bad, we do not care if the transmission was a failure $\rightarrow$ for this case we can use a simplified model with only $3$ states (figure\ref{fig:3states}), where the metrics are:
+\beq
+R =
+\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}
+\hspace{5mm}
+T =
+\begin{bmatrix}
+1\\
+m\\
+m
+\end{bmatrix}
+\eeq
+\beq
+p=
+\begin{bmatrix}
+(1-\delta)p_{00} & \delta p_{00} & p_{01}\\
+(1-\delta)p{00}(m) & \delta p_{00}(m) & p_{01}(m)\\
+(1-\delta)p_{10}(m) & \delta p_{10}(m) & p_{11}(m)
+\end{bmatrix}
+\eeq
 
-\begin{equation*}
-	\begin{dcases}
-		r_{ij} & \text{reward of transition } i\rightarrow j \\
-		R_{ij} = \exp[r_{ij}] & \text{mean reward of transition } i\rightarrow j\\
-		R_i = \sum_k P_{ik} R_{ik} & \text{average reward of a visit to state } i\\
-		\theta_{ij} =
-			\begin{dcases}
-				r_{ij} &\text{with probability } P_{ij}\\
-				r_{ik}+\theta_{kj} &\text{with probability } P_{ik}, k\neq j
-			\end{dcases}
-			& \parbox[c]{.5\textwidth}{total reward going from $i$ to $j$ for the first time following any path} \\
-			\begin{aligned}[b]
-				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
-				&= R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] \\
-				&= R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
-			\end{aligned} & \parbox[b]{.5\textwidth}{average reward going from $i$ to $j$ for the first time following any path}
-	\end{dcases}
-\end{equation*}
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=4cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G_0)											{$G_0$};
+			\node[state]		(G_1)[below of=G]				{$G_1$};
+			\node[state]		(B)[right of=G_1]		{$B$};
+			\path
+			(G_0) 	edge[loop left]	(G_0)
+							edge[bend left=20]	(G_1)
+							edge[bend left=20]	(B)
+			(G_1)		edge[loop left]	(G_1)
+							edge[bend left=20]	(G_0)
+							edge[bend left=20]	(B)
+			(B)			edge[loop right]	(B)
+							edge[bend left=20]	(G_0)
+							edge[bend left=20]	(G_1);
+		\end{tikzpicture}
+	\end{center}
+	\caption{3-state model}
+	\label{fig:3states}
+\end{figure}
+The throughput is:
+\beq
+\frac{\pi_{G_0}}{\pi_{G_0}+m(1-\pi_{G_0})}
+\hspace{5mm}
+\bar{\pi} = \bar{\pi}\cdot\bar{P}
+\eeq
+to obtain it we take:
+\begin{align}
+\pi_{G_0} & = (1-\delta)(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m))\\
+\pi_{G_1} & = \delta(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m)) %Chiedere a Fede
+\end{align}
+where
+\begin{itemize}
+\item $(1-\delta)\pi_{G_1} = \delta\pi_{G_0}$
+\item $(1-\delta)\pi_{B} = (1-\delta)-\pi_{G_0}$
+\item $\pi_{B} = 1-\pi_{G_0}-\pi_{G_1} = 1-\pi_{G_0}-\frac{\delta}{1-\delta}\pi_{G_0} = 1- \frac{\pi_{G_0}}{1-\delta} = \frac{(1-\delta)-\pi_{G_0}}{1-\delta}$
+\end{itemize}
+and obtaining:
+\begin{align}
+\begin{split}
+\pi_{G_0} & = (1-\delta)p_{00}\pi_{G_0} + \delta\pi_{G_0} p_{00}(m) (1-\delta-\pi_{G_0})p_{10}(m)\\
+& = \frac{(1-\delta)p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
+\end{split}
+\end{align}
+\beq
+1-\pi_{G_0} = \frac{1-(1-\delta)p_{00} -\delta p_{00}(m) + \delta p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
+\eeq
+So the throughput is:
+\beq
+throughput = \frac{(1-\delta)p_{10}(m)}{(1-\delta)p_{10}(m) + m[1-(1-\delta)p_{00}-\delta p_{00}(m)+\delta p_{10}(m)]}
+\eeq
+\subsection{Graph reduction}
+What if we rewrite the scheme, such that we can reduce it like in figure\ref{fig:GBN}?\\
+From a memory point of view it is ok because we do not need to keep memory of the acknowledgments since they are i.i.d; but let's try to understand what happens in terms of success or failure of the acknowledgments:
+\\
+If we enter state $G$ (we tx a packet and it is succesful)we have:
+\begin{itemize}
+\item The ack is correct and we found $1$ success in $1$ slot w.p. $1-\delta$;
+\item W.p. $\delta$ instead, we count $0$ successes in $m$ slots;
+\end{itemize}
+This brings us to conclude that in state $G$ we have:
+\begin{itemize}
+\item $1$ reward w.p. $1-\delta$, $0$ otherwise;
+\item $1$ slot w.p. $1-\delta$, $m$ otherwise;
+\end{itemize}
+About transition probabilities:
+\begin{itemize}
+\item going to $G$ w.p. $(1-\delta)p_{00}+\delta p_{00}(m)$;
+\item going to $B$ w.p. $(1-\delta)p_{01}+\delta p_{01}(m)$;
+\end{itemize}
+In state $B$ we have:
+\begin{itemize}
+\item No reward w.p. $1$ and $m$ slots always;
+\item We go from there to $G$ w.p. $p_{10}(m)$;
+\item And to $B$ w.p. $p_{11}(m)$;
+\end{itemize}
+So now we have a simplified Markov model where we combine into a single state everything that before was separate. What we obtain is:
+\beq
+\pi_{G} = \frac{p_{10}(m)}{(\dots)}
+\hspace{20mm}
+\pi_{B} = \frac{(1-\delta)p_{01}+\delta p_{01}(m)}{(\dots)}
+\eeq
+Reward and time:
+\beq
+R =
+\begin{bmatrix}
+1-\delta\\
+0
+\end{bmatrix}
+\hspace{20mm}
+T =
+\begin{bmatrix}
+1-\delta+\delta \cdot m\\
+m
+\end{bmatrix}
+\eeq
+And finally we can estimate the throughput for the system in figure\ref{fig:2states}:
+\beq
+\lim_{t \to \infty} \frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{(1-\delta)p_{10}(m)}{(1-\delta+\delta \cdot m)p_{10}(m)+m[(1-\delta)p_{01}+\delta p_{01}(m)]}
+\eeq
+We just note that the denominator of this expression is equal to the one in the previous throughput expression: to prove it it is necessary to impose:
+\begin{itemize}
+\item $p_{00} = 1-p_{01}$;
+\item $p_{00}(m) = 1-p_{01}(m)$
+\end{itemize}
+So $1-(1-\delta)p_{00}-\delta p_{00}(m) = (1-\delta)p_{01} + \delta p_{01}(m)$.\\
+This result stands out from the fact that the two throughputs are the same quantity but computed by two different models; so we did not reduced the complexity, we just redistributed the quantities.
 
-We have that the average reward for transitions exiting each possible state $i$ is
-\begin{equation*}
-\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_j \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
-\end{equation*}
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B)[right of=G]				{$B$};
+			\path
+			(G) 		edge[loop left]		 			node{$(1-\delta)p_{00}+\delta p_{00}(m)$}				(G)
+							edge[bend left=20]		 			node{$(1-\delta)p_{01} + \delta p_{01}(m)$}		 		(B)
+			(B)		edge[bend left=20]	node{$p_{10}(m)$}				(G)
+							edge[loop right]					node{$p_{11}(m)$}	(B);
 
-For \emph{any} metric $r(\cdot)$ it holds that
-\begin{equation}
-\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_j \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
-\end{equation}
-
-and if the metric is specifically \emph{time}
-\begin{equation}
-\pi_j \mu_{jj} = \sum_i \pi_i \mu_i
-\end{equation}
-
-Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
-\begin{equation}
-\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\exp[R]}{\exp[X]} = \frac{\rho_{jj}}{\mu_{jj}} = \frac{\sum_i \pi_i \frac{R_i}{\pi_j}}{\sum_i \pi_i \frac{\mu_i}{\pi_j}} = \frac{\sum_i \pi_i \sum_j P_{ik} R_{ik}}{\sum_i \pi_i \sum_k P_{ik}T_{ik}}
-\end{equation}
-
-This is a powerful way to evaluate systems performances, in order for this model to be applied two conditions need to be met:
-\begin{enumerate}
-	\item The system must be able to be modeled with a concept of \emph{state}\footnote{That's good for us, every protocol is essentially a state machine}
-	\item The process must be Markovian or at least semi-Markovian
-\end{enumerate}
+		\end{tikzpicture}
+	\end{center}
+	\caption{2-state simplified model}
+	\label{fig:2states}
+\end{figure}
