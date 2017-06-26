@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book} 
+\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
 
 % language settings
 \usepackage[english]{babel}
@@ -19,11 +19,12 @@
 \usepackage{mathtools}
 \usepackage{amsthm}
 \usepackage{amsmath, amssymb, dsfont, bm}
+\usepackage{cancel}
 \usepackage{cases}
 
 % tikz figures
 \usepackage{tikz}
-\usetikzlibrary{shapes, arrows}
+\usetikzlibrary{automata,arrows,positioning,calc, shapes}
 
 % image path
 \graphicspath{ {./img/} }
@@ -40,6 +41,7 @@
 \newacronym{kt}{KT}{Karlin-Taylor}
 \newacronym{rv}{r.v.}{random variable (r.v.)}
 \newacronym[plural=PPs,firstplural=Poisson Processes]{pp}{PP}{Poisson Process}
+\newacronym{geraf}{GeRaF}{Geographic Random Forwarding}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -86,7 +88,7 @@
 \usepackage{ifluatex}
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
 
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
+% \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
 %------------------------------ macros
 \newcommand{\sectionname}{Section} % define Section ref
 \newcommand{\subsectionname}{Sub-section} % define Sub-section ref
@@ -132,13 +134,6 @@
 \newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
 \newcommand{\RN}[1]{ \textup{\uppercase\expandafter{\romannumeral#1}}} %This is for inserting Roman Numbers (useful for \stackrel in equations so that you don't confuse indicating numbers from equation numbers
 
-\usepackage[acronym]{glossaries}
-
-\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
-\newacronym{kt}{KT}{Karlin-Taylor}
-\newacronym{pp}{PP}{Poisson Process}
-\newacronym{geraf}{GeRaF}{Geographic Random Forwarding}
-
 \begin{document}
 \frontmatter
 
@@ -153,7 +148,7 @@
 \includegraphics[width=9cm]{Zorzilla}\\
 \vspace{0.5cm}
 {written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero, Cristina Gava\par}
 %\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
 \end{center}
 
