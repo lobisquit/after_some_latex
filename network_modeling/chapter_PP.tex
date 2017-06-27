@@ -221,14 +221,14 @@ $M(t)= \#$ of users in the system at time $t$ \\
 A user is still in the system at time t if $W_k + Y_k \geq t$. Therefore $M(t) = \sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} $.
 \begin{equation}
   \begin{split}
-      P[M(t)=m|X(t)=n] &= P[\sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} = m|X(t)=n] \\
-      &= P[\sum\limits_{k=1}^{n} \mathds{1}\{U_k + Y_k \geq t\}] = {{n}\choose{m}}p^{m}(1-p)^{n-m}
+      \prob[M(t)=m|X(t)=n] &= \prob\bigg[\sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} = m|X(t)=n\bigg] \\
+      &= \prob\bigg[\sum\limits_{k=1}^{n} \mathds{1}\{U_k + Y_k \geq t\}\bigg] = {{n}\choose{m}}p^{m}(1-p)^{n-m}
   \end{split}
 \end{equation}
-Where $p = P[U_k + Y_k \geq t]$, we have to compute this probability.\\
+Where $p = \prob[U_k + Y_k \geq t]$, we have to compute this probability.\\
 \begin{equation}
   \begin{split}
-    p = P[U_k + Y_k \geq t] &= \frac{1}{t}\int_0^t P[Y_k \geq t -u] \mathrm{d}u \\
+    p = \prob[U_k + Y_k \geq t] &= \frac{1}{t}\int_0^t \prob[Y_k \geq t -u] \mathrm{d}u \\
     &= \frac{1}{t}\int_0^t [1 - G(t-u)] \mathrm{d}u
     &= \frac{1}{t}\int_0^t [1 - G(z)] \mathrm{d}z
   \end{split}
@@ -236,14 +236,15 @@ Where $p = P[U_k + Y_k \geq t]$, we have to compute this probability.\\
 Now we can compute
 \begin{equation}
   \begin{split}
-      P[M(t)=m] &= \sum\limits_{n=0}^{\infty} P[M(t)=m|X(t)=n]P[X(t)=n] \\
+      \prob[M(t)=m] &= \sum\limits_{n=0}^{\infty} \prob[M(t)=m|X(t)=n]\prob[X(t)=n] \\
       &= \sum\limits_{n=m}^{\infty} \frac{n!}{m!(n-m)!}p^m(1-p)^{n-m}\frac{e^{-\lambda t} (\lambda t)^n}{n!} \\
-      &= \frac{e^{-\lambda t} p^m (\lambda p t)^m}{m!}\sum\limits_{n=m}^{\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
-      &= \frac{e^{\lambda p t}(\lambda p t)^m}{m!}
+      &= \frac{e^{-\lambda t} (\lambda p t)^m}{m!}\sum\limits_{n=m}^{\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
+			&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!} e^{-\lambda(1-p)t}\\
+      &= \frac{e^{-\lambda p t}(\lambda p t)^m}{m!}
   \end{split}
 \end{equation}
 Where $\lambda p t = E[M(t)] = \lambda t \frac{1}{t} \int_0^t [1 - G(z)] \mathrm{d}z = \lambda \int_0^t [1 - G(z)] \mathrm{d}z$. \\
-As $t \rightarrow \infty$: $\lambda \int_0^t [1 - G(z)] \mathrm{d}z = \lambda E[Y] (=p)$.
+As $t \rightarrow \infty$: $\lambda \int_0^t [1 - G(z)] \mathrm{d}z = \lambda E[Y]$ where $1/\lambda$ is the average interarrival time, and $E[Y]$ is the average service time.
 
 %shot noise example? should we add it?
 
@@ -253,11 +254,14 @@ Assumptions:
   \item[1.] Slotted system: constant packet duration, synchronized users
   \item[2.] Poisson arrivals: with \textbf{total} arrival rate $\lambda$
   \item[3.] Collision or perfect reception
-  \item[4.] Immediate $ \{ 0,1, e\}$ feedback
+  \item[4.] Immediate $ \{ 0,1, e\}$ feedback, where 0 stands for \textit{no packets arrived}, 1 stands for \textit{one packet arrived} and \textit{e} stands for \textit{too many packets arrived}, i.e. \textit{collision}.
   \item[5.] Retransmission until success (backlogged)
   \item[6a.] No buffering $\rightarrow$ upper bound to the performance of a realistic system
   \item[6b.] Infinite set of nodes $\rightarrow$ lower bound
 \end{itemize}
+The last two assumptions provide a system with $n$ packets in it and $n$ nodes ready to process them (each node receive 1 packet).
+In a real system, a node may have more than 1 packet.
+
 \subsection{ALOHA}
 Slot time = 1\\
 G = average $\#$ of attempts per slot\\
@@ -267,27 +271,29 @@ $\lambda$ = average rate of arrivals (new packet per slot)
 The success probability is $P_{succ} = e^{-T \cdot G} = e^{-2 \cdot G}$, as the vulnerability interval is T=2.
 Now suppose to consider the interval $d\tau$, we have
 \begin{equation}\begin{split}
-  \text{Are stationary processes:} \begin{cases}
+  \text{A stationary processes:} \begin{cases}
     \prob[\text{one TX starts in $d\tau$}] &\approx G  \cdot d\tau\\
-    \exp{\text{\# of successes in $d\tau$}} &= G \cdot e^{-2 \cdot G} d\tau \\
+    \exp[\text{\# of successes in $d\tau$}] &= G \cdot e^{-2 \cdot G} d\tau \\
   \end{cases}
   \end{split}
   \end{equation}
   \begin{equation}\begin{split}
-  \exp{\text{\# of successes in $[0;t]$}} &= \int\limits_0^t G \cdot e^{-2 \cdot G} = t \cdot G \cdot e^{-2 \cdot G}\\
-  \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G} =  G \cdot e^{-2 \cdot G}\\
+  \exp\bigg[\text{\# of successes in $[0;t]$}\bigg] &= \int\limits_0^t G \cdot e^{-2 \cdot G}d\tau = t \cdot G \cdot e^{-2 \cdot G}\\
+  \text{S = throughput  }&=\frac{1}{t}\cdot  \int\limits_0^t G \cdot e^{-2 \cdot G}d\tau =  G \cdot e^{-2 \cdot G}\\
   \implies S_{max} = \frac{1}{2e}& \approx 18.7\% \quad G_{max} = \frac{1}{2}
 \end{split}\end{equation}
 
 If the user transmits only at the end of the (universal) time: \textbf{Slotted ALOHA}.
-With S.A. the vulnerability interval becomes T=1. $\implies S_{max})=\frac{1}{e} \approx 37\% \quad G_{max} = 1$.
+With S.A. the vulnerability interval becomes T=1. $\implies S_{max}=\frac{1}{e} \approx 37\% \quad G_{max} = 1$.
 
-\subsubsection{Suppose m users}
+Actually, this analysis can not be completely correct, since we suppose G as fixed in order to find a working point. In a real system, G cannot be fixed. In the follows we propose an approach to take in account this problem.
+
+\subsubsection{Correct approach}
+
+Suppose m users.
+
 Let the state of the system be n, which considers the number of backlogged users.
-The traffic per user is $\frac{\lambda}{m}$ and let the probability that a backlogged
-user transmits in a slot be $q_r$. Suppose the retransmission probability density function be a geometric,
-
-then a non-backlogged user transmits with probability $q_a = 1-e^{-\frac{\lambda}{m}}$.
+The traffic per user is $\frac{\lambda}{m}$ and let the probability that a backlogged user transmits in a slot be $q_r$. Suppose the retransmission probability density function be a geometric, then a non-backlogged user transmits with probability $q_a = 1-e^{-\frac{\lambda}{m}}$.
 
 As the arrival are poissonian and the retransmission are memoryless, we can study this case with \gls{mc}.
 
@@ -310,17 +316,19 @@ Now we want to define the transition probability $P_{n,n+1}$, and the calculatio
 We can conclude that the resulting matrix is an almost-upper-triangular.
 
 \subsubsection{Drift Analysis}
-\begin{equation}\begin{split}
-  D_n &= \exp[\text{change in state} | n] = \exp[X_{t+1} - X_t | X_t = n] \\
-  &= \exp[\text{arrivals - departures} | n ] = (m-n) \cdot q_a - P_{succ} \\
-  P_{succ}&= \prob[\text{exactly 1 TX}|n] = Q_a(1,n) \cdot Q_r(0,n) + Q_a(0,n) \cdot Q_r(1,n) \\
-  &= (m-n)\cdot(1-q_a)^{n-m-1} \cdot q_a \cdot(1-q_r)^n + (1-q_a)^{m-n}\cdot n \cdot q_r \cdot (1-q_r)^(n-1) \\
-  &= (1-q_1)^{m-n} \cdot (1-q_r)^n \cdot [\frac{m-n}{1-qa}\cdot q_a + \frac{n \cdot q_r}{1-q_r}]
-\end{split}\end{equation}
+\begin{equation}
+	\begin{split}
+	  D_n &= \exp[\text{change in state} | n] = \exp[X_{t+1} - X_t | X_t = n] \\
+	  &= \exp[\text{arrivals - departures} | n ] = (m-n) \cdot q_a - P_{succ} \\
+	  P_{succ}&= \prob[\text{exactly 1 TX}|n] = Q_a(1,n) \cdot Q_r(0,n) + Q_a(0,n) \cdot Q_r(1,n) \\
+	  &= (m-n)\cdot(1-q_a)^{n-m-1} \cdot q_a \cdot(1-q_r)^n + (1-q_a)^{m-n}\cdot n \cdot q_r \cdot (1-q_r)^{n-1} \\
+	  &= (1-q_a)^{m-n} \cdot (1-q_r)^n \cdot \bigg[\frac{m-n}{1-q_a}\cdot q_a + \frac{n \cdot q_r}{1-q_r}\bigg]
+	\end{split}
+\end{equation}
 we can then approximate $(1+x)^n \approx e^{-n \cdot x}$ if $x \ll 1$
 \begin{equation}
   \implies P_{succ} \approx e^{-(m-n)\cdot q_a} \cdot e^{-n\cdot q_r} \cdot \overbrace{[(m-n) \cdot q_a + n \cdot q_r]}^{G(n)}
-  \implies P_{succ} \approx e^{-G(n)}
+  \implies P_{succ} \approx G(n)e^{-G(n)}
 \end{equation}
 
 We found out that the success probability depends on the state, so we would like to know how the states evolve in time.
@@ -328,18 +336,16 @@ The process can be approximated as a Poisson Process and the description is give
 with G(n) as given before.
 
 \begin{figure}
-  \input{img/driftAnalisis.tex}
+	\centering
+  \input{img/driftAnalysis.tex}
   \caption{Between \textbf{A} and \textbf{B} and for any G(n) bigger than \textbf{G(m)} $D_n <0$. $D_n>0$ in the other regions of the plane}
   \label{fig:drift}
 \end{figure}
 
-
-When $D_n>0$ the system tends to reduce the backlogging, wherease if $D_n<0$ the backlogging
-increases and the system becomes unstable.
+When $D_n>0$ the system tends to reduce the backlogging, wherease if $D_n<0$ the backlogging increases and the system becomes unstable. The optimal condition for the system is $D_n = 0$, when this condition is verified, the system is in an equilibrium point.
 
 We would like to improve the system, such that the probability of the system to become
-unstable, is small and the delay to be as low as possible; to do so we can
-
+unstable, is small and the delay to be as low as possible; to do so we can:
 \begin{description}
   \item[increase $q_r$] The delay gets smaller, but the stability get worse
   \item[decrease $q_r$] the delay increases, but the system is more stable
@@ -353,34 +359,41 @@ We don't know n, so we need to extimate $q_r(n)$ to best fit. We will call the m
 of ALOHA as the \textbf{STABILIZED ALOHA}.
 
 \begin{lemma}[Pakes' lemma (B.G. p.264)]
-  Suppose $D_i < +\infty \forall i$ and that $\exists \delta > 0 , i_0$ index s.t.
-  $D_i \le - \delta \forall i > i_0$ ($D_i$ is bounded away from zero)\\
+
+	Given $D_i = \exp[X_{n+1}-X_n|X_n = 1]$ the drift, suppose $D_i < +\infty ~\forall i$ and that $\exists \delta > 0 , ~i_0$ index s.t.
+  $D_i \le - \delta ~\forall i > i_0$ ($D_i$ is bounded away from zero)\\
   Then the  \gls{mc} is \textbf{stable} (or positive recurrent).
+
   \begin{proof}
+		Since the drift is bounded, we can always find a maximum values in some interval.
     Let $\beta = \max_{i \le i_0} D_i$ . Then $\forall i$:
     \begin{equation}\begin{split}
       \exp[X_n | X_0 = i] -i &= \sum\limits_{k=1}^n \exp[X_k - X_{k-1}|X_0 = i] \\
       &= \sum\limits_{k=1}^n \sum\limits_{j=0}^{+\infty} \exp[X_k - X_{k-1}|X_{k-1} = j , X_0 = i ] \cdot P_{i,j}^{(k-1)}\\
-      & \le \sum\limits_{k=1}^{n} \left[\beta \cdot \sum\limits_{j=0}^{+\infty} P_{i,j}^{(k-1)} - \delta \cdot (1- \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)}\right]\\
+      & \le \sum\limits_{k=1}^{n} \left[\beta \cdot \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)} - \delta \cdot (1- \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)}\right]\\
        &= (\beta + \delta) \cdot \sum\limits_{k=1}^n \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)} - n \cdot \delta \\
        \implies & 0 \le \exp[X_n | X_0 = i] \le (\beta + \delta) \cdot \sum\limits_{k=1}^n \sum\limits_{j=0}^{i_0} P_{i,j}^{(k-1)} - n \cdot \delta +i\\
        & \quad \text{as it's valid $\forall n , i$ we can say that} \\
        \exp[X_n | X_0 = i] &= n \cdot \left[(\beta + \delta) \cdot \sum\limits_{j=0}^{i_0} \frac{1}{n} \cdot \sum\limits_{k=1}^{n} P_{i,j}^{(k-1)} - \delta \right] +i\\
     \text{As $n \to +\infty$ } & \text{ we can write}\\
-    0 \le \lim_{n \to +\infty} &(\beta + \delta) \cdot\sum\limits_{j=0}^{i_0} \underbrace {\frac{1}{n} \cdot \sum\limits_{k=1}^{n} P_{i,j}^{(k-1)}}_{\pi_j} - \delta + \underbrace{\frac{i}{n}}_{\to 0}\\
-    0 \le &\underbrace{(\beta + \delta)}_{>0} \cdot \sum\limits_{j=0}^{i_0} \pi_j - \delta \quad \text{\textbf{CONTRADDICTION }if } \pi_j = 0 \forall j \\
+    0 \le \lim_{n \to +\infty} &\bigg[(\beta + \delta) \cdot\sum\limits_{j=0}^{i_0} \underbrace {\frac{1}{n} \cdot \sum\limits_{k=1}^{n} P_{i,j}^{(k-1)}}_{\pi_j} - \delta + \underbrace{\frac{i}{n}}_{\to 0}\bigg]\\
+    0 \le &\underbrace{(\beta + \delta)}_{>0} \cdot \sum\limits_{j=0}^{i_0} \pi_j - \delta \quad \text{\textbf{CONTRADDICTION }if } \pi_j = 0 ~\forall j \\
     \implies & \text{it must be positive recurrent}
     \end{split}\end{equation}
   \end{proof}
 \end{lemma}
 \begin{lemma}[Kaplan's lemma]
-Suppose it $\exists i_0 \text{ s.t. } D_{i}>0 \forall i > i_0 , \; P_{i,j} = 0 \forall i,j \; 0 \le j \le i-k$
+Suppose that $\exists i_0 ~and ~k \text{ s.t. } D_i>0 ~\forall i> i_0 , \; P_{i,j} = 0 ~\forall i,j \; 0 \le j \le i-k$
 Then the \gls{mc} is unstable (i.e. non-positive recurrent)
 
--- INSERIRE GRAFICO
+\begin{figure}
+	\centering
+  \input{img/KaplansPlot.tex}
+  \caption{In the orange region, the function is unstable, in according to the Kaplan's Lemma.}
+  \label{fig:kaplan}
+\end{figure}
 
 We may want the \gls{mc} to be stable at least for an amount of time (i.e. network can fail once or twice a year).
-----NO PROOF
 \end{lemma}
 
 Slotted Aloha exploits at max $S \approx 37 \%$ of its maximum throughput, so we'd like to reduce the wasted time,
@@ -390,22 +403,23 @@ so that we can increase $S \to 100\%$. To do so, we need
   \item See if the channel is empty and determine what's happening (\textbf{CSMA})
 \end{enumerate}
 
-Let $\beta = \frac{\tau}{\frac{L}{C}} = \frac{\tau \cdot C}{L}$. If $\beta \ll 1 \; \implies \text{CSMA is effective}$. \\
+Let $\beta = \frac{\tau}{L/C} = \frac{\tau \cdot C}{L}$. If $\beta \ll 1 \; \implies \text{CSMA is effective}$. \\
 L.A.N are defined by $\beta \ll 1$.
 
-If user generates a packet in an empty time slot, he will try to send it in the next slot. If the packet is generated while the channel is in usa, the packet will be backlogged.
-state transitions take $\begin{cases}
+If user generates a packet in an empty time slot, he will try to send it in the next slot. If the packet is generated while the channel is in use, the packet will be backlogged.
+
+State transitions take $\begin{cases}
   \beta & \text{if empty slot} \\
   \beta + 1 & \text{if there's a transmission}
 \end{cases}$
 
 \begin{equation}\begin{split}
-  \prob[\text{empty slot }|n] &= e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \\
-  \exp[\text{slot duration}] &= \beta + 1 - e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \\
-  D_n &= \exp[\text{arrivals - departures }|n ]= \lambda \cdot [\beta + 1 - e^{-\lambda \cdot \beta} \cdot (1-q_r)^n ]\\
-  P_{succ} &= \lambda \cdot \beta \cdot e^{-\lambda \cdot \beta} \cdot (1-q_r)^n + e^{-\lambda \cdot \beta} \cdot (1-q_r)^{n-1} \cdot n \cdot q_r \\
-  &\approx (\lambda \cdot \beta + n \cdot q_r) \cdot e^{-(\lambda \cdot \beta + n \cdot q_r)} \quad \text{ if } n \cdot q_r \ll 1 \\
-  &= g(n) \cdot e^{g(n)}
+  \prob[\text{empty slot }|n] &= e^{-\lambda \beta}  (1-q_r)^n \\
+  \exp[\text{slot duration}] &= \beta + 1 - e^{-\lambda\beta} (1-q_r)^n \\
+  D_n &= \exp[\text{arrivals - departures }|n ]= \lambda [\beta + 1 - e^{-\lambda \beta}  (1-q_r)^n ]\\
+  P_{succ} &= \lambda  \beta  e^{-\lambda  \beta}  (1-q_r)^n + e^{-\lambda  \beta}  (1-q_r)^{n-1}  n  q_r \\
+  &\approx (\lambda  \beta + n  q_r)  e^{-(\lambda  \beta + n  q_r)} \quad \text{ if } n  q_r \ll 1 \\
+  &= g(n)  e^{g(n)}
 \end{split}\end{equation}
 
 \begin{figure} \centering
@@ -419,18 +433,18 @@ If two transmissions occours at the same tume, but the nodes transmitting are fa
 \centering
 \begin{tabular}{|c|c|c|}
 \textbf{Type} & \textbf{Duration} & \textbf{Probability}                                         \\ \hline
-IDLE          & $\beta$           & $e^{-\lambda \cdot \beta} \cdot (1-q_r)^n \approx e^{-g(n)}$ \\
-SUCCESS       & $1+\beta$         & $\approx g(n) \cdot e^{-g(n)}$                               \\
-COLLISION     & $2 \beta$         & $1-(1+g(n))\cdot e^{-g(n)}$
+IDLE          & $\beta$           & $e^{-\lambda  \beta}  (1-q_r)^n \approx e^{-g(n)}$ \\
+SUCCESS       & $1+\beta$         & $\approx g(n)  e^{-g(n)}$                               \\
+COLLISION     & $2 \beta$         & $1-(1+g(n)) e^{-g(n)}$
 \end{tabular}
 \caption{Events occouring in the CSMA channel}
 \label{TAB:tx_prob}
 \end{table}
-$D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{g(n) \cdot e^{-g(n)}}{\beta + 1 - e^{-g(n)}}$\\
+$D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{g(n)  e^{-g(n)}}{\beta + 1 - e^{-g(n)}}$\\
 We know that instability will occour eventually, but the time for it to happen is really long.
 
 \subsection{Recurrent \gls{mc} behaviour}
-Suppose a recurrent markov chain like the one in figure \ref{fig:recurrMC}, we can study a system which has a transient state and two states, 0 and 1,
+Suppose a recurrent \gls{mc} like the one in figure \ref{fig:recurrMC}, we can study a system which has a transient state and two states, 0 and 1,
 that may be recurrent.
 \begin{figure}[h!]\centering
   \input{img/recurr.tex}
@@ -460,18 +474,18 @@ We than have that
 
 \begin{equation}\begin{split}
   P^2&=\begin{pmatrix}
-      Q^2 & Q \cdot R_1 + R_1 \cdot A & Q \cdot R_2  + R_2\\
+      Q^2 & Q  R_1 + R_1  A & Q  R_2  + R_2\\
       0 & A^2   & 0 \\
       0 & 0   & 1 \\
   \end{pmatrix}
   \\
-  P^{3} = P \cdot P^2 &=\begin{pmatrix}
-      Q^3 & Q^2 \cdot Q \cdot R_1\cdot A + R_1 \cdot A^2 & Q^2 \cdot R_2  + Q \cdot R_2 +R_2\\
+  P^{3} = P  P^2 &=\begin{pmatrix}
+      Q^3 & Q^2  Q  R_1 A + R_1  A^2 & Q^2  R_2  + Q  R_2 +R_2\\
       0 & A^3=A   & 0 \\
       0 & 0   & 1 \\
   \end{pmatrix}\\
   P^{n+1}&=\begin{pmatrix}
-      Q^{n+1} & \sum\limits_{i=0}^n Q^i \cdot R_1 \cdot A^{n-i} & \sum\limits_{i=0}^n Q^i \cdot R_2\\
+      Q^{n+1} & \sum\limits_{i=0}^n Q^i  R_1  A^{n-i} & \sum\limits_{i=0}^n Q^i  R_2\\
       0 & A^{n+1}   & 0 \\
       0 & 0   & 1 \\
   \end{pmatrix}\\
@@ -479,18 +493,18 @@ We than have that
 We can now evaluate separately the case where n is even and the one where it's odd
 
 \begin{equation}\begin{split}
-  n &= 2 \cdot k \\
-  &\sum\limits_{i=0}^{2k}Q^i \cdot R_1 \cdot A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1} \cdot R_1 \cdot A \\
-  &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right) \cdot R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right) \cdot (Q \cdot R_1 \cdot A)\\
-  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A)\\
-  n &= 2 \cdot k + 1 \\
-  &\sum\limits_{i=0}^{2k+1}Q^i \cdot R_1 \cdot A^{2k+1-i} = \sum\limits_{j=0}^{k}Q^{2j} \cdot R_1\cdot A + \sum\limits_{j=0}^{k}Q^{2j+1} \cdot R_1 \\
-  \implies & k  \to +\infty \quad [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 ) \\
+  n &= 2  k \\
+  &\sum\limits_{i=0}^{2k}Q^i  R_1  A^{2k-i} = \sum\limits_{j=0}^{k}Q^{2j}  R_1 + \sum\limits_{j=0}^{k-1}Q^{2j+1}  R_1  A \\
+  &=\left(\sum\limits_{j=0}^{k}Q^{2j} \right)  R_1 + \left(\sum\limits_{j=0}^{k-1}Q^{2j} \right)  (Q  R_1  A)\\
+  \implies & k  \to +\infty \quad [I - Q^2]^{-1}  (R_1 + Q  R_1  A)\\
+  n &= 2  k + 1 \\
+  &\sum\limits_{i=0}^{2k+1}Q^i  R_1  A^{2k+1-i} = \sum\limits_{j=0}^{k}Q^{2j}  R_1 A + \sum\limits_{j=0}^{k}Q^{2j+1}  R_1 \\
+  \implies & k  \to +\infty \quad [I - Q^2]^{-1}  (R_1  A + Q  R_1 ) \\
   \\
   &\text{the two limits are the same if: }\\
-  & [I - Q^2]^{-1} \cdot (R_1 + Q \cdot R_1 \cdot A) = [I - Q^2]^{-1} \cdot (R_1 \cdot A + Q \cdot R_1 )\\
+  & [I - Q^2]^{-1}  (R_1 + Q  R_1  A) = [I - Q^2]^{-1}  (R_1  A + Q  R_1 )\\
   \implies & det(1-Q^2)\neq 0\\
-  & [I-Q ]\cdot R_1 = [I-Q]\cdot R_1 \cdot A \quad \implies R_1 = R_1 \cdot A
+  & [I-Q ] R_1 = [I-Q] R_1  A \quad \implies R_1 = R_1  A
 \end{split}\end{equation}
 
 
@@ -498,14 +512,14 @@ We can now evaluate separately the case where n is even and the one where it's o
 \begin{equation}
   \prob[N(t)=n|A(t,t+\delta)] = \prob[N(t)=n]
 \end{equation}
-At time $t$ I have $n$ users, so $N(t)=n$ depends on past, wherease $A(t,t+\delta)$ depends on the future
+At time $t$ I have $n$ users, so $N(t)=n$ depends on past, wherease $A(t,t+\delta)$ depends on the future.
 
-\subsubsection{Under mild conditions}
+Under mild\footnote{Mild as a feather, not as a salsa.} conditions:
 \begin{enumerate}
   \item the system is stable
   \item the system state changes in unit increments
 \end{enumerate}
-If the chain is staboe, the state n will be visited an infinite numer of times. In particular, the arrivals and the departures can be written as:
+If the chain is stable, the state n will be visited an infinite numer of times. In particular, the arrivals and the departures can be written as:
 \begin{equation}\begin{split}
 a_n(t)&= \frac{\text{\# of arrivals finding n}}{\text{\# of arrivals}} = \frac{\text{\# of transitions } n \to n+1}{\text{\# of upwards transitions}}\\
 d_n(t)&= \frac{\text{\# of departures leaving n}}{\text{\# of departures}} = \frac{\text{\# of transitions } n+1 \to n}{\text{\# of downwards transitions}}
