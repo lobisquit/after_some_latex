@@ -1,7 +1,8 @@
-\documentclass[a4paper, 12pt, twoside, openright,fleqn]{book}
+\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
+
+% language settings
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
-
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
 \usepackage{caption}
@@ -11,22 +12,43 @@
 \usepackage{wrapfig}
 \usepackage{changepage}
 
-% math package
-\usepackage{mathtools}
-\usepackage{amsthm}
-\usepackage{amsmath,amssymb,dsfont,bm}
-\usepackage[usenames,dvipsnames,table,tikz]{xcolor} % use colors on table and more
-%\definecolor{DefinedColor}{RGB}{51, 51, 51} % define custom color
+\usepackage[usenames, dvipsnames, table, tikz]{xcolor}
+
+% tikz figures
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{listing}
 \usepackage{textgreek}
+
+% math package
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb, dsfont, bm}
+\usepackage{cancel}
+\usepackage{cases}
+
 %\usepackage{subfigure}
 \graphicspath{{./img/} {./.tmp/} }
 %------------------------------ colors
 
-%\usetikzlibrary{positioning}
-\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{automata, arrows, positioning, calc, shapes}
+
+% image path
+\graphicspath{ {./img/} }
+
+% add support for url and cross-references in PDF output
+\usepackage{url}
+\renewcommand{\UrlFont}{\color{black}\small\ttfamily}
+\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
+
+% support for glossary and acronyms
+\usepackage[acronym]{glossaries}
+\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
+\newacronym[plural=STs,firstplural=Stopping times (STs)]{st}{ST}{Stopping Time}
+\newacronym{kt}{KT}{Karlin-Taylor}
+\newacronym{rv}{r.v.}{random variable (r.v.)}
+\newacronym[plural=PPs,firstplural=Poisson Processes]{pp}{PP}{Poisson Process}
+\newacronym{geraf}{GeRaF}{Geographic Random Forwarding}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -47,7 +69,6 @@
 \newtheorem{definition}{Definition}
 \newtheorem{remark}{Remark}
 \newtheorem{example}{Example}
-
 
 % added support for proof parts
 \theoremstyle{remark}
@@ -73,7 +94,9 @@
 %\usepackage{svg}
 \usepackage{ifluatex}
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
+
+% \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
+
 %------------------------------ macros
 \newcommand{\sectionname}{Section} % define Section ref
 \newcommand{\subsectionname}{Sub-section} % define Sub-section ref
@@ -88,6 +111,7 @@
 \def\eal{\end{align}}
 \def\prob{\ensuremath\mathbb{P}}
 \def\exp{\ensuremath\mathbb{E}}
+\def\pois{\mathcal P}
 \newcommand{\Hb}{\mathbb{H}}
 \newcommand{\Sb}{\mathbb{\Sigma}}
 \newcommand{\U}{\mathbb{U}}
@@ -119,12 +143,6 @@
 \newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
 \newcommand{\RN}[1]{ \textup{\uppercase\expandafter{\romannumeral#1}}} %This is for inserting Roman Numbers (useful for \stackrel in equations so that you don't confuse indicating numbers from equation numbers
 
-\usepackage[acronym]{glossaries}
-
-\newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
-\newacronym{kt}{KT}{Karlin-Taylor}
-\newacronym{pp}{PP}{Poisson Process}
-
 \begin{document}
 \frontmatter
 
@@ -139,7 +157,7 @@
 \includegraphics[width=9cm]{Zorzilla}\\
 \vspace{0.5cm}
 {written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Cristina Gava, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero, Ciprian Matteo\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Cristina Gava, Davide Peron, Federico Mason, Lorenza Prospero, Ciprian Matteo\par}
 %\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
 \end{center}
 
@@ -177,4 +195,7 @@
 \input{introduction.tex}
 \input{chapter_2.tex}
 \input{chapter_PP.tex}
+\input{renewalProc.tex}
+\input{chapter_SN.tex}
+
 \end{document}
