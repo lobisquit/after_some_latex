@@ -6,8 +6,8 @@ Two state Markov process $X_n$: 0 = correct transmission, 1 = erroneous transmis
 										 = & \prob[\sum\limits_{m=0}^{n-1} \mathbb{1}\{X_m = 0\} = k, X_n = j | X_0 = i]
 	\end{split}
 \end{equation}
-\textbf{Conditioning on last transition:}
-If the last state is successfull, we require k-1 successes in the previous n-1 transitions, else we require k successes in the previous n-1 successes:
+\paragraph{Conditioning on last transition}
+If the last state is successfull, we require $k-1$ successes in the previous $n-1$ transitions, else we require $k$ successes in the previous $n-1$ successes:
 $$\Phi_{ij}(k,n) = \Phi_{i0}(k-1,n-1)p_{0j} + \Phi_{i1}(k,n-1)p_{1j} \textrm{ with } n>0 \textrm{ and } 0<k\leq n$$
 Initial condition:
 \begin{equation}
