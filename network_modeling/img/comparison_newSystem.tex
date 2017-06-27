@@ -1,0 +1,25 @@
+\begin{tikzpicture}\begin{axis}[axis lines=middle,samples=200
+        ,ylabel=$P_{succ}$
+        ,xlabel=$S$
+        ,ymax=1
+        ,every axis x label/.style={
+          at={(ticklabel* cs:1.05)},
+            anchor=west,
+          },
+        every axis y label/.style={
+          at={(ticklabel* cs:1.05)},
+            anchor=south,
+          },
+        ,xtick=data
+        ,xtick={0.98}
+        ,xticklabels={$\frac{1}{1+\sqrt{2\cdot \beta}}$}
+        ,ytick=data,
+        ,ytick={0.3748,0.748}
+        ,yticklabels={$\lambda$,$\frac{1}{1+\sqrt{2\cdot \beta}}$}
+        ]
+      \addplot[red,domain=0:6] {2*x*e^(-x)};
+      \addplot[blue,domain=0:6] {x*e^(-x)};
+      \addplot[gray,dotted,domain=0:6] {0.3748};
+      \addplot[gray,dotted,domain=0:6] {0.748};
+      \addplot[gray,dotted,mark=none] coordinates {(0.98, 0) (0.98, 3)};
+    \end{axis}\end{tikzpicture}

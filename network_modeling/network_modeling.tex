@@ -11,10 +11,15 @@
 \usepackage{graphics}
 \usepackage{wrapfig}
 \usepackage{changepage}
+
 \usepackage[usenames, dvipsnames, table, tikz]{xcolor}
+
+% tikz figures
+\usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{listing}
 \usepackage{textgreek}
+
 % math package
 \usepackage{mathtools}
 \usepackage{amsthm}
@@ -22,9 +27,11 @@
 \usepackage{cancel}
 \usepackage{cases}
 
-% tikz figures
-\usepackage{tikz}
-\usetikzlibrary{automata,arrows,positioning,calc, shapes}
+%\usepackage{subfigure}
+\graphicspath{{./img/} {./.tmp/} }
+%------------------------------ colors
+
+\usetikzlibrary{automata, arrows, positioning, calc, shapes}
 
 % image path
 \graphicspath{ {./img/} }
@@ -84,15 +91,17 @@
 \addto\captionsenglish{\renewcommand*\abstractname{Sommario}} % change Abstract title
 %------------------------------ active url
 \usepackage{url}
-\usepackage{svg}
+%\usepackage{svg}
 \usepackage{ifluatex}
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
 
 % \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref} % active ref
+
 %------------------------------ macros
 \newcommand{\sectionname}{Section} % define Section ref
 \newcommand{\subsectionname}{Sub-section} % define Sub-section ref
 \renewcommand*\arraystretch{1.4} % tables padding
+\newcommand{\N}{\mathbb{N}}
 \DeclareInputText{176}{°}
 
 % Useful Aliases
@@ -114,7 +123,7 @@
 \newcommand{\E}{\mathbb{E}}
 \newcommand{\I}{\mathbb{I}}
 \newcommand{\Y}{\mathbb{Y}}
-\newcommand{\N}{\mathbb{N}}
+%\newcommand{\N}{\mathbb{N}}
 \newcommand{\W}{\mathbb{W}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\R}{\mathbb{R}}
@@ -148,7 +157,7 @@
 \includegraphics[width=9cm]{Zorzilla}\\
 \vspace{0.5cm}
 {written with love by\par}
-{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Umberto Martinelli, Federico Mason, Lorenza Prospero, Cristina Gava\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Cristina Gava, Davide Peron, Federico Mason, Lorenza Prospero, Ciprian Matteo\par}
 %\vspace{0.2cm} \linespread{1} \scshape{\large{\bfseries{(subtitle)}}}
 \end{center}
 
@@ -188,4 +197,5 @@
 \input{chapter_PP.tex}
 \input{renewalProc.tex}
 \input{chapter_SN.tex}
+
 \end{document}
