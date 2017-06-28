@@ -16,7 +16,7 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 			\prob[X_n \ge 2] &= o(n)
 		\end{split}
 	\end{equation}
-	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
+	\gls{kt} at page 226 shows that assuming \eqref{p_dist} you can get \eqref{p_dist_conseq} and viceversa.
 \end{enumerate}
 \begin{theorem}[Exponential times in Poisson arrivals]
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
@@ -40,7 +40,7 @@ Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
 	\prob[S_1 > t | S_0 = s] = \prob[\text{No arrivals in } [s, s+t]] = \prob[S_1 > t] = e^{-\lambda t}
 \end{equation}
 
-Where \eq{poiss_independence} is possible because $S_0$ and $S_1$ are disjoint and so the condition on $S_0$ is independent on the $S_1$ slot.
+Where \eqref{poiss_independence} is possible because $S_0$ and $S_1$ are disjoint and so the condition on $S_0$ is independent on the $S_1$ slot.
 In general,
 \begin{equation}
 	\prob[S_n > t | S_i = s_i, ~i=0,s,n-1] = e^{-\lambda t}

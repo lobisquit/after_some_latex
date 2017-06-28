@@ -111,7 +111,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 % In essence this results states that in finite time we have a finite number of renewals. Viceversa in infinite time we have infinite renewals.
 
 \begin{proof}
-	\proofpart (equation \ref{eq:nt_to_infty})
+	\proofpart (equation \eqref{eq:nt_to_infty})
 
 	In have infinite time, we have a finite number of renewals if and ony if there exists an event that is the last one, i.e. its assiciated renewal time $X_k$ takes an infinite amount of time.
 	\begin{equation*}
@@ -121,12 +121,12 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 		\end{split}
 	\end{equation*}
 
-	\proofpart (equation \ref{eq:renewal_partial_sum})
+	\proofpart (equation \eqref{eq:renewal_partial_sum})
 
 	By $S_n$ definition, we have that $ S_{N(t)} / N(t)$ is the average interarrival time for the first $N(t)$ renewals and so for the \emph{Strong Law of Large Numbers} we have that this time average converges to the expectation.
 	$$ \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} = \lim_{t \to +\infty} \frac{S_{N(t)+1}}{N(t)+1} = \lim_{N \to +\infty} \frac{S_{N}}{N} = \mu $$
 
-	\proofpart (equation \ref{eq:nt_grows_linearly})
+	\proofpart (equation \eqref{eq:nt_grows_linearly})
 
 	By $S_n$ and $N(t)$ definitions, we have that $S_{N(t)}$ and $S_{N(t)+1}$ are respectively the time of the last and the next renewal of a given time $t$.
 
@@ -135,7 +135,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)} =\frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}
 	\end{equation*}
 
-	Finally, for the sandwich theorem and for equation \ref{eq:renewal_partial_sum}, we have that
+	Finally, for the sandwich theorem and for equation \eqref{eq:renewal_partial_sum}, we have that
 	$$ \mu \le \lim_{t \to +\infty} \frac{t}{N(t)} \stackrel{(*)}{\le}\mu \quad \implies \lim_{t \to +\infty} \frac{t}{N(t)} = \mu $$
 	Where in $(*)$ the strict $<$ became $\le$ as we were dealing with limits.
 \end{proof}
@@ -152,7 +152,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 \end{theorem}
 \begin{proof}
-	\proofpart (equation \ref{eq:Fn_geometric_decreasing})
+	\proofpart (equation \eqref{eq:Fn_geometric_decreasing})
 	Considering the distributions of the $r$-th renewal, we can state that
 
 	\begin{equation}
@@ -170,7 +170,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	Thus we have proved that $ \lim_{n \to +\infty} F_r(t) = 0 $ at least geometrically.
 
-	\proofpart (equation \ref{eq:mt_always_finite} and \ref{eq:mt_diverges})
+	\proofpart (equation \eqref{eq:mt_always_finite} and \eqref{eq:mt_diverges})
 	First we derive a nice property of $F_n(t)$ distributions that holds for every $m \in [1,\, n-1]$:
 
 	\begin{equation} \label{eq:fn_upper_bound}
@@ -192,8 +192,8 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\end{equation}
 	where
 	\begin{itemize}
-		\item[(1)] both hold by applying equation \ref{eq:fn_upper_bound}
-		\item[(2)] is obtained applying \ref{eq:fn_upper_bound} recursevely
+		\item[(1)] both hold by applying equation \eqref{eq:fn_upper_bound}
+		\item[(2)] is obtained applying \eqref{eq:fn_upper_bound} recursevely
 	\end{itemize}
 
 	While the latter term on $k$ is always finite, since it is a finite sum, the former converges only if the $F_r(t)$ terms converge at least geometrically.
@@ -251,14 +251,14 @@ Averaging on the first event distribution, we can get the unconditioned value of
 \section{Renewal equations}
 
 \begin{definition}[Renewal Equation]
-	Formulas like \ref{eq:mt_renewal_equation} are so often encountered in these field of study that they took the name of \emph{renewal equations}.
+	Formulas like \eqref{eq:mt_renewal_equation} are so often encountered in these field of study that they took the name of \emph{renewal equations}.
 
 	\begin{equation} \label{eq:renewal_equation}
 			A(t) = a(t) +\int\limits_0^{t}A(t-x) \cdot dF(x)
 	\end{equation}
 	with $a(t)$ given and $F(x)$ a probability distribution.
 
-	Setting $a(t) = F(t)$ and $A(t) = M(t)$ we obtain the equation \ref{eq:mt_renewal_equation}.
+	Setting $a(t) = F(t)$ and $A(t) = M(t)$ we obtain the equation \eqref{eq:mt_renewal_equation}.
 \end{definition}
 
 \begin{theorem}[4.1 K.T. p.184]
@@ -287,7 +287,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 
 	\proofpart of existence
 
-		We will now assess that our guess is actually a valid solution obtaining \ref{eq:renewal_equation} from \ref{eq:renewal_solution}.
+		We will now assess that our guess is actually a valid solution obtaining \eqref{eq:renewal_equation} from \eqref{eq:renewal_solution}.
 
 		\begin{equation}\begin{split}
 			A(t) &= a(t) + M \ast a(t) = a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a(t) = \\
@@ -300,7 +300,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 
 	\proofpart of uniqueness
 
-	This proof is the inverse reasoning of the proof of existence, as we will obtain \ref{eq:renewal_solution} from \ref{eq:renewal_equation}.
+	This proof is the inverse reasoning of the proof of existence, as we will obtain \eqref{eq:renewal_solution} from \eqref{eq:renewal_equation}.
 
 	\begin{equation}\begin{split}
 		A(t) &= a(t) + F \ast A(t) \quad \text{which is a recursive expression.} \\
@@ -1231,7 +1231,7 @@ m_0 = p_{00}\cdot1+p_{01}[1+\frac{m}{p_{10}(m)}]
 \label{Formula}
 \eeq
 Where $m_0$ is the average return time to $G$ and so the inverse of throughput; why? Because as in all semi-Markov processes, if we consider one state, visits to that one state are renewal instants. So the return time from $G$ to itself is a renewal interval and for this specific case, at every renewal cycle we have 1 success and the avg number of successes per unit time is the avg number of successes per cycle, $1$, divided by the average time per cycle. Moreover, once we have obtained the Markov structure we can identify the metrics we need to find.\\
-Returning to the expression \ref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
+Returning to the expression \eqref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
 \begin{align}
 \begin{split}
 m_0 & = 1+\frac{p_{01}\cdot m}{p_{10}(m)}\\

@@ -186,39 +186,39 @@ We can state
 where $X_i$ are r.v. representing the advancement in a given hop.
 This may seem like a \textit{stopping rule}, since I can advance until I enter in the range of the destination and $n'$ can be used as the \textit{stopping time}, but $X_i$ are neither independent nor identically distributed, since these depends on the distance from the source.
 
-For the moment, we can ignore this problem and replace $X_i$ with an iid sequence $Y_i$, and replace it in \eq{firstBound}.
+For the moment, we can ignore this problem and replace $X_i$ with an iid sequence $Y_i$, and replace it in \eqref{firstBound}.
 
 \begin{equation}\label{stoppingRule}
 	\sum_{i=1}^{n'-1} Y_i < D-1 \le \sum_{i=1}^{n'} Y_i
 \end{equation}
 
 where $Y_i$ are iid.
-In this way we can apply to \eq{stoppingRule} the stopping theory and divide the problem in two parts.
+In this way we can apply to \eqref{stoppingRule} the stopping theory and divide the problem in two parts.
 
 \begin{enumerate}
 		\item
 			$$ D-1 \le \exp\left[\sum_{i=1}^{n'} Y_i\right] \stackrel{(1)}{=} \exp[n']\exp[Y] $$
-			Where (1) holds for the Wald's equation. Rearranging the previous equation and using \eq{hopsdefinition}, we can find that
+			Where (1) holds for the Wald's equation. Rearranging the previous equation and using \eqref{hopsdefinition}, we can find that
 			\begin{equation}\label{lowerBound}
 				\exp[n] = \exp[n'+1] \ge \frac{D-1}{\exp[Y]} +1
 			\end{equation}
 		\item
 			Advancement $\zeta$ is at most 1, then
 			$$\sum_{i=1}^{n'} Y_i \le \sum_{i=1}^{n'-1} Y_i +1 \stackrel{(1)}{<} D$$
-			Where (1) is derived from \eq{stoppingRule}. Then we can apply the expectation and the Wald's equation, obtaining
+			Where (1) is derived from \eqref{stoppingRule}. Then we can apply the expectation and the Wald's equation, obtaining
 			$$\exp\left[\sum_{i=1}^{n'} Y_i\right] = \exp[n']\exp[Y] < D$$
-			Then, applying the definition of number of hops in \eq{hopsdefinition} we obtain the second bound.
+			Then, applying the definition of number of hops in \eqref{hopsdefinition} we obtain the second bound.
 			\begin{equation}\label{upperBound}
 				\exp[n] < \frac{D}{\exp[Y]} + 1
 			\end{equation}
 
-			The final result is the union of the bounds \eq{lowerBound} and \eq{upperBound}:
+			The final result is the union of the bounds \eqref{lowerBound} and \eqref{upperBound}:
 			\begin{equation}\label{iidBounds}
 				\frac{D-1}{\exp[Y]} +1 \le \exp[n] < \frac{D}{\exp[Y]} + 1
 			\end{equation}
 \end{enumerate}
 Then we must replace $Y$ with $X$ appropriately in the result.
-If we assume that all the $X_s$ have the statistic of $X_1$(worst case), we have the maximum number of hops, while if we assume that all the $X_s$ have the statistic of $X_D$(best case) we have the minimum number of hops. So we can replace in \eq{iidBounds} the best and the worst case, obtaining the final result:
+If we assume that all the $X_s$ have the statistic of $X_1$(worst case), we have the maximum number of hops, while if we assume that all the $X_s$ have the statistic of $X_D$(best case) we have the minimum number of hops. So we can replace in \eqref{iidBounds} the best and the worst case, obtaining the final result:
 
 \begin{equation}\label{finalBounds}
 	\underbrace{\frac{D-1}{\exp[X_d]} +1}_\text{Best Case} \le \exp[n] < \underbrace{\frac{D}{\exp[X_1]} + 1}_\text{Worst Case}

@@ -590,7 +590,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 	\begin{proof}
 		\begin{enumerate}
-			\item Assume \eq{pitoinfty} is true. \\
+			\item Assume \eqref{pitoinfty} is true. \\
 				Since the series expansion for $e^{-p_i}$ is an alternating series with terms decreasing in absolute value, we can write:
 				\begin{equation}
 					1-p_i < 1-p_i + \frac{p_i^2}{2!} - \frac{p_i^3}{3!} + \cdots = ~e^{-p_i} \quad with ~i\ge 0
@@ -699,7 +699,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
 		where
 		\begin{itemize}
-			\item [(1)] using equation \ref{eq:n_step_in_class}, sum is splitted in $k \in C$ into two sums in $k \in C'$ and $k \in C ~ \wedge ~ k \notin C' $
+			\item [(1)] using equation \eqref{eq:n_step_in_class}, sum is splitted in $k \in C$ into two sums in $k \in C'$ and $k \in C ~ \wedge ~ k \notin C' $
 			\item [(2)] terms have been rearranged: first and last one have been merged
 			\item [(3)] the first sum over all $n \in \N$ is splitted using $N$
 			\item [(4)] the module of a sum is less or equal than the sum of the modules
@@ -707,7 +707,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 			\item [(6)] choosing $C'$ and $N$ large enough, we can make the two terms between parenthesis small as we want: they are infinitesimal
 			\item [(7)] since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
 		\end{itemize}
-		This way we have verified that first term of \ref{eq:theorem_3.1_thesis} is in fact infinitesimal.
+		This way we have verified that first term of \eqref{eq:theorem_3.1_thesis} is in fact infinitesimal.
 
 		\bigbreak
 		Now we explore the second term.
@@ -722,7 +722,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{split}\end{equation}
 
 		\bigbreak
-		Recalling thesis (equation \ref{eq:theorem_3.1_thesis}), both terms of the sum have been proven infinitesimal, so wanted limit is itself proven.
+		Recalling thesis (equation \eqref{eq:theorem_3.1_thesis}), both terms of the sum have been proven infinitesimal, so wanted limit is itself proven.
 	\end{proof}
 
 	Summarizing all we know about limiting distribution across multiple classes, we can build the following table.
@@ -802,14 +802,14 @@ In conclusion, we found that the average first passage time is equal to the aver
 		$$ \exists \lim_{n \to +\infty} Y_i(n) \stackrel{.}{=} Y_i = \prob[\text{staying in } S | \text{starting from } i \in S] $$
 		where $ S = \{ 1, 2, 3, ...\} $ as before.
 
-		Using \emph{first step analysis} as in previous equation \ref{eq:Y_i-properties} and taking the limit for $n \to +\infty $, we can build the following system.
+		Using \emph{first step analysis} as in previous equation \eqref{eq:Y_i-properties} and taking the limit for $n \to +\infty $, we can build the following system.
 		\begin{equation} \label{eq:Yj_system}
 			\forall i \neq 0, Y_i = \sum_{j \in S} P_{ij} Y_j
 		\end{equation}
 	\end{lemma}
 
 	\begin{lemma}
-		Let $\{Z_i, i=1, 2, ...\}$ be a solution set for system \ref{eq:Yj_system}. We focus in particular on non-divergent solutions, imposing that $ \forall i, |Z_i| \le 1 $.
+		Let $\{Z_i, i=1, 2, ...\}$ be a solution set for system \eqref{eq:Yj_system}. We focus in particular on non-divergent solutions, imposing that $ \forall i, |Z_i| \le 1 $.
 
 		It holds that
 		$$ \forall n, |Z_i| \le Y_i(n) ~ \Rightarrow ~|Z_i| \le \lim_{n \to +\infty} Y_i(n) = Y_i $$
