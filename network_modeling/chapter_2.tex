@@ -771,7 +771,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\end{proof}
 
 	\begin{definition}
-		Given an \gls{mc} with a state set $S = \{1, 2, ...\}$, quantity $Y_i(n)$ is defined as the probability of staying in $S$ along an $n$-steps path that starts from $i \in S$.
+		Given a \gls{mc} with a state set $S = \{1, 2, ...\}$, quantity $Y_i(n)$ is defined as the probability of staying in $S$ along an $n$-steps path that starts from $i \in S$.
 
 		$$ Y_i(n) = \prob[X_j \in S ~\forall j=1, 2, ..., n | X_0 = i \in S] $$
 	\end{definition}
@@ -826,7 +826,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\end{proof}
 
 	\begin{lemma}[4.13 (Ross 2, pg. 78-82)] \label{lemma:MC_irreducible_fi0}
-		Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
+		Given an irreducible \gls{mc} with a state set $S=\left\{0,1,2,\dots \right\}$ it is recurrent if and only if:
 
 		$$ \forall i \neq 0, f_{i 0} = 1 $$
 		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
