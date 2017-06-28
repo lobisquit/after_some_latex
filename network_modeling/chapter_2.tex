@@ -492,11 +492,11 @@ In conclusion, we found that the average first passage time is equal to the aver
 			$\lim\limits_{k \to \infty } \prob[M \geq k | X_0=i]$ & 0 & 1 & 1 \\ \hline
 			$\exp[n|X_0=i]$ & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & $\infty$ \\ \hline
 			$m_i = \sum\limits_n f_{ii}^{(n)}$ & $\infty$ & $\infty$ & $<\infty$ \\ \hline
-			$\pi_i = \frac{1}{m_i}$ & 0 & 0 & $>1$ \\ \hline
+			$\pi_i = \frac{1}{m_i}$ & 0 & 0 & $>0$ \\ \hline %positive. \pi is less than 1 and greater than 0
 		\end{tabular}
 	\end{center}}
 
-	\begin{theorem}
+	\begin{theorem}[1.3 (K.T. pp 85-86)]
 		For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of the following system.
 		\begin{equation*}\begin{cases}
 			\pi_j = \sum\limits_{i=0}^\infty \pi_i P_{ij} \\
@@ -827,7 +827,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		where (*) is due to the inductive hypothesis.
 	\end{proof}
 
-	\begin{lemma}[Ross 2, pg. 78-82] \label{lemma:MC_irreducible_fi0}
+	\begin{lemma}[4.13 (Ross 2, pg. 78-82)] \label{lemma:MC_irreducible_fi0}
 		Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
 
 		$$ \forall i \neq 0, f_{i 0} = 1 $$
@@ -859,7 +859,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		This is absurd, because chain is supposed irreducible.
 	\end{proof}
 
-	\begin{theorem}
+	\begin{theorem}[4.14]
 		An irreducible \gls{mc} with states $S = 0, 1, 2, ...$ is transient if and only if
 
 		$$ Z_i = \sum_{j=1}^{+\infty} P_{ij} Z_j \text{ for } i = 1, 2, ...$$
@@ -885,113 +885,157 @@ In conclusion, we found that the average first passage time is equal to the aver
 		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
 
-	\begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
-		An irreducible \gls{mc} is recurrent if:
+ -----DOING Random walks and MG1 ------
+\subsection{Random walks}
+Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now define the probability to advance in state and going back to the previous state as follows:
+\begin{esp}
+	p_i &= P_{i i+1} \quad \text{probability to go $i\to i+1 $}\\
+	q_i &= P_{i i-1} = 1-p_i \quad \text{probability to go $i\to i-1$ }\\
+	\text{with } & p_o = 1 ~ q_o = 0
+\end{esp}
+Let's now define $Z_i$ the probability to reach state i from all the other states, which means
+\begin{esp}
+	Z_i &= \sum\limits_{i=1}^{+\infty} P_{i j} \cdot Z_j \\
+	Z_1 = p_1 \cdot Z_2
+\end{esp}
+where with the last row we say that in one step the state can move upward or downward by only one state.
 
-		\begin{equation}\noindent
-			\exists \text{ a sequence } Y_i : \quad
- 			\sum\limits_{i=0}^{+\infty} P_{ij} Y_j \le Y_i \quad \forall i \neq 0 \quad and \quad
- 			\lim\limits_{i \to +\infty} Y_i = +\infty
+We can then write:
+\begin{esp}
+	\underbrace{p_i + q_i}_{=1} \cdot Z_i &= p_i \cdot Z_{i+1} + q_i \cdot Z_{i-1} \quad i>1 \\
+	q_i \cdot\left(Z_i - Z_{i-1}\right) &=p_i \cdot\left( Z_{i+1} - Z_i \right)\\
+	Z_{i+1} = Z_i + \frac{q_i}{p_i}\cdot \underbrace{\left(Z_i - Z_{i-1}\right)}_{(1)}
+\end{esp}
+where $(1)$ can be written as $\frac{q_{i-1}}{p_{i-1}} \left(Z_{i-1} - Z_{i-2}\right)$. \\
+
+We can then write the recursive equation for $Z_i$ as follows
+\begin{esp}
+Z_{i+1} &= Z_i + Z_1 \cdot \prod\limits_{j=1}^i \frac{q_j}{p_j} \quad i \ge 1\\
+Z_n+1 &= \sum\limits_{i=1}^n \left(Z_{i+1} - Z_i \right)	+Z_1 = Z_1 \cdot \sum\limits_{i=0}^{n} \prod\limits_{j=1}^i \frac{q_j}{p_j}
+\end{esp}
+Moreover we find that if $\sum\limits_{i=0}^{+\infty}p_i < \infty$ then there exists a non-zero bounded solution and therefore the \gls{mc} is transient.
+The table \ref{tab:rw} summarize the result we just found
+\begin{table}[]
+\centering
+\label{tab:rw}
+\begin{tabular}{c|cc}
+Cases \ series                                                & \multicolumn{1}{c|}{$\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{q_j}{p_j}$} & $\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{p_j}{q_{j+1}}$ \\ \hline
+Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\
+\begin{tabular}[c]{@{}c@{}}Positive \\ recurrent\end{tabular} & $+\infty$                                                                               & $< +\infty$                                                          \\
+\begin{tabular}[c]{@{}c@{}}Null\\ recurrent\end{tabular}      & $+\infty$                                                                               & $+\infty$
+\end{tabular}
+\end{table}
+
+\subsection{M/G/1}
+--TODO--
+
+\begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
+	An irreducible \gls{mc} is recurrent if:
+
+	\begin{equation}\noindent
+		\exists \text{ a sequence } Y_i : \quad
+		\sum\limits_{i=0}^{+\infty} P_{ij} Y_j \le Y_i \quad \forall i \neq 0 \quad and \quad
+		\lim\limits_{i \to +\infty} Y_i = +\infty
 		\end{equation}
-	\end{theorem}
-	---
-	\begin{proof}
-		Proof is splitted into small chunks, as usual.
+\end{theorem}
+---
+\begin{proof}
+	Proof is splitted into small chunks, as usual.
 
-		\proofpart
-			Let's consider a \gls{mc} with probability matrix $\tilde{P}$, that concides with P except for the first line, which is $(1, 0, 0, ...)$.
-			In this way we make the state 0 absorbing.
+	\proofpart
+		Let's consider a \gls{mc} with probability matrix $\tilde{P}$, that concides with P except for the first line, which is $(1, 0, 0, ...)$.
+		In this way we make the state 0 absorbing.
 
-			We employ this trick to write theorem condition also for $i=0$.
-			$$ \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \le Y_i ~~ \forall i$$
+		We employ this trick to write theorem condition also for $i=0$.
+		$$ \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \le Y_i ~~ \forall i$$
 
-		\proofpart
-			If a given sequence $Y_i$ is a solution, its shifted version $y_i + b$ is a solution too, for all $b$.
+	\proofpart
+		If a given sequence $Y_i$ is a solution, its shifted version $y_i + b$ is a solution too, for all $b$.
 
-			Since $Y_i$ sequence diverges, we can choose the minimum $b$ that makes each member strictly positive.
-			\begin{equation}
-				\exists b: \forall i, Y_i + b \doteq Y_i' > 0 \text{ is a valid solution.}
-			\end{equation}
+		Since $Y_i$ sequence diverges, we can choose the minimum $b$ that makes each member strictly positive.
+		\begin{equation}
+			\exists b: \forall i, Y_i + b \doteq Y_i' > 0 \text{ is a valid solution.}
+		\end{equation}
 
-			From now on, we consider only positive sequences $Y_i$.
+		From now on, we consider only positive sequences $Y_i$.
 
-		\proofpart
-			\begin{equation}\begin{split}
-				Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
-				\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(2)}{=} \\
-				& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
-				\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
-				& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall i,\forall m
-			\end{split}\end{equation}
-			where
-			\begin{itemize}
-				\item[(1)] hypothesis has been applied to $Y_j$ itself. Note that for $\tilde{P}$ this property is valid for $i=0$ too (in general it's not true for $P$).
-				\item[(2)] sums can be swapped since sum in $k$ surely converges, both simply and absolutely since $Y_i$ are strictly positive. Note that convergence is guaranteed by the fact that at the left side of the current chain of decreasing inequalities we find the real number $Y_i$, that exists for hypothesis.
-				\item[(3)] the same reasoning of (2) is repeated in a recursive way.
-			\end{itemize}
+	\proofpart
+		\begin{equation}\begin{split}
+			Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
+			\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(2)}{=} \\
+			& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
+			\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
+			& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall i,\forall m
+		\end{split}\end{equation}
+		where
+		\begin{itemize}
+			\item[(1)] hypothesis has been applied to $Y_j$ itself. Note that for $\tilde{P}$ this property is valid for $i=0$ too (in general it's not true for $P$).
+			\item[(2)] sums can be swapped since sum in $k$ surely converges, both simply and absolutely since $Y_i$ are strictly positive. Note that convergence is guaranteed by the fact that at the left side of the current chain of decreasing inequalities we find the real number $Y_i$, that exists for hypothesis.
+			\item[(3)] the same reasoning of (2) is repeated in a recursive way.
+		\end{itemize}
 
-		\proofpart \label{part:Yi_lower_bound}
-			Since $Y_i$ serie diverges, we can write, by limit definition
-			$$ \forall \epsilon > 0, ~\exists M \in \N : ~Y_i \ge \frac{1}{\epsilon} \quad \forall i \ge M$$
+	\proofpart \label{part:Yi_lower_bound}
+		Since $Y_i$ serie diverges, we can write, by limit definition
+		$$ \forall \epsilon > 0, ~\exists M \in \N : ~Y_i \ge \frac{1}{\epsilon} \quad \forall i \ge M$$
 
-			\begin{equation}\begin{split}
-				Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
-					= \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-					+ \sum_{j=M}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \ge \\
-				& \ge \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-					+ \frac{1}{\epsilon} \sum_{j=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
-				& = \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-					+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \quad \forall i, \forall m
-			\end{split}\end{equation}
+		\begin{equation}\begin{split}
+			Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
+				= \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \sum_{j=M}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \ge \\
+			& \ge \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \frac{1}{\epsilon} \sum_{j=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
+			& = \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+				+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \quad \forall i, \forall m
+		\end{split}\end{equation}
 
-		\proofpart
-			Our aim is now to prove following statement
-			$$ \forall i,j \neq 0, \lim_{m \to \infty} \tilde{P}_{ij}^{(m)} = 0 $$
+	\proofpart
+		Our aim is now to prove following statement
+		$$ \forall i,j \neq 0, \lim_{m \to \infty} \tilde{P}_{ij}^{(m)} = 0 $$
 
-			We can distinguish two cases,
-			\begin{itemize}
-				\item if $P$ is recurrent, we certantly reach state 0 at some time ($f_{i0} = 1$), but given $\tilde{P}$ strucure, we will be stuck there forever.
-				\item if $P$ is transient, it must be $P_{ij}^{(m)}\stackrel{m \to \infty}{\longrightarrow} 0 $, so our lemma would be proven if
-				$$ \tilde{P}_{ij}^{(m)} \le P_{ij}^{(m)} \quad\forall i, j \neq 0$$
-			\end{itemize}
+		We can distinguish two cases,
+		\begin{itemize}
+			\item if $P$ is recurrent, we certantly reach state 0 at some time ($f_{i0} = 1$), but given $\tilde{P}$ strucure, we will be stuck there forever.
+			\item if $P$ is transient, it must be $P_{ij}^{(m)}\stackrel{m \to \infty}{\longrightarrow} 0 $, so our lemma would be proven if
+			$$ \tilde{P}_{ij}^{(m)} \le P_{ij}^{(m)} \quad\forall i, j \neq 0$$
+		\end{itemize}
 
-			This possibility can be more widely explained this way, splitting $\tilde{P}_{ij}^{(m)}$ and $P_{ij}^{(m)}$ across random walks	 that contain state 0 or not.
-			\begin{equation}
-				\left\{ \begin{split}
-					& P_{ij}^{(m)} = \sum_{l=1}^{m-1} f_{i0}(l) P_{0j}^{(m-l)} +
-						& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
-					& \tilde{P}_{ij}^{(m)} =
-						& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
-				\end{split} \right.
-			\end{equation}
-			Note that, in $\tilde{P}$, state $0$ is a trap state, so the first term of the sum disappear because $j \neq 0$ can no more be reached.
+		This possibility can be more widely explained this way, splitting $\tilde{P}_{ij}^{(m)}$ and $P_{ij}^{(m)}$ across random walks	 that contain state 0 or not.
+		\begin{equation}
+			\left\{ \begin{split}
+				& P_{ij}^{(m)} = \sum_{l=1}^{m-1} f_{i0}(l) P_{0j}^{(m-l)} +
+				& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
+	 			& \tilde{P}_{ij}^{(m)} =
+				& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
+			\end{split} \right.
+		\end{equation}
+		Note that, in $\tilde{P}$, state $0$ is a trap state, so the first term of the sum disappear because $j \neq 0$ can no more be reached.
 
-		\proofpart
-			Now we assume that chain is transient and we proceed to an absurd statement, which proves our theorem.
+	\proofpart
+		Now we assume that chain is transient and we proceed to an absurd statement, which proves our theorem.
 
-			By definition,
-			$$ f_{i0} = \lim_{m \to +\infty} \tilde{P}_{i0}^{(m)} = \prob[\exists k : X_k = 0 | X_0 = i] = \tilde{\pi}_i(C_0)$$
-			where $C_0$ is the recurrent class that contains only the absorbing state 0.
+		By definition,
+		$$ f_{i0} = \lim_{m \to +\infty} \tilde{P}_{i0}^{(m)} = \prob[\exists k : X_k = 0 | X_0 = i] = \tilde{\pi}_i(C_0)$$
+		where $C_0$ is the recurrent class that contains only the absorbing state 0.
 
-			Using what we have proved in part \ref{part:Yi_lower_bound}:
-			\begin{equation}\begin{split}
-				Y_i & \ge \lim_{m \to +\infty} Y_i \ge \\
+		Using what we have proved in part \ref{part:Yi_lower_bound}:
+		\begin{equation}\begin{split}
+			Y_i & \ge \lim_{m \to +\infty} Y_i \ge \\
 					& \ge \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-						+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
-				& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
-			\end{split}\end{equation}
-			where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
+					  + \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
+					& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
+		\end{split}\end{equation}
+		where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
 
-			Terms can be rearranged this way
-			\begin{equation*}\begin{split}
-				&Y_i - \tilde{\pi}_i(C_0) Y_0 \ge \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
-				&1 - \tilde{\pi}_i(C_0) \le \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] \le \epsilon Y_i \quad\forall \epsilon > 0
-			\end{split}\end{equation*}
+		Terms can be rearranged this way
+		\begin{equation*}\begin{split}
+			&Y_i - \tilde{\pi}_i(C_0) Y_0 \ge \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
+			&1 - \tilde{\pi}_i(C_0) \le \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] \le \epsilon Y_i \quad\forall \epsilon > 0
+		\end{split}\end{equation*}
 
-			Since we assumed that the chain is transient, we can state that $\tilde{\pi}_i(C_0) < 1$, so choosing $\epsilon < \frac{1-\tilde{\pi}_i(C_0)}{Y_i}$ we have that
+		Since we assumed that the chain is transient, we can state that $\tilde{\pi}_i(C_0) < 1$, so choosing $\epsilon < \frac{1-\tilde{\pi}_i(C_0)}{Y_i}$ we have that
 
-			\begin{equation*}
-				1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i = 1 - \tilde{\pi}_i(C_0)
-			\end{equation*}
-			We derive that $\tilde{\pi}_i(C_0) = f_{i0} = 1$, which implies that chain is recurrent for lemma \ref{lemma:MC_irreducible_fi0}. This is an absurd given chain is supposed transient.
+		\begin{equation*}
+			1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i = 1 - \tilde{\pi}_i(C_0)
+		\end{equation*}
+		We derive that $\tilde{\pi}_i(C_0) = f_{i0} = 1$, which implies that chain is recurrent for lemma \ref{lemma:MC_irreducible_fi0}. This is an absurd given chain is supposed transient.
 	\end{proof}

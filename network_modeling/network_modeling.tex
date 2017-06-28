@@ -20,7 +20,7 @@
 
 % math package
 \usepackage{mathtools}
-\usepackage{amsthm}
+\usepackage{amsthm,environ}
 \usepackage{amsmath, amssymb, dsfont, bm,blkarray}
 
 % tikz figures
@@ -72,6 +72,19 @@
 \addto\captionsenglish{\renewcommand{\chaptername}{Section}}
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
 %\renewcommand\qedsymbol{$\square$\itshape QED}
+
+%split and equation environment
+\NewEnviron{esp}{%
+\begin{equation}\begin{split}
+  \BODY
+\end{split}\end{equation}
+}
+
+\NewEnviron{esp*}{%
+\begin{equation*}\begin{split}
+  \BODY
+\end{split}\end{equation*}
+}
 
 
 % useful aliases for common employed declarations
