@@ -27,7 +27,11 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 \subsection{Count of renewals}
 	Each $X_i$ can be reported as a progress on a plot, marking each renewal event and the time intervals between them.
 
-	\#TODO Graph
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{img/renewal.jpg}
+		\caption{Representation of a Renewal process}
+	\end{figure}
 
 	where
 	\begin{itemize}
@@ -1227,7 +1231,7 @@ m_0 = p_{00}\cdot1+p_{01}[1+\frac{m}{p_{10}(m)}]
 \label{Formula}
 \eeq
 Where $m_0$ is the average return time to $G$ and so the inverse of throughput; why? Because as in all semi-Markov processes, if we consider one state, visits to that one state are renewal instants. So the return time from $G$ to itself is a renewal interval and for this specific case, at every renewal cycle we have 1 success and the avg number of successes per unit time is the avg number of successes per cycle, $1$, divided by the average time per cycle. Moreover, once we have obtained the Markov structure we can identify the metrics we need to find.\\
-Returning to the expression \ref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra\footnote{Fede e Davide this is for you $\heartsuit$} is:
+Returning to the expression \ref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
 \begin{align}
 \begin{split}
 m_0 & = 1+\frac{p_{01}\cdot m}{p_{10}(m)}\\
@@ -1423,7 +1427,6 @@ We just note that the denominator of this expression is equal to the one in the 
 \end{itemize}
 So $1-(1-\delta)p_{00}-\delta p_{00}(m) = (1-\delta)p_{01} + \delta p_{01}(m)$.\\
 This result stands out from the fact that the two throughputs are the same quantity but computed by two different models; so we did not reduced the complexity, we just redistributed the quantities.
-
 \begin{figure}[h]
 	\begin{center}
 		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
