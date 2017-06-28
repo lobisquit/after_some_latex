@@ -407,7 +407,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\end{definition}
 
 	So the probability of ever going back to state $i$ can be written as
-	$$ f_{ii} = \sum\limits_{n=1}^\infty f_{ii}(n)  = \sum\limits_{n=1}^\infty \prob[R_i=n | X_0=i] $$
+	$$ f_{ii} = \sum\limits_{n=1}^{+\infty} f_{ii}(n)  = \sum\limits_{n=1}^{+\infty} \prob[R_i=n | X_0=i] $$
 	where $f_{ii}(n)$ is the probability of returning to state $i$ in $n$ steps.
 
 	\begin{definition}[Recurrent state]
@@ -423,7 +423,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 	\begin{definition}
 		$M$ is the number of returns to state $i$, starting from $i$
-		$$\exp[M | X_0 = i] = \sum\limits_{k=1}^\infty \prob[M\geq k | X_0 = i] = \sum\limits_{k=1}^\infty f_{ii}^k = \begin{cases}
+		$$\exp[M | X_0 = i] = \sum\limits_{k=1}^{+\infty} \prob[M\geq k | X_0 = i] = \sum\limits_{k=1}^{+\infty} f_{ii}^k = \begin{cases}
 		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
 		\infty, & \text{if recurrent}
 		\end{cases}$$
@@ -438,18 +438,18 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\end{definition}
 
 	\begin{theorem}
-		$$i  \text{ is recurrent} \iff \sum\limits_{n=1}^\infty P_{ii}^{(n)} = \infty$$
+		$$i  \text{ is recurrent} \iff \sum\limits_{n=1}^{+\infty} P_{ii}^{(n)} = \infty$$
 	\end{theorem}
 	---
 
 	\begin{proof}
-		Let the number of time state i has been visited be $$M = \sum\limits_{n=1}^\infty \mathds{1}\{X_n =i\} $$
+		Let the number of time state i has been visited be $$M = \sum\limits_{n=1}^{+\infty} \mathds{1}\{X_n =i\} $$
 		The following swap from expected value and infinite sum is allowed by Fubini's Theorem
 		$$
-			\exp[M | X_0 = i] = \exp\left[\sum\limits_{n=1}^\infty \mathds{1}\{X_n = i\} | X_0 = i\right]
-			= \sum\limits_{n=1}^\infty \exp\left[\mathds{1}\{ X_n = i\} | X_0 = i\right] = \sum\limits_{n=1}^\infty P_{ii}^{(n)}
+			\exp[M | X_0 = i] = \exp\left[\sum\limits_{n=1}^{+\infty} \mathds{1}\{X_n = i\} | X_0 = i\right]
+			= \sum\limits_{n=1}^{+\infty} \exp\left[\mathds{1}\{ X_n = i\} | X_0 = i\right] = \sum\limits_{n=1}^{+\infty} P_{ii}^{(n)}
 		$$
-		So we have shown that $\exp[M | X_0=i] = \sum\limits_{n=1}^\infty P_{ii}^{(n)}$.\\
+		So we have shown that $\exp[M | X_0=i] = \sum\limits_{n=1}^{+\infty} P_{ii}^{(n)}$.\\
 		Now, remembering that $$ \exp[M | X_0 = i] = \begin{cases}
 		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
 		\infty, & \text{if recurrent}
@@ -465,12 +465,12 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\begin{proof}
 		$$\text{Since } i\leftrightarrow j : \exists m,n \text{ such that } P_{ij}^{(n)} \text{ and } P_{ji}^{(m)} > 0$$
 		$$\text{let } r>0 : P_{jj}^{(m+r+n)} = \sum\limits_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)} \geq P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}$$
-		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} \geq \sum\limits_{r=1}^\infty P_{jj}^{(m+r+n)} \geq \sum\limits_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum\limits_{r=1}^\infty P_{ii}^{(r)}$$
+		$$\sum\limits_{l=1}^{+\infty} P_{jj}^{(l)} \geq \sum\limits_{r=1}^{+\infty} P_{jj}^{(m+r+n)} \geq \sum\limits_{r=1}^{+\infty} P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum\limits_{r=1}^{+\infty} P_{ii}^{(r)}$$
 		but since \begin{itemize}
-		\item$i$ is recurrent $\Rightarrow \sum\limits_{n=1}^\infty P_{ii}^{(n)} = \infty$
+		\item$i$ is recurrent $\Rightarrow \sum\limits_{n=1}^{+\infty} P_{ii}^{(n)} = \infty$
 		\item $P_{ij}^{(n)} \text{ and } P_{ji}^{(m)} > 0$
 		\end{itemize}
-		$$\sum\limits_{l=1}^\infty P_{jj}^{(l)} = \infty \Rightarrow j \text{ is recurrent}$$
+		$$\sum\limits_{l=1}^{+\infty} P_{jj}^{(l)} = \infty \Rightarrow j \text{ is recurrent}$$
   \end{proof}
 
 	\begin{theorem}[Basic limit theorem on MC] \label{th:basic_limit_MC}
@@ -486,7 +486,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\begin{tabular}{|c||c|c|c|}
 			\hline
 			State $i$ & Transient & Null recurrent & Positive recurrent \\ \hline
-			$f_{ii} = \sum\limits_{n=1}^\infty f_{ii}^{(n)}$ & $<1$ & 1 & 1 \\ \hline
+			$f_{ii} = \sum\limits_{n=1}^{+\infty} f_{ii}^{(n)}$ & $<1$ & 1 & 1 \\ \hline
 			$\lim\limits_{k \to \infty } \prob[M \geq k | X_0=i]$ & 0 & 1 & 1 \\ \hline
 			$\exp[n|X_0=i]$ & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & $\infty$ \\ \hline
 			$m_i = \sum\limits_n f_{ii}^{(n)}$ & $\infty$ & $\infty$ & $<\infty$ \\ \hline
@@ -497,8 +497,8 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\begin{theorem}[1.3 (K.T. pp 85-86)]
 		For an aperiodic positive recurrent class (irreducible MC), $\pi_j$ is the unique solution of the following system.
 		\begin{equation*}\begin{cases}
-			\pi_j = \sum\limits_{i=0}^\infty \pi_i P_{ij} \\
-			\sum\limits_{i=0}^\infty \pi_i = 1 \\
+			\pi_j = \sum\limits_{i=0}^{+\infty} \pi_i P_{ij} \\
+			\sum\limits_{i=0}^{+\infty} \pi_i = 1 \\
 			\pi_i \geq 0 \quad \forall i
 		\end{cases}\end{equation*}
 	\end{theorem}
@@ -510,9 +510,9 @@ In conclusion, we found that the average first passage time is equal to the aver
 			We first want to show that the $\pi_j$ satisfy the system (\textbf{\textit{Existence of the solution}})
 			\begin{equation*}
 				\begin{split}
-					\forall m,n \qquad 1&=\sum\limits_{j=0}^\infty P_{ij}^{(n)} > \sum\limits_{j=0}^m P_{ij}^{(n)}\\
+					\forall m,n \qquad 1&=\sum\limits_{j=0}^{+\infty} P_{ij}^{(n)} > \sum\limits_{j=0}^m P_{ij}^{(n)}\\
 	 			 \lim_{n\to\infty} \sum\limits_{j=0}^m P_{ij}^{(n)} &= \sum\limits_{j=0}^m \pi_j \leq 1 \quad \forall n \\
-				 &\implies \sum\limits_{j=0}^\infty \pi_j \leq 1\\
+				 &\implies \sum\limits_{j=0}^{+\infty} \pi_j \leq 1\\
 				\end{split}
 			\end{equation*}
 
@@ -528,24 +528,24 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\proofpart
 			\begin{equation*}
 				\begin{split}
-					\sum\limits_{k=0}^\infty \sum\limits_{j=0}^\infty \pi_k P_{kj}^{(n)} &\geq
-					\sum\limits_{k=0}^m \sum\limits_{j=0}^\infty \pi_k P_{kj}^{(n)}  \\
-					&=(\text{since } \sum\limits_{j=0}^\infty P_{kj}^{(n)} = 1 )\\
+					\sum\limits_{k=0}^{+\infty} \sum\limits_{j=0}^{+\infty} \pi_k P_{kj}^{(n)} &\geq
+					\sum\limits_{k=0}^m \sum\limits_{j=0}^{+\infty} \pi_k P_{kj}^{(n)}  \\
+					&=(\text{since } \sum\limits_{j=0}^{+\infty} P_{kj}^{(n)} = 1 )\\
 					&=\sum\limits_{k=0}^m \pi_k \quad \forall m\\
-					\text{suppose } \exists j > 1 : \pi_j &> \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)} \\
-					\text{then we have that } \sum\limits_{j=0}^\infty \pi_k &> \sum\limits_{j=0}^\infty \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum\limits_{k=0}^\infty \pi_k \quad \text{ABSURD.} \\
-					&\implies \pi_j = \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)}
+					\text{suppose } \exists j > 1 : \pi_j &> \sum\limits_{k=0}^{+\infty} \pi_k P_{kj}^{(n)} \\
+					\text{then we have that } \sum\limits_{j=0}^{+\infty} \pi_k &> \sum\limits_{j=0}^{+\infty} \sum\limits_{k=0}^{+\infty} \pi_k P_{kj}^{(n)} > \sum\limits_{k=0}^{+\infty} \pi_k \quad \text{ABSURD.} \\
+					&\implies \pi_j = \sum\limits_{k=0}^{+\infty} \pi_k P_{kj}^{(n)}
 				\end{split}
 			\end{equation*}
 
 		\proofpart
 			\begin{equation*}
 				\begin{split}
-			 		\pi_j = \sum\limits_{k=0}^\infty \pi_k P_{kj}^{(n)}, \qquad |P_{kj}^{(n)}| &\leq 1 \quad \forall n,i,k \\
+			 		\pi_j = \sum\limits_{k=0}^{+\infty} \pi_k P_{kj}^{(n)}, \qquad |P_{kj}^{(n)}| &\leq 1 \quad \forall n,i,k \\
 					\text{using an appropriate theorem for sliding the}&\text{ limit inside the infinite sum we have:}\\
-					\pi_j = \sum\limits_{k=0}^\infty  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} &= (\sum\limits_{k=0}^\infty \pi_k) \pi_j\\
+					\pi_j = \sum\limits_{k=0}^{+\infty}  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} &= (\sum\limits_{k=0}^{+\infty} \pi_k) \pi_j\\
 					\text{and now since $\pi_j>0$}
-					&\implies \sum\limits_{k=0}^\infty \pi_k = 1
+					&\implies \sum\limits_{k=0}^{+\infty} \pi_k = 1
 				\end{split}
 			\end{equation*}
 			\textbf{\textit{This concludes the existence proof.}}
@@ -556,22 +556,22 @@ In conclusion, we found that the average first passage time is equal to the aver
 			\begin{equation}
 				\begin{split}
 					X_j =
-					 \sum\limits_{i=0}^\infty X_i P_{ij} &=
-					 \sum\limits_{i=0}^\infty ( \sum\limits_{k=0}^\infty X_k P_{ki} ) P_{ij} \geq
+					 \sum\limits_{i=0}^{+\infty} X_i P_{ij} &=
+					 \sum\limits_{i=0}^{+\infty} ( \sum\limits_{k=0}^{+\infty} X_k P_{ki} ) P_{ij} \geq
 					 \sum\limits_{k=0}^m X_k \\
-					 \sum\limits_{i=0}^\infty P_{ki} P_{ij} &= \sum\limits_{k=0}^m X_k P_{kj}^{(2)}
+					 \sum\limits_{i=0}^{+\infty} P_{ki} P_{ij} &= \sum\limits_{k=0}^m X_k P_{kj}^{(2)}
 					 \quad \forall m
-					 \Rightarrow X_j \geq \sum\limits_{k=0}^\infty X_k P_{kj}^{(n)}\qquad \forall n
+					 \Rightarrow X_j \geq \sum\limits_{k=0}^{+\infty} X_k P_{kj}^{(n)}\qquad \forall n
 				\end{split}
 			\end{equation}
 
 			This is the same result of $3^{rd}$ step, so as in $3^{rd}$ step, we can prove by contradiction that this inequality is in fact an equality.
 
-			$$ \implies X_j = \sum\limits_{k=0}^\infty X_k P_{kj}^{(n)} \quad \forall n $$
+			$$ \implies X_j = \sum\limits_{k=0}^{+\infty} X_k P_{kj}^{(n)} \quad \forall n $$
 			as $n \to \infty$ we have:
 
 			\begin{equation}
-				X_j = (\sum\limits_{k=0}^\infty X_k ) \pi_j \Rightarrow X_j = \pi_j
+				X_j = (\sum\limits_{k=0}^{+\infty} X_k ) \pi_j \Rightarrow X_j = \pi_j
 			\end{equation}
 
 			So it's unique.
@@ -584,7 +584,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{equation}
 		if and only if
 		\begin{equation}\label{pitoinfty}
-			\sum\limits_{i=0}^\infty p_i = \infty
+			\sum\limits_{i=0}^{+\infty} p_i = \infty
 		\end{equation}
 	\end{lemma}
 
@@ -599,7 +599,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 				\begin{equation}
 					\prod_{i=0}^{k-1} (1-p_i) < e^{-\sum\limits_{i=0}^{k-1}p_i}
 				\end{equation}
-				But by assumption $\sum\limits_{i=0}^\infty p_i = \infty$ hence,
+				But by assumption $\sum\limits_{i=0}^{+\infty} p_i = \infty$ hence,
 				$$ \lim_{m \to \infty} \prod_{i=0}^{m}(1-p_i) = 0 $$
 
 			\item Let's prove the following inequality:
@@ -612,7 +612,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 				1- \sum\limits_{i=j}^{m+1} p_i + p_{m+1}\sum\limits_{i=j}^m p_i
 			\end{eqnarray*}
 
-			Assume now that $\sum\limits_{i=1}^\infty p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum\limits_{i=j}^\infty p_i < 1$.
+			Assume now that $\sum\limits_{i=1}^{+\infty} p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum\limits_{i=j}^{+\infty} p_i < 1$.
 
 			Then we have:
 			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) \ge \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
@@ -897,9 +897,10 @@ Let's now consider a queueing system where arrivals are markovian and there's on
 \end{equation}
 
 Let's now define the probability of moving to state $i$ in one step as
-\begin{esp}
+\begin{esp}\label{eq:MG1-intro}
 	\Pi_i &= \sum\limits_{j=0}^{+\infty} \pi_j \cdot P_{ji} \quad \forall i \\
-	\sum\limits_{i=0}^{+\infty} \pi_i &=1
+	\sum\limits_{i=0}^{+\infty} \pi_i &=1\\
+	\sum\limits_{i=0}^{+\infty} a_i &=1
 \end{esp}
 Looking at P in \eqref{eq:mg1P} we can simplify the previous equation as
 \begin{equation}
@@ -1113,3 +1114,27 @@ but I don't know why. TODO!!
 		\end{equation*}
 		We derive that $\tilde{\pi}_i(C_0) = f_{i0} = 1$, which implies that chain is recurrent for lemma \ref{lemma:MC_irreducible_fi0}. This is an absurd given chain is supposed transient.
 	\end{proof}
+
+We now want to discriminate what happens to a \gls{mc} with relation to what we found in \eqref{eq:pi0rho}. We recall now the value of $y_i$ (or equivalently, as stated in the book, $z_i$)
+\begin{esp} \label{eq:zirho}
+	z_i \ge \sum\limits_{j=0}^{+\infty} P_{i j} \cdot z_j &= a_o \cdot z_i-1 + a_1 \cdot z_i + \dots \\ &= \sum\limits_{j=0}^{+\infty} a_{j} \cdot z_{i-1+j} ~ i\neq 0
+\end{esp}
+
+For $z_i=i$ we now wonder when the relation \eqref{eq:pi0rho} holds:
+\begin{esp}
+	i &\ge \sum\limits_{j=0}^{+\infty} a_{j} \cdot (i-1+j) =(i-1)\cdot\sum\limits_{j=0}^{+\infty} a_{j} + \sum\limits_{j=0}^{+\infty} a_{j} \cdot j \stackrel{(1)}{=} i-1+\rho \\
+	i &\stackrel{?}{\ge } i-1+\rho \quad \text{true if }\rho \le 1
+\end{esp}
+where (1) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state probability is positive and equation \eqref{eq:pi0rho}, we can derive the table \ref{tab:rhoBehaviour}:
+
+\begin{table}[h!]
+\centering
+\caption{Behaviour of the \gls{mc} when varying $\rho$}
+\label{tab:rhoBehaviour}
+\begin{tabular}{c|c|c}
+$\rho$ value     & \begin{tabular}[c]{@{}l@{}}Direction of\\ implication\end{tabular} & MC characteristic  \\
+$0 \le \rho <1 $ & $\Leftrightarrow$                                                  & positive recurrent \\
+$=1$             &                                                                    & zero recurrent     \\
+$>1$             & $\implies$                                                         & transient
+\end{tabular}
+\end{table}

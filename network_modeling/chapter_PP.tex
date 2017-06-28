@@ -248,9 +248,9 @@ Where $p = \prob[U_k + Y_k \geq t]$, we have to compute this probability.
 Now we can compute
 \begin{equation}
 	\begin{split}
-		\prob[M(t)=m] &= \sum\limits_{n=0}^{\infty} \prob[M(t)=m|X(t)=n]\prob[X(t)=n] \\
-		&= \sum\limits_{n=m}^{\infty} \frac{n!}{m!(n-m)!}p^m(1-p)^{n-m}\frac{e^{-\lambda t} (\lambda t)^n}{n!} \\
-		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!}\sum\limits_{n=m}^{\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
+		\prob[M(t)=m] &= \sum\limits_{n=0}^{+\infty} \prob[M(t)=m|X(t)=n]\prob[X(t)=n] \\
+		&= \sum\limits_{n=m}^{+\infty} \frac{n!}{m!(n-m)!}p^m(1-p)^{n-m}\frac{e^{-\lambda t} (\lambda t)^n}{n!} \\
+		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!}\sum\limits_{n=m}^{+\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
 		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!} e^{-\lambda(1-p)t}\\
 		&= \frac{e^{-\lambda p t}(\lambda p t)^m}{m!}
 	\end{split}

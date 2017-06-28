@@ -474,7 +474,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
 	\eeq
-	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^\infty(1-F(x))\,dx$. See figure\ref{fig:mu}
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. See figure\ref{fig:mu}
 	\begin{figure}
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
@@ -705,9 +705,9 @@ The distribution function of a discrete random variable with possible values 0, 
 \begin{definition}
 	(Directly Riemann Integrable Function) Given a function g defined on [0, $\infty$) we define the following quantities for $\delta > 0$:
 	\begin{align*}
-		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
+		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{+\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
 		\\
-		\bar \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty}max\{g(t):(n-1)\delta \leq t \leq n \delta \}
+		\bar \sigma (\delta) = \delta \cdot \sum_{n=1}^{+\infty}max\{g(t):(n-1)\delta \leq t \leq n \delta \}
 	\end{align*}
 	We say that g is directly Riemann integrable if both $\underline \sigma (\delta)$ and $\bar \sigma (\delta)$ converge absolutely $\forall \quad \delta > 0$ and if:
 	\begin{equation}
@@ -715,7 +715,7 @@ The distribution function of a discrete random variable with possible values 0, 
 		\end{equation}
 \end{definition}
 
-We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
+We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
 
 \begin{theorem}
 	(Key Renewal Theorem) It is given a distribution function F of a positive random variable $a$ with mean $\mu$. We suppose that $a$ is directly Riemann integrable and that $A$ is the solution of the \textit{renewal equation}
@@ -726,7 +726,7 @@ We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (
 	\begin{equation*}
 		\lim_{t \rightarrow \infty} A(t) =
 		\begin{dcases}
-			\frac{1}{\mu} \int_{0}^{\infty}a(x)dx \quad & if \quad \mu < \infty \\
+			\frac{1}{\mu} \int_{0}^{+\infty}a(x)dx \quad & if \quad \mu < \infty \\
 			0 \quad & if \quad \mu = \infty
 		\end{dcases}
 	\end{equation*}
@@ -734,7 +734,7 @@ We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (
 	\begin{equation*}
 		\lim_{t \rightarrow \infty} A(c+n\cdot \lambda) =
 		\begin{dcases}
-			\frac{\lambda}{\mu} \sum_{n=0}^{\infty}a(c+n \cdot \lambda) \quad & if 	\quad \mu<\infty \\
+			\frac{\lambda}{\mu} \sum_{n=0}^{+\infty}a(c+n \cdot \lambda) \quad & if 	\quad \mu<\infty \\
 			0 \quad & if \quad \mu = \infty
 		\end{dcases}
 	\end{equation*}
@@ -744,7 +744,7 @@ We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (
 The theorem \ref{KRT1} can be also expressed in the following form:
 
 \begin{theorem}
-	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^\infty F_{k}(t)$ is the \textit{renewal function} associated with F.
+	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^{+\infty} F_{k}(t)$ is the \textit{renewal function} associated with F.
 	If F is not arithmetic then
 	\begin{equation}
 		\lim_{t \rightarrow \infty} [M(t+h)-M(t)]=\frac{h}{\mu}
@@ -775,7 +775,7 @@ Conditioning on the first event, we obtain that
 
 For the law of the total probability we have
 \begin{align*}
-	A_z(t) &= \int_{0}^{\infty} \prob[\gamma_t>z|X_1=x] dF(x) = \int_{0}^{t}A_z(t-x)dF(x)+\int_{t+z}^{\infty}dF(x)= \\
+	A_z(t) &= \int_{0}^{+\infty} \prob[\gamma_t>z|X_1=x] dF(x) = \int_{0}^{t}A_z(t-x)dF(x)+\int_{t+z}^{+\infty}dF(x)= \\
 	&= \int_{0}^{t}A_z(t-x)dF(x)+ [1-F(t+z)]
 \end{align*}
 
@@ -786,13 +786,13 @@ Now we apply the \textit{renewal equation} setting
 \end{dcases} \end{equation}
 
 \begin{align*}
-	\int_{0}^{\infty} a(x) d(x) & = \int_{0}^{\infty}(1-F(x)) d(x) = \\
-	& = \int_{z}^{\infty}(1-F(y))dy \leq \int_{0}^{\infty}(1-F(y))dy = \mu
+	\int_{0}^{+\infty} a(x) d(x) & = \int_{0}^{+\infty}(1-F(x)) d(x) = \\
+	& = \int_{z}^{+\infty}(1-F(y))dy \leq \int_{0}^{+\infty}(1-F(y))dy = \mu
 \end{align*}
 
 Supposing $\mu < \infty$, for the \textit{renewal theorem} we obtain that
 \begin{equation}
-	\lim_{t \rightarrow \infty} \prob[\gamma_t>z] = \lim_{t \rightarrow \infty} A_z(t) = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(x))dx \quad \forall z > 0
+	\lim_{t \rightarrow \infty} \prob[\gamma_t>z] = \lim_{t \rightarrow \infty} A_z(t) = \frac{1}{\mu} \cdot \int_z^{+\infty}(1-F(x))dx \quad \forall z > 0
 	\label{limitingdistribution}
 \end{equation}
 
@@ -804,16 +804,16 @@ From \ref{limitingdistribution} we can determine the limiting distribution for t
 \end{equation}
 From equation \ref{currtotallife} we have that
 \begin{align*}
-	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} \prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(z))dz
+	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} \prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{+\infty}(1-F(z))dz
 \end{align*}
 In particular we have that
 \begin{align*}
-	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y] & = \lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_{t} \geq 0] \\ & = \frac{1}{\mu} \int_z^{\infty}(1-F(z))dz
+	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y] & = \lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_{t} \geq 0] \\ & = \frac{1}{\mu} \int_z^{+\infty}(1-F(z))dz
 \end{align*}
 
 So $\frac{1-F(z)}{\mu}$ is the probability density function of $\delta_t$. We are able to compute $\delta_t$ and $\gamma_t$ averages.
 \begin{align*}
-	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{\infty} \frac{z}{\mu} (1-F(z))dz \\ & = \frac{z^2}{2\mu} \left( 1-F(z) \right|_0^{\infty} + \int_0^{\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
+	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{+\infty} \frac{z}{\mu} (1-F(z))dz \\ & = \frac{z^2}{2\mu} \left( 1-F(z) \right|_0^{+\infty} + \int_0^{+\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
 \end{align*}
 
 Finally we conclude that
@@ -854,7 +854,7 @@ Then we finally prove that
 
 	\begin{align}
 		& M_D(t) = \exp[N(t)]
-		\\ & M(t) = \sum_{k=1}^{\infty}F_k(t)
+		\\ & M(t) = \sum_{k=1}^{+\infty}F_k(t)
 	\end{align}
 	Now we want to prove what follows:
 	\begin{align*}
@@ -864,7 +864,7 @@ Then we finally prove that
 
 	We have already seen that for a recurrent irreducible aperiodic \gls{mc} the following statament is true.
 	\begin{equation}
-		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
+		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{+\infty}n \cdot f_{jj}^{(n)}}
 	\end{equation}
 	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
 
@@ -931,17 +931,17 @@ Then we finally prove that
 			\prob[Y_1>t|X_1=x] & \text{if} \quad x \geq t
 			\\ p(t-x) & \text{if} \quad x<t
 		\end{dcases}
-		\\ & = \int_0^t p(t-x)dF(x)+\int_t^{\infty}\prob[Y_1>t|X_1=x]dF(x)
+		\\ & = \int_0^t p(t-x)dF(x)+\int_t^{+\infty}\prob[Y_1>t|X_1=x]dF(x)
 	\end{align*}
 	Knowing that $\int_0^{t}\prob[Y_1>t|X_1=x]dF(x)=0$ we have that
 	\begin{align*}
-		p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{\infty}\prob[Y_1>t|X_1=x]dF(x)
+		p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{+\infty}\prob[Y_1>t|X_1=x]dF(x)
 		\\ & = \prob[Y_1>t]+\int_0^t p(t-x)dF(x)
 	\end{align*}
 
-	We observe that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. Let $\int_0^{\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$, we can apply the renewal theorem
+	We observe that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. Let $\int_0^{+\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$, we can apply the renewal theorem
 	\begin{align*}
-		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
+		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{+\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
 	\end{align*}
 
 \section{Renewal-Reward processes}
@@ -1058,7 +1058,7 @@ Let us define the following quantities of interest.
 			\end{dcases}
 			& \parbox[c]{.5\textwidth}{total reward going from $i$ to $j$ for the first time following any path} \\
 			\begin{aligned}[b]
-				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
+				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{+\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
 				&= R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] \\
 				&= R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
 			\end{aligned} & \parbox[b]{.5\textwidth}{average reward going from $i$ to $j$ for the first time following any path}
