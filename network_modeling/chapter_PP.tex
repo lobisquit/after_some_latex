@@ -16,7 +16,7 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 			\prob[X_n \ge 2] &= o(n)
 		\end{split}
 	\end{equation}
-	\gls{kt} at page 226 shows that assuming \eqref{p_dist} you can get \eqref{p_dist_conseq} and viceversa.
+	\gls{kt} at page 226 shows that assuming \eqref{p_dfist} you can get \eqref{p_dist_conseq} and viceversa.
 \end{enumerate}
 \begin{theorem}[Exponential times in Poisson arrivals]
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
@@ -120,8 +120,8 @@ In general,
 Defining
 \begin{itemize}
 	\item $X(t)$ as the number of arrivals up to time t;
-	\item $W_n$ the instant of $n_{th}$ arrival;
-	\item $S_n$= $W_{n+1} - W_n$ the inter-arrival time between $(n+1)_{th}$ and $n_{th}$ arrival;
+	\item $W_n$ the instant of $n^{th}$ arrival;
+	\item $S_n$= $W_{n+1} - W_n$ the inter-arrival time between $(n+1)^{th}$ and $n^{th}$ arrival; %people uses (n+1)th and (n+1)st. no form is more correct than the other
 \end{itemize}
 
 \begin{theorem}[5.4, 	\textbf{$W_n ~ \sim$ Gamma Distribution} ]
@@ -155,7 +155,7 @@ Defining
 			\end{cases}
 		\end{equation*}
 
-		Compute the probability of these two disjoint events.
+		Computing the probability of these two disjoint events, we obtain
 		\begin{equation}
 			\begin{split}
 				& P[N((0,w_1])=0,...,N((w_n+\Delta w_n,t])=0] = \\
@@ -184,7 +184,7 @@ Defining
 
 		Dividing both members for ($\Delta w_1 \Delta w_2 .. \Delta w_n$) we obtain the distribution of an uniform random variable.
 		\begin{equation}
-			f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) =n!/t^n
+			f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) =\frac{n!}{t^n}
 		\end{equation}
 	\end{proof}
 \end{theorem}
@@ -199,7 +199,7 @@ Defining
 \begin{theorem}[5.6, Conditioned Arrivals]
 	(Enunciate given in an intuitive but not so formal way)
 
-	Being $X(t)$ a Poisson Process with $\lambda>0$, $u$ and $t$ two temporal variables such that $0<u<t$, $n$ and $k$ two variables which describes the number of arrivals such that $0\leq k\leq n$ . The probability of the event "up to instant $u$, $k$ arrivals have been occurred conditioned by the fact that $n$ arrivals occurs up to time $t$" is described by a binomial distribution with $n$ attempts and $u/t$ success probability.
+	Being $X(t)$ a Poisson Process with $\lambda>0$, $u$ and $t$ two temporal variables such that $0<u<t$, $n$ and $k$ two variables which describes the number of arrivals such that $0\leq k\leq n$ . The probability of the event ``up to instant $u$, $k$ arrivals have been occurred conditioned by the fact that $n$ arrivals occurs up to time $t$'' is described by a binomial distribution with $n$ attempts and $u/t$ success probability.
 
 	Formally
 	\begin{equation}
@@ -212,7 +212,7 @@ Defining
 	Being $X(t)=n$, the position of each arrival along interval $t$ can be modeled as i.i.d. uniform random variable. This corresponds to the realization of n experiments with $p_{succ}=u/t$ thus the conditioned probability can be modeled as binomial $Bin(n,\frac{u}{t})$.
 \end{proof}
 
-We will now show the theorem for the case where we have $X_1(t)\tilde\P(\lambda_1)$ and $X_2(t)\tilde\P(\lambda_2)$
+We will now show the theorem for the case where we have $X_1(t)\sim Poi(\lambda_1)$ and $X_2(t)\sim Poi(\lambda_2)$
 \begin{esp}
 	\prob[X_1(t)=k |X_1(t)+X_2(t)=n] &= \frac{\prob[X_1(t)=k |X_1(t)=k,X_2(t)=n-k]}{\prob[X_1(t)+X_2(t)=n]}\\
 	&= \frac{e^{-\lambda_1 \cdot t}\cdot \frac{(\lambda_1 t)^k}{k!}\cdot e^{-\lambda_2 \cdot t}\cdot \frac{(\lambda_2 t)^{n-k}}{(n-k)!}}{e^{-(\lambda_1 +\lambda_2) \cdot t}\cdot \frac{\left[(\lambda_1 +\lambda_2) t\right]^{n}}{n!}} \\

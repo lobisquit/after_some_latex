@@ -397,7 +397,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 		Since both $n+s+m$ and $n+2s+m$ are integer multiples of $d(j)$, so it is their difference $s$.
 
-		We have proved that $\forall s \in S_i$ is integer multiple of $d(j)$: this implies that $d(j)$ is a common divisor of $S_i$, and moreover it divides the g.c.d. of $S$, $d(i)$. In conclusion, $d(i)$ is an integer multiple of $d(j)$.
+		We have proved that $\forall s \in S_i$, s is an integer multiple of $d(j)$: this implies that $d(j)$ is a common divisor of $S_i$, and moreover it divides the g.c.d. of $S$, $d(i)$. In conclusion, $d(i)$ is an integer multiple of $d(j)$.
 
 		Doing this proof again switching role of $i$ and $j$ we prove that $d(j)$ is an integer multiple of $d(i)$, and so $d(i) = d(j)$.
 	\end{proof}
@@ -520,7 +520,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\proofpart
 			\begin{equation*}
 				\begin{split}
-					P_{ij}^{(n+m)} &\geq \sum\limits_{k=0}^m P_{ik}^{(m)} P_{kj}^{(n)} \quad \forall n, m, M\\
+					P_{ij}^{(n+m)} &\geq \sum\limits_{k=0}^M P_{ik}^{(m)} P_{kj}^{(n)} \quad \forall n, m, M\\
 					\text{as } m \to \infty :\quad \pi_j &\geq \sum\limits_{k=0}^m \pi_k P_{kj}^{(n)}\\
 					&\implies  \pi_j \geq \sum\limits_{k=0}^m \pi_k P_{kj}^{(n)}
 				\end{split}
@@ -608,10 +608,10 @@ In conclusion, we found that the average first passage time is equal to the aver
 			We can prove it recursively:
 			$$(1-p_j)(1-p_{j+1}) = 1-p_j - p_{j+1} + p_j p_{j+1} > 1-p_j - p_{j+1}$$
 			Iterating we obtain:
-			\begin{eqnarray*}
-				\prod_{i=j}^{m+1}(1-p_i) = (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum\limits_{i=j}^m p_i) = \\
-				1- \sum\limits_{i=j}^{m+1} p_i + p_{m+1}\sum\limits_{i=j}^m p_i
-			\end{eqnarray*}
+			\begin{esp*}
+				\prod_{i=j}^{m+1}(1-p_i) &= (1-p_{m+1})\prod_{i=j}^m(1-p_i) > (1-p_{m+1})(1-\sum\limits_{i=j}^m p_i)  \\
+				&=1- \sum\limits_{i=j}^{m+1} p_i + p_{m+1}\sum\limits_{i=j}^m p_i
+			\end{esp*}
 
 			Assume now that $\sum\limits_{i=1}^{+\infty} p_i < \infty$, then there must exist an index $j>1$ s.t. $\sum\limits_{i=j}^{+\infty} p_i < 1$.
 
@@ -785,14 +785,14 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\begin{proof} Base case $n=1$
 		\begin{equation}\begin{split} \label{eq:Y_i-properties}
 			& Y_i(1) = \prob[X_1 \in S | X_0 = i] = \sum_{j \in S} P_{ij} \\
-			& Y_i(2) \stackrel{(*)}{=} \sum_{j \in S} P_{ij} Y_i(1) \le \sum_{j \in S} P_{ij} = Y_i(1)
+			& Y_i(2) \stackrel{(*)}{=} \sum_{j \in S} P_{ij} Y_j(1) \le \sum_{j \in S} P_{ij} = Y_i(1)
 		\end{split}\end{equation}
 		where (*) holds by \emph{first step analysis}: $ Y_i(n) = \sum_{j \in S} P_{ij} Y_j(n-1) $.
 	\end{proof}
 
 	\begin{proof} Inductive step
 		\begin{equation}\begin{split}
-			& Y_i(n+1) \stackrel{(1)}{=} \sum_{j \in S} P_{ij} Y_i(n) \stackrel{(2)}{\le} \sum_{j \in S} P_{ij} Y_i(n-1) \stackrel{(3)}{=} Y_i(n)
+			& Y_i(n+1) \stackrel{(1)}{=} \sum_{j \in S} P_{ij} Y_j(n) \stackrel{(2)}{\le} \sum_{j \in S} P_{ij} Y_j(n-1) \stackrel{(3)}{=} Y_i(n)
 		\end{split}\end{equation}
 		where (1) and (3) hold by first step analysis and (2) for inductive hypothesis.
 	\end{proof}
@@ -842,7 +842,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1.
 	\end{proof}
 
-	\begin{proof} \emph{only if implication} $"\Rightarrow"$
+	\begin{proof} \emph{only if implication} $``\Rightarrow''$
 		Suppose chain is irreducible, but thesis is false, i.e.
 		$$ \exists i \neq 0 : f_{i0} < 1 $$
 
@@ -851,7 +851,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 		Let $n$ be the minimum value among all possible $m$  that satisfies this condition for given state $i \neq 0$: such number is the shortest path from 0 to $i$ and, by its definition, does not cross state 0 in the middle.
 
-		$$ \prob[\forall n, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
+		$$ \prob[\forall n>0, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
 
 		where (*) inequality holds because leaving 0 forever (first term) is a more general case of going to state $i$ via the shortest path and then not crossing 0 ever again.
 
@@ -888,9 +888,9 @@ In conclusion, we found that the average first passage time is equal to the aver
 Let's now consider a queueing system where arrivals are markovian and there's only one server which acts with a generic proibability distribution. Let's then define the probability transition matrix as
 \begin{equation}\label{eq:mg1P}
 	P=\begin{pmatrix}
- \color{red}{a_o}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2} & \dots &\dots & \\
- \color{red}{a_o}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2}& \dots & \dots \\
- 0  & \color{red}{a_o}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2} & \dots \\
+ \color{red}{a_0}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2} & \dots &\dots & \\
+ \color{red}{a_0}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2}& \dots & \dots \\
+ 0  & \color{red}{a_0}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2} & \dots \\
  0 & 0 & \color{red}{\ddots} & \color{blue}{\ddots} &\color[rgb]{0,0.7,0}{\ddots} \\
 \vdots & \ddots &\ddots & \color{red}{\ddots} & \color{blue}{\ddots} &\color[rgb]{0,0.7,0}{\ddots} \\
 
@@ -899,35 +899,35 @@ Let's now consider a queueing system where arrivals are markovian and there's on
 
 Let's now define the probability of moving to state $i$ in one step as
 \begin{esp}\label{eq:MG1-intro}
-	\Pi_i &= \sum\limits_{j=0}^{+\infty} \pi_j \cdot P_{ji} \quad \forall i \\
+	\pi_i &= \sum\limits_{j=0}^{+\infty} \pi_j \cdot P_{ji} \quad \forall i \\
 	\sum\limits_{i=0}^{+\infty} \pi_i &=1\\
 	\sum\limits_{i=0}^{+\infty} a_i &=1
 \end{esp}
 Looking at P in \eqref{eq:mg1P} we can simplify the previous equation as
 \begin{equation}
-	\Pi_i = \Pi_o \cdot a_i +  \sum\limits_{j=0}^{i+1} \pi_j \cdot a_{i-j+1}\quad i \ge 0
+	\pi_i = \pi_0 \cdot a_i +  \sum\limits_{j=0}^{i+1} \pi_j \cdot a_{i-j+1}\quad i \ge 0
 \end{equation}
-We can then see all $\Pi_i$ and $a_i$ as two Laplace transform, which means
+We can then see all $\pi_i$ and $a_i$ as two transform, which means
 \begin{esp}\label{eq:lsplaceMG1}
 	\Pi(s) &= \sum\limits_{i=0}^{+\infty} \pi_i \cdot s^i \\
 	A(s) &= \sum\limits_{i=0}^{+\infty} a_i \cdot s^i \\
 \end{esp}
 The generic term $a_{i+1}$ can be written as
 \begin{equation*}
-	\sum\limits_{i=0}^{+\infty} a_{i+1} \cdot s^i =\sum\limits_{i=1}^{+\infty} a_i \cdot s^{i-1} = \frac{A(s) - a_o}{s}
+	\sum\limits_{i=0}^{+\infty} a_{i+1} \cdot s^i =\sum\limits_{i=1}^{+\infty} a_i \cdot s^{i-1} = \frac{A(s) - a_0}{s}
 \end{equation*}
-We can then write the convolution $()\pi * a) (i)$ as the product of the two Laplace transform calculated in equation \eqref{eq:lsplaceMG1}.
+We can then write the convolution $(\pi * a) (i)$ as the product of the two transforms calculated in equation \eqref{eq:lsplaceMG1}.
 
-We can then write the Laplace transform of the $\Pi$ as
+We can then write the transform of the $\pi$ as
 \begin{esp}
-	\Pi(s) &= \pi_o \cdot A(s) + \frac{A(s) \cdot \Pi(s) - \pi_o a_o}{s} -\frac{A(s) \cdot \pi_o - \pi_o a_o}{s} \\
-	s \cdot & \Pi(s) - A(s) \cdot \Pi(s) = \pi_o \cdot A(s) \cdot (s-1) \\
-	\Pi(s) &= \pi_o \cdot \frac{A(s)\cdot(s-1)}{s - A(s)}
+	\Pi(s) &= \pi_0 \cdot A(s) + \frac{A(s) \cdot \Pi(s) - \pi_0 a_0}{s} -\frac{A(s) \cdot \pi_0 - \pi_0 a_0}{s} \\
+	s \cdot  \Pi(s) &- A(s) \cdot \Pi(s) = \pi_0 \cdot A(s) \cdot (s-1) \\
+	\Pi(s) &= \pi_0 \cdot \frac{A(s)\cdot(s-1)}{s - A(s)}
 \end{esp}
 Letting s go to 1 and reminding that A(1)=1 we can write
 \begin{esp}\label{eq:s-to1}
-	1=\lim_{s\to 1} \Pi(s) &= \pi_o \cdot \lim_{s\to 1} \frac{s-1}{s-A(s)} \\
-	&=\pi_o \cdot \lim_{s\to 1} \left(1-\underbrace{\frac{A(s)-1}{s-1}}_{(1)}\right)^{-1} = \pi_o\cdot\left[1-A^{\prime}(1)\right]^{-1} = \frac{\pi_o}{1-A^\prime(1)}
+	1=\lim_{s\to 1} \Pi(s) &= \pi_0 \cdot \lim_{s\to 1} \frac{s-1}{s-A(s)} \\
+	&=\pi_0 \cdot \lim_{s\to 1} \left(1-\underbrace{\frac{A(s)-1}{s-1}}_{(1)}\right)^{-1} = \pi_0\cdot\left[1-A^{\prime}(1)\right]^{-1} = \frac{\pi_0}{1-A^\prime(1)}
 \end{esp}
 where $(1)$ can be seen as the definition of the derivative of A(s) calculated in s=1
 
@@ -938,9 +938,9 @@ We can then define
 
 rewriting \eqref{eq:s-to1}, we can say:
 \begin{esp} \label{eq:pi0rho}
-	1&= \frac{\pi_o}{1-\rho} \\ \Rightarrow & \pi_o = 1-\rho
+	1&= \frac{\pi_0}{1-\rho} \\ \Rightarrow & \pi_0 = 1-\rho
 \end{esp}
-In case $\pi_o \notin [0;1]$ there's no solution to the system.\\
+In case $\pi_0 \notin [0;1]$ there's no solution to the system.\\
 In conclusion we found that
 \begin{equation}\begin{cases}
 	0 \le \rho \le 1 & \Leftrightarrow \text{ positive recurrent} \\
@@ -953,7 +953,7 @@ Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now de
 \begin{esp}
 	p_i &= P_{i i+1} \quad \text{probability to go $i\to i+1 $}\\
 	q_i &= P_{i i-1} = 1-p_i \quad \text{probability to go $i\to i-1$ }\\
-	\text{with } & p_o = 1 ~ q_o = 0
+	\text{with } & p_0 = 1 ~ q_0 = 0
 \end{esp}
 Let's now define $Z_i$ the probability to reach state i from all the other states, which means
 \begin{esp}
@@ -976,14 +976,14 @@ Z_{i+1} &= Z_i + Z_1 \cdot \prod\limits_{j=1}^i \frac{q_j}{p_j} \quad i \ge 1\\
 Z_n+1 &= \sum\limits_{i=1}^n \left(Z_{i+1} - Z_i \right)	+Z_1 = Z_1 \cdot \sum\limits_{i=0}^{n} \prod\limits_{j=1}^i \frac{q_j}{p_j}
 \end{esp}
 Moreover we find that if $\sum\limits_{i=0}^{+\infty}p_i < \infty$ then there exists a non-zero bounded solution and therefore the \gls{mc} is transient.
-The table \ref{tab:rw} summarize the result we just found
-\begin{table}[]
+The table \Tab{tab:rw} summarize the result we just found
+\begin{table}[h]
 \centering
 \label{tab:rw}
-\begin{tabular}{c|cc}
+\begin{tabular}{c|c|c}
 Cases \ series                                                & \multicolumn{1}{c|}{$\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{q_j}{p_j}$} & $\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{p_j}{q_{j+1}}$ \\ \hline
-Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\
-\begin{tabular}[c]{@{}c@{}}Positive \\ recurrent\end{tabular} & $+\infty$                                                                               & $< +\infty$                                                          \\
+Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\ \hline
+\begin{tabular}[c]{@{}c@{}}Positive \\ recurrent\end{tabular} & $+\infty$                                                                               & $< +\infty$                                                          \\ \hline
 \begin{tabular}[c]{@{}c@{}}Null\\ recurrent\end{tabular}      & $+\infty$                                                                               & $+\infty$
 \end{tabular}
 \end{table}
@@ -1118,7 +1118,7 @@ but I don't know why. TODO!!
 
 We now want to discriminate what happens to a \gls{mc} with relation to what we found in \eqref{eq:pi0rho}. We recall now the value of $y_i$ (or equivalently, as stated in the book, $z_i$)
 \begin{esp} \label{eq:zirho}
-	z_i \ge \sum\limits_{j=0}^{+\infty} P_{i j} \cdot z_j &= a_o \cdot z_i-1 + a_1 \cdot z_i + \dots \\ &= \sum\limits_{j=0}^{+\infty} a_{j} \cdot z_{i-1+j} ~ i\neq 0
+	z_i \ge \sum\limits_{j=0}^{+\infty} P_{i j} \cdot z_j &= a_0 \cdot z_i-1 + a_1 \cdot z_i + \dots \\ &= \sum\limits_{j=0}^{+\infty} a_{j} \cdot z_{i-1+j} ~ i\neq 0
 \end{esp}
 
 For $z_i=i$ we now wonder when the relation \eqref{eq:pi0rho} holds:
