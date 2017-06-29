@@ -14,6 +14,10 @@
 
 \usepackage[usenames, dvipsnames, table, tikz]{xcolor}
 
+\usepackage{booktabs}
+\newcommand*{\indicator}{\mathds}
+\usepackage{environ}
+
 % tikz figures
 \usepackage{tikz}
 \usepackage{pgfplots}
@@ -23,7 +27,7 @@
 % math package
 \usepackage{mathtools}
 \usepackage{amsthm}
-\usepackage{amsmath, amssymb, dsfont, bm}
+\usepackage{amsmath,  amssymb, dsfont, bm}
 \usepackage{cancel}
 \usepackage{cases}
 
@@ -36,7 +40,7 @@
 % image path
 \graphicspath{ {./img/} }
 
-% add support for url and cross-references in PDF output
+% add support for url and cross-references in PDF ou8tput
 \usepackage{url}
 \renewcommand{\UrlFont}{\color{black}\small\ttfamily}
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=black]{hyperref}
@@ -45,6 +49,7 @@
 \usepackage[acronym]{glossaries}
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 \newacronym{rtt}{RTT}{Round Trip Time}
+\newacronym{gcd}{GCD}{Greatest Common Divisor}
 \newacronym[plural=STs,firstplural=Stopping times (STs)]{st}{ST}{Stopping Time}
 \newacronym{kt}{KT}{Karlin-Taylor}
 \newacronym{rv}{r.v.}{random variable (r.v.)}
@@ -104,6 +109,19 @@
 \renewcommand*\arraystretch{1.4} % tables padding
 \newcommand{\N}{\mathbb{N}}
 \DeclareInputText{176}{°}
+
+% equation + split environment
+\NewEnviron{esp}{%
+\begin{equation}\begin{split}
+  \BODY
+\end{split}\end{equation}
+}
+
+\NewEnviron{esp*}{%
+\begin{equation*}\begin{split}
+  \BODY
+\end{split}\end{equation*}
+}
 
 % Useful Aliases
 \def\beq{\begin{equation}}
@@ -194,7 +212,7 @@
 \endgroup
 \mainmatter
 \input{introduction.tex}
-\input{chapter_2.tex}
+\input{chapter_MC.tex}
 \input{gbn_analysis.tex}
 \input{chapter_PP.tex}
 \input{renewalProc.tex}

@@ -1,0 +1,1017 @@
+\chapter{Markov Chains}
+
+\section{Introduction}
+
+\begin{definition}[Markov Chain]
+	A random process $X_n$ is said to be a \gls{mc} if the so called \emph{Markov property} holds.
+	\begin{equation} \begin{split}
+		\prob[X_{n+1} = j | \,\forall k=1, \ldots, n, X_k = i_k] = \prob[X_{n+1} = j | X_n=i_n] =  P_{ij}^{\,n, n+1}
+	\end{split}	\end{equation}
+
+	where $P_{ij}^{\,n, n+1}$ is the one-step transition probability from $i$ to $j$ at time $n$.
+\end{definition}
+
+\begin{definition}[Homogeneous Markov Chain]
+	A \gls{mc} is \emph{homogeneous} if the one-step transition probabilities are stationary, i.e. they do not vary w.r.t time $n$.
+	\begin{equation}
+		\forall n, i, j, P_{ij}^{n,n+1}=P_{ij}
+	\end{equation}
+
+	From now on, all \gls{mc} we encounter will be homogeneous.
+\end{definition}
+
+\begin{definition}[Transition probability matrix]
+	Given the homogeneity assumption, we can design a matrix $P$, called \emph{transition probability matrix}.
+
+	\begin{esp}
+		& \bm P=\begin{pmatrix}
+			P_{00} & P_{01} & \cdots  \\
+			P_{10} & P_{11} & \cdots \\
+			\vdots & \vdots & \ddots  \\
+	 	\end{pmatrix}
+		\text{ with }
+		\begin{dcases}
+			P_{ij}\ge 0 ~\forall i,j \\
+			\sum_{j=0}^{+\infty}P_{ij} = 1
+		\end{dcases}
+	\end{esp}
+
+	Similarly, we can define the $n$-step transition probability matrix given the $n$-step transition probabilities.
+	\begin{esp}
+		\bm P^{(n)} = \left[ P_{ij}^{(n)} \right]_{0 \le i, j < +\infty}
+	\end{esp}
+\end{definition}
+
+\paragraph{Queueing model as a Markov Chain}
+Let's now model a queueing system, a special class of random processes, as a \gls{mc}.
+
+First of all, suppose these properties hold:
+\begin{itemize}
+	\item time in which events occur is slotted
+	\item customers arrive independently and are queued in the system before getting served
+	\item the service time occupies always one slot (deterministically)
+	\item if the queue is empty, that time slot is wasted
+\end{itemize}
+
+Now let the number of users arriving in the $n$-th slot be $\xi_n$ and the number of users in the system at that time be $X_n$.
+
+Since arrivals are indipendent, all $\xi_n$ are identically distributed:
+
+\begin{equation}
+	\forall n, \prob[\xi_n = k] = a_k
+\end{equation}
+
+Then we have
+\begin{esp}
+	X_{n+1}= \begin{cases}
+		X_n - 1 +\xi_n &  \text{if } X_n > 0 \\
+		\xi_n &  \text{if } X_n = 0
+	\end{cases}
+\end{esp}
+where in the first case the system is not empty at time $n$: the served user leaves and $\xi_n$ new users arrive.
+
+We now observe that $X_n$ only depends on previous state $X_{n-1}$, since $\xi_n$ are all memoryless: $X_n$ is actually a \gls{mc}, since the Markov property holds.
+
+The transition probability matrix, given $\xi_n$ distribution, is the following.
+\begin{equation} \bm P=\begin{pmatrix}
+		a_{0} & a_{1} & a_2 & \cdots  \\
+		a_{0} & a_{1} & a_2 & \cdots  \\
+		0			& a_{0} & a_{1} & \cdots  \\
+		0 		& 0			& a_{0} & \cdots  \\
+		\vdots & \vdots & \vdots & \ddots &  \\
+	\end{pmatrix}
+\end{equation}
+
+The average increase of the $X_n$ is defined as
+\begin{equation}
+	\rho = \exp[\xi_n] = \sum_{k=0}^{+\infty} k \, a_k
+\end{equation}
+
+Intuitively, if $\rho$ is greater than the service rate 1, the users in the system will increase without limit, whereas queue will stay stable if $\rho<1$, since the users are served faster than they arrive.
+
+\section{First step analysis} \label{sec:first_step_analysis}
+
+The Markov property is useful because it allows us to split the computation of a complex \gls{mc} probability, for example the three-step one, in the product of one-step probabilities.
+\begin{equation}
+	\prob[X_3 = 3 , X_2 = 2, X_1 = 1, X_0 = 0]=P_{0}\cdot P_{01}\cdot P_{12}\cdot P_{23}
+\end{equation}
+
+This conditioning on the past state, often called \emph{first step analysis} or \emph{last step analysis}, can be generalized in the computation of the $n$-step probability from $i$ to $j$, for a generic homogeneous \gls{mc} with states marked with positive integers.
+
+\begin{esp}
+	P_{ij}^{(n)}
+		& = \prob[X_{m+n} = j | X_m = i] ~ \forall m \\
+		& = \prob[X_n = j | X_o = i]
+			= \sum_{k=0}^{+\infty} \prob[X_n = j, X_1 = k | X_o = i] \\
+		& = \sum_{k=0}^{+\infty}
+			\prob[X_n = j | X_1 = k, X_o = i] ~ \prob[X_1 = k | X_o = i] \\
+		& \stackrel{(*)}{=} \sum_{k=0}^{+\infty}
+			\prob[X_n = j | X_1 = k] ~ \prob[X_1 = k | X_o = i] \\
+		& = \sum_{k=0}^{+\infty} P_{kj}^{(n-1)} P_{ik}
+\end{esp}
+where in (*) the Markov property has been applied, discarding time 0 information because of the more recent state 1.
+
+This property can be extended to probability matrixes $\bm P^{(n)}$, that is nothing but the $n$-th power of matrix $\bm P$.
+\begin{esp}
+	\bm P^{(n)} = \bm P \cdot \bm P^{(n-1)} = \ldots = \bm P^{n}
+\end{esp}
+
+\bigbreak
+Therefore, we can notice that for the full description of a \gls{mc} only the initial state probability and the transition probability matrix are needed.
+Moreover we can combine these building blocks fearless conditioning on the \emph{first step} of the process.
+
+\section{Applications}
+Now we will focus on the description of common queue systems through \gls{mc}.
+
+First, we define some metrics and some state of interest, in order to discuss what is going on in the time evolution of the process.
+
+\begin{definition}[Absorbing state]
+	A state $i$ is called \emph{absorbing} if
+	\begin{equation*}
+		\begin{cases}
+			\forall j\neq i, P_{ij}=0 \\
+			p_{ii}=1
+		\end{cases}
+	\end{equation*}
+	In practice, when a chain incur in the state $i$ no transition to other different states is longer possible.
+\end{definition}
+
+\begin{definition}[Absorbing time]
+	The absorbing time $T$ is defined as the minimum time required by the chain to reach an absorbing state, starting from a non-absorbing one.
+	\begin{equation*}
+		T = min \left\{ n \ge 0 : X_n \text{ is absorbing } | X_0 \text{ is \emph{not} absorbing} \right\}
+	\end{equation*}
+
+	This absorbing time is a r.v. and its expected value, given an initial non-absorbing state $j$ is called
+	\begin{equation*}
+		v_j = \exp[T | X_0 = j]
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[Absorbing probability]
+	Given an absorbing time $T$, the probability of being absorbed in $i$ starting in a non-absorbing state $j$ is defined as
+	\begin{equation*}
+		u_{ij} = \prob[X_T = i | X_0 = j]
+	\end{equation*}
+\end{definition}
+
+\begin{definition}[First passage time] \label{def:first_passage_time}
+	The number of transitions required to reach state $j$ from $i$ \emph{for the first time} is an integer random variable, called $\theta_{ij}$, with a probability distribution $f_{ij}$.
+	\begin{equation*}
+		f_{ij}(n)
+			= \prob[\theta_{ij} = n]
+			= \prob[X_n = j, X_m \neq j ~ \forall m = 1, \ldots, n-1 | X_0 = i]
+	\end{equation*}
+\end{definition}
+
+\subsection{M/G/1 queue}
+\subsection{G/M/1 queue}
+\subsection{Gambler's ruin}
+\subsection{Synchronization model}
+
+\section{Long Run Behaviour}
+Everything computed and defined in the previous section had to be conditioned on the first state, i.e. on the first state distribution.
+
+In this part we will discuss what happens to a \gls{mc} after the transient behaviour has settled, in order to abstract from the initial state and acquire more interesting results.
+
+\begin{definition}[Regular \gls{mc}]
+	A \gls{mc} is said to be \emph{regular} if
+	\begin{equation}
+		\forall i, j, ~ \lim_{n \to \infty} P_{ij}^{(n)}
+			= \lim_{ n \to \infty} \prob[ X_n=j | X_0 =i]
+			= \pi_j > 0
+	\end{equation}
+\end{definition}
+
+Notice that this assumption leads to interesting properties.
+\begin{enumerate}
+	\item limit exists (not obvious)
+	\item limit depends \emph{only} on final state $j$
+	\item limit is strictly positive: $\pi_j \neq 0$
+\end{enumerate}
+
+\begin{theorem} \label{th:regular_pi}
+	For a regular finite \gls{mc} with states 0, 1, ..., N the limiting distribution $\vec{\pi} = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations.
+
+	\begin{equation*}
+		\begin{dcases}
+			\pi_j = \sum_{k=0}^N \pi_k P_{k j}
+				& \quad \text{for} \quad j = 0,1, \cdots, N \\
+			\sum_{k=0}^N \pi_k = 1
+		\end{dcases}
+	\end{equation*}
+
+\end{theorem}
+
+\begin{proof}
+	\proofpart Existence of the solution
+
+	From what has been proved in section \ref{sec:first_step_analysis}, it holds that
+	\begin{equation}
+			P_{i j}^{(n)} = \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j}
+		\quad \text{with} \quad \sum_{k=0}^N P_{ik}^{(n)} = 1 ~\forall n
+	\end{equation}
+
+	Now let's take the limit for $ n \to \infty $.
+	\begin{equation}
+		\begin{split}
+			\pi_j &= \lim_{n \to \infty} P_{ij}^{(n)} = \lim_{n \to \infty} \sum_{k=0}^N P_{ik}^{(n-1)} P_{k j
+			} =\\
+			&= \sum_{k=0}^N \lim_{n \to \infty} P_{ik}^{(n-1)} P_{k j
+			} = \sum_{k=0}^N \pi_k P_{kj}
+		\end{split}
+	\end{equation}
+	Here the limit and the sum can be switched since the sum is finite.
+	This shows that the system have a solution, namely
+
+	\begin{equation*}
+		\pi_k = \lim_{n \to \infty} P_{ik}^{(n)} \text{ for } k = 1, \ldots N
+	\end{equation*}
+
+\proofpart Uniqueness of the solution
+
+	Let $x_l$ be a solution, so, by construction, $x_l = \sum_{k=0}^N x_k \, P_{kl}$.
+
+	This relation holds for each state $j$ of the \gls{mc}, so
+	\begin{equation}
+			x_l = \sum_{j=0}^N x_j P_{jl} =  \sum_{j=0}^N \left( \sum_{k=0}^N x_k P_{kj} \right) P_{jl} =  \sum_{k=0}^N x_k \sum_{j=0}^N P_{kj} P_{jl} = \sum_{k=0}^N x_k P_{kl}^{(2)}
+	\end{equation}
+
+	Applying this trick recursevely, we can prove by induction that  $\forall n, x_j = \sum_{k=0}^N x_k P_{kj}^{(n)}$.
+
+	Now, as $n \to \infty$, we have that the general solution $\vec{x}$ coincides with the proposed one $\vec{\pi}$, proving our is actually unique.
+	\begin{equation}
+		x_j = \sum_{k=0}^N x_k \pi_j
+			= \pi_j \left( \sum_{k=0}^N x_k \right)
+			= \pi_j
+	\end{equation}
+\end{proof}
+
+\section{Classes of states}
+	With the properties proved so far, we can classify states of \gls{mc} with various criterions, to better understand the global behaviour.
+
+	\begin{definition}[Accessible State]
+		State $j$ is \emph{accessible} from state $i$, written $i \rightarrow j$, if\, $\exists n \geq 0$ such that $P_{ij}^{(n)} > 0$.
+
+		Conversely, state it's \emph{not} accessible if $\forall n \ge 0, P_{ij}^{(n)}=0$
+	\end{definition}
+
+	\begin{definition}[Communicant States]
+		States $i$ and $j$ are said to \emph{communicate}, written $ i \leftrightarrow j$, if
+		\begin{equation}
+			\begin{cases}
+				i \rightarrow j \\
+				j \rightarrow i
+			\end{cases}
+		\end{equation}
+	\end{definition}
+
+	For communication, the following properties hold.
+
+	\vspace{1em}
+	\begin{tabular}{l l}
+		1. Reflexivity & $i \leftrightarrow i \quad\text{since } P_{ii}^{(0)}=1$ \\
+		2. Symmetry & $i \leftrightarrow j ~ \Rightarrow ~ j \leftrightarrow i$ \\
+		3. Transitivity & $i \leftrightarrow j$, $j \leftrightarrow k ~ \Rightarrow~  i \leftrightarrow k$\\
+	\end{tabular}
+	\vspace{1em}
+
+	This proves that communication is an equivalence relation, i.e. it can split the states in classes.
+
+	\begin{definition}[Periodicity]
+		The period of state $i$, written $d(i)$, is the \gls{gcd} of $S_i = \{ s>0 : P_{ii}^{(s)} > 0 \}$, set of the lengths of the allowed paths from $i$ to itself.
+
+		If $d(i) = 1$, state $i$ is said to be \emph{aperiodic}.
+	\end{definition}
+
+	\begin{theorem}[Periodicity]
+		Periodicity is a property of \emph{classes} of states, separated by communication relation.
+			$$ i \leftrightarrow j ~ \Rightarrow ~ d(i) = d(j) $$
+	\end{theorem}
+
+	\begin{proof}
+		Let $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$ be the set of path lengths from $i$ to itself.
+
+		Since $i$ and $j$ communicate, there exist two positive integers $m, n > 0$ such that $P_{ij}^{(m)} > 0$ and $P_{ji}^{(n)} > 0$.
+
+		Using Markov property, we can find some members of set $S_j$.
+
+		\begin{esp*}
+			\forall s \in S_i, P_{jj}^{(n+s+m)}
+				& = \sum_{h, k} P_{jh}^{(n)} P_{hk}^{(s)} P_{kj}^{(m)} \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ij}^{(m)} >0
+					& \implies n+s+m \in S_j \\
+				P_{jj}^{(n+2s+m)} & \geq P_{ji}^{(n)} P_{ii}^{(s)} P_{ii}^{(s)} P_{ij}^{(m)} >0
+					& \implies n+2s+m \in S_j
+		\end{esp*}
+
+		Now let's call $d(j) =$ \gls{gcd} of $S_j$.
+
+		Since both $n+s+m$ and $n+2s+m$ belong to $S_j$, they are integer multiples of $d(j)$, as well as their difference $s \in S_i$.
+
+		Switching the indexes $i$ and $j$, the inverse can be easily proved, i.e. each $s \in S_j$ is an integer multiple of $d(i)$.
+
+		\bigbreak
+		These two separate results can hold only if $\forall i,j, ~d(i) = d(j)$.
+	\end{proof}
+
+	\begin{definition}[Return Time]
+		The random variable $R_i$ is defined as the time it takes to return to $i$ starting from $i$ itself.
+	\end{definition}
+
+	Note that, as in definition \ref{def:first_passage_time}, $R_i = \theta_{ii}$.
+	Since its probability distribution was $f_{ij}(n)$, we can define the probability of returning to $i$ at \emph{any} time $n$ as
+
+	$$ f_{ii} = \sum_{n=1}^\infty f_{ii}(n)  = \sum_{n=1}^\infty \prob[R_i=n | X_0=i] $$
+
+	where $f_{ii}(n)$ is the probability of returning to state $i$ in $n$ steps.
+
+	\begin{definition}[Recurrent state]
+		A state is recurrent if $f_{ii} = 1$
+	\end{definition}
+	In other words we say that a state $i$ is recurrent if and only if after a passage in state $i$, the process will eventually come back w.p. 1.
+
+	\begin{definition}[Transient state]
+		A state is transient if  $f_{ii} < 1$
+	\end{definition}
+
+	In other words a state $i$ is transient if there exists a non-zero probability of never coming back to it.\footnote{like Angela. Please come back Angela, I love you.}
+
+	\begin{definition}[Number of returns] \label{def:big_m}
+		Defining $M$ as the number of returns to state $i$ starting from $i$, its expectation can be computed as
+
+		\begin{esp}
+			\exp[M | X_0 = i]
+			& = \sum_{k=1}^\infty \prob[M\geq k | X_0 = i] \\
+			& \stackrel{(*)}{=} \sum_{k=1}^\infty f_{ii}^k
+				= \begin{dcases}
+						\frac{f_{ii}}{1-f_{ii}} & \text{if $i$ is transient} \\
+						\infty & \text{if $i$ is recurrent}
+					\end{dcases}
+		\end{esp}
+		where (*) holds since $M$ is a geometric r.v. that counts passages to $i$.
+	\end{definition}
+
+	\bigbreak
+	Let's now recall a definition from previous probability courses.
+	\begin{definition}[Proper and improper r.v.]
+		Given $X$ a finite value r.v. it is called \emph{proper} if
+		$$\lim_{a\to \infty} \prob[X\geq a] = 0$$
+
+		Conversely, $X$ is \emph{improper} if
+		$$\lim_{a\to \infty} \prob[X\geq a] = p_\infty \ne 0$$
+	\end{definition}
+
+	\begin{theorem}[Sufficient and necessary condition for recurrence]
+		\label{th:iff_recurrent}
+		$$i  \text{ is recurrent}
+			\iff \sum_{n=1}^\infty P_{ii}^{(n)} = \infty$$
+	\end{theorem}
+
+	\begin{proof}
+		Recalling definition \ref{def:big_m}, $M$ is defined as
+		\begin{esp}
+			\exp[M | X_0 = i]
+				& = \exp\left[\sum_{n=1}^\infty \indicator{1}\{X_n = i\} | X_0 = i\right] \\
+				& \stackrel{(*)}{=} \sum_{n=1}^\infty \exp\left[\indicator{1}\{ X_n = i\} | X_0 = i\right]
+				= \sum_{n=1}^\infty P_{ii}^{(n)}
+		\end{esp}
+		where (*) holds under the conditions of Fubini's theorem.
+
+		Now, remembering that
+			\begin{equation}
+				\exp[M | X_0 = i] = \begin{cases}
+				\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
+				\infty, & \text{if recurrent}
+				\end{cases}
+			\end{equation}
+		the proof is concluded.
+	\end{proof}
+
+	\begin{theorem}
+		(not to confuse with theorem on periodicity)
+		\begin{equation}
+			\begin{cases}
+				i\leftrightarrow j \\
+				i \text{ is recurrent }
+			\end{cases} \Rightarrow \text{ j is also recurrent}
+		\end{equation}
+	\end{theorem}
+	---
+	\begin{proof}
+		Since $i$ and $j$ communicate, we can state that
+		\begin{equation}
+			\exists n: P_{ij}^{(n)} > 0
+			\exists m: P_{ji}^{(m)} > 0
+		\end{equation}
+
+		With a similar approach than in previous demonstrations, we can set a lower bound for the return probability of $j$.
+		\begin{equation}
+			\forall r>0 : P_{jj}^{(m+r+n)}
+				= \sum_{r, k} P_{jh}^{(m)} P_{hk}^{(r)} P_{kj}^{(n)}
+				\stackrel{(*)}{\geq} P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)}
+		\end{equation}
+		where (*) holds because we are discarding positive terms.
+
+		With this result, we can write
+		\begin{esp}
+			\sum_{l=1}^\infty P_{jj}^{(l)}
+				\geq \sum_{r=1}^\infty P_{jj}^{(m+r+n)}
+				\geq \sum_{r=1}^\infty P_{ji}^{(m)}  P_{ii}^{(r)}  P_{ij}^{(n)} = P_{ji}^{(m)} P_{ij}^{(n)} \sum_{r=1}^\infty P_{ii}^{(r)}
+		\end{esp}
+
+		The first two factors are strictly positive, for hyphotesis, and the infinite sum diverges, since $i$ is recurrent (see theorem \ref{th:iff_recurrent}).
+
+		Therefore $j$ is recurrent too, for the same theorem.
+  \end{proof}
+
+	\begin{theorem}[Basic limit theorem on MC]
+		Consider an irreducible aperiodic recurrent class of a \gls{mc}: we have that
+		\begin{equation}
+			\lim_{n\to \infty} P_{ii}^{(n)}
+				= \frac{1}{m_i}
+				= \pi_i = \lim_{n\to\infty} P_{ji}^{(n)} \quad \forall j
+		\end{equation}
+		where $m_i = \exp[M | X_0 = i]$ is the average return time of $i$.
+	\end{theorem}
+
+	\bigbreak
+	The following table summarizes some properties for the types of state that can be found in a \gls{mc}.
+
+	\begin{center}
+		\begin{tabular}{c c c c}
+			\toprule
+			State $i$ & Transient & Null recurrent & Positive recurrent \\
+			\midrule
+			$f_{ii} = \sum_{n=1}^\infty f_{ii}^{(n)}$ & $<1$ & 1 & 1 \\
+			\rule{0pt}{4ex}
+			$\lim_{k \to \infty } \prob[M \geq k | X_0=i]$ & 0 & 1 & 1 \\
+			\rule{0pt}{4ex}
+			$\exp[n|X_0=i]$ & $f_{ii}\,(1-f_{ii})^{-1}$ & $\infty$ & $\infty$ \\
+			\rule{0pt}{4ex}
+			$m_i = \sum_n f_{ii}^{(n)}$ & $\infty$ & $\infty$ & $<\infty$ \\
+			\rule{0pt}{4ex}
+			$\pi_i = m_i^{-1}$ & 0 & 0 & $>1$ \\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+
+	\begin{theorem}
+		For an aperiodic positive recurrent class, $\pi_j$ is the unique solution of the following system.
+
+		\begin{equation*}\begin{dcases}
+			\pi_j = \sum_{i=0}^\infty \pi_i P_{ij} \\
+			\sum_{i=0}^\infty \pi_i = 1 \\
+			\pi_i \geq 0 \quad \forall i
+		\end{dcases}\end{equation*}
+	\end{theorem}
+
+	% Note that a similar result has been proved for the \emph{regular} \gls{mc} in theorem \ref{th:regular_pi}, for which we assume the existance of the limiting distributions $\vec{\pi}$.
+	% Here we deal instead with \emph{recurrence}, property that does not rely on this strong assumption.
+
+	\begin{proof}
+		It is splitted in several parts\footnote{The funny thing is that this proof is easier than the book.}, whose results build the thesis, like brick with a wall.
+
+		\proofpart
+
+			We first want to show that the limiting distribution $\vec{\pi}$ is a proper one, i.e. the sum of its components does not diverge.
+
+			\begin{equation*}
+				\forall m,n,
+					1 = \sum_{j=0}^\infty P_{ij}^{(n)}
+					\ge \sum_{j=0}^m P_{ij}^{(n)}
+			\end{equation*}
+			where the inequality holds since the sum of non-negative terms is truncated.
+
+			Taking the limit on the right term, we can state that
+			\begin{esp*}
+				\forall m, \lim_{n \to \infty} \sum_{j=0}^m P_{ij}^{(n)}
+					= \sum_{j=0}^m \pi_j
+					\stackrel{(1)}{\leq} \sum_{j=0}^\infty \pi_j
+					\stackrel{(2)}{\leq} 1
+			\end{esp*}
+			where (1) holds because the infinite sum adds non-negative terms to the finite one and (2) is true for the bound proved just above.
+
+		\proofpart
+			\begin{esp*}
+				\forall n, m, M,
+					P_{ij}^{(n+m)} \geq \sum_{k=0}^M P_{ik}^{(m)} P_{kj}^{(n)}
+			\end{esp*}
+			where the inequality is here since the infinite sum has been truncated.
+
+			For the limit of $m \to +\infty$, we have that the $P$ terms become the limiting distribution.
+			\begin{esp} \label{eq:pi_inequality}
+				\text{for } m \to \infty, ~
+					\pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)}
+					\implies  \pi_j \geq \sum_{k=0}^m \pi_k P_{kj}^{(n)}
+			\end{esp}
+			These property will be useful later, trust me.
+
+		\proofpart $\vec{\pi}$ are a solution \label{part:pi_are_solution}
+
+			We will now show that the limiting distribution is a solution to the proposed system.
+
+			First we will prove this inequality.
+			\begin{esp} \label{eq:pis_inequality}
+				\forall M,
+				\sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
+					\stackrel{(1)}{\geq} \sum_{k=0}^M \sum_{j=0}^\infty \pi_k P_{kj}^{(n)}
+					\stackrel{(2)}{=} \sum_{k=0}^M \pi_k \sum_{j=0}^\infty P_{kj}^{(n)}
+					\stackrel{(3)}{=}  \sum_{k=0}^M \pi_k
+			\end{esp}
+			where in (1) the sum is trucated up to $M$, in (2) the sums are swapped, since the one in $k$ is finite and in (3) the sum in $j$ is removed, since it is one by definition of $P_{kj}^{(n)}$.
+
+			In equation \ref{eq:pi_inequality} we proved a loose inequality\footnote{You trusted me, right?}, now we will prove the equality, i.e. the limiting distribution is a valid solution for the system.
+
+			Let's now suppose that the equation does \emph{not} hold.
+			\begin{esp*}
+				\exists j > 1, \pi_j > \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
+				\implies \sum_{j=0}^\infty \pi_j > \sum_{j=0}^\infty \sum_{k=0}^\infty \pi_k P_{kj}^{(n)} > \sum_{k=0}^\infty \pi_k
+			\end{esp*}
+			which is an absurd, since the former and latter sum are nothing but the same.
+
+		\proofpart $\vec{\pi}$ sum to 1
+
+			Considering a generic state $j$, we can write that
+			\begin{esp*}
+				\pi_j
+					= \lim_{n \to \infty} \sum_{k=0}^\infty \pi_k P_{kj}^{(n)}
+					\stackrel{(*)}{=} \sum_{k=0}^\infty  \pi_k \lim_{n\to\infty} P_{kj}^{(n)} = \pi_j \sum_{k=0}^\infty \pi_k
+				 \implies \sum_{k=0}^\infty \pi_k = 1
+			\end{esp*}
+			where in (*) sum and limit can be swapped because Lebesgue dominate convergence conditions are met, since $P_{kj}^{(n)} \le 1$.
+
+			Thus we proved that the solution \emph{exists} and it is \emph{valid}.
+
+		\proofpart Uniqueness of the solution
+
+			Suppose $x_j$ is a solution for the system, then
+			\begin{esp*}
+				x_j
+					= \sum_{i=0}^\infty x_i P_{ij}
+					= \sum_{i=0}^\infty \left( \sum_{k=0}^\infty x_k P_{ki} \right) P_{ij}
+					\geq \sum_{k=0}^M x_k \sum_{i=0}^\infty P_{ki} P_{ij}
+					= \sum_{k=0}^M x_k P_{kj}^{(2)}
+			\end{esp*}
+
+			Like was done in part \ref{part:pi_are_solution}, we can iterate the previous reasoning $n$ times, in order to obtain a similar equation as \ref{eq:pis_inequality}.
+			\begin{equation*}
+				\forall n,~ x_j \geq \sum_{k=0}^\infty x_k P_{kj}^{(n)}
+			\end{equation*}
+
+			We can suppose that such inequality is strict and derive an absurd: thus equality must hold.
+			\begin{equation*}
+				\forall n,~ x_j = \sum_{k=0}^\infty x_k P_{kj}^{(n)}
+			\end{equation*}
+
+			Taking the limit $n \to \infty$, we obtain that the generic solution coincide with the limiting distribution.
+			\begin{equation*}
+				x_j = \left( \sum_{k=0}^\infty x_k \right) \pi_j \Rightarrow x_j = \pi_j
+			\end{equation*}
+	\end{proof}
+
+	\begin{lemma}[4.1]
+	  For a sequence of terms $0 < p_i < 1$, then
+		\begin{equation}
+			\lim_{m \to \infty} \prod_{i=0}^{m}\left( 1-p_i \right) = 0
+			\iff \sum_{i=0}^\infty p_i = \infty
+		\end{equation}
+	\end{lemma}
+
+	\begin{proof}
+		\proofpart ``$\impliedby$''
+
+			Since the series expansion for $e^{-p_i}$ is an alternating serie with terms decreasing in absolute value, we can write:
+			\begin{equation*}
+				1-p_i < 1-p_i + \frac{p_i^2}{2!} - \frac{p_i^3}{3!} + \cdots = ~e^{-p_i}
+			\end{equation*}
+
+			Applying the product on $i$ to both members we obtain
+			\begin{equation*}
+				\prod_{i=0}^{k-1} \left( 1-p_i \right) < e^{-\sum_{i=0}^{k-1}p_i}
+			\end{equation*}
+
+			Taking the limit for $k \to +\infty$, we assess that
+			\begin{equation*}
+				\prod_{i=0}^{+\infty} \left( 1-p_i \right)
+					\le e^{-\sum_{i=0}^{+\infty} p_i}
+					= 0
+			\end{equation*}
+			where the inequality becomes loose for the limit and the last equality holds for hypothesis.
+
+		\proofpart ``$\implies$''
+
+		Let's prove the following inequality.
+		\begin{equation*}
+			\forall m \ge j+1, ~ \prod_{i=j}^m(1-p_i) > 1-\sum_{i=j}^m p_i
+		\end{equation*}
+
+		We can prove it by induction: first of all the base case $m=1$.
+		\begin{equation*}
+			(1-p_j)(1-p_{j+1})
+				= 1-p_j - p_{j+1} + p_j p_{j+1}
+				> 1-p_j - p_{j+1}
+				= 1- (p_j + p_{j+1})
+		\end{equation*}
+
+		Then the inductive step, for a generic $m$.
+		\begin{esp*}
+			\prod_{i=j}^{m+1}(1-p_i)
+				& = (1-p_{m+1})\prod_{i=j}^m(1-p_i)
+					\stackrel{(*)}{>} (1-p_{m+1}) \left(1-\sum_{i=j}^m p_i \right) \\
+				& = 1 - \sum_{i=j}^{m+1} p_i + p_{m+1}\sum_{i=j}^m p_i
+					> 1 - \sum_{i=j}^{m+1} p_i
+		\end{esp*}
+		where (*) holds for the inductive hypothesis.
+
+		\bigbreak
+		Assume now the opposite of the thesis, i.e. $\sum_{i=1}^\infty p_i < \infty$, then for limit definition there must exist an index $j>1$ s.t. $\sum_{i=j}^\infty p_i < 1$.
+
+		Then we obtain the opposite of the hypothesis, and proof is complete.
+		\begin{equation*}
+			\lim_{m \to \infty} \prod_{i=j}^m (1-p_i) \ge \lim_{m \to \infty} (1-\sum_{i=j}^m p_i) > 0
+		\end{equation*}
+
+	\end{proof}
+
+	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
+		Given a recurrent class $C$ and a transient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
+		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
+
+		Thus, the probability that the chain, starting from $i$, reaches class $C$ at step $n$ is
+		$$ \pi_{i}^{(n)}(C) = \sum_{k \in C} \pi_{ik}^{(n)}(C) $$
+
+		and the general probability of reaching $C$ starting from $i$ is
+		$$ \pi_i(C) = \sum_{n \in \N} \pi_i^{(n)}(C) $$
+	\end{definition}
+
+	\begin{theorem}[3.1, KT p. 91] \label{th:3.1}
+		Given state $j \in C$, an aperiodic and recurrent class, and a transient state $i \notin C$, it holds that
+
+		$$ \lim_{n \to \infty } P_{ij}^{(n)} = \pi_i(C) \cdot \lim_{n \to \infty } P_{jj}^{(n)} = \pi_i(C) \cdot \pi_j $$
+	\end{theorem}
+	---
+	\begin{proof}
+		The limit of theorem thesis can be expanded this way
+		\begin{equation}\begin{split} \label{eq:theorem_3.1_thesis}
+			& \forall \epsilon > 0, \exists \text{ class } C' \in C, N \in \N \text{ such that } \\
+			& \forall n \ge N,~ \left| P_{ij}^{(n)} - \pi_i(C) \pi_j \right| \stackrel{(1)}{=} \\
+			= & \left| P_{ij}^{(n)} - \left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right) \pi_j +
+				\left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C)\right)\pi_j - \pi_i(C)\pi_j \right| \stackrel{(2)}{\le} \\
+			\le & \left| P_{ij}^{(n)} - \left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right) \pi_j \right| +
+				\left| \left( \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C)\right) - \pi_i(C) \right| \pi_j
+		\end{split}\end{equation}
+		where
+		\begin{itemize}
+			\item [(1)] term between parenthesis is added and subtracted
+			\item [(2)] absolute value of a sum is less or equal than the sum of the absolute values
+		\end{itemize}
+
+		If we can prove that the two terms are infinitesimal (i.e. $< \epsilon$) for given $N$ and $C'$, we are done.
+		\smallbreak
+
+		First we can prove that, given class $C$ is recurrent, transition probability in $n$ steps from $i$ to $j$ can be formulated as follows.
+		\begin{equation} \label{eq:n_step_in_class}
+			P_{ij}^{(n)} = \sum_{v = 1}^{n} \sum_{k \in C} \pi_{ik}^{(v)}(C) ~ P_{kj}^{(n-v)}
+		\end{equation}
+		where path from $i$ to $j$ is splitted in two parts, before and after entering $C$.
+
+		This formula can be written as a limit in $n$ and $C$, expliciting the inner infinite sum over class elements.
+
+		% FORMAT setting
+		\setlength{\mathindent}{-1.5cm} % sporco trucco ingegneristico
+
+		\begin{equation}\begin{split} \label{eq:theorem_3.1_first term}
+			& \forall \epsilon > 0, \exists N \in \N \text{ and a finite class } C' \subseteq C \text{ such that } \\
+			& \forall n \ge N, \left| P_{ij}^{(n)} - \pi_j \left( \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)} \right) \right| \stackrel{(1)}{=}
+			\\
+			= & \left|
+				\left(
+					\sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) ~ P_{kj}^{(n-v)} + \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) ~ P_{kj}^{(n-v)} \right)
+				- \pi_j \left( \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right)
+				\right| \stackrel{(2)}{=}
+			\\
+			= & \left| \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j)
+				+ \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right| \stackrel{(3)}{=}
+			\\
+			= & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) +
+				\sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) +
+				\sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right| \stackrel{(4)}{\le}
+			\\
+			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
+				\left| \sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
+				\left| \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right| \stackrel{(5)}{\le}
+			\\
+			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
+				2 \left( \sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right) +
+				\left( \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) \right) \stackrel{(6)}{\le}
+			\\
+			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)} (P_{kj}^{(n-v)} - \pi_j) \right| + 3 \epsilon \stackrel{(7)}{<} 4 \epsilon
+		\end{split}\end{equation}
+
+		\setlength{\mathindent}{0cm} % reset of "sporco trucco ingegneristico"
+
+		since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
+		where
+		\begin{itemize}
+			\item [(1)] using equation \ref{eq:n_step_in_class}, sum is splitted in $k \in C$ into two sums in $k \in C'$ and $k \in C ~ \wedge ~ k \notin C' $
+			\item [(2)] terms have been rearranged: first and last one have been merged
+			\item [(3)] the first sum over all $n \in \N$ is splitted using $N$
+			\item [(4)] the module of a sum is less or equal than the sum of the modules
+			\item [(5)] given it always holds that $P_{kj}^{(n-v)} \le 1$ and $|P_{kj}^{(n-v)} - \pi_j| \le 2$
+			\item [(6)] choosing $C'$ and $N$ large enough, we can make the two terms between parenthesis small as we want: they are infinitesimal
+			\item [(7)] since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
+		\end{itemize}
+		This way we have verified that first term of \ref{eq:theorem_3.1_thesis} is in fact infinitesimal.
+
+		\bigbreak
+		Now we explore the second term.
+		Given definitions \ref{def:falling_probability}, it holds that
+		$$ \pi_i(C) = \sum_{v = 1}^{+\infty} \sum_{k \in C} \pi_{ik}^{(v)}(C) $$
+
+		\smallbreak
+		Since the right term converges to a finite value, namely $\pi_i$, the limit implicit in the infinite sum can be expanded this way.
+		\begin{equation}\begin{split} \label{eq:pi_limit_definition}
+			& \forall \epsilon > 0, \exists N \in \N \text{ and a finite class } C' \subseteq C \text{ such that } \\
+			& \forall n \ge N,~ \left| \pi_i(C) - \sum_{v = 1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right| < \epsilon
+		\end{split}\end{equation}
+
+		\bigbreak
+		Recalling thesis (equation \ref{eq:theorem_3.1_thesis}), both terms of the sum have been proven infinitesimal, so wanted limit is itself proven.
+	\end{proof}
+
+	\bigbreak
+	Summarizing all we know about limiting distribution across multiple classes, we can build the following table.
+	See theorem \ref{th:3.1} for last line.
+	\begin{center}\begin{tabular}{c c c}
+		\toprule
+		Starting state $i$ & Arrival state $j$ & $\lim_{n \to +\infty}
+		P_{ij}^{(n)}$ \\
+		\midrule
+		any & transient & 0 \\
+		recurrent $\notin C' ,\: \in C$ & recurrent $\in C$ & 0 \\
+		recurrent $\in C$ & recurrent $\in C$ & $\pi_j = 1 / m_j$ \\
+		transient & recurrent $\in C$ & $\pi_i(C)\cdot\pi_j = \pi_i(C) / m_j$ \\
+		\bottomrule
+	\end{tabular}\end{center}
+
+	\begin{theorem}[Property of finite \gls{mc}] \label{th:finite_MC_1}
+		A finite \gls{mc} must have at least a positive recurrent state.
+
+		$$ \forall \text{ finite \gls{mc}, } \exists i: \pi_i \neq 0 $$
+	\end{theorem}
+	---
+	\begin{proof}
+		Labeling \gls{mc} states from $1$ to $N$, we can always write that
+
+		$$ \forall i, n ~ \sum_{j=0}^N P_{ij}^{(n)} = 1$$
+
+		This holds for each value of $n$, so it must be true also in the limit.
+		Suppose also that there are no positive recurrent states.
+		$$ 1 = \lim_{n \to +\infty} \sum_{j=0}^N P_{ij}^{(n)} \stackrel{(*)}{=} \sum_{j=0}^N \lim_{n \to +\infty} P_{ij}^{(n)}
+		= \sum_{j=0}^N \pi_j $$
+		where passage marked with the (*) is possible only because sum is finite.
+
+		Since the sum of the $\pi_j$ is not zero, one of them must be strictly positive: the corresponding state is then positive recurrent, proving our theorem.
+	\end{proof}
+
+	\begin{theorem}[Property of finite \gls{mc}]
+		A finite \gls{mc} can't have null recurrent state.
+
+		$$ \text{ In a finite \gls{mc}, } \nexists~ i: \pi_i = 0 $$
+	\end{theorem}
+	---
+	\begin{proof}
+		Supposing such a null recurrent exists, there must be a null recurrent class that contains it.
+		Such class is finite, given the chain is finite too.
+
+		But for theorem \ref{th:finite_MC_1} such class must have at least one positive recurrent state, which is absurd.
+		So a null recurrent class cannot exist in a finite \gls{mc}.
+	\end{proof}
+
+	\begin{definition}[$Y_i(n)$]
+		Given an \gls{mc} with a state set $S = \{1, 2, ...\}$, $Y_i(n)$ is defined as the probability of staying in $S$ after a $n$-steps path that starts from $i \in S$.
+
+		$$ Y_i(n) = \prob[X_j \in S ~\forall j=1, 2, ..., n | X_0 = i \in S] $$
+	\end{definition}
+
+	\begin{theorem}
+		$Y_i(n)$ is monothonically non-increasing on $n$.
+		$$ Y_i(n) \le Y_i(n-1) $$
+	\end{theorem}
+	---
+	\begin{proof}
+		\proofpart Base case $n=1$
+
+		\begin{equation}\begin{split} \label{eq:Y_i-properties}
+			& Y_i(1) = \prob[X_1 \in S | X_0 = i] = \sum_{j \in S} P_{ij} \\
+			& Y_i(2) \stackrel{(*)}{=} \sum_{j \in S} P_{ij} Y_i(1) \le \sum_{j \in S} P_{ij} = Y_i(1)
+		\end{split}\end{equation}
+		where (*) holds by \emph{first step analysis}: $ Y_i(n) = \sum_{j \in S} P_{ij} Y_j(n-1) $.
+
+		\proofpart Inductive step
+
+		\begin{equation}\begin{split}
+			& Y_i(n+1) \stackrel{(1)}{=} \sum_{j \in S} P_{ij} Y_i(n) \stackrel{(2)}{\le} \sum_{j \in S} P_{ij} Y_i(n-1) \stackrel{(3)}{=} Y_i(n)
+		\end{split}\end{equation}
+		where (1) and (3) hold by first step analysis and (2) for inductive hypothesis.
+	\end{proof}
+
+	\begin{lemma}
+		Since $Y_i(n)$ is monothonically non-increasing and positive (it is a probability), we can always take the limit for $n \to +\infty$.
+
+		$$ \exists \lim_{n \to +\infty} Y_i(n) \stackrel{.}{=} Y_i = \prob[\text{staying in } S | \text{starting from } i \in S] $$
+		where $ S = \{ 1, 2, 3, ...\} $ as before.
+
+		Using \emph{first step analysis} as in previous equation \ref{eq:Y_i-properties} and taking the limit for $n \to +\infty $, we can build the following system.
+		\begin{equation} \label{eq:Yj_system}
+			\forall i \neq 0, Y_i = \sum_{j \in S} P_{ij} Y_j
+		\end{equation}
+	\end{lemma}
+
+	\begin{lemma}
+		Let $\{Z_i, i=1, 2, ...\}$ be a solution set for system \ref{eq:Yj_system}. We focus in particular on non-divergent solutions, imposing that $ \forall i ~ |Z_i| \le 1 $.
+
+		It holds that
+		$$ \forall n, |Z_i| \le Y_i(n) ~ \Rightarrow ~|Z_i| \le \lim_{n \to +\infty} Y_i(n) = Y_i $$
+	\end{lemma}
+	---
+	\begin{proof}
+		\proofpart Base case $n=1$
+
+		$$ |Z_i| = \sum_{j \in S} P_{ij} |Z_j| \stackrel{(*)}{\le} \sum_{j \in S} P_{ij} = Y_i(1) $$
+		where (*) holds because $|Z_i| < 1$.
+
+		\proofpart Inductive step
+
+		$$ |Z_i| = \sum_{j \in S} P_{ij} |Z_j| \stackrel{(*)}{\le} \sum_{j \in S} P_{ij} Y_j(n) = Y_i(n+1) $$
+		where (*) is due to the inductive hypothesis.
+	\end{proof}
+
+	\begin{lemma}[Ross 2, pg. 78-82] \label{lemma:MC_irreducible_fi0}
+		Given an \gls{mc} with a state set $S$ that contains state 0, it is irreducible if and only if
+
+		$$ \forall i \neq 0, f_{i 0} = 1 $$
+		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
+	\end{lemma}
+	---
+	\begin{proof} ``$\Leftarrow$''
+		\begin{equation}\begin{split}
+			f_{00} = P_{00} + \sum_{i \neq 0} P_{0i} f_{i 0} \stackrel{(*)}{=} \sum_{i} P_{0i} = 1
+		\end{split}\end{equation}
+		where (*) is due to hypothesis.
+
+		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1: it must be recurrent.
+	\end{proof}
+
+	\begin{proof} ``$\Rightarrow$''
+		Suppose chain is irreducible, but thesis is false, i.e.
+		$$ \exists i \neq 0 : f_{i0} < 1 $$
+
+		If \gls{mc} is irreducible (i.e. it is made only of a single class) it must be that
+		$$ \forall i \neq 0, \exists m : P_{0i}^{(m)} > 0 $$
+
+		Let $n$ be the minimum value among all possible $m$  that satisfies this condition for given state $i \neq 0$: such number is the shortest path from 0 to $i$ and, by its definition, does not cross state 0 in the middle.
+
+		$$ \prob[\forall n, X_n \neq 0 | X_0 = 0] = 1 - f_{00} \stackrel{(*)}{\ge} P_{0i}^{(n)} (1 - f_{i0}) > 0 \Rightarrow \text{ state 0 is transient} $$
+
+		where (*) inequality holds because leaving 0 forever (first term) is a more general case of going to state $i$ via the shortest path and then not crossing 0 ever again.
+
+		This is absurd, because chain is supposed irreducible.
+	\end{proof}
+
+	\begin{theorem}
+		An irreducible \gls{mc} with states $S = 0, 1, 2, ...$ is transient if and only if
+
+		$$ Z_i = \sum_{j=1}^{+\infty} P_{ij} Z_j \text{ for } i = 1, 2, ...$$
+
+		has a non-zero bounded solution with $ |Z_i| \le 1$.
+	\end{theorem}
+	---
+	\begin{proof}
+		Let's consider a \gls{mc} and a state subset $S = \{1, 2, 3, ...\}$.
+
+		$$ \prob[\text{leaving } S| X_0 = i \neq 0] \stackrel{(1)}{=}
+			1 - Y_i \stackrel{(2)}{=} f_{i0} $$
+		where (1) holds for $Y_i$ definition and (2) because, for $S$ formulation, leaving $S$ means reaching 0.
+
+		We can now distinguish two cases, based on $Z_i$ solutions:
+		\begin{itemize}
+			% Z has only at most zero solutons
+			\item $ \forall i, Z_i \le 0 \Leftrightarrow \forall i, Y_i = 0 \Leftrightarrow \forall i, f_{i0} = 1 \stackrel{(*)}{\Leftrightarrow} $ chain is recurrent
+
+			% Z has a non zero bounded solution
+			\item $ \exists i: Z_i > 0 \Leftrightarrow \exists i: Y_i > 0 \Leftrightarrow \exists i: f_{i0} < 1 \stackrel{(*)}{\Leftrightarrow} $ chain is transient
+		\end{itemize}
+		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
+	\end{proof}
+
+	\begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
+		An irreducible \gls{mc} is recurrent if exists a sequence $Y_i$ that is not bounded on $i$.
+
+		\begin{equation}\noindent
+			\exists \text{ sequence } Y_i : \quad
+ 			\sum_{j=0}^{+\infty} P_{ij} Y_j \le Y_i \quad \forall i \neq 0 \quad and \quad
+ 			\lim_{i \to +\infty} Y_i = +\infty
+		\end{equation}
+	\end{theorem}
+	---
+	\begin{proof}
+		Proof is splitted into small chunks, as usual.
+
+		\proofpart
+			Let's consider a \gls{mc} with probability matrix $\tilde{P}$, that concides with P except for the first line, which is $(1, 0, 0, ...)$.
+			In this way we make the state 0 absorbing.
+
+			We employ this trick to write theorem condition also for $i=0$.
+			$$ \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \le Y_i ~~ \forall i$$
+
+		\proofpart
+			If a given sequence $Y_i$ is a solution, its shifted version $y_i + b$ is a solution too, for all $b$.
+
+			Since $Y_i$ sequence diverges, we can choose the minimum $b$ that makes each member strictly positive.
+			\begin{equation}
+				\exists b: \forall i, Y_i + b \doteq Y_i' > 0 \text{ is a valid solution.}
+			\end{equation}
+
+			From now on, we consider only positive sequences $Y_i$, without loss of generality.
+
+		\proofpart
+			\begin{equation}\begin{split}
+				Y_i & \ge \sum_{j=0}^{+\infty} \tilde{P}_{ij} Y_j \stackrel{(1)}{\ge}
+				\sum_{j=0}^{+\infty} \tilde{P}_{ij} \left( \sum_{k=0}^{+\infty} \tilde{P}_{jk} Y_k \right) \stackrel{(2)}{=} \\
+				& = \sum_{k=0}^{+\infty} Y_k \sum_{j=0}^{+\infty} \tilde{P}_{ij}  \tilde{P}_{jk} =
+				\sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(2)} = \\
+				& \stackrel{(3)}{=} \ldots = \sum_{k=0}^{+\infty} Y_k \tilde{P}_{ik}^{(m)} \quad\forall i,\forall m
+			\end{split}\end{equation}
+			where
+			\begin{itemize}
+				\item[(1)] hypothesis has been applied to $Y_j$ itself. Note that for $\tilde{P}$ this property is valid for $i=0$ too (in general it's not true for $P$).
+				\item[(2)] sums can be swapped since sum in $k$ surely converges, both simply and absolutely since $Y_i$ are strictly positive. Note that convergence is guaranteed by the fact that at the left side of the current chain of decreasing inequalities we find the real number $Y_i$, that exists for hypothesis.
+				\item[(3)] the same reasoning of (2) is repeated in a recursive way.
+			\end{itemize}
+
+		\proofpart \label{part:Yi_lower_bound}
+			Since $Y_i$ serie diverges, we can write, by limit definition
+			$$ \forall \epsilon > 0, ~\exists M \in \N : ~Y_i \ge \frac{1}{\epsilon} \quad \forall i \ge M$$
+
+			\begin{equation}\begin{split}
+				Y_i & \ge \sum_{j=0}^{+\infty} Y_j \tilde{P}_{ij}^{(m)}
+					= \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+					+ \sum_{j=M}^{+\infty} Y_j \tilde{P}_{ij}^{(m)} \ge \\
+				& \ge \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+					+ \frac{1}{\epsilon} \sum_{j=M}^{+\infty} \tilde{P}_{ij}^{(m)} \\
+				& = \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+					+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1}\tilde{P}_{ij}^{(m)} \right) \quad \forall i, \forall m
+			\end{split}\end{equation}
+
+		\proofpart
+			Our aim is now to prove following statement
+			$$ \forall i,j \neq 0, \lim_{m \to \infty} \tilde{P}_{ij}^{(m)} = 0 $$
+
+			We can distinguish two cases,
+			\begin{itemize}
+				\item if $P$ is recurrent, we certantly reach state 0 at some time ($f_{i0} = 1$), but given $\tilde{P}$ strucure, we will be stuck there forever.
+				\item if $P$ is transient, it must be $\lim_{m \to \infty} P_{ij}^{(m)} = 0 $, so our lemma would be proven if
+				$$ \tilde{P}_{ij}^{(m)} \le P_{ij}^{(m)} \quad\forall i, j \neq 0$$
+			\end{itemize}
+
+			This possibility can be more widely explained this way, splitting $\tilde{P}_{ij}^{(m)}$ and $P_{ij}^{(m)}$ across random walks	 that contain state 0 or not.
+			\begin{equation}
+				\left\{ \begin{split}
+					& P_{ij}^{(m)} = \sum_{l=1}^{m-1} f_{i0}(l) P_{0j}^{(m-l)} +
+						& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
+					& \tilde{P}_{ij}^{(m)} =
+						& \prob[X_m = j, X_l \neq 0 ~ \forall l = 1, ..., m-1 | X_0 = i] \\
+				\end{split} \right.
+			\end{equation}
+			Note that, in $\tilde{P}$, state $0$ is a trap state, so the first term of the sum disappear because $j \neq 0$ can no more be reached.
+
+		\proofpart
+			Now we assume that chain is transient and we proceed to an absurd statement, which proves our theorem.
+
+			By definition,
+			$$ f_{i0} = \lim_{m \to +\infty} \tilde{P}_{i0}^{(m)} = \prob[\exists k : X_k = 0 | X_0 = i] = \tilde{\pi}_i(C_0)$$
+			where $C_0$ is the recurrent class that contains only the absorbing state 0.
+
+			Using what we have proved in part \ref{part:Yi_lower_bound}:
+			\begin{equation}\begin{split}
+				Y_i & \ge \lim_{m \to +\infty} Y_i \ge \\
+					& \ge \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
+						+ \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
+				& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
+			\end{split}\end{equation}
+			where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
+
+			Terms can be rearranged this way
+			\begin{equation*}\begin{split}
+				&Y_i - \tilde{\pi}_i(C_0) Y_0 \ge \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) \\
+				&1 - \tilde{\pi}_i(C_0) \le \epsilon \, [Y_i - \tilde{\pi}_i(C_0) Y_0] \le \epsilon Y_i \quad\forall \epsilon > 0
+			\end{split}\end{equation*}
+
+			Since we assumed that the chain is transient, we can state that $\tilde{\pi}_i(C_0) < 1$, so choosing $\epsilon < [1-\tilde{\pi}_i(C_0)] ~ Y_i^{-1}$ we have that
+
+			\begin{equation*}
+				1 - \tilde{\pi}_i(C_0) \le \epsilon Y_i < \frac{1-\tilde{\pi}_i(C_0)}{Y_i} Y_i = 1 - \tilde{\pi}_i(C_0)
+			\end{equation*}
+			We derive that $\tilde{\pi}_i(C_0) = f_{i0} = 1$, which implies that chain is recurrent for lemma \ref{lemma:MC_irreducible_fi0}. This is an absurd given chain is supposed transient.
+	\end{proof}
