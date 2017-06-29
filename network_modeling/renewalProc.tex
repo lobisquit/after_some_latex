@@ -35,9 +35,11 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	where
 	\begin{itemize}
-		\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
+		\item $ S_n \stackrel{\footnotemark}{=} W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
 		\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
 	\end{itemize}
+
+	\footnotetext{It's only a matter of notation, in some book is reported as $S_n$, in others as $W_n$}
 
 	Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
 
@@ -71,7 +73,20 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	\bigbreak
 	An interesting result can be proven for Poisson processes with intensity $\lambda$.
+	Actually, renewal processes are generalized version of Poisson processes (arrival hasn't to be exponential).
 	In this case, given $\beta_t = \delta_t + \gamma_t$, the joint distribution of $\delta_t$ and $\gamma_t$ can be written as follows.
+	\begin{equation*}
+		\prob[\gamma_t > x] = \prob[no ~events ~in ~(t,t+x)] = e^{-\lambda x}
+	\end{equation*}
+
+	\begin{equation*}
+		\prob[\delta_t > x] = \prob[no ~events ~in ~(t-x,t)] =
+		\begin{cases}
+			e^{-\lambda x} & x<t\\
+			0 & x\ge t
+		\end{cases}
+	\end{equation*}
+	where the second case takes into account that the previous event can not happen before time 0.
 
 	\begin{equation}
 		\prob[\gamma_t > x, \delta_t > y ] =
@@ -80,7 +95,6 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			0 & \text{if } y \ge t \\
 		\end{cases}
 	\end{equation}
-	where the second case takes into account that the previous event can not happen before time 0.
 
 	The expectation of $\beta_t$ can be computed naturally as
 	\begin{equation*}
@@ -275,7 +289,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 	For the triangle inequality and integral properties, we have that
 	$$ |A(t)| \le |a(t)| + \int\limits_0^{t}|a(t-x)| \cdot dM(x) $$
 
-	We can easily assess this upper buond for the value of $A(t)$, that proves our thesis.
+	We can easily assess this upper bound for the value of $A(t)$, that proves our thesis.
 	\begin{equation}\begin{split}
 		\sup_{0\le t \le T} |A(t)| & \le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le \eta \le T}|a(\eta)| \cdot dM(x) \\
 		& = \sup_{0\le t \le T} |a(t)| \cdot [ 1+M(T) ] < \infty \text{ as }
@@ -364,6 +378,29 @@ An integer random variable N is called \gls{st} for the i.i.d. sequence $X_i$ if
 
 Less formally, N is independent on what happens after $X_n$.
 \end{definition}
+For example:
+
+\begin{description}
+	\item[\textbf{Coin Flip}]
+		$\prob[X_i=0] = \prob[X_i=0] = 1/2$
+		\begin{equation*}
+			N = min\bigg\{n:\sum_{i=1}^n X_i = 10\bigg\}
+		\end{equation*}
+		Flip a coin until you get 10 ones, $N$ is a \textit{stopping time r.v.}
+	\item[\textbf{Gambler's ruin}]
+		$\prob[X_i=1] = \prob[X_i=-1] = 1/2$
+		\begin{equation*}
+			N = min\bigg\{n:\sum_{i=1}^n X_i = 1\bigg\}
+		\end{equation*}
+		$N$ is a \textit{stopping time r.v.}
+	\item[\textbf{Uniform distribution}]
+		$X_i \sim U[0,1]$
+		\begin{equation*}
+			N_1 = min\bigg\{n:\sum_{i=1}^n X_i > 10\bigg\} \qquad
+			N_2 = min\bigg\{n:\sum_{i=1}^n X_i \le 10\bigg\}
+		\end{equation*}
+		$N_1$ is a \textit{stopping time r.v.} since it stops as soon as the sum is above $10$, $N_2$ isn't a \textit{stopping time r.v.} since the variable has to look for the next value of $X_i$, so $N$ depends on $X_{n+1}$.
+\end{description}
 
 \begin{theorem}[Wald's equation]
 	Let $X_1, X_2, \dots, X_N $ be an i.i.d. sequence with finite mean and N a stopping time such that $\exp[N] < \infty$. Then
@@ -411,7 +448,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}
 	\eeq
 	where $\mu = E[X]$.\\
-	Then we can prove that $\frac{M(t)}{t} = E[\frac{N(t)}{t}]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
+	Then we can prove that $\frac{M(t)}{t} = \exp\bigg[\frac{N(t)}{t}\bigg]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
 	\subsubsection{Counter example}
 	Let $U$ be a uniform r.v. $U(0,1)$ and let $Y_n$ be a r.v. such that:
 	\beq
