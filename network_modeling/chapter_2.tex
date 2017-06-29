@@ -62,6 +62,7 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 \input{first_step_analysis.tex}
 \section{Random walk}
 \begin{figure}[h]
+	\centering
 	\input{img/infinite_mc.tex}
 	\caption{An infinite random walk MC. With relation to gambling, the MC rapresents the case
 	where (1) the adversary has an infinite wealth (e.g.: casino), (2) the gambler can loose nothing in one game
@@ -169,7 +170,7 @@ Let's start with the probability:
 	\caption{A two-state Markov chain}
 	\label{fig:2sMC}
 \end{figure}
-For a two state \gls{mc} like the one in \ref{fig:2sMC}, we can write:
+For a two state \gls{mc} like the one in \Fig{fig:2sMC}, we can write:
 \begin{equation}\begin{split}
 	f_{01}(n)&= P_{01} \cdot \delta(n-1) + P_{00} \cdot f_{01}(n-1) = a \cdot \delta(n-1) + (1-a)\cdot f_{01}(n-1)\\
 	f_{01}(1)&=a \quad f_{01}(2)=a \cdot(1-a) \quad \dots \quad f_{01}(n) = a\cdot(1-a)^{n-1} n \ge 1 \\
@@ -283,7 +284,7 @@ This means that:
 \begin{enumerate}
 	\item $U^{(n)} = W^{(n-1)}\cdot R$
 	\item $U=\lim_{n\to +\infty} U^{(n)} = W \cdot R = [I-Q]^{-1}\cdot R$
-	\item $\tilde{P}=\begin{matrix} Q & r \\ \vec{0}&1 \end{matrix}$
+	\item $\tilde{P}=\begin{pmatrix} Q & r \\ \vec{0}&1 \end{pmatrix}$
 \end{enumerate}
 In conclusion, we found that the average first passage time is equal to the average
  absorption time, which is $[I-Q]^{-1}\cdot \vec{1}$
@@ -347,7 +348,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 		Now, as $n \to \infty$, we have that
 		\begin{equation}
-			X_j = \sum\limits_{k=0}^N X_k \pi_j = \pi_j (\sum\limits_{k=0}^N X_k) = \pi_j  \implies
+			X_j = \sum\limits_{k=0}^N X_k \pi_j = \pi_j \left(\sum\limits_{k=0}^N X_k\right) = \pi_j  \implies
 			\text{The solution is unique}
 		\end{equation}
 	\end{proof}

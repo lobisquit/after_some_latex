@@ -1,25 +1,25 @@
 \section{First step analysis}
-\begin{definition}[Absorbent state]
-	 A state $i$ is defined $absorbient$ if it is valid the following condition:$p_{ij}=0$ $\forall j\neq i$ and $p_{ii}=1$. In practice, when a chain incur in the state $i$ no transition to other different states is longer possible. Therefore  the chain will remain "absorbed" in it. 
+\begin{definition}[Absorbing state]
+	 A state $i$ is defined $absorbient$ if it is valid the following condition:$p_{ij}=0$ $\forall j\neq i$ and $p_{ii}=1$. In practice, when a chain incur in the state $i$ no transition to other different states is longer possible. Therefore  the chain will remain "absorbed" in it.
 \end{definition}
-\begin{definition}[Absorbent time]
-	Being $A$ the set of the absorbent states of a particular markov chain, the absorbent time is defined in the following way: 
+\begin{definition}[Absorption time]
+	Being $A$ the set of the absorbing states of a particular markov chain, the absorption time is defined in the following way:
 	\begin{equation}
 	T= \min \{n\geq0: X_n \in A \}
 	\end{equation}
 \end{definition}
-"First step analysis" is a "standard procedure" applied to resolve some particular Markov Chain in which there is one of more absorbent state.
+``First step analysis'' is a ``standard procedure'' applied to resolve some particular Markov Chain in which there is one of more absorbing state.
  We are interested in computing two fundamental quantities:
 \begin{itemize}
-	\item The probability of absorption given a starting point $i$ :  $ u_i=P[X_T\in A | X_0=i ]$
-	\item The expected absorption time given a starting point $i$ : $v_i= E[T|X_0=i]$
+	\item The probability of absorption given a starting point \\$i$ :  $ u_i=P[X_T\in A | X_0=i ]$
+	\item The expected absorption time given a starting point $i$ :\\ $v_i= E[T|X_0=i]$
 \end{itemize}
 \subsection{First Step Analysis: General Method}
 \begin{itemize}
 	\item Reorganize the markov chain according to the following rules
 	\begin{itemize}
 		\item The states from $0,..r-1$ transient;
-		\item The states from $r,...,N$ absorbent.
+		\item The states from $r,...,N$ absorbing.
 	\end{itemize}
 
 	\item  Reorganize the transition matrix according to the following rules :
@@ -31,48 +31,46 @@
      P_{(r+1)0}=0 & P_{(r+1)1}=0& \cdots &P_{(r+1)r}=0& P_{(r+1)(r+1)}=1& 0&  \cdots&  0\\
      \vdots & \vdots & \ddots  \\
      P_{N0}=0 & P_{N1}=0& \cdots &P_{Nr}=0& P_{N(r+1)}=0& 0&  \cdots&  P_{NN}=1\\
-     
+
      \end{pmatrix}
-$$   
      \end{equation}
      As shown in the figure above the matrix is composed by three parts:
      \begin{itemize}
      	\item In the upper part there are the transitions probability from the not-absorbient states.
-     	\item In the low left corner there are the transition probability from  the absorbent states to the not-absorbent states: these can be have only 0 for the definition of absorbent state.
-     	\item In the low-right corner there are the transition probabilities from  the absorbent states to the absorbent states. This is a $(N-r)$ x$(N-r)$ identity submatrix: once a chain enters in one absorbent state, it can only remain in it and cannot go away 
-     	
-     \end{itemize} 
+     	\item In the low left corner there are the transition probability from  the absorbing states to the not-absorbing states: these can be have only 0 for the definition of absorbing state.
+     	\item In the low-right corner there are the transition probabilities from  the absorbing states to the absorbing states. This is a $(N-r) \times(N-r)$ identity submatrix: once a chain enters in one absorbing state, it can only remain in it and cannot go away
+
+     \end{itemize}
     \item In order to compute the the probability of absorption given a starting point $i$ it is possible to write the following:
-    \begin{equation} 
+    \begin{equation}
     \begin{split}
-      u_{ik} = P[X_T=k|X_0=i]= \sum\limits_{j=0}^N u_{jk}P_{ij}=\\
-      \sum\limits_{j=0}^N P[X_T=k|X_0=i,X_1=j]P[X_1=j|X_0=i]=\\
-      = P_{ik}+\sum\limits_{j=0}^N 0*P_{ij} +\sum\limits_{j=0}^{r-1} u_{jk}P_{ij},
-      \\
-      P_{ik}+\sum\limits_{j=0}^{r-1} u_{jk}P_{ij}              
-      \end{split}      
+      u_{ik} &= P[X_T=k|X_0=i]= \sum\limits_{j=0}^N u_{jk}P_{ij}=\\
+      &\sum\limits_{j=0}^N P[X_T=k|X_0=i,X_1=j]P[X_1=j|X_0=i]=\\
+      &= P_{ik}+\sum\limits_{j=0}^N 0*P_{ij} +\sum\limits_{j=0}^{r-1} u_{jk}P_{ij}\\
+      &=P_{ik}+\sum\limits_{j=0}^{r-1} u_{jk}P_{ij}
+      \end{split}
      \end{equation}
-     
+
        this is valid for $i= 0,1,..r-1$
-    Intuitively the probability of being absorbed in a state $k$ starting in $i$ is equal to the transient probability of the transition $i\rightarrow k$ plus the probabilities of being absorbent from another not-absorbent state ($j \in (0,...r-1)$) weighted by the probability of doing the transition  $i\rightarrow j$ ($P_{ij}$). 
-    In this case the unknown values are the $u_{jk}$ thus 
+    Intuitively the probability of being absorbed in a state $k$ starting in $i$ is equal to the transient probability of the transition $i\rightarrow k$ plus the probabilities of being absorbed from another not-absorbing state ($j \in (0,...r-1)$) weighted by the probability of doing the transition  $i\rightarrow j$ ($P_{ij}$).
+    In this case the unknown values are the $u_{jk}$ thus
     a system of $ r-1$ has to be solved in order to compute properly $u_{ik}$ probability.
      \newline Trivially for $i= r,.. , N$, $u_{ik}=0$ for $i\neq k$ and $u_{ik}=1$ $i=k$.
- 
- \item In order to compute the expected absorption time given a starting point $i$ : $v_i= E[T|X_0=i]$ a very similar method is applied: 
+
+ \item In order to compute the expected absorption time given a starting point $i$ : $v_i= E[T|X_0=i]$ a very similar method is applied:
  \begin{equation}
  v_i= 1 + \sum\limits_{j=0}^{r-1} P_{ij} v_j
   \end{equation}
-   Intuitively the expected absorption time from i is equal to 1 with probability 1 (at least one transition has to be done) plus the  the expected absorption time starting from j weighted by the probability of doing the transition  $i\rightarrow j$ ($P_{ij}$) where j (of course) is a not-absorbent state.
-   
+   Intuitively the expected absorption time from i is equal to 1 with probability 1 (at least one transition has to be done) plus the  the expected absorption time starting from j weighted by the probability of doing the transition  $i\rightarrow j$ ($P_{ij}$) where j (of course) is a not-absorbing state.
+
   \item Remember that all the equations written above are recursive because they will have the following form :
   \begin{equation}
      u_{ik}= P_{ik}+\sum\limits_{j=0}^{r-1} u_{jk}P_{ij} =  P_{ik}+ u_{0k}P_{i0} + .... + u_{ik}P_{ii} + ... +  u_{(r-1)k}P_{i(r-1)}
-   \end{equation}  
+   \end{equation}
 \end{itemize}
 
 %\subsection{First passage time}
 %Another application of first step analysis is the computation of so-called "First-passage-time" define in the following way:
 %	\newline
-%	$\theta_{ij}$= \# of transitions to reach j starting from i 
-%% TO BE DONE ... 
+%	$\theta_{ij}$= \# of transitions to reach j starting from i
+%% TO BE DONE ...
