@@ -511,13 +511,14 @@ For example:
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
 	\eeq
-	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^\infty(1-F(x))\,dx$. See figure\ref{fig:mu}
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^\infty(1-F(x))\,dx$. See \autoref{fig:mu}.
 	\begin{figure}
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
 	\caption{This graph is the complementary distribution of $X^c$}
 	\label{fig:mu}
 	\end{figure}
+
 	So at the end we conclude that
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c} = \frac{1}{\mu}
@@ -539,37 +540,37 @@ For example:
 	In the first case there is no case in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
 	\subsubsection*{$1^{st}$ Statement}
 	In this case represents a Poisson process: $S_{N(t)+1} = t + \gamma_t$ and $S_{N(t)} = t - \delta_t$;\\
-	If i sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
+	If I sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
 	Moreover we know that both $\gamma$ and $\delta$ are exponentially distributed (because of Poisson process theory and the memoryless condition of the process): $\gamma_t$ is exponential with parameter $\lambda$, while $\delta_t$ is exponential with parameter $\lambda$ truncated at $t$.\\
 	So we can find all the quantities involved:%min 25:00
 	\beq
-	E[S_{N(t)+1} = t + \frac{1}{\lambda}] \qquad E[S_{N(t)}] = t - \frac{1-e^{-\lambda t}}{\lambda}
+	E[S_{N(t)+1}] = t + \frac{1}{\lambda} \qquad E[S_{N(t)}] = t - \frac{1-e^{-\lambda t}}{\lambda}
 	\eeq
 	with $M(t) = \lambda t$ and $E[X] = \frac{1}{\lambda}$.\\
-	Thanks to it we can see that the equality in true.
+	Thanks to it we can see that the equality is true.
 	\subsubsection*{$2^{nd}$ Statement}
 	In this case we take:
 	\beq
 	X_i =
 	\begin{cases}
-	1 \qquad w.p. p\\
-	a \geq 2 \qquad w.p. 1-p
+	1 \qquad w.p. ~p\\
+	a \geq 2 \qquad w.p. ~1-p
 	\end{cases}
 	\eeq
 	How many arrivals do we count?
 	\beq
 	N(t) =
 	\begin{cases}
-	1 \qquad w.p. p\\
-	0 \qquad w.p. 1-p
+	1 \qquad w.p. ~p\\
+	0 \qquad w.p. ~1-p
 	\end{cases}
 	\eeq
 	And how much time do we count?
 	\beq
 	S_{N(t)}=
 	\begin{cases}
-	1 \qquad w.p. p\\
-	0 \qquad w.p. 1-p
+	1 \qquad w.p. ~p\\
+	0 \qquad w.p. ~1-p
 	\end{cases}
 	\eeq
 	NOTE: Even though the value is the same, they do not represent the same thing.\\
@@ -577,7 +578,7 @@ For example:
 	\beq
 	S_{N(t)+1} =
 	\begin{cases}
-	a \quad \text{w.p. $ (1-p)$}  \rightarrow \text{it means it the first renewal}\\
+	a \quad \text{w.p. $ (1-p)$}  \rightarrow \text{it means is the first renewal}\\
 	2  \quad \text{w.p.  $p^2$}  \rightarrow \text{if the first  X is 1 and also the second}\\
 	1+a \quad \text{w.p. $ p(1-p)$} \rightarrow \text{if the first X is 1 and the second is a}\\
 	\end{cases}
@@ -608,7 +609,7 @@ For example:
 	So the first equation was found to be true in both cases and it's contrary for the second.
 	\subsection{Exercises}
 	\subsubsection*{Ex 2.4}
-	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
+	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on a given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
 	So I represent the book as:
 	\begin{figure}[h]
 	\centering
@@ -643,13 +644,14 @@ For example:
 	\end{align}
 	\subsubsection*{Ex 3.6}
 	For $i = 1 \dots n$ I have an indep. PP $\rightarrow X_i(t)$ is an i.i.d. PP($\lambda$).\\
-	The problem asks to find the first time such that there is at least one event  in every process, see figure\ref{fig:3.6}
+	The problem asks to find the first time such that there is at least one event  in every process, see \autoref{fig:renewal_ex}.
 	\begin{figure}[h]
-	\centering
-	\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
-	\label{3.6}
+		\centering
+		\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
+		\label{fig:renewal_ex}
 	\end{figure}
-	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{}-\lambda t)^n$.\\
+
+	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 ~events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{-\lambda t})^n$.\\
 	We could actually see the problem from a different point of view: this view counts the events in the Poisson Poisson process and uses the independence to find the probability that none of them has seen $0$ events.\\
 	So we can see how we can look at $T$: we get that $T$ is the time at which the last process has its first event and it will be the biggest value among the exponentials; the first event will occur, obviously, with exponential time, so using this reasoning we can express the r.v. $T$ as:
 	\beq
@@ -658,7 +660,7 @@ For example:
 	So I can turn the point into a question: what is the distribution of the maximum among the i.i.d variables?
 	\begin{align}
 	\begin{split}
-	P[max{X_1,X_2,\dots,X_n} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
+	P[max\{X_1,X_2,\dots,X_n\} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
 						  & = (P[X \leq t])^n = (1-e^{-\lambda t})^n
 	\end{split}
 	\end{align}
@@ -697,7 +699,7 @@ For example:
 	\subsubsection*{Ex 4.1}
 	Given $n$ arrivals, we take the quantity $E[w_1] = \int_{0}^{1}(1-t)^n dt = \frac{1}{n+1}$ where $w_1$ is the smallest among $n$ i.i.d. uniform r.v. between $0$ and $1$ and so the distribution is the distribution of the minimum of $n$ i.i.d. uniform r.v., and its complementary distribution is the $n^{th}$ power of the complementary distribution.\\
 	\subsubsection*{Ex 4.3}
-	Suppose we have $5$ arrivals, the cumulative time is the area in figure4, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
+	Suppose we have $5$ arrivals, the cumulative time is the area in \autoref{fig:area}, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
 	\subsubsection*{Ex 4.5}
 	Here assume we have $\alpha$  and the service time is an exponential r.v. $\sim exp(\alpha)$, and the probability $P[\text{at time 1 h the queue is empty}]$ is estimated considering each user arriving uniformly. So at the end the number of users is binomial and, conditioning on the uniform variable, we get:
 	\begin{align}
@@ -732,7 +734,11 @@ For example:
 	\end{equation}
 \end{definition}
 \begin{definition}
-	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
+	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that
+	\begin{equation}
+		\sum_{n=-\infty}^{+\infty}\prob[X = n\lambda] = 1
+	\end{equation}
+	i.e. F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
 
 	We call \textit{SPAN} the largest $\lambda$ for which F is still arithmetic.
 \end{definition}
@@ -903,10 +909,10 @@ Then we finally prove that
 	\begin{equation}
 		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
 	\end{equation}
-	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
+	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statement is always true for any initial state $Y_0$.
 
 	\begin{equation}
-		N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
+		N_j(n)-N_j(n-1)=1 = I[Y_n=j]
 	\end{equation}
 
 	If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
