@@ -1,5 +1,5 @@
 \chapter{Renewal Processes (Cap 7)}
-The main idea of a renewal process is a cyclic recurrence of a random fenomena presenting always the same statistics.
+The main idea of a renewal process is a cyclic recurrence of a random phenomena presenting always the same statistics.
 The classical example is the lifetime of a light bulb: everytime a blub dies the new one experience the same conditions as the previous one.
 
 \begin{definition}[Renewal Process]
@@ -8,7 +8,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\begin{itemize}
 		\item $ \forall i, F_i(x) = P[X_i < x] = F(x) \rightarrow $ lifetimes are statistically equivalent
 		\item $ F(0) = 0 \rightarrow $ renewals are not simultanous
-		\item $ F(+\infty) = 0 \rightarrow $ renewals repeat forever
+		\item $ F(+\infty) = 1 \rightarrow $ renewals repeat forever
 	\end{itemize}
 \end{definition}
 
@@ -82,7 +82,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\end{equation}
 	where the second case takes into account that the previous event can not happen before time 0.
 
-	The expectation of $\beta_t$ can be computed naturally as
+	The expectation of $\beta_t$ can be computed simply as
 	\begin{equation*}
 		\exp[\beta_t] = \exp[\gamma_t] + \exp[\delta_t] =
 		\frac{1}{\lambda} + \exp[\delta_t] =
@@ -99,7 +99,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
 
 \section{Asymptotic results}
-\begin{theorem}[Ross p. 101 and passim]
+\begin{theorem}[Ross p. 101 and following]
 	Given a renewal process made of a sequence $X_k$ i.i.d. r.v., we can state that, with probability 1,
 	\begin{numcases}{}
 		\lim_{t \to +\infty} N(t) = N(\infty) = +\infty \label{eq:nt_to_infty} \\
@@ -121,12 +121,12 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 		\end{split}
 	\end{equation*}
 
-	\proofpart (equation \eqref{eq:renewal_partial_sum})
+	\proofpart equation \eqref{eq:renewal_partial_sum}
 
-	By $S_n$ definition, we have that $ S_{N(t)} / N(t)$ is the average interarrival time for the first $N(t)$ renewals and so for the \emph{Strong Law of Large Numbers} we have that this time average converges to the expectation.
+	By $S_n$ definition, we have that $ \frac{S_{N(t)}}{N(t)}$ is the average interarrival time for the first $N(t)$ renewals and so for the \emph{Strong Law of Large Numbers} we have that this time average converges to the expectation.
 	$$ \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} = \lim_{t \to +\infty} \frac{S_{N(t)+1}}{N(t)+1} = \lim_{N \to +\infty} \frac{S_{N}}{N} = \mu $$
 
-	\proofpart (equation \eqref{eq:nt_grows_linearly})
+	\proofpart equation \eqref{eq:nt_grows_linearly}
 
 	By $S_n$ and $N(t)$ definitions, we have that $S_{N(t)}$ and $S_{N(t)+1}$ are respectively the time of the last and the next renewal of a given time $t$.
 
@@ -168,7 +168,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			\left( 1 - F \left( \frac{t}{r} \right) \right) ^ r > 0
 	\end{split} \end{equation}
 
-	Thus we have proved that $ \lim_{n \to +\infty} F_r(t) = 0 $ at least geometrically.
+	Thus we have proved that $ \lim_{n \to +\infty} F_n(t) = 0 $ at least geometrically.
 
 	\proofpart (equation \eqref{eq:mt_always_finite} and \eqref{eq:mt_diverges})
 	First we derive a nice property of $F_n(t)$ distributions that holds for every $m \in [1,\, n-1]$:
@@ -423,7 +423,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\eeq
 	Where the second equation brings to the espressions $\frac{M(t)}{t} > \frac{1}{\mu} - \frac{1}{t}$ and $\lim_{t \to \infty} \frac{M(t)}{t} \geq \frac{1}{\mu}$
 
-	\textbf{NOTE}: In the book the notation has also the expression \textit{"lim \textbf{inf}"} since, in this way, the demonstration is "easier" to do, in fact we can also see graphically that the $inf$ expression guarantees that we have a lower bound. Figure\ref{fig:graph1}
+	\textbf{NOTE}: In the book the notation has also the expression \textit{"lim \textbf{inf}"} since, in this way, the demonstration is "easier" to do, in fact we can also see graphically that the $inf$ expression guarantees that we have a lower bound. []\Fig{fig:graph1}]
 	\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Cri_graph1.jpg}
@@ -460,8 +460,8 @@ Less formally, N is independent on what happens after $X_n$.
 	and since $M^c(t) \geq M(t)$ from the previous inequality, I can say that:
 	\begin{align}
 	\begin{split}
-	\mu^c(1+M^c(t)) \geq \mu^c(1+M(t))\\
-	\frac{M(t)}{t} \leq \frac{1}{\mu^c} \frac{1}{t}(\frac{c}{\mu^c}-1) \qquad \forall c > 0 \quad (valid\quad for\quad any\quad truncation)
+	\mu^c(1+M^c(t)) &\geq \mu^c(1+M(t))\\
+	\frac{M(t)}{t} &\leq \frac{1}{\mu^c} \frac{1}{t}(\frac{c}{\mu^c}-1) \qquad \forall c > 0 \quad (valid\quad for\quad any\quad truncation)
 	\end{split}
 	\end{align}
 
@@ -474,7 +474,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
 	\eeq
-	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. See figure\ref{fig:mu}
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. [See \Fig{fig:mu}]
 	\begin{figure}
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
@@ -486,7 +486,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c} = \frac{1}{\mu}
 	\eeq
 	\\
-	\textit{cvd}
+	\qed
 	\subsection*{Observation}
 	In the book, at the beginning, they assume that $E[X] < \infty$. Reasoning on it we can observe that:
 	\begin{itemize}
@@ -499,14 +499,14 @@ Less formally, N is independent on what happens after $X_n$.
 	\item \textbf{1}: $E[S_{N(t)+1}] = (1+M(t))E[X]$;
 	\item \textbf{2}: $E[S_{N(t)}] \ne M(t)E[X]$;
 	\end{itemize}
-	In the first case there is no case in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
+	In the first case there is no may in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
 	\subsubsection*{$1^{st}$ Statement}
 	In this case represents a Poisson process: $S_{N(t)+1} = t + \gamma_t$ and $S_{N(t)} = t - \delta_t$;\\
 	If i sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
 	Moreover we know that both $\gamma$ and $\delta$ are exponentially distributed (because of Poisson process theory and the memoryless condition of the process): $\gamma_t$ is exponential with parameter $\lambda$, while $\delta_t$ is exponential with parameter $\lambda$ truncated at $t$.\\
 	So we can find all the quantities involved:%min 25:00
 	\beq
-	E[S_{N(t)+1} = t + \frac{1}{\lambda}] \qquad E[S_{N(t)}] = t - \frac{1-e^{-\lambda t}}{\lambda}
+	\exp\left[S_{N(t)+1} = t + \frac{1}{\lambda}\right] \qquad \exp\left[S_{N(t)}\right] = t - \frac{1-e^{-\lambda t}}{\lambda}
 	\eeq
 	with $M(t) = \lambda t$ and $E[X] = \frac{1}{\lambda}$.\\
 	Thanks to it we can see that the equality in true.
@@ -515,24 +515,24 @@ Less formally, N is independent on what happens after $X_n$.
 	\beq
 	X_i =
 	\begin{cases}
-	1 \qquad w.p. p\\
-	a \geq 2 \qquad w.p. 1-p
+	1 & w.p.~~ p\\
+	a \geq 2 & w.p.~~ 1-p
 	\end{cases}
 	\eeq
 	How many arrivals do we count?
 	\beq
 	N(t) =
 	\begin{cases}
-	1 \qquad w.p. p\\
-	0 \qquad w.p. 1-p
+	1 & w.p. ~~p\\
+	0 & w.p. ~~1-p
 	\end{cases}
 	\eeq
 	And how much time do we count?
 	\beq
 	S_{N(t)}=
 	\begin{cases}
-	1 \qquad w.p. p\\
-	0 \qquad w.p. 1-p
+	1 & w.p. ~~ p\\
+	0 & w.p. ~~ 1-p
 	\end{cases}
 	\eeq
 	NOTE: Even though the value is the same, they do not represent the same thing.\\
@@ -540,9 +540,9 @@ Less formally, N is independent on what happens after $X_n$.
 	\beq
 	S_{N(t)+1} =
 	\begin{cases}
-	a \quad \text{w.p. $ (1-p)$}  \rightarrow \text{it means it the first renewal}\\
-	2  \quad \text{w.p.  $p^2$}  \rightarrow \text{if the first  X is 1 and also the second}\\
-	1+a \quad \text{w.p. $ p(1-p)$} \rightarrow \text{if the first X is 1 and the second is a}\\
+	a \quad \text{w.p. $ (1-p)$} & \rightarrow \text{it means it the first renewal}\\
+	2  \quad \text{w.p.  $p^2$} & \rightarrow \text{if the first  X is 1 and also the second}\\
+	1+a \quad \text{w.p. $ p(1-p)$} &\rightarrow \text{if the first X is 1 and the second is a}\\
 	\end{cases}
 	\eeq
 	So:
@@ -802,7 +802,7 @@ From \ref{limitingdistribution} we can determine the limiting distribution for t
 	\Leftrightarrow
 	\{\gamma_{t-y} \geq x+y \}
 \end{equation}
-From equation \ref{currtotallife} we have that
+From equation \eqref{currtotallife} we have that
 \begin{align*}
 	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} \prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{+\infty}(1-F(z))dz
 \end{align*}
@@ -864,7 +864,7 @@ Then we finally prove that
 
 	We have already seen that for a recurrent irreducible aperiodic \gls{mc} the following statament is true.
 	\begin{equation}
-		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{+\infty}n \cdot f_{jj}^{(n)}}
+		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum\limits_{n=1}^{+\infty}n \cdot f_{jj}^{(n)}}
 	\end{equation}
 	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
 
@@ -989,7 +989,7 @@ Now we adopt the following definitions.
 	\end{align*}
 	Then we have that
 	\begin{align*}
-		& \exp\bigg[\sum_{n=1}^{N(t)}R_n\bigg] \leq \exp[R(t)] \leq \exp\bigg[\sum_{n=1}^{N(t)+1}R_n\bigg]
+		& \exp\left[\sum_{n=1}^{N(t)}R_n\right] \leq \exp[R(t)] \leq \exp\left[\sum_{n=1}^{N(t)+1}R_n\right]
 		\\ & [M(t)+1] \, \exp[R]-\exp[R_{N(t)+1}] \leq \exp[R(t)] \leq [M(t)+1] \, \exp[R]
 	\end{align*}
 	Then, knowing that $\lim_{t \to \infty} \frac{[M(t)+1] \, \exp[R]}{t} = \frac {\exp[R]}{\exp[X]} $ we have that
@@ -1016,24 +1016,24 @@ Now we adopt the following definitions.
 		\\ & a(0)=\int_{0}^{+\infty}\exp[R_1|X_1=x]dF(x)=\exp[R_1]<+\infty
 	\end{align*}
 	\begin{align*}
-		|a(t)| & \leq \int_{t}^{+\infty}\exp[|R_1||X_1=x]dF(x)
-		\\ & \leq \int_{0}^{+\infty}\exp[|R_1||X_1=x]dF(x) = \exp[|R_1|]=\exp[R_1]<+\infty
+		|a(t)| & \leq \int_{t}^{+\infty}\exp\left[|R_1|\,|X_1=x\right]dF(x)
+		\\ & \leq \int_{0}^{+\infty}\exp\left[|R_1|\,|X_1=x\right]dF(x) = \exp\left[|R_1|\right]=\exp[R_1]<+\infty
 	\end{align*}
 	So we have come to the following results:
 	\begin{align*}
 		1) \quad & \forall \epsilon>0 \quad \exists T>0:\quad |a(t)|<\epsilon \quad \forall t>T
-		\\ 2) \quad & |a(t)| \leq \exp[|R_1|]<+\infty \quad \forall t
+		\\ 2) \quad & |a(t)| \leq \exp\left[|R_1|\right]<+\infty \quad \forall t
 	\end{align*}
 	Knowing that $A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)$ we have that
 	\begin{align*}
 		|A(t)| & = |\int_{0}^{t}a(t-x)dM(x)+a(t)| \leq \int_{0}^{t}|a(t-x)|dM(x)+|a(t)|
 		\\ & \leq \int_{0}^{t-T}|a(t-x)|dM(x)+ \int_{t-T}^{t}|a(t-x)|dM(x) + a(t)
-		\\ & \leq \int_{0}^{t-T}\epsilon dM(x)+ \int_{t-T}^{t}\exp[|R_1|] dM(x) + a(t)
+		\\ & \leq \int_{0}^{t-T}\epsilon dM(x)+ \int_{t-T}^{t}\exp\left[|R_1|\right] dM(x) + a(t)
 	\end{align*}
 	\begin{align*}
-		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
+		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp\left[|R_1|\right]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
 	\end{align*}
-	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that
+	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp\left[|R_1|\right]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that
 	\begin{align*}
 		\lim_{t \to \infty} \frac{A(t)}{t} \leq \frac{\epsilon}{\exp[X]} \Rightarrow \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t}=0 \Rightarrow \frac {\exp[R]}{\exp[X]} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
 	\end{align*}
@@ -1041,7 +1041,7 @@ Now we adopt the following definitions.
 	\begin{align*}
 		\lim_{t \to \infty} \frac{\exp[R(t)]}{t} = \frac{\exp[R]}{\exp[X]}
 	\end{align*}
-	Then \ref{rewardtheorem2} is proven.
+	Then \eqref{rewardtheorem2} is proven.
 \end{proof}
 
 Let us define the following quantities of interest.
@@ -1067,12 +1067,12 @@ Let us define the following quantities of interest.
 
 We have that the average reward for transitions exiting each possible state $i$ is
 \begin{equation*}
-\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_j \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
+\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_i \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
 \end{equation*}
 
 For \emph{any} metric $r(\cdot)$ it holds that
 \begin{equation}
-\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_j \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
+\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
 \end{equation}
 
 and if the metric is specifically \emph{time}
@@ -1080,7 +1080,7 @@ and if the metric is specifically \emph{time}
 \pi_j \mu_{jj} = \sum_i \pi_i \mu_i
 \end{equation}
 
-Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
+Now, in system modeling one of the main task of performance evaluation is to find the average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
 \begin{equation}
 \lim_{t \to \infty}\frac{R(t)}{t} = \frac{\exp[R]}{\exp[X]} = \frac{\rho_{jj}}{\mu_{jj}} = \frac{\sum_i \pi_i \frac{R_i}{\pi_j}}{\sum_i \pi_i \frac{\mu_i}{\pi_j}} = \frac{\sum_i \pi_i \sum_j P_{ik} R_{ik}}{\sum_i \pi_i \sum_k P_{ik}T_{ik}}
 \end{equation}
@@ -1113,8 +1113,7 @@ process}.
 Thus a semi-Markov process does not possess the Markovian property that
 the future is independent of the past, given the present state.
 
-To predict the future not only would we want to know the present state, but also the length of time that has been spent in that state
-\footnote{note that $Z(t) = \{\text{state of the process at time } t\}$ is a \gls{mc} only when the transition time is memoryless (for example exponential).}. Of course, at the moment of transition, all we would need to know is the new state (and nothing about the past).
+To predict the future not only would we want to know the present state, but also the length of time that has been spent in that state\footnote{note that $Z(t) = \{\text{state of the process at time } t\}$ is a \gls{mc} only when the transition time is memoryless (for example exponential).}. Of course, at the moment of transition, all we would need to know is the new state (and nothing about the past).
 
 Let $H_i(t)$ denote the \emph{distribution of time} that the semi-Markov process spends in state i before making a transition. For the law of total probability, we have that
 \begin{equation}
@@ -1137,7 +1136,7 @@ With the theory of alternating renewal processes, it is a simple matter to deriv
 
 	$$P_j = \lim_{t \to \infty} \prob[Z(t)=j | Z(0)=k]$$
 
-	exists and independent of the initial state. Furthermore,
+	exists and is independent of the initial state. Furthermore,
 
 	$$P_j = \frac{\exp[\mbox{time in state i in a cycle}]}{\exp[\mbox{duration of the cycle}]} = \frac{\mu_i}{\mu_{ii}}$$
 
