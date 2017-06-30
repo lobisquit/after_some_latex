@@ -1,0 +1,39 @@
+\subsection{G/M/1 queue limiting distribution}
+We know that the limiting distribution is the solution of the following system of equations:
+\begin{equation*}
+ \begin{split}
+	 \begin{cases}
+		 \pi_k = \sum_i \pi_i p_{ik} \\
+		 \sum_i \pi_i = 1
+	 \end{cases}
+ \end{split}
+\end{equation*}
+In our case this is equal to:
+$$\pi_x = \sum_{i = k-1}^{+\infty} \pi_i \int_0^{+\infty}e^{-\mu t} \frac{(\mu t)^{i+1-k}}{(i+1-k)!}dG(t) \hspace{1cm} \text{for } k \geq 1$$
+We try to verify the guessing $\pi_k=c\beta^k$ (geometric distribution).
+\begin{equation*}
+ \begin{split}
+		 c\beta^k &= \sum_{i = k-1}^{+\infty} c\beta^i \int_0^{+\infty}e^{-\mu t} \frac{(\mu t)^{i+1-k}}{(i+1-k)!}dG(t) \\
+		 &= c \int_0^{+\infty}e^{-\mu t}\beta^{k-1}\sum_{i = k-1}^{+\infty}\frac{(\beta \mu t)^{i+1-k}}{(i+1-k)!}dG(t) \\
+		 &= c \int_0^{+\infty}e^{-\mu t}\beta^{k-1}e^{\beta \mu t}dG(t)
+ \end{split}
+\end{equation*}
+Therefore $\beta^k = \int_0^{+\infty}e^{-\mu(1-\beta)t}\beta^{k-1}dG(t)$\\
+and
+\begin{equation*}
+ \begin{split}
+		  \beta &= \int_0^{+\infty}e^{-\mu(1-\beta)t}dG(t)\\
+			&= \E[e^{-\mu(1-\beta)t}]\\
+			&\triangleq A(\beta)
+ \end{split}
+\end{equation*}
+We have to solve $\beta = A(\beta)$:
+\begin{itemize}
+	\item $A(0) = \int_0^{+\infty}e^{-\mu(1-\beta)t}dG(t) > 0$
+	\item $A(1) = 1 $
+	\item $A^{'}(\beta)=\int_0^{+\infty}e^{-\mu(1-\beta)t}(\mu t)dG(t) > 0$, therefore $A(\beta)$ is a monotonic increasing function
+	\item $A^{''}(\beta)=\int_0^{+\infty}e^{-\mu(1-\beta)t}(\mu t)^2dG(t) > 0$, therefore $A(\beta)$ is a concave function
+\end{itemize}
+%%GRAPH MISSING
+If 2 is $A(\beta)$ there is no conclusion (no intersection). If, instead, 1 is $A(\beta)$ there is one intersection, that intersection is the solution and the chain is positive recurrent with $\pi_k = (1-\beta^*)(\beta^*)^k$.\\
+The third possibility is $\beta^* = 1$ and the curve is tangent. Coming from below, $A^{'}(1)>1$, therefore $\frac{\mu}{\lambda}>1$. We know from queing theory that the condition $\lambda < \mu$ is a sufficient condition for the stability of the chain. In this example, we are not able to find a solution if $\lambda > \mu$, in principle there should be no conclusion, but we know there is no solution from queing theory.
