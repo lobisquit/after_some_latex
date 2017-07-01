@@ -435,7 +435,12 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 		\item $A^{''}(\beta)=\int_0^{+\infty}e^{-\mu(1-\beta)t}(\mu t)^2dG(t) > 0$, therefore $A(\beta)$ is a concave function
 	\end{enumerate}
 	%%GRAPH MISSING
-	If 2 is $A(\beta)$ there is no conclusion (no intersection). If, instead, 1 is $A(\beta)$ there is one intersection, that intersection is the solution and the chain is positive recurrent with $\pi_k = (1-\beta^*)(\beta^*)^k$.\\
+	\begin{figure}[h!]
+		\input{img/cBetaToK.tex}
+		\caption{The value of $\beta^*$ is the intersection of the function $A(\beta)=\exp\left[e^{-\mu(1-\beta)t}\right]$ and the line $A(\beta)=\beta$}
+		\label{fig:cBetaK}
+	\end{figure}
+	If 2 is $A(\beta)$ there is no conclusion (no intersection). If, instead, 1 is $A(\beta)$ there is one intersection which is the solution and the chain is positive recurrent with $\pi_k = (1-\beta^*)(\beta^*)^k$.[\Fig{fig:cBetaK}]\\
 	The third possibility is $\beta^* = 1$ and the curve is tangent. Coming from below, $A^{'}(1)>1$, therefore $\frac{\mu}{\lambda}>1$. We know from queing theory that the condition $\lambda < \mu$ is a sufficient condition for the stability of the chain. In this example, we are not able to find a solution if $\lambda > \mu$, in principle there should be no conclusion, but we know there is no solution from queing theory.
 
 \subsection*{Periodic case for average first return time}
