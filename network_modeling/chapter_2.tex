@@ -135,6 +135,118 @@ that the gambler goes in ruin is
 The last case may seem strange, but even if the game is fair ($p=q=\frac{1}{2}$), in an infinite time
 a series of unfortunate events may occour and the gambler will reach $X_0$, his ruin.
 
+\section{Synchronization model}
+We consider a slotted model where every slot is composed by $N$ symbols. Our aim is find inside a slot a \textit{sync sequence}, which a particular sequence of $S$ bits. We call \textit{erroneus sequence} every sequence of $S$ bits that is not a \textit{sync sequence}.
+Our system can be found in the following possible states.
+\begin{enumerate}
+	\item Hunt state $H=A_{k_a}$: the system searchs for a \textit{sync sequence} bit-by-bit untill the sequence is found or $N$ consecutives bits are checked without find a \textit{sync sequence}; if a \textit{sync sequence} is found the system moves to $L_1$.
+	\item Lock state $L_k$: the system has found $k-1$ consecutives \textit{sync sequences}; if a new \textit{sync sequence} is found the system moves to $L_{k+1}$ while if a \textit{erroneus sequence} is found the system moves to $H$.
+	\item Accepted sync $L=L_{k_l}$: the system has fond $k_l$ consecutives \textit{sync sequence}; if a \textit{erroneus sequence} is found the system moves to $A_1$.
+	\item Allarm state $A_k$: the system has found $k$ consecutives bits out of sync; if a \textit{erroneus sequence} is found the system moves to $A_{k+1}$ while if a \textit{sync sequence} is found the system moves to $L$.
+\end{enumerate}
+
+We have to consider that the system can make mistakes, so we have to distinguish two kind of \textit{lock states} that are the \textit{true lock} $TL_k$ and the \textit{false lock} $FL_k$. Consequently we have also to distinguis two kind of \textit{allarm states} tha are the \textit{true allarm} $TA_k$ and the \textit{false allarm} $FA_k$.
+
+\begin{figure}
+	\centering
+  \begin{tikzpicture}
+    [
+      my circle/.style={minimum width=20mm, circle, draw},
+      my label/.style={above=10pt, anchor=mid}
+    ]
+    \node[my circle] (1) at (-15,0) {H};
+    \node[my circle] (2) at ( -12,3) {$FL_1$};
+		\node[my circle] (3) at ( -12,-3) {$TL_1$};
+		\node[my circle] (4) at ( -9,2) {$FA_{k_a-1}$};
+		\node[my circle] (5) at ( -9,5) {$FL_2$};
+		\node[my circle] (6) at ( -9,-2) {$TA_{k_l-1}$};
+		\node[my circle] (7) at ( -9,-5) {$TL_2$};
+		\node[my circle] (8) at ( -6,2) {$FA_{k_a-2}$};
+		\node[my circle] (9) at ( -6,5) {$FL_3$};
+		\node[my circle] (10) at ( -6,-2) {$TA_{k_l-2}$};
+		\node[my circle] (11) at ( -6,-5) {$TL_3$};
+		\node[my circle] (12) at ( -2,2) {$FA_1$};
+		\node[my circle] (13) at ( -2,5) {$FL$};
+		\node[my circle] (14) at ( -2,-2) {$TA_1$};
+		\node[my circle] (15) at ( -2,-5) {$TL$};
+
+    %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
+
+		\draw[->] (1.south) .. controls +(down:1cm) and +(left:1cm) .. node[below] {$P_{TL}$} (3.west);
+
+		\draw[->] (1.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_{FL}$} (2.west);
+
+		\draw[->] (3.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (7.west);
+
+		\draw[->] (7.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (11.west);
+
+		\draw[->] (7.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above] {$1-P_C$} (1.south west);
+
+		\draw[->] (11.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (15.west);
+
+		\draw[->] (11.south) .. controls +(down:3cm) and +(down:8cm) .. node[above] {$1-P_C$} (1.south west);
+
+  \end{tikzpicture}
+	\caption{Synchronization model}
+	\label{fig:syncmodel}
+\end{figure}
+
+
+Given that a \textit{sync sequence} is composed by $S$ bits we can compute the probability of wrong detection $P_W$ and the probability of correct detection $P_C$. $P_W$ is the probability of consider a sequence of random data as a \textit{sync sequence}. $P_C$ is the probability of correctly recognize a \textit{sync sequence}.
+\begin{equation}
+	P_W= \left( \frac{1}{2} \right) ^{S}
+	\label{wrong_detection}
+\end{equation}
+\begin{equation}
+	P_C= \left( 1-\epsilon \right) ^{S}
+	\label{correct_detection}
+\end{equation}
+In \eqref{correct_detection} we call $\epsilon$ the value of the trasmission error probability.
+Now we suppone that the system is in the \textit{hunt state} $H$ and it is looking at the $n^{th}$ bit of the slot. We call $P_{TL}(n)$ the probability of move to state $TL_1$ given that the system is looking at $n^{th}$ bit of the slot.
+\begin{equation}
+	P_{TL}(n) = (1-P_W)^{N-n} \cdot P_C
+\end{equation}
+We call $P_{NL}(n)$ the probability of don't find a \textit{sync sequence}, neither correct nor wrong, given that we start from the $n^{th}$ bit of the slot.
+\begin{equation}
+	P_{NL}(n) = (1-P_W)^{N-1} \cdot (1-P_C)
+\end{equation}
+Then we can compute $P_{TL}$ and $P_{NL}$ as follows.
+
+\begin{equation}
+\begin{split}
+	P_{TL} & = \frac{1}{N} \cdot \sum_{n=1}^{N} P_{TL}(n) \\
+	& = \frac{P_C}{N} \cdot \sum_{n=1}^{N} (1-P_{W})^{N-n} \\
+	& = \frac{P_C}{N} \cdot \frac{1-(1-P_W)^N}{1-(1-P_W)} \\
+	& = \frac{P_C \cdot (1 - (1-P_W)^N ) } { N \cdot P_W}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+	P_{NL} & = \frac{1}{N} \cdot \sum_{n=1}^{N} P_{NL}(n) \\
+	& = \frac{N}{N} \cdot (1-P_W)^{N-1} \cdot (1-P_C) \\
+	& = (1-P_W)^{N-1} \cdot (1-P_C)
+\end{split}
+\end{equation}
+
+We call $P_{FL}(n)$ the probability of move to state $FL_1$ given that the system is looking at $n^{th}$ bit of the slot.
+
+\begin{equation}
+	P_{FL}(n) = \sum_{i=0}^{N-n-1} (1-P_W)^{i} \cdot P_W + \sum_{i=1}^{n-1} (1-P_W)^{N-n+i-1} \cdot (1-P_C) \cdot P_W
+	\label{probability_falselock}
+\end{equation}
+In \eqref{probability_falselock} the first summation regards the bits numbered from $n$ to $N-1$ while the second summation regards the bits numbered from $1$ to $n-1$.
+Now we check that the sum of probabilities $P_{TL}(n)$, $P_{FL}(n)$ and $P_{NL}(n)$ is equal to one.
+\begin{equation}
+	\begin{split}
+		P_{FL}(n) & = \sum_{i=0}^{N-n-1} (1-P_W)^{i} \cdot P_W + \sum_{i=1}^{n-1} (1-P_W)^{N-n+i-1} \cdot (1-P_C) \cdot P_W \\
+		& = P_W \cdot \frac{1-(1-P_W)^{N-n}}{P_W} + (1-P_C) \cdot (1-P_w)^{N-n} \cdot P_W \cdot \frac{1-(1-P_W)^{n-1}}{P_W} \\
+		& = 1 - (1-P_W)^{N-n} + (1-P_C) \cdot (1-P_W)^{N-n} - (1-P_C) \cdot (1-P_W)^{N-1} \\
+		& = 1 - P_C \cdot (1-P_W)^{N-n} - (1-P_C) \cdot (1-P_W)^{N-1} \\
+		& = 1 - P_{TL}(n) - P_{NL}(n)
+	\end{split}
+\end{equation}
+
 \section{First passage time}
 \begin{definition}[$\theta_{i,j}$]
 We define $\theta_{i,j}$ to be the number of transitions to reach j from i for the first time.
