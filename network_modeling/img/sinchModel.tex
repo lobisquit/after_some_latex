@@ -8,20 +8,22 @@
     my label/.style={above=10pt, anchor=mid}
   ]
   \node[my circle] (H) at (-15,0) {H};
-  \node[my circle] (fl1) at ( -12,3) {$FL_1$};
-  \node[my circle] (tl1) at ( -12,-3) {$TL_1$};
+  \node[my circle] (fl1) at ( -12,5) {$FL_1$};
+  \node[my circle] (tl1) at ( -12,-5) {$TL_1$};
   \node[my circle] (faKa1) at ( -9,2) {$FA_{k_a-1}$};
-  \node[my circle] (fl2) at ( -9,5) {$FL_2$};
+  \node[my circle] (fl2) at ( -9,7) {$FL_2$};
   \node[my circle] (taKa1) at ( -9,-2) {$TA_{k_l-1}$};
-  \node[my circle] (tl2) at ( -9,-5) {$TL_2$};
+  \node[my circle] (tl2) at ( -9,-7) {$TL_2$};
   \node[my circle] (faKa2) at ( -6,2) {$FA_{k_a-2}$};
-  \node[my circle] (fl3) at ( -6,5) {$FL_3$};
+  \node[my circle] (fl3) at ( -6,7) {$FL_3$};
   \node[my circle] (taKl2) at ( -6,-2) {$TA_{k_l-2}$};
-  \node[my circle] (tl3) at ( -6,-5) {$TL_3$};
-  \node[my circle] (fa1) at ( -2,2) {$FA_1$};
-  \node[my circle] (fl) at ( -2,5) {$FL$};
-  \node[my circle] (ta1) at ( -2,-2) {$TA_1$};
-  \node[my circle] (tl) at ( -2,-5) {$TL$};
+  \node[my circle] (tl3) at ( -6,-7) {$TL_3$};
+  \node[my circle] (fa1) at ( 2,2) {$FA_1$};
+  \node[my circle] (fa2) at ( -2,2) {$FA_2$};
+  \node[my circle] (fl) at ( -2,7) {$FL$};
+  \node[my circle] (ta1) at ( 2,-4) {$TA_1$};
+  \node[my circle] (ta2) at ( -2,-2) {$TA_2$};
+  \node[my circle] (tl) at ( -2,-7) {$TL$};
 
   %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
   %
@@ -30,9 +32,9 @@
   \path[-stealth] (H) edge[loop left]  node{$P_{NL}$} (H);
   \draw[-stealth] (H.south) .. controls +(down:1cm) and +(left:1cm) .. node[above,rotate=-40] {$P_{TL}$} (tl1.west);
   \path[->] (tl1.north west) edge[bend right] node[below, rotate=-45] {$1-P_{C}$}  (H.south east);
-  \draw[->] (H.north) .. controls +(up:1cm) and +(left:1cm) .. node[above,rotate=40] {$P_{FL}$} (fl1.west);
-  \path[->] (fl1.south west) edge[bend left] node[below, rotate=45] {$1-P_{FA}$}  (H.north east);
-  \path[->] (fl2.north west) edge[bend right =60] node[above, rotate=40] {$1-P_{FA}$}  (H.north west);
+  \draw[->] (H.north) .. controls +(up:1cm) and +(left:1cm) .. node[above,rotate=70] {$P_{FL}$} (fl1.west);
+  \path[->] (fl1) edge[bend ,out=240,in=60] node[above, rotate=60] {$1-P_{FA}$}  (H);
+  \path[->] (fl2.north west) edge[bend right =60] node[above, rotate=50] {$1-P_{FA}$}  (H.north west);
 
   %
   % --- PATH INVOLVING TL# ---
@@ -41,25 +43,32 @@
 
   \draw[->] (tl2.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (tl3.west);
 
-  \draw[->] (tl2.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above,rotate=-35] {$1-P_C$} (H.south west);
+  \draw[->] (tl2.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above right,rotate=-45] {$1-P_C$} (H.south west);
 
   \draw[->] (tl3.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (tl.west);
 
-  \draw[->] (tl3.south) .. controls +(down:3cm) and +(down:8cm) .. node[above, rotate=-15] {$1-P_C$} (H.south west);
+  \draw[->] (tl3.south) .. controls +(down:3cm) and +(down:8cm) .. node[above right, rotate=-20] {$1-P_C$} (H.south west);
 
   %
   % --- PATH INVOLVING FL# ---
   %
-  \path[-stealth] (fl1.north) edge[bend left] node[above,rotate=30] {$P_{FL}$}  (fl2.west);
-  \path[-stealth] (fl2.north east) edge[bend left] node[above,rotate=0] {$P_{FL}$}  (fl3.north west);
-  \path[-stealth] (fl3.north east) edge[bend left] node[above,rotate=0] {$P_{FL}$}  (fl.north west);
-  \path[-stealth] (fl) edge[in=50, out=-10, loop]  node[above,rotate=-60]{$P_{NL}$} (fl);
-  \path[-stealth] (fl.south east) edge[bend left] node[above,rotate=-90] {$1-P_{FA}$}  (fa1.north east);
-  \path[-stealth] (fa1.north west) edge[bend left] node[below,rotate=90] {$P_{FA}$}  (fl.south west);
-
+  \path[-stealth] (fl1.north) edge[bend left] node[above,rotate=30] {$P_{FA}$}  (fl2.west);
+  \path[-stealth] (fl2.north east) edge[bend left] node[above,rotate=0] {$P_{FA}$}  (fl3.north west);
+  \path[-stealth] (fl3) edge[bend left, in=-190,out=10] node[above,rotate=36] {$1-P_{FA}$}  (H);
+  \path[-stealth] (fl3.north east) edge[bend left] node[above,rotate=0] {$P_{FA}^{k_l-2}$}  (fl.north west);
+  \path[-stealth] (fl) edge[in=80, out=10, loop]  node[above,rotate=-40]{$P_{NL}$} (fl);
+  \path[-stealth] (fl.east) edge[bend left] node[above,rotate=-50] {$1-P_{FA}$}  (fa1.north);
+  \path[-stealth] (fa1.north west) edge[bend left] node[above,rotate=-50] {$P_{FA}$}  (fl.south east);
+  \path[->] (fl2) edge[bend ,out=240,in=40] node[above left, rotate=50] {$1-P_{FA}$} (H);
   %
   % --- PATH INVOLVING FA# ---
   %
-  % \path[-stealth] (fa2.north west) edge[bend left] node[below,rotate=90] {$P_{FA}$}  (fl.south west);
+  \path[-stealth] (fa2.north west) edge[bend left] node[above,rotate=-80] {$P_{FA}$}  (fl.south west);
+  \path[-stealth] (fa1) edge[bend left] node[below] {$1-P_{FA}$}  (fa2);
+  \path[-stealth] (fa2) edge[bend left] node[below] {$(1-P_{FA})^{k_a -2}$}  (faKa2); %verify formula. not sure
+  \path[-stealth] (faKa2) edge[bend left] node[below] {$1-P_{FA}$}  (faKa1);
+  \path[-stealth] (faKa1) edge[bend left] node[above,rotate=20] {$1-P_{FA}$}  (H);
+  \path[-stealth, dotted,red] (faKa2) edge[bend left,in=-200,out=20] node[below,red, rotate=50] {$P_{FA}$}  (fl);
+  \path[-stealth, dotted,red] (faKa1) edge[bend left,in=-200,out=20] node[below,red, rotate=50] {$P_{FA}$}  (fl);
 \end{tikzpicture}
 \end{document}
