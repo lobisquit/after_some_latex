@@ -563,14 +563,14 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 	\begin{proof} Base case $n=1$
 		\begin{equation}\begin{split} \label{eq:Y_i-properties}
 			& Y_i(1) = \prob[X_1 \in S | X_0 = i] = \sum_{j \in S} P_{ij} \\
-			& Y_i(2) \stackrel{(*)}{=} \sum_{j \in S} P_{ij} Y_i(1) \le \sum_{j \in S} P_{ij} = Y_i(1)
+			& Y_i(2) \stackrel{(*)}{=} \sum_{j \in S} P_{ij} Y_j(1) \le \sum_{j \in S} P_{ij} = Y_i(1)
 		\end{split}\end{equation}
 		where (*) holds by \emph{first step analysis}: $ Y_i(n) = \sum_{j \in S} P_{ij} Y_j(n-1) $.
 	\end{proof}
 
 	\begin{proof} Inductive step
 		\begin{equation}\begin{split}
-			& Y_i(n+1) \stackrel{(1)}{=} \sum_{j \in S} P_{ij} Y_i(n) \stackrel{(2)}{\le} \sum_{j \in S} P_{ij} Y_i(n-1) \stackrel{(3)}{=} Y_i(n)
+			& Y_i(n+1) \stackrel{(1)}{=} \sum_{j \in S} P_{ij} Y_j(n) \stackrel{(2)}{\le} \sum_{j \in S} P_{ij} Y_j(n-1) \stackrel{(3)}{=} Y_i(n)
 		\end{split}\end{equation}
 		where (1) and (3) hold by first step analysis and (2) for inductive hypothesis.
 	\end{proof}
