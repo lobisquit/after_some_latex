@@ -24,14 +24,19 @@
   \node[my circle] (tl) at ( -2,-5) {$TL$};
 
   %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
+  %
+  % --- PATH INVOLVING H ---
+  %
   \path[-stealth] (H) edge[loop left]  node{$P_{NL}$} (H);
-
   \draw[-stealth] (H.south) .. controls +(down:1cm) and +(left:1cm) .. node[above,rotate=-40] {$P_{TL}$} (tl1.west);
   \path[->] (tl1.north west) edge[bend right] node[below, rotate=-45] {$1-P_{C}$}  (H.south east);
   \draw[->] (H.north) .. controls +(up:1cm) and +(left:1cm) .. node[above,rotate=40] {$P_{FL}$} (fl1.west);
   \path[->] (fl1.south west) edge[bend left] node[below, rotate=45] {$1-P_{FA}$}  (H.north east);
-  \path[->] (fl2.west) edge[bend right =60] node[above, rotate=40] {$1-P_{FA}$}  (H.north west);
+  \path[->] (fl2.north west) edge[bend right =60] node[above, rotate=40] {$1-P_{FA}$}  (H.north west);
 
+  %
+  % --- PATH INVOLVING TL# ---
+  %
   \draw[->] (tl1.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (tl2.west);
 
   \draw[->] (tl2.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (tl3.west);
@@ -42,5 +47,19 @@
 
   \draw[->] (tl3.south) .. controls +(down:3cm) and +(down:8cm) .. node[above, rotate=-15] {$1-P_C$} (H.south west);
 
+  %
+  % --- PATH INVOLVING FL# ---
+  %
+  \path[-stealth] (fl1.north) edge[bend left] node[above,rotate=30] {$P_{FL}$}  (fl2.west);
+  \path[-stealth] (fl2.north east) edge[bend left] node[above,rotate=0] {$P_{FL}$}  (fl3.north west);
+  \path[-stealth] (fl3.north east) edge[bend left] node[above,rotate=0] {$P_{FL}$}  (fl.north west);
+  \path[-stealth] (fl) edge[in=50, out=-10, loop]  node[above,rotate=-60]{$P_{NL}$} (fl);
+  \path[-stealth] (fl.south east) edge[bend left] node[above,rotate=-90] {$1-P_{FA}$}  (fa1.north east);
+  \path[-stealth] (fa1.north west) edge[bend left] node[below,rotate=90] {$P_{FA}$}  (fl.south west);
+
+  %
+  % --- PATH INVOLVING FA# ---
+  %
+  % \path[-stealth] (fa2.north west) edge[bend left] node[below,rotate=90] {$P_{FA}$}  (fl.south west);
 \end{tikzpicture}
 \end{document}
