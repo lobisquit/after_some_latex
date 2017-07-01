@@ -149,44 +149,7 @@ We have to consider that the system can make mistakes, so we have to distinguish
 
 \begin{figure}
 	\centering
-  \begin{tikzpicture}
-    [
-      my circle/.style={minimum width=20mm, circle, draw},
-      my label/.style={above=10pt, anchor=mid}
-    ]
-    \node[my circle] (1) at (-15,0) {H};
-    \node[my circle] (2) at ( -12,3) {$FL_1$};
-		\node[my circle] (3) at ( -12,-3) {$TL_1$};
-		\node[my circle] (4) at ( -9,2) {$FA_{k_a-1}$};
-		\node[my circle] (5) at ( -9,5) {$FL_2$};
-		\node[my circle] (6) at ( -9,-2) {$TA_{k_l-1}$};
-		\node[my circle] (7) at ( -9,-5) {$TL_2$};
-		\node[my circle] (8) at ( -6,2) {$FA_{k_a-2}$};
-		\node[my circle] (9) at ( -6,5) {$FL_3$};
-		\node[my circle] (10) at ( -6,-2) {$TA_{k_l-2}$};
-		\node[my circle] (11) at ( -6,-5) {$TL_3$};
-		\node[my circle] (12) at ( -2,2) {$FA_1$};
-		\node[my circle] (13) at ( -2,5) {$FL$};
-		\node[my circle] (14) at ( -2,-2) {$TA_1$};
-		\node[my circle] (15) at ( -2,-5) {$TL$};
-
-    %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
-
-		\draw[->] (1.south) .. controls +(down:1cm) and +(left:1cm) .. node[below] {$P_{TL}$} (3.west);
-
-		\draw[->] (1.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_{FL}$} (2.west);
-
-		\draw[->] (3.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (7.west);
-
-		\draw[->] (7.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (11.west);
-
-		\draw[->] (7.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above] {$1-P_C$} (1.south west);
-
-		\draw[->] (11.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (15.west);
-
-		\draw[->] (11.south) .. controls +(down:3cm) and +(down:8cm) .. node[above] {$1-P_C$} (1.south west);
-
-  \end{tikzpicture}
+  \input{img/sinchModel.tex}
 	\caption{Synchronization model}
 	\label{fig:syncmodel}
 \end{figure}

@@ -1,0 +1,46 @@
+\documentclass{standalone}
+\usepackage[usenames, dvipsnames, table, tikz]{xcolor}
+\usepackage{tikz}
+\begin{document}
+\begin{tikzpicture}
+  [
+    my circle/.style={minimum width=20mm, circle, draw},
+    my label/.style={above=10pt, anchor=mid}
+  ]
+  \node[my circle] (H) at (-15,0) {H};
+  \node[my circle] (fl1) at ( -12,3) {$FL_1$};
+  \node[my circle] (tl1) at ( -12,-3) {$TL_1$};
+  \node[my circle] (faKa1) at ( -9,2) {$FA_{k_a-1}$};
+  \node[my circle] (fl2) at ( -9,5) {$FL_2$};
+  \node[my circle] (taKa1) at ( -9,-2) {$TA_{k_l-1}$};
+  \node[my circle] (tl2) at ( -9,-5) {$TL_2$};
+  \node[my circle] (faKa2) at ( -6,2) {$FA_{k_a-2}$};
+  \node[my circle] (fl3) at ( -6,5) {$FL_3$};
+  \node[my circle] (taKl2) at ( -6,-2) {$TA_{k_l-2}$};
+  \node[my circle] (tl3) at ( -6,-5) {$TL_3$};
+  \node[my circle] (fa1) at ( -2,2) {$FA_1$};
+  \node[my circle] (fl) at ( -2,5) {$FL$};
+  \node[my circle] (ta1) at ( -2,-2) {$TA_1$};
+  \node[my circle] (tl) at ( -2,-5) {$TL$};
+
+  %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
+  \path[-stealth] (H) edge[loop left]  node{$P_{NL}$} (H);
+
+  \draw[-stealth] (H.south) .. controls +(down:1cm) and +(left:1cm) .. node[above,rotate=-40] {$P_{TL}$} (tl1.west);
+  \path[->] (tl1.north west) edge[bend right] node[below, rotate=-45] {$1-P_{C}$}  (H.south east);
+  \draw[->] (H.north) .. controls +(up:1cm) and +(left:1cm) .. node[above,rotate=40] {$P_{FL}$} (fl1.west);
+  \path[->] (fl1.south west) edge[bend left] node[below, rotate=45] {$1-P_{FA}$}  (H.north east);
+  \path[->] (fl2.west) edge[bend right =60] node[above, rotate=40] {$1-P_{FA}$}  (H.north west);
+
+  \draw[->] (tl1.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (tl2.west);
+
+  \draw[->] (tl2.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (tl3.west);
+
+  \draw[->] (tl2.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above,rotate=-35] {$1-P_C$} (H.south west);
+
+  \draw[->] (tl3.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (tl.west);
+
+  \draw[->] (tl3.south) .. controls +(down:3cm) and +(down:8cm) .. node[above, rotate=-15] {$1-P_C$} (H.south west);
+
+\end{tikzpicture}
+\end{document}
