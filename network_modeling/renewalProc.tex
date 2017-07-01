@@ -1154,16 +1154,16 @@ From a modeling perspective, the packets subsequent to the bad packet are not re
 \eeq
 The channel matrix is:
 \beq
-C = \begin{bmatrix} p_{00} & p_{01}\\p_{10} & p_{11} \end{bmatrix}
+C = \begin{bmatrix} P_{00} & P_{01}\\P_{10} & P_{11} \end{bmatrix}
 \eeq
-Every time the source try to retx, it does not do it right after the bad packet but only after a number of packets equivalent to the $R\pi(m)$. Doing so, this does not involve every single slot but some certain slots. The probability that, from the packet num $3$, the packet $4$ is good is a 1-step transmission probability; while the probability that the packet $3$ (coming after the packet $5$) is good is an m-step transmission probability. So we also write down the $m$ step matrix:
+Every time the source try to retx, it does not do it right after the bad packet but only after a number of packets equivalent to the \emph{RTT(m)}. Doing so, this does not involve every single slot but some certain slots. The probability that, from the packet num $3$, the packet $4$ is good is a 1-step transmission probability; while the probability that the packet $3$ (coming after the packet $5$) is good is an m-step transmission probability. So we also write down the $m$ step matrix:
 \beq
 C^m =
 \begin{bmatrix}
-p_{00}(m) & p_{01}(m)\\
-p_{10}(m) & p_{11}(m)
-\end{bmatrix}\footnote{$p_{11}(m)$ is the probability of moving from a bad step to another bad step in $m$ moves}
-\eeq
+P_{00}(m) & P_{01}(m)\\
+P_{10}(m) & P_{11}(m)
+\end{bmatrix}^{\footnotemark} %in math mode footnote doesn't work. Fixed also positioning of number
+\eeq\footnotetext{$P_{11}(m)$ is the probability of moving from a bad step to another bad step in $m$ moves}
 So we can model the protocol assuming error free feedback: (G = good, B = bad).
 \begin{figure}
 \centering
@@ -1178,10 +1178,10 @@ So we can model the protocol assuming error free feedback: (G = good, B = bad).
 			\node[state]		(G)											{$G$};
 			\node[state]		(B)[right of=G]				{$B$};
 			\path
-			(G) 		edge[loop left]		 			node{$p_{00}$}				(G)
-							edge[bend left]		 			node{$p_{01}$}		 		(B)
-			(B)		edge[bend left]	node{$p_{01}(m)$}				(G)
-							edge[loop right]					node{$p_{11}(m)$}	(B);
+			(G) 		edge[loop left]		 			node{$P_{00}$}				(G)
+							edge[bend left]		 			node{$P_{01}$}		 		(B)
+			(B)		edge[bend left]	node{$P_{01}(m)$}				(G)
+							edge[loop right]					node{$P_{11}(m)$}	(B);
 
 		\end{tikzpicture}
 	\end{center}
@@ -1201,40 +1201,40 @@ And the protocol chain is:
 \beq
 P =
 \begin{bmatrix}
-p_{00} & p_{01}\\
-p_{10}(m) & p_{11}(m)
+P_{00} & P_{01}\\
+P_{10}(m) & P_{11}(m)
 \end{bmatrix}
 \eeq
 To solve the limit we can find the $\pi$s like:
 \begin{align}
-\pi_{G} & = \frac{p_{10}(m)}{p_{10}(m)+p_{01}}\\
-\pi_{B} & = \frac{p_{01}}{p_{10}(m)+p_{01}}
+\pi_{G} & = \frac{P_{10}(m)}{P_{10}(m)+P_{01}}\\
+\pi_{B} & = \frac{P_{01}}{P_{10}(m)+P_{01}}
 \end{align}
-and insert them in the fraction, not considering the denominators, since they are the same for both the $\pi$s and so they would erase with each other.
+and insert them in the fraction, not considering the denominators, since they are the same for both the $\pi_\text{s}$ and so they would erase with each other.
 \begin{align}
 \begin{split}
 \lim_{t \to \infty}\frac{R(t)}{t} & = \frac{\pi_GR_G+\pi_BR_B}{\pi_GT_G +\pi_BT_B}\\
-& = \frac{p_{10}(m)\cdot1+p_{01}\cdot0}{p_{10}(m)\cdot1+p_{01}(m)}\\
-& =\frac{p_{10}(m)}{p_{10}(m)+mp_{01}}
+& = \frac{P_{10}(m)\cdot1+P_{01}\cdot0}{P_{10}(m)\cdot1+P_{01}\cdot m}\\
+& =\frac{P_{10}(m)}{P_{10}(m)+mP_{01}}
 \end{split}
 \end{align}
 If we suppose an i.i.d. error we obtain:
 \beq
 \frac{1-\epsilon}{(1-\epsilon)+m\epsilon}
 \eeq
-Where $1-\epsilon$ is the \textit{P[having a good result | m previous results were bad]}, or better, \textit{P[having a good result]} since we hypothesized the independence of the errors.\\
+Where $1-\epsilon$ is the $\prob[having\,a\,good\,result\,|\,m\, previous\,results\,were\,bad]$, or better, $\prob[having\, a\, good \,result]$ since we hypothesized the independence of the errors.\\
 Now let's try to answer another question: \textit{If we are in state G, how long does it take to us to come back?}\\
 The answer is:
 \beq
-m_0 = p_{00}\cdot1+p_{01}[1+\frac{m}{p_{10}(m)}]
+m_0 = P_{00}\cdot1+P_{01}\left[1+\frac{m}{P_{10}(m)}\right]
 \label{Formula}
 \eeq
 Where $m_0$ is the average return time to $G$ and so the inverse of throughput; why? Because as in all semi-Markov processes, if we consider one state, visits to that one state are renewal instants. So the return time from $G$ to itself is a renewal interval and for this specific case, at every renewal cycle we have 1 success and the avg number of successes per unit time is the avg number of successes per cycle, $1$, divided by the average time per cycle. Moreover, once we have obtained the Markov structure we can identify the metrics we need to find.\\
 Returning to the expression \eqref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
 \begin{align}
 \begin{split}
-m_0 & = 1+\frac{p_{01}\cdot m}{p_{10}(m)}\\
-& = \frac{p_{10}(m)+mp_{01}}{p_{10}(m)}
+m_0 & = 1+\frac{P_{01}\cdot m}{P_{10}(m)}\\
+& = \frac{P_{10}(m)+mP_{01}}{P_{10}(m)}
 \end{split}
 \end{align}
 \\
@@ -1242,24 +1242,24 @@ In the case the feedback has errors, we also need a M.C. for the acknowledgment 
 \beq
 C_f =
 \begin{bmatrix}
-p_{00} & p_{01}\\
-p_{10} & p_{11}
+P_{00} & P_{01}\\
+P_{10} & P_{11}
 \end{bmatrix}
 \hspace{10mm}
 C_b =
 \begin{bmatrix}
-q_{00} & q_{01}\\
-q_{10} & q_{11}
+Q_{00} & Q_{01}\\
+Q_{10} & Q_{11}
 \end{bmatrix}
 \eeq
 So the total transmission probability matrix is:
 \beq
 P =
 \begin{bmatrix}
-p_{00}q_{00} & p_{00}q_{01} & p_{01}q_{00} & p_{01}q_{01}\\
-p_{00}(m)q_{10}(m) & p_{00}(m)q_{11}(m) & p_{01}(m)q_{10}(m) & p_{01}(m)q_{11}(m)\\
-\text{$3^{rd}$ and} & \text{$4^{th}$ rows} & \text{can be} & \text{derived}\\
-\text{in} & \text{a} & \text{similar} & \text{way}
+P_{00}Q_{00} & P_{00}Q_{01} & P_{01}Q_{00} & P_{01}Q_{01}\\
+P_{00}(m)Q_{10}(m) & P_{00}(m)Q_{11}(m) & P_{01}(m)Q_{10}(m) & P_{01}(m)Q_{11}(m)\\
+P_{10}(m)Q_{00}(m) & P_{01}(m) Q_{01}(m) & P_{11}(m)Q_{00}(m) &P_{11}(m)Q_{01}(m)\\
+P_{10}(m)Q_{10}(m) & P_{01}(m) Q_{11}(m) & P_{11}(m)Q_{10}(m) &P_{11}(m)Q_{11}(m)
 \end{bmatrix}
 \eeq
 The state $00$ means $1$ success and $1$ slot, any other state is a failure: $0$ successes and $m$ slots. So I can rewrite the model, defining the vectors $R$ and $T$:
@@ -1282,7 +1282,7 @@ m
 \eeq
 and so obtaining the result:
 \beq
-\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{\pi_{00}\cdot 1}{\pi_{00}\cdot1+(1-\pi_{00})m}
+\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\vec{\pi}\vec{R}}{\vec{\pi}\vec{T}} = \frac{\pi_{00}\cdot 1}{\pi_{00}\cdot1+(1-\pi_{00})m}
 \eeq
 If now we suppose i.i.d. feedback errors w.p. $\delta$, we obtain the matrix
 \beq
@@ -1292,7 +1292,7 @@ C_b =
 1-\delta & \delta
 \end{bmatrix}
 \eeq
-Moreover, if the feedback channel is i.i.d., we have nothing to remember: regardless of whether the ack is good or bad, we do not care if the transmission was a failure $\rightarrow$ for this case we can use a simplified model with only $3$ states (figure\ref{fig:3states}), where the metrics are:
+Moreover, if the feedback channel is i.i.d., we have nothing to remember: regardless of whether the ack is good or bad, we do not care if the transmission was a failure $\rightarrow$ for this case we can use a simplified model with only $3$ states (\Fig{fig:3states}), where the metrics are:
 \beq
 R =
 \begin{bmatrix}
@@ -1309,11 +1309,11 @@ m
 \end{bmatrix}
 \eeq
 \beq
-p=
+P=
 \begin{bmatrix}
-(1-\delta)p_{00} & \delta p_{00} & p_{01}\\
-(1-\delta)p{00}(m) & \delta p_{00}(m) & p_{01}(m)\\
-(1-\delta)p_{10}(m) & \delta p_{10}(m) & p_{11}(m)
+(1-\delta)P_{00} & \delta P_{00} & P_{01}\\
+(1-\delta)p{00}(m) & \delta P_{00}(m) & P_{01}(m)\\
+(1-\delta)P_{10}(m) & \delta P_{10}(m) & P_{11}(m)
 \end{bmatrix}
 \eeq
 
@@ -1340,15 +1340,15 @@ p=
 	\label{fig:3states}
 \end{figure}
 The throughput is:
-\beq
+\beq\label{eq:thrPig0}
 \frac{\pi_{G_0}}{\pi_{G_0}+m(1-\pi_{G_0})}
 \hspace{5mm}
-\bar{\pi} = \bar{\pi}\cdot\bar{P}
+\vec{\pi} = \vec{\pi}\cdot\vec{P}
 \eeq
 to obtain it we take:
 \begin{align}
-\pi_{G_0} & = (1-\delta)(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m))\\
-\pi_{G_1} & = \delta(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m)) %Chiedere a Fede
+\pi_{G_0} & = (1-\delta)(\pi_{G_0}P_{00}+\pi_{G_1}P_{00}(m) +\pi_{B}P_{10}(m))\\
+\pi_{G_1} & = \delta(\pi_{G_0}P_{00}+\pi_{G_1}P_{00}(m) +\pi_{B}P_{10}(m)) %Chiedere a Fede
 \end{align}
 where
 \begin{itemize}
@@ -1359,16 +1359,16 @@ where
 and obtaining:
 \begin{align}
 \begin{split}
-\pi_{G_0} & = (1-\delta)p_{00}\pi_{G_0} + \delta\pi_{G_0} p_{00}(m) (1-\delta-\pi_{G_0})p_{10}(m)\\
-& = \frac{(1-\delta)p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
+\pi_{G_0} & = (1-\delta)P_{00}\pi_{G_0} + \delta\pi_{G_0} P_{00}(m) (1-\delta-\pi_{G_0})P_{10}(m)\\
+& = \frac{(1-\delta)P_{10}(m)}{1-(1-\delta)P_{00}-\delta P_{00}(m) +P_{10}(m)}
 \end{split}
 \end{align}
 \beq
-1-\pi_{G_0} = \frac{1-(1-\delta)p_{00} -\delta p_{00}(m) + \delta p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
+1-\pi_{G_0} = \frac{1-(1-\delta)P_{00} -\delta P_{00}(m) + \delta P_{10}(m)}{1-(1-\delta)P_{00}-\delta P_{00}(m) +P_{10}(m)}
 \eeq
-So the throughput is:
+So, rewriting \eqref{eq:thrPig0}, the throughput is:
 \beq
-throughput = \frac{(1-\delta)p_{10}(m)}{(1-\delta)p_{10}(m) + m[1-(1-\delta)p_{00}-\delta p_{00}(m)+\delta p_{10}(m)]}
+throughput = \frac{(1-\delta)P_{10}(m)}{(1-\delta)P_{10}(m) + m[1-(1-\delta)P_{00}-\delta P_{00}(m)+\delta P_{10}(m)]}
 \eeq
 \subsection{Graph reduction}
 What if we rewrite the scheme, such that we can reduce it like in figure\ref{fig:GBN}?\\
@@ -1386,20 +1386,20 @@ This brings us to conclude that in state $G$ we have:
 \end{itemize}
 About transition probabilities:
 \begin{itemize}
-\item going to $G$ w.p. $(1-\delta)p_{00}+\delta p_{00}(m)$;
-\item going to $B$ w.p. $(1-\delta)p_{01}+\delta p_{01}(m)$;
+\item going to $G$ w.p. $(1-\delta)P_{00}+\delta P_{00}(m)$;
+\item going to $B$ w.p. $(1-\delta)P_{01}+\delta P_{01}(m)$;
 \end{itemize}
 In state $B$ we have:
 \begin{itemize}
 \item No reward w.p. $1$ and $m$ slots always;
-\item We go from there to $G$ w.p. $p_{10}(m)$;
-\item And to $B$ w.p. $p_{11}(m)$;
+\item We go from there to $G$ w.p. $P_{10}(m)$;
+\item And to $B$ w.p. $P_{11}(m)$;
 \end{itemize}
 So now we have a simplified Markov model where we combine into a single state everything that before was separate. What we obtain is:
 \beq
-\pi_{G} = \frac{p_{10}(m)}{(\dots)}
+\pi_{G} = \frac{P_{10}(m)}{(\dots)} %brutto. riusciamo a trovare la formula?
 \hspace{20mm}
-\pi_{B} = \frac{(1-\delta)p_{01}+\delta p_{01}(m)}{(\dots)}
+\pi_{B} = \frac{(1-\delta)P_{01}+\delta P_{01}(m)}{(\dots)}
 \eeq
 Reward and time:
 \beq
@@ -1417,14 +1417,14 @@ m
 \eeq
 And finally we can estimate the throughput for the system in figure\ref{fig:2states}:
 \beq
-\lim_{t \to \infty} \frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{(1-\delta)p_{10}(m)}{(1-\delta+\delta \cdot m)p_{10}(m)+m[(1-\delta)p_{01}+\delta p_{01}(m)]}
+\lim_{t \to \infty} \frac{R(t)}{t} = \frac{\vec{\pi}\vec{R}}{\vec{\pi}\vec{T}} = \frac{(1-\delta)P_{10}(m)}{(1-\delta+\delta \cdot m)P_{10}(m)+m[(1-\delta)P_{01}+\delta P_{01}(m)]}
 \eeq
 We just note that the denominator of this expression is equal to the one in the previous throughput expression: to prove it it is necessary to impose:
 \begin{itemize}
-\item $p_{00} = 1-p_{01}$;
-\item $p_{00}(m) = 1-p_{01}(m)$
+\item $P_{00} = 1-P_{01}$;
+\item $P_{00}(m) = 1-P_{01}(m)$
 \end{itemize}
-So $1-(1-\delta)p_{00}-\delta p_{00}(m) = (1-\delta)p_{01} + \delta p_{01}(m)$.\\
+So $1-(1-\delta)P_{00}-\delta P_{00}(m) = (1-\delta)P_{01} + \delta P_{01}(m)$.\\
 This result stands out from the fact that the two throughputs are the same quantity but computed by two different models; so we did not reduced the complexity, we just redistributed the quantities.
 \begin{figure}[h]
 	\begin{center}
@@ -1433,10 +1433,10 @@ This result stands out from the fact that the two throughputs are the same quant
 			\node[state]		(G)											{$G$};
 			\node[state]		(B)[right of=G]				{$B$};
 			\path
-			(G) 		edge[loop left]		 			node{$(1-\delta)p_{00}+\delta p_{00}(m)$}				(G)
-							edge[bend left=20]		 			node{$(1-\delta)p_{01} + \delta p_{01}(m)$}		 		(B)
-			(B)		edge[bend left=20]	node{$p_{10}(m)$}				(G)
-							edge[loop right]					node{$p_{11}(m)$}	(B);
+			(G) 		edge[loop left]		 			node{$(1-\delta)P_{00}+\delta P_{00}(m)$}				(G)
+							edge[bend left=20]		 			node{$(1-\delta)P_{01} + \delta P_{01}(m)$}		 		(B)
+			(B)		edge[bend left=20]	node{$P_{10}(m)$}				(G)
+							edge[loop right]					node{$P_{11}(m)$}	(B);
 
 		\end{tikzpicture}
 	\end{center}
