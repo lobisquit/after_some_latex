@@ -151,46 +151,85 @@ We have to consider that the system can make mistakes, so we have to distinguish
 	\centering
   \begin{tikzpicture}
     [
-      my circle/.style={minimum width=20mm, circle, draw},
+      my circle/.style={text width=10mm, circle, draw},
       my label/.style={above=10pt, anchor=mid}
     ]
-    \node[my circle] (1) at (-15,0) {H};
-    \node[my circle] (2) at ( -12,3) {$FL_1$};
-		\node[my circle] (3) at ( -12,-3) {$TL_1$};
-		\node[my circle] (4) at ( -9,2) {$FA_{k_a-1}$};
-		\node[my circle] (5) at ( -9,5) {$FL_2$};
-		\node[my circle] (6) at ( -9,-2) {$TA_{k_l-1}$};
-		\node[my circle] (7) at ( -9,-5) {$TL_2$};
-		\node[my circle] (8) at ( -6,2) {$FA_{k_a-2}$};
-		\node[my circle] (9) at ( -6,5) {$FL_3$};
-		\node[my circle] (10) at ( -6,-2) {$TA_{k_l-2}$};
-		\node[my circle] (11) at ( -6,-5) {$TL_3$};
-		\node[my circle] (12) at ( -2,2) {$FA_1$};
-		\node[my circle] (13) at ( -2,5) {$FL$};
-		\node[my circle] (14) at ( -2,-2) {$TA_1$};
-		\node[my circle] (15) at ( -2,-5) {$TL$};
+    \node[my circle] (1) at (-11,0) {H};
+    \node[my circle] (2) at (-9,3) {$FL_1$};
+		\node[my circle] (3) at (-9,-3) {$TL_1$};
+		\node[my circle] (5) at (-7,2) {$FA_{k_a-1}$};
+		\node[my circle] (4) at (-7,5) {$FL_2$};
+		\node[my circle] (6) at (-7,-2) {$TA_{k_l-1}$};
+		\node[my circle] (7) at (-7,-5) {$TL_2$};
+		\node[my circle] (9) at (-4,2) {$FA_{k_a-2}$};
+		\node[my circle] (8) at (-4,5) {$FL_3$};
+		\node[my circle] (10) at (-4,-2) {$TA_{k_l-2}$};
+		\node[my circle] (11) at (-4,-5) {$TL_3$};
+		\node[my circle] (13) at (0,2) {$FA_1$};
+		\node[my circle] (12) at (0,5) {$FL$};
+		\node[my circle] (14) at (0,-2) {$TA_1$};
+		\node[my circle] (15) at (0,-5) {$TL$};
+		\node[text width=0.5cm] (17) at (-2,2) {....};
+		\node[text width=0.5cm] (16) at (-2,5) {....};
+		\node[text width=0.5cm] (18) at (-2,-2) {....};
+		\node[text width=0.5cm] (19) at (-2,-5) {....};
+		\node[text width=0cm] (20) at (-13,0) {$P_{NL}$};
+		\node[text width=0cm] (21) at (0,-7) {$P_C$};
+		\node[text width=0cm] (22) at (0,7) {$P_W$};
 
     %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
 
+		\draw[->] (1.170) arc(30:340:8mm);
+		\draw[->] (15.260) arc(120:430:8mm);
+		\draw[->] (12.80) arc(300:610:8mm);
+
 		\draw[->] (1.south) .. controls +(down:1cm) and +(left:1cm) .. node[below] {$P_{TL}$} (3.west);
+		\draw[->] (3.north west) .. controls +(up:0.5cm) and +(right:0.5cm) .. node[below] {$1-P_C$} (1.south east);
+
 
 		\draw[->] (1.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_{FL}$} (2.west);
+		\draw[->] (2.south west) .. controls +(down:0.5cm) and +(right:0.5cm) .. node[above] {$1-P_W$} (1.north east);
 
-		\draw[->] (3.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (7.west);
-
-		\draw[->] (7.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C$} (11.west);
-
-		\draw[->] (7.south west) .. controls +(left:3cm) and +(down:3cm) .. node[above] {$1-P_C$} (1.south west);
-
-		\draw[->] (11.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (15.west);
-
+		\draw[->] (3.east) .. controls +(right:1cm) and +(up:1cm) .. node[above] {$P_C$} (7.north);
+		\draw[->] (7.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (11.west);
+		\draw[->] (7.west) .. controls +(left:3cm) and +(down:3cm) .. node[above] {$1-P_C$} (1.south west);
+		\draw[->] (11.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (19.west);
 		\draw[->] (11.south) .. controls +(down:3cm) and +(down:8cm) .. node[above] {$1-P_C$} (1.south west);
+		\draw[->] (19.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (15.west);
+
+		\draw[->] (2.east) .. controls +(right:1cm) and +(down:1cm) .. node[above] {$P_W$} (4.south);
+		\draw[->] (4.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (8.west);
+		\draw[->] (4.west) .. controls +(left:3cm) and +(up:3cm) .. node[above] {$1-P_W$} (1.north west);
+		\draw[->] (8.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (16.west);
+		\draw[->] (8.north) .. controls +(up:3cm) and +(up:8cm) .. node[above] {$1-P_C$} (1.north west);
+		\draw[->] (16.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (12.west);
+
+		\draw[->] (12.east) .. controls +(right:1cm) and +(right:1cm) .. node[above] {$1-P_W$} (13.east);
+		\draw[->] (13.north) .. controls +(left:0cm) and +(left:0cm) .. node[above] {$P_W$} (12.south);
+
+		\draw[->] (13.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (17.east);
+		\draw[->] (17.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (9.east);
+		\draw[->] (9.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (5.east);
+		\draw[->] (5.south west) .. controls +(down:1cm) and +(right:1cm) .. node[above] {$1-P_W$} (1.east);
+
+		\draw[->] (9.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_W$} (12.south west);
+		\draw[->] (5.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_W$} (12.south west);
+
+		\draw[->] (15.east) .. controls +(right:1cm) and +(right:1cm) .. node[above] {$1-P_C$} (14.east);
+		\draw[->] (14.south) .. controls +(left:0cm) and +(left:0cm) .. node[above] {$P_C$} (15.north);
+
+		\draw[->] (14.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (18.east);
+		\draw[->] (18.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (10.east);
+		\draw[->] (10.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (6.east);
+		\draw[->] (6.north west) .. controls +(up:1cm) and +(right:1cm) .. node[above] {$1-P_C$} (1.east);
+
+		\draw[->] (10.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (15.north west);
+		\draw[->] (6.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (15.north west);
 
   \end{tikzpicture}
 	\caption{Synchronization model}
 	\label{fig:syncmodel}
 \end{figure}
-
 
 Given that a \textit{sync sequence} is composed by $S$ bits we can compute the probability of wrong detection $P_W$ and the probability of correct detection $P_C$. $P_W$ is the probability of consider a sequence of random data as a \textit{sync sequence}. $P_C$ is the probability of correctly recognize a \textit{sync sequence}.
 \begin{equation}
@@ -399,8 +438,9 @@ This means that:
 \end{enumerate}
 In conclusion, we found that the average first passage time is equal to the average
  absorption time, which is $[I-Q]^{-1}\cdot \vec{1}$
-\section{Long Run Behaviour}
-\subsection{Steady-state probabilities}
+
+\chapter{Long Run Behaviour}
+\section{Steady-state probabilities}
 
 	\begin{definition}[Regular \gls{mc}]
 		A regular \gls{mc} is a \gls{mc} with the following property:
@@ -464,7 +504,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{equation}
 	\end{proof}
 
-\subsection{Classes of states}
+\section{Classes of states}
 	\begin{definition}[Accessible State]
 		State $j$ is {\bfseries accessible} from state $i$ if $\exists n \geq 0$ such that $P_{ij}^{(n)} > 0$. It can be written ($i \rightarrow j$).
 		State it's \textbf{not} accessible if $\forall n \ge 0 \quad P_{ij}^{(n)}=0$
@@ -995,7 +1035,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
 
-\subsection{M/G/1}
+\section{M/G/1}
 Let's now consider a queueing system where arrivals are markovian and there's only one server which acts with a generic proibability distribution. Let's then define the probability transition matrix as
 \begin{equation}\label{eq:mg1P}
 	P=\begin{pmatrix}
@@ -1059,7 +1099,7 @@ In conclusion we found that
 \end{cases}\end{equation}
 Where the second equation is one-direction only because we cannot say that if I cannot find a solution by guess, then there's no solution.
 
-\subsection{Random walks}
+\section{Random walks}
 Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now define the probability to advance in state and going back to the previous state as follows:
 \begin{esp}
 	p_i &= P_{i i+1} \quad \text{probability to go $i\to i+1 $}\\
