@@ -35,9 +35,11 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	where
 	\begin{itemize}
-		\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
+		\item $ S_n \stackrel{\footnotemark}{=} W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
 		\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
 	\end{itemize}
+
+	\footnotetext{It's only a matter of notation, in some book is reported as $S_n$, in others as $W_n$}
 
 	Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
 
@@ -71,7 +73,20 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	\bigbreak
 	An interesting result can be proven for Poisson processes with intensity $\lambda$.
+	Actually, renewal processes are generalized version of Poisson processes (arrival hasn't to be exponential).
 	In this case, given $\beta_t = \delta_t + \gamma_t$, the joint distribution of $\delta_t$ and $\gamma_t$ can be written as follows.
+	\begin{equation*}
+		\prob[\gamma_t > x] = \prob[no ~events ~in ~(t,t+x)] = e^{-\lambda x}
+	\end{equation*}
+
+	\begin{equation*}
+		\prob[\delta_t > x] = \prob[no ~events ~in ~(t-x,t)] =
+		\begin{cases}
+			e^{-\lambda x} & x<t\\
+			0 & x\ge t
+		\end{cases}
+	\end{equation*}
+	where the second case takes into account that the previous event can not happen before time 0.
 
 	\begin{equation}
 		\prob[\gamma_t > x, \delta_t > y ] =
@@ -80,7 +95,6 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			0 & \text{if } y \ge t \\
 		\end{cases}
 	\end{equation}
-	where the second case takes into account that the previous event can not happen before time 0.
 
 	The expectation of $\beta_t$ can be computed simply as
 	\begin{equation*}
@@ -275,7 +289,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 	For the triangle inequality and integral properties, we have that
 	$$ |A(t)| \le |a(t)| + \int\limits_0^{t}|a(t-x)| \cdot dM(x) $$
 
-	We can easily assess this upper buond for the value of $A(t)$, that proves our thesis.
+	We can easily assess this upper bound for the value of $A(t)$, that proves our thesis.
 	\begin{equation}\begin{split}
 		\sup_{0\le t \le T} |A(t)| & \le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le \eta \le T}|a(\eta)| \cdot dM(x) \\
 		& = \sup_{0\le t \le T} |a(t)| \cdot [ 1+M(T) ] < \infty \text{ as }
@@ -364,6 +378,29 @@ An integer random variable N is called \gls{st} for the i.i.d. sequence $X_i$ if
 
 Less formally, N is independent on what happens after $X_n$.
 \end{definition}
+For example:
+
+\begin{description}
+	\item[\textbf{Coin Flip}]
+		$\prob[X_i=0] = \prob[X_i=0] = 1/2$
+		\begin{equation*}
+			N = min\bigg\{n:\sum_{i=1}^n X_i = 10\bigg\}
+		\end{equation*}
+		Flip a coin until you get 10 ones, $N$ is a \textit{stopping time r.v.}
+	\item[\textbf{Gambler's ruin}]
+		$\prob[X_i=1] = \prob[X_i=-1] = 1/2$
+		\begin{equation*}
+			N = min\bigg\{n:\sum_{i=1}^n X_i = 1\bigg\}
+		\end{equation*}
+		$N$ is a \textit{stopping time r.v.}
+	\item[\textbf{Uniform distribution}]
+		$X_i \sim U[0,1]$
+		\begin{equation*}
+			N_1 = min\bigg\{n:\sum_{i=1}^n X_i > 10\bigg\} \qquad
+			N_2 = min\bigg\{n:\sum_{i=1}^n X_i \le 10\bigg\}
+		\end{equation*}
+		$N_1$ is a \textit{stopping time r.v.} since it stops as soon as the sum is above $10$, $N_2$ isn't a \textit{stopping time r.v.} since the variable has to look for the next value of $X_i$, so $N$ depends on $X_{n+1}$.
+\end{description}
 
 \begin{theorem}[Wald's equation]
 	Let $X_1, X_2, \dots, X_N $ be an i.i.d. sequence with finite mean and N a stopping time such that $\exp[N] < \infty$. Then
@@ -411,7 +448,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}
 	\eeq
 	where $\mu = E[X]$.\\
-	Then we can prove that $\frac{M(t)}{t} = E[\frac{N(t)}{t}]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
+	Then we can prove that $\frac{M(t)}{t} = \exp\bigg[\frac{N(t)}{t}\bigg]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
 	\subsubsection{Counter example}
 	Let $U$ be a uniform r.v. $U(0,1)$ and let $Y_n$ be a r.v. such that:
 	\beq
@@ -474,13 +511,14 @@ Less formally, N is independent on what happens after $X_n$.
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
 	\eeq
-	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. [ \Fig{fig:mu}]
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to +\infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. [ \Fig{fig:mu}]
 	\begin{figure}
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
 	\caption{This graph is the complementary distribution of $X^c$}
 	\label{fig:mu}
 	\end{figure}
+
 	So at the end we conclude that
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c} = \frac{1}{\mu}
@@ -502,14 +540,14 @@ Less formally, N is independent on what happens after $X_n$.
 	In the first case there is no may in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
 	\subsubsection*{$1^{st}$ Statement}
 	In this case represents a Poisson process: $S_{N(t)+1} = t + \gamma_t$ and $S_{N(t)} = t - \delta_t$;\\
-	If i sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
+	If I sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
 	Moreover we know that both $\gamma$ and $\delta$ are exponentially distributed (because of Poisson process theory and the memoryless condition of the process): $\gamma_t$ is exponential with parameter $\lambda$, while $\delta_t$ is exponential with parameter $\lambda$ truncated at $t$.\\
 	So we can find all the quantities involved:%min 25:00
 	\beq
 	\exp\left[S_{N(t)+1} = t + \frac{1}{\lambda}\right] \qquad \exp\left[S_{N(t)}\right] = t - \frac{1-e^{-\lambda t}}{\lambda}
 	\eeq
 	with $M(t) = \lambda t$ and $E[X] = \frac{1}{\lambda}$.\\
-	Thanks to it we can see that the equality in true.
+	Thanks to it we can see that the equality is true.
 	\subsubsection*{$2^{nd}$ Statement}
 	In this case we take:
 	\beq
@@ -571,7 +609,7 @@ Less formally, N is independent on what happens after $X_n$.
 	So the first equation was found to be true in both cases and it's contrary for the second.
 	\subsection{Exercises}
 	\subsubsection*{Ex 2.4}
-	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
+	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on a given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
 	So I represent the book as:
 	\begin{figure}[h]
 	\centering
@@ -608,11 +646,12 @@ Less formally, N is independent on what happens after $X_n$.
 	For $i = 1 \dots n$ I have an indep. PP $\rightarrow X_i(t)$ is an i.i.d. PP($\lambda$).\\
 	The problem asks to find the first time such that there is at least one event  in every process, see \Fig{fig:3.6}
 	\begin{figure}[h]
-	\centering
-	\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
-	\label{3.6}
+		\centering
+		\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
+		\label{fig:renewal_ex}
 	\end{figure}
-	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{}-\lambda t)^n$.\\
+
+	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 ~events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{-\lambda t})^n$.\\
 	We could actually see the problem from a different point of view: this view counts the events in the Poisson Poisson process and uses the independence to find the probability that none of them has seen $0$ events.\\
 	So we can see how we can look at $T$: we get that $T$ is the time at which the last process has its first event and it will be the biggest value among the exponentials; the first event will occur, obviously, with exponential time, so using this reasoning we can express the r.v. $T$ as:
 	\beq
@@ -621,7 +660,7 @@ Less formally, N is independent on what happens after $X_n$.
 	So I can turn the point into a question: what is the distribution of the maximum among the i.i.d variables?
 	\begin{align}
 	\begin{split}
-	P[max{X_1,X_2,\dots,X_n} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
+	P[max\{X_1,X_2,\dots,X_n\} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
 						  & = (P[X \leq t])^n = (1-e^{-\lambda t})^n
 	\end{split}
 	\end{align}
@@ -660,7 +699,7 @@ Less formally, N is independent on what happens after $X_n$.
 	\subsubsection*{Ex 4.1}
 	Given $n$ arrivals, we take the quantity $E[w_1] = \int_{0}^{1}(1-t)^n dt = \frac{1}{n+1}$ where $w_1$ is the smallest among $n$ i.i.d. uniform r.v. between $0$ and $1$ and so the distribution is the distribution of the minimum of $n$ i.i.d. uniform r.v., and its complementary distribution is the $n^{th}$ power of the complementary distribution.\\
 	\subsubsection*{Ex 4.3}
-	Suppose we have $5$ arrivals, the cumulative time is the area in figure4, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
+	Suppose we have $5$ arrivals, the cumulative time is the area in \autoref{fig:area}, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
 	\subsubsection*{Ex 4.5}
 	Here assume we have $\alpha$  and the service time is an exponential r.v. $\sim exp(\alpha)$, and the probability $P[\text{at time 1 h the queue is empty}]$ is estimated considering each user arriving uniformly. So at the end the number of users is binomial and, conditioning on the uniform variable, we get:
 	\begin{align}
@@ -695,7 +734,11 @@ Less formally, N is independent on what happens after $X_n$.
 	\end{equation}
 \end{definition}
 \begin{definition}
-	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
+	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that
+	\begin{equation}
+		\sum_{n=-\infty}^{+\infty}\prob[X = n\lambda] = 1
+	\end{equation}
+	i.e. F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
 
 	We call \textit{SPAN} the largest $\lambda$ for which F is still arithmetic.
 \end{definition}
@@ -866,10 +909,10 @@ Then we finally prove that
 	\begin{equation}
 		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum\limits_{n=1}^{+\infty}n \cdot f_{jj}^{(n)}}
 	\end{equation}
-	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
+	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statement is always true for any initial state $Y_0$.
 
 	\begin{equation}
-		N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
+		N_j(n)-N_j(n-1)=1 = I[Y_n=j]
 	\end{equation}
 
 	If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
