@@ -150,11 +150,11 @@ We have to consider that the system can make mistakes, so we have to distinguish
 
 \begin{figure}
 	\centering
-	\resizebox{\textwidth}{!}{\input{img/sinchModelFede.tex}}
-	\caption{Synchronization model}
+	% \resizebox{\textwidth}{!}{\input{img/sinchModelFede.tex}}
+	% \caption{Synchronization model}
   % PITT version
-	% \resizebox{\textwidth}{!}{\input{img/sinchModel.tex}}
-	% \caption{Synchronization model schema: the green area is where we'd like to be, so that the system is synchronized.}
+	\resizebox{\textwidth}{!}{\input{img/sinchModel.tex}}
+	\caption{Synchronization model schema: the green area is where we'd like to be, so that the system is synchronized.}
 	\label{fig:syncmodel}
 \end{figure}
 
@@ -239,8 +239,8 @@ Let's start with the probability:
     \node[my circle] (1) at (-1,0) {$0$};
     \node[my circle] (2) at ( 1,0) {$1$};
     %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
-		\path[->,draw] (1.south east)  edge[bend right=90] node [below] {$b$} (2.south west);
-		\path[->,draw] (1.north east)  edge[bend left=90] node [above]  {$a$} (2.north west);
+		\path[-stealth] (2.south west)  edge[bend left=90] node [below] {$b$} (1.south east);
+		\path[-stealth] (1.north east)  edge[bend left=90] node [above]  {$a$} (2.north west);
 		\path [-stealth, draw] (2.south east) arc (-135:135:5mm) node [near end, my label] {$1-b$};
     \path [-stealth, draw] (1.south west) arc (-45:-315:5mm) node [near end, my label] {$1-a$};
   \end{tikzpicture}
