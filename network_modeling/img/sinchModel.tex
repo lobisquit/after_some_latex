@@ -45,7 +45,7 @@
 
   \path[->] (tl2) edge[bend left,in=100,out=80,min distance=0.3cm] node[above left, rotate=-55] {$1-P_C$} (H);
 
-  \draw[-stealth] (tl3.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (tl.west);
+  \draw[-stealth,dashed] (tl3.east) .. controls +(right:1cm) and +(left:1cm) .. node[above] {$P_C^{k_{l}-2}$} (tl.west);
   \path[-stealth] (tl3) edge[bend left,in=70,out=100,min distance=6.5cm] node[above right, rotate=-35] {$1-P_C$} (H);
   \path[-stealth] (tl) edge[in=-110, out=-20,min distance=2cm]  node[above,rotate=25]{$P_{C}$} (tl);
   %
@@ -55,10 +55,10 @@
   \path[->] (ta1) edge[bend right] node[above, rotate=40] {$P_C$} (tl);
   \path[->] (ta1) edge[bend right] node[above, rotate=-30] {$1-P_C$} (ta2);
   \path[->] (ta2) edge[] node[right, rotate=0] {$P_C$} (tl);
-  \path[->] (ta2) edge[bend right] node[above, rotate=0] {$1-P_C$} (taKa2);
-  \path[-stealth,dotted] (taKa2) edge[bend left] node[below left, rotate=0] {$P_C$} (tl);
+  \path[->,dashed] (ta2) edge[bend right] node[above, rotate=0] {$(1-P_C)^{K_l-4}$} (taKa2);
+  \path[-stealth] (taKa2) edge[bend left] node[below left, rotate=0] {$P_C$} (tl);
   \path[->] (taKa2) edge[bend right] node[above, rotate=0] {$1-P_C$} (taKa1);
-  \path[-stealth,dotted] (taKa1) edge[bend right, in=180,out=-40] node[above, rotate=0] {$P_C$} (tl);
+  \path[-stealth] (taKa1) edge[bend right, in=180,out=-40] node[above, rotate=0] {$P_C$} (tl);
   \path[->] (taKa1) edge[in=-30,out=170] node[above right, rotate=-10] {$1-P_C$} (H);
   %
   % --- PATH INVOLVING FL# ---
@@ -66,7 +66,7 @@
   \path[-stealth] (fl1.north) edge[bend left] node[above,rotate=30] {$P_{FA}$}  (fl2.west);
   \path[-stealth] (fl2.north east) edge[bend left] node[above,rotate=0] {$P_{FA}$}  (fl3.north west);
   \path[-stealth] (fl3) edge[bend left, in=-190,out=10] node[above,rotate=36] {$1-P_{FA}$}  (H);
-  \path[-stealth] (fl3.north east) edge[bend left] node[above,rotate=0] {$P_{FA}^{k_l-2}$}  (fl.north west);
+  \path[-stealth,dashed] (fl3.north east) edge[bend left] node[above,rotate=0] {$P_{FA}^{k_l-2}$}  (fl.north west);
   \path[-stealth] (fl) edge[in=80, out=10, loop]  node[above,rotate=-40]{$P_{NL}$} (fl);
   \path[-stealth] (fl.east) edge[bend left] node[above,rotate=-50] {$1-P_{FA}$}  (fa1.north);
   \path[-stealth] (fa1.north west) edge[bend left] node[above,rotate=-50] {$P_{FA}$}  (fl.south east);
@@ -78,11 +78,11 @@
   %
   \path[-stealth] (fa2.north west) edge[bend left] node[above,rotate=-80] {$P_{FA}$}  (fl.south west);
   \path[-stealth] (fa1) edge[bend left] node[below] {$1-P_{FA}$}  (fa2);
-  \path[-stealth] (fa2) edge[bend left] node[below] {$(1-P_{FA})^{k_a -2}$}  (faKa2); %verify formula. not sure
+  \path[-stealth,dashed] (fa2) edge[bend left] node[below] {$(1-P_{FA})^{k_a -4}$}  (faKa2); %verify formula. not sure
   \path[-stealth] (faKa2) edge[bend left] node[below] {$1-P_{FA}$}  (faKa1);
   \path[-stealth] (faKa1) edge[bend left] node[above,rotate=20] {$1-P_{FA}$}  (H);
-  \path[-stealth, dotted] (faKa2) edge[bend left,in=-200,out=20] node[below, rotate=50] {$P_{FA}$}  (fl);
-  \path[-stealth, dotted] (faKa1) edge[bend left,in=-200,out=20] node[below, rotate=50] {$P_{FA}$}  (fl);
+  \path[-stealth] (faKa2) edge[bend left,in=-200,out=20] node[below, rotate=50] {$P_{FA}$}  (fl);
+  \path[-stealth] (faKa1) edge[bend left,in=-200,out=20] node[below, rotate=50] {$P_{FA}$}  (fl);
 
   %Final line where I'd like to be
   \draw[dotted,fill=green!70, opacity=0.15] plot [smooth cycle] coordinates {(3.3,-2.5) (3.3,-5) (2,-7) (1,-8) (-0.5,-9) (-10,-9) (-14,-6) (-13,-3) (-10,0) (0.5,0) (2,-1)};
