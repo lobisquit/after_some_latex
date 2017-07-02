@@ -684,9 +684,9 @@ In conclusion, we found that the average first passage time is equal to the aver
 				\sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) +
 				\sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right| \stackrel{(4)}{\le}
 			\\
-			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
-				\left| \sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
-				\left| \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right| \stackrel{(5)}{\le}
+			\le & \underbrace{\left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right|}_{\alpha} +
+				\underbrace{\left| \sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right|}_{\beta} +
+				\underbrace{\left| \sum_{v = 1}^{n} \sum_{\substack{k \in C \\ k \notin C'}} \pi_{ik}^{(v)}(C) P_{kj}^{(n-v)} \right|}_{\gamma} \stackrel{(5)}{\le}
 			\\
 			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)}(C) (P_{kj}^{(n-v)} - \pi_j) \right| +
 				2 \left( \sum_{v = N+1}^{n} \sum_{k \in C'} \pi_{ik}^{(v)}(C) \right) +
@@ -694,7 +694,11 @@ In conclusion, we found that the average first passage time is equal to the aver
 			\\
 			\le & \left| \sum_{v = 1}^{N} \sum_{k \in C'} \pi_{ik}^{(v)} (P_{kj}^{(n-v)} - \pi_j) \right| + 3 \epsilon \stackrel{(7)}{<} 4 \epsilon
 		\end{split}\end{equation}
-
+		\begin{figure}
+			\input{img/Theorem_3.1.tex}
+			\caption{The letters correspond to the underbraced letter on the last but two passage of eq. \eqref{eq:theorem_3.1_first term}. The area with diagonal lines is all less then $\epsilon$}
+			\label{fig:th3_1}
+		\end{figure}
 		\setlength{\mathindent}{0cm} % reset of "sporco trucco ingegneristico"
 
 		since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
@@ -707,6 +711,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 			\item [(5)] given it always holds that $P_{kj}^{(n-v)} \le 1$ and $|P_{kj}^{(n-v)} - \pi_j| \le 2$
 			\item [(6)] choosing $C'$ and $N$ large enough, we can make the two terms between parenthesis small as we want: they are infinitesimal
 			\item [(7)] since $\pi_j = \lim_{n \to +\infty} P_{kj}^{(n-v)}$ by definition, what we have here is a finite sum (over $N$ and $C'$) of infinitesimal quantities
+			\item[$\alpha, ~\beta,~ \gamma$] are shown in \Fig{fig:th3_1}
 		\end{itemize}
 		This way we have verified that first term of \eqref{eq:theorem_3.1_thesis} is in fact infinitesimal.
 
