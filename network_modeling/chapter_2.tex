@@ -136,6 +136,83 @@ that the gambler goes in ruin is
 The last case may seem strange, but even if the game is fair ($p=q=\frac{1}{2}$), in an infinite time
 a series of unfortunate events may occour and the gambler will reach $X_0$, his ruin.
 
+\section{Synchronization model}
+We consider a slotted model where every slot is composed by $N$ symbols. Our aim is find inside a slot a \textit{sync sequence}, which a particular sequence of $S$ bits. We call \textit{erroneus sequence} every sequence of $S$ bits that is not a \textit{sync sequence}.
+Our system can be found in the following possible states.
+\begin{enumerate}
+	\item Hunt state $H=A_{k_a}$: the system searchs for a \textit{sync sequence} bit-by-bit untill the sequence is found or $N$ consecutives bits are checked without find a \textit{sync sequence}; if a \textit{sync sequence} is found the system moves to $L_1$.
+	\item Lock state $L_k$: the system has found $k-1$ consecutives \textit{sync sequences}; if a new \textit{sync sequence} is found the system moves to $L_{k+1}$ while if a \textit{erroneus sequence} is found the system moves to $H$.
+	\item Accepted sync $L=L_{k_l}$: the system has fond $k_l$ consecutives \textit{sync sequence}; if a \textit{erroneus sequence} is found the system moves to $A_1$.
+	\item Allarm state $A_k$: the system has found $k$ consecutives bits out of sync; if a \textit{erroneus sequence} is found the system moves to $A_{k+1}$ while if a \textit{sync sequence} is found the system moves to $L$.
+\end{enumerate}
+
+We have to consider that the system can make mistakes, so we have to distinguish two kind of \textit{lock states} that are the \textit{true lock} $TL_k$ and the \textit{false lock} $FL_k$. Consequently we have also to distinguis two kind of \textit{allarm states} tha are the \textit{true allarm} $TA_k$ and the \textit{false allarm} $FA_k$.
+
+\begin{figure}
+	\centering
+	\resizebox{\textwidth}{!}{\input{img/sinchModelFede.tex}}
+	\caption{Synchronization model}
+  % PITT version
+	% \resizebox{\textwidth}{!}{\input{img/sinchModel.tex}}
+	% \caption{Synchronization model schema: the green area is where we'd like to be, so that the system is synchronized.}
+	\label{fig:syncmodel}
+\end{figure}
+
+Given that a \textit{sync sequence} is composed by $S$ bits we can compute the probability of wrong detection $P_W$ and the probability of correct detection $P_C$. $P_W$ is the probability of consider a sequence of random data as a \textit{sync sequence}. $P_C$ is the probability of correctly recognize a \textit{sync sequence}.
+\begin{equation}
+	P_W= \left( \frac{1}{2} \right) ^{S}
+	\label{wrong_detection}
+\end{equation}
+\begin{equation}
+	P_C= \left( 1-\epsilon \right) ^{S}
+	\label{correct_detection}
+\end{equation}
+In \eqref{correct_detection} we call $\epsilon$ the value of the trasmission error probability.
+Now we suppone that the system is in the \textit{hunt state} $H$ and it is looking at the $n^{th}$ bit of the slot. We call $P_{TL}(n)$ the probability of move to state $TL_1$ given that the system is looking at $n^{th}$ bit of the slot.
+\begin{equation}
+	P_{TL}(n) = (1-P_W)^{N-n} \cdot P_C
+\end{equation}
+We call $P_{NL}(n)$ the probability of don't find a \textit{sync sequence}, neither correct nor wrong, given that we start from the $n^{th}$ bit of the slot.
+\begin{equation}
+	P_{NL}(n) = (1-P_W)^{N-1} \cdot (1-P_C)
+\end{equation}
+Then we can compute $P_{TL}$ and $P_{NL}$ as follows.
+
+\begin{equation}
+\begin{split}
+	P_{TL} & = \frac{1}{N} \cdot \sum_{n=1}^{N} P_{TL}(n) \\
+	& = \frac{P_C}{N} \cdot \sum_{n=1}^{N} (1-P_{W})^{N-n} \\
+	& = \frac{P_C}{N} \cdot \frac{1-(1-P_W)^N}{1-(1-P_W)} \\
+	& = \frac{P_C \cdot (1 - (1-P_W)^N ) } { N \cdot P_W}
+\end{split}
+\end{equation}
+
+\begin{equation}
+\begin{split}
+	P_{NL} & = \frac{1}{N} \cdot \sum_{n=1}^{N} P_{NL}(n) \\
+	& = \frac{N}{N} \cdot (1-P_W)^{N-1} \cdot (1-P_C) \\
+	& = (1-P_W)^{N-1} \cdot (1-P_C)
+\end{split}
+\end{equation}
+
+We call $P_{FL}(n)$ the probability of move to state $FL_1$ given that the system is looking at $n^{th}$ bit of the slot.
+
+\begin{equation}
+	P_{FL}(n) = \sum_{i=0}^{N-n-1} (1-P_W)^{i} \cdot P_W + \sum_{i=1}^{n-1} (1-P_W)^{N-n+i-1} \cdot (1-P_C) \cdot P_W
+	\label{probability_falselock}
+\end{equation}
+In \eqref{probability_falselock} the first summation regards the bits numbered from $n$ to $N-1$ while the second summation regards the bits numbered from $1$ to $n-1$.
+Now we check that the sum of probabilities $P_{TL}(n)$, $P_{FL}(n)$ and $P_{NL}(n)$ is equal to one.
+\begin{equation}
+	\begin{split}
+		P_{FL}(n) & = \sum_{i=0}^{N-n-1} (1-P_W)^{i} \cdot P_W + \sum_{i=1}^{n-1} (1-P_W)^{N-n+i-1} \cdot (1-P_C) \cdot P_W \\
+		& = P_W \cdot \frac{1-(1-P_W)^{N-n}}{P_W} + (1-P_C) \cdot (1-P_w)^{N-n} \cdot P_W \cdot \frac{1-(1-P_W)^{n-1}}{P_W} \\
+		& = 1 - (1-P_W)^{N-n} + (1-P_C) \cdot (1-P_W)^{N-n} - (1-P_C) \cdot (1-P_W)^{N-1} \\
+		& = 1 - P_C \cdot (1-P_W)^{N-n} - (1-P_C) \cdot (1-P_W)^{N-1} \\
+		& = 1 - P_{TL}(n) - P_{NL}(n)
+	\end{split}
+\end{equation}
+
 \section{First passage time}
 \begin{definition}[$\theta_{i,j}$]
 We define $\theta_{i,j}$ to be the number of transitions to reach j from i for the first time.
@@ -288,8 +365,9 @@ This means that:
 \end{enumerate}
 In conclusion, we found that the average first passage time is equal to the average
  absorption time, which is $[I-Q]^{-1}\cdot \vec{1}$
-\section{Long Run Behaviour}
-\subsection{Steady-state probabilities}
+
+\chapter{Long Run Behaviour}
+\section{Steady-state probabilities}
 
 	\begin{definition}[Regular \gls{mc}]
 		A regular \gls{mc} is a \gls{mc} with the following property:
@@ -353,7 +431,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{equation}
 	\end{proof}
 
-\subsection{Classes of states}
+\section{Classes of states}
 	\begin{definition}[Accessible State]
 		State $j$ is {\bfseries accessible} from state $i$ if $\exists n \geq 0$ such that $P_{ij}^{(n)} > 0$. It can be written ($i \rightarrow j$).
 		State it's \textbf{not} accessible if $\forall n \ge 0 \quad P_{ij}^{(n)}=0$
@@ -943,7 +1021,7 @@ We can ignore the $d$ value if we calculate:
 		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
 
-\subsection{M/G/1}
+\section{M/G/1}
 Let's now consider a queueing system where arrivals are markovian and there's only one server which acts with a generic proibability distribution. Let's then define the probability transition matrix as
 \begin{equation}\label{eq:mg1P}
 	P=\begin{pmatrix}
@@ -1007,7 +1085,7 @@ In conclusion we found that
 \end{cases}\end{equation}
 Where the second equation is one-direction only because we cannot say that if I cannot find a solution by guess, then there's no solution.
 
-\subsection{Random walks}
+\section{Random walks}
 Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now define the probability to advance in state and going back to the previous state as follows:
 \begin{esp}
 	p_i &= P_{i i+1} \quad \text{probability to go $i\to i+1 $}\\

@@ -135,8 +135,9 @@ Defining
 \begin{theorem}[5.7, Joint probability of {$[W_{1},\dots,W_{n}]$}]
 	Being $W_{1}$,$W_{2}$,..$W_{n}$ the arrival time in a Poisson Process $N(t)$ with rate ${\lambda}>0$. Given $N(t)=n$, the joint distribution of $w_{1},w_{2}\dots,w_{n}$ variables is:
 	\begin{equation}
-	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = P (W_1=w_1,...W_n=w_n|N(t)=n) = n!/t^n
+	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = P (W_1=w_1,...W_n=w_n|N(t)=n) = \frac{n!}{t^n}
 	\end{equation}
+	where we supposed that $0<w_1<\dots<w_n<t$, otherwise the function is zero.
 	\begin{proof}
 		Excluding simultaneous arrivals,
 		\begin{equation*}
