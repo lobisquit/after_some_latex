@@ -149,91 +149,11 @@ We have to consider that the system can make mistakes, so we have to distinguish
 
 \begin{figure}
 	\centering
-<<<<<<< HEAD
-  \begin{tikzpicture}
-    [
-      my circle/.style={text width=10mm, circle, draw},
-      my label/.style={above=10pt, anchor=mid}
-    ]
-    \node[my circle] (1) at (-11,0) {H};
-    \node[my circle] (2) at (-9,3) {$FL_1$};
-		\node[my circle] (3) at (-9,-3) {$TL_1$};
-		\node[my circle] (5) at (-7,2) {$FA_{k_a-1}$};
-		\node[my circle] (4) at (-7,5) {$FL_2$};
-		\node[my circle] (6) at (-7,-2) {$TA_{k_l-1}$};
-		\node[my circle] (7) at (-7,-5) {$TL_2$};
-		\node[my circle] (9) at (-4,2) {$FA_{k_a-2}$};
-		\node[my circle] (8) at (-4,5) {$FL_3$};
-		\node[my circle] (10) at (-4,-2) {$TA_{k_l-2}$};
-		\node[my circle] (11) at (-4,-5) {$TL_3$};
-		\node[my circle] (13) at (0,2) {$FA_1$};
-		\node[my circle] (12) at (0,5) {$FL$};
-		\node[my circle] (14) at (0,-2) {$TA_1$};
-		\node[my circle] (15) at (0,-5) {$TL$};
-		\node[text width=0.5cm] (17) at (-2,2) {....};
-		\node[text width=0.5cm] (16) at (-2,5) {....};
-		\node[text width=0.5cm] (18) at (-2,-2) {....};
-		\node[text width=0.5cm] (19) at (-2,-5) {....};
-		\node[text width=0cm] (20) at (-13,0) {$P_{NL}$};
-		\node[text width=0cm] (21) at (0,-7) {$P_C$};
-		\node[text width=0cm] (22) at (0,7) {$P_W$};
-
-    %\path [postaction={draw, {>[sep=5pt,reversed]}-{<[sep=5pt]}}, draw] (1) -- (2) node [very near start, my label] {$a$}  node [very near end, my label] {$\beta$} ;
-
-		\draw[->] (1.170) arc(30:340:8mm);
-		\draw[->] (15.260) arc(120:430:8mm);
-		\draw[->] (12.80) arc(300:610:8mm);
-
-		\draw[->] (1.south) .. controls +(down:1cm) and +(left:1cm) .. node[below] {$P_{TL}$} (3.west);
-		\draw[->] (3.north west) .. controls +(up:0.5cm) and +(right:0.5cm) .. node[below] {$1-P_C$} (1.south east);
-
-
-		\draw[->] (1.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_{FL}$} (2.west);
-		\draw[->] (2.south west) .. controls +(down:0.5cm) and +(right:0.5cm) .. node[above] {$1-P_W$} (1.north east);
-
-		\draw[->] (3.east) .. controls +(right:1cm) and +(up:1cm) .. node[above] {$P_C$} (7.north);
-		\draw[->] (7.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (11.west);
-		\draw[->] (7.west) .. controls +(left:3cm) and +(down:3cm) .. node[above] {$1-P_C$} (1.south west);
-		\draw[->] (11.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (19.west);
-		\draw[->] (11.south) .. controls +(down:3cm) and +(down:8cm) .. node[above] {$1-P_C$} (1.south west);
-		\draw[->] (19.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_C$} (15.west);
-
-		\draw[->] (2.east) .. controls +(right:1cm) and +(down:1cm) .. node[above] {$P_W$} (4.south);
-		\draw[->] (4.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (8.west);
-		\draw[->] (4.west) .. controls +(left:3cm) and +(up:3cm) .. node[above] {$1-P_W$} (1.north west);
-		\draw[->] (8.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (16.west);
-		\draw[->] (8.north) .. controls +(up:3cm) and +(up:8cm) .. node[above] {$1-P_W$} (1.north west);
-		\draw[->] (16.east) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$P_W$} (12.west);
-
-		\draw[->] (12.east) .. controls +(right:1cm) and +(right:1cm) .. node[above] {$1-P_W$} (13.east);
-		\draw[->] (13.north) .. controls +(left:0cm) and +(left:0cm) .. node[above] {$P_W$} (12.south);
-
-		\draw[->] (13.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (17.east);
-		\draw[->] (17.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (9.east);
-		\draw[->] (9.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_W$} (5.east);
-		\draw[->] (5.south west) .. controls +(down:1cm) and +(right:1cm) .. node[above] {$1-P_W$} (1.east);
-
-		\draw[->] (9.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_W$} (12.south west);
-		\draw[->] (5.north) .. controls +(up:1cm) and +(left:1cm) .. node[above] {$P_W$} (12.south west);
-
-		\draw[->] (15.east) .. controls +(right:1cm) and +(right:1cm) .. node[above] {$1-P_C$} (14.east);
-		\draw[->] (14.south) .. controls +(left:0cm) and +(left:0cm) .. node[above] {$P_C$} (15.north);
-
-		\draw[->] (14.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (18.east);
-		\draw[->] (18.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (10.east);
-		\draw[->] (10.west) .. controls +(right:0cm) and +(left:0cm) .. node[above] {$1-P_C$} (6.east);
-		\draw[->] (6.north west) .. controls +(up:1cm) and +(right:1cm) .. node[above] {$1-P_C$} (1.east);
-
-		\draw[->] (10.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (15.north west);
-		\draw[->] (6.south) .. controls +(down:1cm) and +(left:1cm) .. node[above] {$P_C$} (15.north west);
-
-  \end{tikzpicture}
+	\resizebox{\textwidth}{!}{\input{img/sinchModelFede.tex}}
 	\caption{Synchronization model}
-=======
-  % \includegraphics[width=\textwidth]{img/sinchModel.tex}
-	\resizebox{\textwidth}{!}{\input{img/sinchModel.tex}}
-	\caption{Synchronization model schema: the green area is where we'd like to be, so that the system is synchronized.}
->>>>>>> origin/MC-reloaded
+  % PITT version
+	% \resizebox{\textwidth}{!}{\input{img/sinchModel.tex}}
+	% \caption{Synchronization model schema: the green area is where we'd like to be, so that the system is synchronized.}
 	\label{fig:syncmodel}
 \end{figure}
 
