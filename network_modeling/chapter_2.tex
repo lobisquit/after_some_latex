@@ -64,17 +64,16 @@ Let $\rho=\sum\limits_{k=0}^{+\infty} k \cdot a_k$. We say that for
 \begin{figure}[h]
 	\centering
 	\input{img/infinite_mc.tex}
-	\caption{An infinite random walk MC. With relation to gambling, the MC rapresents the case
-	where (1) the adversary has an infinite wealth (e.g.: casino), (2) the gambler can loose nothing in one game
-	(3) all games have different probability to win or loose (4) the player can always recover }
-	\label{}
+	\caption{An infinite random walk MC. With relation to gambling, the MC represents the case
+	where (1) the adversary has an infinite wealth (e.g.: casino), (2) the gambler can lose nothing in one game
+	(3) all games have different probability to win or lose (4) the player can always recover }
 \end{figure}
 The theory around the random walks was developed to understand better the probability around the
 gambling world using the MC theory. We now make some assumptions before starting the analysis on this topic.
 \subsection{Assumptions:}
 \begin{enumerate}
-	\item The MC has \textbf{N+1} states, representing the status of the gambler' health.
-	 Let 0 be the \textit{ruined gambler} state and N be the gambler' success;
+	\item The MC has \textbf{N+1} states, representing the status of the gambler's health.
+	 Let 0 be the \textit{ruined gambler} state and N be the gambler's success;
 	\item The gambler must always play;
 	\item All the games are equal with
 	\begin{description}
@@ -84,8 +83,7 @@ gambling world using the MC theory. We now make some assumptions before starting
 \end{enumerate}
 \begin{figure}[h]
 	\input{img/finite_mc.tex}
-	\caption{Under the assumption given before, the MC can be represented as this picture}
-	\label{}
+	\caption{Under the assumptions given before, the MC can be represented as this picture}
 \end{figure}
 
 Let now define the probability that the gambler goes to ruin if he starts in state k
@@ -98,7 +96,7 @@ Let now define the probability that the gambler goes to ruin if he starts in sta
 We can now define the transition probability as follows
 
 \begin{equation}\begin{split}
-q \cdot \underbrace{(u_k - u_k-1)}{X_k} &= p \cdot \underbrace{\left(u_{k+1} -u_k\right)}{X_{k+1}} \\
+q \cdot \underbrace{(u_k - u_k-1)}_{X_k} &= p \cdot \underbrace{\left(u_{k+1} -u_k\right)}_{X_{k+1}} \\
 X_{k+1} = \frac{q}{p}\cdot X_k \quad & X_{2} = \frac{q}{p}\cdot X_1 \quad X_{3} = \left(\frac{q}{p}\right)^2 \cdot X_1\\
 \implies & X_{k} = \left(\frac{q}{p}\right)^{k-1}\cdot X_1
 \end{split}\end{equation}
@@ -129,24 +127,24 @@ that the gambler goes in ruin is
 \begin{equation}
 	\lim_{N \to +\infty} u_k =
 	\begin{cases}
-		1 & p<k \\
+		1 & p<q \\
 		\left(\frac{q}{p}\right)^k & p>q\\
 		1 & p=q
 \end{cases}\end{equation}
 The last case may seem strange, but even if the game is fair ($p=q=\frac{1}{2}$), in an infinite time
-a series of unfortunate events may occour and the gambler will reach $X_0$, his ruin.
+a series of unfortunate events may occur and the gambler will reach $X_0$, his ruin.
 
 \section{Synchronization model}
-We consider a slotted model where every slot is composed by $N$ symbols. Our aim is find inside a slot a \textit{sync sequence}, which a particular sequence of $S$ bits. We call \textit{erroneus sequence} every sequence of $S$ bits that is not a \textit{sync sequence}.
+We consider a slotted model where every slot is composed by $N$ symbols. Our aim is find inside a slot a \textit{sync sequence}, which a particular sequence of $S$ bits. We call \textit{erroneous sequence} every sequence of $S$ bits that is not a \textit{sync sequence}.
 Our system can be found in the following possible states.
 \begin{enumerate}
-	\item Hunt state $H=A_{k_a}$: the system searchs for a \textit{sync sequence} bit-by-bit untill the sequence is found or $N$ consecutives bits are checked without find a \textit{sync sequence}; if a \textit{sync sequence} is found the system moves to $L_1$.
-	\item Lock state $L_k$: the system has found $k-1$ consecutives \textit{sync sequences}; if a new \textit{sync sequence} is found the system moves to $L_{k+1}$ while if a \textit{erroneus sequence} is found the system moves to $H$.
-	\item Accepted sync $L=L_{k_l}$: the system has fond $k_l$ consecutives \textit{sync sequence}; if a \textit{erroneus sequence} is found the system moves to $A_1$.
-	\item Allarm state $A_k$: the system has found $k$ consecutives bits out of sync; if a \textit{erroneus sequence} is found the system moves to $A_{k+1}$ while if a \textit{sync sequence} is found the system moves to $L$.
+	\item Hunt state $H=A_{k_a}$: the system searchs for a \textit{sync sequence} bit-by-bit until the sequence is found or $N$ consecutive bits are checked without find a \textit{sync sequence}; if a \textit{sync sequence} is found the system moves to $L_1$.
+	\item Lock state $L_k$: the system has found $k-1$ consecutive \textit{sync sequences}; if a new \textit{sync sequence} is found the system moves to $L_{k+1}$ while if a \textit{erroneous sequence} is found the system moves to $H$.
+	\item Accepted sync $L=L_{k_l}$: the system has found $k_l$ consecutive \textit{sync sequence}; if a \textit{erroneous sequence} is found the system moves to $A_1$.
+	\item Alarm state $A_k$: the system has found $k$ consecutive bits out of sync; if a \textit{erroneous sequence} is found the system moves to $A_{k+1}$ while if a \textit{sync sequence} is found the system moves to $L$.
 \end{enumerate}
 
-We have to consider that the system can make mistakes, so we have to distinguish two kind of \textit{lock states} that are the \textit{true lock} $TL_k$ and the \textit{false lock} $FL_k$. Consequently we have also to distinguis two kind of \textit{allarm states} tha are the \textit{true allarm} $TA_k$ and the \textit{false allarm} $FA_k$.
+We have to consider that the system can make mistakes, so we have to distinguish two kind of \textit{lock states} that are the \textit{true lock} $TL_k$ and the \textit{false lock} $FL_k$. Consequently we have also to distinguis two kind of \textit{alarm states} that are the \textit{true alarm} $TA_k$ and the \textit{false alarm} $FA_k$.
 
 \begin{figure}
 	\centering
@@ -223,7 +221,7 @@ Let's start with the probability:
 \begin{definition}
 	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{i,j}=n]$, as follows:
 	\begin{equation}\begin{split}
-		\prob[\theta_{i,j}=n] &= f_{i,j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1 \dots n-1}\\
+		\prob[\theta_{i,j}=n] &= f_{i,j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1, \dots , n-1}\\
 		f_{i,j}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
 		f_{i,j}(0)&=P_{i,j} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{k,j}(n-1)\\
 	\end{split}\end{equation}
@@ -277,7 +275,7 @@ For a general \gls{mc}, we have
 Let's now focus on the expectation of $\theta_{i,j}$. We can write:
 \begin{equation}\begin{split}
 	\exp[\theta_{i,j}] &= P_{i,j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k,j}])\cdot P_{i,k}\\
-	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} \forall i \neq j\\
+	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} ~\forall i \neq j\\
 \end{split}\end{equation}
 with \textit{(1)} $P_{i,j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
 \\
@@ -351,7 +349,7 @@ Now suppose that $i,j$ are transient and put $W_{i,j}^{(n)}$ as element of a mat
 \end{split}\end{equation}
 If we sum, for all j transient states $W_{i,j}$  we obtain:
 \begin{equation}
-	\sum\limits_{j=0}^{r-1}W_{i,j} = \exp[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i] = \exp[T|X_0=i]=v_i
+	\sum\limits_{j=0}^{r-1}W_{i,j} = \exp\bigg[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i\bigg] = \exp[T|X_0=i]=v_i
 \end{equation}
 Let's now find the probability to go from a transient state ($i$) to an absorbing one($k$)
 \begin{equation}
@@ -1022,7 +1020,7 @@ We can ignore the $d$ value if we calculate:
 	\end{proof}
 
 \section{M/G/1}
-Let's now consider a queueing system where arrivals are markovian and there's only one server which acts with a generic proibability distribution. Let's then define the probability transition matrix as
+Let's now consider a queueing system where arrivals are markovian and there's only one server which acts with a generic probability distribution. Let's then define the probability transition matrix as
 \begin{equation}\label{eq:mg1P}
 	P=\begin{pmatrix}
  \color{red}{a_0}& \color{blue}{a_1} & \color[rgb]{0,0.7,0}{a_2} & \dots &\dots & \\
