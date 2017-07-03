@@ -137,25 +137,7 @@ $$s_2 = \text{time per transition}$$
 
 \begin{figure}[h]
 	\begin{center}
-		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
-			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
-			\node[state]		(G)											{$G$};
-			\node[state]		(B_1)[right of=G]				{$B_1$};
-			\node[state]		(B_2)[right of=B_1]			{$B_2$};
-			\node[state]		(dots)[right of=B_2]		{...};
-			\node[state]		(B_N)[right of=dots]		{$B_N$};
-			\path
-			(G) 		edge[loop left]		 			node{$P_{00}s_1s_2$}			(G)
-							edge[bend left]		 			node{$P_{01}s_2$}		 			(B_1)
-			(B_1)		edge[bend left]					node{$P_{10}(m)s_1s_2^m$}	(G)
-							edge[bend left, below]	node{$P_{11}(m)s_2^m$}		(B_2)
-			(B_2)		edge[bend left]																		(G)
-							edge[bend left, below]	node{$P_{11}(m)s_2^m$} 		(dots)
-			(dots)	edge[bend left, below]	node{$P_{11}(m)s_2^m$} 		(B_N)
-							edge[bend left]																		(G)
-			(B_N)		edge[bend left]																		(G)
-			(B_N)		edge[bend right, above]	node{$P_{11}(m)s_2^m$}		(B_1);
-		\end{tikzpicture}
+		\input{img/gbn-mc.tex}
 	\end{center}
 	\caption{Markov Chain of the Go Back N protocol with limited retransmission}
 	\label{fig:gbn_mc_complete}
