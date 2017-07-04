@@ -811,8 +811,8 @@ Conditioning on the first event, we obtain that
 \begin{equation*}
 	\prob[\gamma_t>z|X_1=x] = \begin{cases}
 		1 \quad & if \quad x > t+z \\
-		0 \quad & if \quad t+x \geq x > t \\
-		A_z(t-x) \quad & if \quad t \geq x > 0
+		0 \quad & if \quad t < x \le t+z \\
+		A_z(t-x) \quad & if \quad 0< x \le t
 	\end{cases}
 \end{equation*}
 
@@ -829,7 +829,7 @@ Now we apply the \textit{renewal equation} setting
 \end{dcases} \end{equation}
 
 \begin{align*}
-	\int_{0}^{+\infty} a(x) d(x) & = \int_{0}^{+\infty}(1-F(x)) d(x) = \\
+	\int_{0}^{+\infty} a(x) dx & = \int_{0}^{+\infty}(1-F(z+x)) dx = \\
 	& = \int_{z}^{+\infty}(1-F(y))dy \leq \int_{0}^{+\infty}(1-F(y))dy = \mu
 \end{align*}
 
@@ -839,7 +839,7 @@ Supposing $\mu < \infty$, for the \textit{renewal theorem} we obtain that
 	\label{limitingdistribution}
 \end{equation}
 
-From \ref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that
+From \eqref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that
 \begin{equation} \label{currtotallife}
 	\{\gamma_t \geq x, \delta_t \geq y \}
 	\Leftrightarrow
