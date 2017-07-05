@@ -695,6 +695,25 @@ In conclusion, we found that the average first passage time is equal to the aver
 			$$ \lim_{m \to \infty} \prod_{i=j}^m (1-p_i) \ge \lim_{m \to \infty} (1-\sum\limits_{i=j}^m p_i) > 0 $$
 		\end{enumerate}
 	\end{proof}
+\section{G/M/1}
+Let's define some parameters before analyzing this queueing system where arrivals are generic and there is only one server which time has a Markov distribution. Given $X$ a sequence of arrivals, we have:
+\begin{description}
+	\item[$t_n$:]  the time of the n-th arrival
+	\item[$X_n$=] $X(t_n^{-})$ the arrival at time $t_n$
+	\item[$a_k$:] the k-th service time, i.i.d. with exponential distribution
+	\item[T:] interarrival time with distribution $G(t)$
+\end{description}
+We now would like now to calculate $P_{i~ i+1-j}$:
+\begin{esp}
+	P_{i~ i+1-j}&\stackrel{j<i+1}{=}\prob[\text{j depart. in an interarrival time}] \\
+	&=\prob\left[\sum\limits_{k=1}^j a_k \le T \le \sum\limits_{k=1}^j a_k\right]\\
+	&= \prob[\text{exactly j Poisson events in T}] = \int_0^{+\infty} \frac{e^{-\mu t} (\mu t)^j}{j!} dG(t)
+\end{esp}
+The case where everyone departs, or where there are at least j Poisson events can be represented as $P_{i 0}$
+\begin{equation}
+	P_{i 0} = \int_0^{+\infty} \sum\limits_{k=i+1}^{+\infty}\frac{e^{-\mu t} (\mu t)^k}{k!} dG(t) = 1- \int_0^{+\infty} \sum\limits_{k=0}^{i}\frac{e^{-\mu t} (\mu t)^k}{k!} dG(t)
+\end{equation}
+Which gives an almost lower triangular transition matrix.
 
 	\subsection{G/M/1 queue limiting distribution}
 	We know that the limiting distribution is the solution of the following system of equations:
@@ -1112,7 +1131,7 @@ Z_n+1 &= \sum\limits_{i=1}^n \left(Z_{i+1} - Z_i \right)	+Z_1 = Z_1 \cdot \sum\l
 \end{esp}
 Moreover we find that if $\sum\limits_{i=0}^{+\infty}p_i < \infty$ then there exists a non-zero bounded solution and therefore the \gls{mc} is transient.
 \newpage
-The following table summarize the results we just found %\Tab{tab:summ} 
+The following table summarize the results we just found %\Tab{tab:summ}
 \begin{table}[h]
 \centering
 \label{tab:summ}
