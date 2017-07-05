@@ -1011,12 +1011,12 @@ We can ignore the $d$ value if we calculate:
 		We can now distinguish two cases, based on $Z_i$ solutions:
 		\begin{itemize}
 			% Z has only at most zero solutons
-			\item $ \forall i, Z_i \le 0 \Leftrightarrow \forall i, Y_i = 0 \Leftrightarrow \forall i, f_{i0} = 1 \stackrel{(*)}{\Leftrightarrow} $ chain is recurrent
+			\item $ \forall i, Z_i \le 0 \Leftrightarrow \forall i, Y_i = 0 \Leftrightarrow \forall i, f_{i0} = 1 \stackrel{(\heartsuit)}{\Leftrightarrow} $ chain is recurrent
 
 			% Z has a non zero bounded solution
-			\item $ \exists i: Z_i > 0 \Leftrightarrow \exists i: Y_i > 0 \Leftrightarrow \exists i: f_{i0} < 1 \stackrel{(*)}{\Leftrightarrow} $ chain is transient
+			\item $ \exists i: Z_i > 0 \Leftrightarrow \exists i: Y_i > 0 \Leftrightarrow \exists i: f_{i0} < 1 \stackrel{(\heartsuit)}{\Leftrightarrow} $ chain is transient
 		\end{itemize}
-		where (*) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
+		where ($\heartsuit$) implications hold for theorem \ref{lemma:MC_irreducible_fi0}.
 	\end{proof}
 
 \section{M/G/1}
@@ -1059,12 +1059,12 @@ We can then write the transform of the $\pi$ as
 	s \cdot  \Pi(s) &- A(s) \cdot \Pi(s) = \pi_0 \cdot A(s) \cdot (s-1) \\
 	\Pi(s) &= \pi_0 \cdot \frac{A(s)\cdot(s-1)}{s - A(s)}
 \end{esp}
-Letting s go to 1 and reminding that A(1)=1 we can write
+Letting $s$ go to $1$ and reminding that $A(1)=1$ we can write
 \begin{esp}\label{eq:s-to1}
 	1=\lim_{s\to 1} \Pi(s) &= \pi_0 \cdot \lim_{s\to 1} \frac{s-1}{s-A(s)} \\
-	&=\pi_0 \cdot \lim_{s\to 1} \left(1-\underbrace{\frac{A(s)-1}{s-1}}_{(1)}\right)^{-1} = \pi_0\cdot\left[1-A^{\prime}(1)\right]^{-1} = \frac{\pi_0}{1-A^\prime(1)}
+	&=\pi_0 \cdot \lim_{s\to 1} \left(1-\underbrace{\frac{A(s)-1}{s-1}}_{(\bigstar)}\right)^{-1} = \pi_0\cdot\left[1-A^{\prime}(1)\right]^{-1} = \frac{\pi_0}{1-A^\prime(1)}
 \end{esp}
-where $(1)$ can be seen as the definition of the derivative of A(s) calculated in s=1
+where $(\bigstar)$ can be seen as the definition of the derivative of $A(s)$ calculated in $s=1$
 
 We can then define
 \begin{equation*}
@@ -1088,12 +1088,12 @@ Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now de
 \begin{esp}
 	p_i &= P_{i i+1} \quad \text{probability to go $i\to i+1 $}\\
 	q_i &= P_{i i-1} = 1-p_i \quad \text{probability to go $i\to i-1$ }\\
-	\text{with } & p_0 = 1 ~ q_0 = 0
+	\text{with }  p_0 &= 1 ~ q_0 = 0
 \end{esp}
-Let's now define $Z_i$ the probability to reach state i from all the other states, which means
+Let's now define $Z_i$ the probability to reach state $i$ from all the other states, which means
 \begin{esp}
 	Z_i &= \sum\limits_{i=1}^{+\infty} P_{i j} \cdot Z_j \\
-	Z_1 = p_1 \cdot Z_2
+	Z_1 &= p_1 \cdot Z_2
 \end{esp}
 where with the last row we say that in one step the state can move upward or downward by only one state.
 
@@ -1101,9 +1101,9 @@ We can then write:
 \begin{esp}
 	\underbrace{p_i + q_i}_{=1} \cdot Z_i &= p_i \cdot Z_{i+1} + q_i \cdot Z_{i-1} \quad i>1 \\
 	q_i \cdot\left(Z_i - Z_{i-1}\right) &=p_i \cdot\left( Z_{i+1} - Z_i \right)\\
-	Z_{i+1} = Z_i + \frac{q_i}{p_i}\cdot \underbrace{\left(Z_i - Z_{i-1}\right)}_{(1)}
+	Z_{i+1} &= Z_i + \frac{q_i}{p_i}\cdot \underbrace{\left(Z_i - Z_{i-1}\right)}_{(\spadesuit)}
 \end{esp}
-where $(1)$ can be written as $\frac{q_{i-1}}{p_{i-1}} \left(Z_{i-1} - Z_{i-2}\right)$. \\
+where $(\spadesuit)$ can be written as $\frac{q_{i-1}}{p_{i-1}} \left(Z_{i-1} - Z_{i-2}\right)$. \\
 
 We can then write the recursive equation for $Z_i$ as follows
 \begin{esp}
@@ -1111,10 +1111,11 @@ Z_{i+1} &= Z_i + Z_1 \cdot \prod\limits_{j=1}^i \frac{q_j}{p_j} \quad i \ge 1\\
 Z_n+1 &= \sum\limits_{i=1}^n \left(Z_{i+1} - Z_i \right)	+Z_1 = Z_1 \cdot \sum\limits_{i=0}^{n} \prod\limits_{j=1}^i \frac{q_j}{p_j}
 \end{esp}
 Moreover we find that if $\sum\limits_{i=0}^{+\infty}p_i < \infty$ then there exists a non-zero bounded solution and therefore the \gls{mc} is transient.
-The table \Tab{tab:rw} summarize the result we just found
+\newpage
+The following table summarize the results we just found %\Tab{tab:summ} 
 \begin{table}[h]
 \centering
-\label{tab:rw}
+\label{tab:summ}
 \begin{tabular}{c|c|c}
 Cases \ series                                                & \multicolumn{1}{c|}{$\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{q_j}{p_j}$} & $\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{p_j}{q_{j+1}}$ \\ \hline
 Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\ \hline
@@ -1129,16 +1130,16 @@ We can then study the result obtained with what we found in M/G/1 system. We can
 \end{equation}
 If we consider $Z_i = 1-s$ we obtain that
 \begin{equation}
-	1-s = \sum\limits_{j=0}^{+\infty} a_{j} \cdot (1-s^j) \stackrel{(1)}{=}\sum\limits_{j=1}^{+\infty} a_{j} \cdot (1-s^j) = 1-A(s)
+	1-s = \sum\limits_{j=0}^{+\infty} a_{j} \cdot (1-s^j) \stackrel{(\clubsuit)}{=}\sum\limits_{j=1}^{+\infty} a_{j} \cdot (1-s^j) = 1-A(s)
 \end{equation}
-where $(1)$ is possible as $s^0=1$, so the first term of the sum is null.
+where $(\clubsuit)$ is possible as $s^0=1$, so the first term of the sum is null.
 
 We then found out that $A(s)=s$. We can then calculate:
 \begin{equation}
 	1-s^i = \sum\limits_{j=0}^{+\infty} a_{j} \cdot (1-s^{i+j-1}) = 1-s^{i-1} \cdot A(s)
 \end{equation}
 
-but I don't know why. TODO!!
+%but I don't know why. TODO!!
 
 \begin{theorem}[4.2, KT p. 95 (sufficient condition for recurrence)]
 	An irreducible \gls{mc} is recurrent if:
@@ -1232,10 +1233,10 @@ but I don't know why. TODO!!
 		\begin{equation}\begin{split}
 			Y_i & \ge \lim_{m \to +\infty} Y_i \ge \\
 					& \ge \lim_{m \to +\infty} \left[ \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)}
-					  + \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(*)}{=} \\
+					  + \frac{1}{\epsilon} \left( 1 - \sum_{j=0}^{M-1} Y_j \tilde{P}_{ij}^{(m)} \right) \right] \stackrel{(\heartsuit)}{=} \\
 					& = \tilde{\pi}_i(C_0) Y_0 + \frac{1}{\epsilon} \left( 1 - \tilde{\pi}_i(C_0) \right) ~ \forall \epsilon > 0
 		\end{split}\end{equation}
-		where (*) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
+		where ($\heartsuit$) holds because 0 is a trap state for the recurrent \gls{mc} with matrix  $\tilde{P}$, so for $m \to +\infty$ only paths ending in that state have a non-zero probability of being taken.
 
 		Terms can be rearranged this way
 		\begin{equation*}\begin{split}
@@ -1258,10 +1259,10 @@ We now want to discriminate what happens to a \gls{mc} with relation to what we 
 
 For $z_i=i$ we now wonder when the relation \eqref{eq:pi0rho} holds:
 \begin{esp}
-	i &\ge \sum\limits_{j=0}^{+\infty} a_{j} \cdot (i-1+j) =(i-1)\cdot\sum\limits_{j=0}^{+\infty} a_{j} + \sum\limits_{j=0}^{+\infty} a_{j} \cdot j \stackrel{(1)}{=} i-1+\rho \\
+	i &\ge \sum\limits_{j=0}^{+\infty} a_{j} \cdot (i-1+j) =(i-1)\cdot\sum\limits_{j=0}^{+\infty} a_{j} + \sum\limits_{j=0}^{+\infty} a_{j} \cdot j \stackrel{(\diamondsuit)}{=} i-1+\rho \\
 	i &\stackrel{?}{\ge } i-1+\rho \quad \text{true if }\rho \le 1
 \end{esp}
-where (1) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state probability is positive and equation \eqref{eq:pi0rho}, we can derive the table \ref{tab:rhoBehaviour}:
+where ($\diamondsuit$) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state probability is positive and equation \eqref{eq:pi0rho}, we can derive the table \ref{tab:rhoBehaviour}:
 
 \begin{table}[h!]
 \centering
@@ -1269,6 +1270,7 @@ where (1) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state
 \label{tab:rhoBehaviour}
 \begin{tabular}{c|c|c}
 $\rho$ value     & \begin{tabular}[c]{@{}l@{}}Direction of\\ implication\end{tabular} & MC characteristic  \\
+\hline\hline
 $0 \le \rho <1 $ & $\Leftrightarrow$                                                  & positive recurrent \\
 $=1$             &                                                                    & zero recurrent     \\
 $>1$             & $\implies$                                                         & transient
