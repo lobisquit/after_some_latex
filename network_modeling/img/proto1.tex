@@ -1,0 +1,27 @@
+% \documentclass{standalone}
+%
+% \usepackage{tikz}
+% \usetikzlibrary{automata,positioning}
+% \begin{document}
+\begin{tikzpicture}
+  \node[state] at (-10,0) (0) {0};
+  \node[state] at (-8,0)  (1) {1};
+  \node[state] at (-6,0)  (2) {2};
+  \node[state] at (-4,0)  (3) {3};
+  \node[] at (-3,0 )  (infty) {$\dots$};
+  \node[state] at (-2,0)  (4) {$M$};
+  \node[state] at (0,0)  (5) {$M+1$};
+
+  \draw[every loop, auto=right, >=latex]
+      (0) edge[bend left, auto=right] node {$a_1$} (1)
+      (0) edge[loop left]             node {1} (0)
+      (0) edge[bend left, auto=right,out=60] node {$a_2$} (2)
+      (0) edge[bend left, auto=right,out=70] node {$a_3$} (3)
+      (5) edge[bend left, auto=left,in=120,out=50]  node[above] {$a_0$} (0)
+      (4) edge[bend left, auto=left,in=140,out=60]  node[above] {$a_0$} (0)
+      (4) edge[bend left, auto=left,in=140,out=40]  node[above] {$a_1$} (1)
+      (4) edge[bend right, auto=left]  node[above] {$a_3$} (3)
+      (3) edge[bend left, auto=left]  node[above] {$a_2$} (2)
+      (5) edge[bend right, auto=left]  node[above]{$a_{M-1}$} (4);
+\end{tikzpicture}
+% \end{document}

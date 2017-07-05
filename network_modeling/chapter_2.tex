@@ -717,7 +717,7 @@ Which gives an almost lower triangular transition matrix.
 
 \subsection{Data protocols - Layer 2 and 4}
 \begin{figure}
-	\input{img/dataProto.tex}
+	\input{img/diagProto.tex}
 	\caption{A simple queueing protocol like the one explained in this section}
 	\label{fig:dataProto}
 \end{figure}
@@ -726,7 +726,7 @@ Suppose that the system schedule to send an amount of data at the beginning of e
 \begin{enumerate}
 	\item all data is sent up to a max of M data unit
 	\item data is sent if there is at least m data unit \label{proto2}
-	\item same as 2) but send up to M data unit
+	\item same as 2. but send up to M data unit
 \end{enumerate}
 Let's now suppose that the data incoming in the during one slot is queued for the next transmission
 \subsubsection*{Proto 1}
@@ -737,18 +737,18 @@ Let's now suppose that the data incoming in the during one slot is queued for th
 \end{equation}
 \paragraph{Transition diagram and matrix}
 \begin{equation}
-	P=\begin{blockarray}{cccc}
-			\begin{block}{c(ccc)}
+	P=\begin{blockarray}{ccccc}
+			\begin{block}{c(cccc)}
 				1 & a_0 & a_1 & \dots & \dots \\
 				\vdots & \vdots &\vdots &\dots \\
 				M & a_0 & a_1 & \dots & \dots \\
 				M+1 & 0 & a_0 & a_1 & \dots \\
-				\vdots & \vdots &\vdots &\dots \\
+				\vdots & \vdots &\vdots &\dots&\ddots \\
 		\end{block}
 	\end{blockarray}
 \end{equation}
-\begin{figure}
-	\input{img/diagProto1.tex}
+\begin{figure}[h]
+	\input{img/proto1.tex}
 	\label{diag:proto1}
 \end{figure}
 
@@ -760,33 +760,33 @@ Let's now suppose that the data incoming in the during one slot is queued for th
 \end{equation}
 \paragraph{Transition diagram and matrix}
 \begin{equation}
-	P=\begin{blockarray}{cccc}
-			\begin{block}{c(ccc)}
+	P=\begin{blockarray}{cccccc}
+			\begin{block}{c(ccccc)}
 				1 & a_0 & a_1 & \dots & \dots & \dots\\
 				2 & 0 & a_0 & \ddots & \dots & \dots\\
-				\vdots & \vdots &\vdots &\dots & \dots\\
-				m-1 & \dots & \dots & \dots & a_0 & \dots\\
+				\vdots & \vdots &\ddots &\ddots & \dots& \dots\\
+				m-1 & 0 & \dots & 0 & a_0  & \dots\\
 				m & a_0 & a_1 & a_2 &\dots & \dots\\
 				m+1 & a_0 & a_1 & a_2 &\dots & \dots\\
-				\vdots & \vdots &\vdots &\dots & \dots\\
+				\vdots & \vdots &\vdots &\vdots & \vdots& \vdots\\
 		\end{block}
 	\end{blockarray}
 \end{equation}
-\begin{figure}
-	\input{img/diagProto2.tex}
-	\label{diag:proto1}
+\begin{figure}[h]
+	\input{img/proto2.tex}
+	\label{diag:proto2}
 \end{figure}
 \subsubsection*{Proto 3}
 \begin{equation}
 	X_{n+1}=\begin{cases}
 			\xi_n & \text{if } m\le X_n\le M\\
-			 X_n+\xi_n & \text{if } X_n<m
+			 X_n+\xi_n & \text{if } X_n<m\\
 			 X_n-M+\xi_n & \text{if } X_n> M
 	\end{cases}
 \end{equation}
 \paragraph{Transition diagram}
 The transition diagram is the combination of the two previous protocols.
-
+%missing this diagram, but I don't have time right now
 	\subsection{G/M/1 queue limiting distribution}
 	We know that the limiting distribution is the solution of the following system of equations:
 	\begin{equation*}
