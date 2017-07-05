@@ -318,20 +318,20 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 
 	\begin{equation}\begin{split}
 		A(t) &= a(t) + F \ast A(t) \quad \text{which is a recursive expression.} \\
-		&= a(t) + F \ast \left[a(t) + F \ast a(t) \right] = a(t) + F \ast a ~ (t) + F_2 \ast a(t) \\
-		&= a(t) + F \ast a ~ (t) + F_2 \ast \left[a(t) + F \ast a(t) \right] \\
-		&= a(t) + F \ast a(t) + F_2 \ast a(t) + F_3 \ast a(t) = \dots  = \\
-		&= a(t) + \left( \sum\limits_{k=1}^{n-1}F_k\right) \ast a(t) + F_n \ast a(t) \\
+		&= a(t) + F \ast \left[a(t) + F \ast A(t) \right] = a(t) + F \ast a ~ (t) + F_2 \ast A(t) \\
+		&= a(t) + F \ast a ~ (t) + F_2 \ast \left[a(t) + F \ast A(t) \right] \\
+		&= a(t) + F \ast a(t) + F_2 \ast a(t) + F_3 \ast A(t) = \dots  = \\
+		&= a(t) + \left( \sum\limits_{k=1}^{n-1}F_k\right) \ast a(t) + F_n \ast A(t) \\
 	\end{split} \end{equation}
 
 	For $n \to +\infty$, the term between parenthesis becomes $M(t)$, for its definition.
 	\begin{equation}
-		A(t) = a(t) + M \ast a(t) + \lim_{n \to +\infty} F_n \ast a(t)
+		A(t) = a(t) + M \ast a(t) + \lim_{n \to +\infty} F_n \ast A(t)
 	\end{equation}
 
 	For our proof we will show that the remaining limit goes to zero.
 	\begin{equation} \begin{split}
-		|F_n \ast a(t)| & = \left| \int\limits_0^{t}A(t-\eta) \cdot dF_n(\eta) \right| \le \\
+		|F_n \ast A(t)| & = \left| \int\limits_0^{t}A(t-\eta) \cdot dF_n(\eta) \right| \le \\
 		& \le \int\limits_0^{t}|A(t-\eta)| \cdot dF_n(\eta) \le \sup\limits_{0 \le \eta \le t} |A(\eta)| \cdot F_n (t)
 	\end{split}\end{equation}
 
