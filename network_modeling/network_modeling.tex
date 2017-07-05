@@ -24,8 +24,12 @@
 
 % math package
 \usepackage{mathtools}
-\usepackage{amsthm,environ,cancel,cases}
+\usepackage{amsthm}
+\usepackage{environ,cancel,cases}
 \usepackage{amsmath, amssymb, dsfont, bm,blkarray}
+% \usepackage[amsthm]{ntheorem}
+\usepackage{thmtools}
+\renewcommand{\listtheoremname}{List of Theorems and Definitions}
 \graphicspath{{./img/} {./.tmp/} }
 
 % add support for url and cross-references in PDF output
@@ -172,14 +176,44 @@
 \textsc{Academic Year 2016/2017}
 \end{center}
 \end{titlepage}
+\begin{titlepage} %------------------------------ TITLE PAGE
+\begin{center}
+
+\hspace{0.5cm}
+\vspace{-1.4cm}
+
+\emph{\Huge{NETWORK MODELING}} \\
+\textit{- Any Question? -}\\
+\vspace{0.4cm}
+\includegraphics[width=10cm]{Zorzilla}\\
+\vfill
+{written with love by:\par}
+\vspace{0.2cm}
+%\large
+\textbf{Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Federico Mason, Lorenza Prospero, Cristina Gava, Matteo Ciprian}
+\end{center}
+\vfill
+\begin{center}
+\noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
+\textsc{Academic Year 2016/2017}
+\end{center}
+\end{titlepage}
 
 \begingroup %------------------------------ CONTENTS
   \makeatletter
+  \renewcommand\thmt@listnumwidth{3em}
   \let\ps@plain\ps@empty
   \makeatother
   \tableofcontents
+%theorem listing
+  \listoftheorems[ignoreall,show={theorem}]
+  \begingroup
+    \let\clearpage\relax
+    \listoftheorems[ignoreall,show={definition}]
+  \endgroup
   \clearpage
 \endgroup
+
 \mainmatter
 \input{introduction.tex}
 \input{chapter_2.tex}
