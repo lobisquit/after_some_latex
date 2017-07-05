@@ -1,0 +1,24 @@
+% \documentclass{standalone}
+% \usepackage{tikz}
+% \usetikzlibrary{automata}
+% \begin{document}
+\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+  \tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+  \node[state]		at (-7,0)   (G)				{$G$};
+  \node[state]		at (-3,0)   (B_1)			{$B_1$};
+  \node[state]		at (0,0)    (B_2)			{$B_2$};
+  \node[circle, minimum size=1cm]		at (2,0)    (dots)		{...};
+  \node[state]		at (5,0)     (B_N)   	{$B_N$};
+  \path
+  (G) 		edge[loop left,in=110,out=60,min distance=0.7cm]		 			node[above]{$P_{00}s_1s_2$}			(G)
+          edge[bend left]		 			node{$P_{01}s_2$}		 			(B_1)
+  (B_1)		edge[bend left,above]					node[above]{$P_{10}(m)s_1s_2^m$}	(G)
+          edge[bend left, above]	node[above]{$P_{11}(m)s_2^m$}		(B_2)
+  (B_2)		edge[bend left,in=130]																		(G)
+          edge[bend left, above]	node{$P_{11}(m)s_2^m$} 		(dots)
+  (dots)	edge[bend left, above]	node[above]{$P_{11}(m)s_2^m$} 		(B_N)
+          edge[bend left,in=110]																		(G)
+  (B_N)		edge[bend left,in=90]																		(G)
+  (B_N)		edge[bend right, below,in=240,out=-60]	node{$P_{11}(m)s_2^m$}		(B_1);
+\end{tikzpicture}
+% \end{document}

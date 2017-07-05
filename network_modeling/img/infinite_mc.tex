@@ -1,0 +1,29 @@
+% \documentclass{standalone}
+%
+% \usepackage{tikz}
+% \usetikzlibrary{automata,positioning}
+%\begin{document}
+\begin{tikzpicture}
+  \node[state] at (-10,0) (0) {0};
+  \node[state] at (-8,0)  (1) {1};
+  \node[state] at (-6,0)  (2) {2};
+  \node[state] at (-4,0)  (3) {3};
+  \node[] at (-2,0 )  (infty) {$\dots$};
+
+  \draw[every loop, auto=right, >=latex]
+      (1) edge[bend right, auto=left]  node[above] {$q_1$} (0)
+      (0) edge[bend right, auto=right] node {$p_0$} (1)
+      (1) edge[loop above]             node {} (1)
+      (0) edge[loop above]             node {} (0)
+      (2) edge[bend right, auto=left]  node[above] {$q_2$} (1)
+      (1) edge[bend right, auto=right] node {$p_1$} (2)
+      (2) edge[loop above]             node {} (2)
+      (1) edge[loop above]             node {} (1)
+      (3) edge[bend right, auto=left]  node[above] {$q_3$} (2)
+      (2) edge[bend right, auto=right] node {$p_2$} (3)
+      (3) edge[loop above]             node {} (3)
+      (2) edge[loop above]             node {} (2)
+      (infty) edge[bend right, auto=left]  node {} (3)
+      (3) edge[bend right, auto=right] node {} (infty);
+\end{tikzpicture}
+% \end{document}

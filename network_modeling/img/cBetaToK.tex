@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+  \def\x{0.3088}
+\begin{axis}[axis lines=middle,samples=200
+        ,ylabel=$A(\beta)$
+        ,xlabel=$\beta$
+        ,ymax=1.2
+        ,xmax=1.2
+        ,every axis x label/.style={
+          at={(ticklabel* cs:1.05)},
+            anchor=west,
+          },
+        every axis y label/.style={
+          at={(ticklabel* cs:1.05)},
+            anchor=south,
+          },
+        ,xtick=data,
+        ,xtick={\x,1}
+        ,xticklabels={$\beta^*$,1}
+        ,ytick=data,
+        ,ytick={0.182683,1}
+        ,yticklabels={$e^{-\mu}$,1}
+        ]
+			% \fill[orange!20]
+			% 	(axis cs:0.75,0) --
+			% 	(axis cs:2,0) --
+			% 	(axis cs:2,0.15) --
+			% 	(axis cs:0.75,0.15) --
+			% 	cycle;
+			\addplot[blue,domain=0:1,thick] {e^(-1.7)*e^(1.7*x)};
+      \addplot[gray,domain=0:1, dashed] {1};
+      \addplot[gray,domain=0:1, dashed] coordinates {(1,0) (1,1)};
+			\addplot[red,domain=0:1,dashed] coordinates {(0,0) (1,1)};
+      \addplot[orange,domain=0:1, dashed] coordinates {(\x,0) (\x,\x)};
+    \end{axis}\end{tikzpicture}

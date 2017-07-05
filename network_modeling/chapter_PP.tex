@@ -16,7 +16,7 @@ A Poisson process of intensity, or rate, $\lambda > 0$ is an integer-valued stoc
 			\prob[X_n \ge 2] &= o(n)
 		\end{split}
 	\end{equation}
-	\gls{kt} at page 226 shows that assuming \eq{p_dist} you can get \eq{p_dist_conseq} and viceversa.
+	\gls{kt} at page 226 shows that assuming \eqref{p_dfist} you can get \eqref{p_dist_conseq} and viceversa.
 \end{enumerate}
 \begin{theorem}[Exponential times in Poisson arrivals]
 Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
@@ -40,10 +40,10 @@ Interarrival times in a \gls{pp} are iid exponentials with parameter $\lambda$
 	\prob[S_1 > t | S_0 = s] = \prob[\text{No arrivals in } [s, s+t]] = \prob[S_1 > t] = e^{-\lambda t}
 \end{equation}
 
-Where \eq{poiss_independence} is possible because $S_0$ and $S_1$ are disjoint and so the condition on $S_0$ is independent on the $S_1$ slot.
+Where \eqref{poiss_independence} is possible because $S_0$ and $S_1$ are disjoint and so the condition on $S_0$ is independent on the $S_1$ slot.
 In general,
 \begin{equation}
-	\prob[S_n > t | S_i = s_i, ~i=0,s,n-1] = e^{-\lambda t}
+	\prob[S_n > t | S_i = s_i, ~i=0,\dots,n-1] = e^{-\lambda t}
 \end{equation}
 \end{proof}
 
@@ -120,8 +120,8 @@ In general,
 Defining
 \begin{itemize}
 	\item $X(t)$ as the number of arrivals up to time t;
-	\item $W_n$ the instant of $n_{th}$ arrival;
-	\item $S_n$= $W_{n+1} - W_n$ the inter-arrival time between $(n+1)_{th}$ and $n_{th}$ arrival;
+	\item $W_n$ the instant of $n^{th}$ arrival;
+	\item $S_n$= $W_{n+1} - W_n$ the inter-arrival time between $(n+1)^{th}$ and $n^{th}$ arrival; %people uses (n+1)th and (n+1)st. no form is more correct than the other
 \end{itemize}
 
 \begin{theorem}[5.4, 	\textbf{$W_n ~ \sim$ Gamma Distribution} ]
@@ -132,11 +132,12 @@ Defining
 	\end{equation}
 \end{theorem}
 
-\begin{theorem}[5.7, Joint probability of [$W_{1}$,..$W_{n}$]]
-	Being $W_{1}$,$W_{2}$,..$W_{n}$ the arrival time in a Poisson Process $N(t)$ with rate ${\lambda}>0$. Given $N(t)=n$, the joint distribution of $w_{1}$,$w_{2}$,..$w_{n}$ variables is:
+\begin{theorem}[5.7, Joint probability of {$[W_{1},\dots,W_{n}]$}]
+	Being $W_{1}$,$W_{2}$,..$W_{n}$ the arrival time in a Poisson Process $N(t)$ with rate ${\lambda}>0$. Given $N(t)=n$, the joint distribution of $w_{1},w_{2}\dots,w_{n}$ variables is:
 	\begin{equation}
-	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = P (W_1=w_1,...W_n=w_n|N(t)=n) = n!/t^n
+	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = P (W_1=w_1,...W_n=w_n|N(t)=n) = \frac{n!}{t^n}
 	\end{equation}
+	where we supposed that $0<w_1<\dots<w_n<t$, otherwise the function is zero.
 	\begin{proof}
 		Excluding simultaneous arrivals,
 		\begin{equation*}
@@ -155,7 +156,7 @@ Defining
 			\end{cases}
 		\end{equation*}
 
-		Compute the probability of these two disjoint events.
+		Computing the probability of these two disjoint events, we obtain
 		\begin{equation}
 			\begin{split}
 				& P[N((0,w_1])=0,...,N((w_n+\Delta w_n,t])=0] = \\
@@ -184,7 +185,7 @@ Defining
 
 		Dividing both members for ($\Delta w_1 \Delta w_2 .. \Delta w_n$) we obtain the distribution of an uniform random variable.
 		\begin{equation}
-			f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) =n!/t^n
+			f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) =\frac{n!}{t^n}
 		\end{equation}
 	\end{proof}
 \end{theorem}
@@ -199,7 +200,7 @@ Defining
 \begin{theorem}[5.6, Conditioned Arrivals]
 	(Enunciate given in an intuitive but not so formal way)
 
-	Being $X(t)$ a Poisson Process with $\lambda>0$, $u$ and $t$ two temporal variables such that $0<u<t$, $n$ and $k$ two variables which describes the number of arrivals such that $0\leq k\leq n$ . The probability of the event "up to instant $u$, $k$ arrivals have been occurred conditioned by the fact that $n$ arrivals occurs up to time $t$" is described by a binomial distribution with $n$ attempts and $u/t$ success probability.
+	Being $X(t)$ a Poisson Process with $\lambda>0$, $u$ and $t$ two temporal variables such that $0<u<t$, $n$ and $k$ two variables which describes the number of arrivals such that $0\leq k\leq n$ . The probability of the event ``up to instant $u$, $k$ arrivals have been occurred conditioned by the fact that $n$ arrivals occurs up to time $t$'' is described by a binomial distribution with $n$ attempts and $u/t$ success probability.
 
 	Formally
 	\begin{equation}
@@ -211,6 +212,13 @@ Defining
 	It is a direct consequence of Theorem 5.7.
 	Being $X(t)=n$, the position of each arrival along interval $t$ can be modeled as i.i.d. uniform random variable. This corresponds to the realization of n experiments with $p_{succ}=u/t$ thus the conditioned probability can be modeled as binomial $Bin(n,\frac{u}{t})$.
 \end{proof}
+
+We will now show the theorem for the case where we have $X_1(t)\sim Poi(\lambda_1)$ and $X_2(t)\sim Poi(\lambda_2)$
+\begin{esp}
+	\prob[X_1(t)=k |X_1(t)+X_2(t)=n] &= \frac{\prob[X_1(t)=k |X_1(t)=k,X_2(t)=n-k]}{\prob[X_1(t)+X_2(t)=n]}\\
+	&= \frac{e^{-\lambda_1 \cdot t}\cdot \frac{(\lambda_1 t)^k}{k!}\cdot e^{-\lambda_2 \cdot t}\cdot \frac{(\lambda_2 t)^{n-k}}{(n-k)!}}{e^{-(\lambda_1 +\lambda_2) \cdot t}\cdot \frac{\left[(\lambda_1 +\lambda_2) t\right]^{n}}{n!}} \\
+	&= \frac{n!}{(n-k)| \cdot k!} \cdot \left(\frac{\lambda_1}{\lambda_1+\lambda_2}\right)^{k}\cdot \left(\frac{\lambda_2}{\lambda_1+\lambda_2}\right)^{n-k}
+\end{esp}
 
 \section{M/G/$\infty$}
 
@@ -248,9 +256,9 @@ Where $p = \prob[U_k + Y_k \geq t]$, we have to compute this probability.
 Now we can compute
 \begin{equation}
 	\begin{split}
-		\prob[M(t)=m] &= \sum\limits_{n=0}^{\infty} \prob[M(t)=m|X(t)=n]\prob[X(t)=n] \\
-		&= \sum\limits_{n=m}^{\infty} \frac{n!}{m!(n-m)!}p^m(1-p)^{n-m}\frac{e^{-\lambda t} (\lambda t)^n}{n!} \\
-		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!}\sum\limits_{n=m}^{\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
+		\prob[M(t)=m] &= \sum\limits_{n=0}^{+\infty} \prob[M(t)=m|X(t)=n]\prob[X(t)=n] \\
+		&= \sum\limits_{n=m}^{+\infty} \frac{n!}{m!(n-m)!}p^m(1-p)^{n-m}\frac{e^{-\lambda t} (\lambda t)^n}{n!} \\
+		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!}\sum\limits_{n=m}^{+\infty} \frac{(1-p)^{n-m}(\lambda t)^{n-m}}{(n-m)!}\\
 		&= \frac{e^{-\lambda t} (\lambda p t)^m}{m!} e^{-\lambda(1-p)t}\\
 		&= \frac{e^{-\lambda p t}(\lambda p t)^m}{m!}
 	\end{split}
