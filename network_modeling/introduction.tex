@@ -51,7 +51,7 @@ We define the joint probability of two variables as
   $$F_{XY}(x,y)=\prob[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
 \end{equation*}
 
-From what we obtain in \Sec{sec:pmd}, we can write \\
+From what we obtain in \ref{sec:pmd}, we can write \\
 \begin{equation*}
   $$F_X(x)=F_{XY}(x,+\infty)=\lim\limits_{y \to +\infty} F_{XY}(x,y)$$
   $$F_Y(y)=F_{XY}(+\infty,y)=\lim\limits_{x \to +\infty} F_{XY}(x,y)$$
@@ -77,7 +77,7 @@ Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = \prob[Z\le z] = 
 Calculating F(z) can be more difficult with two variables. We will proceed this way:
 \\
 \begin{equation}\begin{split}
-    \exp_{Y}[\prob[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} \exp_Y [\prob[X \le z - Y | Y]] = \exp_Y[F_X(z-Y)]\\
+    \exp_{Y}[\prob[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} \exp_Y [\prob[X \le Z - Y | Y]] = \exp_Y[F_X(z-Y)]\\
     &=\int_{-\infty}^{+\infty}F_x(z-y) \cdot dF_Y(y) \\
     &\implies f_Z(z) = F'_z(z) = \int_{-\infty}^{+\infty}{f_X(z-y)\cdot f_Y(y) dy} \\
     &=\int_{0}^{z}{f_X(z-y) \cdot f_Y(y) dy}
@@ -89,8 +89,8 @@ Calculating F(z) can be more difficult with two variables. We will proceed this 
 (This can be found at KT pp 10-13)
 \begin{equation}\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = \exp[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
   \int_{-\infty}^{+\infty}e^{\imath \lambda t} \cdot p(\lambda) d\lambda
+  \\ \implies
 \end{equation}
-which means that
 \begin{enumerate}
   \item $\phi(t)$ fully describes the statistics of X (the Fourier transform is a  one-to-one map )
   \item The characteristic function of the sum of independent variables is the product
@@ -116,7 +116,7 @@ Doing the derivative of g(s) we obtain:
 \end{equation}
 
 \subsection{Random Sum}
-Now, let $X_1, X_2, \dotsc \; \text{ be a r.v. and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
+Now, let $X_1, X_2, \dotsc \; \text{ and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
 is a random sum, because the sum is made of random $x_i$ random terms and $N$ is a random number.
 
 \begin{equation}
@@ -128,7 +128,7 @@ is a random sum, because the sum is made of random $x_i$ random terms and $N$ is
 \end{equation}
 The mean and the variance of the moment generating functions can be calculated as follows:
 \begin{equation}\begin{split}
-  g'_R(s) &= g'_N(g(s)) \cdot g'(s) \\
+  g'_R(s) &= g'_N(g(s)) \cdot g'_(s) \\
   g'_R(1) &= g_N'(1)\cdot g'(1) = \exp[N]\cdot \exp[X]=\exp[R]\\
   &=\exp[N^2-N]\cdot (\exp[X])^2 + \exp[N]\cdot \exp[X^2-X] \\
   &=\exp[N^2]\cdot \exp[X]^2 - \exp[N] \cdot \exp[X]^2 +\exp[N]\cdot \exp[X^2] - \exp[N]\cdot \exp[X]\\
@@ -257,9 +257,9 @@ We can try to find the expectation of $g(x)$ which is a function of Y using the 
 \subsubsection{Transform approach}
 \begin{equation}
   \begin{split}
-  g_N(s)&=\sum \limits_{n=1}^{+\infty} \beta \cdot (1-\beta)^{n-1}\cdot s^n = \frac{\beta \cdot s}{1-(1-\beta)\cdot s}\\
-  \phi_T&=\exp[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
-  \phi_Z &= g_N(\phi_T(t))=\frac{\beta \cdot \frac{\lambda}{\lambda - \jmath \cdot t}}{1-(1-\beta)\cdot \frac{\lambda}{\lambda - \jmath \cdot t}} =
+  g_N(s)=\sum \limits_{n=1}^{+\infty} \beta \cdot (1-\beta)^{n-1}\cdot s^n = \frac{\beta \cdot s}{1-(1-\beta)\cdot s}\\
+  \phi_T=\exp[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
+  \phi_Z = g_N(\phi_T(t))=\frac{\beta \cdot \frac{\lambda}{\lambda - \jmath \cdot t}}{1-(1-\beta)\cdot \frac{\lambda}{\lambda - \jmath \cdot t}} =
    \frac{\beta \cdot \lambda}{\lambda - \jmath \cdot t -\lambda - \beta \cdot \lambda} = \frac{\beta \cdot \lambda}{\beta \cdot \lambda - \jmath \cdot t}
   \end{split}
 \end{equation}
@@ -269,7 +269,7 @@ We recall that $f_{X|Y} = \frac{f_{XY}(x,y)}{f_Y(y)}$ with $f_Y(y)\neq 0$ in the
 We can then derive
 \begin{equation}
   \begin{split}
-  F_{X|Y}(x|y) &= \int_{-\infty}^{x}f_{X|Y}(\xi,y)d\xi\\
+  F_{X|Y}(x|y) = \int_{-\infty}^{x}f_{X|Y}(\xi,y)d\xi\\
   \forall x,y \quad \prob[X \le x , Y \le y] &= \int_{-\infty}^{x}d\xi \int_{-\infty}^{y}f_{XY}(\xi,\eta) d\eta\\
   &=\int_{-\infty}^{y}f_Y(\eta) \int_{-\infty}^{x}f_{X|Y}(\xi,\eta) d\xi d\eta \\
   &=\int_{-\infty}^{y}F_{X|Y}(x,\eta) dF_Y(\eta)\\

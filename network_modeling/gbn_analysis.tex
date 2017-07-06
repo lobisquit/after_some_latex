@@ -2,13 +2,13 @@
 Two state Markov process $X_n$: 0 = correct transmission, 1 = erroneous transmission. Statistic of successful slots up to time n:
 \begin{equation}
 	\begin{split}
-			\Phi_{ij}(k,n) = & \prob[\textrm{k good slots in 0,1,$\dots$,n-1 and j at n | i at 0}] \\
-										 = & \prob\left[\sum\limits_{m=0}^{n-1} \mathds{1}\{X_m = 0\} = k, X_n = j | X_0 = i\right]
+			\Phi_{ij}(k,n) = & \prob[\textrm{k good slots in 0,1,...,n-1 and j at n | i at 0}] \\
+										 = & \prob[\sum\limits_{m=0}^{n-1} \mathbb{1}\{X_m = 0\} = k, X_n = j | X_0 = i]
 	\end{split}
 \end{equation}
 \paragraph{Conditioning on last transition}
 If the last state is successfull, we require $k-1$ successes in the previous $n-1$ transitions, else we require $k$ successes in the previous $n-1$ successes:
-$$\Phi_{ij}(k,n) = \Phi_{i0}(k-1,n-1)P_{0j} + \Phi_{i1}(k,n-1)P_{1j} \textrm{ with } n>0 \textrm{ and } 0<k\leq n$$
+$$\Phi_{ij}(k,n) = \Phi_{i0}(k-1,n-1)p_{0j} + \Phi_{i1}(k,n-1)p_{1j} \textrm{ with } n>0 \textrm{ and } 0<k\leq n$$
 Initial condition:
 \begin{equation}
  \begin{split}
@@ -42,18 +42,18 @@ and
 The initial condition can be rewritten as: $\Phi_{ij}(k,0)=\delta_{ij}\delta(k)\delta(n)$.\\
 Therefore $\Phi_{ij}(k,n) = 0$ if $k<0$ or $k>n$ or $n<0$.\\
 Finally:
-$$\Phi_{ij}(k,n) =  \Phi_{i0}(k-1,n-1)P_{0j} + \Phi_{i1}(k,n-1)P_{1j} + \delta_{ij}\delta(n)\delta(k)$$
+$$\Phi_{ij}(k,n) =  \Phi_{i0}(k-1,n-1)p_{0j} + \Phi_{i1}(k,n-1)p_{1j} + \delta_{ij}\delta(n)\delta(k)$$
 In matrix form: $\Phi(k,n) = \begin{pmatrix} \Phi_{00}(k,n)&\Phi_{01}(k,n)\\ \Phi_{10}(k,n)&\Phi_{11}(k,n)\end{pmatrix}$
 \begin{equation}
 	\begin{split}
-			\Phi(k,n) =	 & \Phi(k-1,n-1)\underbrace{\begin{pmatrix} P_{00}&P_{01}\\0&0 \end{pmatrix}}_{\mathclap{= P(1)\text{ (``good transitions'')}}} + \Phi(k,n-1)\underbrace{\begin{pmatrix} 0&0\\ P_{10}&P_{11}\end{pmatrix}}_{\mathclap{=P(0)\text{ (``bad transitions'')}}} + I\delta(n)\delta(k)\\
+			\Phi(k,n) =	 & \Phi(k-1,n-1)\underbrace{\begin{pmatrix} p_{00}&p_{01}\\0&0 \end{pmatrix}}_{\mathclap{= P(1)\text{ (``good transitions")}}} + \Phi(k,n-1)\underbrace{\begin{pmatrix} 0&0\\ p_{10}&p_{11}\end{pmatrix}}_{\mathclap{=P(0)\text{ (``bad transitions")}}} + I\delta(n)\delta(k)\\
 								= & \Phi(k-1,n-1)P(1) + \Phi(k,n-1)P(0) + I\delta(n)\delta(k)
 	\end{split}
 \end{equation}
 If, instead, we condition on the first transition:
 \begin{align*}
-\Phi_{0j}(k,n) =& P_{00}\Phi_{0j}(k-1, n-1) + P_{01}\Phi{1j}(k-1,n-1) + \delta_{0j}\delta(n)\delta(k)  \\
-\Phi_{1j}(k,n) =& P_{10}\Phi_{0j}(k, n-1) + P_{11}\Phi{1j}(k,n-1) + \delta_{1j}\delta(n)\delta(k)
+\Phi_{0j}(k,n) =& p_{00}\Phi_{0j}(k-1, n-1) + p_{01}\Phi{1j}(k-1,n-1) + \delta_{0j}\delta(n)\delta(k)  \\
+\Phi_{1j}(k,n) =& p_{10}\Phi_{0j}(k, n-1) + p_{11}\Phi{1j}(k,n-1) + \delta_{1j}\delta(n)\delta(k)
 \end{align*}
 In matrix form: $\Phi(k,n) = P(1)\Phi(k-1,n-1) + P(0)\Phi_{i1}(k,n-1) + I\delta(n)\delta(k)$.\\
 To solve these equations:
@@ -72,7 +72,7 @@ Therefore:
 \end{split}
 \end{equation}
 $$\rightarrow \varphi(s,n)= \underbrace{\sum\limits_{k=0}^{+\infty} s^k \Phi(k,n)}_{\mathclap{\text{transform over k for a given n}}}=(P(1)s+P(0))^n$$
-Now suppose we associate an integer metric to each transition. Let $P(l)$ be the matrix that contains all elements of P that correspond to a ``reward'' of l. We have:
+Now suppose we associate an integer metric to each transition. Let $P(l)$ be the matrix that contains all elements of P that correspond to a ``reward" of l. We have:
 $$\Phi(k,n) = \sum\limits_{l=0}^{+\infty} \Phi(k-l,n-1)P(l) + I\delta(n)\delta(k)$$
 With transform: $\varphi(s,z) = \varphi(s,z)\psi(s)z + I$.\\
 Where
@@ -87,7 +87,7 @@ As before: $\varphi(s) = [I - z\psi(s)]^{-1} \rightarrow \varphi(s,n)=[\psi(s)]^
 \begin{enumerate}
 	\item We can find average number of rewards in 0,1,...,n-1 as before
 	\item In $\varphi(s,z)$, s labels successes and z labels the number of transitions
-	\item Each transition has a ``label'' $\psi_{ij}(s)$
+	\item Each transition has a ``label" $\psi_{ij}(s)$
 	\item The label $\psi_{ij}(s)$ does not need to be a single term, but in general can be polynomial: $$\psi_{ij}(s) = \sum\limits_{l=0}^{+\infty} P_{ij}(l)s^l$$
 				Where $P_{ij} = \prob[X_{n+1}=j\text{ and l is earned}| X_n = i]$.\\
 				Properties of $\psi_{ij}(s)$:
@@ -120,7 +120,6 @@ As before: $\varphi(s) = [I - z\psi(s)]^{-1} \rightarrow \varphi(s,n)=[\psi(s)]^
 
 
 \chapter{Go Back N protocol with limited retransmissions}
-\chaptermark{GBN protocol with limited RETX} %shorten title on header
 Suppose a system governed by the Go Back N protocol.
 In this system the \gls{rtt} take m slot and when a received packet is wrong, it's retransmitted, until the $N^{th}$ failure, after which the packet is discarded.
 
@@ -137,7 +136,25 @@ $$s_2 = \text{time per transition}$$
 
 \begin{figure}[h]
 	\begin{center}
-		\input{img/gbn-mc.tex}
+		\begin{tikzpicture}[->, >=stealth, auto, thin, node distance=3.5cm]
+			\tikzstyle{every state}=[fill=white,draw=black,thin,text=black,scale=1]
+			\node[state]		(G)											{$G$};
+			\node[state]		(B_1)[right of=G]				{$B_1$};
+			\node[state]		(B_2)[right of=B_1]			{$B_2$};
+			\node[state]		(dots)[right of=B_2]		{...};
+			\node[state]		(B_N)[right of=dots]		{$B_N$};
+			\path
+			(G) 		edge[loop left]		 			node{$p_{00}s_1s_2$}			(G)
+							edge[bend left]		 			node{$p_{01}s_2$}		 			(B_1)
+			(B_1)		edge[bend left]					node{$p_{10}(m)s_1s_2^m$}	(G)
+							edge[bend left, below]	node{$p_{11}(m)s_2^m$}		(B_2)
+			(B_2)		edge[bend left]																		(G)
+							edge[bend left, below]	node{$p_{11}(m)s_2^m$} 		(dots)
+			(dots)	edge[bend left, below]	node{$p_{11}(m)s_2^m$} 		(B_N)
+							edge[bend left]																		(G)
+			(B_N)		edge[bend left]																		(G)
+			(B_N)		edge[bend right, above]	node{$p_{11}(m)s_2^m$}		(B_1);
+		\end{tikzpicture}
 	\end{center}
 	\caption{Markov Chain of the Go Back N protocol with limited retransmission}
 	\label{fig:gbn_mc_complete}
@@ -146,8 +163,8 @@ $$s_2 = \text{time per transition}$$
 We spend 1 slot in $G$ and m slots in $B_j$ since we need an \gls{rtt} to recognize an error.
 
 For the sake of simplicity we rename the transition probability in a simpler way:
-$$ \beta_{00} = P_{00}s_1s_2 \qquad \beta_{01} = P_{01}s_2$$
-$$ \beta_{10} = P_{10}(m)s_1s_2^m \qquad \beta_{11} = P_{11}(m)s_2^m$$
+$$ \beta_{00} = p_{00}s_1s_2 \qquad \beta_{01} = p_{01}s_2$$
+$$ \beta_{10} = p_{10}(m)s_1s_2^m \qquad \beta_{11} = p_{11}(m)s_2^m$$
 
 All these $\beta s$ seems similar, we can simplify a bit the system assuming the following statement:
 
@@ -168,8 +185,8 @@ Given a three-state system $x(t) = i,j,k$, we want to reduce it to a two-state s
 		\node[state]		(j)[right of=i]		{$j$};
 		\node[state]		(k)[right of=j]		{$k$};
 		\path
-		(i) 		edge[bend left]		node{$P_{ij}\frac{\Psi_{ij}(s)}{P_{ij}}$}			(j)
-		(j) 		edge[bend left]		node{$P_{jk}\frac{\Psi_{jk}(s)}{P_{jk}}$}			(k);
+		(i) 		edge[bend left]		node{$p_{ij}\frac{\Psi_{ij}(s)}{p_{ij}}$}			(j)
+		(j) 		edge[bend left]		node{$p_{jk}\frac{\Psi_{jk}(s)}{p_{jk}}$}			(k);
 
 	\end{tikzpicture}
 \end{center}
@@ -369,30 +386,30 @@ We have reduced \autoref{fig:gbn_mc_complete} to an extremely simple chain, but 
 Expanding the transition probabilities in \autoref{fig:gbn_mc_1state}, we have:
 
 \begin{equation}
-	\Psi_{GG} = \beta_{00} + \frac{\beta_{01}\beta_{10}}{1-\beta_{11}} = P_{00}s_1s_2 + \frac{P_{01}s_2P_{10}(m)s_1s_2^m}{1-P_{11}(m)s_2^m}
+	\Psi_{GG} = \beta_{00} + \frac{\beta_{01}\beta_{10}}{1-\beta_{11}} = p_{00}s_1s_2 + \frac{p_{01}s_2p_{10}(m)s_1s_2^m}{1-p_{11}(m)s_2^m}
 \end{equation}
 
 In the follows, we compute the throughput of \autoref{fig:gbn_mc_complete} and of its semplifications.
 We start from the 1-state system, analyzing the derivative of the different metrics assuming $\mathbf{s} = 1$.
 
 \begin{equation}\label{eq:av_succ_gbn}
-	\frac{\partial B}{\partial s_1}\bigg|_{\mathbf{s} = 1} = P_{00} + \frac{P_{01}\bcancel{P_{10}(m)}}{\bcancel{1-P_{11}(m)}} = 1
+	\frac{\partial B}{\partial s_1}\bigg|_{\mathbf{s} = 1} = p_{00} + \frac{p_{01}\bcancel{p_{10}(m)}}{\bcancel{1-p_{11}(m)}} = 1
 \end{equation}
 
 \begin{equation}\label{eq:av_time_gbn}
 	\begin{split}
-			\frac{\partial B}{\partial s_2}\bigg|_{\mathbf{s} = 1} &= P_{00} + P_{01}\bcancel{P_{10}(m)}\frac{(m+1)[1-P_{11}(m)]+mP_{11}(m)}{[1-P_{11}(m)]^{\bcancel{2}}}\\
-			&= P_{00} + \frac{P_{01}[m+1-P_{11}(m)]}{1-P_{11}(m)}\\
-			&= \frac{P_{00}P_{10}(m)+P_{01}m+P_{01}P_{10}(m)}{P_{10}(m)}\\
-			&= \frac{P_{10}(m)+mP_{01}}{P_{10}(m)}
+			\frac{\partial B}{\partial s_2}\bigg|_{\mathbf{s} = 1} &= p_{00} + p_{01}\bcancel{p_{10}(m)}\frac{(m+1)[1-p_{11}(m)]+mp_{11}(m)}{[1-p_{11}(m)]^{\bcancel{2}}}\\
+			&= p_{00} + \frac{p_{01}[m+1-p_{11}(m)]}{1-p_{11}(m)}\\
+			&= \frac{p_{00}p_{10}(m)+p_{01}m+p_{01}p_{10}(m)}{p_{10}(m)}\\
+			&= \frac{p_{10}(m)+mp_{01}}{p_{10}(m)}
 	\end{split}
 \end{equation}
-We have simplified some terms since $P_{10}(m) = 1-P_{11}(m)$ and $P_{00} + P_{01} = 1$.
+We have simplified some terms since $p_{10}(m) = 1-p_{11}(m)$ and $p_{00} + p_{01} = 1$.
 
 The throughput of the system in \autoref{fig:gbn_mc_1state} represents the average number of successes per unit time, and is given by:
 
 \begin{equation}\label{eq:thr_1state_gbn}
-	throughput = \frac{\text{average \# of success per transition}}{\text{average time per transition}} = \frac{P_{10}(m)}{P_{10}(m) + mP_{01}}
+	throughput = \frac{\text{average \# of success per transition}}{\text{average time per transition}} = \frac{p_{10}(m)}{p_{10}(m) + mp_{01}}
 \end{equation}
 
 Where the numerator is \autoref{eq:av_succ_gbn} and the denominator is \autoref{eq:av_time_gbn}.
@@ -404,8 +421,8 @@ The correspondent transition probability matrix is:
 \begin{equation*}
 	\Psi(s_1,s_2) =
 	\begin{pmatrix}
-		P_{00}s_1s_2 & P_{01}s_2 \\
-		\frac{P_{10}(m)s_1s_2^m[1-(P_{11}(m)s_2^m)^N]}{1-P_{11}(m)s_2^m} & [P_{11}(m)s_2^m]^N
+		p_{00}s_1s_2 & p_{01}s_2 \\
+		\frac{p_{10}(m)s_1s_2^m[1-(p_{11}(m)s_2^m)^N]}{1-p_{11}(m)s_2^m} & [p_{11}(m)s_2^m]^N
 	\end{pmatrix}
 \end{equation*}
 That calculated for $\mathbf{s} = 1$ become:
@@ -413,8 +430,8 @@ That calculated for $\mathbf{s} = 1$ become:
 \begin{equation*}
 	P =
 	\begin{pmatrix}
-		P_{00} & P_{01} \\
-		1-P_{11}^N(m) & P_{11}^N(m)
+		p_{00} & p_{01} \\
+		1-p_{11}^N(m) & p_{11}^N(m)
 	\end{pmatrix}
 \end{equation*}
 
@@ -423,12 +440,12 @@ We take the derivative in respect of $s_1$:
 \begin{equation*}
 	\frac{\partial\Psi}{\partial s_1}\bigg|_{\mathbf{s} = 1} =
 	\begin{pmatrix}
-		P_{00} & 0\\
-		\frac{P_{10}(m)[1-P_{11}^N(m)]}{1-P_{11}(m)} & 0
+		p_{00} & 0\\
+		\frac{p_{10}(m)[1-p_{11}^N(m)]}{1-p_{11}(m)} & 0
 	\end{pmatrix} =
 	\begin{pmatrix}
-		P_{00} & 0\\
-		1-P_{11}^N(m) & 0
+		p_{00} & 0\\
+		1-p_{11}^N(m) & 0
 	\end{pmatrix}
 \end{equation*}
 
@@ -436,8 +453,8 @@ Summing the rows of $\frac{\partial\Psi}{\partial s_1}\bigg|_{\mathbf{s} = 1}$ w
 \begin{equation}
 	\mathbf{R} =
 	\begin{pmatrix}
-		P_{00} \\
-		1-P_{11}^N(m)
+		p_{00} \\
+		1-p_{11}^N(m)
 	\end{pmatrix}
 \end{equation}
 
@@ -445,24 +462,24 @@ Then the derivative in respect of $s_2$:
 \begin{equation*}
 	\frac{\partial\Psi}{\partial s_1}\bigg|_{\mathbf{s} = 1} =
 	\begin{pmatrix}
-		P_{00} & P_{01}\\
-		\frac{\partial}{\partial s_2}\beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}} & mNP_{11}^N
+		p_{00} & p_{01}\\
+		\frac{\partial}{\partial s_2}\beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}} & mNp_{11}^N
 	\end{pmatrix}
 \end{equation*}
 
 Where instead of the derivative of $\beta_{10}\frac{1-\beta_{11}^N}{1-\beta_{11}}$, we can compute the one of $\beta_{10}\sum_{i=0}^{N-1}\beta_{11}^i$ as follows.
 
 \begin{equation*}
-	\frac{\partial}{\partial s_2}\bigg[\sum_{i=0}^{N-1}P_{10}(m)P_{11}^i(m)s_1s_2^{(i+1)m}\bigg] = \sum_{i=0}^{N-1}P_{10}(m)P_{11}^i(m)s_1(i+1)ms_2^{(i+1)m-1}
+	\frac{\partial}{\partial s_2}\bigg[\sum_{i=0}^{N-1}p_{10}(m)p_{11}^i(m)s_1s_2^{(i+1)m}\bigg] = \sum_{i=0}^{N-1}p_{10}(m)p_{11}^i(m)s_1(i+1)ms_2^{(i+1)m-1}
 \end{equation*}
 
 That, calculated in $\mathbf{s} = 1$ become:
 
 \begin{equation*}
 	\begin{split}
-		\sum_{i=0}^{N-1}P_{10}(m)P_{11}^i(i+1)m &= mP_{10}(m)\sum_{i=0}^{N-1}(i+1)P_{11}^i(m) = \\
-		&=m\bcancel{P_{10}(m)}\frac{1-P_{11}^N(m)-NP_{11}^N(m)[1-P_{11}(m)]}{[1-P_{11}(m)]^{\bcancel{2}}}\\
-		&=m\frac{1-P_{11}^N(m)-NP_{11}^N(m)[1-P_{11}(m)]}{1-P_{11}(m)}
+		\sum_{i=0}^{N-1}p_{10}(m)p_{11}^i(i+1)m &= mp_{10}(m)\sum_{i=0}^{N-1}(i+1)p_{11}^i(m) = \\
+		&=m\bcancel{p_{10}(m)}\frac{1-p_{11}^N(m)-Np_{11}^N(m)[1-p_{11}(m)]}{[1-p_{11}(m)]^{\bcancel{2}}}\\
+		&=m\frac{1-p_{11}^N(m)-Np_{11}^N(m)[1-p_{11}(m)]}{1-p_{11}(m)}
 	\end{split}
 \end{equation*}
 
@@ -472,7 +489,7 @@ To compute $\mathbf{T}$, we have to sum the rows of the transition probability m
 \mathbf{T} =
 	\begin{pmatrix}
 		1 \\
-		m\frac{1-P_{11}^N(m)}{1-P_{11}(m)}
+		m\frac{1-p_{11}^N(m)}{1-p_{11}(m)}
 	\end{pmatrix}
 \end{equation}
 
@@ -481,8 +498,8 @@ Then we can compute $\mathbf{\pi}$:
 \begin{equation}
 \mathbf{\pi} =
 	\begin{pmatrix}
-		\frac{1-P_{11}^N(m)}{1-P_{11}^N(m) + P_{01}} ,
-		\frac{P_{01}}{1-P_{11}^N(m) + P_{01}}
+		\frac{1-p_{11}^N(m)}{1-p_{11}^N(m) + p_{01}} ,
+		\frac{p_{01}}{1-p_{11}^N(m) + p_{01}}
 	\end{pmatrix}
 \end{equation}
 
@@ -491,8 +508,8 @@ Finally we compute the throughput as:
 \begin{equation}
 	\begin{split}
 	\frac{\mathbf{\pi}\cdot\mathbf{R}}{\mathbf{\pi}\cdot\mathbf{T}} &=
-	\frac{(1-P_{11}^N(m))P_{00} + P_{01}(1-P_{11}^N(m))}{1-P_{11}^N(m) + P_{01}m\frac{1-P_{11}^N(m)}{1-P_{11}(m)}} = \\
-	&= \frac{1}{1+ \frac{P_{01}m}{P_{10}(m)}} = \frac{P_{10}(m)}{P_{10}(m) + mP_{01}}
+	\frac{(1-p_{11}^N(m))p_{00} + p_{01}(1-p_{11}^N(m))}{1-p_{11}^N(m) + p_{01}m\frac{1-p_{11}^N(m)}{1-p_{11}(m)}} = \\
+	&= \frac{1}{1+ \frac{p_{01}m}{p_{10}(m)}} = \frac{p_{10}(m)}{p_{10}(m) + mp_{01}}
 	\end{split}
 \end{equation}
 
@@ -503,47 +520,47 @@ Note that the result is the same of \autoref{eq:thr_1state_gbn}, this prove that
 We proceed now to the calculation of the throughput of the three state Markov chain in \autoref{fig:gbn_mc_3state}. The transition probability with $\mathbf{s} = 1$ is:
 $$P=
 \begin{pmatrix}
-		P_{00} & P_{01} & 0 \\
-		1-P_{11}^{N-1}(m) & 0 & P_{11}^{N-1}(m) \\
-		P_{11}(m) & P_{11} & 0
+		p_{00} & p_{01} & 0 \\
+		1-p_{11}^{N-1}(m) & 0 & p_{11}^{N-1}(m) \\
+		p_{11}(m) & p_{11} & 0
 \end{pmatrix} $$
 By solving the system $\mathbf{\pi} = \mathbf{\pi}P$ it is possible to find
 $$
 	\mathbf{\pi} \propto
 	\begin{pmatrix}
-		\frac{1-P_{11}^N(m)}{P_{01}} , 1 , 1-P_{11}^{N-1}(m)
+		\frac{1-p_{11}^N(m)}{p_{01}} , 1 , 1-p_{11}^{N-1}(m)
 	\end{pmatrix}
 $$
 It is  possible to find the exact values by dividing those numbers by their sum. From the previous analysis we know that
 $$\mathbf{R} =
 \begin{pmatrix}
-		P_{00}\\
-	  1-P_{11}^{N-1}(m) \\
-		1-P_{11}(m)
+		p_{00}\\
+	  1-p_{11}^{N-1}(m) \\
+		1-p_{11}(m)
 \end{pmatrix} \hspace{1 cm}
 \mathbf{T} =
 \begin{pmatrix}
 		1 \\
-		m \frac{1-P_{11}^{N-1}(m)}{1-P_{11}(m)} \\
+		m \frac{1-p_{11}^{N-1}(m)}{1-p_{11}(m)} \\
 		m
 \end{pmatrix} $$
-$\mathbf{\pi}$ will still be proportional to the previous result we find even if we multiply all the  terms by the same number. If we multiply all the terms by $P_{01}$ it is easier to perform the calculation:
+$\mathbf{\pi}$ will still be proportional to the previous result we find even if we multiply all the  terms by the same number. If we multiply all the terms by $p_{01}$ it is easier to perform the calculation:
 \begin{equation}
 	\begin{split}
-		\mathbf{\pi}\mathbf{R} &\propto  (1-P_{11}^N(m))P_{00} + P_{01}1-P_{11}^{N-1}(m) + P_{01}P_{11}^{N-1}(m)(1-P_{11}(m))\\
-		&= 1 + P_{11}^N(m)
+		\mathbf{\pi}\mathbf{R} &\propto  (1-p_{11}^N(m))p_{00} + p_{01}1-p_{11}^{N-1}(m) + p_{01}p_{11}^{N-1}(m)(1-p_{11}(m))\\
+		&= 1 + p_{11}^N(m)
 	\end{split}
 \end{equation}
 And
 \begin{equation}
 	\begin{split}
-		\mathbf{\pi}\mathbf{T} &\propto (1-P_{11}^N(m)) + P_{01}m\frac{1-P_{11}^{N-1}(m)}{1-P_{11}(m)} + P_{01}P_{11}^{N-1}(m)m\\
-		&=\frac{(1 + P_{11}^N(m))(1-P_{11}(m))+mP_{01}(1-P_{11}^N(m))}{1-P_{11}(m)}
+		\mathbf{\pi}\mathbf{T} &\propto (1-p_{11}^N(m)) + p_{01}m\frac{1-p_{11}^{N-1}(m)}{1-p_{11}(m)} + p_{01}p_{11}^{N-1}(m)m\\
+		&=\frac{(1 + p_{11}^N(m))(1-p_{11}(m))+mp_{01}(1-p_{11}^N(m))}{1-p_{11}(m)}
 	\end{split}
 \end{equation}
 Therefore:
 \begin{equation}
-		\frac{\mathbf{\pi}\mathbf{R}}{\mathbf{\pi}\mathbf{R}} = \frac{1-P_{11}(m)}{1-P_{11}(m)+ mP_{01}}
+		\frac{\mathbf{\pi}\mathbf{R}}{\mathbf{\pi}\mathbf{R}} = \frac{1-p_{11}(m)}{1-p_{11}(m)+ mp_{01}}
 \end{equation}
 
 Also in this case, the throughput remains the same.
@@ -571,22 +588,22 @@ To remove $B_1$ I have to account for all the transitions coming from and going 
 %%%GRAPH MISSING
 $$P =
 \begin{pmatrix}
-		1-P_{01}P_{11}^{N-1}(m) & P_{01}P_{11}^{N-1}(m) \\
-		1-P_{11}^N(m) & P_{11}^N(m)
+		1-p_{01}p_{11}^{N-1}(m) & p_{01}p_{11}^{N-1}(m) \\
+		1-p_{11}^N(m) & p_{11}^N(m)
 \end{pmatrix}$$
 We can find $\Psi$, \textbf{T}, \textbf{R} and to the calculations we did before. \\
 How to find the probability that a packet is dropped?
 Assign a label to the transmission, such that every time a packet is generated counts how many packets have been transmitted and how many packets have been dropped.
 $$\Psi=
 \begin{pmatrix}
-	 (1- P_{00}P_{11}^{N-1}(m))s_3 & P_{01}P_{11}^{N-1}(m)s_3s_4 \\
-	 (1- P_{11}^{N-1}(m))s_3 & P_{11}^{N-1}(m)s_3s_4 \\
+	 (1- p_{00}p_{11}^{N-1}(m))s_3 & p_{01}p_{11}^{N-1}(m)s_3s_4 \\
+	 (1- p_{11}^{N-1}(m))s_3 & p_{11}^{N-1}(m)s_3s_4 \\
 \end{pmatrix} $$
-Where $s_3 =$ new packets, $s_4 =$ packet drops. Then $\mathbf{\pi} \propto (1-P_{11}^N(m),P_{01}P_{11}^{N-1}(m))$.
-Therefore Drop $= \begin{pmatrix} P_{01}P_{11}^{N-1}(m) \\ P_{11}^N(m) \end{pmatrix}$ and pkts $= \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.\\
+Where $s_3 =$ new packets, $s_4 =$ packet drops. Then $\mathbf{\pi} \propto (1-p_{11}^N(m),p_{01}p_{11}^{N-1}(m))$.
+Therefore Drop $= \begin{pmatrix} p_{01}p_{11}^{N-1}(m) \\ p_{11}^N(m) \end{pmatrix}$ and pkts $= \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.\\
 The probability can then be computed as:
 \begin{equation}
-	P_{\text{drop}} = \frac{P_{01}P_{11}^{N-1}(m)}{1-P_{11}^N(m) + P_{01}P_{11}^{N-1}(m)}
+	P_{\text{drop}} = \frac{p_{01}p_{11}^{N-1}(m)}{1-p_{11}^N(m) + p_{01}p_{11}^{N-1}(m)}
 \end{equation}
 %Probabilistic way to find the same result?
 First passage function:

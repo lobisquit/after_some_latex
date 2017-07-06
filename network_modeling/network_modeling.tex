@@ -1,7 +1,8 @@
-\documentclass[a4paper, 12pt, twoside, openright, fleqn]{book}
+\documentclass[a4paper, 12pt, fleqn]{book}
 
 % language settings
 \usepackage[english]{babel}
+\usepackage[light]{CormorantGaramond}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{fancyhdr}
@@ -11,22 +12,35 @@
 \usepackage{graphics}
 \usepackage{wrapfig}
 \usepackage{changepage}
-\usepackage{shapepar} 
 
 \usepackage[usenames, dvipsnames, table, tikz]{xcolor}
+
+\usepackage{geometry}
+\geometry{a4paper,top=3cm,bottom=3cm,left=3.5cm,right=3.5cm, heightrounded, bindingoffset=8mm}
+
 
 % tikz figures
 \usepackage{tikz}
 \usepackage{pgfplots}
 \usepackage{listing}
-\usepackage{textgreek}
-\usetikzlibrary{shapes, arrows,automata}
+%\usepackage{textgreek}
+%\usepackage{lmodern}
 
 % math package
 \usepackage{mathtools}
-\usepackage{amsthm,environ,cancel,cases}
-\usepackage{amsmath, amssymb, dsfont, bm,blkarray}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb, dsfont, bm}
+\usepackage{cancel}
+\usepackage{cases}
+
+%\usepackage{subfigure}
 \graphicspath{{./img/} {./.tmp/} }
+%------------------------------ colors
+
+\usetikzlibrary{automata, arrows, positioning, calc, shapes}
+
+% image path
+\graphicspath{ {./img/} }
 
 % add support for url and cross-references in PDF output
 \usepackage{url}
@@ -42,6 +56,7 @@
 \newacronym{rv}{r.v.}{random variable (r.v.)}
 \newacronym[plural=PPs,firstplural=Poisson Processes]{pp}{PP}{Poisson Process}
 \newacronym{geraf}{GeRaF}{Geographic Random Forwarding}
+
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
   {\topsep}% measure of space to leave above the theorem. E.g.: 3pt
@@ -76,19 +91,6 @@
 
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
 %\renewcommand\qedsymbol{$\square$\itshape QED}
-
-%split and equation environment
-\NewEnviron{esp}{%
-\begin{equation}\begin{split}
-  \BODY
-\end{split}\end{equation}
-}
-
-\NewEnviron{esp*}{%
-\begin{equation*}\begin{split}
-  \BODY
-\end{split}\end{equation*}
-}
 
 
 %------------------------------ define Abstract environment, missing in the 'book' class
@@ -138,11 +140,13 @@
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Rm}{\mathbb{R^{-1}}}
 \newcommand{\J}{\mathbb{J}}
-\newcommand*{\Chi}{\mbox{\Large $\chi$}}% big chi
+
+
+% REFERENCES
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
-\newcommand{\Sec}[1]{[Sec.~\ref{#1}]}
+\newcommand{\Sec}[1]{Sec.~\ref{#1}}
 \newcommand{\indep}{\mathrel{\perp\mspace{-10mu}\perp}}
 \newcommand{\RN}[1]{ \textup{\uppercase\expandafter{\romannumeral#1}}} %This is for inserting Roman Numbers (useful for \stackrel in equations so that you don't confuse indicating numbers from equation numbers
 
@@ -154,19 +158,16 @@
 
 \hspace{0.5cm}
 
-\emph{\Huge{NETWORK MODELING}} \\
+\emph{\Large{NETWORK MODELING}} \\
 \vspace{1cm}
-\textit{-Follow the white rabbit-}\\
-\vspace{0.4cm}
-\includegraphics[width=4cm]{rabbit}\\
+%\includegraphics[width=9cm]{Zorzilla}\\
 \vspace{0.5cm}
-\vfill
-{written with love by:\par}
-\vspace{0.8cm}
-%\large
-\heartpar{Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Federico Mason, Lorenza Prospero, Cristina Gava, Matteo Ciprian}
+{written with love by\par}
+{\Large Ettore Mariotti, Andrea Pittaro, Enrico Lovisotto, Davide Peron, Federico Mason, Lorenza Prospero, Cristina Gava, Matteo Ciprian\par}
 \end{center}
 
+
+\vfill
 \begin{center}
 \noindent\makebox[\linewidth]{\rule{\textwidth}{0.4pt}}
 \textsc{Academic Year 2016/2017}

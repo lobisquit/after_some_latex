@@ -1,5 +1,5 @@
 \chapter{Renewal Processes (Cap 7)}
-The main idea of a renewal process is a cyclic recurrence of a random phenomena presenting always the same statistics.
+The main idea of a renewal process is a cyclic recurrence of a random phenomenon presenting always the same statistics.
 The classical example is the lifetime of a light bulb: everytime a blub dies the new one experience the same conditions as the previous one.
 
 \begin{definition}[Renewal Process]
@@ -7,15 +7,15 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	\begin{itemize}
 		\item $ \forall i, F_i(x) = P[X_i < x] = F(x) \rightarrow $ lifetimes are statistically equivalent
-		\item $ F(0) = 0 \rightarrow $ renewals are not simultanous
-		\item $ F(+\infty) = 1 \rightarrow $ renewals repeat forever
+		\item $ F(0) = 0 \rightarrow $ renewals are not simultaneous
+		\item $ F(+\infty) = 0 \rightarrow $ renewals repeat themselves forever
 	\end{itemize}
 \end{definition}
 
 \begin{remark}[Markov chain as renewal processes]
 	Given this definition, in a \gls{mc} each arrival at a given state can be considered as a renewal instant.
 
-	In fact, for the Markov property the future evolution depends only on the current state, so behaviour of the process through a given node is the same after every passage.
+	In fact, for the Markov property the future evolution depends only on the current state, so behavior of the process through a given node is the same after every passage.
 \end{remark}
 
 \begin{remark}[Poisson process as renewal processes]
@@ -35,16 +35,14 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	where
 	\begin{itemize}
-		\item $ S_n \stackrel{\footnotemark}{=} W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
+		\item $ S_n = W_n = \sum\limits_{k=1}^n X_k =$ time of the n-th renewal
 		\item $ N(t) = $ number of events in $(0, t] = \max\,\{n : W_n \le t \}$
 	\end{itemize}
 
-	\footnotetext{It's only a matter of notation, in some book is reported as $S_n$, in others as $W_n$}
-
-	Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
+	Since all variables are indipendent of the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
 
 \subsection{Renewal function}
-	Given a serie of renewals, it can be interesting to obtain the probability distribution on the \emph{n}-th event: since it describes a sum of i.i.d. r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
+	Given a series of renewals, it can be interesting to obtain the probability distribution on the \emph{n}-th event: since it describes a sum of i.i.d. r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
 
 	\begin{equation}
 		F_n(t) = \prob[W_n \le t] \stackrel{(*)}{=} \prob[N(t) \ge n]
@@ -73,20 +71,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	\bigbreak
 	An interesting result can be proven for Poisson processes with intensity $\lambda$.
-	Actually, renewal processes are generalized version of Poisson processes (arrival hasn't to be exponential).
 	In this case, given $\beta_t = \delta_t + \gamma_t$, the joint distribution of $\delta_t$ and $\gamma_t$ can be written as follows.
-	\begin{equation*}
-		\prob[\gamma_t > x] = \prob[no ~events ~in ~(t,t+x)] = e^{-\lambda x}
-	\end{equation*}
-
-	\begin{equation*}
-		\prob[\delta_t > x] = \prob[no ~events ~in ~(t-x,t)] =
-		\begin{cases}
-			e^{-\lambda x} & x<t\\
-			0 & x\ge t
-		\end{cases}
-	\end{equation*}
-	where the second case takes into account that the previous event can not happen before time 0.
 
 	\begin{equation}
 		\prob[\gamma_t > x, \delta_t > y ] =
@@ -95,8 +80,9 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			0 & \text{if } y \ge t \\
 		\end{cases}
 	\end{equation}
+	where the second case takes into account that the previous event can not happen before time 0.
 
-	The expectation of $\beta_t$ can be computed simply as
+	The expectation of $\beta_t$ can be computed naturally as
 	\begin{equation*}
 		\exp[\beta_t] = \exp[\gamma_t] + \exp[\delta_t] =
 		\frac{1}{\lambda} + \exp[\delta_t] =
@@ -105,15 +91,15 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\end{equation*}
 	where again it is taken into account that $\delta_t$ must be smaller than $t$, i.e. the last renewal cannot happen before 0.
 
-	The asymptotic behaviour of this parameter, that gets rid of the transient component, gives this surprising result.
+	The asymptotic behavior of this parameter, that gets rid of the transient component, gives this surprising result.
 	\begin{equation*}
 		\lim_{t \to +\infty} \exp[\beta_t] = \lim_{t \to +\infty} \frac{2-e^{-\lambda \cdot t}}{\lambda} = \frac{2}{\lambda} > \frac{1}{\lambda} = \exp[X] \text{ where } X \sim exp(\lambda)
 	\end{equation*}
 	This result is indeed correct, but it clashes with our previous knowledge of the mean interarrivals time $X$ for Poisson process.
-	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
+	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behavior of the time interval, since bigger ones are privileged.
 
 \section{Asymptotic results}
-\begin{theorem}[Ross p. 101 and following]
+\begin{theorem}[Ross p. 101 and passim]
 	Given a renewal process made of a sequence $X_k$ i.i.d. r.v., we can state that, with probability 1,
 	\begin{numcases}{}
 		\lim_{t \to +\infty} N(t) = N(\infty) = +\infty \label{eq:nt_to_infty} \\
@@ -125,7 +111,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 % In essence this results states that in finite time we have a finite number of renewals. Viceversa in infinite time we have infinite renewals.
 
 \begin{proof}
-	\proofpart (equation \eqref{eq:nt_to_infty})
+	\proofpart (equation \ref{eq:nt_to_infty})
 
 	In have infinite time, we have a finite number of renewals if and ony if there exists an event that is the last one, i.e. its assiciated renewal time $X_k$ takes an infinite amount of time.
 	\begin{equation*}
@@ -135,12 +121,12 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 		\end{split}
 	\end{equation*}
 
-	\proofpart equation \eqref{eq:renewal_partial_sum}
+	\proofpart (equation \ref{eq:renewal_partial_sum})
 
-	By $S_n$ definition, we have that $ \frac{S_{N(t)}}{N(t)}$ is the average interarrival time for the first $N(t)$ renewals and so for the \emph{Strong Law of Large Numbers} we have that this time average converges to the expectation.
+	By $S_n$ definition, we have that $ S_{N(t)} / N(t)$ is the average interarrival time for the first $N(t)$ renewals and so for the \emph{Strong Law of Large Numbers} we have that this time average converges to the expectation.
 	$$ \lim_{t \to +\infty} \frac{S_{N(t)}}{N(t)} = \lim_{t \to +\infty} \frac{S_{N(t)+1}}{N(t)+1} = \lim_{N \to +\infty} \frac{S_{N}}{N} = \mu $$
 
-	\proofpart equation \eqref{eq:nt_grows_linearly}
+	\proofpart (equation \ref{eq:nt_grows_linearly})
 
 	By $S_n$ and $N(t)$ definitions, we have that $S_{N(t)}$ and $S_{N(t)+1}$ are respectively the time of the last and the next renewal of a given time $t$.
 
@@ -149,7 +135,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			\frac{S_{N(t)}}{N(t)} \le \frac{t}{N(t)} < \frac{S_{N(t)+1}}{N(t)} =\frac{S_{N(t)+1}}{N(t)+1} \cdot \frac{N(t)+1}{N(t)}
 	\end{equation*}
 
-	Finally, for the sandwich theorem and for equation \eqref{eq:renewal_partial_sum}, we have that
+	Finally, for the sandwich theorem and for equation \ref{eq:renewal_partial_sum}, we have that
 	$$ \mu \le \lim_{t \to +\infty} \frac{t}{N(t)} \stackrel{(*)}{\le}\mu \quad \implies \lim_{t \to +\infty} \frac{t}{N(t)} = \mu $$
 	Where in $(*)$ the strict $<$ became $\le$ as we were dealing with limits.
 \end{proof}
@@ -166,7 +152,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 \end{theorem}
 \begin{proof}
-	\proofpart (equation \eqref{eq:Fn_geometric_decreasing})
+	\proofpart (equation \ref{eq:Fn_geometric_decreasing})
 	Considering the distributions of the $r$-th renewal, we can state that
 
 	\begin{equation}
@@ -182,9 +168,9 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 			\left( 1 - F \left( \frac{t}{r} \right) \right) ^ r > 0
 	\end{split} \end{equation}
 
-	Thus we have proved that $ \lim_{n \to +\infty} F_n(t) = 0 $ at least geometrically.
+	Thus we have proved that $ \lim_{n \to +\infty} F_r(t) = 0 $ at least geometrically.
 
-	\proofpart (equation \eqref{eq:mt_always_finite} and \eqref{eq:mt_diverges})
+	\proofpart (equation \ref{eq:mt_always_finite} and \ref{eq:mt_diverges})
 	First we derive a nice property of $F_n(t)$ distributions that holds for every $m \in [1,\, n-1]$:
 
 	\begin{equation} \label{eq:fn_upper_bound}
@@ -206,8 +192,8 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\end{equation}
 	where
 	\begin{itemize}
-		\item[(1)] both hold by applying equation \eqref{eq:fn_upper_bound}
-		\item[(2)] is obtained applying \eqref{eq:fn_upper_bound} recursevely
+		\item[(1)] both hold by applying equation \ref{eq:fn_upper_bound}
+		\item[(2)] is obtained applying \ref{eq:fn_upper_bound} recursevely
 	\end{itemize}
 
 	While the latter term on $k$ is always finite, since it is a finite sum, the former converges only if the $F_r(t)$ terms converge at least geometrically.
@@ -265,14 +251,14 @@ Averaging on the first event distribution, we can get the unconditioned value of
 \section{Renewal equations}
 
 \begin{definition}[Renewal Equation]
-	Formulas like \eqref{eq:mt_renewal_equation} are so often encountered in these field of study that they took the name of \emph{renewal equations}.
+	Formulas like \ref{eq:mt_renewal_equation} are so often encountered in these field of study that they took the name of \emph{renewal equations}.
 
 	\begin{equation} \label{eq:renewal_equation}
 			A(t) = a(t) +\int\limits_0^{t}A(t-x) \cdot dF(x)
 	\end{equation}
 	with $a(t)$ given and $F(x)$ a probability distribution.
 
-	Setting $a(t) = F(t)$ and $A(t) = M(t)$ we obtain the equation \eqref{eq:mt_renewal_equation}.
+	Setting $a(t) = F(t)$ and $A(t) = M(t)$ we obtain the equation \ref{eq:mt_renewal_equation}.
 \end{definition}
 
 \begin{theorem}[4.1 K.T. p.184]
@@ -289,7 +275,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 	For the triangle inequality and integral properties, we have that
 	$$ |A(t)| \le |a(t)| + \int\limits_0^{t}|a(t-x)| \cdot dM(x) $$
 
-	We can easily assess this upper bound for the value of $A(t)$, that proves our thesis.
+	We can easily assess this upper buond for the value of $A(t)$, that proves our thesis.
 	\begin{equation}\begin{split}
 		\sup_{0\le t \le T} |A(t)| & \le \sup_{0\le t \le T} |a(t)| + \int\limits_0^{T}\sup_{0\le \eta \le T}|a(\eta)| \cdot dM(x) \\
 		& = \sup_{0\le t \le T} |a(t)| \cdot [ 1+M(T) ] < \infty \text{ as }
@@ -301,7 +287,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 
 	\proofpart of existence
 
-		We will now assess that our guess is actually a valid solution obtaining \eqref{eq:renewal_equation} from \eqref{eq:renewal_solution}.
+		We will now assess that our guess is actually a valid solution obtaining \ref{eq:renewal_equation} from \ref{eq:renewal_solution}.
 
 		\begin{equation}\begin{split}
 			A(t) &= a(t) + M \ast a(t) = a(t) + \left(\sum\limits_{k=1}^{+\infty} F_k \right) \ast a(t) = \\
@@ -314,7 +300,7 @@ In other words it exists an unique solution that doesn't diverge in a finite tim
 
 	\proofpart of uniqueness
 
-	This proof is the inverse reasoning of the proof of existence, as we will obtain \eqref{eq:renewal_solution} from \eqref{eq:renewal_equation}.
+	This proof is the inverse reasoning of the proof of existence, as we will obtain \ref{eq:renewal_solution} from \ref{eq:renewal_equation}.
 
 	\begin{equation}\begin{split}
 		A(t) &= a(t) + F \ast A(t) \quad \text{which is a recursive expression.} \\
@@ -378,29 +364,6 @@ An integer random variable N is called \gls{st} for the i.i.d. sequence $X_i$ if
 
 Less formally, N is independent on what happens after $X_n$.
 \end{definition}
-For example:
-
-\begin{description}
-	\item[\textbf{Coin Flip}]
-		$\prob[X_i=0] = \prob[X_i=0] = 1/2$
-		\begin{equation*}
-			N = min\bigg\{n:\sum_{i=1}^n X_i = 10\bigg\}
-		\end{equation*}
-		Flip a coin until you get 10 ones, $N$ is a \textit{stopping time r.v.}
-	\item[\textbf{Gambler's ruin}]
-		$\prob[X_i=1] = \prob[X_i=-1] = 1/2$
-		\begin{equation*}
-			N = min\bigg\{n:\sum_{i=1}^n X_i = 1\bigg\}
-		\end{equation*}
-		$N$ is a \textit{stopping time r.v.}
-	\item[\textbf{Uniform distribution}]
-		$X_i \sim U[0,1]$
-		\begin{equation*}
-			N_1 = min\bigg\{n:\sum_{i=1}^n X_i > 10\bigg\} \qquad
-			N_2 = min\bigg\{n:\sum_{i=1}^n X_i \le 10\bigg\}
-		\end{equation*}
-		$N_1$ is a \textit{stopping time r.v.} since it stops as soon as the sum is above $10$, $N_2$ isn't a \textit{stopping time r.v.} since the variable has to look for the next value of $X_i$, so $N$ depends on $X_{n+1}$.
-\end{description}
 
 \begin{theorem}[Wald's equation]
 	Let $X_1, X_2, \dots, X_N $ be an i.i.d. sequence with finite mean and N a stopping time such that $\exp[N] < \infty$. Then
@@ -448,7 +411,7 @@ For example:
 	\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}
 	\eeq
 	where $\mu = E[X]$.\\
-	Then we can prove that $\frac{M(t)}{t} = \exp\bigg[\frac{N(t)}{t}\bigg]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
+	Then we can prove that $\frac{M(t)}{t} = E[\frac{N(t)}{t}]$ and that $\lim_{t \to \infty}\frac{M(t)}{t} = \frac{1}{\mu}$ w.p. 1.
 	\subsubsection{Counter example}
 	Let $U$ be a uniform r.v. $U(0,1)$ and let $Y_n$ be a r.v. such that:
 	\beq
@@ -460,7 +423,7 @@ For example:
 	\eeq
 	Where the second equation brings to the espressions $\frac{M(t)}{t} > \frac{1}{\mu} - \frac{1}{t}$ and $\lim_{t \to \infty} \frac{M(t)}{t} \geq \frac{1}{\mu}$
 
-	\textbf{NOTE}: In the book the notation has also the expression \textit{``lim \textbf{inf}''} since, in this way, the demonstration is ``easier'' to do, in fact we can also see graphically that the $inf$ expression guarantees that we have a lower bound. [\Fig{fig:graph1}]
+	\textbf{NOTE}: In the book the notation has also the expression \textit{"lim \textbf{inf}"} since, in this way, the demonstration is "easier" to do, in fact we can also see graphically that the $inf$ expression guarantees that we have a lower bound. Figure\ref{fig:graph1}
 	\begin{figure}[h]
 	\centering
 	\includegraphics[width=0.5\textwidth]{Cri_graph1.jpg}
@@ -497,8 +460,8 @@ For example:
 	and since $M^c(t) \geq M(t)$ from the previous inequality, I can say that:
 	\begin{align}
 	\begin{split}
-	\mu^c(1+M^c(t)) &\geq \mu^c(1+M(t))\\
-	\frac{M(t)}{t} &\leq \frac{1}{\mu^c} \frac{1}{t}(\frac{c}{\mu^c}-1) \qquad \forall c > 0 \quad (valid\quad for\quad any\quad truncation)
+	\mu^c(1+M^c(t)) \geq \mu^c(1+M(t))\\
+	\frac{M(t)}{t} \leq \frac{1}{\mu^c} \frac{1}{t}(\frac{c}{\mu^c}-1) \qquad \forall c > 0 \quad (valid\quad for\quad any\quad truncation)
 	\end{split}
 	\end{align}
 
@@ -511,20 +474,19 @@ For example:
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c}
 	\eeq
-	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to +\infty$ we see that $\mu^c \to \mu = \int_0^{+\infty}(1-F(x))\,dx$. [ \Fig{fig:mu}]
+	where $\mu^c = \int_0^c(1-F(x))\,dx$, so as $c \to \infty$ we see that $\mu^c \to \mu = \int_0^\infty(1-F(x))\,dx$. See figure\ref{fig:mu}
 	\begin{figure}
 	\centering
 	\includegraphics[width = 0.5\textwidth]{Cri_mu.jpg}
 	\caption{This graph is the complementary distribution of $X^c$}
 	\label{fig:mu}
 	\end{figure}
-
 	So at the end we conclude that
 	\beq
 	\lim_{t \to \infty} sup \frac{M(t)}{t} \leq \lim_{c \to \infty} \frac{1}{\mu^c} = \frac{1}{\mu}
 	\eeq
 	\\
-	\qed
+	\textit{cvd}
 	\subsection*{Observation}
 	In the book, at the beginning, they assume that $E[X] < \infty$. Reasoning on it we can observe that:
 	\begin{itemize}
@@ -537,40 +499,40 @@ For example:
 	\item \textbf{1}: $E[S_{N(t)+1}] = (1+M(t))E[X]$;
 	\item \textbf{2}: $E[S_{N(t)}] \ne M(t)E[X]$;
 	\end{itemize}
-	In the first case there is no may in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
+	In the first case there is no case in which the equality is not true, so we can state that this equality is always true; in the second case there is a non-zero number of cases in which the equality is not true, and so it cannot taken as true in general.
 	\subsubsection*{$1^{st}$ Statement}
 	In this case represents a Poisson process: $S_{N(t)+1} = t + \gamma_t$ and $S_{N(t)} = t - \delta_t$;\\
-	If I sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
+	If i sit at time $t$, then $\gamma_t$ is the time until the next renewal, which means that the time until the next renewal occurs is $t + \gamma_t$, and so this is why $S_{N(t)}$ is the instant $t$ minus the time since the last renewal occurred $\delta_t$. And that's actually true for any renewal process.\\
 	Moreover we know that both $\gamma$ and $\delta$ are exponentially distributed (because of Poisson process theory and the memoryless condition of the process): $\gamma_t$ is exponential with parameter $\lambda$, while $\delta_t$ is exponential with parameter $\lambda$ truncated at $t$.\\
 	So we can find all the quantities involved:%min 25:00
 	\beq
-	\exp\left[S_{N(t)+1} = t + \frac{1}{\lambda}\right] \qquad \exp\left[S_{N(t)}\right] = t - \frac{1-e^{-\lambda t}}{\lambda}
+	E[S_{N(t)+1} = t + \frac{1}{\lambda}] \qquad E[S_{N(t)}] = t - \frac{1-e^{-\lambda t}}{\lambda}
 	\eeq
 	with $M(t) = \lambda t$ and $E[X] = \frac{1}{\lambda}$.\\
-	Thanks to it we can see that the equality is true.
+	Thanks to it we can see that the equality in true.
 	\subsubsection*{$2^{nd}$ Statement}
 	In this case we take:
 	\beq
 	X_i =
 	\begin{cases}
-	1 & w.p.~~ p\\
-	a \geq 2 & w.p.~~ 1-p
+	1 \qquad w.p. p\\
+	a \geq 2 \qquad w.p. 1-p
 	\end{cases}
 	\eeq
 	How many arrivals do we count?
 	\beq
 	N(t) =
 	\begin{cases}
-	1 & w.p. ~~p\\
-	0 & w.p. ~~1-p
+	1 \qquad w.p. p\\
+	0 \qquad w.p. 1-p
 	\end{cases}
 	\eeq
 	And how much time do we count?
 	\beq
 	S_{N(t)}=
 	\begin{cases}
-	1 & w.p. ~~ p\\
-	0 & w.p. ~~ 1-p
+	1 \qquad w.p. p\\
+	0 \qquad w.p. 1-p
 	\end{cases}
 	\eeq
 	NOTE: Even though the value is the same, they do not represent the same thing.\\
@@ -578,9 +540,9 @@ For example:
 	\beq
 	S_{N(t)+1} =
 	\begin{cases}
-	a \quad \text{w.p. $ (1-p)$} & \rightarrow \text{it means it the first renewal}\\
-	2  \quad \text{w.p.  $p^2$} & \rightarrow \text{if the first  X is 1 and also the second}\\
-	1+a \quad \text{w.p. $ p(1-p)$} &\rightarrow \text{if the first X is 1 and the second is a}\\
+	a \quad \text{w.p. $ (1-p)$}  \rightarrow \text{it means it the first renewal}\\
+	2  \quad \text{w.p.  $p^2$}  \rightarrow \text{if the first  X is 1 and also the second}\\
+	1+a \quad \text{w.p. $ p(1-p)$} \rightarrow \text{if the first X is 1 and the second is a}\\
 	\end{cases}
 	\eeq
 	So:
@@ -609,7 +571,7 @@ For example:
 	So the first equation was found to be true in both cases and it's contrary for the second.
 	\subsection{Exercises}
 	\subsubsection*{Ex 2.4}
-	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on a given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
+	Each specific error is found on a specific case w.p. $\frac{1}{600}$ so the number of errors on given page is a binomial r.v. $(240,\frac{1}{600})$. At the same time, though, we know that when we have a Bin where $p$ is small and $M$ is big we can approximate it to a Poisson r.v. $\sim P(\frac{240}{600})$, where $\lambda = \frac{240}{600}  \simeq 0.4$.\\
 	So I represent the book as:
 	\begin{figure}[h]
 	\centering
@@ -644,14 +606,13 @@ For example:
 	\end{align}
 	\subsubsection*{Ex 3.6}
 	For $i = 1 \dots n$ I have an indep. PP $\rightarrow X_i(t)$ is an i.i.d. PP($\lambda$).\\
-	The problem asks to find the first time such that there is at least one event  in every process, see \Fig{fig:3.6}
+	The problem asks to find the first time such that there is at least one event  in every process, see figure\ref{fig:3.6}
 	\begin{figure}[h]
-		\centering
-		\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
-		\label{fig:renewal_ex}
+	\centering
+	\includegraphics[width =0.6\textwidth]{Cri_Ex3_6.jpg}
+	\label{3.6}
 	\end{figure}
-
-	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 ~events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{-\lambda t})^n$.\\
+	Since the process is Poisson, we have that $P[T\leq t] = 1-P[0 events] = 1-e^{-\lambda t}$ for one process, while for $n$ processes we have $P[t \leq t] = (1-e^{}-\lambda t)^n$.\\
 	We could actually see the problem from a different point of view: this view counts the events in the Poisson Poisson process and uses the independence to find the probability that none of them has seen $0$ events.\\
 	So we can see how we can look at $T$: we get that $T$ is the time at which the last process has its first event and it will be the biggest value among the exponentials; the first event will occur, obviously, with exponential time, so using this reasoning we can express the r.v. $T$ as:
 	\beq
@@ -660,7 +621,7 @@ For example:
 	So I can turn the point into a question: what is the distribution of the maximum among the i.i.d variables?
 	\begin{align}
 	\begin{split}
-	P[max\{X_1,X_2,\dots,X_n\} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
+	P[max{X_1,X_2,\dots,X_n} \leq t] & = P[X_i \leq t, \quad i = 1,2, \dots, n]\footnote{since the X's are i.i.d.}\\
 						  & = (P[X \leq t])^n = (1-e^{-\lambda t})^n
 	\end{split}
 	\end{align}
@@ -699,7 +660,7 @@ For example:
 	\subsubsection*{Ex 4.1}
 	Given $n$ arrivals, we take the quantity $E[w_1] = \int_{0}^{1}(1-t)^n dt = \frac{1}{n+1}$ where $w_1$ is the smallest among $n$ i.i.d. uniform r.v. between $0$ and $1$ and so the distribution is the distribution of the minimum of $n$ i.i.d. uniform r.v., and its complementary distribution is the $n^{th}$ power of the complementary distribution.\\
 	\subsubsection*{Ex 4.3}
-	Suppose we have $5$ arrivals, the cumulative time is the area in \autoref{fig:area}, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
+	Suppose we have $5$ arrivals, the cumulative time is the area in figure4, but we know that the arrival times are i.i.d. uniform so each user has to wait average waiting time is $0.5$ hours, so $0.5\times5 = 2.5$.\\
 	\subsubsection*{Ex 4.5}
 	Here assume we have $\alpha$  and the service time is an exponential r.v. $\sim exp(\alpha)$, and the probability $P[\text{at time 1 h the queue is empty}]$ is estimated considering each user arriving uniformly. So at the end the number of users is binomial and, conditioning on the uniform variable, we get:
 	\begin{align}
@@ -734,11 +695,7 @@ For example:
 	\end{equation}
 \end{definition}
 \begin{definition}
-	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that
-	\begin{equation}
-		\sum_{n=-\infty}^{+\infty}\prob[X = n\lambda] = 1
-	\end{equation}
-	i.e. F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
+	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that F has points of increase exclusively among the points 0, $\pm \lambda$, $\pm 2\lambda$, \dots .
 
 	We call \textit{SPAN} the largest $\lambda$ for which F is still arithmetic.
 \end{definition}
@@ -748,9 +705,9 @@ The distribution function of a discrete random variable with possible values 0, 
 \begin{definition}
 	(Directly Riemann Integrable Function) Given a function g defined on [0, $\infty$) we define the following quantities for $\delta > 0$:
 	\begin{align*}
-		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{+\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
+		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
 		\\
-		\bar \sigma (\delta) = \delta \cdot \sum_{n=1}^{+\infty}max\{g(t):(n-1)\delta \leq t \leq n \delta \}
+		\bar \sigma (\delta) = \delta \cdot \sum_{n=1}^{\infty}max\{g(t):(n-1)\delta \leq t \leq n \delta \}
 	\end{align*}
 	We say that g is directly Riemann integrable if both $\underline \sigma (\delta)$ and $\bar \sigma (\delta)$ converge absolutely $\forall \quad \delta > 0$ and if:
 	\begin{equation}
@@ -758,7 +715,7 @@ The distribution function of a discrete random variable with possible values 0, 
 		\end{equation}
 \end{definition}
 
-We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
+We note that every function for which $\int_{0}^{\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
 
 \begin{theorem}
 	(Key Renewal Theorem) It is given a distribution function F of a positive random variable $a$ with mean $\mu$. We suppose that $a$ is directly Riemann integrable and that $A$ is the solution of the \textit{renewal equation}
@@ -769,7 +726,7 @@ We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ 
 	\begin{equation*}
 		\lim_{t \rightarrow \infty} A(t) =
 		\begin{dcases}
-			\frac{1}{\mu} \int_{0}^{+\infty}a(x)dx \quad & if \quad \mu < \infty \\
+			\frac{1}{\mu} \int_{0}^{\infty}a(x)dx \quad & if \quad \mu < \infty \\
 			0 \quad & if \quad \mu = \infty
 		\end{dcases}
 	\end{equation*}
@@ -777,7 +734,7 @@ We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ 
 	\begin{equation*}
 		\lim_{t \rightarrow \infty} A(c+n\cdot \lambda) =
 		\begin{dcases}
-			\frac{\lambda}{\mu} \sum_{n=0}^{+\infty}a(c+n \cdot \lambda) \quad & if 	\quad \mu<\infty \\
+			\frac{\lambda}{\mu} \sum_{n=0}^{\infty}a(c+n \cdot \lambda) \quad & if 	\quad \mu<\infty \\
 			0 \quad & if \quad \mu = \infty
 		\end{dcases}
 	\end{equation*}
@@ -787,7 +744,7 @@ We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ 
 The theorem \ref{KRT1} can be also expressed in the following form:
 
 \begin{theorem}
-	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^{+\infty} F_{k}(t)$ is the \textit{renewal function} associated with F.
+	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^\infty F_{k}(t)$ is the \textit{renewal function} associated with F.
 	If F is not arithmetic then
 	\begin{equation}
 		\lim_{t \rightarrow \infty} [M(t+h)-M(t)]=\frac{h}{\mu}
@@ -811,14 +768,14 @@ Conditioning on the first event, we obtain that
 \begin{equation*}
 	\prob[\gamma_t>z|X_1=x] = \begin{cases}
 		1 \quad & if \quad x > t+z \\
-		0 \quad & if \quad t < x \le t+z \\
-		A_z(t-x) \quad & if \quad 0< x \le t
+		0 \quad & if \quad t+x \geq x > t \\
+		A_z(t-x) \quad & if \quad t \geq x > 0
 	\end{cases}
 \end{equation*}
 
 For the law of the total probability we have
 \begin{align*}
-	A_z(t) &= \int_{0}^{+\infty} \prob[\gamma_t>z|X_1=x] dF(x) = \int_{0}^{t}A_z(t-x)dF(x)+\int_{t+z}^{+\infty}dF(x)= \\
+	A_z(t) &= \int_{0}^{\infty} \prob[\gamma_t>z|X_1=x] dF(x) = \int_{0}^{t}A_z(t-x)dF(x)+\int_{t+z}^{\infty}dF(x)= \\
 	&= \int_{0}^{t}A_z(t-x)dF(x)+ [1-F(t+z)]
 \end{align*}
 
@@ -829,34 +786,34 @@ Now we apply the \textit{renewal equation} setting
 \end{dcases} \end{equation}
 
 \begin{align*}
-	\int_{0}^{+\infty} a(x) dx & = \int_{0}^{+\infty}(1-F(z+x)) dx = \\
-	& = \int_{z}^{+\infty}(1-F(y))dy \leq \int_{0}^{+\infty}(1-F(y))dy = \mu
+	\int_{0}^{\infty} a(x) d(x) & = \int_{0}^{\infty}(1-F(x)) d(x) = \\
+	& = \int_{z}^{\infty}(1-F(y))dy \leq \int_{0}^{\infty}(1-F(y))dy = \mu
 \end{align*}
 
 Supposing $\mu < \infty$, for the \textit{renewal theorem} we obtain that
 \begin{equation}
-	\lim_{t \rightarrow \infty} \prob[\gamma_t>z] = \lim_{t \rightarrow \infty} A_z(t) = \frac{1}{\mu} \cdot \int_z^{+\infty}(1-F(x))dx \quad \forall z > 0
+	\lim_{t \rightarrow \infty} \prob[\gamma_t>z] = \lim_{t \rightarrow \infty} A_z(t) = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(x))dx \quad \forall z > 0
 	\label{limitingdistribution}
 \end{equation}
 
-From \eqref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that
+From \ref{limitingdistribution} we can determine the limiting distribution for the \textit{current life} $\delta_t$ and for the \textit{total life} $\beta_t$. First we note that
 \begin{equation} \label{currtotallife}
 	\{\gamma_t \geq x, \delta_t \geq y \}
 	\Leftrightarrow
 	\{\gamma_{t-y} \geq x+y \}
 \end{equation}
-From equation \eqref{currtotallife} we have that
+From equation \ref{currtotallife} we have that
 \begin{align*}
-	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} \prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{+\infty}(1-F(z))dz
+	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_t \geq x] & = \lim_{t \rightarrow \infty} \prob[\gamma_{t-y} \geq x+y] \\ & = \frac{1}{\mu} \cdot \int_z^{\infty}(1-F(z))dz
 \end{align*}
 In particular we have that
 \begin{align*}
-	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y] & = \lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_{t} \geq 0] \\ & = \frac{1}{\mu} \int_z^{+\infty}(1-F(z))dz
+	\lim_{t \rightarrow \infty} \prob[\delta_t \geq y] & = \lim_{t \rightarrow \infty} \prob[\delta_t \geq y, \gamma_{t} \geq 0] \\ & = \frac{1}{\mu} \int_z^{\infty}(1-F(z))dz
 \end{align*}
 
 So $\frac{1-F(z)}{\mu}$ is the probability density function of $\delta_t$. We are able to compute $\delta_t$ and $\gamma_t$ averages.
 \begin{align*}
-	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{+\infty} \frac{z}{\mu} (1-F(z))dz \\ & = \frac{z^2}{2\mu} \left( 1-F(z) \right|_0^{+\infty} + \int_0^{+\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
+	\exp[\delta_t]=\exp[\gamma_t] & =\int_z^{\infty} \frac{z}{\mu} (1-F(z))dz \\ & = \frac{z^2}{2\mu} \left( 1-F(z) \right|_0^{\infty} + \int_0^{\infty}\frac{z^2}{2 \mu} f(z)dz= \frac{\exp[X^2]}{2 \exp[X]}
 \end{align*}
 
 Finally we conclude that
@@ -870,7 +827,7 @@ Finally we conclude that
 
 
 \paragraph{Asymptotic expansion of the renewal function}
-Given a distribution function $F$ of mean $\mu$ and variance $\sigma$ we want to find a more detailed description of the asymptotic behaviour of $M(t)$.
+Given a distribution function $F$ of mean $\mu$ and variance $\sigma$ we want to find a more detailed description of the asymptotic behavior of $M(t)$.
 
 For $t \rightarrow \infty$ we have what follows
 \begin{align*}
@@ -897,7 +854,7 @@ Then we finally prove that
 
 	\begin{align}
 		& M_D(t) = \exp[N(t)]
-		\\ & M(t) = \sum_{k=1}^{+\infty}F_k(t)
+		\\ & M(t) = \sum_{k=1}^{\infty}F_k(t)
 	\end{align}
 	Now we want to prove what follows:
 	\begin{align*}
@@ -907,12 +864,12 @@ Then we finally prove that
 
 	We have already seen that for a recurrent irreducible aperiodic \gls{mc} the following statament is true.
 	\begin{equation}
-		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum\limits_{n=1}^{+\infty}n \cdot f_{jj}^{(n)}}
+		\lim_{n \to \infty} P_{jj}^{(n)}=\pi_j=\frac{1}{m_j}=\frac{1}{\sum_{n=1}^{\infty}n \cdot f_{jj}^{(n)}}
 	\end{equation}
-	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statement is always true for any initial state $Y_0$.
+	Given a recurrent state $j$ we call $N_j(t)$ the number of visits in $j$ by the time $t$. The following statament is always true for any initial state $Y_0$.
 
 	\begin{equation}
-		N_j(n)-N_j(n-1)=1 = I[Y_n=j]
+		N_j(n)-N_j(n-1)=1 \quad \Leftrightarrow \quad Y_n=j
 	\end{equation}
 
 	If $Y_0$ is equal to j, then $N_j$ is a ordinary renewal process. We keep $Y_0=j$ and we obtain what follows.
@@ -974,17 +931,17 @@ Then we finally prove that
 			\prob[Y_1>t|X_1=x] & \text{if} \quad x \geq t
 			\\ p(t-x) & \text{if} \quad x<t
 		\end{dcases}
-		\\ & = \int_0^t p(t-x)dF(x)+\int_t^{+\infty}\prob[Y_1>t|X_1=x]dF(x)
+		\\ & = \int_0^t p(t-x)dF(x)+\int_t^{\infty}\prob[Y_1>t|X_1=x]dF(x)
 	\end{align*}
 	Knowing that $\int_0^{t}\prob[Y_1>t|X_1=x]dF(x)=0$ we have that
 	\begin{align*}
-		p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{+\infty}\prob[Y_1>t|X_1=x]dF(x)
+		p(t) & = \int_0^t p(t-x)dF(x)+\int_0^{\infty}\prob[Y_1>t|X_1=x]dF(x)
 		\\ & = \prob[Y_1>t]+\int_0^t p(t-x)dF(x)
 	\end{align*}
 
-	We observe that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. Let $\int_0^{+\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$, we can apply the renewal theorem
+	We observe that $p(t)= \prob[Y_1>t]+\int_0^t p(t-x)dF(x)$ is a renewal equation. Let $\int_0^{\infty}\prob[Y_1>t]dt=\exp[Y_1]=\nu$, we can apply the renewal theorem
 	\begin{align*}
-		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{+\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
+		\lim_{t \to \infty} p(t) & = \frac{1}{\mu}\cdot\int_0^{\infty}p(t)dt = \frac{\nu}{\mu}= \frac{\exp[X]}{\exp[Y]}
 	\end{align*}
 
 \section{Renewal-Reward processes}
@@ -1032,7 +989,7 @@ Now we adopt the following definitions.
 	\end{align*}
 	Then we have that
 	\begin{align*}
-		& \exp\left[\sum_{n=1}^{N(t)}R_n\right] \leq \exp[R(t)] \leq \exp\left[\sum_{n=1}^{N(t)+1}R_n\right]
+		& \exp\bigg[\sum_{n=1}^{N(t)}R_n\bigg] \leq \exp[R(t)] \leq \exp\bigg[\sum_{n=1}^{N(t)+1}R_n\bigg]
 		\\ & [M(t)+1] \, \exp[R]-\exp[R_{N(t)+1}] \leq \exp[R(t)] \leq [M(t)+1] \, \exp[R]
 	\end{align*}
 	Then, knowing that $\lim_{t \to \infty} \frac{[M(t)+1] \, \exp[R]}{t} = \frac {\exp[R]}{\exp[X]} $ we have that
@@ -1059,24 +1016,24 @@ Now we adopt the following definitions.
 		\\ & a(0)=\int_{0}^{+\infty}\exp[R_1|X_1=x]dF(x)=\exp[R_1]<+\infty
 	\end{align*}
 	\begin{align*}
-		|a(t)| & \leq \int_{t}^{+\infty}\exp\left[|R_1|\,|X_1=x\right]dF(x)
-		\\ & \leq \int_{0}^{+\infty}\exp\left[|R_1|\,|X_1=x\right]dF(x) = \exp\left[|R_1|\right]=\exp[R_1]<+\infty
+		|a(t)| & \leq \int_{t}^{+\infty}\exp[|R_1||X_1=x]dF(x)
+		\\ & \leq \int_{0}^{+\infty}\exp[|R_1||X_1=x]dF(x) = \exp[|R_1|]=\exp[R_1]<+\infty
 	\end{align*}
 	So we have come to the following results:
 	\begin{align*}
 		1) \quad & \forall \epsilon>0 \quad \exists T>0:\quad |a(t)|<\epsilon \quad \forall t>T
-		\\ 2) \quad & |a(t)| \leq \exp\left[|R_1|\right]<+\infty \quad \forall t
+		\\ 2) \quad & |a(t)| \leq \exp[|R_1|]<+\infty \quad \forall t
 	\end{align*}
 	Knowing that $A(t)=\int_{0}^{t}a(t-x)dM(x)+a(t)$ we have that
 	\begin{align*}
 		|A(t)| & = |\int_{0}^{t}a(t-x)dM(x)+a(t)| \leq \int_{0}^{t}|a(t-x)|dM(x)+|a(t)|
 		\\ & \leq \int_{0}^{t-T}|a(t-x)|dM(x)+ \int_{t-T}^{t}|a(t-x)|dM(x) + a(t)
-		\\ & \leq \int_{0}^{t-T}\epsilon dM(x)+ \int_{t-T}^{t}\exp\left[|R_1|\right] dM(x) + a(t)
+		\\ & \leq \int_{0}^{t-T}\epsilon dM(x)+ \int_{t-T}^{t}\exp[|R_1|] dM(x) + a(t)
 	\end{align*}
 	\begin{align*}
-		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp\left[|R_1|\right]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
+		\lim_{t \to \infty} \frac{A(t)}{t} \leq \lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t} + \lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t} + \lim_{t \to \infty} \frac{a(t)}{t}
 	\end{align*}
-	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp\left[|R_1|\right]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that
+	Knowing that $\lim_{t \to \infty} \epsilon \cdot \frac{M(t-T)}{t}=\frac{\epsilon}{\exp[X]}$, $\lim_{t \to \infty} \exp[|R_1|]\cdot \frac{M(t)-M(t-T)}{t}=0$ and $\lim_{t \to \infty} \frac{a(t)}{t}=0$ we have that
 	\begin{align*}
 		\lim_{t \to \infty} \frac{A(t)}{t} \leq \frac{\epsilon}{\exp[X]} \Rightarrow \lim_{t \to \infty} \frac{\exp[R_{N(t)+1}]}{t}=0 \Rightarrow \frac {\exp[R]}{\exp[X]} \leq \lim_{t \to \infty} \frac{\exp[R(t)]}{t} \leq \frac{\exp[R]}{\exp[X]}
 	\end{align*}
@@ -1084,7 +1041,7 @@ Now we adopt the following definitions.
 	\begin{align*}
 		\lim_{t \to \infty} \frac{\exp[R(t)]}{t} = \frac{\exp[R]}{\exp[X]}
 	\end{align*}
-	Then \eqref{rewardtheorem2} is proven.
+	Then \ref{rewardtheorem2} is proven.
 \end{proof}
 
 Let us define the following quantities of interest.
@@ -1101,7 +1058,7 @@ Let us define the following quantities of interest.
 			\end{dcases}
 			& \parbox[c]{.5\textwidth}{total reward going from $i$ to $j$ for the first time following any path} \\
 			\begin{aligned}[b]
-				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{+\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
+				\rho_{ij} &= \exp[\theta_{ij}] = \sum_{k=0}^{\infty}\exp[\theta_{ij}| X_1=k] P_{ik} =\\
 				&= R_{ij}P_{ij} +\sum_{k \neq j} P_{ik} [R_{ik}+\rho_{kj}] \\
 				&= R_i + \sum_{k \neq j}P_{ik}\rho_{kj}
 			\end{aligned} & \parbox[b]{.5\textwidth}{average reward going from $i$ to $j$ for the first time following any path}
@@ -1110,12 +1067,12 @@ Let us define the following quantities of interest.
 
 We have that the average reward for transitions exiting each possible state $i$ is
 \begin{equation*}
-\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_i \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
+\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_i \sum_{k \neq j} \pi_i P_{ik} \rho_{kj} = \sum_j \pi_i R_i + \sum_{k \neq j}\rho_{kj}\sum_i\pi_i P_{ik}
 \end{equation*}
 
 For \emph{any} metric $r(\cdot)$ it holds that
 \begin{equation}
-\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_i \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
+\Rightarrow\sum_i \pi_i \rho_{ij} = \sum_j \pi_i R_i + \sum_{k \neq j}\pi_k\rho_{kj},\qquad \pi_j\rho_{jj} = \sum_i \pi_i R_i
 \end{equation}
 
 and if the metric is specifically \emph{time}
@@ -1123,7 +1080,7 @@ and if the metric is specifically \emph{time}
 \pi_j \mu_{jj} = \sum_i \pi_i \mu_i
 \end{equation}
 
-Now, in system modeling one of the main task of performance evaluation is to find the average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
+Now, in system modeling one of the main task of performance evaluation is to find te average value of some reward over time, that is to evaluate $\lim_{t \to \infty}\frac{R(t)}{t}$. The following result holds:
 \begin{equation}
 \lim_{t \to \infty}\frac{R(t)}{t} = \frac{\exp[R]}{\exp[X]} = \frac{\rho_{jj}}{\mu_{jj}} = \frac{\sum_i \pi_i \frac{R_i}{\pi_j}}{\sum_i \pi_i \frac{\mu_i}{\pi_j}} = \frac{\sum_i \pi_i \sum_j P_{ik} R_{ik}}{\sum_i \pi_i \sum_k P_{ik}T_{ik}}
 \end{equation}
@@ -1156,7 +1113,8 @@ process}.
 Thus a semi-Markov process does not possess the Markovian property that
 the future is independent of the past, given the present state.
 
-To predict the future not only would we want to know the present state, but also the length of time that has been spent in that state\footnote{note that $Z(t) = \{\text{state of the process at time } t\}$ is a \gls{mc} only when the transition time is memoryless (for example exponential).}. Of course, at the moment of transition, all we would need to know is the new state (and nothing about the past).
+To predict the future not only would we want to know the present state, but also the length of time that has been spent in that state
+\footnote{note that $Z(t) = \{\text{state of the process at time } t\}$ is a \gls{mc} only when the transition time is memoryless (for example exponential).}. Of course, at the moment of transition, all we would need to know is the new state (and nothing about the past).
 
 Let $H_i(t)$ denote the \emph{distribution of time} that the semi-Markov process spends in state i before making a transition. For the law of total probability, we have that
 \begin{equation}
@@ -1179,7 +1137,7 @@ With the theory of alternating renewal processes, it is a simple matter to deriv
 
 	$$P_j = \lim_{t \to \infty} \prob[Z(t)=j | Z(0)=k]$$
 
-	exists and is independent of the initial state. Furthermore,
+	exists and independent of the initial state. Furthermore,
 
 	$$P_j = \frac{\exp[\mbox{time in state i in a cycle}]}{\exp[\mbox{duration of the cycle}]} = \frac{\mu_i}{\mu_{ii}}$$
 
@@ -1197,16 +1155,16 @@ From a modeling perspective, the packets subsequent to the bad packet are not re
 \eeq
 The channel matrix is:
 \beq
-C = \begin{bmatrix} P_{00} & P_{01}\\P_{10} & P_{11} \end{bmatrix}
+C = \begin{bmatrix} p_{00} & p_{01}\\p_{10} & p_{11} \end{bmatrix}
 \eeq
-Every time the source try to retx, it does not do it right after the bad packet but only after a number of packets equivalent to the \emph{RTT(m)}. Doing so, this does not involve every single slot but some certain slots. The probability that, from the packet num $3$, the packet $4$ is good is a 1-step transmission probability; while the probability that the packet $3$ (coming after the packet $5$) is good is an m-step transmission probability. So we also write down the $m$ step matrix:
+Every time the source try to retx, it does not do it right after the bad packet but only after a number of packets equivalent to the $R\pi(m)$. Doing so, this does not involve every single slot but some certain slots. The probability that, from the packet num $3$, the packet $4$ is good is a 1-step transmission probability; while the probability that the packet $3$ (coming after the packet $5$) is good is an m-step transmission probability. So we also write down the $m$ step matrix:
 \beq
 C^m =
 \begin{bmatrix}
-P_{00}(m) & P_{01}(m)\\
-P_{10}(m) & P_{11}(m)
-\end{bmatrix}^{\footnotemark} %in math mode footnote doesn't work. Fixed also positioning of number
-\eeq\footnotetext{$P_{11}(m)$ is the probability of moving from a bad step to another bad step in $m$ moves}
+p_{00}(m) & p_{01}(m)\\
+p_{10}(m) & p_{11}(m)
+\end{bmatrix}\footnote{$p_{11}(m)$ is the probability of moving from a bad step to another bad step in $m$ moves}
+\eeq
 So we can model the protocol assuming error free feedback: (G = good, B = bad).
 \begin{figure}
 \centering
@@ -1221,10 +1179,10 @@ So we can model the protocol assuming error free feedback: (G = good, B = bad).
 			\node[state]		(G)											{$G$};
 			\node[state]		(B)[right of=G]				{$B$};
 			\path
-			(G) 		edge[loop left]		 			node{$P_{00}$}				(G)
-							edge[bend left]		 			node{$P_{01}$}		 		(B)
-			(B)		edge[bend left]	node{$P_{01}(m)$}				(G)
-							edge[loop right]					node{$P_{11}(m)$}	(B);
+			(G) 		edge[loop left]		 			node{$p_{00}$}				(G)
+							edge[bend left]		 			node{$p_{01}$}		 		(B)
+			(B)		edge[bend left]	node{$p_{01}(m)$}				(G)
+							edge[loop right]					node{$p_{11}(m)$}	(B);
 
 		\end{tikzpicture}
 	\end{center}
@@ -1244,40 +1202,40 @@ And the protocol chain is:
 \beq
 P =
 \begin{bmatrix}
-P_{00} & P_{01}\\
-P_{10}(m) & P_{11}(m)
+p_{00} & p_{01}\\
+p_{10}(m) & p_{11}(m)
 \end{bmatrix}
 \eeq
 To solve the limit we can find the $\pi$s like:
 \begin{align}
-\pi_{G} & = \frac{P_{10}(m)}{P_{10}(m)+P_{01}}\\
-\pi_{B} & = \frac{P_{01}}{P_{10}(m)+P_{01}}
+\pi_{G} & = \frac{p_{10}(m)}{p_{10}(m)+p_{01}}\\
+\pi_{B} & = \frac{p_{01}}{p_{10}(m)+p_{01}}
 \end{align}
-and insert them in the fraction, not considering the denominators, since they are the same for both the $\pi_\text{s}$ and so they would erase with each other.
+and insert them in the fraction, not considering the denominators, since they are the same for both the $\pi$s and so they would erase with each other.
 \begin{align}
 \begin{split}
 \lim_{t \to \infty}\frac{R(t)}{t} & = \frac{\pi_GR_G+\pi_BR_B}{\pi_GT_G +\pi_BT_B}\\
-& = \frac{P_{10}(m)\cdot1+P_{01}\cdot0}{P_{10}(m)\cdot1+P_{01}\cdot m}\\
-& =\frac{P_{10}(m)}{P_{10}(m)+mP_{01}}
+& = \frac{p_{10}(m)\cdot1+p_{01}\cdot0}{p_{10}(m)\cdot1+p_{01}(m)}\\
+& =\frac{p_{10}(m)}{p_{10}(m)+mp_{01}}
 \end{split}
 \end{align}
 If we suppose an i.i.d. error we obtain:
 \beq
 \frac{1-\epsilon}{(1-\epsilon)+m\epsilon}
 \eeq
-Where $1-\epsilon$ is the $\prob[having\,a\,good\,result\,|\,m\, previous\,results\,were\,bad]$, or better, $\prob[having\, a\, good \,result]$ since we hypothesized the independence of the errors.\\
+Where $1-\epsilon$ is the \textit{P[having a good result | m previous results were bad]}, or better, \textit{P[having a good result]} since we hypothesized the independence of the errors.\\
 Now let's try to answer another question: \textit{If we are in state G, how long does it take to us to come back?}\\
 The answer is:
 \beq
-m_0 = P_{00}\cdot1+P_{01}\left[1+\frac{m}{P_{10}(m)}\right]
+m_0 = p_{00}\cdot1+p_{01}[1+\frac{m}{p_{10}(m)}]
 \label{Formula}
 \eeq
 Where $m_0$ is the average return time to $G$ and so the inverse of throughput; why? Because as in all semi-Markov processes, if we consider one state, visits to that one state are renewal instants. So the return time from $G$ to itself is a renewal interval and for this specific case, at every renewal cycle we have 1 success and the avg number of successes per unit time is the avg number of successes per cycle, $1$, divided by the average time per cycle. Moreover, once we have obtained the Markov structure we can identify the metrics we need to find.\\
-Returning to the expression \eqref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
+Returning to the expression \ref{Formula}, for the part  inside the rectangular brackets, the expression means that we stay in $B$ for a geometric number of times, which is equal to the average inverse outgoing probability. What we obtain after some algebra is:
 \begin{align}
 \begin{split}
-m_0 & = 1+\frac{P_{01}\cdot m}{P_{10}(m)}\\
-& = \frac{P_{10}(m)+mP_{01}}{P_{10}(m)}
+m_0 & = 1+\frac{p_{01}\cdot m}{p_{10}(m)}\\
+& = \frac{p_{10}(m)+mp_{01}}{p_{10}(m)}
 \end{split}
 \end{align}
 \\
@@ -1285,24 +1243,24 @@ In the case the feedback has errors, we also need a M.C. for the acknowledgment 
 \beq
 C_f =
 \begin{bmatrix}
-P_{00} & P_{01}\\
-P_{10} & P_{11}
+p_{00} & p_{01}\\
+p_{10} & p_{11}
 \end{bmatrix}
 \hspace{10mm}
 C_b =
 \begin{bmatrix}
-Q_{00} & Q_{01}\\
-Q_{10} & Q_{11}
+q_{00} & q_{01}\\
+q_{10} & q_{11}
 \end{bmatrix}
 \eeq
 So the total transmission probability matrix is:
 \beq
 P =
 \begin{bmatrix}
-P_{00}Q_{00} & P_{00}Q_{01} & P_{01}Q_{00} & P_{01}Q_{01}\\
-P_{00}(m)Q_{10}(m) & P_{00}(m)Q_{11}(m) & P_{01}(m)Q_{10}(m) & P_{01}(m)Q_{11}(m)\\
-P_{10}(m)Q_{00}(m) & P_{01}(m) Q_{01}(m) & P_{11}(m)Q_{00}(m) &P_{11}(m)Q_{01}(m)\\
-P_{10}(m)Q_{10}(m) & P_{01}(m) Q_{11}(m) & P_{11}(m)Q_{10}(m) &P_{11}(m)Q_{11}(m)
+p_{00}q_{00} & p_{00}q_{01} & p_{01}q_{00} & p_{01}q_{01}\\
+p_{00}(m)q_{10}(m) & p_{00}(m)q_{11}(m) & p_{01}(m)q_{10}(m) & p_{01}(m)q_{11}(m)\\
+\text{$3^{rd}$ and} & \text{$4^{th}$ rows} & \text{can be} & \text{derived}\\
+\text{in} & \text{a} & \text{similar} & \text{way}
 \end{bmatrix}
 \eeq
 The state $00$ means $1$ success and $1$ slot, any other state is a failure: $0$ successes and $m$ slots. So I can rewrite the model, defining the vectors $R$ and $T$:
@@ -1325,7 +1283,7 @@ m
 \eeq
 and so obtaining the result:
 \beq
-\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\vec{\pi}\vec{R}}{\vec{\pi}\vec{T}} = \frac{\pi_{00}\cdot 1}{\pi_{00}\cdot1+(1-\pi_{00})m}
+\lim_{t \to \infty}\frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{\pi_{00}\cdot 1}{\pi_{00}\cdot1+(1-\pi_{00})m}
 \eeq
 If now we suppose i.i.d. feedback errors w.p. $\delta$, we obtain the matrix
 \beq
@@ -1335,7 +1293,7 @@ C_b =
 1-\delta & \delta
 \end{bmatrix}
 \eeq
-Moreover, if the feedback channel is i.i.d., we have nothing to remember: regardless of whether the ack is good or bad, we do not care if the transmission was a failure $\rightarrow$ for this case we can use a simplified model with only $3$ states (\Fig{fig:3states}), where the metrics are:
+Moreover, if the feedback channel is i.i.d., we have nothing to remember: regardless of whether the ack is good or bad, we do not care if the transmission was a failure $\rightarrow$ for this case we can use a simplified model with only $3$ states (figure\ref{fig:3states}), where the metrics are:
 \beq
 R =
 \begin{bmatrix}
@@ -1352,11 +1310,11 @@ m
 \end{bmatrix}
 \eeq
 \beq
-P=
+p=
 \begin{bmatrix}
-(1-\delta)P_{00} & \delta P_{00} & P_{01}\\
-(1-\delta)p{00}(m) & \delta P_{00}(m) & P_{01}(m)\\
-(1-\delta)P_{10}(m) & \delta P_{10}(m) & P_{11}(m)
+(1-\delta)p_{00} & \delta p_{00} & p_{01}\\
+(1-\delta)p{00}(m) & \delta p_{00}(m) & p_{01}(m)\\
+(1-\delta)p_{10}(m) & \delta p_{10}(m) & p_{11}(m)
 \end{bmatrix}
 \eeq
 
@@ -1383,15 +1341,15 @@ P=
 	\label{fig:3states}
 \end{figure}
 The throughput is:
-\beq\label{eq:thrPig0}
+\beq
 \frac{\pi_{G_0}}{\pi_{G_0}+m(1-\pi_{G_0})}
 \hspace{5mm}
-\vec{\pi} = \vec{\pi}\cdot\vec{P}
+\bar{\pi} = \bar{\pi}\cdot\bar{P}
 \eeq
 to obtain it we take:
 \begin{align}
-\pi_{G_0} & = (1-\delta)(\pi_{G_0}P_{00}+\pi_{G_1}P_{00}(m) +\pi_{B}P_{10}(m))\\
-\pi_{G_1} & = \delta(\pi_{G_0}P_{00}+\pi_{G_1}P_{00}(m) +\pi_{B}P_{10}(m)) %Chiedere a Fede
+\pi_{G_0} & = (1-\delta)(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m))\\
+\pi_{G_1} & = \delta(\pi_{G_0}p_{00}+\pi_{G_1}p_{00}(m) +\pi_{B}p_{10}(m)) %Chiedere a Fede
 \end{align}
 where
 \begin{itemize}
@@ -1402,16 +1360,16 @@ where
 and obtaining:
 \begin{align}
 \begin{split}
-\pi_{G_0} & = (1-\delta)P_{00}\pi_{G_0} + \delta\pi_{G_0} P_{00}(m) (1-\delta-\pi_{G_0})P_{10}(m)\\
-& = \frac{(1-\delta)P_{10}(m)}{1-(1-\delta)P_{00}-\delta P_{00}(m) +P_{10}(m)}
+\pi_{G_0} & = (1-\delta)p_{00}\pi_{G_0} + \delta\pi_{G_0} p_{00}(m) (1-\delta-\pi_{G_0})p_{10}(m)\\
+& = \frac{(1-\delta)p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
 \end{split}
 \end{align}
 \beq
-1-\pi_{G_0} = \frac{1-(1-\delta)P_{00} -\delta P_{00}(m) + \delta P_{10}(m)}{1-(1-\delta)P_{00}-\delta P_{00}(m) +P_{10}(m)}
+1-\pi_{G_0} = \frac{1-(1-\delta)p_{00} -\delta p_{00}(m) + \delta p_{10}(m)}{1-(1-\delta)p_{00}-\delta p_{00}(m) +p_{10}(m)}
 \eeq
-So, rewriting \eqref{eq:thrPig0}, the throughput is:
+So the throughput is:
 \beq
-throughput = \frac{(1-\delta)P_{10}(m)}{(1-\delta)P_{10}(m) + m[1-(1-\delta)P_{00}-\delta P_{00}(m)+\delta P_{10}(m)]}
+throughput = \frac{(1-\delta)p_{10}(m)}{(1-\delta)p_{10}(m) + m[1-(1-\delta)p_{00}-\delta p_{00}(m)+\delta p_{10}(m)]}
 \eeq
 \subsection{Graph reduction}
 What if we rewrite the scheme, such that we can reduce it like in figure\ref{fig:GBN}?\\
@@ -1429,20 +1387,20 @@ This brings us to conclude that in state $G$ we have:
 \end{itemize}
 About transition probabilities:
 \begin{itemize}
-\item going to $G$ w.p. $(1-\delta)P_{00}+\delta P_{00}(m)$;
-\item going to $B$ w.p. $(1-\delta)P_{01}+\delta P_{01}(m)$;
+\item going to $G$ w.p. $(1-\delta)p_{00}+\delta p_{00}(m)$;
+\item going to $B$ w.p. $(1-\delta)p_{01}+\delta p_{01}(m)$;
 \end{itemize}
 In state $B$ we have:
 \begin{itemize}
 \item No reward w.p. $1$ and $m$ slots always;
-\item We go from there to $G$ w.p. $P_{10}(m)$;
-\item And to $B$ w.p. $P_{11}(m)$;
+\item We go from there to $G$ w.p. $p_{10}(m)$;
+\item And to $B$ w.p. $p_{11}(m)$;
 \end{itemize}
 So now we have a simplified Markov model where we combine into a single state everything that before was separate. What we obtain is:
 \beq
-\pi_{G} = \frac{P_{10}(m)}{(\dots)} %brutto. riusciamo a trovare la formula?
+\pi_{G} = \frac{p_{10}(m)}{(\dots)}
 \hspace{20mm}
-\pi_{B} = \frac{(1-\delta)P_{01}+\delta P_{01}(m)}{(\dots)}
+\pi_{B} = \frac{(1-\delta)p_{01}+\delta p_{01}(m)}{(\dots)}
 \eeq
 Reward and time:
 \beq
@@ -1460,14 +1418,14 @@ m
 \eeq
 And finally we can estimate the throughput for the system in figure\ref{fig:2states}:
 \beq
-\lim_{t \to \infty} \frac{R(t)}{t} = \frac{\vec{\pi}\vec{R}}{\vec{\pi}\vec{T}} = \frac{(1-\delta)P_{10}(m)}{(1-\delta+\delta \cdot m)P_{10}(m)+m[(1-\delta)P_{01}+\delta P_{01}(m)]}
+\lim_{t \to \infty} \frac{R(t)}{t} = \frac{\bar{\pi}\bar{R}}{\bar{\pi}\bar{T}} = \frac{(1-\delta)p_{10}(m)}{(1-\delta+\delta \cdot m)p_{10}(m)+m[(1-\delta)p_{01}+\delta p_{01}(m)]}
 \eeq
 We just note that the denominator of this expression is equal to the one in the previous throughput expression: to prove it it is necessary to impose:
 \begin{itemize}
-\item $P_{00} = 1-P_{01}$;
-\item $P_{00}(m) = 1-P_{01}(m)$
+\item $p_{00} = 1-p_{01}$;
+\item $p_{00}(m) = 1-p_{01}(m)$
 \end{itemize}
-So $1-(1-\delta)P_{00}-\delta P_{00}(m) = (1-\delta)P_{01} + \delta P_{01}(m)$.\\
+So $1-(1-\delta)p_{00}-\delta p_{00}(m) = (1-\delta)p_{01} + \delta p_{01}(m)$.\\
 This result stands out from the fact that the two throughputs are the same quantity but computed by two different models; so we did not reduced the complexity, we just redistributed the quantities.
 \begin{figure}[h]
 	\begin{center}
@@ -1476,10 +1434,10 @@ This result stands out from the fact that the two throughputs are the same quant
 			\node[state]		(G)											{$G$};
 			\node[state]		(B)[right of=G]				{$B$};
 			\path
-			(G) 		edge[loop left]		 			node{$(1-\delta)P_{00}+\delta P_{00}(m)$}				(G)
-							edge[bend left=20]		 			node{$(1-\delta)P_{01} + \delta P_{01}(m)$}		 		(B)
-			(B)		edge[bend left=20]	node{$P_{10}(m)$}				(G)
-							edge[loop right]					node{$P_{11}(m)$}	(B);
+			(G) 		edge[loop left]		 			node{$(1-\delta)p_{00}+\delta p_{00}(m)$}				(G)
+							edge[bend left=20]		 			node{$(1-\delta)p_{01} + \delta p_{01}(m)$}		 		(B)
+			(B)		edge[bend left=20]	node{$p_{10}(m)$}				(G)
+							edge[loop right]					node{$p_{11}(m)$}	(B);
 
 		\end{tikzpicture}
 	\end{center}
