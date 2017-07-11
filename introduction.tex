@@ -1,0 +1,280 @@
+\chapter{Introduction}
+\section{Topics of the course}
+\begin{itemize}
+  \item Review of probability theory
+  \item Markov chains
+  \item Poisson processes
+  \item Example of applications protocols
+  \item Random access protocols
+\end{itemize}
+\section{Review of probability theory}
+Let $X_n, X_t$ be two different instances of a random variable (r.v.). We will use
+\textit{t} as a subscript if the r.v. is continuous ($t \in \mathbb{R}$), \textit{n} if the r.v. is discrete ($ n \in \mathbb{Z}$)
+
+Let \textit{A},\textit{B} be two events, then:
+\begin{itemize}
+  \item if $A \cap B = \emptyset$, then A and B are disjoint
+  \item $\prob[A \cup B] = \prob[A]+\prob[B] - \prob[A \cap B]$
+  \item $0\le \prob[A] \le 1$
+  \item $\prob[A \cup B] \le \prob[A]+\prob[B]$
+  \item $ \prob[\Omega]=1 $ and $\prob[\emptyset]=0$ with $\Omega$ the Universe set
+\end{itemize}
+\subsection{Total probability law}
+Given $A_i \cap A_j = \emptyset \;\; \forall i \neq j $, then $\bigcup\limits_{i=1}^{+\infty} A_i \, = \Omega$.
+Moreover $\prob[B]=\sum\limits_{i=1}^{+\infty} \prob[B \cap A_i]$.
+
+If $\prob[A \cap B] = \prob[A]\cdot \prob[B] \implies A,B$ \textit{are} \textbf{independent}.
+
+\subsection{Distribution function (PMD)}\label{sec:pmd}
+$F(x) = \prob[X \le x]$ is called the distribution function and has the following properties:
+\begin{enumerate}
+  \item $\lim\limits_{x \to -\infty} F(x) = 0$ \quad and \quad $\lim\limits_{x \to +\infty} F(x) = 1$
+  \item F is monothonic non-decreasing $\implies$ if $x_1 > x_2 \implies F(x_1)\ge F(x_2)$
+  \item F(x) is continuous from the right
+\end{enumerate}
+We define $f(x)=F'(x)$ the probability density function \textit{PDF}.
+
+\subsection{Moment}
+We define  the moment as:
+$\exp[X^m]=
+\begin{cases}
+    \sum\limits_{i} {x{_i}^{m} \cdot \prob[X=x_i]} & \text{if X is discrete } \\
+    \int_{-\infty}^{+\infty} {x^{m} \cdot f(x) dx }  & \text{if X is continuous}
+\end{cases}$
+In particular if m=1, we obtain the mean, if m=2 we get the power (and in particular if $\exp[X]=0$ we obtain the variance).\\
+Defining $\mu = \exp[X]$, we say that $\exp[(X-\mu)^m]$ is the center moment.\\
+We will denote $\exp[g(x)]=\int_{-\infty}^{+\infty} g(x)\, d F_X(x)$
+
+\subsection{Joint probability}
+We define the joint probability of two variables as
+\begin{equation*}
+  $$F_{XY}(x,y)=\prob[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
+\end{equation*}
+
+From what we obtain in \Sec{sec:pmd}, we can write \\
+\begin{equation*}
+  $$F_X(x)=F_{XY}(x,+\infty)=\lim\limits_{y \to +\infty} F_{XY}(x,y)$$
+  $$F_Y(y)=F_{XY}(+\infty,y)=\lim\limits_{x \to +\infty} F_{XY}(x,y)$$
+\end{equation*}
+If X and Y are independent ($X \indep Y$), we have
+\begin{itemize}
+  \item $F_{XY}(x,y)=F_X(x)\cdot F_Y(y) \; \forall x,y$
+  \item $cov(X,Y) = \exp[(X - \mu_X)\cdot (Y - \mu_Y)] = \exp[X \cdot Y]-\mu_X \cdot \mu_Y$
+\end{itemize}
+If X and Y are uncorrelated ($X \bot Y$) $\implies cov(X,Y)=0$.
+
+\subsection{Conditional probability}
+\begin{equation}
+  \begin{split}
+    \prob[A | B]&= \frac{\prob[A \cap B]}{\prob[B]} \; \text{with $\prob[B]\ne 0$} \\
+    \implies \prob[A \cap B ] &= \prob[A | B ]\cdot \prob[B]
+  \end{split}
+\end{equation}\\
+From the total probability law we can write\\
+$$\prob[A]= \sum\limits_{i=0}^{+\infty}\prob[A|B]\cdot \prob[B_i]$$
+
+Suppose we have $X \indep Y \text{ and } Z=X+Y$. Then $F_Z(z) = \prob[Z\le z] = \prob[X+Y \le z]$
+Calculating F(z) can be more difficult with two variables. We will proceed this way:
+\\
+\begin{equation}\begin{split}
+    \exp_{Y}[\prob[X+Y \le z | Y]]  &\stackrel{\text{if X,Y are cont.}}{=} \exp_Y [\prob[X \le z - Y | Y]] = \exp_Y[F_X(z-Y)]\\
+    &=\int_{-\infty}^{+\infty}F_x(z-y) \cdot dF_Y(y) \\
+    &\implies f_Z(z) = F'_z(z) = \int_{-\infty}^{+\infty}{f_X(z-y)\cdot f_Y(y) dy} \\
+    &=\int_{0}^{z}{f_X(z-y) \cdot f_Y(y) dy}
+  \end{split}
+\end{equation}
+
+
+\subsection{Charateristic Function (C.F)}
+(This can be found at KT pp 10-13)
+\begin{equation}\phi(t) = \int_{-\infty}^{+\infty}e^{\imath \lambda t} dF(\lambda) = \exp[e^{\imath t x}]\stackrel{\text{ x cont.}}{=}
+  \int_{-\infty}^{+\infty}e^{\imath \lambda t} \cdot p(\lambda) d\lambda
+\end{equation}
+which means that
+\begin{enumerate}
+  \item $\phi(t)$ fully describes the statistics of X (the Fourier transform is a  one-to-one map )
+  \item The characteristic function of the sum of independent variables is the product
+  \item $\phi'(t)=\frac{d}{dt} \exp[e^{\imath \cdot t \cdot x}]=\exp[\imath \cdot x \cdot e^{\imath \cdot t \cdot x}]$ \\
+  if t=0 $\implies \exp[\imath \cdot x]=\imath \cdot \exp[ X] = \phi'(0)$
+  \item $\phi^{(k)}(0) = (\imath)^k \cdot \exp[X^k] \implies \phi(t)$ is the \textbf{moment-generating function}
+\end{enumerate}
+
+
+For integer and non negative r.v. :
+$$g(s)=\sum\limits_{k=0}^{+\infty}p_k \cdot s^k = \exp[S^X]$$
+$$\phi(t) = g(e^{\imath \cdot t})$$
+
+Doing the derivative of g(s) we obtain:
+\begin{equation}
+  \begin{split}
+    & g'(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
+    \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = \exp[X] \\
+    & g''(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot (k-1) \cdot s^{k-2}
+    \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = \exp[X^2]-\exp[X] \\
+    &\implies \exp[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
+  \end{split}
+\end{equation}
+
+\subsection{Random Sum}
+Now, let $X_1, X_2, \dotsc \; \text{ be a r.v. and }\; N \in \mathbb{N}$ a random number. Then $R=\sum\limits_{i=1}^{N}x_i$
+is a random sum, because the sum is made of random $x_i$ random terms and $N$ is a random number.
+
+\begin{equation}
+  \begin{split}
+    g_R(s)&=\exp[s^R]=\exp[s^{X_1+X_2+\dotsc+X_N}]=\sum\limits_{n=0}^{+\infty} \prob[N=n]\cdot \exp[s^{\sum_{i=0}^{n}X_i}|N=n]\\
+    &=\sum\limits_{n=0}^{+\infty} \prob[N=n]\cdot [g(s)]^n=g_N(g(s))
+    \\ & \implies g_R(s) = g_N(g(s))
+  \end{split}
+\end{equation}
+The mean and the variance of the moment generating functions can be calculated as follows:
+\begin{equation}\begin{split}
+  g'_R(s) &= g'_N(g(s)) \cdot g'(s) \\
+  g'_R(1) &= g_N'(1)\cdot g'(1) = \exp[N]\cdot \exp[X]=\exp[R]\\
+  &=\exp[N^2-N]\cdot (\exp[X])^2 + \exp[N]\cdot \exp[X^2-X] \\
+  &=\exp[N^2]\cdot \exp[X]^2 - \exp[N] \cdot \exp[X]^2 +\exp[N]\cdot \exp[X^2] - \exp[N]\cdot \exp[X]\\
+  & \implies var(R) = \exp[R^2]-\exp[R]^2 = g''_R(1)+g'_R(1)-[g'_R(1)]^2\\
+  &=\exp[N^2] \cdot \exp[X]^2 + \exp[N] \cdot var(X) - \exp[N]\cdot \exp[X] + \exp[N] \cdot \exp[X] - (\exp[N] \cdot \exp[X])^2 \\
+  &= \exp[X]^2 \cdot (\exp[N^2]-\exp[N]^2) + \exp[N] \cdot var(X)
+\end{split}
+\end{equation}
+
+\textbf{So}
+\begin{itemize}
+  \item $\exp[R] = \exp[N] \cdot \exp[X]$
+  \item $var(R) = \exp[N] \cdot var(X) + var(N) \cdot \exp[X]^2$
+\end{itemize}
+
+What we saw just above is used in queueing systems when transmitting: queue length is N, random,
+and the queue has packets of length X\textsubscript{i}.
+
+\section{Distributions}
+\subsection{Bernoulli}
+Let $X \in \{0,1\}, \, p = \prob[X=1]$, then $\exp[X]=p, \, var(X)=p \cdot (1-p)$
+We define $\chi(A)$ as the indicator function.
+
+\subsection{Binomial}
+Let $n$ be the number of i.i.d experiments with $\prob[success]=p$. Let Y be the counter of the successes:
+$Y=\sum\limits_{i=1}^{n} x_i$. We get $\prob[Y=k]= \frac{n!}{k! \cdot (n-k)!}\cdot p^k \cdot (1-p)^{n-k}$
+
+\subsection{Geometric}
+Let Z be the counter of failure prior to the first success. We have $\prob[Z=k] = p \cdot (1-p)^{k-1}$ with $k=0,1,\dots$, \\
+We get $\exp[Z]=\frac{1-p}{p} \; var(Z)=\frac{1-p}{p^2}$.
+Sometimes books refer to $Z'=Z+1$ as the number of failure with the first success. In that case we have:\\
+$\exp[Z']=\frac{1}{p}; \quad var(Z')=\frac{1-p}{p^2}=var(Z)$
+
+\subsection{Poisson}
+Let $X$ be a Poisson r.v. with parameter $\lambda$. Then $\prob[X=k] =  \frac{\lambda^k \cdot e^{-\lambda}}{k!}$ with $k=0,1,\dots$
+\\
+$\exp[X]=\sum\limits_{k=0}^{+\infty}k \cdot \frac{\lambda^k \cdot e^{-\lambda}}{k!}= \lambda \sum\limits_{k=1}^{+\infty}\frac{\lambda^{k-1}\cdot e^{-\lambda}}{(k-1)!}=\lambda$
+and $var(X)=\lambda$
+
+Poisson r.v. play the role in the discrete as the gaussian in the continuos. There exists a theorem similar to CLT that states that under mild assumptions discrete r.v. converges to Poisson (will be better clarified with the Law of rare events).
+
+\subsection{Exponential}
+Let $T$ be an exponential r.v. in the form of
+$$f_T(t)=
+\begin{cases}
+  \lambda \cdot e^{-\lambda \cdot t} & t \ge 0 \\
+  0 & t <0
+\end{cases}
+$$
+\\
+Then $\exp[X]= \frac{1}{\lambda}; \quad var(X)=\frac{1}{\lambda^2}$
+
+The exponential is a r.v. good to model inter-arrival time and reliability (time in-between disasters)
+What is the value of $\prob[T-t > x | T>t]$?
+
+\begin{equation}
+  $$\prob[T-t > x | T>t]=\frac{\prob[T-t > x , T>t]}{\prob[T>t]}=\frac{\prob[T > t+x ]}{\prob[T>t]}=\frac{1-\prob[T \le t+x]}{1-\prob[T\le t]}=\frac{e^{-\lambda \cdot (t+x)}}{e^{-\lambda \cdot t}} = e^{-\lambda \cdot x}$$
+\end{equation}
+We proved that the exponential r.v. is memoryless\footnote{If I observe that a the machine is working, it's like it's new. Not very realistic, but mathematically convenient.}
+
+\subsection{Uniform}
+$\exp[\mathbb{U}]=\frac{a+b}{2},\quad var(\mathbb{U})=\frac{(b-a)^2}{12}$
+
+\subsection{Gamma (also called Erlang distribution)}
+Let $\alpha >0 , \lambda >0$. Then the PDF of a gamma-distributed r.v. is
+\begin{equation}
+  $$f(x) = \frac{\lambda}{\Gamma(\alpha)}\cdot (\lambda \cdot x)^{\alpha -1} \cdot e^{-\lambda \cdot x} \text{ with } x\ge 0$$
+\end{equation}
+
+For the expectation and the variance, we have: $$\exp[G]=\frac{\alpha}{\lambda}, \qquad var(G)=\frac{\alpha}{\lambda^2}$$
+
+Which is the same as $\alpha$ times $\exp[exp]$ and $\alpha$ times $var(exp)$.
+\\ If $\alpha \in \mathbb{N} \implies \Gamma(\alpha) = (\alpha-1)!$ and the gamma
+distribution is the sum of $\alpha$ i.i.d exponential r.v. of parameter $\lambda$.
+
+\begin{equation}
+  \begin{split}
+  \exp[X] &\stackrel{discrete}{=} \sum\limits_{k=0}^{+\infty} k \cdot \prob[X=k]
+  \stackrel{\text{can be shown  that}}{=} \sum\limits_{k=0}^{+\infty} \prob[X>k] \quad\text{  (beautiful)}\\
+  &=0 \cdot p(0) + 1 \cdot p(1) + 2 \cdot p(2) + \dots \\
+  &= p(1) + p(2) + p(3)+ \dots \qquad \prob[X>0]\\
+  & \qquad \qquad + p(2) + p(3) +\dots \quad \prob[X>1]\\
+  & \qquad \qquad \qquad \qquad + p(3)+ \dots \quad \prob[X>2] \\
+  & \dots
+  \end{split}
+\end{equation}
+where $\prob[X=k]=p(k)$ and $\prob[X>k]$ is the complementary distribution
+
+In the continuous case
+\begin{equation}
+  \begin{split}
+    \exp[X] &= \int_{0}^{+\infty} 1-F(x) dx = \int_{0}^{+\infty} x \cdot f(x) dx
+    &=\int_{0}^{+\infty} e^{-\lambda \cdot x} dx = \frac{1}{\lambda}
+  \end{split}
+\end{equation}
+
+\section{Conditional Distribution}
+(Note: this material can be found in Chapter 2 K. T.).\\
+We saw the Total Probability theorem and how to use it to find a probability with subsetting.\\
+Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $\prob[Y=y]\neq 0$.
+Then, $\forall x,y$
+\begin{equation}
+  \begin{split}
+    \prob[X\le x, Y \le y] &= \sum \limits_{\eta \le y} \prob[X \le x , Y \le \eta] \\
+    &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot \prob[Y=\eta]\\
+    &\stackrel{continuous}{=} \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)
+  \end{split}
+\end{equation}
+We can try to find the expectation of $g(x)$ which is a function of Y using the conditioning. So we obtain:
+\begin{equation}
+  $$\exp[g(x)]=\exp[\exp[g(x)|Y]] = \int_{-\infty}^{+\infty}\exp[g(x)|Y=\eta] dF_Y(\eta)$$
+\end{equation}
+
+\textbf{SO}
+\begin{equation}
+  \begin{split}
+   &\forall x,y \\
+  &\prob[X\le x , Y \le y] = \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)\\
+  &\forall x \quad \prob[X \le x] = \int_{-\infty}^{+\infty}F_{X|Y}(x|\eta) dF_Y(\eta) \\
+  &\exp[g(x)]=\int_{-\infty}^{+\infty}
+  \exp[g(x)|Y=\eta] dF_Y(\eta)
+  \end{split}
+\end{equation}
+
+
+\subsubsection{Transform approach}
+\begin{equation}
+  \begin{split}
+  g_N(s)&=\sum \limits_{n=1}^{+\infty} \beta \cdot (1-\beta)^{n-1}\cdot s^n = \frac{\beta \cdot s}{1-(1-\beta)\cdot s}\\
+  \phi_T&=\exp[e^{\jmath \cdot t \cdot x}] = \int_{0}^{+\infty} e^{\jmath \cdot t \cdot x} \cdot \lambda \cdot e^{ \lambda \cdot x} dx = \frac{\lambda}{\lambda - \jmath \cdot t} \\
+  \phi_Z &= g_N(\phi_T(t))=\frac{\beta \cdot \frac{\lambda}{\lambda - \jmath \cdot t}}{1-(1-\beta)\cdot \frac{\lambda}{\lambda - \jmath \cdot t}} =
+   \frac{\beta \cdot \lambda}{\lambda - \jmath \cdot t -\lambda - \beta \cdot \lambda} = \frac{\beta \cdot \lambda}{\beta \cdot \lambda - \jmath \cdot t}
+  \end{split}
+\end{equation}
+In the last row we can see how the the composition changed only the parameter: $\lambda$ becomes $\beta \cdot \lambda$.
+
+We recall that $f_{X|Y} = \frac{f_{XY}(x,y)}{f_Y(y)}$ with $f_Y(y)\neq 0$ in the considered interval.
+We can then derive
+\begin{equation}
+  \begin{split}
+  F_{X|Y}(x|y) &= \int_{-\infty}^{x}f_{X|Y}(\xi,y)d\xi\\
+  \forall x,y \quad \prob[X \le x , Y \le y] &= \int_{-\infty}^{x}d\xi \int_{-\infty}^{y}f_{XY}(\xi,\eta) d\eta\\
+  &=\int_{-\infty}^{y}f_Y(\eta) \int_{-\infty}^{x}f_{X|Y}(\xi,\eta) d\xi d\eta \\
+  &=\int_{-\infty}^{y}F_{X|Y}(x,\eta) dF_Y(\eta)\\
+  \exp[g(x)] &= \int_{-\infty}^{+\infty} \int_{-\infty}^{+\infty}g(\eta) f_{XY}(\xi,\eta) d\eta  d\xi \\
+  &= \int_{-\infty}^{+\infty} f_Y(\eta) \int_{-\infty}^{+\infty}g(\eta) f_{X|Y}(\xi,\eta)   d\xi d\eta \\
+  &= \int_{-\infty}^{+\infty}\exp[g(x)|Y=\eta] dF_Y(\eta)
+  \end{split}
+\end{equation}
