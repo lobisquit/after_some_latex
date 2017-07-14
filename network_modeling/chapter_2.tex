@@ -6,7 +6,7 @@ A markov process is a process $X_n \text{ or } X_t$ s.t.
 	\prob[X_{n+1} = j | X_0 = i_0, X_1 = i_1, \dots, X_n = i_n] = \prob[X_{n+1} = j | X_n=i_n] = P
 \end{equation}
 
-with P as the \textit{one-step probability}. From now on, the notation for that probability will be $P_{i\, j}^{n,n+1}=P_{i\, j} \quad \forall n$ if the MC is homogeneous, i.e. the transition probabilities are stationary.
+with P as the \textit{one-step probability}. From now on, the notation for that probability will be $P_{i j}^{n,n+1}=P_{i j} \quad \forall n$ if the MC is homogeneous, i.e. the transition probabilities are stationary.
 
 We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix}, which will characterize the process as
 \begin{equation} \bm P=\begin{pmatrix}
@@ -14,7 +14,7 @@ We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix
 	P_{10} & P_{11} & \cdots \\
 	\vdots & \vdots & \ddots  \\
  	\end{pmatrix}
-	\text{with } P_{i\, j}\ge 0 \forall i,j \quad \text{ and } \sum\limits_{j=0}^{+\infty}P_{i\, j} = 1 \quad \forall i
+	\text{with } P_{i j}\ge 0 \forall i,j \quad \text{ and } \sum\limits_{j=0}^{+\infty}P_{i j} = 1 \quad \forall i
 \end{equation}
 
 For example
@@ -212,18 +212,18 @@ Now we check that the sum of probabilities $P_{TL}(n)$, $P_{FL}(n)$ and $P_{NL}(
 \end{equation}
 
 \section{First passage time}
-\begin{definition}[$\theta_{i\, j}$]
-We define $\theta_{i\, j}$ to be the number of transitions to reach j from i for the first time.
+\begin{definition}[$\theta_{i j}$]
+We define $\theta_{i j}$ to be the number of transitions to reach j from i for the first time.
 \end{definition}
-We now would like to know $\prob[\theta_{i\, j}=n]$ and $\exp[\theta_{i\, j}]$.
+We now would like to know $\prob[\theta_{i j}=n]$ and $\exp[\theta_{i j}]$.
 
 Let's start with the probability:
 \begin{definition}[n-step probability from i to j]
-	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{i\, j}=n]$, as follows:
+	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{ij}=n]$, as follows:
 	\begin{equation}\begin{split}
-		\prob[\theta_{i\, j}=n] &= f_{i\, j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1, \dots , n-1}\\
-		f_{i\, j}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
-		f_{i\, j}(n)&=P_{i\, j} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{k\, j}(n-1)\\
+		\prob[\theta_{i j}=n] &= f_{i j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1, \dots , n-1}\\
+		f_{ij}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
+		f_{ij}(n)&=P_{ij} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{kj}(n-1)\\
 	\end{split}\end{equation}
 \end{definition}
 \subsubsection{Example for a 2-state MC}
@@ -258,36 +258,36 @@ For a two state \gls{mc} like the one in \Fig{fig:2sMC}, we can write:
 For a general \gls{mc}, we have
 \begin{equation}\begin{split}
 	P^{(n)} &= P^n \\
-	P_{i\, j}^{(n)} &= \sum\limits_{m=1}^n f_{i\, j}(m) \cdot P_{j,j}^{(n-m)} \quad n \ge 1 \\
-	f_{i\, j}(n)&=
+	P_{i j}^{(n)} &= \sum\limits_{m=1}^n f_{i j}(m) \cdot P_{j,j}^{(n-m)} \quad n \ge 1 \\
+	f_{i j}(n)&=
 	\begin{cases}
-		P_{i\, j}^{(n)} -\sum\limits_{m=1}^{n-1} f_{i\, j}(m) \cdot P_{j,j}^{(n-m)} & n \ge 2 \\
-		P_{i\, j}^{(n)} = P_{i\, j} & n =1 \\
+		P_{i j}^{(n)} -\sum\limits_{m=1}^{n-1} f_{i j}(m) \cdot P_{j,j}^{(n-m)} & n \ge 2 \\
+		P_{i j}^{(n)} = P_{i j} & n =1 \\
 		0 & n=0
 	\end{cases} \\
-	\theta_{i\, j}(n)&=
+	\theta_{i j}(n)&=
 	\begin{cases}
-		1 & \text{w.p. } P_{i\, j} \\
-		1+\theta_{k\, j} &  \text{w.p. } P_{i\, j} \text{ with } k \neq j
+		1 & \text{w.p. } P_{i j} \\
+		1+\theta_{k j} &  \text{w.p. } P_{i j} \text{ with } k \neq j
 	\end{cases} \\
 \end{split}\end{equation}
 
-Let's now focus on the expectation of $\theta_{i\, j}$. We can write:
+Let's now focus on the expectation of $\theta_{i j}$. We can write:
 \begin{equation}\begin{split}
-	\exp[\theta_{i\, j}] &= P_{i\, j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k\, j}])\cdot P_{i,k}\\
-	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k\, j}] \cdot P_{i,k} ~\forall i \neq j\\
+	\exp[\theta_{i j}] &= P_{i j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k j}])\cdot P_{i,k}\\
+	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k j}] \cdot P_{i,k} ~\forall i \neq j\\
 \end{split}\end{equation}
-with \textit{(1)} $P_{i\, j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
+with \textit{(1)} $P_{i j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
 \\
 We then get $N$ equations in $N$ unknowns, so the system can be solved.
 \\
 Now, with the example of the two state MC, we will show that the average return
 time is the inverse of the in-state remaining probability.
 \begin{equation}\begin{split}
-	\exp[\theta_{0,1}] &= 1 + P_{00} \cdot \exp[\theta_{0,1}] \quad \exp[\theta_{0,1}] = \frac{1}{1-P_{00}} = \frac{1}{a}\\
-	\exp[\theta_{1,0}] &= 1 + P_{11} \cdot \exp[\theta_{1,0}] \quad \exp[\theta_{1,0}] = \frac{1}{1-P_{11}} = \frac{1}{b}\\
-	\exp[\theta_{0,0}] &= 1 + P_{01} \cdot \exp[\theta_{1,0}] =1+\frac{a}{b} = \frac{1}{1-P_{00}} = \left(\frac{b}{a+b}\right)^{-1}\\
-	\exp[\theta_{1,1}] &= 1 + P_{10} \cdot \exp[\theta_{0,1}] =1+\frac{b}{a} = \frac{1}{1-P_{00}} = \left(\frac{a}{a+b}\right)^{-1}\\
+	\exp[\theta_{01}] &= 1 + P_{00} \cdot \exp[\theta_{01}] \quad \exp[\theta_{01}] = \frac{1}{1-P_{00}} = \frac{1}{a}\\
+	\exp[\theta_{10}] &= 1 + P_{11} \cdot \exp[\theta_{10}] \quad \exp[\theta_{10}] = \frac{1}{1-P_{11}} = \frac{1}{b}\\
+	\exp[\theta_{00}] &= 1 + P_{01} \cdot \exp[\theta_{10}] =1+\frac{a}{b} = \frac{1}{1-P_{00}} = \left(\frac{b}{a+b}\right)^{-1}\\
+	\exp[\theta_{11}] &= 1 + P_{10} \cdot \exp[\theta_{01}] =1+\frac{b}{a} = \frac{1}{1-P_{00}} = \left(\frac{a}{a+b}\right)^{-1}\\
 	\lim_{n \to +\infty} P^n &=
 	\begin{pmatrix}
 		\frac{b}{a+b} & \frac{a}{a+b} \\
@@ -297,9 +297,9 @@ time is the inverse of the in-state remaining probability.
 
 Analyzing the second order momentum, we have
 \begin{equation}\begin{split}
-	\exp[\theta_{i\, j}^2] &= P_{i\, j} + \sum\limits_{k \neq j} \exp[(1+\theta_{k\, j})]\cdot P_{i,k}\\
-	&= 1 +  \underbrace{2 \cdot \sum\limits_{k \neq j} \exp[\theta_{k\, j}]\cdot P_{i,k}}_{\exp[\theta_{i\, j}]-1} + \sum\limits_{k \neq j} \exp[\theta_{k\, j}^2] \cdot P_{i,k}\\
-	&= 2 \cdot \exp[\theta_{i\, j}]-1 +  \sum\limits_{k \neq j} \exp[\theta_{k\, j}^2] \cdot P_{i,k} \forall i \neq j \\
+	\exp[\theta_{i j}^2] &= P_{i j} + \sum\limits_{k \neq j} \exp[(1+\theta_{k j})]\cdot P_{i,k}\\
+	&= 1 +  \underbrace{2 \cdot \sum\limits_{k \neq j} \exp[\theta_{k j}]\cdot P_{i,k}}_{\exp[\theta_{i j}]-1} + \sum\limits_{k \neq j} \exp[\theta_{k j}^2] \cdot P_{i,k}\\
+	&= 2 \cdot \exp[\theta_{i j}]-1 +  \sum\limits_{k \neq j} \exp[\theta_{k j}^2] \cdot P_{i,k} \forall i \neq j \\
 \end{split}\end{equation}
 
 Which means that for the two-state MC, we have
@@ -336,20 +336,20 @@ which means that for the general case we have:
 	0 & I
 	\end{pmatrix}
 \end{split}\end{equation}
-Let's now define $W_{i\, j}^{(n)}$ as follows
-\begin{definition}[$W_{i\, j}^{(n)}$ as n-step probability to reach j from i]
+Let's now define $W_{i j}^{(n)}$ as follows
+\begin{definition}[$W_{i j}^{(n)}$ as n-step probability to reach j from i]
 	\begin{equation}
-		W_{i\, j}^{(n)} = \exp\left[\sum\limits_{l=0}^n \Chi\{ X_l=j\}|X_0=i\right] = \sum\limits_{l=0}^n\exp\left[\Chi \{ X_l=j\}|X_0=i\right]\sum\limits_{l=0}^n P_{i\, j}^{(l)}
+		W_{i j}^{(n)} = \exp\left[\sum\limits_{l=0}^n \Chi\{ X_l=j\}|X_0=i\right] = \sum\limits_{l=0}^n\exp\left[\Chi \{ X_l=j\}|X_0=i\right]\sum\limits_{l=0}^n P_{i j}^{(l)}
 	\end{equation}
 \end{definition}
-Now suppose that $i,j$ are transient and put $W_{i\, j}^{(n)}$ as element of a matrix. The resulting matrix will be:
+Now suppose that $i,j$ are transient and put $W_{i j}^{(n)}$ as element of a matrix. The resulting matrix will be:
 \begin{equation}\begin{split}
 	W^{(n)} &= I + Q + \dots + Q^n = I + Q \cdot W^{(n-1)} \\
 	W &= \lim_{n \to +\infty} W^{(n)} = \sum\limits_{l=0}^{+\infty} [I-Q]^{-1} \cdot \vec{1}
 \end{split}\end{equation}
-If we sum, for all j transient states $W_{i\, j}$  we obtain:
+If we sum, for all j transient states $W_{i j}$  we obtain:
 \begin{equation}
-	\sum\limits_{j=0}^{r-1}W_{i\, j} = \exp\left[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i\right] = \exp[T|X_0=i]=v_i
+	\sum\limits_{j=0}^{r-1}W_{i j} = \exp\left[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i\right] = \exp[T|X_0=i]=v_i
 \end{equation}
 Let's now find the probability to go from a transient state ($i$) to an absorbing one ($k$)
 \begin{equation}
@@ -1060,10 +1060,10 @@ We can ignore the $d$ value if we calculate:
 		Given an irreducible \gls{mc} with a state set $S=\left\{0,1,2,\dots \right\}$ it is recurrent if and only if:
 
 		$$ \forall i \neq 0, f_{i 0} = 1 $$
-		where $f_{i 0}$ is the probability of reaching state $j$ starting from 0 at any time in the future.
+		where $f_{i 0}$ is the probability of reaching state $0$ starting from $i$ at any time in the future.
 	\end{lemma}
 	---
-	\begin{proof} \emph{if implication} $"\Leftarrow"$
+	\begin{proof} \emph{if implication} ``$\Leftarrow$''
 		\begin{equation}\begin{split}
 			f_{00} = P_{00} + \sum_{i \neq 0} P_{0i} f_{i 0} \stackrel{(*)}{=} \sum_{i} P_{0i} = 1
 		\end{split}\end{equation}
@@ -1072,7 +1072,7 @@ We can ignore the $d$ value if we calculate:
 		This implies that, starting from any state $j$, the chain returns to zero eventually with probability 1.
 	\end{proof}
 
-	\begin{proof} \emph{only if implication} $``\Rightarrow''$
+	\begin{proof} \emph{only if implication} ``$\Rightarrow$''
 		Suppose chain is irreducible, but thesis is false, i.e.
 		$$ \exists i \neq 0 : f_{i0} < 1 $$
 

@@ -135,7 +135,7 @@ Defining
 \begin{theorem}[5.7, Joint probability of {$[W_{1},\dots,W_{n}]$}]
 	Being $W_{1}$,$W_{2}$,..$W_{n}$ the arrival time in a Poisson Process $N(t)$ with rate ${\lambda}>0$. Given $N(t)=n$, the joint distribution of $w_{1},w_{2}\dots,w_{n}$ variables is:
 	\begin{equation}
-	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = P (W_1=w_1,...W_n=w_n|N(t)=n) = \frac{n!}{t^n}
+	f_{W_1,W_2,..W_n|n} (w_1,w_2,..w_n) = \prob[W_1=w_1,...W_n=w_n|N(t)=n] = \frac{n!}{t^n}
 	\end{equation}
 	where we supposed that $0<w_1<\dots<w_n<t$, otherwise the function is zero.
 	\begin{proof}
@@ -239,8 +239,8 @@ For the M/G/$\infty$ queue, we define these special quantities, in order to buil
 A user is still in the system at time $t$ if $W_k + Y_k \geq t$. Therefore $M(t) = \sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} $.
 \begin{equation}
 	\begin{split}
-		\prob[M(t)=m|X(t)=n] &= \prob\bigg[\sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} = m|X(t)=n\bigg] \\
-		&= \prob\bigg[\sum\limits_{k=1}^{n} \mathds{1}\{U_k + Y_k \geq t\}\bigg] = {{n}\choose{m}}p^{m}(1-p)^{n-m}
+		\prob[M(t)=m|X(t)=n] &= \prob\left[\sum\limits_{k=1}^{X(t)} \mathds{1}\{W_k + Y_k \geq t\} = m|X(t)=n\right] \\
+		&= \prob\left[\sum\limits_{k=1}^{n} \mathds{1}\{U_k + Y_k \geq t\}=m \right] = {{n}\choose{m}}p^{m}(1-p)^{n-m}
 	\end{split}
 \end{equation}
 
@@ -445,7 +445,7 @@ State transitions take $\begin{cases}
 	D_n &= \exp[\text{arrivals - departures }|n ]= \lambda [\beta + 1 - e^{-\lambda \beta} (1-q_r)^n ]\\
 	P_{succ} &= \lambda \beta e^{-\lambda \beta} (1-q_r)^n + e^{-\lambda \beta} (1-q_r)^{n-1} n q_r \\
 	&\approx (\lambda \beta + n q_r) e^{-(\lambda \beta + n q_r)} \quad \text{ if } n q_r \ll 1 \\
-	&= g(n) e^{g(n)}
+	&= G(n) e^{-G(n)}
 \end{split}\end{equation}
 
 \begin{figure} \centering
@@ -459,14 +459,14 @@ If two transmissions occour at the same time, but the nodes transmitting are far
 	\centering
 	\begin{tabular}{|c|c|c|}
 		\textbf{Type} & \textbf{Duration} & \textbf{Probability} \\ \hline
-		IDLE & $\beta$ & $e^{-\lambda \beta} (1-q_r)^n \approx e^{-g(n)}$ \\
-		SUCCESS & $1+\beta$ & $\approx g(n) e^{-g(n)}$ \\
-		COLLISION & $2 \beta$ & $1-(1+g(n)) e^{-g(n)}$
+		IDLE & $\beta$ & $e^{-\lambda \beta} (1-q_r)^n \approx e^{-G(n)}$ \\
+		SUCCESS & $1+\beta$ & $\approx G(n) e^{-G(n)}$ \\
+		COLLISION & $2 \beta$ & $1-(1+G(n)) e^{-G(n)}$
 	\end{tabular}
 	\caption{Events occouring in the CSMA channel}
 	\label{TAB:tx_prob}
 \end{table}
-$D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{g(n) e^{-g(n)}}{\beta + 1 - e^{-g(n)}}$\\
+$D_n \lessgtr 0 $ if $\lambda \lessgtr \frac{G(n) e^{-G(n)}}{\beta + 1 - e^{-G(n)}}$\\
 We know that instability will occour eventually, but the time for it to happen is really long.
 
 \subsection{Recurrent \gls{mc} behavior}
