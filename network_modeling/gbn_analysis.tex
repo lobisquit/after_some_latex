@@ -104,10 +104,13 @@ As before: $\varphi(s) = [I - z\psi(s)]^{-1} \rightarrow \varphi(s,n)=[\psi(s)]^
 								\end{equation}
 				\end{itemize}
 	\item We can define multiple metrics, i.e., $\textbf{s} = (s_1,...)$. In this case,
-				$$P_{ij}\E[\text{k-th metric on transition } i \rightarrow j] = \frac{\partial \psi_{ij}(s_1,...)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}} $$
-				$$R_{ij}^{(k)}P_{ij}=  \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}$$
-				$$R_i^{(k)} = \sum_j P_{ij}R_{ij}^{(k)} = \sum_j \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}$$
-				$$ \lim_{t \to \infty}\frac{R^{(1)}(t)}{R^{(2)}(t)}=\frac{\sum_i \pi_i R_i^{(1)}}{\sum_i \pi_i R_i^{(2)}}= \frac{\mathbf{\pi} \frac{\partial \psi(\mathbf{s})}{\partial s_1}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}{\mathbf{\pi}\frac{\partial \psi(\mathbf{s})}{\partial s_2}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}$$
+		\begin{esp}
+			P_{ij}\cdot&\E[\text{k-th metric on transition } i \rightarrow j] = \frac{\partial \psi_{ij}(s_1,...)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}\\
+			R_{ij}^{(k)}P_{ij}&=  \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}\\
+			R_i^{(k)} &= \sum_j P_{ij}R_{ij}^{(k)} = \sum_j \frac{\partial \psi_{ij}(s)}{\partial s_k}\bigg|_{\textbf{s}=\textbf{1}}\\
+			\lim_{t \to \infty}\frac{R^{(1)}(t)}{R^{(2)}(t)}&=\frac{\sum_i \pi_i R_i^{(1)}}{\sum_i \pi_i R_i^{(2)}}= \frac{\mathbf{\pi} \frac{\partial \psi(\mathbf{s})}
+			{\partial s_1}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}{\mathbf{\pi}\frac{\partial \psi(\mathbf{s})}{\partial s_2}\bigg|_{\textbf{s}=\textbf{1}}\textbf{1}}
+		\end{esp}
 	\item To compute $\psi_{ij}(s)$:
 		\begin{itemize}
 			\item[a)] Let $\epsilon(i,j)$ be the set of all events that lead from state i to state j
@@ -125,15 +128,17 @@ Suppose a system governed by the Go Back N protocol.
 In this system the \gls{rtt} take m slot and when a received packet is wrong, it's retransmitted, until the $N^{th}$ failure, after which the packet is discarded.
 
 $x(t)$ is the random variable indicating the state of the system. The possible values of $x(t)$ can be:
-
-$$ x(t) = G \text{ \qquad if success at t} $$
-$$ x(t) = B_j \text{ \qquad if $j_{th}$ failure at t} $$
+\begin{equation*}\begin{cases}
+	 x(t) = G &\text{if success at t} \\
+	 x(t) = B_j &\text{ if $j_{th}$ failure at t}
+\end{cases}\end{equation*}
 
 Where we count a success whenether we enter in state $G$.
 In the following system, we define 2 metrics:
-
-$$s_1 = \text{number of success per transition}$$
-$$s_2 = \text{time per transition}$$
+\begin{esp*}
+	s_1 &= \text{number of success per transition}\\
+	s_2 &= \text{time per transition}
+\end{esp*}
 
 \begin{figure}[h]
 	\begin{center}
@@ -146,10 +151,12 @@ $$s_2 = \text{time per transition}$$
 We spend 1 slot in $G$ and m slots in $B_j$ since we need an \gls{rtt} to recognize an error.
 
 For the sake of simplicity we rename the transition probability in a simpler way:
-$$ \beta_{00} = P_{00}s_1s_2 \qquad \beta_{01} = P_{01}s_2$$
-$$ \beta_{10} = P_{10}(m)s_1s_2^m \qquad \beta_{11} = P_{11}(m)s_2^m$$
+\begin{equation*}\begin{matrix}
+	\beta_{00} = P_{00}s_1s_2 & \beta_{01} = P_{01}s_2\\
+	\beta_{10} = P_{10}(m)s_1s_2^m & \beta_{11} = P_{11}(m)s_2^m
+\end{matrix}\end{equation*}
 
-All these $\beta s$ seems similar, we can simplify a bit the system assuming the following statement:
+All these $\beta_s$ seems similar, we can simplify a bit the system assuming the following statement:
 
 \begin{enumerate}
 	\item metrics on different transitions are independent;

@@ -32,7 +32,7 @@ $F(x) = \prob[X \le x]$ is called the distribution function and has the followin
   \item F is monothonic non-decreasing $\implies$ if $x_1 > x_2 \implies F(x_1)\ge F(x_2)$
   \item F(x) is continuous from the right
 \end{enumerate}
-We define $f(x)=F'(x)$ the probability density function \textit{PDF}.
+We define $f(x)=F^\prime(x)$ the probability density function \textit{PDF}.
 
 \subsection{Moment}
 We define  the moment as:
@@ -48,14 +48,14 @@ We will denote $\exp[g(x)]=\int_{-\infty}^{+\infty} g(x)\, d F_X(x)$
 \subsection{Joint probability}
 We define the joint probability of two variables as
 \begin{equation*}
-  $$F_{XY}(x,y)=\prob[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty} f_{XY}(\eta,\xi) d\eta d\xi$$
+  $$F_{XY}(x,y)=\prob[X\le x , Y \le y] \stackrel{\text{cont. case}}{=} \int_{-\infty}^{y}\int_{-\infty}^{x} f_{XY}(\eta,\xi) d\eta d\xi$$
 \end{equation*}
 
 From what we obtain in \Sec{sec:pmd}, we can write \\
-\begin{equation*}
-  $$F_X(x)=F_{XY}(x,+\infty)=\lim\limits_{y \to +\infty} F_{XY}(x,y)$$
-  $$F_Y(y)=F_{XY}(+\infty,y)=\lim\limits_{x \to +\infty} F_{XY}(x,y)$$
-\end{equation*}
+\begin{esp}
+  F_X(x)&=F_{XY}(x,+\infty)=\lim\limits_{y \to +\infty} F_{XY}(x,y)\\
+  F_Y(y)&=F_{XY}(+\infty,y)=\lim\limits_{x \to +\infty} F_{XY}(x,y)
+\end{esp}
 If X and Y are independent ($X \indep Y$), we have
 \begin{itemize}
   \item $F_{XY}(x,y)=F_X(x)\cdot F_Y(y) \; \forall x,y$
@@ -107,10 +107,10 @@ $$\phi(t) = g(e^{\imath \cdot t})$$
 Doing the derivative of g(s) we obtain:
 \begin{equation}
   \begin{split}
-    & g'(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
-    \implies g'(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = \exp[X] \\
-    & g''(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot (k-1) \cdot s^{k-2}
-    \implies g''(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k = \exp[X^2]-\exp[X] \\
+    & g^\prime(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot s^{k-1}
+    \implies g^\prime(1) = \sum\limits_{k=0}^{+\infty} k \cdot p_k \cdot = \exp[X] \\
+    & g^{\prime\prime}(s) = \sum\limits_{k=0}^{+\infty} p_k \cdot k \cdot (k-1) \cdot s^{k-2}
+    \implies g^{\prime\prime}(1) = \sum\limits_{k=0}^{+\infty} k \cdot(k-1) p_k = \exp[X^2]-\exp[X] \\
     &\implies \exp[X^2] = g''(1)+g'(1) \; \; var(X) = g''(1)+g'(1)-(g'(1))^2
   \end{split}
 \end{equation}
@@ -228,13 +228,13 @@ In the continuous case
 \section{Conditional Distribution}
 (Note: this material can be found in Chapter 2 K. T.).\\
 We saw the Total Probability theorem and how to use it to find a probability with subsetting.\\
-Let's now extend it to the composite PMD. Let $X,Y$ be two indipendent r.v, with $\prob[Y=y]\neq 0$.
+Let's now extend it to the composite PMD: let $X,Y$ be two indipendent r.v, with $\prob[Y=y]\neq 0$ in case $X,Y$ are discrete r.v.
 Then, $\forall x,y$
 \begin{equation}
   \begin{split}
-    \prob[X\le x, Y \le y] &= \sum \limits_{\eta \le y} \prob[X \le x , Y \le \eta] \\
-    &\stackrel{discrete}{=} \sum \limits_{\eta \le y} F_{X|Y}(x | \eta) \cdot \prob[Y=\eta]\\
-    &\stackrel{continuous}{=} \int_{\eta \le y} F_{X|Y}(x|\eta) dF_Y(\eta)
+    \prob[X\le x, Y \le y] &= \sum \limits_{\eta \le y} \prob[X \le x , Y = \eta] \\
+    &\stackrel{discrete}{=} \sum \limits_{\eta =0}^{y} F_{X|Y}(x | \eta) \cdot \prob[Y=\eta]\\
+    &\stackrel{continuous}{=} \int_{0}^{y} F_{X|Y}(x|\eta) dF_Y(\eta)
   \end{split}
 \end{equation}
 We can try to find the expectation of $g(x)$ which is a function of Y using the conditioning. So we obtain:

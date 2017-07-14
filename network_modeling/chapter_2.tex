@@ -6,7 +6,7 @@ A markov process is a process $X_n \text{ or } X_t$ s.t.
 	\prob[X_{n+1} = j | X_0 = i_0, X_1 = i_1, \dots, X_n = i_n] = \prob[X_{n+1} = j | X_n=i_n] = P
 \end{equation}
 
-with P as the \textit{one-step probability}. From now on, the notation for that probability will be $P_{i,j}^{n,n+1}=P_{i,j} \quad \forall n$ if the MC is homogeneous, i.e. the transition probabilities are stationary.
+with P as the \textit{one-step probability}. From now on, the notation for that probability will be $P_{i\, j}^{n,n+1}=P_{i\, j} \quad \forall n$ if the MC is homogeneous, i.e. the transition probabilities are stationary.
 
 We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix}, which will characterize the process as
 \begin{equation} \bm P=\begin{pmatrix}
@@ -14,7 +14,7 @@ We can suppose $n\ge 0$ and we'll have the \textbf{transition probability matrix
 	P_{10} & P_{11} & \cdots \\
 	\vdots & \vdots & \ddots  \\
  	\end{pmatrix}
-	\text{with } P_{i,j}\ge 0 \forall i,j \quad \text{ and } \sum\limits_{j=0}^{+\infty}P_{i,j} = 1 \quad \forall i
+	\text{with } P_{i\, j}\ge 0 \forall i,j \quad \text{ and } \sum\limits_{j=0}^{+\infty}P_{i\, j} = 1 \quad \forall i
 \end{equation}
 
 For example
@@ -96,7 +96,7 @@ Let now define the probability that the gambler goes to ruin if he starts in sta
 We can now define the transition probability as follows
 
 \begin{equation}\begin{split}
-q \cdot \underbrace{(u_k - u_k-1)}_{X_k} &= p \cdot \underbrace{\left(u_{k+1} -u_k\right)}_{X_{k+1}} \\
+q \cdot \underbrace{(u_k - u_{k-1})}_{X_k} &= p \cdot \underbrace{\left(u_{k+1} -u_k\right)}_{X_{k+1}} \\
 X_{k+1} = \frac{q}{p}\cdot X_k \quad & X_{2} = \frac{q}{p}\cdot X_1 \quad X_{3} = \left(\frac{q}{p}\right)^2 \cdot X_1\\
 \implies & X_{k} = \left(\frac{q}{p}\right)^{k-1}\cdot X_1
 \end{split}\end{equation}
@@ -166,7 +166,7 @@ Given that a \textit{sync sequence} is composed by $S$ bits we can compute the p
 	\label{correct_detection}
 \end{equation}
 In \eqref{correct_detection} we call $\epsilon$ the value of the trasmission error probability.
-Now we suppone that the system is in the \textit{hunt state} $H$ and it is looking at the $n^{th}$ bit of the slot. We call $P_{TL}(n)$ the probability of move to state $TL_1$ given that the system is looking at $n^{th}$ bit of the slot.
+Now we suppose that the system is in the \textit{hunt state} $H$ and it is looking at the $n^{th}$ bit of the slot. We call $P_{TL}(n)$ the probability of move to state $TL_1$ given that the system is looking at $n^{th}$ bit of the slot.
 \begin{equation}
 	P_{TL}(n) = (1-P_W)^{N-n} \cdot P_C
 \end{equation}
@@ -199,7 +199,7 @@ We call $P_{FL}(n)$ the probability of move to state $FL_1$ given that the syste
 	P_{FL}(n) = \sum_{i=0}^{N-n-1} (1-P_W)^{i} \cdot P_W + \sum_{i=1}^{n-1} (1-P_W)^{N-n+i-1} \cdot (1-P_C) \cdot P_W
 	\label{probability_falselock}
 \end{equation}
-In \eqref{probability_falselock} the first summation regards the bits numbered from $n$ to $N-1$ while the second summation regards the bits numbered from $1$ to $n-1$.
+In \eqref{probability_falselock}, the first sum regards the bits numbered from $n$ to $N-1$ wherease the second regards the bits numbered from $1$ to $n-1$.
 Now we check that the sum of probabilities $P_{TL}(n)$, $P_{FL}(n)$ and $P_{NL}(n)$ is equal to one.
 \begin{equation}
 	\begin{split}
@@ -212,18 +212,18 @@ Now we check that the sum of probabilities $P_{TL}(n)$, $P_{FL}(n)$ and $P_{NL}(
 \end{equation}
 
 \section{First passage time}
-\begin{definition}[$\theta_{i,j}$]
-We define $\theta_{i,j}$ to be the number of transitions to reach j from i for the first time.
+\begin{definition}[$\theta_{i\, j}$]
+We define $\theta_{i\, j}$ to be the number of transitions to reach j from i for the first time.
 \end{definition}
-We now would like to know $\prob[\theta_{i,j}=n]$ and $\exp[\theta_{i,j}]$.
+We now would like to know $\prob[\theta_{i\, j}=n]$ and $\exp[\theta_{i\, j}]$.
 
 Let's start with the probability:
-\begin{definition}
-	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{i,j}=n]$, as follows:
+\begin{definition}[n-step probability from i to j]
+	We define the probability of going from state $i$ to state $j$ in $n$ steps, $\prob[\theta_{i\, j}=n]$, as follows:
 	\begin{equation}\begin{split}
-		\prob[\theta_{i,j}=n] &= f_{i,j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1, \dots , n-1}\\
-		f_{i,j}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
-		f_{i,j}(0)&=P_{i,j} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{k,j}(n-1)\\
+		\prob[\theta_{i\, j}=n] &= f_{i\, j}(n)=\prob[X_n=j,X_m \neq j | X_0 = i] \quad \text{with m=1, \dots , n-1}\\
+		f_{i\, j}(0)&=0 \quad \forall i,j \,\, \text{ because $n \ge 1$}\\
+		f_{i\, j}(n)&=P_{i\, j} \cdot \delta(n-1) + \sum\limits_{k \neq j} P_{i,k} \cdot f_{k\, j}(n-1)\\
 	\end{split}\end{equation}
 \end{definition}
 \subsubsection{Example for a 2-state MC}
@@ -258,26 +258,26 @@ For a two state \gls{mc} like the one in \Fig{fig:2sMC}, we can write:
 For a general \gls{mc}, we have
 \begin{equation}\begin{split}
 	P^{(n)} &= P^n \\
-	P_{i,j}^{(n)} &= \sum\limits_{m=1}^n f_{i,j}(m) \cdot P_{j,j}^{(n-m)} \quad n \ge 1 \\
-	f_{i,j}(n)&=
+	P_{i\, j}^{(n)} &= \sum\limits_{m=1}^n f_{i\, j}(m) \cdot P_{j,j}^{(n-m)} \quad n \ge 1 \\
+	f_{i\, j}(n)&=
 	\begin{cases}
-		P_{i,j}^{(n)} -\sum\limits_{m=1}^{n-1} f_{i,j}(m) \cdot P_{j,j}^{(n-m)} & n \ge 2 \\
-		P_{i,j}^{(n)} = P_{i,j} & n =1 \\
+		P_{i\, j}^{(n)} -\sum\limits_{m=1}^{n-1} f_{i\, j}(m) \cdot P_{j,j}^{(n-m)} & n \ge 2 \\
+		P_{i\, j}^{(n)} = P_{i\, j} & n =1 \\
 		0 & n=0
 	\end{cases} \\
-	\theta_{i,j}(n)&=
+	\theta_{i\, j}(n)&=
 	\begin{cases}
-		1 & \text{w.p. } P_{i,j} \\
-		1+\theta_{k,j} &  \text{w.p. } P_{i,j} \text{ with } k \neq j
+		1 & \text{w.p. } P_{i\, j} \\
+		1+\theta_{k\, j} &  \text{w.p. } P_{i\, j} \text{ with } k \neq j
 	\end{cases} \\
 \end{split}\end{equation}
 
-Let's now focus on the expectation of $\theta_{i,j}$. We can write:
+Let's now focus on the expectation of $\theta_{i\, j}$. We can write:
 \begin{equation}\begin{split}
-	\exp[\theta_{i,j}] &= P_{i,j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k,j}])\cdot P_{i,k}\\
-	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k,j}] \cdot P_{i,k} ~\forall i \neq j\\
+	\exp[\theta_{i\, j}] &= P_{i\, j} + \sum\limits_{k \neq j} (1+\exp[\theta_{k\, j}])\cdot P_{i,k}\\
+	&\stackrel{(1)}{=} 1+ \sum\limits_{k \neq j} \exp[\theta_{k\, j}] \cdot P_{i,k} ~\forall i \neq j\\
 \end{split}\end{equation}
-with \textit{(1)} $P_{i,j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
+with \textit{(1)} $P_{i\, j} + \sum\limits_{k\neq j}P_{i,k} =\sum\limits_{\forall k}P_{i,k} = 1 $
 \\
 We then get $N$ equations in $N$ unknowns, so the system can be solved.
 \\
@@ -297,14 +297,14 @@ time is the inverse of the in-state remaining probability.
 
 Analyzing the second order momentum, we have
 \begin{equation}\begin{split}
-	\exp[\theta_{i,j}^2] &= P_{i,j} + \sum\limits_{k \neq j} \exp[(1+\theta_{k,j})]\cdot P_{i,k}\\
-	&= 1 + 2 \underbrace{\cdot \sum\limits_{k \neq j} \exp[\theta_{k,j}]\cdot P_{i,k}}_{\exp[\theta_{i,j}-1]} + \sum\limits_{k \neq j} \exp[\theta_{k,j}^2] \cdot P_{i,k}\\
-	&= 2 \cdot \exp[\theta_{i,j}]-1 +  \sum\limits_{k \neq j} \exp[\theta_{k,j}^2] \cdot P_{i,k} \forall i \neq j \\
+	\exp[\theta_{i\, j}^2] &= P_{i\, j} + \sum\limits_{k \neq j} \exp[(1+\theta_{k\, j})]\cdot P_{i,k}\\
+	&= 1 +  \underbrace{2 \cdot \sum\limits_{k \neq j} \exp[\theta_{k\, j}]\cdot P_{i,k}}_{\exp[\theta_{i\, j}]-1} + \sum\limits_{k \neq j} \exp[\theta_{k\, j}^2] \cdot P_{i,k}\\
+	&= 2 \cdot \exp[\theta_{i\, j}]-1 +  \sum\limits_{k \neq j} \exp[\theta_{k\, j}^2] \cdot P_{i,k} \forall i \neq j \\
 \end{split}\end{equation}
 
 Which means that for the two-state MC, we have
 \begin{equation} \begin{split}
-	\exp[\theta_{01}^2] &= \frac{2 \cdot \exp[\theta_{01}]}{1-P_{00}} = \frac{\frac{2}{a}-1}{a} = \frac{2}{a^2} - \frac{1}{a}\\
+	\exp[\theta_{01}^2] &= \frac{2 \cdot \exp[\theta_{01}]-1}{1-P_{00}} = \frac{\frac{2}{a}-1}{a} = \frac{2}{a^2} - \frac{1}{a}\\
 	var[\theta_{01}] &= \frac{1-a}{a^2} \quad \text{same variance as a geometric r.v.} \\
 	var[\theta_{10}] &= \frac{1-b}{b^2}\\
 	\exp[\theta_{00}^2] &= 2 \cdot \exp[\theta_{00}]  -1 - P_{01}\cdot \exp[\theta_{10}^2] = 1 + \frac{a}{b} + \frac{2a}{b^2} \\
@@ -323,7 +323,7 @@ transient state and the one that creates the absorbing states, like the followin
           0  & I \\
       \end{block}
 			\parbox[c]{1.7cm}{\small 0,1,\dots,r-1 \text{transient}} & \parbox[c]{1.7cm}{\small r,\dots,n \text{absorbing}}
-    \end{blockarray}}
+    \end{blockarray}}\\
 	P^2 &= P \cdot P = \begin{pmatrix}
 	Q^2 & Q \cdot R + R \\
 	0 & I
@@ -336,22 +336,22 @@ which means that for the general case we have:
 	0 & I
 	\end{pmatrix}
 \end{split}\end{equation}
-Let's now define $W_{i,j}^{(n)}$ as follows
-\begin{definition}
+Let's now define $W_{i\, j}^{(n)}$ as follows
+\begin{definition}[$W_{i\, j}^{(n)}$ as n-step probability to reach j from i]
 	\begin{equation}
-		W_{i,j}^{(n)} = \exp[\sum\limits_{l=0}^n \Chi \{ X_l=j\}|X_0=i] = \sum\limits_{l=0}^n\exp[\Chi \{ X_l=j\}|X_0=i]\sum\limits_{l=0}^n P_{i,j}^{(l)}
+		W_{i\, j}^{(n)} = \exp\left[\sum\limits_{l=0}^n \Chi\{ X_l=j\}|X_0=i\right] = \sum\limits_{l=0}^n\exp\left[\Chi \{ X_l=j\}|X_0=i\right]\sum\limits_{l=0}^n P_{i\, j}^{(l)}
 	\end{equation}
 \end{definition}
-Now suppose that $i,j$ are transient and put $W_{i,j}^{(n)}$ as element of a matrix. The resulting matrix will be:
+Now suppose that $i,j$ are transient and put $W_{i\, j}^{(n)}$ as element of a matrix. The resulting matrix will be:
 \begin{equation}\begin{split}
 	W^{(n)} &= I + Q + \dots + Q^n = I + Q \cdot W^{(n-1)} \\
 	W &= \lim_{n \to +\infty} W^{(n)} = \sum\limits_{l=0}^{+\infty} [I-Q]^{-1} \cdot \vec{1}
 \end{split}\end{equation}
-If we sum, for all j transient states $W_{i,j}$  we obtain:
+If we sum, for all j transient states $W_{i\, j}$  we obtain:
 \begin{equation}
-	\sum\limits_{j=0}^{r-1}W_{i,j} = \exp\bigg[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i\bigg] = \exp[T|X_0=i]=v_i
+	\sum\limits_{j=0}^{r-1}W_{i\, j} = \exp\left[\sum\limits_{n=0}^{T-1}\sum\limits_{j=0}^{r-1}\Chi\{X_n=j\}|X_0=i\right] = \exp[T|X_0=i]=v_i
 \end{equation}
-Let's now find the probability to go from a transient state ($i$) to an absorbing one($k$)
+Let's now find the probability to go from a transient state ($i$) to an absorbing one ($k$)
 \begin{equation}
 	U_{i,k}^{(n)} = \prob[T \le n , X_T = k | X_0=i] = \prob[X_n=k|X_0=i]=P_{i,k}^{(n)}
 \end{equation}
@@ -364,7 +364,7 @@ This means that:
 In conclusion, we found that the average first passage time is equal to the average
  absorption time, which is $[I-Q]^{-1}\cdot \vec{1}$
 
-\chapter{Long Run Behaviour}
+\chapter{Long Run Behavior}
 \section{Steady-state probabilities}
 
 	\begin{definition}[Regular \gls{mc}]
@@ -381,7 +381,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\item Limit is \textbf{strictly} positive
 	\end{enumerate}
 
-	\begin{theorem}
+	\begin{theorem}[$\pi$ limiting distribution]
 		For a regular \gls{mc} with states 0, 1, ..., N the limit distribution $\bm\pi = (\pi_0,\pi_1,\cdots,\pi_N)$ is the unique solution of the following system of equations:\\
 
 		$\begin{cases}
@@ -408,7 +408,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 			\end{split}
 		\end{equation}
 		Here the limit and the sum can be switched since the sum is finite.
-		This shows that the system have a solution.
+		This shows that the system has a solution.
 	\end{proof}
 
 	\begin{proof} of \textbf{uniqueness}:
@@ -420,7 +420,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{equation}
 
 		If we apply this trick again $n$ times we can prove by induction that:
-		$X_j$ also satisfy $ X_j = \sum\limits_{k=0}^N X_k P_{kj}^{(n)} $ \quad  $\forall n $
+		$X_j$ also satisfies $ X_j = \sum\limits_{k=0}^N X_k P_{kj}^{(n)} $ \quad  $\forall n $
 
 		Now, as $n \to \infty$, we have that
 		\begin{equation}
@@ -432,7 +432,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 \section{Classes of states}
 	\begin{definition}[Accessible State]
 		State $j$ is {\bfseries accessible} from state $i$ if $\exists n \geq 0$ such that $P_{ij}^{(n)} > 0$. It can be written ($i \rightarrow j$).
-		State it's \textbf{not} accessible if $\forall n \ge 0 \quad P_{ij}^{(n)}=0$
+		State is \textbf{not} accessible if $\forall n \ge 0 \quad P_{ij}^{(n)}=0$
 	\end{definition}
 
 	\begin{definition}[Communicant States]
@@ -443,7 +443,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		\end{cases}$$
 	\end{definition}
 
-	{\bfseries Proprieties}
+	{\bfseries Properties}
 	\begin{enumerate}
 		\item \textbf{Reflexivity}: \quad $i \leftrightarrow i \quad\text{ given } P_{ii}^{(0)}=1$
 		\item \textbf{Symmetry}: \quad if $i \leftrightarrow j$ then $j \leftrightarrow i$
@@ -452,7 +452,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 	This implies that communication between states is an equivalence relation.
 
 	\begin{definition}[Periodicity]
-		The period of state i, written $d(i)$, is the GCD (greatest common denominator) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$.\\
+		The period of state i, written $d(i)$, is the GCD (greatest common divisor) of set $S_i = \{ s>0 : P_{ii}^{(s)} >0 \}$.\\
 		If $d(i)=1$, the state is said to be \textbf{aperiodic}.
 	\end{definition}
 
@@ -498,7 +498,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 
 	In other words a state $i$ is said to be transient if there exists a non-zero probability of never coming back to it.\footnote{like Angela. Please come back Angela, I love you.}
 
-	\begin{definition}
+	\begin{definition}[Number of returns on recurrent and transient states]
 		$M$ is the number of returns to state $i$, starting from $i$
 		$$\exp[M | X_0 = i] = \sum\limits_{k=1}^{+\infty} \prob[M\geq k | X_0 = i] = \sum\limits_{k=1}^{+\infty} f_{ii}^k = \begin{cases}
 		\frac{f_{ii}}{1-f_{ii}}, & \text{if transient} \\
@@ -514,7 +514,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		given X a r.v. it is called improper if  $$\lim_{a\to \infty} \prob[X\geq a] = p_\infty \ne 0$$
 	\end{definition}
 
-	\begin{theorem}
+	\begin{theorem}[Recurrent state]
 		$$i  \text{ is recurrent} \iff \sum\limits_{n=1}^{+\infty} P_{ii}^{(n)} = \infty$$
 	\end{theorem}
 	---
@@ -534,7 +534,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 		the proof is concluded.
 	\end{proof}
 
-	\begin{theorem}
+	\begin{theorem}[Recurrence on communicant states]
 		(not to confuse with theorem on periodicity)
 		$$\text{if } i\leftrightarrow j \text{and i is recurrent} \Rightarrow \text{ j is also recurrent}$$
 	\end{theorem}
@@ -556,7 +556,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 	\end{theorem}
 	---
 
-	The following table summarize some properties for the types of state that can be found in a \gls{mc}:
+	The following table summarizes some properties for the types of state that can be found in a \gls{mc}:
 
 	{\renewcommand{\arraystretch}{1.2}
 	\begin{center}
@@ -566,7 +566,7 @@ In conclusion, we found that the average first passage time is equal to the aver
 			$f_{ii} = \sum\limits_{n=1}^{+\infty} f_{ii}^{(n)}$ & $<1$ & 1 & 1 \\ \hline
 			$\lim\limits_{k \to \infty } \prob[M \geq k | X_0=i]$ & 0 & 1 & 1 \\ \hline
 			$\exp[n|X_0=i]$ & $\frac{f_{ii}}{1-f_{ii}}$ & $\infty$ & $\infty$ \\ \hline
-			$m_i = \sum\limits_n f_{ii}^{(n)}$ & $\infty$ & $\infty$ & $<\infty$ \\ \hline
+			$m_i = \sum\limits_{n=1}^{+\infty} n \cdot f_{ii}^{(n)}$ & $\infty$ & $\infty$ & $<\infty$ \\ \hline
 			$\pi_i = \frac{1}{m_i}$ & 0 & 0 & $>0$ \\ \hline %positive. \pi is less than 1 and greater than 0
 		\end{tabular}
 	\end{center}}
@@ -722,7 +722,7 @@ Which gives an almost lower triangular transition matrix.
 	\label{fig:dataProto}
 \end{figure}
 Let's now suppose to have a system where every T seconds some amount of data $\xi_n$ is generated and let $a_k=\prob[\xi_n=k]$. Let's now assume that the data is generated as an i.i.d. process.  \Fig{fig:dataProto} can be useful.
-Suppose that the system schedule to send an amount of data at the beginning of each slot. Let's now analyze two protocols:
+Suppose that the system schedule to send an amount of data at the beginning of each slot. Let's now analyze three protocols:
 \begin{enumerate}
 	\item all data is sent up to a max of M data unit
 	\item data is sent if there is at least m data unit \label{proto2}
@@ -747,9 +747,10 @@ Let's now suppose that the data incoming in the during one slot is queued for th
 		\end{block}
 	\end{blockarray}
 \end{equation}
-\begin{figure}[h]
+\begin{figure}[ht]
+	\label{fig:diag-proto1}
 	\input{img/proto1.tex}
-	\label{diag:proto1}
+	\caption{Transition diagram for protocol 1}
 \end{figure}
 
 \subsubsection*{Proto 2}
@@ -773,8 +774,10 @@ Let's now suppose that the data incoming in the during one slot is queued for th
 	\end{blockarray}
 \end{equation}
 \begin{figure}[h]
+	\label{fig:diag-proto2}
 	\input{img/proto2.tex}
-	\label{diag:proto2}
+	\caption{Transition diagram for protocol 2}
+
 \end{figure}
 \subsubsection*{Proto 3}
 \begin{equation}
@@ -785,7 +788,7 @@ Let's now suppose that the data incoming in the during one slot is queued for th
 	\end{cases}
 \end{equation}
 \paragraph{Transition diagram}
-The transition diagram is the combination of the two previous protocols.
+The transition diagram is the combination of \Fig{fig:diag-proto1} and \Fig{fig:diag-proto2}.
 %missing this diagram, but I don't have time right now
 	\subsection{G/M/1 queue limiting distribution}
 	We know that the limiting distribution is the solution of the following system of equations:
@@ -839,11 +842,12 @@ We discussed, so far, only an aperiodic MC: the case where $P_{ii}^{(n)}=0$ if n
 \end{equation}
 We can ignore the $d$ value if we calculate:
 \begin{equation}
-	\lim_{n\to+\infty}\left[\frac{1}{n}\sum\limits_{k=0}^{n-1} P_{ii}^{(k)} = \frac{1}{m_i}\right]
+	\lim_{n\to+\infty}\left[\frac{1}{n}\sum\limits_{k=0}^{n-1} P_{ii}^{(k)}\right] = \frac{1}{m_i}
 \end{equation}
-	\begin{definition}[lesson 22/03/17] \label{def:falling_probability}
+
+\begin{definition}[Entering in class via a state $i$ probability] \label{def:falling_probability}
 		Given a recurrent class $C$ and a transient state $i \notin C$, the probability of entering in that class through state $k \in C$ at step $n$ can be written as
-		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, x_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
+		$$ \pi_{ik}^{(n)}(C) = \prob[X_n = k \in C, X_l \notin C ~ \forall l=1, ..., n-1 | X_0 = i] $$
 
 		Thus, the probability that the chain, starting from $i$, reaches class $C$ at step $n$ is
 		$$ \pi_{i}^{(n)}(C) = \sum_{k \in C} \pi_{ik}^{(n)}(C) $$
@@ -979,8 +983,8 @@ We can ignore the $d$ value if we calculate:
 		= \sum_{j=0}^N \pi_j $$
 		where passage marked with the (*) is possible only because sum is finite.
 
-		Since the sum of the $\pi_j$ is not zero, one of them must be strictly positive.
-		Corresponding state is then positive recurrent, proving our theorem.
+		Since the sum of the $\pi_j$ is not zero, at least one of them must be strictly positive.
+		Corresponding states are then positive recurrent, proving our theorem.
 	\end{proof}
 
 	\begin{theorem}[Property of finite \gls{mc}]
@@ -997,13 +1001,13 @@ We can ignore the $d$ value if we calculate:
 		So a null recurrent class cannot exist in a finite \gls{mc}.
 	\end{proof}
 
-	\begin{definition}
+	\begin{definition}[Staying in a class probability]
 		Given a \gls{mc} with a state set $S = \{1, 2, ...\}$, quantity $Y_i(n)$ is defined as the probability of staying in $S$ along an $n$-steps path that starts from $i \in S$.
 
 		$$ Y_i(n) = \prob[X_j \in S ~\forall j=1, 2, ..., n | X_0 = i \in S] $$
 	\end{definition}
 
-	\begin{theorem}
+	\begin{theorem}[$Y_i(n)$ is monothonically non increasing]
 		$Y_i(n)$ is monothonically non-increasing on $n$.
 		$$ Y_i(n) \le Y_i(n-1) $$
 	\end{theorem}
@@ -1174,6 +1178,17 @@ In conclusion we found that
 \end{cases}\end{equation}
 Where the second equation is one-direction only because we cannot say that if I cannot find a solution by guess, then there's no solution.
 
+The following table summarize the results we just found %\Tab{tab:summ}
+\begin{table}[h]
+\centering
+\label{tab:summ}
+\begin{tabular}{c|c|c}
+Cases \ series                                                & \multicolumn{1}{c|}{$\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{q_j}{p_j}$} & $\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{p_j}{q_{j+1}}$ \\ \hline
+Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\ \hline
+\begin{tabular}[c]{@{}c@{}}Positive \\ recurrent\end{tabular} & $+\infty$                                                                               & $< +\infty$                                                          \\ \hline
+\begin{tabular}[c]{@{}c@{}}Null\\ recurrent\end{tabular}      & $+\infty$                                                                               & $+\infty$
+\end{tabular}
+\end{table}
 \section{Random walks}
 Let $0,1,2,\dots$ be the states that keep track of the random walk. Let's now define the probability to advance in state and going back to the previous state as follows:
 \begin{esp}
@@ -1190,7 +1205,7 @@ where with the last row we say that in one step the state can move upward or dow
 
 We can then write:
 \begin{esp}
-	\underbrace{p_i + q_i}_{=1} \cdot Z_i &= p_i \cdot Z_{i+1} + q_i \cdot Z_{i-1} \quad i>1 \\
+	\underbrace{\left(p_i + q_i\right)}_{=1} \cdot Z_i &= p_i \cdot Z_{i+1} + q_i \cdot Z_{i-1} \quad i>1 \\
 	q_i \cdot\left(Z_i - Z_{i-1}\right) &=p_i \cdot\left( Z_{i+1} - Z_i \right)\\
 	Z_{i+1} &= Z_i + \frac{q_i}{p_i}\cdot \underbrace{\left(Z_i - Z_{i-1}\right)}_{(\spadesuit)}
 \end{esp}
@@ -1202,18 +1217,7 @@ Z_{i+1} &= Z_i + Z_1 \cdot \prod\limits_{j=1}^i \frac{q_j}{p_j} \quad i \ge 1\\
 Z_n+1 &= \sum\limits_{i=1}^n \left(Z_{i+1} - Z_i \right)	+Z_1 = Z_1 \cdot \sum\limits_{i=0}^{n} \prod\limits_{j=1}^i \frac{q_j}{p_j}
 \end{esp}
 Moreover we find that if $\sum\limits_{i=0}^{+\infty}p_i < \infty$ then there exists a non-zero bounded solution and therefore the \gls{mc} is transient.
-\newpage
-The following table summarize the results we just found %\Tab{tab:summ}
-\begin{table}[h]
-\centering
-\label{tab:summ}
-\begin{tabular}{c|c|c}
-Cases \ series                                                & \multicolumn{1}{c|}{$\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{q_j}{p_j}$} & $\sum\limits_{i=0}^{+\infty} \prod\limits_{j=1}^i \frac{p_j}{q_{j+1}}$ \\ \hline
-Transient                                                     & $< +\infty$                                                                             & $+\infty$                                                            \\ \hline
-\begin{tabular}[c]{@{}c@{}}Positive \\ recurrent\end{tabular} & $+\infty$                                                                               & $< +\infty$                                                          \\ \hline
-\begin{tabular}[c]{@{}c@{}}Null\\ recurrent\end{tabular}      & $+\infty$                                                                               & $+\infty$
-\end{tabular}
-\end{table}
+\subsubsection{Random walk analysis with G/M/1}
 
 We can then study the result obtained with what we found in M/G/1 system. We can see the $P_{i j}$ as the $a_i$, so we derive:
 \begin{equation}
@@ -1353,12 +1357,12 @@ For $z_i=i$ we now wonder when the relation \eqref{eq:pi0rho} holds:
 	i &\ge \sum\limits_{j=0}^{+\infty} a_{j} \cdot (i-1+j) =(i-1)\cdot\sum\limits_{j=0}^{+\infty} a_{j} + \sum\limits_{j=0}^{+\infty} a_{j} \cdot j \stackrel{(\diamondsuit)}{=} i-1+\rho \\
 	i &\stackrel{?}{\ge } i-1+\rho \quad \text{true if }\rho \le 1
 \end{esp}
-where ($\diamondsuit$) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state probability is positive and equation \eqref{eq:pi0rho}, we can derive the table \ref{tab:rhoBehaviour}:
+where ($\diamondsuit$) is derived from \eqref{eq:MG1-intro} . Recalling that the steady state probability is positive and equation \eqref{eq:pi0rho}, we can derive the table \ref{tab:rhoBehavior}:
 
 \begin{table}[h!]
 \centering
-\caption{Behaviour of the \gls{mc} when varying $\rho$}
-\label{tab:rhoBehaviour}
+\caption{Behavior of the \gls{mc} when varying $\rho$}
+\label{tab:rhoBehavior}
 \begin{tabular}{c|c|c}
 $\rho$ value     & \begin{tabular}[c]{@{}l@{}}Direction of\\ implication\end{tabular} & MC characteristic  \\
 \hline\hline

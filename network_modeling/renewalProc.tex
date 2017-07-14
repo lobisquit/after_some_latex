@@ -1,5 +1,5 @@
 \chapter{Renewal Processes (Cap 7)}
-The main idea of a renewal process is a cyclic recurrence of a random phenomena presenting always the same statistics.
+The main idea of a renewal process is a cyclic recurrence of random phenomena presenting always the same statistics.
 The classical example is the lifetime of a light bulb: everytime a blub dies the new one experience the same conditions as the previous one.
 
 \begin{definition}[Renewal Process]
@@ -7,15 +7,15 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 
 	\begin{itemize}
 		\item $ \forall i, F_i(x) = P[X_i < x] = F(x) \rightarrow $ lifetimes are statistically equivalent
-		\item $ F(0) = 0 \rightarrow $ renewals are not simultanous
-		\item $ F(+\infty) = 1 \rightarrow $ renewals repeat forever
+		\item $ F(0) = 0 \rightarrow $ renewals are not simultaneous
+		\item $ F(+\infty) = 1 \rightarrow $ renewals repeat themselves forever
 	\end{itemize}
 \end{definition}
 
 \begin{remark}[Markov chain as renewal processes]
 	Given this definition, in a \gls{mc} each arrival at a given state can be considered as a renewal instant.
 
-	In fact, for the Markov property the future evolution depends only on the current state, so behaviour of the process through a given node is the same after every passage.
+	In fact, for the Markov property the future evolution depends only on the current state, so behavior of the process through a given node is the same after every passage.
 \end{remark}
 
 \begin{remark}[Poisson process as renewal processes]
@@ -44,7 +44,7 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	Since all variables are indipendent from the past, the knowledge of $N(t)$ or $W_n$ allows to fully characterize the process.
 
 \subsection{Renewal function}
-	Given a serie of renewals, it can be interesting to obtain the probability distribution on the \emph{n}-th event: since it describes a sum of i.i.d. r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
+	Given a series of renewals, it can be interesting to obtain the probability distribution on the \emph{n}-th event: since it describes a sum of i.i.d. r.v., it is the \emph{n}-th convolution of $F(x)$ with itself.
 
 	\begin{equation}
 		F_n(t) = \prob[W_n \le t] \stackrel{(*)}{=} \prob[N(t) \ge n]
@@ -105,12 +105,12 @@ The classical example is the lifetime of a light bulb: everytime a blub dies the
 	\end{equation*}
 	where again it is taken into account that $\delta_t$ must be smaller than $t$, i.e. the last renewal cannot happen before 0.
 
-	The asymptotic behaviour of this parameter, that gets rid of the transient component, gives this surprising result.
+	The asymptotic behavior of this parameter, that gets rid of the transient component, gives this surprising result.
 	\begin{equation*}
 		\lim_{t \to +\infty} \exp[\beta_t] = \lim_{t \to +\infty} \frac{2-e^{-\lambda \cdot t}}{\lambda} = \frac{2}{\lambda} > \frac{1}{\lambda} = \exp[X] \text{ where } X \sim exp(\lambda)
 	\end{equation*}
 	This result is indeed correct, but it clashes with our previous knowledge of the mean interarrivals time $X$ for Poisson process.
-	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behaviour of the time interval, since bigger ones are privileged.
+	This paradox is easily explained with the concept of \emph{picking bias}: the choice of a random observation instant $t$ changes the statistical behavior of the time interval, since bigger ones are privileged.
 
 \section{Asymptotic results}
 \begin{theorem}[Ross p. 101 and following]
@@ -618,14 +618,14 @@ For example:
 	\end{figure}
 	Easy to find the probability of what happens i different pages: each page is an independent interval, so:
 	\beq
-	P[\text{0 errors in 3 pages}\footnote{not necessarily consecutive}] = e^{-1.2}
+	\prob[\text{0 errors in 3 pages}\footnote{not necessarily consecutive}] = e^{-1.2}
 	\eeq
 	\subsubsection*{Ex 2.5}
 	We have $N$ points equally distributed in a circle of radius $r$. The distribution of points in the circle of radius $1$ as $N \to \infty$ and $r \to \infty$ is:
 	\beq
 	\frac{N}{\pi r^2} < \lambda
 	\eeq
-	While the probability \textit{Prob[points inside r = 1]} is:
+	While the probability \textit{$\prob$[points inside r = 1]} is:
 	\beq
 	\frac{Small_{Area}}{Big_{Area}}
 	\eeq
@@ -726,15 +726,15 @@ For example:
 	\end{figure}
 
 \section{The key renewal theorem}
-\begin{definition}
-	(Point of increase) Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that
+\begin{definition}[Point of increase]
+	 Given a distribution function F we call \textit{point of increase} every point $\alpha$ such that
 	\begin{equation}
 		F(\alpha+\epsilon)-F(\alpha-\epsilon)>0 \quad  \forall \quad
 		\epsilon > 0
 	\end{equation}
 \end{definition}
-\begin{definition}
-	(Arithmetic function) We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that
+\begin{definition}[Arithmetic function]
+	 We say that a distribution function F is \textit{arithmetic} if $\exists \lambda > 0$ such that
 	\begin{equation}
 		\sum_{n=-\infty}^{+\infty}\prob[X = n\lambda] = 1
 	\end{equation}
@@ -745,8 +745,8 @@ For example:
 
 The distribution function of a discrete random variable with possible values 0, 1, 2, \dots is an arithmetic function with SPAN=1.
 
-\begin{definition}
-	(Directly Riemann Integrable Function) Given a function g defined on [0, $\infty$) we define the following quantities for $\delta > 0$:
+\begin{definition}[Directly Riemann Integrable Function]
+	 Given a function g defined on [0, $\infty$) we define the following quantities for $\delta > 0$:
 	\begin{align*}
 		\underline \sigma (\delta) = \delta \cdot \sum_{n=1}^{+\infty} min\{g(t):(n-1)\delta \leq t \leq n \delta \}
 		\\
@@ -760,8 +760,8 @@ The distribution function of a discrete random variable with possible values 0, 
 
 We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ (g is absolutely integrable) is directly Riemann integrable.
 
-\begin{theorem}
-	(Key Renewal Theorem) It is given a distribution function F of a positive random variable $a$ with mean $\mu$. We suppose that $a$ is directly Riemann integrable and that $A$ is the solution of the \textit{renewal equation}
+\begin{theorem}[Key Renewal Theorem]
+	It is given a distribution function F of a positive random variable $a$ with mean $\mu$. We suppose that $a$ is directly Riemann integrable and that $A$ is the solution of the \textit{renewal equation}
 	\begin{equation}
 		A(t)=a(t)+\int_{0}^{t}A(t-x)dF(x)
 	\end{equation}
@@ -786,8 +786,8 @@ We note that every function for which $\int_{0}^{+\infty} |g(t)| dt$ < $\infty$ 
 
 The theorem \ref{KRT1} can be also expressed in the following form:
 
-\begin{theorem}
-	(Key renewal theorem) Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^{+\infty} F_{k}(t)$ is the \textit{renewal function} associated with F.
+\begin{theorem}[Key renewal theorem - v2]
+	 Is given a distribution function F of a positive random variable with mean $\mu$. We suppose $h>0$ and that $M(t)=\sum_{k=1}^{+\infty} F_{k}(t)$ is the \textit{renewal function} associated with F.
 	If F is not arithmetic then
 	\begin{equation}
 		\lim_{t \rightarrow \infty} [M(t+h)-M(t)]=\frac{h}{\mu}
@@ -870,7 +870,7 @@ Finally we conclude that
 
 
 \paragraph{Asymptotic expansion of the renewal function}
-Given a distribution function $F$ of mean $\mu$ and variance $\sigma$ we want to find a more detailed description of the asymptotic behaviour of $M(t)$.
+Given a distribution function $F$ of mean $\mu$ and variance $\sigma$ we want to find a more detailed description of the asymptotic behavior of $M(t)$.
 
 For $t \rightarrow \infty$ we have what follows
 \begin{align*}
@@ -1174,7 +1174,7 @@ Let $T_{ii}$ denote the time between successive transitions into state $i$ and
 \end{equation}
 With the theory of alternating renewal processes, it is a simple matter to derive an expression for the limiting probabilities of a semi-Markov process.
 
-\begin{theorem}
+\begin{theorem}[Limiting distribution on irreducible semi-Markov process]
 	If the semi-Markov process is irreducible and if $T_{ii}$ has a non-lattice\footnote{previously defined as arithmetic} distribution with finite mean, then the limiting distribution
 
 	$$P_j = \lim_{t \to \infty} \prob[Z(t)=j | Z(0)=k]$$
@@ -1414,7 +1414,7 @@ So, rewriting \eqref{eq:thrPig0}, the throughput is:
 throughput = \frac{(1-\delta)P_{10}(m)}{(1-\delta)P_{10}(m) + m[1-(1-\delta)P_{00}-\delta P_{00}(m)+\delta P_{10}(m)]}
 \eeq
 \subsection{Graph reduction}
-What if we rewrite the scheme, such that we can reduce it like in figure\ref{fig:GBN}?\\
+What if we rewrite the scheme, such that we can reduce it like in \Fig{fig:GBN}?\\
 From a memory point of view it is ok because we do not need to keep memory of the acknowledgments since they are i.i.d; but let's try to understand what happens in terms of success or failure of the acknowledgments:
 \\
 If we enter state $G$ (we tx a packet and it is succesful)we have:
@@ -1439,11 +1439,11 @@ In state $B$ we have:
 \item And to $B$ w.p. $P_{11}(m)$;
 \end{itemize}
 So now we have a simplified Markov model where we combine into a single state everything that before was separate. What we obtain is:
-\beq
-\pi_{G} = \frac{P_{10}(m)}{(\dots)} %brutto. riusciamo a trovare la formula?
-\hspace{20mm}
-\pi_{B} = \frac{(1-\delta)P_{01}+\delta P_{01}(m)}{(\dots)}
-\eeq
+\begin{esp}
+\pi_{G} &= \frac{P_{10}(m)}{(1-\delta+\delta \cdot m)P_{10}(m)+m[(1-\delta)P_{01}+\delta P_{01}(m)]} \\ %brutto. riusciamo a trovare la formula?
+\hspace{0.5cm}
+\pi_{B} &= \frac{(1-\delta)P_{01}+\delta P_{01}(m)}{(1-\delta+\delta \cdot m)P_{10}(m)+m[(1-\delta)P_{01}+\delta P_{01}(m)]}
+\end{esp}
 Reward and time:
 \beq
 R =
@@ -1458,7 +1458,7 @@ T =
 m
 \end{bmatrix}
 \eeq
-And finally we can estimate the throughput for the system in figure\ref{fig:2states}:
+And finally we can estimate the throughput for the system in \Fig{fig:2states}:
 \beq
 \lim_{t \to \infty} \frac{R(t)}{t} = \frac{\vec{\pi}\vec{R}}{\vec{\pi}\vec{T}} = \frac{(1-\delta)P_{10}(m)}{(1-\delta+\delta \cdot m)P_{10}(m)+m[(1-\delta)P_{01}+\delta P_{01}(m)]}
 \eeq
