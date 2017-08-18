@@ -74,7 +74,7 @@ Il dipolo corto è la realizzazione fisica più vicina al dipolo elementare e si
 La corrente che scorre lungo il filo può essere scritta nel seguente modo:
 \begin{esp}
   I(z) &= I_m \sin [\beta (\frac{L}{2} - \left | z \right |)] \\
-   &\approx I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L}) 
+   &\approx I_m \beta (\frac{L}{2} - \left | z \right |) \cong \frac{I_A}{\frac{\beta L}{2}} \beta (\frac{L}{2} - \left | z \right |) \cong I_A(1-\frac{2 \left | z \right |}{L})
 \end{esp}
 dove tra il primo e il secondo passaggio è stata applicata l'approssimazione di Taylor.
 Possiamo inoltre scrivere che il vettore potenziale magnetico è:
@@ -254,3 +254,133 @@ $\lambda$                 & $Z_A \to +\infty$. Difficile da adattare \\
 $>\lambda$                & \parbox{7cm}{Si introducono lobi secondari: l'antenna non irradia più come una sfera}
 \end{tabular}
 \end{table}
+
+\section{Yagi-Uda}
+Analizzeremo ora il caso di due antenne vicne ad una certa distanza d, di cui una attiva e una passiva.
+Prenderemo in esame due elementi con lunghezza $\lambda/2$, e la potenza risulterà quindi : $P_{\lambda/2}\propto \left | I_a \right |^2$ e $P_{\lambda/2}\propto (R_r)^{1/2}$.
+
+L'elemento a destra è attivo, con una corrente $I_1$ e un campo prodotto incidente  $E_i$ chiamato $E_{driver}$.
+
+Il secondo elemento a sinistra è invece un elemento passivo, attraversato da una corrente indotta $I_2$ e con un campo elettrico parassita dello stesso modulo ma con segno opposto: $E_{parassita} = -E_i = -E_{driver}$.
+La distanza d è molto minore di $\lambda$ ($d<<\lambda$).
+
+I due elementi risultano quindi molto uguali e  molto vicini.
+La distanza può quindi essere impostata a $\lambda/4$, con d che è risulta paragonabile a $\lambda$.
+
+Calcoliamo ora $E_{parassita}$:
+
+\begin{equation}
+E_{parassita} = -E_i = -E_{driver} e^{-\jmath \beta d} = -E_{driver} e^{-\jmath \frac{2 \pi}{\lambda} \frac{\lambda}{4}} = -E_{driver} e^{-\jmath \frac{\pi}{2}}
+\end{equation}
+
+Calcoliamo ora il campo elettrico a grande distanza ($r>>\lambda$)a destra dell'elemento attivo.
+
+\begin{equation}
+E \propto E_{driver}\frac{\ejbr}{r}-E_{driver}\frac{e^{\jmath\beta(r+\frac{\lambda}{4})}}{r}e^{-\jmath\frac{\pi}{2}}
+\end{equation}
+dove il primo termine proviene alla prima antenna (attiva) mentre il secondo termine dalla seconda natenna (passiva).
+
+Proseguendo:
+
+\begin{equation}
+E \propto E_{driver}\frac{\ejbr}{r} (1-e^{j\beta\frac{\lambda}{4}}e^{-\jmath\frac{\pi}{2}}) =  E_{driver}\frac{\ejbr}{r} (1-e^{-\jmath\pi}) = 2E_{driver}\frac{\ejbr}{r}
+\end{equation}
+
+Il campo elettrico risulta quindi raddoppiato, e in questo caso si parla di interfernza costruttiva.
+
+Analizzando invece il caso di grande distanza a sinistra dell'elemnto passivo, il campo elettrico risulta:
+
+\begin{equation}
+E \propto E_{driver}\frac{\ejbr}{r}-E_{driver}\frac{e^{-\jmath\beta(r-\frac{\lambda}{4})}}{r}e^{-\jmath\frac{\pi}{2}} =  E_{driver}\frac{\ejbr}{r} (1-e^{-\jmath\frac{\pi}{2}}e^{\jmath\frac{\pi}{2}}) = 0
+\end{equation}
+
+In questo caso quindi il campo elettrico risulta nullo e siamo in presenza di interferenza distreuttiva, e nel complesso in pratica è come se fossimo in presenza di un piano conduttore.
+
+Le due antenne (elemento passivo e attivo) possono anche essere ricondotte ad un doppio bipolo, ipotizzando per ciascuna una tensione V  e una corrente I in ingresso.
+
+Questo doppio bipolo si può rappresentare con una matrice delle impedenze:
+
+\begin{equation}
+\left( \begin{array}{c}
+V_1 \\
+V_2 \end{array} \right)
+=
+\left( \begin{array}{cc}
+Z_{11} & Z_{12} \\
+Z_{21} & Z_{22} \end{array} \right)
+\left( \begin{array}{cc}
+I_1 \\
+I_2 \end{array} \right)
+\end{equation}
+
+e quindi il potenziale risulta:
+
+\begin{equation}
+V_2 = Z_{21}I_1+Z_{22}I_2 = 0
+\end{equation}
+con $Z_{22} = Z_{12}$ e $Z_{21}$ che è definita come la transimpedenza.
+
+mentre la corrente risulta:
+
+\begin{equation}
+I_2 = -I_1 \frac{Z_{21}}{Z_{22}}
+\end{equation}
+
+Nel caso reale:
+
+nel caso d = 0, la parte reale di $Z_{21}$ è $73\omega$, mentre nel caso $d = 0.15 \lambda$, la parte reale di $Z_{21}$ risulta $63\omega$. Facendi i calcoli con questa ultima distanza, ci si accorge che la corrente $I_{2}$ è circa ddel 10\% (0.89) più bassa di $I_{1}$.
+
+...Disegni su campo elettrico in condizioni reali...
+
+\clearpage
+
+\section{Antenna a Spira (Elementare) - Dipolo Magnetico}
+
+Può essere pensato come il duale del Dipolo Elementare (Dipolo Elettrico)
+
+\begin{equation}
+\begin{tabular}{|l|c|r|}
+\hline
+Dipolo elettrico & Dipolo magnetico \\
+\hline
+$E_{\theta}$, $E_{r}$ & $H_{\theta}$, $H_{r}$ \\
+\hline
+$H_{\phi}$ & $-E_{\phi}$ \\
+\hline
+$I \Delta z$ & $I^{(m)} \Delta z$ \\
+\hline
+$\eta$ & $\frac{1}{\eta}$ \\
+\hline
+\end{tabular}
+\end{equation}
+
+I campi elettrico e magnetico possono quindi essere scritti come :
+
+\begin{equation}
+\begin{cases}
+\H = \frac{I^{(m)} \Delta z}{4 \pi \eta} \left( \frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath \beta r^3} \right) \sin (\theta) \ejbr \hat{\theta} + \frac{I^{(m)} \Delta z}{2 \pi \eta} \left(\frac{1}{r^2} + \frac{1}{\jmath \beta r^3} \right) \cos (\theta) \ejbr \hat{r} \\
+\E = - \frac{I^{(m)} \Delta z}{4 \pi} \left( \frac{\jmath \beta}{r} + \frac{1}{r^2} + \frac{1}{\jmath \beta r^3} \right) \sin (\theta) \ejbr \hat{\phi} \end{cases}
+\end{equation}
+
+
+con $I^{(m)} \Delta z = \jmath \omega \mu I \Delta s$ e $f^2 \mu \epsilon = \frac{1}{\lambda^2}$
+
+Nel caso di campo lontano ($r>>\lambda$) i due campi, elettrico e magnetico, risultano essere :
+
+\begin{equation}
+\begin{cases}
+\H \simeq H_{\theta} \hat{\theta} = \frac{\jmath \omega \mu I \Delta s}{4 \pi \eta}  \frac{\jmath \beta}{r} \sin (\theta) \ejbr \hat{\theta}  = -\frac{\omega \mu I \Delta s}{4 \pi \sqrt{\frac{\mu}{\epsilon}}}  \omega \sqrt{\mu \epsilon} \sin (\theta) \frac{\ejbr}{r} \hat{\theta} = -\frac{\pi I \Delta s}{\lambda^2} \sin (\theta) \frac{\ejbr}{r} \hat{\theta}  \\
+E_{\phi} = - \eta H_{\theta} \end{cases}
+\end{equation}
+
+Per quanto riguarda il pattern di radiazione, esso risulta uguale a quello del dipolo elementare:
+
+\begin{equation}
+F(\theta, \phi) = \frac{E(r, \theta, \phi)}{E(r, \theta_{MAX}, \phi_{MAX})} = \sin(\theta)
+\end{equation}
+
+Anche la direttività risulta, proprio come il dipolo elementare, uguale a 1.5
+
+
+
+\section{Antenna a Banda Larga}
