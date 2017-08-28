@@ -1,99 +1,103 @@
 \chapter{Introduzione}
 \section{Sistemi di riferimento}
-Nel corso verranno utilizzate principalmente due sistemi di riferimento: quello
-con coordinate \emph{cartesiane} e quello con coordinate \emph{sferiche}.
-Le due rappresentazioni di un punto $P$, definito del vettore posizione $\r$, saranno le seguenti:
-\begin{equation} \begin{split}
-  P&=(x,y,z) = \r = x \cdot \hat{x} + y \cdot \hat{y} +z \cdot \hat{z}
-		& \text{ con\quad} x\perp y \perp z \perp x \\
-  P&=(r,\theta,\phi) = r \cdot \hat{r} = r \cdot \hat{r}(\theta,\phi)
+Nel corso verranno utilizzate due sistemi di coordinate, \emph{cartesiano} e \emph{sferico} basate su versori differenti.
+
+Le due rappresentazioni di un medesimo punto $P$, definito del vettore posizione $\r$, saranno le seguenti.
+\begin{esp}
+	P&=(x,y,z) = \r = x \cdot \hat{x} + y \cdot \hat{y} +z \cdot \hat{z}
+	& \text{ con\quad} x\perp y \perp z \perp x \\
+	P&=(r,\theta,\phi) = r \cdot \hat{r} = r \cdot \hat{r}(\theta,\phi)
 		& \text{ con\quad} r \perp \theta \perp \phi \perp r
-  \label{eq:riferimento}
-\end{split}\end{equation}
+	\label{eq:riferimento}
+\end{esp}
 
 \section{Operatori differenziali spaziali}
-Elenchiamo ora gli operatori che utilizzeremo, per poi definirli meglio in delle loro sottosezioni.
-\begin{itemize}
-  \item \textbf{Operatore Nabla} $ \nabla = \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right)$
-  \item \textbf{Rotore} $\rot$
-  \item \textbf{Divergenza} $\diverg$
-  \item \textbf{Gradiente} $\nabla$
-  \item \textbf{Laplaciano} $\nabla^2$
-\end{itemize}
-Iniziamo a descrivere cosa succede a un generico vettore $\A\left(\r\right)=\left(A_x(\r),A_y(\r),A_z(\r)\right)$.
-\subsection{Rotore}
-\begin{equation} \begin{split}
-  \rot \A(\r) &=
-  \begin{vmatrix}
-    \hat{x} &\hat{y} &\hat{z} \\
-    \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
-    A_x & A_y & A_z
-  \end{vmatrix} \\
-  &= \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right)\cdot \hat{x} -
-  \left(\frac{\partial A_z}{\partial x} - \frac{\partial A_x}{\partial z}\right)\cdot \hat{y} +
-  \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right)\cdot \hat{z}
-\end{split}\end{equation}
+Introduciamo qui gli operatori differenziali da applicare ad un generico vettore $\A\left(\r\right)=\left(A_x(\r),A_y(\r),A_z(\r)\right)$ nello spazio $\mathbb{R}^3$.
+\begin{description}
+	\item \textbf{Vettore Nabla}
+	$ \nabla = \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right)$
 
-\subsection{Divergenza}
-\begin{equation}
-  \diverg \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}
-\end{equation}
-\subsection{Gradiente}
-Dato $\Phi(\r)$ uno scalare, il suo gradiente risulta
-\begin{equation}
-  \nabla \Phi = \left(\frac{\partial \Phi}{\partial x} , \frac{\partial \Phi}{\partial y}, \frac{\partial \Phi}{\partial z}\right)
-\end{equation}
-\subsection{Laplaciano scalare}
-Data una funzione scalare $\Phi(\r)$, il suo laplaciano è definito come
-\begin{equation}
-  \nabla^2 \Phi = \frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} + \frac{\partial^2 \Phi}{\partial z^2}
-\end{equation}
+	Nabla viene, impropriamente, definito come un vettore di operatori: le loro diverse applicazioni al vettore $\vec{A}$ genera le seguenti operazioni.
+
+	\item \textbf{Rotore} $\rot$
+
+	Calcolando il ``determinante'' della matrice con il metodo di Laplace partendo dalla prima riga, si ottiene la formula del rotore.
+	\begin{esp}
+		\rot \A(\r) &=
+		\begin{vmatrix}
+			\hat{x} &\hat{y} &\hat{z} \\
+			\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+			A_x & A_y & A_z
+		\end{vmatrix} \\
+		&= \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right) \hat{x} -
+		\left(\frac{\partial A_z}{\partial x} - \frac{\partial A_x}{\partial z}\right) \hat{y} +
+		\left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) \hat{z}
+	\end{esp}
+
+	\item \textbf{Divergenza} $\diverg$
+
+	\begin{equation}
+		\diverg \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}
+	\end{equation}
+
+	\item \textbf{Gradiente} $\nabla$
+
+	Dato $\Phi(\r)$ uno scalare, il suo gradiente risulta
+	\begin{equation}
+		\nabla \Phi = \left(\frac{\partial \Phi}{\partial x} , \frac{\partial \Phi}{\partial y}, \frac{\partial \Phi}{\partial z}\right)
+	\end{equation}
+
+	\item \textbf{Laplaciano scalare} $\nabla^2$
+
+	Data una funzione scalare $\Phi(\r)$, il suo laplaciano è definito come
+	\begin{equation}
+		\nabla^2 \Phi = \frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} + \frac{\partial^2 \Phi}{\partial z^2}
+	\end{equation}
+\end{description}
 
 \section{Teoremi notevoli}
-Mostreremo ora due teoremi che verranno utilizzati per risolvere le equazioni di Maxwell: il teorema di Stokes (o \emph{del rotore}) e il teorema di Gauss (o \emph{del flusso}).
-Verrà presentato solo il risultato, senza enunciarlo né dimostrarlo.
+Mostreremo ora gli enunciati di due teoremi che verranno utilizzati per risolvere le equazioni di Maxwell: il teorema di Stokes (o \emph{del rotore}) e il teorema di Gauss (o \emph{del flusso}).
+
 \subsection{Teorema di Stokes}
-Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat{n}$ il versore normale alla superficie  e $\vec{A}$ il vettore del campo attraverso la superficie $S_l$, si ha:
+Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat{n}$ il versore normale alla superficie	 e $\vec{A}$ il vettore del campo attraverso la superficie $S_l$, si ha:
 \begin{equation}
-  \oint_{\vec{l}} \vec{A} \cdot d\vec{l} = \int_{S_l}\rot \vec{A} \cdot \hat{n}~ d S_l
+	\oint_{\vec{l}} \vec{A} \cdot \de \vec{l} = \int_{S_l}\rot \vec{A} \cdot \hat{n} \de S_l
 \end{equation}
 
 \subsection{Teorema di Gauss (del flusso)}
 Dato $V$ un volume, $\vec{A}$ un campo e $S$ la superficie del volume e $\hat{n}$
 il versore normale alla superficie, si ha:
 \begin{equation}
-  \int_V \diverg \vec{A} dV = \int_S \vec{A}\cdot \hat{n} ~ dS
+	\int_V \diverg \vec{A} \de V = \int_S \vec{A}\cdot \hat{n} \de S
 \end{equation}
 
 \section{Equazioni di Maxwell}
-Si elencano ora le quattro equazioni di Maxwell nel dominio del tempo e, dall'identità
-vettoriale della divergenza del rotore, si ricaveranno le ultime due equazioni dalle prime due.
+Si elencano ora le quattro equazioni di Maxwell nel dominio del tempo e si ricaveranno le due equazioni ``alla divergenza'' dalle due ``al rotore''.
 
-\begin{equation}\begin{cases}
-  \rot \ert = -\deriv{\brt}{t} \\
-  \rot \hrt = \jt(\r,t) + \deriv{\drt}{t} \\
-  \diverg \d(\r,t) = \rho \\
-  \diverg \b(\r,t) = 0
-\end{cases}\label{eq:maxwell}\end{equation}
+\begin{equation}\begin{dcases}
+	\rot \ert = -\deriv{\brt}{t} \\
+	\rot \hrt = \jt(\r,t) + \deriv{\drt}{t} \\
+	\diverg \d(\r,t) = \rho \\
+	\diverg \b(\r,t) = 0
+\end{dcases}\label{eq:maxwell}\end{equation}
 
 I vettori $\e$, $\h$, $\d$, $\b$, $\jt$ sono tutti rappresentabili nella forma
 $$\vec{v}(\r,t) = \left(v_x(\r,t), v_y(\r,t), v_z(\r,t)\right)$$
 e sono definiti dal punto di vista fisico come segue
 \begin{itemize}
-  \item $\ert$ è il vettore campo elettrico $\left[\frac{V}{m}\right]$
-  \item $\brt$ è il vettore induzione magnetica $[T]$
-  \item $\hrt$ è il vettore campo magnetico $[A \cdot m]$
-  \item $\drt$ è il vettore spostamento elettrico $\left[\frac{C}{m^2}\right]$
-  \item $\jt(\r, t)$ è il vettore densità totale di corrente elettrica $\left[\frac{A}{m^2}\right]$
+	\item $\ert$ è il vettore campo elettrico $\left[\frac{V}{m}\right]$
+	\item $\brt$ è il vettore induzione magnetica $[T]$
+	\item $\hrt$ è il vettore campo magnetico $[A \cdot m]$
+	\item $\drt$ è il vettore spostamento elettrico $\left[\frac{C}{m^2}\right]$
+	\item $\jt(\r, t)$ è il vettore densità totale di corrente elettrica $\left[\frac{A}{m^2}\right]$
 \end{itemize}
 
 \subsubsection{Identità vettoriale e ultime due equazioni di Maxwell} \label{sec:id-not}
-L'identità vettoriale $\diverg (\rot \vec{A}) = 0$ permette di ricavare
-le equazioni alle divergenze dalle equazioni ai rotori.
+L'identità vettoriale $\diverg (\rot \vec{A}) = 0$ permette di ricavare le equazioni alle divergenze dalle equazioni ai rotori.
 
 La seconda si ricava immediatamente come
 \begin{equation}\begin{split}
-  & \diverg (\rot \ert) = \diverg \left(-\deriv{\brt}{t}\right)=0 \\
+	& \diverg (\rot \ert) = \diverg \left(-\deriv{\brt}{t}\right)=0 \\
 	& \implies \deriv{\diverg \b}{t}=0 \implies \diverg \b \text{ è costante nel tempo.}\\
 \end{split}\end{equation}
 
@@ -108,205 +112,214 @@ Per ricavare l'equazione sulla divergenza di $\d$ sfruttiamo, insieme al teorema
 
 \begin{esp}
 	& \begin{dcases}
-		\int_{S_v}\jt \cdot \hat{n} ~ dS_v &= -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho \cdot dV = \int_V \deriv{\rho}{t} dV \\
-		\int_{S_v}\jt \cdot \hat{n} ~ dS_v &= \int_V \diverg \jt dV = - \int_V \deriv{\rho}{t} dV
+		\int_{S_v}\jt \cdot \hat{n} \de S_v &= -\deriv{Q_v}{t} = -\deriv{}{t} \int_V \rho \cdot \de V = \int_V \deriv{\rho}{t} \de V \\
+		\int_{S_v}\jt \cdot \hat{n} \de S_v &= \int_V \diverg \jt \de V = - \int_V \deriv{\rho}{t} \de V
 	\end{dcases} \\
 	& \implies \diverg \jt = -\deriv{\rho}{t} \\
 \end{esp}
 
 E dunque,
 \begin{esp}
-  \deriv{}{t} \left(\diverg \d - \rho \right) &=0 \implies
-  \begin{cases}
-    \diverg \d - \rho & \text{è costante nel tempo} \\
-    \diverg \d = \rho & \text{si riconosce come la legge di Gauss}
-  \end{cases}
+	\deriv{}{t} \left(\diverg \d - \rho \right) &=0 \implies
+	\begin{cases}
+		\diverg \d - \rho & \text{è costante nel tempo} \\
+		\diverg \d = \rho & \text{si riconosce come la legge di Gauss}
+	\end{cases}
 \end{esp}
 
 \subsubsection{Leggi del legame materiale}
-La risoluzione delle equazioni di Maxwell porta ad aver 6 equazioni, derivanti
-dalle prime due equazioni (vettoriali) di Maxwell in 15 incognite ($\b , \e , \h , \d , \jt $ tutte $\in \R^3$).
+La risoluzione delle equazioni di Maxwell porta ad aver 6 equazioni, derivanti dalle prime due equazioni (vettoriali) di Maxwell in 15 incognite ($\b , \e , \h , \d , \jt $ tutte $\in \R^3$).
 
-Si può ridurre il numero delle incognite attraverso le \emph{relazioni costitutive} o \emph{leggi del legame materiale}. In particolare si riesce ad ottenere
+Si può ridurre il numero delle incognite attraverso le \emph{relazioni costitutive} o \emph{leggi del legame materiale}.
+
+Viene prima di tutto scomposta la densità di corrente totale in due componenti: la prima è la corrente autoindotta (incognita) mentre la seconda è la corrente impressa dai generatori, nota.
 \begin{equation}
-  \jt = \vec{j}_{COND} + \vec{j}
+	\jt = \vec{j}_{COND} + \vec{j}
 \end{equation}
-dove la prima è la corrente autoindotta (incognita) e la seconda è la corrente impressa, nota.
 
 Nel vuoto si ha inoltre che
 \begin{equation}
 	\begin{cases}
-	  \b = \mu_0 \cdot \h \\
+		\b = \mu_0 \cdot \h \\
 		\d = \epsilon_0 \e \\
 		\vec{j}_{COND} = 0 \implies \jt \text{ è nota} \\
 	\end{cases}
-  \label{eq:bh-de-j}
+	\label{eq:bh-de-j}
 \end{equation}
 dove
 \begin{itemize}
-  \item $\mu_0 = 4\cdot \pi \cdot 10^{-7} \left[\frac{H}{m}\right]$ è la costante di \textbf{permeabilità
-  magnetica del vuoto}
-  \item $\epsilon_0 = 8.85 \cdot 10^{-12} \left[\frac{F}{m}\right]$ è la costante di \textbf{permermittività
-  dielettrica del vuoto}
+	\item $\mu_0 = 4\cdot \pi \cdot 10^{-7} \left[\frac{H}{m}\right]$ è la costante di \emph{permeabilità
+	magnetica del vuoto}
+	\item $\epsilon_0 = 8.85 \cdot 10^{-12} \left[\frac{F}{m}\right]$ è la costante di \emph{permermittività
+	dielettrica del vuoto}
 \end{itemize}
 
 \subsubsection{Densità di corrente impressa}
-Dato $V_s$ il volume delle sorgenti, si ha che la densità di corrente elettrica impressa è
+Si definisce $V_s$ come il volume delle sorgenti, dove tutta la corrente è confinata.
 \begin{equation} \vec{j}(\r,t)
-  \begin{cases}
-    \neq 0 & \forall \r \in V_s \\
-    =0 & \text{altrimenti}
-  \end{cases}
-  \label{eq:correnti}
+	\begin{cases}
+		\neq 0 & \forall \r \in V_s \\
+		=0 & \text{altrimenti}
+	\end{cases}
+	\label{eq:correnti}
 \end{equation}
 
 Grazie alle condizioni descritte in \eqref{eq:bh-de-j} e \eqref{eq:correnti}, nel vuoto
 le equazioni di Maxwell si possono riscrivere come
-\begin{equation}\begin{cases}
-  \rot \ert = -\mu_0 \deriv{\hrt}{t} \\
-  \rot \hrt = \epsilon_0 \deriv{\ert}{t}\\
-  \diverg \hrt = 0 \\ \diverg\ert = \frac{\rho}{\epsilon_0}
-\end{cases}\label{eq:maxwell-vuoto}\end{equation}
+\begin{equation}\begin{dcases}
+	\rot \ert = -\mu_0 \deriv{\hrt}{t} \\
+	\rot \hrt = \epsilon_0 \deriv{\ert}{t}\\
+	\diverg \hrt = 0 \\ \diverg\ert = \frac{\rho}{\epsilon_0}
+\end{dcases}\label{eq:maxwell-vuoto}\end{equation}
 
 Le incognite $\ert, \hrt$ sono quindi le uniche incognite del \emph{campo elettromagnetico}.
-Inoltre si ha che se uno dei due campi è statico, l'altro risulta indipendente.
+Si può notare che se uno dei campi è statico la sua derivata si annulla e perciò l'andamento dell'altro ne risulta indipendente.
 
-\textsc{Nota:} d'ora in poi si scriverà $\e$ invece che $\ert$ per semplicità.
-Applicando ora il rotore alle prime due equazioni di Maxwell nel vuoto, si ha
+\smallbreak
+\textsc{Nota } Per semplificare la notazione, d'ora in poi si ometterà la variabile spaziale $\vec{r}$ e temporale $t$ dall'espressioni dei vettori considerati.
+\smallbreak
+
+Applicando il rotore alle prime due equazioni di Maxwell nel vuoto, si ha che
 \begin{equation}\begin{split}
-  \rot\left(\rot\e\right) &= -\mu_0 \deriv{}{t} \left(\rot\h\right) = -\mu_0\epsilon_0 \deriv[2]{\e}{t} \\
-  \rot\left(\rot\h\right) &= -\epsilon_0 \deriv{}{t} \left(\rot\e\right) = -\mu_0\epsilon_0 \deriv[2]{\h}{t} \\
+	\rot\left(\rot\e\right) &= -\mu_0 \deriv{}{t} \left(\rot\h\right) = -\mu_0\epsilon_0 \deriv[2]{\e}{t} \\
+	\rot\left(\rot\h\right) &= -\epsilon_0 \deriv{}{t} \left(\rot\e\right) = -\mu_0\epsilon_0 \deriv[2]{\h}{t} \\
 \end{split}\end{equation}
 
 Sfruttando l'identità vettoriale $\rot\rot\vec{A} = -\nabla^2 + \nabla(\diverg\vec{A})$ si ottiene
 \begin{equation}\begin{split}
-  -\nabla^2\e + \nabla(\diverg\e) &= - \mu_0\epsilon_0 \deriv[2]{\e}{t} \Leftrightarrow \nabla^2\e = \mu_0\epsilon_0\deriv[2]{\e}{t}\\
-  -\nabla^2\h + \nabla(\diverg\b) &= - \mu_0\epsilon_0 \deriv[2]{\h}{t} \Leftrightarrow \nabla^2\h = \mu_0\epsilon_0\deriv[2]{\h}{t}\\
+	-\nabla^2\e + \nabla(\diverg\e) &= - \mu_0\epsilon_0 \deriv[2]{\e}{t} ~~ \Rightarrow ~~ \nabla^2\e = \mu_0\epsilon_0\deriv[2]{\e}{t}\\
+	-\nabla^2\h + \nabla(\diverg\b) &= - \mu_0\epsilon_0 \deriv[2]{\h}{t} ~~ \Rightarrow ~~ \nabla^2\h = \mu_0\epsilon_0\deriv[2]{\h}{t}\\
 \end{split}\end{equation}
-Dove la prima equazione suppone che non ci siano cariche superficiali ($\rho=0$)
+Dove la prima equazione suppone che non ci siano cariche superficiali ($\rho=0$).
 Abbiamo quindi ottenuto sei equazioni in sei incognite, che conducono a un sistema risolvibile.
 
 \paragraph{Analisi dimensionale}
 
 Per semplicità, consideriamo solo la componente lungo l'asse $x$ del campo elettrico
 \begin{equation}
-  \left[\nabla^2 e_x\right] = \left[\mu_0\epsilon_0\right]  \cdot \left[\deriv[2]{e_x}{t}\right] \\
-  \frac{[e]}{m^2} = [\mu_0\epsilon_0] \cdot \frac{[e]}{s^2} \implies \frac{1}{\sqrt{[\mu_0\epsilon_0]}} = \frac{m}{s}
+	\left[\nabla^2 e_x\right] = \left[\mu_0\epsilon_0\right]	\cdot \left[\deriv[2]{e_x}{t}\right] \\
+	\frac{[e]}{m^2} = [\mu_0\epsilon_0] \cdot \frac{[e]}{s^2} \implies \frac{1}{\sqrt{[\mu_0\epsilon_0]}} = \frac{m}{s}
 \end{equation}
-Abbiamo quindi scoperto la velocità del moto ondoso nel vuoto. D'ora in avanti definiremo
-$c_0 = \frac{1}{\sqrt{\mu_0\epsilon_0}} \simeq 3 \cdot 10^8 m/s$ come la velocità della luce nel vuoto.emph
+Questa quantità è omogenea ad una velocità: dalla teoria delle onde emerge infatti che essa è la velocità dell'onda nel vuoto. D'ora in avanti definiremo
+$c_0 = 1 / \sqrt{\mu_0\epsilon_0} \simeq 3 \cdot 10^8 m/s$ come la velocità della luce nel vuoto.
 
-Possiamo inoltre definire il campo elettromagnetico come
+A seconda che le sorgenti siano o meno nella regione di spazio considerata, possiamo inoltre discriminare il campo elettromagnetico in
 
 \begin{description}
-  \item [campo di propagazione] se $\vec{J_s}=\vec{0}$
-  \item [campo di radiazione] se $\vec{J_s}\neq\vec{0}$
+	\item [campo di propagazione] se $\vec{J_s}=\vec{0}$
+	\item [campo di radiazione] se $\vec{J_s}\neq\vec{0}$
 \end{description}
 
 \section{Campo in spazio non vuoto}
-Nel mezzo, supponiamo che la legge che lega $\b$ ad $\h$ e $\d$ ad $\e$ sia analoga a quella nel vuoto.
-In particolare $\b=\mu\cdot\h$ e $\d=\epsilon\cdot\e$ dove
+Analizziamo ora la propagazione nel mezzo, supponendo che la legge che lega $\b$ ad $\h$ e $\d$ ad $\e$ sia analoga a quella nel vuoto, ovvero $\b=\mu\cdot\h$ e $\d=\epsilon\cdot\e$ con
 \begin{itemize}
-  \item $\mu$ è la costante di \emph{permeabilità  magnetica del mezzo}
-  \item $\epsilon$ è la costante di \emph{permermittività  dielettrica del mezzo}
+	\item $\mu$ è la costante di \emph{permeabilità	 magnetica del mezzo}
+	\item $\epsilon$ è la costante di \emph{permermittività	 dielettrica del mezzo}
 \end{itemize}
-Supponiamo inoltre che le correnti impresse siano $\vec{j_i}$ e che le correnti di conduzione siano $\vec{J_{COND}} = \sigma \cdot \e$, definendo $\sigma$ la \emph{costante di conducibilità elettrica del mezzo}, ovvero che le correnti di conduzione rispettino la legge di Ohm.
+Supponiamo inoltre che le correnti impresse siano $\vec{j}_i$ e che le correnti di conduzione rispettino la legge di Ohm, per cui $\vec{J}_{COND} = \sigma ~ \e$, con $\sigma$ la \emph{costante di conducibilità elettrica del mezzo}.
 
-Elenchiamo ora le \emph{proprietà del mezzo} che andremo a studiare, considerandole \emph{localmente} vere per i mezzi che andremo a considerare.
+Elenchiamo ora le \emph{proprietà del mezzo} che andremo a studiare, considerandole \emph{localmente} vere per i mezzi reali che incontreremo.
 \begin{itemize}
-  \item \textbf{linearità}
-  \item \textbf{isotropia}
-  \item \textbf{omogeneità}  ossia $\epsilon, \mu, \sigma$ rimangono costanti nello spazio considerato
-  \item \textbf{tempo-invarianza} ossia le costanti non variano al variare del tempo (temperatura costante)
-  \item \textbf{non dispersività}  le costanti di propagazione non variano in frequenza
+	\item \textbf{linearità}
+	\item \textbf{isotropia}
+	\item \textbf{omogeneità} ossia $\epsilon, \mu, \sigma$ rimangono costanti nello spazio considerato
+	\item \textbf{tempo-invarianza} ossia le costanti del materiale non variano al variare del tempo
+	\item \textbf{non dispersività} per cui le costanti di propagazione non variano in frequenza
 \end{itemize}
 
-D'ora in poi considereremo \emph{solo mezzi dielettrici}, mezzi per cui $\mu \simeq \mu_0$, in cui quindi le equazioni di Maxwell saranno analoghe a quelle del vuoto, a meno delle costanti $\epsilon, \mu_0$ e $\sigma$.
+D'ora in poi considereremo solo mezzi \emph{dielettrici}, mezzi per cui $\mu \simeq \mu_0$, in cui quindi le equazioni di Maxwell saranno analoghe a quelle del vuoto, a meno delle costanti $\epsilon, \mu_0$ e $\sigma$.
 
 \section{Studio delle equazioni di Maxwell in regime sinusoidale}
-Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale:
-introdurremo i vettori di \emph{Steinmetz} e vedremo come un mezzo possa variare la sua
-attitudine al campo alle diverse frequenze.
+Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale: introdurremo i vettori di \emph{Steinmetz} e vedremo come un mezzo possa variare la sua attitudine al campo alle diverse frequenze.
 
-Supponiamo quindi, nel caso generale di lavorare a pulsazione $\omega = 2\pi f$, quindi a frequenza $[f] = Hz = s^{-1}$.
-
-Nonostante le trasmissioni avvengano su una banda di frequenze ($\Delta f$), l'analisi alla frequenza portante è una buona approsimazione del comportamento nella banda, a patto che essa sia stretta ($\Delta f \ll f$).
+Ci poniamo in condizioni di banda stretta, supponendo perciò che le trasmissioni avvengano su una banda di frequenze $\Delta f$ centrata attorno ad una portante $f$: l'analisi limitata alla sola frequenza $f$ è una buona approsimazione dell'onda, a patto che essa sia stretta ($\Delta f \ll f$).
 I segnali a banda larga verranno poi approssimati come sovrapposizione di molti segnali a banda stretta, linearità del mezzo permettendo.
 
 Il campo elettrico ora può essere scritto come
 \begin{esp}
-  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot E_n(\r)\cdot \cos\left[\omega t + \Phi_{E_n}(\r)\right]\\
+	\ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot E_n(\r)\cdot \cos\left[\omega t + \Phi_{E_n}(\r)\right]\\
 \end{esp}
 con
-\begin{esp}
-  E_n (\r) &\in \R \text{ pari al massimo del campo nella componente } n \\
-  \Phi_{E_{n}} &\in [0;2\pi]\subset \R \text{ pari alla fase del campo nella componente } n \\
-\end{esp}
+\begin{itemize}
+	\item $E_n (\r) \in \R$ pari al massimo del campo nella componente $n$
+	\item $\Phi_{E_{n}} \in [0;2\pi]\subset \R$ pari alla fase del campo nella componente $n$
+\end{itemize}
 
-Introduciamo ora la rappresentazione con i \emph{vettori complessi}, chiamata rappresentazione di \emph{Steinmetz}, come estensione tridimensionale del concetto di fasore complesso: utilizzeremo i valori massimi (invece che valori efficaci, usati durante il corso di elettrotecnica).
+Date queste ipotesi, introduciamo ora i \emph{vettori complessi}, o di \emph{Steinmetz}, quali estensione tridimensionale del concetto di fasore complesso: utilizzeremo i valori massimi (invece che valori efficaci, usati durante il corso di elettrotecnica).
 
 \subsubsection{Fasore sulla linea di trasmissione}
 
-Vediamo ora come estendere il concetto di fasore al nostro campo elettromagnetico analizzando la tensione lungo la linea di trasmissione che lavora a pulsazione $\omega$.
+La tensione lungo la linea di trasmissione che lavora a pulsazione $\omega$ si può descrivere con il fasore $V \in \mathbb{C}^3$.
 \begin{equation}
-  v(t,x) = cos(\omega t + \Phi_0) = \Re\left[V \cdot e^{\jmath \omega t}\right]
+	v(t,x) = |V| \cos(\omega t + \Phi_0) = \Re\left[V \cdot e^{\jmath \omega t}\right]
 \end{equation}
-Con il campo elettrico $\E(\r) = \left[E_x(\r);E_y(\r);E_z(\r)\right] \in \C^3$ possiamo scrivere in modo analogo $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$. Avremo quindi
-\begin{equation}\begin{split}
-  \E(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)} \\
-  \ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot \Re\left[e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot cos[\omega t + \Phi_{E_n}(\r)]
-\end{split}\end{equation}
+
+Per un certo $\E(\r) = \left(E_x(\r);E_y(\r);E_z(\r)\right) \in \C^3$ potremo scrivere in modo analogo $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$.
+
+Avremo quindi
+\begin{equation*}
+	\E(\r) = \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}
+\end{equation*}
+\begin{equation*}\begin{split}
+	\ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
+	&=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot \Re\left[e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
+	&=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot cos[\omega t + \Phi_{E_n}(\r)]
+\end{split}\end{equation*}
 Allo stesso modo si ottengono le uguaglianze per il campo magnetico e per le correnti.
 
 Cerchiamo ora di scrivere le equazioni di Maxwell utilizzando i vettori di Steinmetz. Data la trasformazione presentata in precedenza, ovvero
 \begin{esp}
-  \rot \e &= \rot \Re\left[\E(\r) \cdot e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \cdot e^{\jmath\omega t}\right]\\
+	\rot \e &= \rot \Re\left[\E(\r) \cdot e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \cdot e^{\jmath\omega t}\right]\\
 \end{esp}
 
 si può ricavare che
 \begin{esp}
-  \rot\e &\leftrightarrow \rot\E \\
-  \diverg\e &\leftrightarrow \diverg\E \\
-  \deriv{\e}{t} & \leftrightarrow \jmath \omega \E\quad \text{trasformata di Fourier} \\
+	\rot\e &\leftrightarrow \rot\E \\
+	\diverg\e &\leftrightarrow \diverg\E \\
+	\deriv{\e}{t} & \leftrightarrow \jmath \omega \E\quad \text{(trasformata di Fourier)} \\
 \end{esp}
 
 \subsection{Equazioni di Maxwell in regime sinusoidale}
 Le equazioni di Maxwell, nel caso del regime sinusoidale si possono riscrivere come
-\begin{equation}\begin{cases}
-  \rot\E(\r) = -\jmath \omega \mu\H(\r) \\
+\begin{equation}\begin{dcases}
+	\rot\E(\r) = -\jmath \omega \mu\H(\r) \\
 	\begin{aligned}[b]
-		\rot\H(\r) &= \jmath  \omega \epsilon \E(\r) + \J(\r) + \sigma\E \\
+		\rot\H(\r) &= \jmath	\omega \epsilon \E(\r) + \J(\r) + \sigma\E \\
 		&= \J(\r) +(\sigma + \jmath \omega \epsilon) \cdot \E(\r) \\
 		&= \J(\r) +\jmath \omega \epsilon_c \cdot \E(\r) \\
 	\end{aligned} \\
-  \diverg\H(\r)=0\\
-  \diverg \E(\r) = \frac{\rho_T(\r)}{\epsilon}
-\end{cases}\end{equation}
-dove $\rho$ varia in regime sinusoidale, come le altre grandezze fisiche in gioco, e $\epsilon_c = \epsilon + \frac{-\jmath\sigma}{\omega}$ \emph{costante di permittività dielettrica complessa}.
+	\diverg\H(\r)=0\\
+	\diverg \E(\r) = \frac{\rho_T(\r)}{\epsilon}
+\end{dcases}\end{equation}
+dove $\rho$ varia in regime sinusoidale, come le altre grandezze fisiche in gioco, e $\epsilon_c = \epsilon -\jmath\sigma / \omega$ è detta \emph{costante di permittività dielettrica complessa}.
 
 Andiamo ad analizzare ora i diversi tipi di mezzi al variare di $\epsilon_c$.
 
 \begin{definition}[Angolo di perdita]
 	Considerando soltanto materiali dielettrici, vale che $\Re(\epsilon_c) = \epsilon$, $\Im(\epsilon_c) = -\frac{\sigma}{\omega}$.
 
-	$\J_{COND} = \sigma \E$ è invece la densità di corrente di conduzione e $\J_{SPOST}$ la densità di corrente di spostamento, definiamo l'angolo di perdita come
-  \begin{equation}
-    \delta = arctg\left(-\frac{\Im(\epsilon_c)}{\Re(\epsilon_c)}\right) = arctg\left(\frac{\sigma}{\omega \epsilon}\right)
-    \end{equation}
+	Sia $\J_{COND} = \sigma \E$ è invece la densità di corrente di conduzione e $\J_{SPOST}$ la densità di corrente di spostamento.
+	Definiamo quindi l'angolo di perdita come
+	\begin{equation}
+		\delta = \arctg-\frac{\Im(\epsilon_c)}{\Re(\epsilon_c)} = \arctg\frac{\sigma}{\omega \epsilon}
+		\end{equation}
 \end{definition}
 
 Nella seguente tabella definiamo i diversi materiali a seconda di $\sigma$ e $\delta$.
 \begin{table}[h] \label{tab:conductors}
 \centering
 \begin{tabular}{llll}
-	$\sigma$                      & $\delta$                & tipo di materiale                  \\
+	$\sigma$ & $\delta$ & tipo di materiale \\
 	\hline \\
-	0                             & 0                       & isolante perfetto (come il vuoto)                 \\
-	$\approx 0$                   & $\approx 0$             & buon isolante (come l'aria)                     \\
-	$\gtreqless \omega \epsilon $ &                         & conduttore                         \\
-	$\gg \omega \epsilon$         & $\approx \frac{\pi}{2}$ & buon conduttore (tra cui i metalli)                    \\
-	$\approx +\infty$             & $\frac{\pi}{2}$         & conduttore perfetto o ideale (PEC)
+	0 & 0 & isolante perfetto (come il vuoto) \\
+	$\approx 0$ & $\approx 0$ & buon isolante (come l'aria) \\
+	$\gtreqless \omega \epsilon $ & & conduttore \\
+	$\gg \omega \epsilon$ & $\approx \frac{\pi}{2}$ & buon conduttore (tra cui i metalli) \\
+	$\approx +\infty$ & $\frac{\pi}{2}$ & conduttore perfetto o ideale (PEC)
 \end{tabular}
 \end{table}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "antenne"
+%%% End:
