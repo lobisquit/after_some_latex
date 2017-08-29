@@ -49,7 +49,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			& \s \cdot \s = {s_x}^2 + {s_y}^2 + {s_z}^2 = - \omega^2 \, \mu \, \epsilon_c
 		\end{split}
 	\end{equation}
-	dove nell'ultimo passaggio la somma dei quadrati delle componenti di $\s$ è indicata, con un abuso di notazione, come il prodotto scalare ``reale'' nonstante $\s$ sia un vettore complesso.
+	dove nell'ultimo passaggio la somma dei quadrati delle componenti di $\s$ è indicata, con un abuso di notazione, come il prodotto scalare \emph{reale} nonstante $\s$ sia un vettore complesso.
 
 	Una volta individuate le condizioni per la validità della soluzione \ref{eq:helmotz_sol}, si può stabilire il legame tra campo elettrico e magnetico.
 
@@ -57,21 +57,17 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\begin{split}
 			\H & = \frac {\rot\E}{- \jmath \omega \mu} =
 				\frac {\rot(\vec{E_o} ~ e^{-\s \cdot \r})}{- \jmath \omega \mu} \stackrel{(1)}{=} \\
-			& = \frac {(\rot\vec{E_o}) ~ e^{-\s \cdot \r} - \vec{E_o} \times \nabla e^{-\s \cdot \r})} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
+			& = \frac {(\rot\vec{E_o}) ~ e^{-\s \cdot \r} - \vec{E_o} \times \nabla e^{-\s \cdot \r}} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
 			& = \frac { \vec{E_o} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_o}} {\jmath \omega \mu} ~ e^{-\s \cdot \r} = \frac { \s \times \vec{E}} {\jmath \omega \mu} \\
 		\end{split}
 	\end{equation*}
 	dove (1) è dato dalla derivata del prodotto, mentre (2) è dovuto al fatto che, essendo $\vec{E_o}$ costante, il suo gradiente è nullo.
 
 \section{Piani di simmetria}
-	La soluzione di onda piana presenta particolari comportamenti lungo e trasversalmente le direzioni date dalla parte reale e immaginaria del vettore $\s$.
-
-	\begin{equation*}
-		\s = \a + \jmath \k
-	\end{equation*}
+	La soluzione di onda piana presenta particolari comportamenti lungo e trasversalmente le direzioni date dalla parte reale e immaginaria del vettore $\s = \a + \jmath \k$.
 
 	\begin{itemize}
-		\item[|$\Delta\r \perp \a$ )] Lungo questa direzione, l'ampiezza dei campi $\E$ e $\H$ non cambia.
+		\item[|$\Delta\r \perp \a$ )] Lungo questa direzione, l'\emph{ampiezza} dei campi $\E$ e $\H$ non cambia.
 
 		\begin{equation*}
 			\begin{split}
@@ -82,14 +78,14 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{equation*}
 		dove (*) è dato dal fatto che $\a \cdot \Delta\r = 0$ per costruzione.
 
-		\item[|$\Delta\r \perp \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ non cambia.
+		\item[|$\Delta\r \perp \k$ )] Lungo questa direzione, la \emph{fase} dei campi $\E$ e $\H$ non cambia.
 
 		\begin{equation*}
 				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r = \measuredangle \E(\r)
 		\end{equation*}
 		dove (*) è dato dal fatto che $\k \cdot \Delta\r = 0$ per costruzione.
 
-		\item[|$\Delta\r \parallel \a$ )] Lungo questa direzione, l'ampiezza dei campi cala in modo esponenziale in $|\a|$ e in $\Delta r$.
+		\item[|$\Delta\r \parallel \a$ )] Lungo questa direzione, l'\emph{ampiezza} dei campi cala in modo esponenziale in $|\a|$ e in $\Delta r$.
 
 		\begin{equation*}
 			\begin{split}
@@ -100,7 +96,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{equation*}
 		dove (*) è dovuto al parallelismo tra $\a$ e $\Delta\r$.
 
-		\item[|$\Delta\r \parallel \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ oscilla periodicamente.
+		\item[|$\Delta\r \parallel \k$ )] Lungo questa direzione, la \emph{fase} dei campi $\E$ e $\H$ oscilla periodicamente.
 
 		\begin{equation*}
 				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r - |\k| \Delta r = \measuredangle \E(\r) - |\k| \Delta r
@@ -121,18 +117,17 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\begin{equation} \label{eq:s_components}
 		\begin{dcases}
-			& |\a|^2 - |\k|^2 = - \omega^2 \, \mu \, \epsilon \\
-			& 2 \a \cdot \k = \omega^2 \, \mu \, \sigma = 0
+			& |\a|^2 - |\k|^2 = - \omega^2 \mu \, \epsilon \\
+			& 2 \a \cdot \k = \omega^2 \mu \, \sigma = 0
 		\end{dcases}
 	\end{equation}
 
 	La seconda equazione è risolta per ciascuno dei seguenti casi
-
-	\begin{equation}\begin{cases}
+	\begin{equation}\begin{dcases}
 		|\a| = 0 \\
 		|\k| = 0 \\
 		\a \perp \k
-	\end{cases}\end{equation}
+	\end{dcases}\end{equation}
 
 	Il caso $|\k| = 0$ è da escludere a priori, perché la prima equazione del sistema \ref{eq:s_components} diventa impossibile.
 
@@ -166,7 +161,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		dove $\eta$ è definita come impedenza d'onda del mezzo.
 
 \section{Onda piana nel mezzo conduttore}
-	Per i mezzi conduttori vale $\sigma \neq 0$, che rende il prodotto scalare $\a \cdot \k \neq 0$: questo rende impossibile il caso considerato in precedenza di onda piana uniforme, perché la componente reale di attenuazione (come pure il vettore $\k$) è sempre presente.
+	Per i mezzi conduttori vale $\sigma \neq 0$, quindi si avrà il prodotto scalare $\a \cdot \k \neq 0$: questo rende impossibile il caso considerato in precedenza di onda piana uniforme, perché la componente reale di attenuazione (come pure il vettore $\k$) è sempre presente.
 
 	\subsection{Onda piana nel buon conduttore} \label{sec:onda_piana_conduttore}
 		Dividendo tra loro membro a membro le due equazioni del sistema \ref{eq:s_components} si ottiene che
@@ -224,11 +219,10 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{split} \end{equation}
 
 		Nel caso, per esempio del rame, $\delta$ risulta dell'ordine di $1.6 \mu m$: questo ci porta a concludere che l'onda incidente il buon conduttore viene in gran parte dispersa vicino alla superficie del mezzo.
-		Questo comportamento, dovuto in gran parte all'effetto Joule, viene chiamato \emph{effetto pelle}.
 
+		Questo comportamento, dovuto principalmente all'effetto Joule, viene chiamato \emph{effetto pelle}.
 		\subsubsection{Lunghezza d'onda nel buon conduttore}
-		Il buon conduttore induce un ulteriore modifica delle proprietà dell'onda: riduce infatti notevolmente la sua lunghezza d'onda rispetto alla propagazione libera nel vuoto.
-
+		Il buon conduttore modifica le proprietà dell'onda che lo attraversa: riduce infatti notevolmente la sua lunghezza rispetto alla propagazione libera nel vuoto.
 		\begin{equation*} \begin{split}
 			& |\k|
 				= \sqrt{\pi f \mu \sigma}
@@ -249,23 +243,23 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{split} \end{equation*}
 
 \section{Appendice sui vettori di \emph{Steimetz}}
-	Dati due vettori complessi tridimensionali $\vec{A}, \vec{B} \in \mathbb{C}^3$, il prodotto scalare è definito come $<\vec{A} | \vec{B}> = \vec{A} \cdot \vec{B}^* = \sum_{n=1}^3 A_n {B_n}^*$.
+	Dati due vettori complessi tridimensionali $\vec{A}, \vec{B} \in \mathbb{C}^3$, il prodotto scalare è definito come $\langle \vec{A} | \vec{B} \rangle = \vec{A} \cdot \vec{B}^* = \sum_{n=1}^3 A_n {B_n}^*$.
 
 	Cerchiamo ora di stabilire cosa significhi, partendo dalla sua definizione,  l'ortogonalità tra due vettori complessi. Considereremo in particolare vettori che esprimano componenti lungo due soli assi, ovvero giacenti sul piano di polarizzazione.
 
 	\begin{esp}
 		& \vec{A} \perp \vec{B} \Leftrightarrow \vec{A} \cdot \vec{B}^* = 0 \quad \text{con}\quad \begin{dcases}
-			\vec{A} = A_{x^{\prime}} \hat{y}^{\prime} + A_x \hat{y}^{\prime} \\
-			\vec{B} = B_{x^{\prime}} \hat{y}^{\prime} + B_x \hat{y}^{\prime}
+			\vec{A} = A_{x^{\prime}} \, \hat{x}^{\prime} + A_{y^{\prime}} \, \hat{y}^{\prime} \\
+			\vec{B} = B_{x^{\prime}} \, \hat{x}^{\prime} + B_{y^{\prime}} \, \hat{y}^{\prime}
 		\end{dcases}
 	\end{esp}
 
 	Risolvendo l'equazione, si dimostra che l'ortogonalità di vettori di questo tipo consiste in una particolare simmetria dei rapporti di polarizzazione.
 	\begin{esp}
-		&A_{x^{\prime}} ~ B_{x^{\prime}}^x + A_{y^{\prime}} ~ B_{y^{\prime}}^x = 0 \\
+		&A_{x^{\prime}} \, B_{x^{\prime}}^* + A_{y^{\prime}} \, B_{y^{\prime}}^* = 0 \\
 		&p_A^{\prime} = \jmath \frac{ A_{x^{\prime}} } { A_{y^{\prime}} }
 			= - \jmath \frac{ B_{y^{\prime}} } { B_{x^{\prime}} }
-			= \frac{1} {\jmath \frac{ B_{y^{\prime}} } { B_{x^{\prime}} }} = \frac{1}{-p_B^{* \prime}}
+			= \frac{1} {\jmath \frac{ B_{x^{\prime}}^* } { B_{y^{\prime}}^* }} = \frac{1}{ \left( -p_B^{\prime} \right)^* }
 	\end{esp}
 
 \section{Potenza dell'onda elettromagnetica}
@@ -281,12 +275,12 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	Combinando tra loro le equazioni, si ottiene che
 	\begin{esp}
 		& \rot \h \cdot \e - \h \cdot \rot \e
-			= \e \cdot \jt + \sigma |\e|^2 + \epsilon \e \deriv{\e}{t} - \h \mu \deriv{\h}{t} \\
+			= \e \cdot \jt + \sigma |\e|^2 + \epsilon \e \deriv{\e}{t} - \mu \h \deriv{\h}{t} \\
 		& -\diverg(\e \times \h) - \e \cdot \jt = \sigma |\e|^2 + \epsilon \deriv{|\e|^2}{t} - \mu \deriv{|\h|^2}{t}
 	\end{esp}
 	dove il primo membro è riscritto come divergenza grazie ad un'identità vettoriale.
 
-	Lì analisi dimensionale mette in luce come le quantità dell'equazione ricavata siano potenze per unità di volume: integrando sul volume $V$ considerato si ottengono perciò potenze, qui scomposte a seconda dell'origine dei vari termini.
+	L'analisi dimensionale mette in luce come le quantità dell'equazione ricavata siano potenze per unità di volume: integrando sul volume $V$ considerato si ottengono perciò potenze, qui scomposte a seconda dell'origine dei vari termini.
 
 	\begin{esp} \label{eq:bilancio_potenza_EM}
 		& \underbrace{ - \int_V \e \cdot \jt dV}_{\text{potenza dai generatori}}
@@ -299,7 +293,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		%	+ \deriv{}{t} \int_V \left[ \frac{\epsilon}{2} |\e|^2 - \frac{\mu}{2} |\h|^2 \right] dV
 		%	+ \int_{S_V} (\e \times \h) \cdot \hat{n} ~ dV \\
 	\end{esp}
-	\subsection{Potenza espresssa con vettori di Steinmetz}
+	\subsection{Potenza espressa con vettori di Steinmetz}
 	Cercheremo ora la relazione tra $|\ert|$ e il suo vettore associato $|\E|$, per stabilire come calcolare la potenza del campo oscillante $\e$ con il vettore di Steinmetz.
 
 	\begin{esp}
@@ -327,7 +321,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			& \stackrel{(1)}{=}  \frac{1}{T} \int_0^T \frac{|\E|^2}{2} dt
 				\stackrel{(2)}{=} \frac{|\E|^2}{2}
 	\end{esp}
-	dove (1) vale perché il secondo membro è periodico, perciò l'integrale sul periodo $T$ è nullo, mentre (2) perché il vettore $\E$ non dipende dal tempo $t$.
+	dove (1) vale perché il secondo membro è periodico, perciò l'integrale sul periodo $T$ è nullo, mentre (2) è immediato perché il vettore $\E$ non dipende dal tempo $t$.
 
 	Grazie alla relazione appena ricavata, è possibile applicare la trasformata di Steinmetz all'equazione \ref{eq:bilancio_potenza_EM}, ottenendone il duale.
 
@@ -341,7 +335,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\subsection{Vettore di Poynting}
 
-	L'ultimo termine dell'equazione \ref{eq:bilancio_potenza_EM_steinmetz} rappresenta la potenza in uscita dal volume trasportata dall'onda: esso è perciò di particolare interesse per il nostro studio.
+	L'ultimo termine dell'equazione \ref{eq:bilancio_potenza_EM_steinmetz} rappresenta la potenza trasportata dall'onda fuori dal volume $V$: esso è perciò di particolare interesse per il nostro studio.
 
 	\begin{esp} \label{eq:def_poynting}
 		\int_V \frac{\diverg(\E \times \H^*)}{2} dV
@@ -361,15 +355,15 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \ref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
 
 		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
-			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= 0 \text{ perché } \jt = 0}
-				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= 0 \text{ perché } \sigma = 0}
+			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= \, 0 \text{ perché } \jt = 0}
+				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= \, 0 \text{ perché } \sigma = 0}
 				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS
 				\implies \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS = 0
 		\end{esp}
 
 		Da qui emerge che in questo caso privo di sorgenti e di dispersioni, $\Re[\vec{P}]$ è un campo solenoidale.
 
-		Nel caso ancora più specifico di polarizzazione rettilinea, il vettore di Poynting si calcola semplicemente come
+		Nel caso ancora più specifico di polarizzazione rettilinea il vettore di Poynting si calcola semplicemente come
 		\begin{esp}
 			\vec{P}
 				= \frac{1}{2} \left( E_o \hat{x} \right) \times \left( \frac{H_o}{\eta} \hat{y} \right)
@@ -378,7 +372,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 				= I \hat{z}
 		\end{esp}
 
-		In questo caso possiamo osservare quindi che
+		In questo caso possiamo osservare che
 		\begin{equation}
 			\begin{dcases}
 				~ \vec{P} \in \mathbb{R}^3 & \text{ la potenza trasmessa è puramente reale} \\
@@ -414,7 +408,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		dove si può notare come l'intensità $I = \Re[\vec{P}] $ cali esponenzialmente in $z$, secondo $\beta = |\a|$.
 
-		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \ref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai $3-5 ~ \delta$.
+		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \ref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai 3--5 $\delta$.
 
 \section{Riflessione e rifrazione}
 Riflessione e rifrazione sono trasformazioni a cui l'onda elettromagnetica è sottoposta quando attraversa la frontiera tra due materiali differenti, come in figura \ref{fig:discontinuita}.
@@ -443,7 +437,7 @@ La loro analisi consiste perciò nel risolvere le equazioni di Maxwell nei due m
 	\label{fig:discontinuita}
 \end{figure}
 
-\subsection{Continuità dei campi tangenti}
+\subsubsection{Continuità dei campi tangenti}
 Un importante lemma permette di far coincidere le soluzioni sulla discontinuità: esso afferma che la componente dei campi $\E$ ed $\H$ tangente alla superficie resta costante nel passaggio tra il primo ed il secondo mezzo.
 
 \begin{equation}
@@ -554,7 +548,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 \subsection{Interferenza in riflessione}
 	Come è possibile notare in figura \ref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due.
-	Questo dà vita a fenomeni di interferenza tra l'onda progressiva incidente e l'onda regressiva riflessa, generata dalla discontinuità di mezzo.
+	Questo dà vita a fenomeni di interferenza tra l'onda progressiva incidente e l'onda regressiva riflessa generata dalla discontinuità di mezzo.
 
 	\begin{figure}[ht]
 		\centering
@@ -565,10 +559,10 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 	Nel caso generico di incidenza, abbiamo che
 	\begin{esp}
-		\begin{cases}
+		\begin{dcases}
 			\k_i = (+ \beta_1 \cos(\theta_1), + \beta_1 \sin(\theta_1), 0) \\
 			\k_r = (- \beta_1 \cos(\theta_1), + \beta_1 \sin(\theta_1), 0)
-		\end{cases}
+		\end{dcases}
 	\end{esp}
 	dove i vettori sono scomposti nelle loro componenti secondo il sistema di coordinate in figura \ref{fig:campi_incidenza_non_normale_isolanti}.
 
@@ -600,7 +594,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			& = |E_{oi}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
 	\end{esp}
 
-	Questi piani individuano lungo $\hat{x}_3$ settori in cui l'impedenza vista dall'onda elettromagnetica varia. Essa, nel caso dell'onda piana, può essere semplicemente calcolata come
+	Questi piani individuano lungo $\hat{x}_3$ settori in cui l'impedenza vista dall'onda elettromagnetica varia. Essa, nel caso dell'onda piana, può essere calcolata sfruttando la legge di Ohm.
 
 	\begin{esp}
 		Z(x_3)
@@ -612,7 +606,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			{e^{\jmath \beta_1 x_3} - e^{\jmath \beta_1 x_3}}
 			{e^{\jmath \beta_1 x_3} + e^{\jmath \beta_1 x_3}} \\
 		& = \frac{\eta_1}{\jmath} ~ \frac{\sin(\beta_1 x_3)}{\cos(\beta_1 x_3)}
-			= -\jmath \eta_1 \tan(\beta x_3)
+			= -\jmath \, \eta_1 \tan(\beta x_3)
 	\end{esp}
 
 	Periodicamente ogni $\lambda_1 / 2$ l'impedenza d'onda oscilla da 0 a $+\infty$:
@@ -646,6 +640,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 				0 & \theta_i = 0 \\
 				\sim 0 & \theta_i \simeq 0
 			\end{cases}
+			\text{\quad perché } \lambda_2 \ll \lambda_1
 	\end{esp}
 
 	Inoltre si può dimostrare come un buon conduttore si comporti come uno specchio per l'onda elettromagnetica, infatti, richiamando l'equazione \ref{eq:coefficiente_riflessione}, si ha che
@@ -658,7 +653,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\end{esp}
 	dove l'ultimo passaggio è giustificato dal fatto che, per i buoni conduttori, la resistenza di parete $R_s$ è molto più piccola dell'impedenza del mezzo isolante $\eta_1$.
 
-	Infatti, per il passaggio dell'onda dall'aria al rame, si può calcolare che
+	Per esempio, nel passaggio dell'onda dall'aria al rame, si può calcolare che
 	\begin{esp}
 		\begin{cases}
 			R_s = \sqrt{\frac{\pi f \mu_o}{\sigma}} \simeq 60m\Omega \\
@@ -667,3 +662,8 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\end{esp}
 
 	Con valore di $\rho$ come questo, si ha che $I_t = I_i (1 - |\rho|^2) \simeq 0$: il nostro materiale è un buono specchio e diventa uno specchio perfetto per $\sigma \to +\infty$.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "antenne"
+%%% End:
