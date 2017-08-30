@@ -134,11 +134,12 @@
 \renewcommand{\A}{\ensuremath{\vec{A}}}
 \renewcommand{\S}{\ensuremath{\vec{S}}}
 \renewcommand{\P}{\ensuremath{\vec{P}}}
-%riduzzioni antenne
-\newcommand{\hz}{\ensuremath{\hat{z}}}
-\newcommand{\hth}{\ensuremath{\hat{\theta}}}
-\newcommand{\hphi}{\ensuremath{\hat{\Phi}}}
-\newcommand{\hr}{\ensuremath{\hat{r}}}
+% riduzioni antenne
+\newcommand{\hhat}[1]{\,\hat{#1}}
+\newcommand{\hz}{\ensuremath{\hhat{z}}}
+\newcommand{\hth}{\ensuremath{\hhat{\theta}}}
+\newcommand{\hphi}{\ensuremath{\hhat{\Phi}}}
+\newcommand{\hr}{\ensuremath{\hhat{r}}}
 \newcommand{\ejbr}{\ensuremath{e^{-\jmath \beta r}}}
 \newcommand{\ejbrp}{\ensuremath{e^{\jmath \beta r}}}
 \newcommand{\oqme}{\ensuremath{\omega^2 \mu \epsilon}}
@@ -159,6 +160,8 @@
 }
 
 \begin{document}
+% custom autoref for equations
+\def\equationautorefname~#1\null{(#1)\null}
 
 \begin{titlepage}
 	\begin{center}
