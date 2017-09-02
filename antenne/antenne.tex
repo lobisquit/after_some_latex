@@ -40,6 +40,7 @@
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 \newacronym[plural=AF,firstplural=Array Factor (AF)]{af}{AF}{Array Factor}
 \newacronym[plural=SLL,firstplural=Side Lobe Levels (SLL)]{sll}{SLL}{Side Lobe Level}
+\newacronym{eirp}{EIRP}{Effective Isotropic Radiated Power}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -105,7 +106,7 @@
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Rm}{\mathbb{R^{-1}}}
 \newcommand{\J}{\mathbb{J}}
-\newcommand*{\Chi}{\mbox{\Large $\chi$}}% big chi
+\newcommand*{\Chi}{\raisebox{2pt}{\mbox{\Large $\chi$}}}% big chi
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
@@ -143,7 +144,11 @@
 \newcommand{\ejbr}{\ensuremath{e^{-\jmath \beta r}}}
 \newcommand{\ejbrp}{\ensuremath{e^{\jmath \beta r}}}
 \newcommand{\oqme}{\ensuremath{\omega^2 \mu \epsilon}}
-%Derivatives shortcut
+
+\newcommand{\pvec}[1]{\ensuremath{\vec{#1}\mkern2mu\vphantom{#1}^\prime}}
+\newcommand{\rp}{\pvec{r}}
+
+% Derivatives shortcut
 \newcommand{\deriv}[3][]{% \deriv[<order>]{<func>}{<var>}
   \ensuremath{\frac{\partial^{#1} {#2}}{\partial {#3}^{#1}}}}
 %---------------------------------
@@ -159,9 +164,15 @@
 \end{split}\end{equation*}
 }
 
+% no newline inside $...$ inline formula
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
 \begin{document}
-% custom autoref for equations
+
+% custom autoref for equations and figures
 \def\equationautorefname~#1\null{(#1)\null}
+\def\figureautorefname~#1\null{figura #1\null}
 
 \begin{titlepage}
 	\begin{center}
