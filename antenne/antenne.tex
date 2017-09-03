@@ -139,11 +139,14 @@
 \newcommand{\hhat}[1]{\,\hat{#1}}
 \newcommand{\hz}{\ensuremath{\hhat{z}}}
 \newcommand{\hth}{\ensuremath{\hhat{\theta}}}
-\newcommand{\hphi}{\ensuremath{\hhat{\Phi}}}
+\newcommand{\hphi}{\ensuremath{\hhat{\phi}}}
 \newcommand{\hr}{\ensuremath{\hhat{r}}}
 \newcommand{\ejbr}{\ensuremath{e^{-\jmath \beta r}}}
 \newcommand{\ejbrp}{\ensuremath{e^{\jmath \beta r}}}
 \newcommand{\oqme}{\ensuremath{\omega^2 \mu \epsilon}}
+
+\usepackage{booktabs}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
 \newcommand{\pvec}[1]{\ensuremath{\vec{#1}\mkern2mu\vphantom{#1}^\prime}}
 \newcommand{\rp}{\pvec{r}}
@@ -174,6 +177,7 @@
 % custom autoref for equations and figures
 \def\equationautorefname~#1\null{(#1)\null}
 \def\figureautorefname~#1\null{figura #1\null}
+\def\tableautorefname~#1\null{tabella #1\null}
 
 \begin{titlepage}
 	\begin{center}
