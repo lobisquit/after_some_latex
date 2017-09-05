@@ -41,6 +41,7 @@
 \newacronym[plural=AF,firstplural=Array Factor (AF)]{af}{AF}{Array Factor}
 \newacronym[plural=SLL,firstplural=Side Lobe Levels (SLL)]{sll}{SLL}{Side Lobe Level}
 \newacronym{eirp}{EIRP}{Effective Isotropic Radiated Power}
+\newacronym{pec}{PEC}{Perfect Electric Conductor}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -144,13 +145,16 @@
 \newcommand{\ejbr}{\ensuremath{e^{-\jmath \beta r}}}
 \newcommand{\ejbrp}{\ensuremath{e^{\jmath \beta r}}}
 \newcommand{\oqme}{\ensuremath{\omega^2 \mu \epsilon}}
-
-\usepackage{booktabs}
-\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
-
 \newcommand{\pvec}[1]{\ensuremath{\vec{#1}\mkern2mu\vphantom{#1}^\prime}}
 \newcommand{\rp}{\pvec{r}}
 \DeclareMathOperator{\ctg}{ctg}
+
+% nice tables settings
+\usepackage{booktabs}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% multiple subfigure in figures
+\usepackage{subcaption}
 
 % Derivatives shortcut
 \newcommand{\deriv}[3][]{% \deriv[<order>]{<func>}{<var>}
