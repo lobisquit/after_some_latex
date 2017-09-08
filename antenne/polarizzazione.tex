@@ -4,7 +4,7 @@ Andremo ora ad analizzare come si comporta il campo elettromagnetico nello spazi
 Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione alla differenza con il corso di Fisica 2: mentre nell'altro corso si è osservata la polarizzazione del mezzo, ora analizzeremo la polarizzazione dell'onda elettromagnetica.
 \begin{esp}
 	\ert = & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos\left[\omega t + \phi_{E_n}(\r)\right] \\
-	= & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos(\omega t)\cdot \cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\\
+	= & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \left\lbrace\cos(\omega t)\cdot \cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\right\rbrace\\
 	= & \cos(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos \left[ \phi_{E_n}(\r) \right] \\
 	&+\sin(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \sin \left[ \phi_{E_n}(\r) \right] \\
 \end{esp}
@@ -28,7 +28,7 @@ Possiamo osservare il vettore di Steinmetz si può ottenere direttamente dalla f
 \end{dcases} \end{equation*}
 
 \paragraph{Proprietà di polarizzazione del campo}
-A partire dall'equazione \ref{eq:ert} possiamo osservare alcune simmetrie del campo $\E$.
+A partire dall'equazione \eqref{eq:ert} possiamo osservare alcune simmetrie del campo $\E$.
 \begin{enumerate}
 	\item il campo elettromagnetico giace sempre su un piano di polarizzazione, qualunque $t$ si scelga, determinato da $\E^I(\r)$ e $\E^R(\r)$
 	\item il campo elettromagnetico traccia una curva chiusa
@@ -103,14 +103,14 @@ mentre in un sistema di assi generico, si ottiene, in modo analogo alle linee di
 \begin{equation}
 	p^\prime = \jmath \frac{E_y}{E_x} = \frac{p - \jmath tg(\delta)}{1-\jmath p \cdot tg(\delta)}
 \end{equation}
-Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno della parte reale di $p^\prime$ non cambi. $p^\prime \in \C$ discrimina infatti, indipendentemente dal sistema di referimento, i diversi tipi di polarizzazione
+Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno della parte reale di $p^\prime$ non cambi. $p^\prime \in \C$ discrimina infatti, indipendentemente dal sistema di riferimento, i diversi tipi di polarizzazione
 \begin{equation}\begin{cases}
 	\Re[p^\prime] >0 & \text{ellittica destrorsa} \\
 	\Re[p^\prime] <0 & \text{ellittica sinistrorsa} \\
 	\Re[p^\prime] =0 & \text{rettilinea ``orizzontale''} \\
 	\Re[p^\prime] =\infty & \text{rettilinea ``verticale''} \\
 	p = p^\prime = 1 & \text{circolare destrorsa} \\
-	p = p^\prime = 1 & \text{circolare sinistrorsa}
+	p = p^\prime = -1 & \text{circolare sinistrorsa}
 \end{cases}\end{equation}
 
 % \textbf{\textsc{Nota Bene}} la polarizzazione circolare prevede che $p=p\prime$ sia \textbf{puramente reale} e pari a $\pm1$
