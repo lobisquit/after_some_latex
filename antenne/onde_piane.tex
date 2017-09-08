@@ -30,9 +30,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\begin{equation} \label{eq:helmotz_sol}
 		\begin{cases}
-			E_x(\r) = E_{ox} ~ e^{-\s \cdot \r} \\
-			E_y(\r) = E_{oy} ~ e^{-\s \cdot \r} \\
-			E_z(\r) = E_{oz} ~ e^{-\s \cdot \r}
+			E_x(\r) = E_{_{0}x} ~ e^{-\s \cdot \r} \\
+			E_y(\r) = E_{_{0}y} ~ e^{-\s \cdot \r} \\
+			E_z(\r) = E_{_{0}z} ~ e^{-\s \cdot \r}
 		\end{cases}
 	\end{equation}
 	dove $\r$ è il vettore reale che definisce la posizione del punto considerato, mentre $\s = (s_x, s_y, s_z)$ è detto vettore \emph{di spostamento} e definisce come il campo vari nello spazio in modulo e fase.
@@ -42,10 +42,10 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\begin{equation} \label{eq:condizione_s}
 		\begin{split}
 			& \nabla^2 E_x+ \omega^2 \, \mu \, \epsilon_c \, E_x = 0 \\
-			& E_{ox} ~ ({s_x}^2 e^{-\s \cdot \r} +
+			& E_{_0 x} ~ ({s_x}^2 e^{-\s \cdot \r} +
 				{s_y}^2 e^{-\s \cdot \r} +
 				{s_z}^2 e^{-\s \cdot \r}) +
-				\omega^2 \, \mu \, \epsilon_c \, E_{ox} ~ e^{-\s \cdot \r} = 0 \\
+				\omega^2 \, \mu \, \epsilon_c \, E_{_{0}x} ~ e^{-\s \cdot \r} = 0 \\
 			& \s \cdot \s = {s_x}^2 + {s_y}^2 + {s_z}^2 = - \omega^2 \, \mu \, \epsilon_c
 		\end{split}
 	\end{equation}
@@ -56,12 +56,12 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\begin{equation*}
 		\begin{split}
 			\H & = \frac {\rot\E}{- \jmath \omega \mu} =
-				\frac {\rot(\vec{E_o} ~ e^{-\s \cdot \r})}{- \jmath \omega \mu} \stackrel{(1)}{=} \\
-			& = \frac {(\rot\vec{E_o}) ~ e^{-\s \cdot \r} - \vec{E_o} \times \nabla e^{-\s \cdot \r}} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
-			& = \frac { \vec{E_o} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_o}} {\jmath \omega \mu} ~ e^{-\s \cdot \r} = \frac { \s \times \vec{E}} {\jmath \omega \mu} \\
+				\frac {\rot(\vec{E_{_{0}}} ~ e^{-\s \cdot \r})}{- \jmath \omega \mu} \stackrel{(1)}{=} \\
+			& = \frac {(\rot\vec{E_{_{0}}}) ~ e^{-\s \cdot \r} - \vec{E_{_{0}}} \times \nabla e^{-\s \cdot \r}} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
+			& = \frac { \vec{E_{_{0}}} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_{_{0}}} {\jmath \omega \mu} ~ e^{-\s \cdot \r} = \frac { \s \times \vec{E}} {\jmath \omega \mu} \\
 		\end{split}
 	\end{equation*}
-	dove (1) è dato dalla derivata del prodotto, mentre (2) è dovuto al fatto che, essendo $\vec{E_o}$ costante, il suo gradiente è nullo.
+	dove (1) è dato dalla derivata del prodotto, mentre (2) è dovuto al fatto che, essendo $\vec{E_{_{0}}}$ costante, il suo gradiente è nullo.
 
 \section{Piani di simmetria}
 	La soluzione di onda piana presenta particolari comportamenti lungo e trasversalmente le direzioni date dalla parte reale e immaginaria del vettore $\s = \a + \jmath \k$.
@@ -71,9 +71,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		\begin{equation*}
 			\begin{split}
-				|\E(\r + \Delta\r)| &= |\vec{E_o}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
-				& = |\vec{E_o}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
-				& = |\vec{E_o}| ~ e^{-\a \cdot \r} = |\E(\r)|
+				|\E(\r + \Delta\r)| &= |\vec{E_{_{0}}}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
+				& = |\vec{E_{_{0}}}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
+				& = |\vec{E_{_{0}}}| ~ e^{-\a \cdot \r} = |\E(\r)|
 			\end{split}
 		\end{equation*}
 		dove (*) è dato dal fatto che $\a \cdot \Delta\r = 0$ per costruzione.
@@ -89,9 +89,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		\begin{equation*}
 			\begin{split}
-				|\E(\r + \Delta\r)| &= |\vec{E_o}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
-				& = |\vec{E_o}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
-				& = \left( |\vec{E_o}| ~ e^{-|\a| \Delta\r} \right) e^{-\a \cdot \r} = |\E(\r)| ~ e^{-|\a| \Delta\r}
+				|\E(\r + \Delta\r)| &= |\vec{E_{_{0}}}| ~ e^{-\a \cdot (\r + \Delta\r)} = \\
+				& = |\vec{E_{_{0}}}| ~ e^{-\a \cdot \r} ~ e^{-\a \cdot \Delta\r} \stackrel{(*)}{=} \\
+				& = \left( |\vec{E_{_{0}}}| ~ e^{-|\a| \Delta\r} \right) e^{-\a \cdot \r} = |\E(\r)| ~ e^{-|\a| \Delta\r}
 			\end{split}
 		\end{equation*}
 		dove (*) è dovuto al parallelismo tra $\a$ e $\Delta\r$.
@@ -146,17 +146,17 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		dove $n$ è definito come il coefficiente di rifrazione nel mezzo e $c_0$ è la velocità della luce nel vuoto.
 
 	\subsection{Onda piana uniforme in polarizzazione rettilinea}
-		Considerando il caso specifico di polarizzazione rettilinea, con $\vec{E_o} = E_o \, \hat{x}$, otteniamo che
+		Considerando il caso specifico di polarizzazione rettilinea, con $\vec{E_{_{0}}} = E_{_{0}} \, \hat{x}$, otteniamo che
 
 		\begin{equation*} \begin{split}
-			\vec{H_o} &= \frac{\s \times \vec{E}} {\jmath \omega \mu}
-				= \frac{(\jmath \k) \times (E_o \, \hat{x})}{\jmath \omega \mu}
-				= \frac{|\k| \, E_o}{\omega \mu} ~ \hat{k} \times \hat{x} = \\
-			& = \frac{|\k| \, E_o}{\omega \mu} ~ \hat{y}
-				= \frac{E_o}{\mu c} ~ \hat{y}
-				= \frac{E_o}{\sqrt{\mu / \epsilon}} ~ \hat{y}
-				= \frac{E_o}{\eta} ~ \hat{y}
-				= H_o ~ \hat{y}
+			\vec{H_{_{0}}} &= \frac{\s \times \vec{E}} {\jmath \omega \mu}
+				= \frac{(\jmath \k) \times (E_{_{0}} \, \hat{x})}{\jmath \omega \mu}
+				= \frac{|\k| \, E_{_{0}}}{\omega \mu} ~ \hat{k} \times \hat{x} = \\
+			& = \frac{|\k| \, E_{_{0}}}{\omega \mu} ~ \hat{y}
+				= \frac{E_{_{0}}}{\mu c} ~ \hat{y}
+				= \frac{E_{_{0}}}{\sqrt{\mu / \epsilon}} ~ \hat{y}
+				= \frac{E_{_{0}}}{\eta} ~ \hat{y}
+				= H_{_{0}} ~ \hat{y}
 		\end{split} \end{equation*}
 		dove $\eta$ è definita come impedenza d'onda del mezzo.
 
@@ -198,10 +198,10 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		Un'onda polarizzata linearmente con questo valore di $\s$ avrà perciò campi
 		\begin{equation*}
 			\begin{dcases}
-				~ \E = \vec{E_o} ~ e^{-\s \cdot \r} = E_o \hat{x} ~ e^{-|\a| (1 + \jmath) z} \\
-				~ \H = \frac{\s \times \vec{E_o}}{\jmath \omega \mu} ~ e^{-\s \cdot \r}
-					= \ldots = \frac{E_o |\a| (1 + \jmath)}{\jmath \omega \mu} ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
-					= \frac{E_o}{ R_s (1 + \jmath) } ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
+				~ \E = \vec{E_{_{0}}} ~ e^{-\s \cdot \r} = E_{_{0}} \hat{x} ~ e^{-|\a| (1 + \jmath) z} \\
+				~ \H = \frac{\s \times \vec{E_{_{0}}}}{\jmath \omega \mu} ~ e^{-\s \cdot \r}
+					= \ldots = \frac{E_{_{0}} |\a| (1 + \jmath)}{\jmath \omega \mu} ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
+					= \frac{E_{_{0}}}{ R_s (1 + \jmath) } ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
 			\end{dcases}
 		\end{equation*}
 		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}} (1 + \jmath)$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
@@ -215,7 +215,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Nel buon conduttore essa è facilmente calcolabile con le equazioni trovate in precedenza.
 		\begin{equation} \begin{split} \label{eq:spessore_penetrazione}
-			|\E(z + \delta)| = E_o ~ e^{-|\a| z} ~ e^{-|\a| \delta} = |\E(z)| ~ e^{-|\a| \delta} = e^{-1} \text{ per } \delta = \frac{1}{|\a|}
+			|\E(z + \delta)| = E_{_{0}} ~ e^{-|\a| z} ~ e^{-|\a| \delta} = |\E(z)| ~ e^{-|\a| \delta} = e^{-1} \text{ per } \delta = \frac{1}{|\a|}
 		\end{split} \end{equation}
 
 		Nel caso, per esempio del rame, $\delta$ risulta dell'ordine di $1.6 \mu m$: questo ci porta a concludere che l'onda incidente il buon conduttore viene in gran parte dispersa vicino alla superficie del mezzo.
@@ -227,7 +227,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			& |\k|
 				= \sqrt{\pi f \mu \sigma}
 				\gg \omega \sqrt{\mu \epsilon}
-				= |\vec{k_o}| \\
+				= |\vec{k_{_{0}}}| \\
 		\end{split} \end{equation*}
 
 		perché, per le proprietà del buon conduttore,
@@ -239,7 +239,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Da questo risultato e dalla definizione di $\lambda$ (equazione \ref{eq:lunghezza_donda}) si ottiene quanto anticipato in precedenza, ovvero che
 		\begin{equation*} \begin{split}
-			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_o}|} = \lambda_o \\
+			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_{_{0}}}|} = \lambda_{_{0}} \\
 		\end{split} \end{equation*}
 
 \section{Appendice sui vettori di \emph{Steimetz}}
@@ -366,9 +366,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		Nel caso ancora più specifico di polarizzazione rettilinea il vettore di Poynting si calcola semplicemente come
 		\begin{esp}
 			\vec{P}
-				= \frac{1}{2} \left( E_o \hat{x} \right) \times \left( \frac{H_o}{\eta} \hat{y} \right)
+				= \frac{1}{2} \left( E_{_{0}} \hat{x} \right) \times \left( \frac{H_{_{0}}}{\eta} \hat{y} \right)
 					~ e^{\jmath \beta z} ~ e^{- \jmath \beta z}
-				= \frac{|E_o|^2}{2\eta} \hat{z}
+				= \frac{|E_{_{0}}|^2}{2\eta} \hat{z}
 				= I \hat{z}
 		\end{esp}
 
@@ -376,7 +376,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\begin{equation}
 			\begin{dcases}
 				~ \vec{P} \in \mathbb{R}^3 & \text{ la potenza trasmessa è puramente reale} \\
-				~ |\vec{P}| \propto |E_o|^2 \\
+				~ |\vec{P}| \propto |E_{_{0}}|^2 \\
 				~ \vec{P} \parallel \hat{z}, \k & \text{ la potenza è trasmessa lungo l'asse } \hat{z}
 			\end{dcases}
 		\end{equation}
@@ -386,8 +386,8 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		\begin{equation}
 			\begin{dcases}
-				~ \E = \vec{E_o} \hat{x} ~ e^{-\beta(1+\jmath) z} \\
-				~ \H = \vec{H_o} \hat{x} ~ e^{-\beta(1+\jmath) z} \\
+				~ \E = \vec{E_{_{0}}} \hat{x} ~ e^{-\beta(1+\jmath) z} \\
+				~ \H = \vec{H_{_{0}}} \hat{x} ~ e^{-\beta(1+\jmath) z} \\
 			\end{dcases}
 			\text{ con } \beta = |\k| = |\a| = \sqrt{\pi f \sigma \mu}
 		\end{equation}
@@ -397,12 +397,12 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\begin{esp}
 			\vec{P} &
 				= \frac{\E \times \H^*}{2} \\
-			& = \frac{1}{2} \left( E_o \hat{x} \right)
-					\times \left( \frac{H_o^*}{Z_w^*} \hat{y} \right)
+			& = \frac{1}{2} \left( E_{_{0}} \hat{x} \right)
+					\times \left( \frac{H_{_{0}}^*}{Z_w^*} \hat{y} \right)
 					~ e^{-\beta(1+\jmath) z} ~ e^{-\beta(1-\jmath) z} \\
-			& = \frac{|E_o|^2}{2 Z_w*} \hat{z} ~ e^{-2 \beta z}
-				= \frac{|E_o|^2}{2 R_s (1 - \jmath)} \hat{z} ~ e^{-2 \beta z} \\
-			& = \left( \frac{|E_o|^2}{2 R_s} \hat{z} ~ e^{-2 \beta z} \right)  (1 + \jmath) \\
+			& = \frac{|E_{_{0}}|^2}{2 Z_w*} \hat{z} ~ e^{-2 \beta z}
+				= \frac{|E_{_{0}}|^2}{2 R_s (1 - \jmath)} \hat{z} ~ e^{-2 \beta z} \\
+			& = \left( \frac{|E_{_{0}}|^2}{2 R_s} \hat{z} ~ e^{-2 \beta z} \right)  (1 + \jmath) \\
 			& = \Re[\vec{P}]  (1 + \jmath)
 		\end{esp}
 
@@ -452,13 +452,13 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 	\begin{esp}
 		\begin{dcases}
-			c_1 = \frac{c_o}{n_1} \\
-			c_2 = \frac{c_o}{n_2}
+			c_1 = \frac{c_{_{0}}}{n_1} \\
+			c_2 = \frac{c_{_{0}}}{n_2}
 		\end{dcases}
 		\implies
 		\begin{dcases}
-			\lambda_1 = \frac{\lambda_o}{n_1} \\
-			\lambda_2 = \frac{\lambda_o}{n_2}
+			\lambda_1 = \frac{\lambda_{_{0}}}{n_1} \\
+			\lambda_2 = \frac{\lambda_{_{0}}}{n_2}
 		\end{dcases}
 		\implies
 		\lambda_2 = \lambda_1 \frac{n_1}{n_2}
@@ -517,10 +517,10 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\begin{esp} \label{eq:coefficiente_riflessione}
 		& \rho \stackrel{.}{=} \frac{E_{or}}{E_{oi}}
 			= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1}
-			\stackrel{(*)}{=} \frac{ \frac{\eta_o}{n_2} - \frac{\eta_o}{n_1}}{\frac{\eta_o}{n_2} + \frac{\eta_o}{n_1}}
+			\stackrel{(*)}{=} \frac{ \frac{\eta_{_{0}}}{n_2} - \frac{\eta_{_{0}}}{n_1}}{\frac{\eta_{_{0}}}{n_2} + \frac{\eta_{_{0}}}{n_1}}
 			= \frac{n_2 - n_1}{n_2 + n_1}
 	\end{esp}
-	dove (*) vale solamente per i dielettrici, materiali per cui $\eta_i = \frac{\eta_o}{n_i}$.
+	dove (*) vale solamente per i dielettrici, materiali per cui $\eta_i = \frac{\eta_{_{0}}}{n_i}$.
 
 	Il \emph{coefficiente di trasmissione} $\tau$ si può ricavare in modo analogo.
 	\begin{esp}
@@ -626,7 +626,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 	\begin{esp}
 		\begin{cases}
-			|\a| \simeq |\k| = \sqrt{\pi f \mu_o \sigma} \\
+			|\a| \simeq |\k| = \sqrt{\pi f \mu_{_{0}} \sigma} \\
 			\lambda_2 \ll \lambda_1
 		\end{cases}
 	\end{esp}
@@ -656,8 +656,8 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	Per esempio, nel passaggio dell'onda dall'aria al rame, si può calcolare che
 	\begin{esp}
 		\begin{cases}
-			R_s = \sqrt{\frac{\pi f \mu_o}{\sigma}} \simeq 60m\Omega \\
-			\eta_1 = \frac{\eta_o}{n_1} \simeq 377\Omega \gg R_s
+			R_s = \sqrt{\frac{\pi f \mu_{_{0}}}{\sigma}} \simeq 60m\Omega \\
+			\eta_1 = \frac{\eta_{_{0}}}{n_1} \simeq 377\Omega \gg R_s
 		\end{cases}
 	\end{esp}
 
