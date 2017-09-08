@@ -37,7 +37,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\end{equation}
 	dove $\r$ è il vettore reale che definisce la posizione del punto considerato, mentre $\s = (s_x, s_y, s_z)$ è detto vettore \emph{di spostamento} e definisce come il campo vari nello spazio in modulo e fase.
 
-	Sostituendo questa generica soluzione in \ref{eq:helmotz}, si ottiene la condizione che il parametro $\s$ deve soddisfare per essere un'effettiva soluzione.
+	Sostituendo questa generica soluzione in \eqref{eq:helmotz}, si ottiene la condizione che il parametro $\s$ deve soddisfare per essere un'effettiva soluzione.
 
 	\begin{equation} \label{eq:condizione_s}
 		\begin{split}
@@ -51,7 +51,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\end{equation}
 	dove nell'ultimo passaggio la somma dei quadrati delle componenti di $\s$ è indicata, con un abuso di notazione, come il prodotto scalare \emph{reale} nonstante $\s$ sia un vettore complesso.
 
-	Una volta individuate le condizioni per la validità della soluzione \ref{eq:helmotz_sol}, si può stabilire il legame tra campo elettrico e magnetico.
+	Una volta individuate le condizioni per la validità della soluzione \eqref{eq:helmotz_sol}, si può stabilire il legame tra campo elettrico e magnetico.
 
 	\begin{equation*}
 		\begin{split}
@@ -113,7 +113,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 \section{Onda piana nel vuoto}
 	Studieremo qui la propagazione dell'onda piana in un mezzo che, come il vuoto, è un perfetto isolante, ovvero $\sigma = 0$.
 
-	Scomponendo l'equazione \ref{eq:condizione_s}, si può ottenere il seguente sistema
+	Scomponendo l'equazione \eqref{eq:condizione_s}, si può ottenere il seguente sistema
 
 	\begin{equation} \label{eq:s_components}
 		\begin{dcases}
@@ -129,7 +129,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\a \perp \k
 	\end{dcases}\end{equation}
 
-	Il caso $|\k| = 0$ è da escludere a priori, perché la prima equazione del sistema \ref{eq:s_components} diventa impossibile.
+	Il caso $|\k| = 0$ è da escludere a priori, perché la prima equazione del sistema \eqref{eq:s_components} diventa impossibile.
 
 	\subsection{Onda piana uniforme}
 		Concentriamoci sul caso $|\a| = 0$: esso porta alla soluzione cosiddetta di onda piana uniforme, che si propaga nel vuoto senza perdite di potenza.
@@ -164,7 +164,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	Per i mezzi conduttori vale $\sigma \neq 0$, quindi si avrà il prodotto scalare $\a \cdot \k \neq 0$: questo rende impossibile il caso considerato in precedenza di onda piana uniforme, perché la componente reale di attenuazione (come pure il vettore $\k$) è sempre presente.
 
 	\subsection{Onda piana nel buon conduttore} \label{sec:onda_piana_conduttore}
-		Dividendo tra loro membro a membro le due equazioni del sistema \ref{eq:s_components} si ottiene che
+		Dividendo tra loro membro a membro le due equazioni del sistema \eqref{eq:s_components} si ottiene che
 
 		\begin{equation*} \begin{split}
 			& \frac{|\k|^2 - |\a|^2}{2 |\a| |\k| \cos(\theta)}
@@ -185,7 +185,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{equation*}
 		dove il passaggio al sistema di destra non è rigoroso, ma vuole presentare l'intuizione sottostante.
 
-		Questa uguaglianza tra i due vettori $\a$ e $\k$ si può sfruttare per risolvere il sistema \ref{eq:s_components}.
+		Questa uguaglianza tra i due vettori $\a$ e $\k$ si può sfruttare per risolvere il sistema \eqref{eq:s_components}.
 		\begin{equation*}
 			\begin{dcases}
 				~ |\k| \simeq |\a|
@@ -237,7 +237,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 				\sigma &\gg 2 \omega \epsilon
 		\end{split} \end{equation*}
 
-		Da questo risultato e dalla definizione di $\lambda$ (equazione \ref{eq:lunghezza_donda}) si ottiene quanto anticipato in precedenza, ovvero che
+		Da questo risultato e dalla definizione di $\lambda$ (equazione \eqref{eq:lunghezza_donda}) si ottiene quanto anticipato in precedenza, ovvero che
 		\begin{equation*} \begin{split}
 			& \lambda = \frac{2\pi}{|\k|} \ll \frac{2\pi}{|\vec{k_{_{0}}}|} = \lambda_{_{0}} \\
 		\end{split} \end{equation*}
@@ -323,7 +323,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\end{esp}
 	dove (1) vale perché il secondo membro è periodico, perciò l'integrale sul periodo $T$ è nullo, mentre (2) è immediato perché il vettore $\E$ non dipende dal tempo $t$.
 
-	Grazie alla relazione appena ricavata, è possibile applicare la trasformata di Steinmetz all'equazione \ref{eq:bilancio_potenza_EM}, ottenendone il duale.
+	Grazie alla relazione appena ricavata, è possibile applicare la trasformata di Steinmetz all'equazione \eqref{eq:bilancio_potenza_EM}, ottenendone il duale.
 
 	\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
 		& \underbrace{ - \int_V \E \cdot \J^* ~ dV}_{\text{potenza dai generatori}}
@@ -335,7 +335,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\subsection{Vettore di Poynting}
 
-	L'ultimo termine dell'equazione \ref{eq:bilancio_potenza_EM_steinmetz} rappresenta la potenza trasportata dall'onda fuori dal volume $V$: esso è perciò di particolare interesse per il nostro studio.
+	L'ultimo termine dell'equazione \eqref{eq:bilancio_potenza_EM_steinmetz} rappresenta la potenza trasportata dall'onda fuori dal volume $V$: esso è perciò di particolare interesse per il nostro studio.
 
 	\begin{esp} \label{eq:def_poynting}
 		\int_V \frac{\diverg(\E \times \H^*)}{2} dV
@@ -352,7 +352,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\subsubsection{Poynting per l'onda piana nel vuoto}
 
-		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \ref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
+		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \eqref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
 
 		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
 			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= \, 0 \text{ perché } \jt = 0}
@@ -408,7 +408,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		dove si può notare come l'intensità $I = \Re[\vec{P}] $ cali esponenzialmente in $z$, secondo $\beta = |\a|$.
 
-		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \ref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai 3--5 $\delta$.
+		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \eqref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai 3--5 $\delta$.
 
 \section{Riflessione e rifrazione}
 Riflessione e rifrazione sono trasformazioni a cui l'onda elettromagnetica è sottoposta quando attraversa la frontiera tra due materiali differenti, come in figura \ref{fig:discontinuita}.
@@ -631,7 +631,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		\end{cases}
 	\end{esp}
 
-	La legge di Schnell, dimostrata in precedenza nell'equazione \ref{eq:legge_di_schnell}, vale anche in questo caso, ed emerge che la trasmissione è sostanzialmente normale anche per angoli di incidenza diversi da $0^\circ$.
+	La legge di Schnell, dimostrata in precedenza nell'equazione \eqref{eq:legge_di_schnell}, vale anche in questo caso, ed emerge che la trasmissione è sostanzialmente normale anche per angoli di incidenza diversi da $0^\circ$.
 
 	\begin{esp}
 		\sin(\theta_t)
@@ -643,7 +643,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			\text{\quad perché } \lambda_2 \ll \lambda_1
 	\end{esp}
 
-	Inoltre si può dimostrare come un buon conduttore si comporti come uno specchio per l'onda elettromagnetica, infatti, richiamando l'equazione \ref{eq:coefficiente_riflessione}, si ha che
+	Inoltre si può dimostrare come un buon conduttore si comporti come uno specchio per l'onda elettromagnetica, infatti, richiamando l'equazione \eqref{eq:coefficiente_riflessione}, si ha che
 
 	\begin{esp}
 		\rho
