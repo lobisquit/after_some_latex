@@ -171,7 +171,7 @@ Sostituendo l'espressione in \autoref{eq:helmotz_vuoto}, si ottiene perciò
 	\nabla^2 A_z
 	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) \\
 	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r} \\
-	& = \frac{1}{r} \deriv{}{r}\left(r^2 \deriv{\frac{f'(r)\cdot r - f}{r^2}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
+	& = \frac{1}{r} \deriv{}{r}\left(r^2 \frac{f'(r)\cdot r - f(r)}{r^2}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
 	& = \frac{1}{r} \left[
 		f^{\prime\prime}(r)\cdot r + f^\prime(r)\cdot 1 - f^\prime(r) \right]
 	+ \omega^2\mu\epsilon f(r) = 0\\
@@ -205,14 +205,14 @@ Inoltre le due componenti progressiva e regressiva dell'onda sono di tipo sferic
 \end{itemize}
 
 \smallbreak
-La soluzione generale trovata in precedenza è però incompleta: se da una parte è possibile impostare $d = 0$ ipotizzando l'assenza di riflessioni, è tuttora necessario stabilire $c$ dalle condizioni al contorno, \emph{estendendo} la soluzione per $\r = 0$.
+La soluzione generale trovata in precedenza è però incompleta: se da una parte è possibile impostare $d = 0$ ipotizzando l'assenza di riflessioni, è tuttora necessario stabilire $c$ dalle condizioni al contorno, \emph{estendendo} la soluzione per $\r = \vec{0}$.
 
 Integrando l'equazione di Helmholtz non omogenea nel volume della sfera di di raggio $\r_0$ centrata nell'origine, otteniamo
 \begin{esp*}
 	\int_V \nabla^2 A_z \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V J_z \de V \\
 	\int_V \diverg(\nabla A_z) \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V I \delta(x)\delta(y) g(z) \de V
 \end{esp*}
-dove $g(z)$, definita in \autoref{eq:dipolo_elementare}, è la di--stribuzione di corrente del dipolo.
+dove $g(z)$, definita in \autoref{eq:dipolo_elementare}, è la distribuzione di corrente del dipolo.
 
 Applicando il teorema della divergenza al primo membro otteniamo che
 \begin{esp} \label{eq:helmotz_dipolo_el}
@@ -382,10 +382,26 @@ $|F_{DE}(\theta,\phi)|^2 = \sin^2(\theta)$.
 \paragraph{Solidi di direttività}
 Partendo dal pattern di radiazione in campo e in potenza possiamo disegnare il \emph{solido di direttività}, un diagramma tridimensionale che permette di valutare le capacità dell'antenna in termini di emissione e radiazione.
 
-Nel caso del dipolo elementare i suoi solidi di direttività in campo e in potenza sono visibili in figura \ref{fig:pattern}.
-%TODO fare grafico, magari con CST
+Nel caso del dipolo elementare i suoi solidi di direttività in campo e in potenza sono visibili in figura \ref{fig:solidoDE}.
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=5cm]{solidoDE.jpg}
+        \caption{Solido di direttività}
+				\label{fig:solidoDE}
+    \end{subfigure}%
+    ~
+    \begin{subfigure}[b]{0.5\textwidth}
+        \centering
+        \includegraphics[width=5cm]{img/patternDE.png}
+        \caption{Diagramma di radiazione}
+				\label{fig:patternDE}
+    \end{subfigure}
+    \caption{Diagrammi per il dipolo elementare}
+\end{figure*}
 
-Poiché la maggior parte delle volte risulta difficoltoso rappresentare un grafico tridimensionale che sia facile e veloce da leggere, si decide di rappresentare un grafico bidimensionale, che verrà chiamato \emph{diagramma di radiazione}.
+Poiché la maggior parte delle volte risulta difficoltoso rappresentare un grafico tridimensionale che sia facile e veloce da leggere, si decide di rappresentare un grafico bidimensionale, che verrà chiamato \emph{diagramma di radiazione} [\autoref{fig:patternDE}].
 
 Il diagramma di radiazione si costruisce omettendo uno dei due angoli $\theta$ o $\phi$ e utilizzando
 \begin{itemize}
@@ -403,7 +419,7 @@ dove $F_{max}=1$ per definizione.
 \subsection{Direttività}
 La \emph{direttività} di un'antenna quantifica la frazione di potenza emessa nel lobo (o nei lobi) principali rispetto alla potenza media irradiata.
 
-Iniziamo quindi a determinare come la potenza emess dall'antenna in campo lontano.
+Iniziamo quindi a determinare come la potenza emessa dall'antenna in campo lontano.
 \begin{equation} \label{eq:potenza_irradiata}
 	P= \int_{S(r)} I(r,\theta,\phi) \de S =\int_0^\pi\int_0^{2\pi} I(r,\theta,\phi) \, r^2 \sin(\theta) \de \theta \de \phi
 \end{equation}
@@ -492,7 +508,7 @@ Una qualsiasi antenna può essere vista come un generico dipolo elettrico, come 
 	\label{fig:antenna_come_dipolo}
 \end{figure}
 
-Per valutare la qualità dell'antenna possiamo perciò considerare, invece della sua potenza irradiata $P$, la potenza elettrica in ingresso $P_IN$, più semplice da stabilire all'atto pratico.
+Per valutare la qualità dell'antenna possiamo perciò considerare, invece della sua potenza irradiata $P$, la potenza elettrica in ingresso $P_{IN}$, più semplice da stabilire all'atto pratico.
 
 Perciò definiamo il \emph{guadagno in potenza} come
 
