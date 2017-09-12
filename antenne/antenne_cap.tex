@@ -44,7 +44,7 @@ Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo c
 \chapter{Antenne}
 In questo capitolo analizzeremo le antenne, partendo inizialmente con i potenziali elettromagnetici e cercando di riformulare le equazioni di Maxwell affinché siano più semplici da risolvere nei casi che analizzeremo.
 
-Vedremo quindi l'equazione di Helmoltz e la scelta di Lorentz. Inizieremo quindi a studiare le antenne partendo dal caso del dipolo elementare, ideale e non realizzabile nella realtà, ma utile per fare le prime approssimazioni. Estenderemo quindi il dipolo elementare al dipolo corto per studiare poi le antenne lineari, le schiere e le patch.
+Vedremo quindi l'equazione di Helmholtz e la scelta di Lorentz. Inizieremo poi a studiare le antenne partendo dal caso del dipolo elementare, ideale e non realizzabile nella realtà, ma utile per fare le prime approssimazioni. Estenderemo quanto trovato per il dipolo elementare al dipolo corto e studiaremo poi le antenne lineari, le schiere e le patch.
 
 Riprendiamo le equazioni di Maxwell scritte con i vettori di Steinmetz.
 \begin{equation}\label{eq:maxw-ant}\begin{cases}
@@ -58,7 +58,7 @@ Ora aggiungiamo un termine $\M$ fittizio di correnti \emph{magnetiche}, affinch�
 \subsubsection{Potenziali elettromagnetici}
 Definiamo quindi $\A$ \emph{potenziale vettore magnetico} il campo per cui $\H = \frac{1}{\mu} \cdot \rot \A$.
 
-\begin{theorem}[Teorema di Helmoltz]
+\begin{theorem}[Teorema di Helmholtz]
 	Un campo vettoriale $\A$ è univocamente definito se sono fissati $\rot \A$ e $\diverg \A$.
 \end{theorem}
 
@@ -85,19 +85,19 @@ Analizziamo ora la seconda equazione di Maxwell.
 	-\nabla^2\A + \diverg(\nabla \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \phi + \mu \J \\
 	\nabla^2 \A + \omega^2 \mu \epsilon_c \A
 		&= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \phi \\
-	\underbrace{-\nabla^2\A + \diverg(\nabla \A)}_{(1)} &=\underbrace{-\mu\J}_{(2)} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \phi}_{(3)}\right)\\
+	\underbrace{-\nabla^2\A + \diverg(\nabla \A)}_{(1)} &=\underbrace{-\mu\J}_{(2)} + \nabla\left(\underbrace{\diverg \A + \jmath \omega \mu \epsilon_c \phi}_{(3)}\right)\\
 \end{esp}
 
 Riconosciamo nel termine (1) il primo membro caratteristico dell'equazione delle onde tridimensionale, in (2) il contributo di termine noto delle sorgenti.
 
-IL termine (3) risulta fuori posto, ma seguendo esso può essere reso nullo, come mostrato in seguito.
+Il termine (3) risulta fuori posto, ma seguendo esso può essere reso nullo, come mostrato in seguito.
 
 \paragraph{Scelta di Lorentz}
-Poiché abbiamo ancora un grado di libertà per definire $\A$, secondo il teorema di Helmotz, possiamo scegliere
+Poiché abbiamo ancora un grado di libertà per definire $\A$, secondo il teorema di Helmholtz, possiamo scegliere
 \begin{equation}
 	\diverg \A = -\jmath \omega \mu \epsilon_c \phi
 \end{equation}
-Otteniamo quindi l'\emph{equazione di Helmoltz non omogenea}.
+Otteniamo quindi l'\emph{equazione di Helmholtz non omogenea}.
 \begin{equation}
 	\nabla^2\A + \omega^2 \mu\epsilon_c\A =-\mu \J
 \end{equation}
@@ -110,12 +110,12 @@ Dobbiamo ora determinare il valore di $\phi$, cosa che faremo sfruttando la terz
 	&\jmath\omega\left(-\jmath \omega\mu\epsilon_c\phi\right) + \nabla^2\phi = - \frac{\rho}{\epsilon}\\
 \end{esp*}
 
-Otteniamo così l'equazione \emph{scalare} di Helmoltz non omogenea.
+Otteniamo così l'equazione \emph{scalare} di Helmholtz non omogenea.
 \begin{esp*}
 	&\omega^2\mu\epsilon_c\phi + \nabla^2 \phi = -\frac{\rho}{\epsilon}
 \end{esp*}
 
-Riassumendo, le equazioni di Maxwell si possono riscrivere nella forma delle equazioni di Helmotz: adotteremo queste ultime per descrivere l'elettromagnetismo, per la maggiore facilità di risoluzione nello studio delle antenne.
+Riassumendo, le equazioni di Maxwell si possono riscrivere nella forma delle equazioni di Helmholtz: adotteremo queste ultime per descrivere l'elettromagnetismo, per la maggiore facilità di risoluzione nello studio delle antenne.
 
 \begin{esp}\label{eq:helmolts-lorentz}
 	\begin{dcases}
@@ -125,7 +125,7 @@ Riassumendo, le equazioni di Maxwell si possono riscrivere nella forma delle equ
 \end{esp}
 
 \section{Dipolo elementare}
-Si può notare che le equazioni di Helmoltz trovate sono lineari: il principio di sovrapposizione degli effetti ci consente perciò di estendere a casi complessi lo studio di sorgenti semplici.
+Si può notare che le equazioni di Helmholtz trovate sono lineari: il principio di sovrapposizione degli effetti ci consente perciò di estendere a casi complessi lo studio di sorgenti semplici.
 
 Partiamo perciò analizzando l'azione del \emph{dipolo elementare}, un'antenna filiforme di lunghezza infinitesima $\Delta z$.
 
@@ -138,7 +138,7 @@ La sua distribuzione di corrente si può scrivere perciò come
 	\end{cases}
 \end{esp}
 
-Risolviamo quindi l'equazione \autoref{eq:helmolts-lorentz} di Helmoltz non omogenea per questa distribuzione delle sorgenti.
+Risolviamo quindi l'equazione \autoref{eq:helmolts-lorentz} di Helmholtz non omogenea per questa distribuzione delle sorgenti.
 \begin{esp*}
 	\begin{cases}
 		\nabla^2 A_{x,y} + \omega^2 \mu\epsilon_c A_{x,y} =0 \\
@@ -207,7 +207,7 @@ Inoltre le due componenti progressiva e regressiva dell'onda sono di tipo sferic
 \smallbreak
 La soluzione generale trovata in precedenza è però incompleta: se da una parte è possibile impostare $d = 0$ ipotizzando l'assenza di riflessioni, è tuttora necessario stabilire $c$ dalle condizioni al contorno, \emph{estendendo} la soluzione per $\r = 0$.
 
-Integrando l'equazione di Helmotz non omogenea nel volume della sfera di di raggio $\r_0$ centrata nell'origine, otteniamo
+Integrando l'equazione di Helmholtz non omogenea nel volume della sfera di di raggio $\r_0$ centrata nell'origine, otteniamo
 \begin{esp*}
 	\int_V \nabla^2 A_z \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V J_z \de V \\
 	\int_V \diverg(\nabla A_z) \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V I \delta(x)\delta(y) g(z) \de V
@@ -221,7 +221,7 @@ Applicando il teorema della divergenza al primo membro otteniamo che
 	= -\mu \int_V I \delta(x)\delta(y) F(z) \de V \\
 \end{esp}
 
-Da quanto ricavato nella risoluzione dell'equazione di Helmotz omogenea, sappiamo che nella superficie $S_V$ vale
+Da quanto ricavato nella risoluzione dell'equazione di Helmholtz omogenea, sappiamo che nella superficie $S_V$ vale
 \begin{esp*}
 	\nabla A_z \cdot \hhat{n}
 	= \frac{\de}{\de r} A_z \hhat{r} \cdot \hat{n}

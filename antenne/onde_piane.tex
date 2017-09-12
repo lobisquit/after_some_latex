@@ -58,7 +58,8 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			\H & = \frac {\rot\E}{- \jmath \omega \mu} =
 				\frac {\rot(\vec{E_{_{0}}} ~ e^{-\s \cdot \r})}{- \jmath \omega \mu} \stackrel{(1)}{=} \\
 			& = \frac {(\rot\vec{E_{_{0}}}) ~ e^{-\s \cdot \r} - \vec{E_{_{0}}} \times \nabla e^{-\s \cdot \r}} {- \jmath \omega \mu} \stackrel{(2)}{=} \\
-			& = \frac { \vec{E_{_{0}}} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_{_{0}}} {\jmath \omega \mu} ~ e^{-\s \cdot \r} = \frac { \s \times \vec{E}} {\jmath \omega \mu} \\
+			& = \frac{ \vec{E_{_{0}}} \times ( \s ~ e^{-\s \cdot \r})} {- \jmath \omega \mu} = \frac { \s \times \vec{E_{_{0}}}} {\jmath \omega \mu}
+			~ e^{-\s \cdot \r} = \frac{\s \times \E}{\jmath \omega \mu} \\
 		\end{split}
 	\end{equation*}
 	dove (1) è dato dalla derivata del prodotto, mentre (2) è dovuto al fatto che, essendo $\vec{E_{_{0}}}$ costante, il suo gradiente è nullo.
@@ -204,7 +205,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 					= \frac{E_{_{0}}}{ R_s (1 + \jmath) } ~ e^{-|\a| (1 + \jmath) z} ~ \hat{y}
 			\end{dcases}
 		\end{equation*}
-		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}} (1 + \jmath)$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
+		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}}$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
 
 		\subsubsection{Spessore di penetrazione}
 		Nello studio della propagazione di onde in un mezzo, si può definire il cosiddetto \emph{spessore di penetrazione} come la distanza $\delta$ lungo l'asse di propagazione per cui il modulo del campo cala di un fattore $e^{-1}$.
@@ -411,7 +412,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		Dopo lo spessore di penetrazione $\delta$, definito nell'equazione \eqref{eq:spessore_penetrazione}, l'intensità risulta ridotta di un fattore $e^{-2} \simeq 1/9$, diventando così trascurabile per distanze superiori ai 3--5 $\delta$.
 
 \section{Riflessione e rifrazione}
-Riflessione e rifrazione sono trasformazioni a cui l'onda elettromagnetica è sottoposta quando attraversa la frontiera tra due materiali differenti, come in figura \ref{fig:discontinuita}.
+Riflessione e rifrazione sono trasformazioni a cui l'onda elettromagnetica è sottoposta quando attraversa la frontiera tra due materiali differenti, come in \autoref{fig:discontinuita}.
 
 La loro analisi consiste perciò nel risolvere le equazioni di Maxwell nei due mezzi e poi garantire la continuità delle soluzioni sulla superficie di separazione.
 
@@ -448,7 +449,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 \end{equation}
 
 \subsection{Incidenza tra perfetti isolanti}
-	Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie e $\sigma_1 = \sigma_2 = 0$ si ha che, come rappresentato in figura \ref{fig:incidenza_normale_isolanti}, la lunghezza d'onda si riduce: in particolare vale che
+	Nel caso $\k \perp \hat{n}$, ovvero incidenza normale alla superficie e $\sigma_1 = \sigma_2 = 0$ si ha che, come rappresentato in \autoref{fig:incidenza_normale_isolanti}, la lunghezza d'onda si riduce: in particolare vale che
 
 	\begin{esp}
 		\begin{dcases}
@@ -471,14 +472,14 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		\label{fig:incidenza_normale_isolanti}
 	\end{figure}
 
-	Nel caso invece di incidenza con un angolo $\theta_i$ rispetto alla normale della superficie, il comportamento è più complesso, come si può osservare in figura \ref{fig:incidenza_non_normale_isolanti}.
+	Nel caso invece di incidenza con un angolo $\theta_i$ rispetto alla normale della superficie, il comportamento è più complesso, come si può osservare in \autoref{fig:incidenza_non_normale_isolanti}.
 
 	La continuità dei piani equifase ci permette ancora di valutare il comportamento dell'onda anche senza risolvere le equazioni di Maxwell.
 
 	Considerando il segmento $l$ evidenziato in figura, la sua lunghezza può essere calcolata in due modi diversi, grazie alle proprietà dei triangoli rettangoli.
 
 	\begin{esp} \label{eq:legge_di_schnell}
-		l = \frac{\lambda_1}{\sin(\theta_i)} = \frac{\lambda_1}{\sin(\theta_i)}
+		l = \frac{\lambda_1}{\sin(\theta_i)} = \frac{\lambda_2}{\sin(\theta_t)}
 	\end{esp}
 
 	\begin{figure}[ht]
@@ -506,16 +507,16 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	Nella superficie di discontinuità i campi sono tutti paralleli, quindi le somme vettoriali si riducono a somme scalari.
 	\begin{esp}
 		\begin{cases}
-			E_{oi} + E_{or} = E_{ot} \\
-			H_{oi} - H_{or} = H_{ot}
+			E_{_0 i} + E_{_0 r} = E_{_0 t} \\
+			H_{_0 i} - H_{_0 r} = H_{_0 t}
 		\end{cases} \implies
-		\frac{E_{oi}}{\eta_1} - \frac{E_{or}}{\eta_1} = \frac{E_{ot}}{\eta_2} = \frac{E_{oi} + E_{or}}{\eta_2}
+		\frac{E_{_0 i}}{\eta_1} - \frac{E_{_0 r}}{\eta_1} = \frac{E_{_0 t}}{\eta_2} = \frac{E_{_0 i} + E_{_0 r}}{\eta_2}
 	\end{esp}
 	dove sono state impiegate le formule che legano $|\E|$ e $|\H|$ nel caso dell'onda piana.
 
 	Riorganizzando i termini dell'equazione, si ottiene il \emph{coefficiente di riflessione} $\rho$.
 	\begin{esp} \label{eq:coefficiente_riflessione}
-		& \rho \stackrel{.}{=} \frac{E_{or}}{E_{oi}}
+		& \rho \stackrel{.}{=} \frac{E_{_0 r}}{E_{_0 i}}
 			= \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1}
 			\stackrel{(*)}{=} \frac{ \frac{\eta_{_{0}}}{n_2} - \frac{\eta_{_{0}}}{n_1}}{\frac{\eta_{_{0}}}{n_2} + \frac{\eta_{_{0}}}{n_1}}
 			= \frac{n_2 - n_1}{n_2 + n_1}
@@ -524,9 +525,9 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 	Il \emph{coefficiente di trasmissione} $\tau$ si può ricavare in modo analogo.
 	\begin{esp}
-		& \tau \stackrel{.}{=} \frac{E_{ot}}{E_{oi}}
-				= \frac{E_{or} + E_{oi}}{E_{oi}}
-				= \frac{E_{or}}{E_{oi}} + 1
+		& \tau \stackrel{.}{=} \frac{E_{_0 t}}{E_{_0 i}}
+				= \frac{E_{_0 r} + E_{_0 i}}{E_{_0 i}}
+				= \frac{E_{_0 r}}{E_{_0 i}} + 1
 				= \rho + 1 \\
 	\end{esp}
 
@@ -536,9 +537,9 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	\begin{esp}
 		I_t
 		& = |\Re[\vec{P}]|
-			= \frac{|E_{ot}|^2}{2 \eta_2}
-			= \frac{|E_{oi} (1 + \rho)|^2}{2 \eta_2} \\
-		& = \frac{|E_{oi}|^2}{2 \eta_1} \frac{\eta_1}{\eta_2} |1 + \rho|^2
+			= \frac{|E_{_0 t}|^2}{2 \eta_2}
+			= \frac{|E_{_0 i} (1 + \rho)|^2}{2 \eta_2} \\
+		& = \frac{|E_{_0 i}|^2}{2 \eta_1} \frac{\eta_1}{\eta_2} |1 + \rho|^2
 			= I_i \frac{\eta_1}{\eta_2} |1 + \rho|^2 \\
 		& = I_i \frac{4 \eta_1 \eta_2}{|\eta_1 + \eta_2|^2}
 			= I_i (1 - |\rho|^2) = I_i - I_i |\rho|^2 = I_i - I_r
@@ -547,7 +548,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 	È possibile osservare come tutto il comportamento in potenza sia dovuto al solo parametro $\rho$, che definisce sia l'intensità dell'onda trasmessa che quella riflessa.
 
 \subsection{Interferenza in riflessione}
-	Come è possibile notare in figura \ref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due.
+	Come è possibile notare in \autoref{fig:campi_incidenza_normale_isolanti}, nel secondo mezzo c'è un'unica onda che si propaga, mentre nel primo ce ne sono due.
 	Questo dà vita a fenomeni di interferenza tra l'onda progressiva incidente e l'onda regressiva riflessa generata dalla discontinuità di mezzo.
 
 	\begin{figure}[ht]
@@ -564,34 +565,34 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			\k_r = (- \beta_1 \cos(\theta_1), + \beta_1 \sin(\theta_1), 0)
 		\end{dcases}
 	\end{esp}
-	dove i vettori sono scomposti nelle loro componenti secondo il sistema di coordinate in figura \ref{fig:campi_incidenza_non_normale_isolanti}.
+	dove i vettori sono scomposti nelle loro componenti secondo il sistema di coordinate in \autoref{fig:campi_incidenza_non_normale_isolanti}.
 
 	Il campo nel mezzo 1 si può perciò scrivere come
 	\begin{esp}
 		\E_1(\r)
-		& = \E_{oi} ~ e^{-\jmath \k_i \cdot \r} + \E_{or} ~ e^{-j \k_r \cdot \r} \\
-		& = E_{oi} ~ \hat{x}_3
+		& = \E_{_0 i} ~ e^{-\jmath \k_i \cdot \r} + \E_{_0 r} ~ e^{-j \k_r \cdot \r} \\
+		& = E_{_0 i} ~ \hat{x}_3
 			~ e^{-\jmath \beta_1 [ \cos(\theta_i) \, x_1 + \sin(\theta_i) \, x_2] }
-			+ E_{or} ~ \hat{x}_3
+			+ E_{_0 r} ~ \hat{x}_3
 			~ e^{-\jmath \beta_1 [-\cos(\theta_i) \, x_1 + \sin(\theta_i) \, x_2] } \\
-		& = E_{oi} ~ \hat{x}_3
+		& = E_{_0 i} ~ \hat{x}_3
 			~ e^{-\jmath \beta_1 [ \cos(\theta_i) x_1 + \sin(\theta_i) x_2] }
-			+ E_{oi} (1 + \rho)
+			+ E_{_0 i} (1 + \rho)
 			~ \hat{x}_3 ~ e^{-\jmath \beta_1 [-\cos(\theta_i) x_1 + \sin(\theta_i) x_2]} \\
-		& = E_{oi} (1 + \rho ~ e^{\jmath 2 \beta_1 \cos(\theta_i) x_1} )
+		& = E_{_0 i} (1 + \rho ~ e^{\jmath 2 \beta_1 \cos(\theta_i) x_1} )
 			~ e^{-\jmath \beta_1 [\cos(\theta_i) x_1 + \sin(\theta_i) x_2]} \\
 	\end{esp}
 
-	Il modulo quadro del campo elettrico varia oscilla in funzione della posizione $x_1$, alternando piani di interferenza distruttiva (campo nullo) a piani di interferenza costruttiva (campo massimo).
+	Il modulo quadro del campo elettrico oscilla in funzione della posizione $x_1$, alternando piani di interferenza distruttiva (campo nullo) a piani di interferenza costruttiva (campo massimo).
 
 	In particolare, nel caso di incidenza normale si ha che
 	\begin{esp}
 		|\E_1(\r)|^2
-			& = |E_{oi}|^2 |1 + \rho ~ e^{\jmath 2 \beta_1 x_1}|^2 \\
-			& = |E_{oi}|^2
-				(1 + \rho ~ e^{-\jmath 2 \beta_1 x_1})
+			& = |E_{_0 i}|^2 |1 + \rho ~ e^{\jmath 2 \beta_1 x_1}|^2 \\
+			& = |E_{_0 i}|^2
+				(1 + \rho ~ e^{\jmath 2 \beta_1 x_1})
 				(1 + \rho^* ~ e^{-\jmath 2 \beta_1 x_1}) \\
-			& = |E_{oi}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
+			& = |E_{_0 i}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
 	\end{esp}
 
 	Questi piani individuano lungo $\hat{x}_3$ settori in cui l'impedenza vista dall'onda elettromagnetica varia. Essa, nel caso dell'onda piana, può essere calcolata sfruttando la legge di Ohm.
@@ -600,13 +601,13 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		Z(x_3)
 		& = \frac{E(x_3)}{H(x_3)}
 			= \frac
-				{E_{oi} (1 - e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3}}
-				{-\frac{E_{oi}}{\eta_1} (1 + e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3} } \\
+				{E_{_0 i} (1 - e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3}}
+				{-\frac{E_{_0 i}}{\eta_1} (1 + e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3} } \\
 		& = \eta_1 ~ \frac
 			{e^{\jmath \beta_1 x_3} - e^{\jmath \beta_1 x_3}}
 			{e^{\jmath \beta_1 x_3} + e^{\jmath \beta_1 x_3}} \\
 		& = \frac{\eta_1}{\jmath} ~ \frac{\sin(\beta_1 x_3)}{\cos(\beta_1 x_3)}
-			= -\jmath \, \eta_1 \tan(\beta x_3)
+			= -\jmath \, \eta_1 \tan(\beta_1 x_3)
 	\end{esp}
 
 	Periodicamente ogni $\lambda_1 / 2$ l'impedenza d'onda oscilla da 0 a $+\infty$:
