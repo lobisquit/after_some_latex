@@ -86,7 +86,7 @@
 			\end{equation}
 
 		\subsubsection{Minimo di radiazione}
-			Osservando l'equazione \ref{eq:array_pattern} si può notare che gli zeri del campo lontano si hanno per valori di $\psi$ che annullano il numeratore, ma non il denominatore.
+			Osservando l'equazione \eqref{eq:array_pattern} si può notare che gli zeri del campo lontano si hanno per valori di $\psi$ che annullano il numeratore, ma non il denominatore.
 
 			\begin{esp}
 				\frac{1}{n} \, \frac{\sin(\frac{n}{2} \psi) }{ \sin( \frac{\psi}{2} ) } = 0
@@ -106,7 +106,7 @@
 							{ \sin(\frac{n}{2} \psi) }
 							{ \sin( \frac{\psi}{2} ) }
 					\right) \\
-				& = \frac{1}{\sin^2 \frac{\psi}{2}} \left[
+				& = \frac{1}{\sin^2 \left(\frac{\psi}{2}\right)} \left[
 					\cos \left(\frac{n}{2} \psi \right) \frac{n}{2} \sin\left( \frac{\psi}{2} \right)
 					- \sin \left(\frac{n}{2} \psi \right) \cos\left( \frac{\psi}{2} \right)
 					\right]
@@ -127,7 +127,7 @@
 					\psi = 0, \, \pi
 						& \text{non accettabili, perché punti di massimo} \\
 					\psi = \pm \frac{\pi}{n} \, (2p + 1) \quad \forall p \in \mathbb{N}
-						& \text{validi se rientrano nel range di visibilità}
+						& \text{validi se rientrano nella regione di visibilità}
 				\end{dcases}
 			\end{equation*}
 
@@ -147,7 +147,7 @@
 			& \implies \theta_0 = 0 \land \theta_0 = \pi
 			& \text{schiere \emph{endfire}} \\
 		\end{esp*}
-
+% \clearpage
 \section{Schiera di antenne non isotrope}
 	Osserveremo ora il caso generico in cui le antenne isotrope ideali sono rimpiazzate da antenne reali.
 
@@ -184,7 +184,7 @@
 				\left( \frac{e^{-\jmath \beta r}}{r} \right)
 				\Delta z ~ AF \, \hat{z}
 		\end{esp}
-		dove l'\gls{af} è calcolato come il rapporto tra il contributo complessivo e della singola antenna.
+		dove l'\gls{af} è calcolato come il rapporto tra il contributo complessivo e quello della singola antenna.
 
 		Il campo elettrico, per esempio lungo $\theta$, si può ricavare a partire da $\vec{A}$.
 		\begin{esp}
@@ -219,7 +219,7 @@
 				& \stackrel{(2)}{=} \frac{\mu}{4\pi}
 				\left( \frac{e^{-\jmath \beta r}}{r} \right) \hat{z}
 				\int_{-\infty}^{+\infty}
-					\left( \sum_{k=0}^{n-1} i_k(z^\prime) ~ e^{\jmath \beta r^\prime \cos \theta} \right)
+					\left( \sum_{k=0}^{n-1} i_k(z^\prime) ~ e^{\jmath \beta z^\prime \cos \theta} \right)
 					\de z^\prime
 		\end{esp}
 		dove
@@ -234,12 +234,12 @@
 			& = \jmath \frac{\eta_0}{2\lambda}
 					\left( \frac{e^{-\jmath \beta r}}{r} \right)
 					\sum_{k=0}^{n-1}
-						\int_{-\infty}^{+\infty} dz^\prime ~ i_k(z^\prime) ~ e^{\jmath \beta z^\prime \cos \theta} \, \hat{z} \\
+						\int_{-\infty}^{+\infty}  ~ i_k(z^\prime) \, e^{\jmath \beta z^\prime \cos \theta} ~dz^\prime \, \hat{z} \\
 			& = \jmath \frac{\eta_0}{2\lambda}
 					\left( \frac{e^{-\jmath \beta r}}{r} \right)
-					\sum_{k=0}^{n-1} E_n(\theta) \\
+					\sum_{k=0}^{n-1} E_k(\theta) \\
 		\end{esp}
-		dove il termine integrale $E_n(\theta)$ è identificabile come il contributo della $k$-esima antenna della schiera.
+		dove il termine integrale $E_k(\theta)$ è identificabile come il contributo della $k$-esima antenna della schiera.
 
 	\subsection{Schiera di antenne filiformi identiche}
 		Nel caso specifico in cui tutte le antenne abbiano la stessa lunghezza $L$ e la stessa distribuzione di corrente, è possibile scomporre ancora scomporre il campo nel constributo della tipologia di antenna e di array.
@@ -254,28 +254,28 @@
 		\begin{esp}
 			E_n(\theta)
 			& = \sin \theta ~ I_n
-				\, \int_{z_n - \frac{L}{2}}^{z_n + \frac{L}{2}} dz^\prime ~
-					i(z^\prime - z_n) e^{\jmath \beta z^\prime \cos \theta} \\
+				\, \int_{z_n - \frac{L}{2}}^{z_n + \frac{L}{2}} \,
+					i(z^\prime - z_n) e^{\jmath \beta z^\prime \cos \theta}~ dz^\prime  \\
 			& \stackrel{(*)}{=} \sin \theta ~ I_n
-				\, \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
-					i(\tau) ~ e^{\jmath \beta (\tau + z_n) \cos \theta} \\
+				\, \int_{-\frac{L}{2}}^{+\frac{L}{2}} \,
+					i(\tau) ~ e^{\jmath \beta (\tau + z_n) \cos \theta}~d\tau  \\
 			& = \sin \theta ~ I_n ~ e^{\jmath \beta z_n \cos \theta}
-				\, \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
-					i(\tau) ~ e^{\jmath \beta \tau \cos \theta} \\
+				\, \int_{-\frac{L}{2}}^{+\frac{L}{2}} \,
+					i(\tau) ~ e^{\jmath \beta \tau \cos \theta} ~d\tau ~\\
 		\end{esp}
 		dove in (*) $z^\prime$ è stato sostituito da $\tau = z^\prime - z_n$.
 
-		È possibile infine inserire questo risultato all'interno della formula generale, in equazione \ref{eq:e_theta_schiera_dipoli}.
+		È possibile infine inserire questo risultato all'interno della formula generale, in equazione \eqref{eq:e_theta_schiera_dipoli}.
 		\begin{esp}
 			\vec{E}_\theta
 			= \jmath \frac{\eta_0}{2\lambda}
 					\left( \frac{e^{-\jmath \beta r}}{r} \right)
 					\underbrace{
-						\left( \sum_{k=0}^{n-1} I_n ~ e^{\jmath \beta z_n \cos \theta} \right)
+						\left( \sum_{k=0}^{n-1} I_k ~ e^{\jmath \beta z_k \cos \theta} \right)
 					}_{\text{AF}}
 					\underbrace{
-						\left( \sin \theta \int_{-\frac{L}{2}}^{+\frac{L}{2}} d\tau ~
-						i(\tau) ~ e^{\jmath \beta \tau \cos \theta} \right)
+						\left( \sin \theta \int_{-\frac{L}{2}}^{+\frac{L}{2}} \,
+						i(\tau) ~ e^{\jmath \beta \tau \cos \theta}~d\tau \right)
 					}_{\text{singola antenna}}
 		\end{esp}
 		dove sono messi in luce i contributi della singola antenna e della loro combinazione.

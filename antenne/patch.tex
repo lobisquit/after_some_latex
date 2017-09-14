@@ -1,14 +1,14 @@
 \chapter{Antenne patch o a microstriscia}
 Le antenne patch sono antenne planari, che possono essere quindi stampate o incise su ogni genere di supporti rigidi.
 
-Quindi, esse sono spesso utilizzate nei circuiti integrati e trovano ampia applicazione nei dispositivi mobili, dove lo spazio occupato è di grande importanza e dove antenne ad ampio raggio sono preferite rispetto a quelle più direttive.
+Esse, quindi, sono spesso utilizzate nei circuiti integrati e trovano ampia applicazione nei dispositivi mobili, dove lo spazio occupato è di grande importanza e dove antenne ad ampio raggio sono preferite rispetto a quelle più direttive.
 
 L'antenna patch più semplice è un antenna rettangolare, come in \autoref{fig:patch}.
 
 \begin{figure}[htp]
 	\centering
 	\includegraphics[]{img/patch.pdf}
-	\caption{Visione dall'alto e dal lato dell'antenna patch. Le parti in arancione sono di \gls{pec}, mentre il sostrato verde è composto da un materiale dielettrico.}
+	\caption{Visione dall'alto e dal lato dell'antenna patch. Le parti in arancione sono di \gls{pec}, mentre il substrato verde è composto da un materiale dielettrico.}
 	\label{fig:patch}
 \end{figure}
 
@@ -26,12 +26,12 @@ Definiamo ora la \emph{costante dielettrica efficace} dell'isolante, che impiegh
 
 \begin{esp}\label{eq:paramPatch}
 	\epsilon_{re}
-	&= \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h}{W}} \\
+	&= \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h_s}{W}} \\
 	L&=\frac{\lambda}{2\sqrt{\epsilon_r}}
-	- \frac{\left(\epsilon_{re} +0.3 \right) \, \left(\frac{W}{h}
-	+ 0.264\right)}{\left(\epsilon_{re} +0.258 \right)\, \left(\frac{W}{h} + 0.8\right)} \\
+	- \frac{\left(\epsilon_{re} +0.3 \right) \, \left(\frac{W}{h_s}
+	+ 0.264\right)}{\left(\epsilon_{re} +0.258 \right)\, \left(\frac{W}{h_s} + 0.8\right)} \\
 	&\simeq 0.49 \, \frac{\lambda}{\sqrt{\epsilon_r}} \\
-	B_\%&= 3.77 \, \frac{\epsilon_r-1}{\epsilon_r^2} \, \frac{W}{L}\, \frac{h}{\lambda}
+	B_\%&= 3.77 \, \frac{\epsilon_r-1}{\epsilon_r^2} \, \frac{W}{L}\, \frac{h_s}{\lambda}
 \end{esp}
 
 L'impedenza d'antenna risulta quindi, non creando un inset al suo interno,
