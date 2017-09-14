@@ -355,8 +355,8 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \eqref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
 
-		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
-			& \underbrace{ - \int_V \E \cdot \J ~ dV}_{= \, 0 \text{ perché } \jt = 0}
+		\begin{esp} \label{eq:bilancio_pot_EM_steinmetz}
+			& \underbrace{ - \int_V \E \cdot \J^* ~ dV}_{= \, 0 \text{ perché } \jt = 0}
 				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= \, 0 \text{ perché } \sigma = 0}
 				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS
 				\implies \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS = 0
@@ -367,7 +367,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		Nel caso ancora più specifico di polarizzazione rettilinea il vettore di Poynting si calcola semplicemente come
 		\begin{esp}
 			\vec{P}
-				= \frac{1}{2} \left( E_{_{0}} \hat{x} \right) \times \left( \frac{H_{_{0}}}{\eta} \hat{y} \right)
+				= \frac{1}{2} \left( E_{_{0}} \hat{x} \right) \times \left( \frac{E_{_{0}}}{\eta} \hat{y} \right)
 					~ e^{\jmath \beta z} ~ e^{- \jmath \beta z}
 				= \frac{|E_{_{0}}|^2}{2\eta} \hat{z}
 				= I \hat{z}
@@ -403,7 +403,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 					~ e^{-\beta(1+\jmath) z} ~ e^{-\beta(1-\jmath) z} \\
 			& = \frac{|E_{_{0}}|^2}{2 Z_w*} \hat{z} ~ e^{-2 \beta z}
 				= \frac{|E_{_{0}}|^2}{2 R_s (1 - \jmath)} \hat{z} ~ e^{-2 \beta z} \\
-			& = \left( \frac{|E_{_{0}}|^2}{2 R_s} \hat{z} ~ e^{-2 \beta z} \right)  (1 + \jmath) \\
+			& = \left( \frac{|E_{_{0}}|^2}{4 R_s} \hat{z} ~ e^{-2 \beta z} \right)  (1 + \jmath) \\
 			& = \Re[\vec{P}]  (1 + \jmath)
 		\end{esp}
 
@@ -478,7 +478,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 
 	Considerando il segmento $l$ evidenziato in figura, la sua lunghezza può essere calcolata in due modi diversi, grazie alle proprietà dei triangoli rettangoli.
 
-	\begin{esp} \label{eq:legge_di_schnell}
+	\begin{esp} \label{eq:legge_di_snell}
 		l = \frac{\lambda_1}{\sin(\theta_i)} = \frac{\lambda_2}{\sin(\theta_t)}
 	\end{esp}
 
@@ -632,7 +632,7 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 		\end{cases}
 	\end{esp}
 
-	La legge di Schnell, dimostrata in precedenza nell'equazione \eqref{eq:legge_di_schnell}, vale anche in questo caso, ed emerge che la trasmissione è sostanzialmente normale anche per angoli di incidenza diversi da $0^\circ$.
+	La legge di Snell, dimostrata in precedenza nell'equazione \eqref{eq:legge_di_snell}, vale anche in questo caso, ed emerge che la trasmissione è sostanzialmente normale anche per angoli di incidenza diversi da $0^\circ$.
 
 	\begin{esp}
 		\sin(\theta_t)

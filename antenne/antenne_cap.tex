@@ -64,7 +64,7 @@ Definiamo quindi $\A$ \emph{potenziale vettore magnetico} il campo per cui $\H =
 
 Per definire propriamente il potenziale $\A$, dobbiamo dunque fornire l'espressione per la $\diverg \A$.
 \begin{esp} \label{eq:AE}
-	\rot\E &= - \jmath \omega \cdot \mu \frac{1}{\mu} \rot \A \quad \Leftrightarrow \quad \rot\left(\rot \E + \jmath \omega \A\right)=0
+	\rot\E &= - \jmath \omega \cdot \mu \frac{1}{\mu} \rot \A \quad \Leftrightarrow \quad \rot\left(\E + \jmath \omega \A\right)=0
 \end{esp}
 
 Questo ci permette di affermare che il termine tra parentesi in \autoref{eq:AE} deve essere \emph{costante} a meno di un termine che si annulli con l'operazione di rotore.
@@ -106,7 +106,7 @@ Dobbiamo ora determinare il valore di $\phi$, cosa che faremo sfruttando la terz
 	\diverg\E
 		= \frac{\rho}{\epsilon} ~~ \implies ~~ &
 		\diverg\left(-\jmath \omega \A - \nabla \phi	 \right)= \frac{\rho}{\epsilon}\\
-	 & \jmath \omega \A + \nabla \phi= -\frac{\rho}{\epsilon}	 \\
+	 & \jmath \omega \nabla \A + \nabla^2 \phi= -\frac{\rho}{\epsilon}	 \\
 	&\jmath\omega\left(-\jmath \omega\mu\epsilon_c\phi\right) + \nabla^2\phi = - \frac{\rho}{\epsilon}\\
 \end{esp*}
 
@@ -725,7 +725,7 @@ Il contributo della sorgente infinitesima $\J$ al potenziale vettore magnetco va
 
 Il potenziale effettivo su $P$ risulta perciò
 \begin{equation} \label{eq:A_di_P}
-	\A(\r)=\int_{V^\prime} \de \A(\rp) =\int_{V^\prime} \frac{\mu}{4\pi} \J(\rp) \frac{\ejbr}{R} \de \rp
+	\A(\r)=\int_{V^\prime} \de \A(\rp) =\int_{V^\prime} \frac{\mu}{4\pi} \J(\rp) \frac{e^{-\jmath \beta R}}{R} \de \rp
 \end{equation}
 
 Come si può notare in \autoref{fig:momento_equivalente}, la distanza $R$ di $P$ dalla sorgente dipende sia da $r$, $r^\prime$ e $\phi$, secondo il teorema del coseno.
