@@ -179,7 +179,7 @@ R_r = \frac{2}{3} \frac{\pi}{4} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{
 
 Trattandosi di un oggetto filiforme, è possibile definire la \emph{resistenza per unità di lunghezza}.
 \begin{equation*}
-			r_f = \frac{R_s}{2 \pi a} = \frac{1}{2 \pi a} \sqrt{\frac{\pi f M }{\sigma}}
+			r_f = \frac{R_s}{2 \pi a} = \frac{1}{2 \pi a} \sqrt{\frac{\pi f \mu }{\sigma}}
 		\end{equation*}
 
 \section{Dipolo a mezz'onda}
@@ -311,9 +311,9 @@ Poniamoci a \emph{sinistra} della coppia di antenne, secondo lo schema di \autor
 	E
 	& \propto E_{driver}\frac{\ejbr}{r}
 	-E_{driver}
-	\frac {e^{\jmath\beta(r+\frac {\lambda} {4})}} {r}
+	\frac {e^{-\jmath\beta(r+\frac {\lambda} {4})}} {r}
 	\, e^{-\jmath\frac{\pi}{2}} \\
-	& = E_{driver} \frac{\ejbr}{r} (1-e^{j (\beta\frac{\lambda}{4} - \frac{\pi}{2})})
+	& = E_{driver} \frac{\ejbr}{r} (1-e^{-j (\beta\frac{\lambda}{4} + \frac{\pi}{2})})
 	= E_{driver}\frac{\ejbr}{r} (1-e^{-\jmath\pi})
 	= 2E_{driver}\frac{\ejbr}{r}
 \end{esp}

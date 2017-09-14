@@ -50,7 +50,7 @@ dove il coefficiente di proporzionalità $D$ è uguale, sempre per simmetria.
 Il campo risultante per entrambe le componenti risulta perciò perpendicolare al piano: data questa scelta di direzione, verso e intensità della sorgente riflessa lo schema risulta perciò equivalente a quello iniziale.
 
 \clearpage
-\section{Monopoli}
+\section{Monopòli}
 
 Per il teorema delle immagini, lo specchio introduce un effetto che può essere interpretato come un'antenna virtuale: sfruttiamo ora questo principio per costruire dei \emph{monopoli elettromagnetici}.
 
@@ -76,7 +76,7 @@ Nel caso del monopolo corto, in particolare si ha che che la resistenza dimezza,
 	&= \frac{\pi}{12}\eta\left(\frac{L}{\lambda}\right)^2
 	\simeq 40 \pi^2 \left(\frac{L}{\lambda}\right)^2 \\
 	D_{monopolo}
-	&= \frac{4\pi U_m}{P_{dipolo}}
+	&= \frac{4\pi U_m}{P_{monopolo}}
 	= \frac{4\pi U_m}{\frac{P_{dipolo}}{2}}
 	= 2 D_{dipolo}
 \end{esp}
@@ -107,8 +107,8 @@ Cerchiamo quindi di di calcolare il momento del dipolo magnetico per questa ante
 		1-\frac{|z^{\prime}|}{\frac{L}{2}+b}
 	\right)
 \de z^{\prime} \\
-	&= I_m\left(L- \int_0^{\frac{L}{2}}\frac{-z^{\prime}}{\frac{L}{2}+b} \de z^{\prime} + \int_{-\frac{L}{2}}^0\frac{z^{\prime}}{\frac{L}{2}+b} \de z^{\prime}\right)\\
-	&=I_m \left(\left. L - \frac{(z^\prime)^2}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_0^{\frac{L}{2}}+\left. \frac{(z^\prime)^2}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_{\frac{L}{2}}^0 \right)\\
+	&= I_m\left(L- \int_0^{\frac{L}{2}}\frac{z^{\prime}}{\frac{L}{2}+b} \de z^{\prime} + \int_{-\frac{L}{2}}^0\frac{z^{\prime}}{\frac{L}{2}+b} \de z^{\prime}\right)\\
+	&=I_m \left(\left. L - \frac{(z^\prime)^2}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_0^{\frac{L}{2}}+\left. \frac{(z^\prime)^2}{2 \cdot \left(\frac{L}{2}+b\right)} \right|_{-\frac{L}{2}}^0 \right)\\
 	&=I_m \, \frac{4L\left(\frac{L}{2}+b\right)-L^2}{4\left(\frac{L}{2}+b\right)}
 	= I_m \, \frac{L}{2} \,  \underbrace{\frac{L+4b}{L+2b}}_{>1}
 \end{esp}
