@@ -37,13 +37,13 @@ Definendo inoltre
 \end{itemize}
 si ottiene che l'impedenza caratteristica risulta
 \begin{equation}
-  Z_C = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \cdot \sqrt{\frac{\mu}{\epsilon}}
+  Z_C = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \, \sqrt{\frac{\mu}{\epsilon}}
 \end{equation}
 
 Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
 \begin{esp}
-  V(z) &= V_o \cdot e^{-\jmath \beta \cdot z}\\
-  I(z) &= I_o \cdot e^{-\jmath \beta \cdot z}
+  V(z) &= V_o \, e^{-\jmath \beta \, z}\\
+  I(z) &= I_o \, e^{-\jmath \beta \, z}
 \end{esp}
 
 
@@ -77,7 +77,7 @@ Definiamo quindi $\Phi$ potenziale scalare elettrico associato ad $\A$. Analizzi
   \rot \H &= \jmath \omega \epsilon_c \cdot \E + \J =  \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right)\\
    &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \Phi \right) + \J \mu  \\
   -\nabla^2\A + \diverg(\nabla \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \Phi + \mu \J \\
-  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\text{\parbox[c]{3cm}{Struttura dell'eq. di Helmoltz}}} 
+  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\text{\parbox[c]{3cm}{Struttura dell'eq. di Helmoltz}}}
   &= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \Phi \\
   &=\underbrace{-\mu\J}_{\text{\parbox[c]{3cm}{termine noto: presenza sorgenti}}} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \Phi}_{\text{\parbox[c]{3cm}{complicazione? scelgo il valore di $\A$}}}\right)\\
 \end{esp}
