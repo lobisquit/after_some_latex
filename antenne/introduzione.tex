@@ -39,14 +39,14 @@ Iniziamo a descrivere cosa succede a un generico vettore $\A\left(\r\right)=\lef
   \diverg \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}
 \end{equation}
 \subsection{Gradiente}
-Dato $\Phi(\r)$ uno scalare, il suo gradiente risulta
+Dato $\phi(\r)$ uno scalare, il suo gradiente risulta
 \begin{equation}
-  \nabla \Phi = \left(\frac{\partial \Phi}{\partial x} , \frac{\partial \Phi}{\partial y}, \frac{\partial \Phi}{\partial z}\right)
+  \nabla \phi = \left(\frac{\partial \phi}{\partial x} , \frac{\partial \phi}{\partial y}, \frac{\partial \phi}{\partial z}\right)
 \end{equation}
 \subsection{Laplaciano scalare}
-Data una funzione scalare $\Phi(\r)$, il suo laplaciano è definito come
+Data una funzione scalare $\phi(\r)$, il suo laplaciano è definito come
 \begin{equation}
-  \nabla^2 \Phi = \frac{\partial^2 \Phi}{\partial x^2} + \frac{\partial^2 \Phi}{\partial y^2} + \frac{\partial^2 \Phi}{\partial z^2}
+  \nabla^2 \phi = \frac{\partial^2 \phi}{\partial x^2} + \frac{\partial^2 \phi}{\partial y^2} + \frac{\partial^2 \phi}{\partial z^2}
 \end{equation}
 
 \section{Teoremi notevoli}
@@ -224,6 +224,7 @@ Elenchiamo ora le \emph{proprietà del mezzo} che andremo a studiare, consideran
 D'ora in poi considereremo \emph{solo mezzi dielettrici}, mezzi per cui $\mu \simeq \mu_0$, in cui quindi le equazioni di Maxwell saranno analoghe a quelle del vuoto, a meno delle costanti $\epsilon, \mu_0$ e $\sigma$.
 
 \section{Studio delle equazioni di Maxwell in regime sinusoidale}
+\sectionname{Equazioni di Maxwell in regime sinusoidale}
 Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale:
 introdurremo i vettori di \emph{Steinmetz} e vedremo come un mezzo possa variare la sua
 attitudine al campo alle diverse frequenze.
@@ -235,12 +236,12 @@ I segnali a banda larga verranno poi approssimati come sovrapposizione di molti 
 
 Il campo elettrico ora può essere scritto come
 \begin{esp}
-  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot E_n(\r)\cdot \cos\left[\omega t + \Phi_{E_n}(\r)\right]\\
+  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime}\, E_n(\r)\, \cos\left[\omega t + \phi_{E_n}(\r)\right]\\
 \end{esp}
 con
 \begin{esp}
   E_n (\r) &\in \R \text{ pari al massimo del campo nella componente } n \\
-  \Phi_{E_{n}} &\in [0;2\pi]\subset \R \text{ pari alla fase del campo nella componente } n \\
+  \phi_{E_{n}} &\in [0;2\pi]\subset \R \text{ pari alla fase del campo nella componente } n \\
 \end{esp}
 
 Introduciamo ora la rappresentazione con i \emph{vettori complessi}, chiamata rappresentazione di \emph{Steinmetz}, come estensione tridimensionale del concetto di fasore complesso: utilizzeremo i valori massimi (invece che valori efficaci, usati durante il corso di elettrotecnica).
@@ -249,20 +250,20 @@ Introduciamo ora la rappresentazione con i \emph{vettori complessi}, chiamata ra
 
 Vediamo ora come estendere il concetto di fasore al nostro campo elettromagnetico analizzando la tensione lungo la linea di trasmissione che lavora a pulsazione $\omega$.
 \begin{equation}
-  v(t,x) = cos(\omega t + \Phi_0) = \Re\left[V \cdot e^{\jmath \omega t}\right]
+  v(t,x) = cos(\omega t + \phi_0) = \Re\left[V \, e^{\jmath \omega t}\right]
 \end{equation}
 Con il campo elettrico $\E(\r) = \left[E_x(\r);E_y(\r);E_z(\r)\right] \in \C^3$ possiamo scrivere in modo analogo $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$. Avremo quindi
 \begin{equation}\begin{split}
-  \E(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)} \\
-  \ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot \Re\left[e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot cos[\omega t + \Phi_{E_n}(\r)]
+  \E(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, e^{\jmath \phi_{E_n}(\r)} \\
+  \ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, e^{\jmath \phi_{E_n}(\r)}\, e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, \Re\left[e^{\jmath \phi_{E_n}(\r)}\, e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, cos[\omega t + \phi_{E_n}(\r)]
 \end{split}\end{equation}
 Allo stesso modo si ottengono le uguaglianze per il campo magnetico e per le correnti.
 
 Cerchiamo ora di scrivere le equazioni di Maxwell utilizzando i vettori di Steinmetz. Data la trasformazione presentata in precedenza, ovvero
 \begin{esp}
-  \rot \e &= \rot \Re\left[\E(\r) \cdot e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \cdot e^{\jmath\omega t}\right]\\
+  \rot \e &= \rot \Re\left[\E(\r) \, e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \, e^{\jmath\omega t}\right]\\
 \end{esp}
 
 si può ricavare che
@@ -279,12 +280,12 @@ Le equazioni di Maxwell, nel caso del regime sinusoidale si possono riscrivere c
 	\begin{aligned}[b]
 		\rot\H(\r) &= \jmath  \omega \epsilon \E(\r) + \J(\r) + \sigma\E \\
 		&= \J(\r) +(\sigma + \jmath \omega \epsilon) \cdot \E(\r) \\
-		&= \J(\r) +\jmath \omega \epsilon_c \cdot \E(\r) \\
+		&= \J(\r) +\jmath \omega \epsilon_c \, \E(\r) \\
 	\end{aligned} \\
   \diverg\H(\r)=0\\
   \diverg \E(\r) = \frac{\rho_T(\r)}{\epsilon}
 \end{cases}\end{equation}
-dove $\rho$ varia in regime sinusoidale, come le altre grandezze fisiche in gioco, e $\epsilon_c = \epsilon + \frac{-\jmath\sigma}{\omega}$ \emph{costante di permittività dielettrica complessa}.
+dove $\epsilon_c = \epsilon + \frac{-\jmath\sigma}{\omega}$ \emph{costante di permittività dielettrica complessa}.
 
 Andiamo ad analizzare ora i diversi tipi di mezzi al variare di $\epsilon_c$.
 
