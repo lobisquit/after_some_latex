@@ -4,36 +4,52 @@ Andremo ora ad analizzare come si comporta il campo elettromagnetico nello spazi
 
 Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione alla differenza con il corso di Fisica 2: mentre nell'altro corso si è osservata la polarizzazione del mezzo, ora analizzeremo la polarizzazione dell'onda elettromagnetica.
 \begin{esp}
+<<<<<<< HEAD
   \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[\omega t + \phi_{E_n}(\r)\right] \\
   &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos(\omega t)\, \cos\left[ \phi_{E_n}(\r)\right] - \sin(\omega t)\, \sin\left[ \phi_{E_n}(\r)\right]\\
   &=\cos(\omega t) \, \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[ \phi_{E_n}(\r) \right] \\
   &+\sin(\omega t) \, \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \sin \left[ \phi_{E_n}(\r) \right] \\
+=======
+	\ert = & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos\left[\omega t + \phi_{E_n}(\r)\right] \\
+	= & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \left\lbrace\cos(\omega t)\cdot \cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\right\rbrace\\
+	= & \cos(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos \left[ \phi_{E_n}(\r) \right] \\
+	&+\sin(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \sin \left[ \phi_{E_n}(\r) \right] \\
+>>>>>>> fc0579293afc5d4824eaf52dcb87d9167a424790
 \end{esp}
 
 Raggruppando i termini, si ha in conclusione che
 \begin{equation} \label{eq:ert}
+<<<<<<< HEAD
 	\ert = \E^R(\r)\cdot \cos(\omega t) - \E^I(\r)\cdot \sin(\omega t)
+=======
+	\ert = \E^R(\r)\cdot \cos(\omega t) - \E^I(\r)\cdot sin(\omega t)
+>>>>>>> fc0579293afc5d4824eaf52dcb87d9167a424790
 \end{equation}
 
 \newpage
 con il vettore di Steinmetz del campo elettrico scomposto in parte reale e immaginaria
 \begin{equation*} \begin{dcases}
+<<<<<<< HEAD
 	\E^R(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[ \phi_{E_n}(\r) \right] \\
 	\E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \sin \left[ \phi_{E_n}(\r) \right]
+=======
+	\E^R(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos \left[ \phi_{E_n}(\r) \right] \\
+	\E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right]
+>>>>>>> fc0579293afc5d4824eaf52dcb87d9167a424790
 \end{dcases} \end{equation*}
 
-Possiamo osservare il vettore di Steinmetz si può ottenere direttamente dalla formula del campo
+Possiamo osservare il vettore di Steinmetz si può ottenere direttamente dalla formula del campo.
 \begin{equation*} \begin{dcases}
 	\e(\r, t=0) = \E^R(\r) \\
-	\e \left( \r, t = \frac{pi}{2\omega} \right) = -\E^I(\r)
+	\e \left( \r, t = \frac{\pi}{2\omega} \right) = -\E^I(\r)
 \end{dcases} \end{equation*}
 
 \paragraph{Proprietà di polarizzazione del campo}
-A partire dall'equazione \ref{eq:ert} possiamo osservare alcune simmetrie del campo $\E$:
+A partire dall'equazione \eqref{eq:ert} possiamo osservare alcune simmetrie del campo $\E$.
 \begin{enumerate}
-  \item il campo elettromagnetico giace sempre su un piano di polarizzazione, qualunque $t$ si scelga
-  \item il campo elettromagnetico traccia una curva chiusa
-  \item la curva chiusa è, in generale, un ellisse
+	\item il campo elettromagnetico giace sempre su un piano di polarizzazione, qualunque $t$ si scelga, determinato da $\E^I(\r)$ e $\E^R(\r)$
+	\item il campo elettromagnetico traccia una curva chiusa
+	\item la curva chiusa è, in generale, un ellisse
 \end{enumerate}
 
 Queste affermazioni possono essere provate come segue
@@ -69,11 +85,11 @@ Passando quindi alle coordinate cartesiane principali, si ottiene
 \end{esp}
 dove $a,b \in \R^+$ indicano il valore dei semiassi dell'ellisse, mentre il $\pm$ indica il verso \emph{destrorso} o \emph{sinistrorso} della polarizzazione ellittica del campo elettrico. Ci sono ora due casi degeneri principali:
 \begin{enumerate}
-  \item $a = b$ l'ellisse degenera in una circonferenza, per cui la polarizzazione sarà circolare destrorsa o sinistrorsa
-  \item $\begin{cases}a=0 \\ b \neq 0 \end{cases} \vee  \begin{cases}a\neq 0 \\ b = 0 \end{cases}$ l'ellisse degenera in un segmento e la polarizzazione sarà rettilinea verticale o orizzontale.
+	\item $a = b$ l'ellisse degenera in una circonferenza, per cui la polarizzazione sarà circolare destrorsa o sinistrorsa;
+	\item $\begin{cases}a=0 \\ b \neq 0 \end{cases} \vee \quad \begin{cases} a\neq 0 \\ b = 0 \end{cases}$ l'ellisse degenera in un segmento e la polarizzazione sarà rettilinea verticale o orizzontale.
 \end{enumerate}
 
-Queste proprietà si posso ricavare anche con i vettori di Steinmetz
+Queste proprietà si posso ricavare anche con i vettori di Steinmetz.
 \begin{esp}
   \e(t) &= \Re[\E\, e^{\jmath \omega t}] \quad \E \in \C^3 \\
   &=\Re\left[\left(\E^R + \jmath \E^I\right)\,\left(\cos(\omega t) + \jmath \sin(\omega t)\right)\right] \\
@@ -93,13 +109,13 @@ Ruotando il sistema di riferimento di un angolo $\delta$ la proprità resta vali
 \section{Rapporto di polarizzazione rettilinea}
 Definiamo il rapporto di polarizzazione rettilinea $p$ nel sistema di assi principali come
 \begin{equation}
-  p = \jmath \frac{E_y}{E_x} \in \C
+	p = \jmath \frac{E_y}{E_x} \in \C
 \end{equation}
 mentre in un sistema di assi generico, si ottiene, in modo analogo alle linee di trasmissione,
 \begin{equation}
-  p\prime = \jmath \frac{E_y}{E_x} = \frac{p - \jmath\, tg(\delta)}{1-\jmath p \, tg(\delta)}
+	p^\prime = \jmath \frac{E_y}{E_x} = \frac{p - \jmath tg(\delta)}{1-\jmath p \cdot tg(\delta)}
 \end{equation}
-Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno di $p\prime$ non cambi. $p\prime \in \C$ discrimina infatti, indipendentemente dal sistema di referimento, i diversi tipi di polarizzazione
+Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno della parte reale di $p^\prime$ non cambi. $p^\prime \in \C$ discrimina infatti, indipendentemente dal sistema di riferimento, i diversi tipi di polarizzazione
 \begin{equation}\begin{cases}
   \Re[p^\prime] >0 & \text{ellittica destrorsa} \\
   \Re[p^\prime] <0 & \text{ellittica sinistrorsa} \\
@@ -111,7 +127,7 @@ Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno di $p\p
 
 % \textbf{\textsc{Nota Bene}} la polarizzazione circolare prevede che $p=p\prime$ sia \textbf{puramente reale} e pari a $\pm1$
 
-Cerchiamo ora di valutare $\Re [p\prime]$
+$\Re [p\prime]$ si può calcolare come
 \begin{esp*}
   p^\prime
 	&= \jmath \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \\
@@ -125,3 +141,8 @@ e dunque,
 	\Re[p^\prime]
 	&= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \, \underbrace{\cos\left( \frac{\pi}{2} +\phi_{y^{\prime}}-\phi_{x^{\prime}} \right)}_{\text{verso di polarizzazione}}
 \end{esp*}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "antenne"
+%%% End:

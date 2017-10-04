@@ -4,7 +4,7 @@
 \usepackage[T1]{fontenc}
 
 \usepackage[utf8]{inputenc}
-\usepackage{textgreek}
+% \usepackage{textgreek}
 \usepackage{fancyhdr} % headers and footers
 
 % figures and positioning
@@ -40,6 +40,8 @@
 \newacronym[plural=MCs,firstplural=Markov Chains (MCs)]{mc}{MC}{Markov Chain}
 \newacronym[plural=AF,firstplural=Array Factor (AF)]{af}{AF}{Array Factor}
 \newacronym[plural=SLL,firstplural=Side Lobe Levels (SLL)]{sll}{SLL}{Side Lobe Level}
+\newacronym{eirp}{EIRP}{Effective Isotropic Radiated Power}
+\newacronym{pec}{PEC}{Perfect Electric Conductor}
 
 % Costumization of theorem style
 \newtheoremstyle{theoremdd}% name of the style to be used
@@ -58,7 +60,11 @@
 \newtheorem{corollary}{Corollario}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definizione}
+<<<<<<< HEAD
 \newtheorem{remark}{Nota}
+=======
+\newtheorem{remark}{Remark}
+>>>>>>> fc0579293afc5d4824eaf52dcb87d9167a424790
 
 % added support for proof parts
 \theoremstyle{remark}
@@ -74,6 +80,8 @@
 \renewcommand\qedsymbol{\includegraphics[width=1.5cm]{occhiali}}
 %\renewcommand\qedsymbol{$\square$\itshape QED}
 
+% alias for differentials
+\newcommand*\de{\mathop{}\!\mathrm{d}}
 
 % useful aliases for common employed declarations
 \def \beq {\begin{equation}}
@@ -103,7 +111,7 @@
 \newcommand{\D}{\mathbb{D}}
 \newcommand{\Rm}{\mathbb{R^{-1}}}
 \newcommand{\J}{\mathbb{J}}
-\newcommand*{\Chi}{\mbox{\Large $\chi$}}% big chi
+\newcommand*{\Chi}{\raisebox{2pt}{\mbox{\Large $\chi$}}}% big chi
 \newcommand{\Fig}[1]{Fig.~\ref{#1}}
 \newcommand{\eq}[1]{(\ref{#1})}
 \newcommand{\Tab}[1]{Tab.~\ref{#1}}
@@ -132,15 +140,27 @@
 \renewcommand{\A}{\ensuremath{\vec{A}}}
 \renewcommand{\S}{\ensuremath{\vec{S}}}
 \renewcommand{\P}{\ensuremath{\vec{P}}}
-%riduzzioni antenne
-\newcommand{\hz}{\ensuremath{\hat{z}}}
-\newcommand{\hth}{\ensuremath{\hat{\theta}}}
-\newcommand{\hphi}{\ensuremath{\hat{\Phi}}}
-\newcommand{\hr}{\ensuremath{\hat{r}}}
+% riduzioni antenne
+\newcommand{\hhat}[1]{\,\hat{#1}}
+\newcommand{\hz}{\ensuremath{\hhat{z}}}
+\newcommand{\hth}{\ensuremath{\hhat{\theta}}}
+\newcommand{\hphi}{\ensuremath{\hhat{\phi}}}
+\newcommand{\hr}{\ensuremath{\hhat{r}}}
 \newcommand{\ejbr}{\ensuremath{e^{-\jmath \beta r}}}
 \newcommand{\ejbrp}{\ensuremath{e^{\jmath \beta r}}}
 \newcommand{\oqme}{\ensuremath{\omega^2 \mu \epsilon}}
-%Derivatives shortcut
+\newcommand{\pvec}[1]{\ensuremath{\vec{#1}\mkern2mu\vphantom{#1}^\prime}}
+\newcommand{\rp}{\pvec{r}}
+\DeclareMathOperator{\ctg}{ctg}
+
+% nice tables settings
+\usepackage{booktabs}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+% multiple subfigure in figures
+\usepackage{subcaption}
+
+% Derivatives shortcut
 \newcommand{\deriv}[3][]{% \deriv[<order>]{<func>}{<var>}
   \ensuremath{\frac{\partial^{#1} {#2}}{\partial {#3}^{#1}}}}
 %---------------------------------
@@ -156,7 +176,16 @@
 \end{split}\end{equation*}
 }
 
+% no newline inside $...$ inline formula
+\binoppenalty=\maxdimen
+\relpenalty=\maxdimen
+
 \begin{document}
+
+% custom autoref for equations and figures
+\def\equationautorefname~#1\null{(#1)\null}
+\def\figureautorefname~#1\null{figura #1\null}
+\def\tableautorefname~#1\null{tabella #1\null}
 
 \begin{titlepage}
 	\begin{center}
@@ -193,3 +222,8 @@
 % \appendix
 % \input{appendici.tex}
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

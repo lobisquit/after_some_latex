@@ -1,51 +1,72 @@
 \chapter{Antenne patch o a microstriscia}
-Questo tipo di antenne sono spesso utilizzate nei circuiti integrati, poiché nella stessa basetta in cui si crea il circuito, si può costruire l'antenna stessa. Poiché inoltre le applicazioni principali sono i dispositivi mobili, è necessario rendere questo tipo di antenne, quanto più possibile isotrope .
-Dalla figura \ref{fig:patch} possiamo vedere come sia necessario calcolarsi la lunghezza, la larghezza e lo spessore dell'isolante. Spesso però, per adattare l'impedenza d'ingresso della patch all'impedenza del conduttore che trasporta il segnale, si modifica il rettangolo inserendo l'inset di un'unità $\Delta x$
+Le antenne patch sono antenne planari, che possono essere quindi stampate o incise su ogni genere di supporti rigidi.
 
-Le formule per calcolare le dimensioni dell'antenna dipendono della lunghezza d'onda, dal dielettrico del materiale, oltre che da parametri di forma.
-Riportiamo ora le equazioni e, nel caso, le approssimazioni migliori di un'antenna patch senza inset.
+Esse, quindi, sono spesso utilizzate nei circuiti integrati e trovano ampia applicazione nei dispositivi mobili, dove lo spazio occupato è di grande importanza e dove antenne ad ampio raggio sono preferite rispetto a quelle più direttive.
 
-\begin{esp}\label{eq:paramPatch}
-  \epsilon_{re} &= \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h}{W}} \text{ \parbox{7cm}{ costante dielettrica efficace dell'isolante}} \\
-  L&=\frac{\lambda}{2\sqrt{\epsilon_r}} - \frac{\left(\epsilon_{re} +0.3 \right)\cdot\left(\frac{W}{h} + 0.264\right)}{\left(\epsilon_{re} +0.258 \right)\cdot\left(\frac{W}{h} + 0.8\right)} \\
-  &= 0.49 \cdot \frac{\lambda}{\sqrt{\epsilon_r}} \quad \text{formula approssimata}\\
-  W &=\frac{\lambda}{2 \sqrt{\frac{\epsilon_r+1}{2}}} \\
-  B_\%&= 3.77 \cdot \frac{\epsilon_r-1}{\epsilon_r^2} \cdot \frac{W}{L}\cdot \frac{h}{\lambda} ~\text{\parbox{8cm}{ percentuale di banda sfruttata dalla patch}}
-\end{esp}
-L'impedenza d'antenna risulta quindi:
-\begin{equation}\label{eq:ZaPatch}
-  Z_A(\Delta x=0) = 90 \frac{\epsilon_r^2}{\epsilon_r-1} \cdot \left(\frac{L}{W}\right)^2
-\end{equation}
-Nel caso in cui si inserisca l'inset, si sfrutta la formula \eqref{eq:ZaPatch} e si trova
-\begin{esp}
-  Z_A(\Delta x) &=Z_A(\Delta x=0) \cdot cos^2(\pi \cdot \frac{\Delta x}{L})
-  &\stackrel{=}{(1)} Z_A(\Delta x=0) \cdot cos^4(\pi \cdot \frac{\Delta x}{L})
-\end{esp}
+L'antenna patch più semplice è un antenna rettangolare, come in \autoref{fig:patch}.
 
-Utilizzando una patch con inset, l'asse centrale (a $\frac{W}{2}$) dell'antenna ha campo nullo, per cui si può collegare il piano conduttore (Ground) alla patch fresata, dimezzando le dimensioni della stessa.
-
-\section{ILA e IFA}
-Le antenne ILA, inverted L antenna,  sono delle antenne costruite su delle basette che da una parte hanno un piano di massa e dall'altra hanno una L rovesciata, con la gamba più lunga connessa al feeder (alimentatore) e quella più corta parallela al piano di massa. Una caratteristica di questo tipo di antenne è che sono degli elementi capacitivi, per cui nell'adattarle si aggiungono degli induttori.
-
-Le antenne IFA, inverted F antenna, sono spesso usate nei cellulari in quanto la loro struttura è parecchio semplice e mostrata in figura \ref{fig:ifa}. Vengono utilizzate spesso negli smartphone in quanto permettono di sfruttare tutti gli spazi lasciati vuoti dalle altre componenti e sono antenne molto isotrope.
-\begin{figure}
-  % \includegraphics{}
-  \caption{Antenna IFA}
-  \label{fig:ifa}
+\begin{figure}[htp]
+	\centering
+	\includegraphics[]{img/patch.pdf}
+	\caption{Visione dall'alto e dal lato dell'antenna patch. Le parti in arancione sono di \gls{pec}, mentre il substrato verde è composto da un materiale dielettrico.}
+	\label{fig:patch}
 \end{figure}
 
-\subsection{Qualità dell'antenna}
-Definiamo qualità dell'antenna il rapporto tra energia elettromagnetica (W) e potenza irradiata (P) a una certa frequenza (f), ossia
-\begin{equation}
-  Q_A=2\pi f \cdot \frac{W}{P} \ge \frac{1}{(\beta a)^3}
+\section{Parametri d'antenna}
+
+Attraverso le dimensioni dell'antenna e il tipo di materiale dielettrico si può regolare la frequenza di risonanza, mentre il parametro $\Delta x$ di lunghezza dell'\emph{inset} regola l'impedenza dell'antenna.
+
+Prima di tutto si calcola la larghezza dell'antenna, partendo dalla lunghezza d'onda desiderata.
+
+\begin{equation*}
+	W =\frac{\lambda}{2 \sqrt{\frac{\epsilon_r+1}{2}}}
+\end{equation*}
+
+Definiamo ora la \emph{costante dielettrica efficace} dell'isolante, che impiegheremo nel calcolo della lunghezza della patch e della larghezza di banda $B\%$.
+
+\begin{esp}\label{eq:paramPatch}
+	\epsilon_{re}
+	&= \frac{\epsilon_r+1}{2} +\frac{\epsilon_r-1}{2}\sqrt{1+\frac{10 h_s}{W}} \\
+	L&=\frac{\lambda}{2\sqrt{\epsilon_r}}
+	- \frac{\left(\epsilon_{re} +0.3 \right) \, \left(\frac{W}{h_s}
+	+ 0.264\right)}{\left(\epsilon_{re} +0.258 \right)\, \left(\frac{W}{h_s} + 0.8\right)} \\
+	&\simeq 0.49 \, \frac{\lambda}{\sqrt{\epsilon_r}} \\
+	B_\%&= 3.77 \, \frac{\epsilon_r-1}{\epsilon_r^2} \, \frac{W}{L}\, \frac{h_s}{\lambda}
+\end{esp}
+
+L'impedenza d'antenna risulta quindi, non creando un inset al suo interno,
+\begin{equation}\label{eq:ZaPatch}
+	Z_A(\Delta x=0)
+	= 90 \frac{\epsilon_r^2}{\epsilon_r-1} \left(\frac{L}{W}\right)^2
 \end{equation}
-dove $\beta = \frac{2\pi}{\lambda}$ e a è la dimensione dell'antenna.
+
+Nel caso in cui si inserisca l'inset, è sufficiente modificare la formula appena ricavata, in questo modo.
+\begin{esp}
+	Z_A(\Delta x)
+	%&=Z_A(\Delta x=0) \, \cos^2 \left(\pi \, \frac{\Delta x}{L} \right) % questa formula (del libro) è sbagliata, diceva il Santa
+	&= Z_A(\Delta x=0) \, \cos^4 \left(\pi \, \frac{\Delta x}{L} \right)
+\end{esp}
+
+Inoltre, in una patch con inset, l'asse centrale (a $W / 2$) dell'antenna ha campo nullo, per cui è possibile inserire qui un piano di massa, dimezzando le dimensioni dell'antenna.
+
+\subsection{Qualità dell'antenna}
+Definiamo qualità, o \emph{fattore di merito}, dell'antenna il rapporto tra energia elettromagnetica $W$ e potenza irradiata $P$ a una certa frequenza $f$, ossia
+\begin{equation}
+	Q_A=2\pi f \frac{W}{P} \ge \frac{1}{(\beta D)^3}
+\end{equation}
+dove $\beta = \frac{2\pi}{\lambda}$ e $D$ è la dimensione dell'antenna.
+
+Come si può notare, la qualità presenta un limite superiore alla potenza irradiata: non è possibile quindi, neppure con gli apparecchi più sofisticati, ottenere un'efficienza d'antenna arbitraria.
+
 \section{Bilanciamento antenne e BAL-UN}
-Spesso i cavi reali che compongono le antenne o che portano il segnale alle antenne stesse presentano l'effetto pelle, impedendo che  la corrente nei due conduttori sia perfettamente uguale. Si adattano quindi le antenne attraverso delle modifiche fisiche. Si hanno quindi i gruppi di antenne BALanced - UNbalanced tipo:
-\begin{enumerate}
-  \item Elettricamente piccole: $L \ll \lambda$, tipo il dipolo corto o il piccolo anello
-  \item Risonanti, come il dipolo a mezz'onda, le antenne microstrip e le yagi
-  \item A banda larga, come le Log-periodiche e quelle a spirale
-  \item Ad apertura, come le antenne a riflettore e a tromba
-\end{enumerate}
-che vengono adattate empiricamente attraverso l'aggiunta di fili per cortocircuitare o tagliando parti dell'antenna dove il campo è nullo.
+
+Spesso le antenne reali presentano delle asimmetrie, dovute alla fabbricazione oppure all'interferenza con i cavi di alimentazione.
+
+Per questo è opportuno, per \emph{bilanciare questi sbilanciamenti} (BALance-UNbalanced) cortocircuitare tra loro elementi dell'antenna.
+
+Per esempio, nel caso di asimmetria tra i due bracci del dipolo a mezz'onda, è possibile cortocircuitare una parte della sezione più lunga per correggere questa differenza di lunghezza.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "antenne"
+%%% End:
