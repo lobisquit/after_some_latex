@@ -7,7 +7,7 @@ Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicar
 
 	\item \textbf{linee coassiali}, come il cavo dell'antenna televisiva
 
-	In questo caso le linee di campo sono analoghe a quelle di un condensatore cilindrico: il campo elettrico è ortogonale alla circonferenza, mentre quello magnetico sono parallele ad essa.
+	In questo caso le linee di campo sono analoghe a quelle di un condensatore cilindrico: il campo elettrico è ortogonale alla circonferenza, mentre quello magnetico è parallelo ad essa.
 
 	\item \textbf{guide rettangolari} impiegate nella trasmissione ad alta potenza
 
@@ -169,9 +169,9 @@ Procediamo ora con un'ipotesi di soluzione: supponiamo che il potenziale vettore
 Sostituendo l'espressione in \autoref{eq:helmotz_vuoto}, si ottiene perciò
 \begin{esp*}
 	\nabla^2 A_z
-	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) \\
-	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r} \\
-	& = \frac{1}{r} \deriv{}{r}\left(r^2 \frac{f'(r)\cdot r - f(r)}{r^2}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
+	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) =0\\
+	\implies \nabla^2 A_z + \omega^2\, \mu\, \epsilon A_z & = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r} \\
+	& = \frac{1}{r} \deriv{}{r}\left(r^2 \frac{f'(r)\cdot r - f(r)}{r^2}\right) + \omega^2 \mu\epsilon\, f(r)\\
 	& = \frac{1}{r} \left[
 		f^{\prime\prime}(r)\cdot r + f^\prime(r)\cdot 1 - f^\prime(r) \right]
 	+ \omega^2\mu\epsilon f(r) = 0\\
@@ -218,7 +218,7 @@ Applicando il teorema della divergenza al primo membro otteniamo che
 \begin{esp} \label{eq:helmotz_dipolo_el}
 	\int_{S_V} \nabla A_z \hhat{n} \de S
 	+ \omega^2 \mu \epsilon \int_V A_z \de V
-	= -\mu \int_V I \delta(x)\delta(y) F(z) \de V \\
+	= -\mu \int_V I \delta(x)\delta(y) g(z) \de V \\
 \end{esp}
 
 Da quanto ricavato nella risoluzione dell'equazione di Helmholtz omogenea, sappiamo che nella superficie $S_V$ vale
@@ -240,12 +240,12 @@ Sostituendo il risultato appena ottenuto a \autoref{eq:helmotz_dipolo_el} cerchi
 		-\jmath \beta \frac{\ejbr}{r}
 		- \frac{\ejbrp}{r^2} \right) \de S
 	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \de V \bigg] = \\
-	& = -\mu \lim_{r^\prime \to 0} \int_V I \delta(x)\delta(y) F(z) \de V \\
+	& = -\mu \lim_{r^\prime \to 0} \int_V I \delta(x)\delta(y) g(z) \de V \\
 \end{esp*}
 
 % questo passaggio non mi torna: ho dubbi sui differenziali
 \begin{esp*}
-	& \lim_{r^\prime \to 0} \left[ \int_{0}^r c \left(
+	& \lim_{r \to 0} \left[ \int_{0}^r c \left(
 			-\jmath \beta \frac{\ejbr}{r}
 			- \frac{\ejbrp}{r^2} \right) 4 \pi r^2 \de r % non dovrebbe essere 8\pi r \de r? (anche sotto per \de V)
 	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \frac{4\pi}{3} r^3 \de r\right]
