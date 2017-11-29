@@ -4,9 +4,9 @@ Nel corso verranno utilizzate due sistemi di coordinate, \emph{cartesiano} e \em
 
 Le due rappresentazioni di un medesimo punto $P$, definito del vettore posizione $\r$, saranno le seguenti.
 \begin{esp}
-	P&=(x,y,z) = \r = x \cdot \hat{x} + y \cdot \hat{y} +z \cdot \hat{z}
+	P&=(x,y,z) = \r = x \, \hat{x} + y \, \hat{y} +z \, \hat{z}
 	& \text{ con\quad} x\perp y \perp z \perp x \\
-	P&=(r,\theta,\phi) = r \cdot \hat{r} = r \cdot \hat{r}(\theta,\phi)
+	P&=(r,\theta,\phi) = r \, \hat{r} = r \, \hat{r}(\theta,\phi)
 		& \text{ con\quad} r \perp \theta \perp \phi \perp r
 	\label{eq:riferimento}
 \end{esp}
@@ -68,7 +68,7 @@ Data $\vec{l}$ una circuitazione, $S_l$ la superficie della circuitazione, $\hat
 Dato $V$ un volume, $\vec{A}$ un campo e $S$ la superficie del volume e $\hat{n}$
 il versore normale alla superficie, si ha:
 \begin{equation}
-	\int_V \diverg \vec{A} \de V = \int_S \vec{A}\cdot \hat{n} \de S
+	\int_V \diverg \vec{A} \de V = \int\rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\_S \vec{A}\cdot \hat{n} \de S
 \end{equation}
 
 \section{Equazioni di Maxwell}
@@ -126,7 +126,6 @@ E dunque,
 		\diverg \d = \rho & \text{si riconosce come la legge di Gauss}
 	\end{cases}
 \end{esp}
-
 \subsubsection{Leggi del legame materiale}
 La risoluzione delle equazioni di Maxwell porta ad aver 6 equazioni, derivanti dalle prime due equazioni (vettoriali) di Maxwell in 15 incognite ($\b , \e , \h , \d , \jt $ tutte $\in \R^3$).
 
@@ -230,20 +229,23 @@ Elenchiamo ora le \emph{proprietà del mezzo} che andremo a studiare, consideran
 D'ora in poi considereremo solo mezzi \emph{dielettrici}, mezzi per cui $\mu \simeq \mu_0$, in cui quindi le equazioni di Maxwell saranno analoghe a quelle del vuoto, a meno delle costanti $\epsilon, \mu_0$ e $\sigma$.
 
 \section{Studio delle equazioni di Maxwell in regime sinusoidale}
-Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale: introdurremo i vettori di \emph{Steinmetz} e vedremo come un mezzo possa variare la sua attitudine al campo alle diverse frequenze.
+\sectionmark{Equazioni di Maxwell in regime sinusoidale}
+Studieremo ora le proprietà del campo elettromagnetico nel caso in cui l'onda sia di tipo sinusoidale:
+introdurremo i vettori di \emph{Steinmetz} e vedremo come un mezzo possa variare la sua
+attitudine al campo alle diverse frequenze.
 
 Ci poniamo in condizioni di banda stretta, supponendo perciò che le trasmissioni avvengano su una banda di frequenze $\Delta f$ centrata attorno ad una portante $f$: l'analisi limitata alla sola frequenza $f$ è una buona approsimazione dell'onda, a patto che essa sia stretta ($\Delta f \ll f$).
 I segnali a banda larga verranno poi approssimati come sovrapposizione di molti segnali a banda stretta, linearità del mezzo permettendo.
 
 Il campo elettrico ora può essere scritto come
 \begin{esp}
-	\ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot E_n(\r)\cdot \cos\left[\omega t + \Phi_{E_n}(\r)\right]\\
+  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime}\, E_n(\r)\, \cos\left[\omega t + \phi_{E_n}(\r)\right]\\
 \end{esp}
 con
-\begin{itemize}
-	\item $E_n (\r) \in \R$ pari al massimo del campo nella componente $n$
-	\item $\Phi_{E_{n}} \in [0;2\pi]\subset \R$ pari alla fase del campo nella componente $n$
-\end{itemize}
+\begin{esp}
+  E_n (\r) &\in \R \text{ pari al massimo del campo nella componente } n \\
+  \phi_{E_{n}} &\in [0;2\pi]\subset \R \text{ pari alla fase del campo nella componente } n \\
+\end{esp}
 
 Date queste ipotesi, introduciamo ora i \emph{vettori complessi}, o di \emph{Steinmetz}, quali estensione tridimensionale del concetto di fasore complesso: utilizzeremo i valori massimi (invece che valori efficaci, usati durante il corso di elettrotecnica).
 
@@ -251,25 +253,20 @@ Date queste ipotesi, introduciamo ora i \emph{vettori complessi}, o di \emph{Ste
 
 La tensione lungo la linea di trasmissione che lavora a pulsazione $\omega$ si può descrivere con il fasore $V \in \mathbb{C}^3$.
 \begin{equation}
-	v(t,x) = |V| \cos(\omega t + \Phi_0) = \Re\left[V \cdot e^{\jmath \omega t}\right]
+  v(t,x) = cos(\omega t + \phi_0) = \Re\left[V \, e^{\jmath \omega t}\right]
 \end{equation}
-
-Per un certo $\E(\r) = \left(E_x(\r);E_y(\r);E_z(\r)\right) \in \C^3$ potremo scrivere in modo analogo $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$.
-
-Avremo quindi
-\begin{equation*}
-	\E(\r) = \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}
-\end{equation*}
-\begin{equation*}\begin{split}
-	\ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-	&=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot \Re\left[e^{\jmath \Phi_{E_n}(\r)}\cdot e^{\jmath \omega t}\right]\\
-	&=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\cdot cos[\omega t + \Phi_{E_n}(\r)]
-\end{split}\end{equation*}
+Con il campo elettrico $\E(\r) = \left[E_x(\r);E_y(\r);E_z(\r)\right] \in \C^3$ possiamo scrivere in modo analogo $\ert = \Re\left[\E(\r)\cdot e^{\jmath \omega t}\right]$. Avremo quindi
+\begin{equation}\begin{split}
+  \E(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, e^{\jmath \phi_{E_n}(\r)} \\
+  \ert &= \Re\left[\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, e^{\jmath \phi_{E_n}(\r)}\, e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, \Re\left[e^{\jmath \phi_{E_n}(\r)}\, e^{\jmath \omega t}\right]\\
+  &=\sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} E_n(\r)\, cos[\omega t + \phi_{E_n}(\r)]
+\end{split}\end{equation}
 Allo stesso modo si ottengono le uguaglianze per il campo magnetico e per le correnti.
 
 Cerchiamo ora di scrivere le equazioni di Maxwell utilizzando i vettori di Steinmetz. Data la trasformazione presentata in precedenza, ovvero
 \begin{esp}
-	\rot \e &= \rot \Re\left[\E(\r) \cdot e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \cdot e^{\jmath\omega t}\right]\\
+  \rot \e &= \rot \Re\left[\E(\r) \, e^{\jmath\omega t}\right] = \Re\left[\rot\E(\r) \, e^{\jmath\omega t}\right]\\
 \end{esp}
 
 si può ricavare che
@@ -281,17 +278,17 @@ si può ricavare che
 
 \subsection{Equazioni di Maxwell in regime sinusoidale}
 Le equazioni di Maxwell, nel caso del regime sinusoidale si possono riscrivere come
-\begin{equation}\begin{dcases}
+\begin{equation}\begin{cases}
 	\rot\E(\r) = -\jmath \omega \mu\H(\r) \\
 	\begin{aligned}[b]
 		\rot\H(\r) &= \jmath	\omega \epsilon \E(\r) + \J(\r) + \sigma\E \\
 		&= \J(\r) +(\sigma + \jmath \omega \epsilon) \cdot \E(\r) \\
-		&= \J(\r) +\jmath \omega \epsilon_c \cdot \E(\r) \\
+		&= \J(\r) +\jmath \omega \epsilon_c \, \E(\r) \\
 	\end{aligned} \\
-	\diverg\H(\r)=0\\
-	\diverg \E(\r) = \frac{\rho_T(\r)}{\epsilon}
-\end{dcases}\end{equation}
-dove $\rho$ varia in regime sinusoidale, come le altre grandezze fisiche in gioco, e $\epsilon_c = \epsilon -\jmath\sigma / \omega$ è detta \emph{costante di permittività dielettrica complessa}.
+  \diverg\H(\r)=0\\
+  \diverg \E(\r) = \frac{\rho_T(\r)}{\epsilon}
+\end{cases}\end{equation}
+dove $\epsilon_c = \epsilon + \frac{-\jmath\sigma}{\omega}$ \emph{costante di permittività dielettrica complessa}.
 
 Andiamo ad analizzare ora i diversi tipi di mezzi al variare di $\epsilon_c$.
 

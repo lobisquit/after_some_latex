@@ -1,24 +1,25 @@
-\chapter{Polarizzazione del campo \textsc{EM}}
+\chapter{Polarizzazione del campo elettromagnetico}
+\chaptermark{Polarizzazione del campo EM}
 Andremo ora ad analizzare come si comporta il campo elettromagnetico nello spazio, in particolare la sua evoluzione e i casi degeneri.
 
 Iniziamo con un'analisi nel dominio del tempo del campo, prestando attenzione alla differenza con il corso di Fisica 2: mentre nell'altro corso si è osservata la polarizzazione del mezzo, ora analizzeremo la polarizzazione dell'onda elettromagnetica.
 \begin{esp}
-	\ert = & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos\left[\omega t + \phi_{E_n}(\r)\right] \\
-	= & \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \left\lbrace\cos(\omega t)\cdot \cos\left[ \phi_{E_n}(\r)\right] - sin(\omega t)\cdot sin\left[ \phi_{E_n}(\r)\right]\right\rbrace\\
-	= & \cos(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos \left[ \phi_{E_n}(\r) \right] \\
-	&+\sin(\omega t) \cdot \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \sin \left[ \phi_{E_n}(\r) \right] \\
+  \ert &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[\omega t + \phi_{E_n}(\r)\right] \\
+  &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos(\omega t)\, \cos\left[ \phi_{E_n}(\r)\right] - \sin(\omega t)\, \sin\left[ \phi_{E_n}(\r)\right]\\
+  &=\cos(\omega t) \, \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[ \phi_{E_n}(\r) \right] \\
+  &+\sin(\omega t) \, \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \sin \left[ \phi_{E_n}(\r) \right] \\
 \end{esp}
 
 Raggruppando i termini, si ha in conclusione che
 \begin{equation} \label{eq:ert}
-	\ert = \E^R(\r)\cdot \cos(\omega t) - \E^I(\r)\cdot sin(\omega t)
+	\ert = \E^R(\r)\cdot \cos(\omega t) - \E^I(\r)\cdot \sin(\omega t)
 \end{equation}
 
 \newpage
 con il vettore di Steinmetz del campo elettrico scomposto in parte reale e immaginaria
 \begin{equation*} \begin{dcases}
-	\E^R(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot \cos \left[ \phi_{E_n}(\r) \right] \\
-	\E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \cdot \E_n(\r)\cdot sin \left[ \phi_{E_n}(\r) \right]
+	\E^R(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \cos\left[ \phi_{E_n}(\r) \right] \\
+	\E^I(\r) &= \sum\limits_{n=1}^3 \hat{x}_n^{\prime\prime} \, E_n(\r)\, \sin \left[ \phi_{E_n}(\r) \right]
 \end{dcases} \end{equation*}
 
 Possiamo osservare il vettore di Steinmetz si può ottenere direttamente dalla formula del campo.
@@ -35,40 +36,35 @@ A partire dall'equazione \eqref{eq:ert} possiamo osservare alcune simmetrie del 
 	\item la curva chiusa è, in generale, un ellisse
 \end{enumerate}
 
-Queste affermazioni possono essere provate come segue, scomponendo il campo $\vec{E}$ lungo due versori arbitrari $\hat{x}^\prime$ e $\hat{y}^\prime$ del piano di polarizzazione.
-\begin{esp*}
-	& \begin{dcases}
-		\E^R = E^R_{x^{\prime}} \cdot \hat{x}^{\prime}+E^R_{y^{\prime}} \cdot \hat{y}\prime \\
-		\E^I = E^I_{x^{\prime}} \cdot \hat{x}^{\prime}+E^I_{y^{\prime}} \cdot \hat{y}\prime \\
-	\end{dcases}
-\end{esp*}
-
-\begin{esp*}
-	\e &= (E^R_{x^{\prime}}\cdot \hat{x}^{\prime}+ E^R_{y^{\prime}})\cdot \cos(\omega t) - (E^I_{x^{\prime}}\cdot \hat{x}^{\prime}+ E^I_{y^{\prime}})\cdot sin(\omega t)\\
-	&= \left[E^R_{x^{\prime}} \cdot \cos(\omega t)-E^I_{x^{\prime}}\cdot sin(\omega t)\right]\cdot \hat{x}^{\prime} + \left[E^R_{y^{\prime}} \cdot \cos(\omega t) -E^I_{y^{\prime}}\cdot sin(\omega t)\right]\cdot \hat{y}\prime \\
-\end{esp*}
-	o in forma matriciale
+Queste affermazioni possono essere provate come segue
 \begin{esp}
-	\begin{pmatrix}
-		e_{x^{\prime}} \\ e_{y^{\prime}}
-	\end{pmatrix}
-	&=
-	\underbrace{\begin{pmatrix}
-		E_{x^{\prime}}^R & -E_{x^{\prime}}^I\\
-		E_{y^{\prime}}^R & -E_{y^{\prime}}^I
-	\end{pmatrix}}_{\text{Deformazione lineare}}
-	\cdot
-	\underbrace{\begin{pmatrix}
-		\cos(\omega t) \\ sin(\omega t)
-	\end{pmatrix}}_{\text{circonferenza}}
+  \E^R &= E^R_{x^{\prime}} \, \hat{x}^{\prime}+E^R_{y^{\prime}} \, \hat{y}\prime \\
+  \E^I &= E^I_{x^{\prime}} \, \hat{x}^{\prime}+E^I_{y^{\prime}} \, \hat{y}\prime \\
+  \e &= (E^R_{x^{\prime}}\, \hat{x}^{\prime}+ E^R_{y^{\prime}})\, \cos(\omega t) - (E^I_{x^{\prime}}\, \hat{x}^{\prime}+ E^I_{y^{\prime}})\, \sin(\omega t)\\
+  &= \left[E^R_{x^{\prime}} \, \cos(\omega t)-E^I_{x^{\prime}}\, \sin(\omega t)\right]\, \hat{x}^{\prime} + \left[E^R_{y^{\prime}} \, \cos(\omega t) -E^I_{y^{\prime}}\, \sin(\omega t)\right]\, \hat{y}\prime \\
+\end{esp}
+  o in forma matriciale
+\begin{esp}
+  \begin{pmatrix}
+    e_{x^{\prime}} \\ e_{y^{\prime}}
+  \end{pmatrix}
+  &=
+  \underbrace{\begin{pmatrix}
+    E_{x^{\prime}}^R & -E_{x^{\prime}}^I\\
+    E_{y^{\prime}}^R & -E_{y^{\prime}}^I
+  \end{pmatrix}}_{\text{Deformazione lineare}}
+  \cdot
+  \underbrace{\begin{pmatrix}
+    \cos(\omega t) \\ \sin(\omega t)
+  \end{pmatrix}}_{\text{circonferenza}}
 \end{esp}
 
 Passando quindi alle coordinate cartesiane principali, si ottiene
 \begin{esp}
 \begin{pmatrix} e_{x} \\ e_{y} \end{pmatrix}
 &= \begin{pmatrix}
-	a \cdot \cos(\omega t + \Phi) \\
-	\pm b \cdot sin(\omega t + \Phi)
+  a \, \cos(\omega t + \phi) \\
+  \pm b \, \sin(\omega t + \phi)
 \end{pmatrix}
 \end{esp}
 dove $a,b \in \R^+$ indicano il valore dei semiassi dell'ellisse, mentre il $\pm$ indica il verso \emph{destrorso} o \emph{sinistrorso} della polarizzazione ellittica del campo elettrico. Ci sono ora due casi degeneri principali:
@@ -79,23 +75,23 @@ dove $a,b \in \R^+$ indicano il valore dei semiassi dell'ellisse, mentre il $\pm
 
 Queste proprietà si posso ricavare anche con i vettori di Steinmetz.
 \begin{esp}
-	\e(t) &= \Re[\E\cdot e^{\jmath \omega t}] \quad \text{where } \E \in \C^3 \\
-	&=\Re\left[\left(\E^R + \jmath \E^I\right)\cdot\left(\cos(\omega t) + \jmath \sin(\omega t)\right)\right] \\
-	&= \E^R \cdot \cos(\omega t) - \E^I\cdot sin(\omega t) \\
-	&= a \cdot \cos(\omega t + \Phi)\cdot \hat{x} \pm b \cdot sin(\omega t + \Phi)\cdot \hat{y}
+  \e(t) &= \Re[\E\, e^{\jmath \omega t}] \quad \E \in \C^3 \\
+  &=\Re\left[\left(\E^R + \jmath \E^I\right)\,\left(\cos(\omega t) + \jmath \sin(\omega t)\right)\right] \\
+	&= \E^R \, \cos(\omega t) - \E^I\, \sin(\omega t) \\
+  &= a \, \cos(\omega t + \phi)\, \hat{x} \pm b \, \sin(\omega t + \phi)\, \hat{y}
 \end{esp}
 
 Ruotando il sistema di riferimento di un angolo $\delta$ la proprità resta valida: è sufficiente applicare la corrispodente trasformazione ai campi considerati.
 \begin{equation}
-	\begin{pmatrix} E_{x^{\prime}} \\ E_{y^{\prime}} \end{pmatrix} =
-	\begin{pmatrix}
-		 \cos(\delta) & sin(\delta) \\ -sin(\delta) & \cos(\delta)
-	\end{pmatrix} \cdot
-		\begin{pmatrix} E_{x} \\ E_{y} \end{pmatrix}
+  \begin{pmatrix} E_{x^{\prime}} \\ E_{y^{\prime}} \end{pmatrix} =
+  \begin{pmatrix}
+     \cos(\delta) & \sin(\delta) \\ -\sin(\delta) & \cos(\delta)
+  \end{pmatrix} \cdot
+    \begin{pmatrix} E_{x} \\ E_{y} \end{pmatrix}
 \end{equation}
 
 \section{Rapporto di polarizzazione rettilinea}
-Definiamo il rapporto di polarizzazione $p$ nel sistema di assi principali come
+Definiamo il rapporto di polarizzazione rettilinea $p$ nel sistema di assi principali come
 \begin{equation}
 	p = \jmath \frac{E_y}{E_x} \in \C
 \end{equation}
@@ -105,29 +101,29 @@ mentre in un sistema di assi generico, si ottiene, in modo analogo alle linee di
 \end{equation}
 Risulta interessante notare come, per qualsiasi angolo $\delta$ il segno della parte reale di $p^\prime$ non cambi. $p^\prime \in \C$ discrimina infatti, indipendentemente dal sistema di riferimento, i diversi tipi di polarizzazione
 \begin{equation}\begin{cases}
-	\Re[p^\prime] >0 & \text{ellittica destrorsa} \\
-	\Re[p^\prime] <0 & \text{ellittica sinistrorsa} \\
-	\Re[p^\prime] =0 & \text{rettilinea ``orizzontale''} \\
-	\Re[p^\prime] =\infty & \text{rettilinea ``verticale''} \\
-	p = p^\prime = 1 & \text{circolare destrorsa} \\
-	p = p^\prime = -1 & \text{circolare sinistrorsa}
+  \Re[p^\prime] >0 & \text{ellittica destrorsa} \\
+  \Re[p^\prime] <0 & \text{ellittica sinistrorsa} \\
+  \Re[p^\prime] =0 & \text{rettilinea ``orizzontale''} \\
+  \Re[p^\prime] =\infty & \text{rettilinea ``verticale''} \\
+  p = p^\prime = 1 & \text{circolare destrorsa} \\
+  p = p^\prime = 1 & \text{circolare sinistrors}
 \end{cases}\end{equation}
 
 % \textbf{\textsc{Nota Bene}} la polarizzazione circolare prevede che $p=p\prime$ sia \textbf{puramente reale} e pari a $\pm1$
 
 $\Re [p\prime]$ si può calcolare come
 \begin{esp*}
-	p^\prime
+  p^\prime
 	&= \jmath \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \\
 	& = e^{\jmath \frac{\pi}{2}} \cdot \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \|
-	\cdot e^{j(\Phi_{y^{\prime}}-\Phi_{x^{\prime}})} \\
-	&= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \cdot e^{j(\frac{\pi}{2}+\Phi_{y^{\prime}}-\Phi_{x^{\prime}})}
+  \cdot e^{j(\phi_{y^{\prime}}-\phi_{x^{\prime}})} \\
+  &= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \cdot e^{j(\frac{\pi}{2}+\phi_{y^{\prime}}-\phi_{x^{\prime}})}
 \end{esp*}
 
 e dunque,
 \begin{esp*}
 	\Re[p^\prime]
-	&= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \cdot \underbrace{\cos \left( \frac{\pi}{2} +\Phi_{y^{\prime}}-\Phi_{x^{\prime}} \right)}_{\text{verso di polarizzazione}}
+	&= \left \| \frac{E_{y^{\prime}}}{E_{x^{\prime}}} \right \| \, \underbrace{\cos\left( \frac{\pi}{2} +\phi_{y^{\prime}}-\phi_{x^{\prime}} \right)}_{\text{verso di polarizzazione}}
 \end{esp*}
 
 %%% Local Variables:

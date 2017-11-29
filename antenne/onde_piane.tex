@@ -1,7 +1,7 @@
 \chapter{Onde piane}
 Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno proprietà e simmetrie notevoli che ne semplificano notevolmente lo studio rispetto al caso generale.
 
-\section{Equazioni di HelmHoltz}
+\section{Equazioni di Helmholtz}
 	Le equazioni di Maxwell possono essere riscritte come le cosiddette equazioni di Helmholtz, nel caso in cui il mezzo sia il vuoto.
 
 	\begin{equation*}
@@ -68,7 +68,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	La soluzione di onda piana presenta particolari comportamenti lungo e trasversalmente le direzioni date dalla parte reale e immaginaria del vettore $\s = \a + \jmath \k$.
 
 	\begin{itemize}
-		\item[|$\Delta\r \perp \a$ )] Lungo questa direzione, l'\emph{ampiezza} dei campi $\E$ e $\H$ non cambia.
+		\item[$\Delta\r \perp \a$ )] Lungo questa direzione, l'ampiezza dei campi $\E$ e $\H$ non cambia.
 
 		\begin{equation*}
 			\begin{split}
@@ -79,14 +79,14 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{equation*}
 		dove (*) è dato dal fatto che $\a \cdot \Delta\r = 0$ per costruzione.
 
-		\item[|$\Delta\r \perp \k$ )] Lungo questa direzione, la \emph{fase} dei campi $\E$ e $\H$ non cambia.
+		\item[$\Delta\r \perp \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ non cambia.
 
 		\begin{equation*}
 				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r = \measuredangle \E(\r)
 		\end{equation*}
 		dove (*) è dato dal fatto che $\k \cdot \Delta\r = 0$ per costruzione.
 
-		\item[|$\Delta\r \parallel \a$ )] Lungo questa direzione, l'\emph{ampiezza} dei campi cala in modo esponenziale in $|\a|$ e in $\Delta r$.
+		\item[$\Delta\r \parallel \a$ )] Lungo questa direzione, l'ampiezza dei campi cala in modo esponenziale in $|\a|$ e in $\Delta r$.
 
 		\begin{equation*}
 			\begin{split}
@@ -97,7 +97,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		\end{equation*}
 		dove (*) è dovuto al parallelismo tra $\a$ e $\Delta\r$.
 
-		\item[|$\Delta\r \parallel \k$ )] Lungo questa direzione, la \emph{fase} dei campi $\E$ e $\H$ oscilla periodicamente.
+		\item[$\Delta\r \parallel \k$ )] Lungo questa direzione, la fase dei campi $\E$ e $\H$ oscilla periodicamente.
 
 		\begin{equation*}
 				\measuredangle \E(\r + \Delta\r) = -\k \cdot (\r + \Delta\r) \stackrel{(*)}{=} - \k \cdot \r - |\k| \Delta r = \measuredangle \E(\r) - |\k| \Delta r
@@ -118,8 +118,8 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 	\begin{equation} \label{eq:s_components}
 		\begin{dcases}
-			& |\a|^2 - |\k|^2 = - \omega^2 \mu \, \epsilon \\
-			& 2 \a \cdot \k = \omega^2 \mu \, \sigma = 0
+			& |\a|^2 - |\k|^2 = - \omega^2 \, \mu \, \epsilon \\
+			& 2 \a \cdot \k = \omega \, \mu \, \sigma = 0
 		\end{dcases}
 	\end{equation}
 
@@ -142,7 +142,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Nei mezzi dielettrici $c$ è calcolabile come
 		\begin{equation*}
-				c = \frac{1}{\sqrt{\epsilon \mu_0}} = \frac{1}{\sqrt{\epsilon_0 \mu_0 \epsilon_r}} = \frac{c_0}{\epsilon_r} = \frac{c_0}{n}
+				c = \frac{1}{\sqrt{\epsilon \mu_0}} = \frac{1}{\sqrt{\epsilon_0 \mu_0 \epsilon_r}} = \frac{c_0}{\sqrt{\epsilon_r}} = \frac{c_0}{n}
 		\end{equation*}
 		dove $n$ è definito come il coefficiente di rifrazione nel mezzo e $c_0$ è la velocità della luce nel vuoto.
 
@@ -208,7 +208,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 		dove $R_s = \sqrt{\frac{\pi f \mu}{\sigma}}$ è la resistenza superficiale del mezzo e $Z_w = (1 + \jmath) R_s$ è l'impedenza di parete del mezzo.
 
 		\subsubsection{Spessore di penetrazione}
-		Nello studio della propagazione di onde in un mezzo, si può definire il cosiddetto \emph{spessore di penetrazione} come la distanza $\delta$ lungo l'asse di propagazione per cui il modulo del campo cala di un fattore $e^{-1}$.
+		Nello studio della propagazione di onde in un mezzo, si definisce il cosiddetto \emph{spessore di penetrazione} come la distanza $\delta$ lungo l'asse di propagazione per cui il modulo del campo cala di un fattore $e^{-1}$.
 
 		\begin{equation*}
 			|\E(z + \delta)| = |\E(z)| ~ e^{-1}
@@ -219,7 +219,8 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 			|\E(z + \delta)| = E_{_{0}} ~ e^{-|\a| z} ~ e^{-|\a| \delta} = |\E(z)| ~ e^{-|\a| \delta} = e^{-1} \text{ per } \delta = \frac{1}{|\a|}
 		\end{split} \end{equation}
 
-		Nel caso, per esempio del rame, $\delta$ risulta dell'ordine di $1.6 \mu m$: questo ci porta a concludere che l'onda incidente il buon conduttore viene in gran parte dispersa vicino alla superficie del mezzo.
+		Nel caso, per esempio del rame, $\delta$ risulta dell'ordine di $1.6 \mathrm{\mu m}$: questo ci porta a concludere che l'onda incidente il buon conduttore viene in gran parte dispersa vicino alla superficie del mezzo.
+		Questo comportamento, dovuto in gran parte all'effetto Joule, viene chiamato \emph{effetto pelle}.
 
 		Questo comportamento, dovuto principalmente all'effetto Joule, viene chiamato \emph{effetto pelle}.
 		\subsubsection{Lunghezza d'onda nel buon conduttore}
@@ -276,17 +277,18 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	Combinando tra loro le equazioni, si ottiene che
 	\begin{esp}
 		& \rot \h \cdot \e - \h \cdot \rot \e
-			= \e \cdot \jt + \sigma |\e|^2 + \epsilon \e \deriv{\e}{t} - \mu \h \deriv{\h}{t} \\
-		& -\diverg(\e \times \h) - \e \cdot \jt = \sigma |\e|^2 + \epsilon \deriv{|\e|^2}{t} - \mu \deriv{|\h|^2}{t}
+			= \e \cdot \j + \sigma |\e|^2 + \epsilon\, \e \deriv{\e}{t} + \h \mu \deriv{\h}{t} \\
+		& -\diverg(\e \times \h) - \e \cdot \jt = \sigma |\e|^2 + \epsilon \deriv{|\e|^2}{t} + \mu \deriv{|\h|^2}{t}
 	\end{esp}
 	dove il primo membro è riscritto come divergenza grazie ad un'identità vettoriale.
 
 	L'analisi dimensionale mette in luce come le quantità dell'equazione ricavata siano potenze per unità di volume: integrando sul volume $V$ considerato si ottengono perciò potenze, qui scomposte a seconda dell'origine dei vari termini.
 
-	\begin{esp} \label{eq:bilancio_potenza_EM}
+	\begin{esp} \hspace*{-1cm}
+		 \label{eq:bilancio_potenza_EM}
 		& \underbrace{ - \int_V \e \cdot \jt dV}_{\text{potenza dai generatori}}
 			= \underbrace{\int_V \sigma |\e|^2 dV}_{\text{effetto Joule}}
-			+ \underbrace{\int_V \left[ \epsilon \deriv{|\e|^2}{t} - \mu \deriv{|\h|^2}{t} \right] dV}
+			+ \underbrace{\int_V \left[ \epsilon \deriv{|\e|^2}{t} + \mu \deriv{|\h|^2}{t} \right] dV}
 				_{\text{variazione di energia \textsc{EM} in } V}
 			+ \underbrace{\int_V \diverg(\e \times \h) dV}_{\text{flusso di potenza in uscita da }V} \\
 		%& - \int_V \e \cdot \jt dV
@@ -300,7 +302,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\begin{esp}
 		|\ert|^2
 			& = \Re\left[ \E ~ e^{j \omega t}\right] \left( \Re\left[ \E ~ e^{j \omega t}\right] \right)^* \\
-			& = \left( \frac{\E ~ e^{j \omega t} + \E ~ e^{-j \omega t}}{2} \right) ^2 \\
+			& \stackrel{(1)}{=} \left( \frac{\E ~ e^{j \omega t} + \E ~ e^{-j \omega t}}{2} \right) ^2 \\
 			& = \frac{1}{4} \left( \E \cdot \E^* +  \E^* \cdot \E + \E \cdot \E ~ e^{j 2 \omega t} + \E^* \cdot \E^* ~ e^{-j 2 \omega t} \right) \\
 			& = \frac{|\E|^2}{2} +
 				\frac{
@@ -308,7 +310,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 					\E^* \cdot \E^* ~ e^{-j 2 \omega t}
 				}{4}
 	\end{esp}
-
+	dove (1) deriva dall'uguaglianza $\Re[z] = \frac{z+z^*}{2}$
 	Mediando nel periodo $T$ il modulo del quadrato del campo otteniamo la potenza del campo elettrico.
 
 	\begin{esp}
@@ -329,7 +331,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 	\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
 		& \underbrace{ - \int_V \E \cdot \J^* ~ dV}_{\text{potenza dai generatori}}
 			= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{\text{effetto Joule}}
-			+ \underbrace{\int_V \jmath \omega \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
+			+ \underbrace{\int_V \frac{\jmath \omega}{2} \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] dV}
 				_{\text{variazione di energia \textsc{EM} in } V}
 			+ \underbrace{ \int_V \frac{\diverg(\E \times \H^*)}{2} dV}_{\text{flusso di potenza in uscita da }V}
 	\end{esp}
@@ -355,9 +357,9 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 
 		Nel caso dell'onda piana su un perfetto isolante, si ha che la parte reale del bilancio di potenze \eqref{eq:bilancio_potenza_EM_steinmetz} si semplifica notevolmente.
 
-		\begin{esp} \label{eq:bilancio_pot_EM_steinmetz}
-			& \underbrace{ - \int_V \E \cdot \J^* ~ dV}_{= \, 0 \text{ perché } \jt = 0}
-				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= \, 0 \text{ perché } \sigma = 0}
+		\begin{esp} \label{eq:bilancio_potenza_EM_steinmetz}
+			& \underbrace{ - \int_V \frac{\E \cdot \J}{2} ~ dV}_{= 0 \text{ perché } \jt = 0}
+				= \underbrace{\int_V \sigma \frac{|\E|^2}{2} dV}_{= 0 \text{ perché } \sigma = 0}
 				+ \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS
 				\implies \int_{S_V} \Re[\vec{P}] \cdot \hat{n} ~ dS = 0
 		\end{esp}
@@ -414,7 +416,7 @@ Le onde piane sono particolari soluzioni delle equazioni di Maxwell che hanno pr
 \section{Riflessione e rifrazione}
 Riflessione e rifrazione sono trasformazioni a cui l'onda elettromagnetica è sottoposta quando attraversa la frontiera tra due materiali differenti, come in \autoref{fig:discontinuita}.
 
-La loro analisi consiste perciò nel risolvere le equazioni di Maxwell nei due mezzi e poi garantire la continuità delle soluzioni sulla superficie di separazione.
+L' analisi consiste perciò nel risolvere le equazioni di Maxwell nei due mezzi e poi garantire la continuità delle soluzioni sulla superficie di separazione.
 
 \def\height{3}
 \def\length{6}
@@ -592,14 +594,14 @@ Un importante lemma permette di far coincidere le soluzioni sulla discontinuità
 			& = |E_{_0 i}|^2
 				(1 + \rho ~ e^{\jmath 2 \beta_1 x_1})
 				(1 + \rho^* ~ e^{-\jmath 2 \beta_1 x_1}) \\
-			& = |E_{_0 i}|^2 (1 + \rho^2 + 2 \rho \cos(2 \beta_1 x_1)) \\
+			& = |E_{_0 i}|^2 (1 + |\rho|^2 + 2 |\rho| \cos(2 \beta_1 x_1+\phi_{\rho})) \\
 	\end{esp}
 
 	Questi piani individuano lungo $\hat{x}_3$ settori in cui l'impedenza vista dall'onda elettromagnetica varia. Essa, nel caso dell'onda piana, può essere calcolata sfruttando la legge di Ohm.
 
 	\begin{esp}
-		Z(x_3)
-		& = \frac{E(x_3)}{H(x_3)}
+		Z(x_1)
+		& = \frac{E(x_1)}{H(x_1)}
 			= \frac
 				{E_{_0 i} (1 - e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3}}
 				{-\frac{E_{_0 i}}{\eta_1} (1 + e^{\jmath 2 \beta_1 x_3}) ~ e^{- \jmath \beta_1 x_3} } \\

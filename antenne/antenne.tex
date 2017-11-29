@@ -60,7 +60,8 @@
 \newtheorem{corollary}{Corollario}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{definition}{Definizione}
-\newtheorem{remark}{Remark}
+\newtheorem{remark}{Nota}
+
 
 % added support for proof parts
 \theoremstyle{remark}
@@ -186,11 +187,14 @@
 \begin{titlepage}
 	\begin{center}
 		\hspace{0.5cm}
-		\Large{Antenne e propagazione wireless} \\
+		\fontsize{30}{30}{\textsc{Antenne e propagazione}} \\
+    \vspace{0.2cm}
+    \fontsize{30}{30}{\textsc{wireless}} \\
 		\vspace{1cm}
-		%\includegraphics[width=9cm]{Zorzilla}\\
+    \centering
+		\includegraphics[width=\textwidth]{copertina.png}\\
 		\vspace{0.5cm}
-		\emph{written with love by} \\
+		\large{\emph{scritto da}} \\
 		\vspace{0.5cm}
 		{\Large Andrea Pittaro, Enrico Lovisotto, Umberto Martinelli}
 	\end{center}
@@ -206,7 +210,9 @@
 
 \tableofcontents
 \clearpage
-
+\frontmatter
+\input{prefazione}
+\mainmatter
 \input{introduzione.tex}
 \input{polarizzazione.tex}
 \input{onde_piane.tex}

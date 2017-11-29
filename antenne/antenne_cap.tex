@@ -7,7 +7,7 @@ Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicar
 
 	\item \textbf{linee coassiali}, come il cavo dell'antenna televisiva
 
-	In questo caso le linee di campo sono analoghe a quelle di un condensatore cilindrico: il campo elettrico è ortogonale alla circonferenza, mentre quello magnetico sono parallele ad essa.
+	In questo caso le linee di campo sono analoghe a quelle di un condensatore cilindrico: il campo elettrico è ortogonale alla circonferenza, mentre quello magnetico è parallelo ad essa.
 
 	\item \textbf{guide rettangolari} impiegate nella trasmissione ad alta potenza
 
@@ -31,14 +31,14 @@ Definendo inoltre
 \end{itemize}
 si ottiene che l'impedenza caratteristica risulta
 \begin{equation}
-	Z_C = \sqrt{\frac{l}{c}} = F \cdot \sqrt{\frac{\mu}{\epsilon}}
+  Z_C = \sqrt{\frac{l}{c}} = \underbrace{F_{forma}}_{\text{fattore di forma}} \, \sqrt{\frac{\mu}{\epsilon}}
 \end{equation}
 dove $F$ è detto \emph{fattore di forma}.
 
 Possiamo quindi riscrivere le equazioni per la tensione e la corrente nel cavo coassiale come
 \begin{esp}
-	V(z) &= V_o \cdot e^{-\jmath \beta \cdot z}\\
-	I(z) &= I_o \cdot e^{-\jmath \beta \cdot z}
+  V(z) &= V_{_0} \, e^{-\jmath \beta \, z}\\
+  I(z) &= I_{_0} \, e^{-\jmath \beta \, z}
 \end{esp}
 
 \chapter{Antenne}
@@ -85,12 +85,12 @@ Dal punto di vista dimensionale, $\phi$ si misura in $V$, perciò viene chiamata
 \smallbreak
 Analizziamo ora la seconda equazione di Maxwell.
 \begin{esp}
-	\rot \H &= \jmath \omega \epsilon_c \E + \J =  \rot\left(\frac{1}{\mu} \rot \A\right)\\
-	\rot \H &= \jmath \omega \mu \epsilon_c \left(-\jmath \omega \A - \nabla \phi \right) + \mu \J \\
-	-\nabla^2\A + \nabla \, (\diverg \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \phi + \mu \J \\
-	\nabla^2 \A + \omega^2 \mu \epsilon_c \A
-		&= -\mu\J + \nabla \, (\diverg \A) + \jmath \omega \mu \epsilon_c \nabla \phi \\
-	\underbrace{-\nabla^2\A + \diverg(\nabla \A)}_{(1)} &=\underbrace{-\mu\J}_{(2)} + \nabla\left(\underbrace{\diverg \A + \jmath \omega \mu \epsilon_c \phi}_{(3)}\right)\\
+  \rot \H &= \jmath \omega \epsilon_c \cdot \E + \J =  \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right)\\
+   &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \Phi \right) + \J \mu  \\
+  -\nabla^2\A + \diverg(\nabla \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \Phi + \mu \J \\
+  \underbrace{\nabla^2 \A + \omega^2 \mu \epsilon_c \A}_{\text{\parbox[c]{3cm}{Struttura dell'eq. di Helmoltz}}}
+  &= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \Phi \\
+  &=\underbrace{-\mu\J}_{\text{\parbox[c]{3cm}{termine noto: presenza sorgenti}}} + \diverg\left(\underbrace{\nabla \A + \jmath \omega \mu \epsilon_c \Phi}_{\text{\parbox[c]{3cm}{complicazione? scelgo il valore di $\A$}}}\right)\\
 \end{esp}
 
 Riconosciamo nel termine (1) il primo membro caratteristico dell'equazione delle onde tridimensionale, in (2) il contributo di termine noto delle sorgenti.
@@ -174,10 +174,11 @@ Procediamo ora con un'ipotesi di soluzione: supponiamo che il potenziale vettore
 
 Sostituendo l'espressione in \autoref{eq:helmotz_vuoto}, si ottiene perciò
 \begin{esp*}
+	\hspace{-2cm}
 	\nabla^2 A_z
-	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) \\
-	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r} \\
-	& = \frac{1}{r} \deriv{}{r}\left(r^2 \frac{f'(r)\cdot r - f(r)}{r^2}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r}\\
+	& = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{A_z(r)}{r}\right) =0\\
+	\implies \nabla^2 A_z + \omega^2\, \mu\, \epsilon A_z & = \frac{1}{r^2} \deriv{}{r}\left(r^2 \deriv{\frac{f(r)}{r}}{r}\right) + \omega^2 \mu\epsilon\frac{f(r)}{r} \\
+	& = \frac{1}{r} \deriv{}{r}\left(r^2 \frac{f'(r)\cdot r - f(r)}{r^2}\right) + \omega^2 \mu\epsilon\, f(r)\\
 	& = \frac{1}{r} \left[
 		f^{\prime\prime}(r)\cdot r + f^\prime(r)\cdot 1 - f^\prime(r) \right]
 	+ \omega^2\mu\epsilon f(r) = 0\\
@@ -245,8 +246,18 @@ Sostituendo il risultato appena ottenuto a \autoref{eq:helmotz_dipolo_el} cerchi
 	\lim_{r^\prime \to 0} \bigg[ \int_{S_V} c & \left(
 		-\jmath \beta \frac{\ejbr}{r}
 		- \frac{\ejbrp}{r^2} \right) \de S
-	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\, \ejbr \right) \de V \bigg] = \\
-	& = -\mu \lim_{r^\prime \to 0} \int_V I \,  \delta(x) \, \delta(y) \,  F(z) \de V \\
+	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \de V \bigg] = \\
+	& = -\mu \lim_{r^\prime \to 0} \int_V I \delta(x)\delta(y) g(z) \de V \\
+\end{esp*}
+
+% questo passaggio non mi torna: ho dubbi sui differenziali
+\begin{esp*}
+	& \lim_{r \to 0} \left[ \int_{0}^r c \left(
+			-\jmath \beta \frac{\ejbr}{r}
+			- \frac{\ejbrp}{r^2} \right) 4 \pi r^2 \de r % non dovrebbe essere 8\pi r \de r? (anche sotto per \de V)
+	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \frac{4\pi}{3} r^3 \de r\right]
+	= -\mu I \Delta z \\
+>>>>>>> 96c962af6ae9a29719b03986c14e7dc2cdbc27d8
 \end{esp*}
 % TODO mettere i passaggi nell'appendice
 La maggior parte dei termini al primo membro si annullano nel limite per $\r \to 0$, per cui si può ottenere
@@ -384,14 +395,14 @@ Nel caso del dipolo elementare i suoi solidi di direttività in campo e in poten
     \centering
     \begin{subfigure}[b]{0.5\textwidth}
         \centering
-        \includegraphics[width=5cm]{solidoDE.jpg}
+        \includegraphics[width=5cm]{solido-dirett.png}
         \caption{Solido di direttività}
 				\label{fig:solidoDE}
     \end{subfigure}%
     ~
     \begin{subfigure}[b]{0.5\textwidth}
         \centering
-        \includegraphics[width=5cm]{img/patternDE.png}
+        \includegraphics[width=5cm]{img/pattern.png}
         \caption{Diagramma di radiazione}
 				\label{fig:patternDE}
     \end{subfigure}
