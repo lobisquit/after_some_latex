@@ -174,7 +174,7 @@ Possiamo inoltre ricavare le espressioni della potenza irradiata e della resiste
 P = \frac{\pi}{3} \eta \left | I_A \right |^2 \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{12} \eta \left | I_A \right |^2 \left(\frac{L}{\lambda}\right)^2
 \end{equation*}
 \begin{equation*}
-R_r = \frac{2}{3} \frac{\pi}{4} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} 120 \pi	 \left(\frac{L}{2 \lambda}\right)^2 = 20 (\pi)^2 \left(\frac{L}{2 \lambda}\right)^2
+R_r = \frac{2}{3} \frac{\pi}{4} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} \eta \left(\frac{L}{2 \lambda}\right)^2 = \frac{\pi}{6} 120 \pi	 \left(\frac{L}{2 \lambda}\right)^2 = 20 \pi^2 \left(\frac{L}{2 \lambda}\right)^2
 \end{equation*}
 
 Trattandosi di un oggetto filiforme, è possibile definire la \emph{resistenza per unità di lunghezza}.
@@ -186,9 +186,9 @@ Trattandosi di un oggetto filiforme, è possibile definire la \emph{resistenza p
 
 Il dipolo a mezz'onda è un antenna filiforme nella quale ognuno dei due rami è lungo $L = \frac{\lambda}{4}$.
 
-Il suo campo elettrico del dipolo a mezz'onda può essere ricavato con lo stesso procedimento impiegato per il dipolo corto, dove però viene fatta cadere l'approssimazione $\beta \, L \simeq 0$.
+Il suo campo elettrico del dipolo a mezz'onda può essere ricavato con lo stesso procedimento impiegato per il dipolo corto, dove però viene fatta cadere l'approssimazione $\beta L \simeq 0$.
 
-Il campo elettrico diventa quindi
+Il campo elettrico di un'antenna di lunghezza generica diventa quindi
 \begin{equation*}
 	\E
 	\simeq \jmath \frac{\eta}{2 \pi} \frac{\ejbr}{r} \frac{I_m \cos \left(\frac{\beta L}{2} \cos \theta \right) - \cos \left(\frac{\beta L}{2} \right)}{\sin \theta} \hth
@@ -217,12 +217,12 @@ Ricaviamo ora i parametri d'antenna trovati sia per il dipolo elementare che per
 		\theta_{MAX} = \frac{\pi}{2}
 	\end{equation}
 
-	\item Vettore di Poynting
+	\item Potenza irradiata
 	\begin{equation}
-		\P
+		P
 		= \int_{S(r)} \frac{\E \times \H^*}{2} \de S
-		= \int_{S(r)} \frac{\left | E_{\theta} \right |^2}{2 \eta} \de S \hhat{r}
-		= \ldots = \frac{C_{in} (2 \pi)}{8 \pi} \eta \left | I_m \right |^2 \hhat{r}
+		= \int_{S(r)} \frac{\left | E_{\theta} \right |^2}{2 \eta} \de S
+		= \ldots = \frac{C_{in} (2 \pi)}{8 \pi} \eta \left | I_m \right |^2
 	\end{equation}
 	con $C_{in}$ la funzione \emph{coseno integrale}.
 	Il valore approssimato del coseno integrale in $2\pi$ è $2,44$.
@@ -231,7 +231,7 @@ Ricaviamo ora i parametri d'antenna trovati sia per il dipolo elementare che per
 
 	Dalla sua definizione, $R_r$ si ricava come
 	\begin{esp*}
-		\Re [\P \cdot \hat{r}]
+		P
 		& = \frac{C_{in} (2 \pi)}{8 \pi} \eta \left | I_A \right |^2
 		= \frac{R_r \left | I_A \right |^2}{2} \\
 		R_r

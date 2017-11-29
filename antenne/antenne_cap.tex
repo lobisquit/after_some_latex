@@ -1,4 +1,4 @@
-\section{Propagazione guidata}
+\section{Propagazione guidata} \label{sec:propagazione_guidata}
 Le equazioni delle onde piane uniformi trovate sinora si possono quindi applicare anche per la propagazione di onde elettromagnetiche in conduttori, per esempio
 \begin{description}
 	\item \textbf{linee bifilari} come il doppino telefonico
@@ -56,15 +56,20 @@ Riprendiamo le equazioni di Maxwell scritte con i vettori di Steinmetz.
 Ora aggiungiamo un termine $\M$ fittizio di correnti \emph{magnetiche}, affinché le equazioni risultino simmetriche e si possa scrivere, in seguito, il sistema di sorgenti equivalenti.
 
 \subsubsection{Potenziali elettromagnetici}
-Definiamo quindi $\A$ \emph{potenziale vettore magnetico} il campo per cui $\H = \frac{1}{\mu} \cdot \rot \A$.
+Definiamo quindi $\A$, \emph{potenziale vettore magnetico}, il campo per cui $\H = \frac{1}{\mu} \, \rot \A$.
+
+Questa definizione è consistente con le equazioni di Maxwell, infatti si ottiene il medesimo risultato della legge di Maxwell alla divergenza di $\H$.
+\begin{equation*}
+	\diverg \H = \frac{1}{\mu} \, \diverg (\rot \A) = 0
+\end{equation*}
 
 \begin{theorem}[Teorema di Helmholtz]
 	Un campo vettoriale $\A$ è univocamente definito se sono fissati $\rot \A$ e $\diverg \A$.
 \end{theorem}
 
-Per definire propriamente il potenziale $\A$, dobbiamo dunque fornire l'espressione per la $\diverg \A$.
+Per definire propriamente il potenziale $\A$, dobbiamo dunque fornire l'espressione per la divergenza di $\A$.
 \begin{esp} \label{eq:AE}
-	\rot\E &= - \jmath \omega \cdot \mu \frac{1}{\mu} \rot \A \quad \Leftrightarrow \quad \rot\left(\E + \jmath \omega \A\right)=0
+	\rot\E &= - \jmath \omega \mu \frac{1}{\mu} \rot \A \quad \Rightarrow \quad \rot\left(\E + \jmath \omega \A\right)=0
 \end{esp}
 
 Questo ci permette di affermare che il termine tra parentesi in \autoref{eq:AE} deve essere \emph{costante} a meno di un termine che si annulli con l'operazione di rotore.
@@ -80,16 +85,15 @@ Dal punto di vista dimensionale, $\phi$ si misura in $V$, perciò viene chiamata
 \smallbreak
 Analizziamo ora la seconda equazione di Maxwell.
 \begin{esp}
-	\rot \H &= \jmath \omega \epsilon_c \cdot \E + \J = \mu \cdot \rot\left(\frac{1}{\mu} \rot \A\right)\\
-	\rot \H &= \jmath \omega \mu \epsilon_c \cdot \left(-\jmath \omega \A - \nabla \phi \right) + \J \mu \\
-	-\nabla^2\A + \diverg(\nabla \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \phi + \mu \J \\
+	\rot \H &= \jmath \omega \epsilon_c \E + \J =  \rot\left(\frac{1}{\mu} \rot \A\right)\\
+	\rot \H &= \jmath \omega \mu \epsilon_c \left(-\jmath \omega \A - \nabla \phi \right) + \mu \J \\
+	-\nabla^2\A + \nabla \, (\diverg \A) &= \omega^2 \mu \epsilon_c \A - \jmath \omega \mu \epsilon_c \nabla \phi + \mu \J \\
 	\nabla^2 \A + \omega^2 \mu \epsilon_c \A
-		&= -\mu\J + \diverg(\nabla\A) + \jmath \omega \mu \epsilon_c \nabla \phi \\
+		&= -\mu\J + \nabla \, (\diverg \A) + \jmath \omega \mu \epsilon_c \nabla \phi \\
 	\underbrace{-\nabla^2\A + \diverg(\nabla \A)}_{(1)} &=\underbrace{-\mu\J}_{(2)} + \nabla\left(\underbrace{\diverg \A + \jmath \omega \mu \epsilon_c \phi}_{(3)}\right)\\
 \end{esp}
 
 Riconosciamo nel termine (1) il primo membro caratteristico dell'equazione delle onde tridimensionale, in (2) il contributo di termine noto delle sorgenti.
-
 Il termine (3) risulta fuori posto, ma seguendo esso può essere reso nullo, come mostrato in seguito.
 
 \paragraph{Scelta di Lorentz}
@@ -104,9 +108,9 @@ Otteniamo quindi l'\emph{equazione di Helmholtz non omogenea}.
 Dobbiamo ora determinare il valore di $\phi$, cosa che faremo sfruttando la terza legge di Maxwell.
 \begin{esp*}
 	\diverg\E
-		= \frac{\rho}{\epsilon} ~~ \implies ~~ &
-		\diverg\left(-\jmath \omega \A - \nabla \phi	 \right)= \frac{\rho}{\epsilon}\\
-	 & \jmath \omega \nabla \A + \nabla^2 \phi= -\frac{\rho}{\epsilon}	 \\
+	= \frac{\rho}{\epsilon} ~ \implies ~
+	& \diverg\left(-\jmath \omega \A - \nabla \phi	 \right)= \frac{\rho}{\epsilon} \\
+	& \jmath \omega \diverg \A + \nabla^2 \phi= -\frac{\rho}{\epsilon} \\
 	&\jmath\omega\left(-\jmath \omega\mu\epsilon_c\phi\right) + \nabla^2\phi = - \frac{\rho}{\epsilon}\\
 \end{esp*}
 
@@ -125,14 +129,15 @@ Riassumendo, le equazioni di Maxwell si possono riscrivere nella forma delle equ
 \end{esp}
 
 \section{Dipolo elementare}
-Si può notare che le equazioni di Helmholtz trovate sono lineari: il principio di sovrapposizione degli effetti ci consente perciò di estendere a casi complessi lo studio di sorgenti semplici.
+Si può notare che le equazioni di Helmholtz trovate sono lineari: il principio di sovrapposizione degli effetti ci consente quindi di estendere a casi complessi lo studio di sorgenti semplici.
 
-Partiamo perciò analizzando l'azione del \emph{dipolo elementare}, un'antenna filiforme di lunghezza infinitesima $\Delta z$.
+\smallbreak
+Partiamo analizzando l'antenna più semplice concepibile, il \emph{dipolo elementare}, costituito da un filo di lunghezza infinitesima $\Delta z$ con distribuzione di corrente $\J$.
 
-La sua distribuzione di corrente si può scrivere perciò come
 \begin{esp} \label{eq:dipolo_elementare}
-	\J &= I \, \delta(x)\delta(y) g(z) \hhat{z} \\
-	\text{dove } g(z) &= \begin{cases}
+	\J = I \, \delta(x) \, \delta(y) \, g(z) \hhat{z}
+	\quad \text{dove} \quad
+	g(z) = \begin{cases}
 		1 & - \frac{\Delta z}{2} \le z \le \frac{\Delta z}{2} \\
 		0 & \text{altrove}
 	\end{cases}
@@ -141,7 +146,8 @@ La sua distribuzione di corrente si può scrivere perciò come
 Risolviamo quindi l'equazione \autoref{eq:helmolts-lorentz} di Helmholtz non omogenea per questa distribuzione delle sorgenti.
 \begin{esp*}
 	\begin{cases}
-		\nabla^2 A_{x,y} + \omega^2 \mu\epsilon_c A_{x,y} =0 \\
+		\nabla^2 A_{x} + \omega^2 \mu\epsilon_c A_{x} =0 \\
+		\nabla^2 A_{y} + \omega^2 \mu\epsilon_c A_{y} =0 \\
 		\nabla^2 A_{z} + \omega^2 \mu\epsilon_c A_{z} =-\mu J_z
 	\end{cases}
 \end{esp*}
@@ -210,15 +216,15 @@ La soluzione generale trovata in precedenza è però incompleta: se da una parte
 Integrando l'equazione di Helmholtz non omogenea nel volume della sfera di di raggio $\r_0$ centrata nell'origine, otteniamo
 \begin{esp*}
 	\int_V \nabla^2 A_z \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V J_z \de V \\
-	\int_V \diverg(\nabla A_z) \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V I \delta(x)\delta(y) g(z) \de V
-\end{esp*}
+	\int_V \diverg(\nabla A_z) \de V + \omega^2 \mu \epsilon \int_V A_z \de V &= -\mu \int_V I \, \delta(x, \delta(y) \, g(z) \de V
+\end{esp*} \,
 dove $g(z)$, definita in \autoref{eq:dipolo_elementare}, è la distribuzione di corrente del dipolo.
 
 Applicando il teorema della divergenza al primo membro otteniamo che
 \begin{esp} \label{eq:helmotz_dipolo_el}
 	\int_{S_V} \nabla A_z \hhat{n} \de S
 	+ \omega^2 \mu \epsilon \int_V A_z \de V
-	= -\mu \int_V I \delta(x)\delta(y) F(z) \de V \\
+	= -\mu \int_V I \, \delta(x) \, \delta(y) \, g(z) \de V \\
 \end{esp}
 
 Da quanto ricavato nella risoluzione dell'equazione di Helmholtz omogenea, sappiamo che nella superficie $S_V$ vale
@@ -239,19 +245,10 @@ Sostituendo il risultato appena ottenuto a \autoref{eq:helmotz_dipolo_el} cerchi
 	\lim_{r^\prime \to 0} \bigg[ \int_{S_V} c & \left(
 		-\jmath \beta \frac{\ejbr}{r}
 		- \frac{\ejbrp}{r^2} \right) \de S
-	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \de V \bigg] = \\
-	& = -\mu \lim_{r^\prime \to 0} \int_V I \delta(x)\delta(y) F(z) \de V \\
+	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\, \ejbr \right) \de V \bigg] = \\
+	& = -\mu \lim_{r^\prime \to 0} \int_V I \,  \delta(x) \, \delta(y) \,  F(z) \de V \\
 \end{esp*}
-
-% questo passaggio non mi torna: ho dubbi sui differenziali
-\begin{esp*}
-	& \lim_{r^\prime \to 0} \left[ \int_{0}^r c \left(
-			-\jmath \beta \frac{\ejbr}{r}
-			- \frac{\ejbrp}{r^2} \right) 4 \pi r^2 \de r % non dovrebbe essere 8\pi r \de r? (anche sotto per \de V)
-	+ \omega^2 \mu \epsilon \int_V \left(\frac{c}{r}\cdot \ejbr \right) \frac{4\pi}{3} r^3 \de r\right]
-	= -\mu I \Delta z \\
-\end{esp*}
-
+% TODO mettere i passaggi nell'appendice
 La maggior parte dei termini al primo membro si annullano nel limite per $\r \to 0$, per cui si può ottenere
 \begin{esp} \label{eq:A_DE}
 	- 4\pi c \, \lim_{r \to 0} \ejbrp = -\mu I \Delta z
@@ -526,7 +523,7 @@ Combinando \autoref{eq:def_guadagno} con \autoref{eq:def_direttivita}, otteniamo
 
 Siccome l'antenna è un dipolo passivo, la potenza emessa non potrà superare quella entrante, perciò la direttività è un limite superiore al valore del guadagno.
 \begin{equation*}
-	G = D \, \frac{P}{P_{IN}} = D\, e_r = \le D
+	G = D \, \frac{P}{P_{IN}} = D ~ e_r \le D
 \end{equation*}
 dove $e_r$ è detta \emph{efficienza di antenna}.
 
@@ -573,7 +570,7 @@ Nel caso del dipolo elementare, supponendo una resistenza ohmica trascurabile, o
 	R_r
 	&= \frac{2P}{|I_A|^2}
 	\stackrel{(*)}{=} \frac{2}{3}\pi \eta \left(\frac{\Delta z}{\lambda}\right)^2
-	= 80\pi^2\left(\frac{\Delta z}{\lambda}\right)^2 \Omega
+	\simeq 80\pi^2\left(\frac{\Delta z}{\lambda}\right)^2 \Omega
 \end{esp}
 dove in (*) si sfrutta la formula \autoref{eq:potenza_DE} della potenza irradiata dal dipolo elementare.
 
@@ -585,9 +582,9 @@ Per calcolare $\Chi_A$, osserviamo ora la potenza reattiva emessa dall'antenna i
 \begin{esp} \label{eq:bilancio_EM_immaginario}
 	\Im [P]
 	& = \Im\left[\frac{V_A \cdot I_A^*}{2}\right]
-	= \Im\left[- \int_V \E \cdot \J^* \de V\right] \\
+	= \Im\left[- \int_V \frac{\E \cdot \J^*}{2} \de V\right] \\
 	& \stackrel{(*)}{=}
-	\omega \underbrace{\int_V \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] \de V}_{1}
+	\omega \underbrace{\int_V \frac{1}{2} \left[\mu \frac{|\H|^2}{2} - \epsilon \frac{|\E|^2}{2} \right] \de V}_{1}
 	+ \underbrace{\Im\left[\int_{S(r)} \P \cdot \hat{r} \de S\right]}_{2}
 \end{esp}
 dove in (*) viene usata il bilancio energetico \autoref{eq:bilancio_potenza_EM_steinmetz}.
@@ -639,12 +636,8 @@ Anche il termine 2 è quindi negativo, perciò dalla \autoref{eq:bilancio_EM_imm
 \subsection{Adattamento dell'antenna}
 Il segnale trasmesso da un'antenna proviene da un generatore collegato attraverso una linea (coassiale, bifilare o guida d'onda) che possiede una sua impedenza caratteristica. È quindi necessario adattare l'antenna, che considereremo come un dipolo elettrico, alla linea di trasmissione per ridurre le riflessioni e permettere che, idealmente, tutta la potenza venga trasmessa.
 
-Definiamo quindi \emph{impedenza caratteristica della linea} la quantità
-\begin{equation}
-	Z_C = \frac{V_+}{I_+} = \sqrt{\frac{l}{c}}
-\end{equation}
-
-Se la linea è priva di perdite, $Z_C \in \R$ e si assume valori di 50--75$\Omega$ per linee coassiali e 100--300$\Omega$ per linee bifilari.
+Ricordiamo, dalla \autoref{sec:propagazione_guidata}, la definizione di impedenza caratteristica della linea $Z_C$.
+Se non ci sono perdite, $Z_C \in \R$ e assume valori di 50--75$\Omega$ per linee coassiali e 100--300$\Omega$ per linee bifilari.
 
 Definiamo ora il coefficiente di riflessione della linea.
 \begin{equation}
@@ -740,7 +733,7 @@ Cerchiamo quindi un'approssimazione per il calcolo di $R$ che ci faciliti i calc
 	&\stackrel{(1)}{\simeq} r \, \sqrt{1 - 2\cos(\psi) \left( \frac{r^\prime}{r}\right) + o\left(\frac{r^\prime}{r}\right)} \\
 	&\stackrel{(2)}{\simeq} r \left[ 1 - \cos(\psi) \left( \frac{r^\prime}{r}\right) + o\left(\frac{r^\prime}{r}\right) \right]
 \end{esp}
-dove in (1) viene aggiunta alle ipotesi di campo lontano $r \gg \rp$, mentre in (2) viene impiegato il limite notevole $\sqrt{1 + x} \simeq 1 + x/2$ per $x \to 0$.
+dove in (1) viene aggiunta alle ipotesi di campo lontano $r \gg r^\prime$, mentre in (2) viene impiegato il limite notevole $\sqrt{1 + x} \simeq 1 + x/2$ per $x \to 0$.
 
 Riprendendo \autoref{eq:A_di_P}, possiamo quindi scrivere
 \begin{equation} \label{eq:A_generico}
@@ -756,11 +749,11 @@ Riorganizzando i termini, si può arrivare ad un espressione analoga a quella de
 	\A(\r)
 	&=
 	\frac{\mu\ejbr}{4\pi r}
-	\int_{V^\prime}\J(\rp)\, e^{-\jmath\beta r^\prime cos(\psi)} \de \rp \\
+	\int_{V^\prime}\J(\rp)\, e^{+\jmath\beta r^\prime cos(\psi)} \de \rp \\
 	&=\frac{\mu \ejbr}{4\pi r} \M(\theta,\phi)\\
 \end{esp*}
 dove $\M(\theta,\phi)$ è detto \emph{momento di dipolo equivalente}.
-Nel caso del dipolo elementare vale semplicemente $I \Delta z \hhat{z}$.
+Nel caso del dipolo elementare vale semplicemente $I \Delta z \sin(\theta) \hth$.
 
 Questa espressione vale solamente se reggono le approssimazioni utilizzate in precedenza, ricapitolando
 
@@ -788,7 +781,7 @@ Definiamo l'\emph{altezza efficace in trasmissione} come il termine $\h_T(\theta
 \end{equation}
 dove $I_A$ è la corrente ai morsetti dell'antenna.
 
-Nel caso del dipolo elementare si ha che $\h_T(\theta,\phi) = \Delta z \hz$.
+Nel caso del dipolo elementare si ha che $\h_T(\theta,\phi) = \Delta z \sin(\theta) \hth$.
 
 \bigbreak
 Consideramo ora il caso reciproco, quello della \emph{ricezione}, prendendo come riferimento lo schema in \autoref{fig:altezza_efficace}.
@@ -815,7 +808,7 @@ La potenza al ricevitore sarà quindi
 	& = \Re\left[\frac{V_L \, I_L^*}{2}\right]
 	= \frac{|V_G|^2}{2} \frac{R_L}{|Z_L+Z_G|^2}
 	= \frac{R_L \, |\E_i \cdot \h_R^*|^2}{2 \, |Z_L+Z_G|^2} \\
-	& \stackrel{(*)}{=} \frac{R_L \, |\E_i \cdot \h_R^*|^2}{2 \, |Z_L+Z_A|^2}
+	& \stackrel{(*)}{=} \frac{R_L \, |\E_i \cdot \h_R^*|^2}{2 \, |Z_L+Z_G|^2}
 \end{esp*}
 dove (*) vale per il teorema di reciprocità.
 
@@ -850,14 +843,14 @@ Inoltre, per il teorema di reciprocità, si può affermare che le due differenti
 \end{equation}
 
 \paragraph{Esempio GNSS}
-Nel caso di navigazione satellitare, sistemi come il GPS, il \textsc{GLONASS}, Beidou e \textsc{IRNSS} utilizzano una polarizzazione circolare destrorsa, in quanto l'onda, dopo una riflessione, inverte il verso di polarizzazione e si attenua.
+Nel caso di navigazione satellitare, sistemi come il \textsc{gps}, il \textsc{glonass}, Beidou e \textsc{irnss} utilizzano una polarizzazione circolare destrorsa, in quanto l'onda, dopo una riflessione, inverte il verso di polarizzazione e si attenua.
 
 L'antenna del cellulare, quindi, filtra naturalmente una riflessione. In caso di doppia riflessione su materiale non conduttore il segnale è molto più attenuato, per cui verrà considerato come rumore di fondo, mentre persiste nel caso del buon conduttore.
 
 Le espressioni dei campi incidente e riflesso sono qui riportate.
 \begin{esp*}
-	\E_i &= (E_x \cdot \hat{x}+E_y \cdot \hat{y}) \cdot e^{\textcolor[rgb]{0.8,0,0}{-}\jmath \beta z} \\
-	\E_r &= (E_x \cdot \hat{x}+E_y \cdot \hat{y}) \cdot \rho \cdot e^{\textcolor[rgb]{0.8,0,0}{+}\jmath \beta z} \\
+	\E_i &= (E_x \, \hat{x}+E_y \, \hat{y}) \, e^{\textcolor[rgb]{0.8,0,0}{-}\jmath \beta z} \\
+	\E_r &= (E_x \, \hat{x}+E_y \, \hat{y}) \, \rho \, e^{\textcolor[rgb]{0.8,0,0}{+}\jmath \beta z} \\
 \end{esp*}
 
 \subsection{Area efficace}
